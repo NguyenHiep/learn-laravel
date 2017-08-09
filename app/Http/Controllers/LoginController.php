@@ -31,7 +31,7 @@ class LoginController extends Controller
     	
     	if (Auth::attempt($login)) {
     		// Authentication passed...
-    		return redirect()->route('admincp');
+    		return redirect()->route('manage');
     		
     	}else{
     		return redirect()->back();

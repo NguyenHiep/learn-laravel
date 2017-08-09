@@ -17,6 +17,7 @@ Route::get('/','PagesController@index');
 Route::get('login', 'LoginController@getlogin')->name('getlogin');
 Route::post('login', 'LoginController@postlogin')->name('postlogin');
 Route::get('logout', 'LoginController@getlogout')->name('getlogout');
-Route::get('admincp', function (){
- 	return  view('admin.home.main');
-})->name('admincp')->middleware('auth');;
+
+Route::get('manage', function () {
+    return view('manage.home.main');
+})->name('manage')->middleware('auth');;
