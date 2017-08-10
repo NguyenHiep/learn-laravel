@@ -9,9 +9,9 @@ class LoginController extends Controller
 {
     public function getlogin(){
     	if(!Auth::check()){
-    		return view('admin.login.login');
+    		return view('manage.login.login');
     	}else{
-    		return redirect()->route('admincp');
+    		return redirect()->route('manage');
     	}
 			
     }
