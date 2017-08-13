@@ -68,7 +68,7 @@
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">Tài khoản</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Vui lòng nhập tài khoản" name="txtUser" /> </div>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Vui lòng nhập tài khoản" name="txtUser"/> </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Mật khẩu</label>
             <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Vui lòng nhập mật khẩu" name="txtPass" /> </div>

@@ -1,7 +1,8 @@
 @if (count($errors) > 0)
-        <ul class="error_msg">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">
+            <button class="close" data-close="alert"></button>
+            <span> {{ $error }} </span>
+        </div>
+    @endforeach
 @endif

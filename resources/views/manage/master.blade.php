@@ -388,8 +388,8 @@
 									<i class="icon-lock"></i> Lock Screen </a>
 							</li>
 							<li>
-								<a href="page_user_login_1.html">
-									<i class="icon-key"></i> Log Out </a>
+								<a href="{{ url('logout') }}">
+									<i class="icon-key"></i> Thoát </a>
 							</li>
 						</ul>
 					</li>
@@ -464,7 +464,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item">
-							<a href="form_controls.html" class="nav-link ">
+							<a href="{{url('manage/settings/settings')}}" class="nav-link ">
 								<span class="title">Cài đặt thông tin website</span>
 							</a>
 						</li>

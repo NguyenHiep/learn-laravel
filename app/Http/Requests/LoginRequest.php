@@ -36,10 +36,10 @@ class LoginRequest extends FormRequest
      */
     public function messages()
     {
-    	return [
-    	'txtUser.required' => 'Vui lòng nhập tên đăng nhập',
-    	'txtPass.required'  => 'Vui lòng nhập mật khẩu',
-    	];
+        return [
+            'txtUser.required' => 'Vui lòng nhập tên đăng nhập',
+            'txtPass.required' => 'Vui lòng nhập mật khẩu',
+        ];
     }
     
 }
