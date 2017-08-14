@@ -18,199 +18,200 @@
                         <span>Cấu hình website</span>
                     </li>
                 </ul>
-                <div class="page-toolbar">
-                    <div class="btn-group pull-right">
-                        <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> Actions
-                            <i class="fa fa-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-bell"></i> Action</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-shield"></i> Another action</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-user"></i> Something else here</a>
-                            </li>
-                            <li class="divider"> </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-bag"></i> Separated link</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
             <!-- END PAGE BAR -->
             <!-- BEGIN PAGE TITLE-->
-            <h3 class="page-title"> Cấu hình thông tin website </h3>
+            <h3 class="page-title"> Quản lý thông tin website </h3>
             <!-- END PAGE TITLE-->
 
             <div class="row">
                 <div class="col-md-12">
+                    {!! Form::open(['url' => 'settings/settings/', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
                     <!-- BEGIN VALIDATION STATES-->
                     <div class="portlet light portlet-fit portlet-form bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-settings font-dark"></i>
-                                <span class="caption-subject font-dark sbold uppercase">Cài đặt nâng cao</span>
+                                <span class="caption-subject font-dark sbold uppercase">Cài đặt thông tin</span>
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <label class="btn btn-transparent dark btn-outline btn-circle btn-sm active">
-                                        <input type="radio" name="options" class="toggle" id="option1">Actions</label>
-                                    <label class="btn btn-transparent dark btn-outline btn-circle btn-sm">
-                                        <input type="radio" name="options" class="toggle" id="option2">Settings</label>
+                                        <button type="button" class="btn default">Cancel</button>
+                                        <button type="submit" name="submit" class="btn green" id="submit_form">Save data</button>
                                 </div>
                             </div>
                         </div>
                         <div class="portlet-body">
-                            <!-- BEGIN FORM-->
-                            <form action="#" id="form_sample_3" class="form-horizontal">
-                                <div class="form-body">
-                                    <div class="alert alert-danger display-hide">
-                                        <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
-                                    <div class="alert alert-success display-hide">
-                                        <button class="close" data-close="alert"></button> Your form validation is successful! </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Name
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-9">
-                                                    <input type="text" name="name" data-required="1" class="form-control" /> </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Email Address
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-9">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-envelope"></i>
-                                                        </span>
-                                                        <input type="email" name="email" class="form-control" placeholder="Email Address"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Occupation&nbsp;&nbsp;</label>
-                                                <div class="col-md-9">
-                                                    <input name="occupation" type="text" class="form-control" /> </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Select2 Dropdown
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-9">
-                                                    <select class="form-control select2me" name="options2">
-                                                        <option value="">Select...</option>
-                                                        <option value="Option 1">Option 1</option>
-                                                        <option value="Option 2">Option 2</option>
-                                                        <option value="Option 3">Option 3</option>
-                                                        <option value="Option 4">Option 4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Datepicker</label>
-                                                <div class="col-md-9">
-                                                    <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
-                                                        <input type="text" class="form-control" readonly name="datepicker">
-                                                        <span class="input-group-btn">
-                                                            <button class="btn default" type="button">
-                                                                <i class="fa fa-calendar"></i>
-                                                            </button>
-                                                        </span>
-                                                    </div>
-                                                    <!-- /input-group -->
-                                                    <span class="help-block"> select a date </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Membership
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-9">
-                                                    <div class="radio-list" data-error-container="#form_2_membership_error">
-                                                        <label>
-                                                            <input type="radio" name="membership" value="1" /> Fee </label>
-                                                        <label>
-                                                            <input type="radio" name="membership" value="2" /> Professional </label>
-                                                    </div>
-                                                    <div id="form_2_membership_error"> </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Services
-                                                    <span class="required"> * </span>
-                                                </label>
-                                                <div class="col-md-9">
-                                                    <div class="checkbox-list" data-error-container="#form_2_services_error">
-                                                        <label>
-                                                            <input type="checkbox" value="1" name="service" /> Service 1 </label>
-                                                        <label>
-                                                            <input type="checkbox" value="2" name="service" /> Service 2 </label>
-                                                        <label>
-                                                            <input type="checkbox" value="3" name="service" /> Service 3 </label>
-                                                    </div>
-                                                    <span class="help-block"> (select at least two) </span>
-                                                    <div id="form_2_services_error"> </div>
-                                                </div>
+                            <div class="form-body">
+                                <h3 class="block-title margin-bottom-15">Thông tin chung</h3>
+                                <div class="alert alert-danger display-hide">
+                                    <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
+                                <div class="alert alert-success display-hide">
+                                    <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Tên công ty
+                                                <span class="required"> * </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('company_name', '', ['class' => 'form-control', 'data-required' => '1','placeholder' => 'VD: TNHH Giadinhit.com']) !!}
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Markdown</label>
-                                                    <div class="col-md-9">
-                                                        <textarea name="markdown" data-provide="markdown" rows="10" data-error-container="#editor_error"></textarea>
-                                                        <div id="editor_error"> </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">WYSIHTML5 Editor
-                                                        <span class="required"> * </span>
-                                                    </label>
-                                                    <div class="col-md-9">
-                                                        <textarea class="wysihtml5 form-control" rows="6" name="editor1" data-error-container="#editor1_error"></textarea>
-                                                        <div id="editor1_error"> </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group last">
-                                                    <label class="control-label col-md-3">CKEditor
-                                                        <span class="required"> * </span>
-                                                    </label>
-                                                    <div class="col-md-9">
-                                                        <textarea class="ckeditor form-control" name="editor2" rows="6" data-error-container="#editor2_error"></textarea>
-                                                        <div id="editor2_error"> </div>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Mã bưu chính
+                                                <span class="required"> * </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('company_zip', '', ['class' => 'form-control', 'data-required' => '1','placeholder' => 'VD: 700000']) !!}
                                             </div>
+                                        </div>
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Số điện thoại</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('company_tel', '', ['class' => 'form-control','placeholder' => 'VD: 0167-6542-578']) !!}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Số fax</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('company_fax', '', ['class' => 'form-control','placeholder' => 'VD: 082-246-9202']) !!}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Bản quyền website
+                                                <span class="required"> * </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('company_copyright', '', ['class' => 'form-control','placeholder' => 'VD: Giadinhit.com']) !!}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Tiêu đề website</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('subtitle', '', ['class' => 'form-control','placeholder' => 'VD: Thiết kế website chất lượng']) !!}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Vĩ độ</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('company_lat', '', ['class' => 'form-control','placeholder' => 'VD: 34.395353']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Kinh độ</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('company_lng', '', ['class' => 'form-control','placeholder' => 'VD: 132.45482']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22169.609551143207!2d106.61998586636786!3d10.805926814680902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1502727694094" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-body">
+                                <h3 class="block-title">Các thông tin khác</h3>
+                                <h4 class="block-title-small">Thông tin email</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Email người gửi</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('email1', '', ['class' => 'form-control','placeholder' => 'VD: minhhiep.q@gmail.com']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Tên hiển thị khi gửi email</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('email1_name', '', ['class' => 'form-control','placeholder' => 'VD: Nguyễn Minh Hiệp']) !!}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-actions">
-                                    <div class="row">
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <button type="submit" class="btn green">Submit</button>
-                                            <button type="button" class="btn default">Cancel</button>
+                                <h4 class="block-title-small margin-top-15">Cấu hình host gửi mail SMTP</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Host SMTP</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('mail_smtp_host', '', ['class' => 'form-control','placeholder' => 'VD: smtp.gmail.com']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Port SMTP</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('mail_smtp_port', '', ['class' => 'form-control','placeholder' => 'VD: 465 hoặc 587']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Tài khoản SMTP</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('mail_smtp_user', '', ['class' => 'form-control','placeholder' => 'VD: nguyenhiep']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Mật khẩu SMTP</label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('mail_smtp_pass', '', ['class' => 'form-control','placeholder' => 'VD: nguyenhiep']) !!}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                            <!-- END FORM-->
+                            </div>
+                            <div class="form-body">
+                                <h3 class="block-title margin-bottom-15">Thông tin cá nhân và Điều khoản sử dụng</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Bảo mật
+                                                <span class="required"> * </span>
+                                            </label>
+                                            <div class="col-md-10">
+                                                <textarea class="ckeditor form-control" name="about_privacy" rows="6" data-error-container="#editor2_error"></textarea>
+                                                <div id="editor2_error"> </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Điều khoản
+                                                <span class="required"> * </span>
+                                            </label>
+                                            <div class="col-md-10">
+                                                <textarea class="ckeditor form-control" name="about_terms" rows="6" data-error-container="#editor2_error"></textarea>
+                                                <div id="editor2_error"> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn green">Submit</button>
+                                        <button type="button" class="btn default">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- END VALIDATION STATES-->
                     </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
