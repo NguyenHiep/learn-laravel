@@ -230,7 +230,7 @@
 									<li>
 										<a href="#">
                                                 <span class="photo">
-                                                    <img src="{{asset('/manages/')}}../assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="{{asset('/manages/assets/layouts/layout3/img/avatar3.jpg')}}" class="img-circle" alt=""> </span>
 											<span class="subject">
                                                     <span class="from"> Richard Doe </span>
                                                     <span class="time">46 mins </span>
@@ -358,34 +358,31 @@
 					<li class="dropdown dropdown-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 							<img alt="" class="img-circle" src="{{asset('/manages/assets/layouts/layout/img/avatar3_small.jpg')}}" />
-							<span class="username username-hide-on-mobile"> Nick </span>
+							<span class="username username-hide-on-mobile"> Nguyễn Hiệp </span>
 							<i class="fa fa-angle-down"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-default">
 							<li>
 								<a href="page_user_profile_1.html">
-									<i class="icon-user"></i> My Profile </a>
+									<i class="icon-user"></i> Thông tin tài khoản </a>
 							</li>
-							<li>
-								<a href="app_calendar.html">
-									<i class="icon-calendar"></i> My Calendar </a>
-							</li>
+
 							<li>
 								<a href="app_inbox.html">
-									<i class="icon-envelope-open"></i> My Inbox
+									<i class="icon-envelope-open"></i> Hộp thư đến
 									<span class="badge badge-danger"> 3 </span>
 								</a>
 							</li>
 							<li>
 								<a href="app_todo.html">
-									<i class="icon-rocket"></i> My Tasks
+									<i class="icon-rocket"></i> Công việc mới
 									<span class="badge badge-success"> 7 </span>
 								</a>
 							</li>
 							<li class="divider"> </li>
 							<li>
 								<a href="page_user_lock_1.html">
-									<i class="icon-lock"></i> Lock Screen </a>
+									<i class="icon-lock"></i> Khóa màn hình </a>
 							</li>
 							<li>
 								<a href="{{ url('logout') }}">
@@ -432,7 +429,7 @@
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 					<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
 					<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-					<form class="sidebar-search  " action="page_general_search_3.html" method="POST">
+					<form class="sidebar-search  " action="/manage" method="POST">
 						<a href="javascript:;" class="remove">
 							<i class="icon-close"></i>
 						</a>
@@ -448,7 +445,7 @@
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="nav-item start active open">
-					<a href="javascript:;" class="nav-link nav-toggle">
+					<a href="{{url('/manage/')}}" class="nav-link nav-toggle">
 						<i class="icon-home"></i>
 						<span class="title">Home</span>
 						<span class="selected"></span>
@@ -456,11 +453,12 @@
 				</li>
 
 
-				<li class="nav-item  ">
+				<li class="nav-item  active open">
 					<a href="javascript:;" class="nav-link nav-toggle">
 						<i class="icon-settings"></i>
 						<span class="title">Cài đặt</span>
 						<span class="arrow"></span>
+						<span class="selected"></span>
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item">
@@ -650,14 +648,14 @@
 								<div class="media-status">
 									<span class="badge badge-success">8</span>
 								</div>
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar3.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar3.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Bob Nilson</h4>
 									<div class="media-heading-sub"> Project Manager </div>
 								</div>
 							</li>
 							<li class="media">
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar1.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar1.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Nick Larson</h4>
 									<div class="media-heading-sub"> Art Director </div>
@@ -667,14 +665,14 @@
 								<div class="media-status">
 									<span class="badge badge-danger">3</span>
 								</div>
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar4.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar4.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Deon Hubert</h4>
 									<div class="media-heading-sub"> CTO </div>
 								</div>
 							</li>
 							<li class="media">
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar2.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar2.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Ella Wong</h4>
 									<div class="media-heading-sub"> CEO </div>
@@ -687,7 +685,7 @@
 								<div class="media-status">
 									<span class="badge badge-warning">2</span>
 								</div>
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar6.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar6.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Lara Kunis</h4>
 									<div class="media-heading-sub"> CEO, Loop Inc </div>
@@ -698,7 +696,7 @@
 								<div class="media-status">
 									<span class="label label-sm label-success">new</span>
 								</div>
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar7.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar7.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Ernie Kyllonen</h4>
 									<div class="media-heading-sub"> Project Manager,
@@ -706,7 +704,7 @@
 								</div>
 							</li>
 							<li class="media">
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar8.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar8.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Lisa Stone</h4>
 									<div class="media-heading-sub"> CTO, Keort Inc </div>
@@ -717,14 +715,14 @@
 								<div class="media-status">
 									<span class="badge badge-success">7</span>
 								</div>
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar9.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar9.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Deon Portalatin</h4>
 									<div class="media-heading-sub"> CFO, H&D LTD </div>
 								</div>
 							</li>
 							<li class="media">
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar10.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar10.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Irina Savikova</h4>
 									<div class="media-heading-sub"> CEO, Tizda Motors Inc </div>
@@ -734,7 +732,7 @@
 								<div class="media-status">
 									<span class="badge badge-danger">4</span>
 								</div>
-								<img class="media-object" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar11.jpg" alt="...">
+								<img class="media-object" src="{{asset('/manages/assets/layouts/layout/img/avatar11.jpg')}}" alt="...">
 								<div class="media-body">
 									<h4 class="media-heading">Maria Gomez</h4>
 									<div class="media-heading-sub"> Manager, Infomatic Inc </div>
@@ -751,7 +749,7 @@
 							</div>
 							<div class="page-quick-sidebar-chat-user-messages">
 								<div class="post out">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar3.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar3.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Bob Nilson</a>
@@ -760,7 +758,7 @@
 									</div>
 								</div>
 								<div class="post in">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar2.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar2.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Ella Wong</a>
@@ -769,7 +767,7 @@
 									</div>
 								</div>
 								<div class="post out">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar3.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar3.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Bob Nilson</a>
@@ -778,7 +776,7 @@
 									</div>
 								</div>
 								<div class="post in">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar2.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar2.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Ella Wong</a>
@@ -787,7 +785,7 @@
 									</div>
 								</div>
 								<div class="post out">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar3.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar3.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Bob Nilson</a>
@@ -796,7 +794,7 @@
 									</div>
 								</div>
 								<div class="post in">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar2.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar2.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Ella Wong</a>
@@ -805,7 +803,7 @@
 									</div>
 								</div>
 								<div class="post out">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar3.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar3.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Bob Nilson</a>
@@ -814,7 +812,7 @@
 									</div>
 								</div>
 								<div class="post in">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar2.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar2.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Ella Wong</a>
@@ -823,7 +821,7 @@
 									</div>
 								</div>
 								<div class="post out">
-									<img class="avatar" alt="" src="{{asset('/manages/')}}../assets/layouts/layout/img/avatar3.jpg" />
+									<img class="avatar" alt="" src="{{asset('/manages/assets/layouts/layout/img/avatar3.jpg')}}" />
 									<div class="message">
 										<span class="arrow"></span>
 										<a href="javascript:;" class="name">Bob Nilson</a>
@@ -1165,14 +1163,14 @@
 
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
-	<div class="page-footer-inner"> 2017 &copy; Custom theme by NguyenHiep. </div>
+	<div class="page-footer-inner text-center"> 2017 &copy; Custom theme by NguyenHiep. </div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
 	</div>
 </div>
 <!-- END FOOTER -->
 
-@section('script')
+@section('scripts')
 <!--[if lt IE 9]>
 <script src="{{asset('/manages/assets/global/plugins/respond.min.js')}}"></script>
 <script src="{{asset('/manages/assets/global/plugins/excanvas.min.js')}}"></script>
