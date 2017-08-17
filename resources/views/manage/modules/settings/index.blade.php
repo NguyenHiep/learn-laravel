@@ -35,19 +35,15 @@
                                 <span class="caption-subject font-dark sbold uppercase">Cài đặt thông tin</span>
                             </div>
                             <div class="actions">
-                                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                        <button type="button" class="btn default">Cancel</button>
-                                        <button type="submit" name="submit" class="btn green" id="submit_form">Save data</button>
-                                </div>
+                                <button type="button" class="btn default">Cancel</button>
+                                <button type="submit" name="submit" class="btn green" id="submit_form">Save data</button>
                             </div>
                         </div>
+
                         <div class="portlet-body">
                             <div class="form-body">
                                 <h3 class="block-title margin-bottom-15">Thông tin chung</h3>
-                                <div class="alert alert-danger display-hide">
-                                    <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
-                                <div class="alert alert-success display-hide">
-                                    <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+                                @include('manage.blocks.errors')
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
