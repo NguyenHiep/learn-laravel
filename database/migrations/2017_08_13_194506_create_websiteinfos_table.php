@@ -34,7 +34,8 @@ class CreateWebsiteinfosTable extends Migration
             $table->string('mail_smtp_user', 255)->nullable()->comment('Email người gửi - User SMTP');
             $table->string('mail_smtp_pass', 255)->nullable()->comment('Email người gửi - PassWord SMTP');
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable()->comment('Ngày xóa');
+            $table->softDeletes();
+            //$table->timestamp('deleted_at')->nullable()->comment('Ngày xóa');
 
         });
     }

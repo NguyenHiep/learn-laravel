@@ -462,7 +462,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item">
-							<a href="{{url('manage/settings/settings')}}" class="nav-link ">
+							<a href="{{url('manage/settings/')}}" class="nav-link ">
 								<span class="title">Cài đặt thông tin website</span>
 							</a>
 						</li>

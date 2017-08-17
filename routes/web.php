@@ -26,7 +26,8 @@ Route::group(['middleware', 'auth'], function () {
             return view('manage.home.main');
         })->name('manage');
         Route::group(['prefix' => 'settings'], function () {
-            Route::get('settings', ['as' => 'index', 'uses' => 'SettingsController@index']);
+            Route::get('/', ['as' => 'index', 'uses' => 'SettingsController@index']);
+            Route::post('/', ['as' => 'index', 'uses' => 'SettingsController@index']);
         });
     });
 

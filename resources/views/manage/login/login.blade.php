@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Metronic | User Login 1</title>
+    <title>Đăng nhập quản trị hệ thống</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -68,14 +68,14 @@
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">Tài khoản</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Vui lòng nhập tài khoản" name="txtUser"/> </div>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Vui lòng nhập tài khoản" name="txtUser" value="{{ old('txtUser') }}"/> </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Mật khẩu</label>
             <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Vui lòng nhập mật khẩu" name="txtPass" /> </div>
         <div class="form-actions">
             <button type="submit" class="btn green uppercase" name="btnLogin">Đăng nhập</button>
             <label class="rememberme check">
-                <input type="checkbox" name="remember" value="1" />Ghi nhớ </label>
+                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}/>Ghi nhớ </label>
             <a href="javascript:;" id="forget-password" class="forget-password">Quên mật khẩu?</a>
         </div>
         <div class="login-options">
