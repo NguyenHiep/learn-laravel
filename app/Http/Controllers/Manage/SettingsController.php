@@ -17,17 +17,24 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        // Get show list
-        return view('manage.modules.settings.index');
+    	$settings = array();
+	    $settings  = Settings::find(1);
+	    // Get show list
+        return view('manage.modules.settings.index', compact('settings'));
     }
 
     public function update_website(SettingsRequest $request){
         //Neu chua co id --> tao moi
 
-        if ($request->validate()) {
+	    Settings::create($request->all());
+	    /*$settings = new Settings();
 
-        }
-        return redirect()->route('manage');
+	    $category->name = $request->get('name');
+	    return \Redirect::route('categories.show',
+		    array($category->id))
+		    ->with('message', 'Your category has been created!');
+		*/
+       return redirect()->route('manage/settings');
         // Neu co roi thi cap nhap lai thong tin
     }
 

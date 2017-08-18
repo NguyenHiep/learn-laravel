@@ -64,6 +64,16 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label class="control-label col-md-3">Địa chỉ
+                                                <span class="required"> * </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                {!! Form::text('company_address', old('company_address'), ['class' => 'form-control', 'data-required' => '1','placeholder' => 'VD: 42/11/2 Hồ Đắc Di, Tây Thạnh, Tân Phú']) !!}
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
                                             <label class="control-label col-md-3">Số điện thoại</label>
                                             <div class="col-md-9">
                                                 {!! Form::text('company_tel', old('company_tel'), ['class' => 'form-control','placeholder' => 'VD: 0167-6542-578']) !!}
@@ -110,7 +120,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3"></label>
                                             <div class="col-md-9">
-                                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22169.609551143207!2d106.61998586636786!3d10.805926814680902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1502727694094" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22169.609551143207!2d106.61998586636786!3d10.805926814680902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1502727694094" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
                                             </div>
                                         </div>
                                     </div>

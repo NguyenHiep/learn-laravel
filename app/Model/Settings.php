@@ -38,7 +38,6 @@ class Settings extends Model
     protected $fillable = [
         'company_name',
         'company_zip',
-        'company_zip',
         'company_address',
         'company_tel',
         'company_fax',

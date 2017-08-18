@@ -26,6 +26,7 @@ class SettingsRequest extends FormRequest
         return [
             'company_name'      => 'required',
             'company_zip'       => 'required',
+            'company_address'   => 'required',
             'company_copyright' => 'required',
             'about_privacy'     => 'required',
             'about_terms'       => 'required',
@@ -42,6 +43,7 @@ class SettingsRequest extends FormRequest
         return [
             'company_name.required'      => 'Vui lòng nhập tên công ty',
             'company_zip.required'       => 'Vui lòng nhập mã zip code',
+            'company_address.required'   => 'Vui lòng nhập địa chỉ',
             'company_copyright.required' => 'Vui lòng nhập bản quyền website',
             'about_privacy.required'     => 'Vui lòng nhập điều khoản',
             'about_terms.required'       => 'Vui lòng nhập nội dung điều kiện'
