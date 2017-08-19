@@ -444,8 +444,8 @@
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="nav-item start active open">
-					<a href="{{url('/manage/')}}" class="nav-link nav-toggle">
+				<li class="nav-item start {{ active(['manage'],'active open') }} ">
+					<a href="{{ route('manage') }}" class="nav-link nav-toggle">
 						<i class="icon-home"></i>
 						<span class="title">Home</span>
 						<span class="selected"></span>
@@ -453,8 +453,8 @@
 				</li>
 
 
-				<li class="nav-item  active open">
-					<a href="javascript:;" class="nav-link nav-toggle">
+				<li class="nav-item  {{ active(['settings.index', 'admins.index'], 'active open') }}">
+					<a href="{{ route('settings.index') }}" class="nav-link nav-toggle">
 						<i class="icon-settings"></i>
 						<span class="title">Cài đặt</span>
 						<span class="arrow"></span>
@@ -462,12 +462,12 @@
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item">
-							<a href="{{url('manage/settings/')}}" class="nav-link ">
+							<a href="{{ route('settings.index') }}" class="nav-link ">
 								<span class="title">Cài đặt thông tin website</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="form_controls.html" class="nav-link ">
+							<a href="{{ route('admins.index') }}" class="nav-link ">
 								<span class="title">Quản trị tài khoản</span>
 							</a>
 						</li>

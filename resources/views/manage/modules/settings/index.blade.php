@@ -11,7 +11,7 @@
             <div class="page-bar">
                 <ul class="page-breadcrumb">
                     <li>
-                        <a href="{{url('/manage/settings/')}}">Cài đặt</a>
+                        <a href="{{route('settings.index')}}">Cài đặt</a>
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
@@ -26,7 +26,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    {!! Form::open(['url' => '/manage/settings/', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
+                    {!! Form::open(['route' => 'settings.update', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
                     <!-- BEGIN VALIDATION STATES-->
                     <div class="portlet light portlet-fit portlet-form bordered">
                         <div class="portlet-title">
