@@ -22,26 +22,23 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = Settings::find(self::WEBSITE_INFO_ID);
-        $settings = (!empty($settings)) ? $settings : [];
+        $settings = Settings::checkWebsiteInfo(self::WEBSITE_INFO_ID);
         // Get show list
         return view('manage.modules.settings.index', compact('settings' ));
     }
 
     public function update(SettingsRequest $request)
     {
-        $settings = Settings::find(self::WEBSITE_INFO_ID);
-        $settings = (!empty($settings)) ? $settings : [];
-
+	    $settings = Settings::checkWebsiteInfo(self::WEBSITE_INFO_ID);
         // If data empty --> create
         if(empty($settings)){
+
             Settings::create($request->all());
             session()->flash('message', 'Thêm mới thông tin website thành công!!');
         }else{
 
             // Update data info
-
-            $settings->company_name         = $request->company_name;;
+            $settings->company_name         =  $request->company_name;;
             $settings->company_zip          =  $request->company_zip;;
             $settings->company_address      =  $request->company_address;
             $settings->company_tel          =  $request->company_tel;

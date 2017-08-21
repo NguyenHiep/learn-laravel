@@ -56,4 +56,18 @@ class Settings extends Model
         'mail_smtp_pass'
     ];
 
+	/**
+	 * Check data empty in table website_info
+	 * @param int $id
+	 * @return array|mixed|static
+	 */
+	public static function checkWebsiteInfo($id = 1)
+	{
+		$settings = Settings::find($id);
+		if (empty($settings)) {
+			return [];
+		}
+		return $settings;
+	}
+
 }
