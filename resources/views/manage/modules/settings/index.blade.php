@@ -20,7 +20,7 @@
             </div>
             <!-- END PAGE BAR -->
             <!-- BEGIN PAGE TITLE-->
-            <h3 class="page-title"> Quản lý thông tin website </h3>
+            <h3 class="page-title"> Quản lý thông tin website - {{__('common.settings.title') }} </h3>
             <!-- END PAGE TITLE-->
 
             <div class="row">

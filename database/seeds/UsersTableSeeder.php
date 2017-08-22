@@ -11,7 +11,21 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
+
+	    $faker = Faker\Factory::create();
+
+	    $limit = 100;
+
+	    for ($i = 0; $i < $limit; $i++) {
+		    DB::table('users')->insert([
+			    'username'   => $faker->name,
+			    'password'   => bcrypt('admin123'),
+			    'level'      => 2,
+			    'created_at' => new Datetime()
+		    ]);
+	    }
+
+        /*DB::table('users')->insert(
             [
                 [
                     'username'   => 'supperadmin',
@@ -39,5 +53,7 @@ class UsersTableSeeder extends Seeder
                 ]
             ]
         );
+        */
+
     }
 }
