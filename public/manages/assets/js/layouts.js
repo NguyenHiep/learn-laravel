@@ -12,7 +12,7 @@ $(window).load(function() {
 		}
 		return false;
 	})
-	.find("tr:not(:eq(0))").css("cursor","hand");
+	.find("tr:not(:eq(0))").css("cursor","pointer");
 
 	$("input[type='checkbox']").click(function(e) {
 		e.stopPropagation();
