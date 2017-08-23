@@ -30,61 +30,79 @@
                 <span class="caption-subject bold uppercase">Danh sách tài khoản</span>
               </div>
               <div class="tools"></div>
+              <div class="actions">
+                <button class="btn green"> Thêm mới
+                  <i class="fa fa-plus"></i>
+                </button>
+
+                <div class="btn-group btn-group-devided" data-toggle="buttons">
+                  <label class="btn btn-transparent red btn-outline btn-circle btn-sm">
+                    <input type="radio" name="options" class="toggle" id="option1">Actions</label>
+                  <label class="btn btn-transparent red btn-outline btn-circle btn-sm active">
+                    <input type="radio" name="options" class="toggle" id="option2">Settings</label>
+                </div>
+              </div>
             </div>
             <div class="portlet-body">
-              <table class="table table-striped table-bordered table-hover" id="sample_1">
-                <thead>
-                <tr>
-                  <th> ID</th>
-                  <th> Tên tài khoản</th>
-                  <th> Cấp bậc</th>
-                  <th> Trạng thái</th>
-                  <th> Hành động</th>
-                </tr>
-                </thead>
-                <tbody>
+              <div class="table-scrollable">
+                <table class="table table-hover js-action-list-rowlink">
+                  <thead>
+                  <tr>
+                    <th> <!-- <th class="checkbox-list">-->
+                           <input class="js-action-list-checkboxes" name="checkboxes" value="" type="checkbox" id="form_checkboxes">
+                    </th>
+                    <th> #ID</th>
+                    <th> Tên tài khoản</th>
+                    <th> Cấp bậc</th>
+                    <th> Trạng thái</th>
+                    <th> Hành động</th>
+                  </tr>
+                  </thead>
+                  <tbody>
 
-                @if (!empty($list_user))
-                  @foreach ($list_user as $user_info)
-                    <tr>
-                      <td> {{$user_info->id}} </td>
-                      <td> {{$user_info->username}} </td>
-                      <td>
-                        @if ($user_info->level === 1)
-                          <span class="font-red-thunderbird bold">
+                    @if (!empty($list_user))
+                      @foreach ($list_user as $user_info)
+                        <tr>
+                          <td> <!--<td class="checkbox-list"> -->
+                            <input id="action_ids{{$user_info->id}}" name="action_ids[]" value="{{$user_info->id}}" type="checkbox">
+                          </td>
+                          <td> {{$user_info->id}} </td>
+                          <td> {{$user_info->username}} </td>
+                          <td>
+                            @if ($user_info->level === 1)
+                              <span class="font-red-thunderbird bold">
                               {{__("selector.levels.$user_info->level")}}
                           </span>
-                        @elseif($user_info->level === 2)
-                          <span class="font-green-dark bold">
+                            @elseif($user_info->level === 2)
+                              <span class="font-green-dark bold">
                             {{__("selector.levels.$user_info->level")}}
                           </span>
-                        @else
-                          {{__("selector.levels.$user_info->level")}}
-                        @endif
-                         </td>
-                      <td>  </td>
-                      <td>
-                        <div class="btn-group">
-                          <a class="btn dark" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-user"></i>
-                            Action
-                            <i class="fa fa-angle-down"></i>
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li>
-                              <a href="javascript:;"><i class="fa fa-pencil"></i> Edit </a>
-                            </li>
-                            <li>
-                              <a href="javascript:;"><i class="fa fa-trash-o"></i> Delete </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
-                  @endforeach
-                @endif
-                </tbody>
-              </table>
+                            @else
+                              {{__("selector.levels.$user_info->level")}}
+                            @endif
+                          </td>
+                          <td>  </td>
+                          <td>
+                            <span class="label label-sm label-success margin-right-10"> Approved </span>
+                            <span class="label label-sm label-danger margin-right-10"> Blocked </span>
+                            <a href="/manage/settings/admins/edit/{{$user_info->id}}" class="js-action-list-rowlink-val">
+                              <span class="label label-sm label-warning margin-right-10"> Chỉnh sửa </span>
+                            </a>
+                            <a href="/manage/settings/admins/delete/{{$user_info->id}}" class="">
+                              <span class="label label-sm label-info margin-right-10"> Xóa</span>
+                            </a>
+                        </tr>
+                      @endforeach
+                    @endif
+
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                        <td colspan="6"> {{ $list_user->links() }}</td>
+                      </tr>
+                  </tfoot>
+                </table>
+              </div>
             </div>
           </div>
           <!-- END EXAMPLE TABLE PORTLET-->
@@ -103,46 +121,14 @@
   <!-- END PAGE LEVEL PLUGINS -->
   @stop
 @section('scripts')
-     <!--[if lt IE 9]>
-  <script src="{{ asset('/manages/assets/global/plugins/respond.min.js') }}"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/excanvas.min.js') }}"></script>
-  <![endif]-->
-
-  <!-- BEGIN CORE PLUGINS -->
-  <script src="{{ asset('/manages/assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap/js/bootstrap.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/js.cookie.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/uniform/jquery.uniform.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"
-          type="text/javascript"></script>
-  <!-- END CORE PLUGINS -->
-
+  @parent
   <!-- BEGIN PAGE LEVEL PLUGINS -->
   <script src="{{ asset('/manages/assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.js') }}"
           type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}"
           type="text/javascript"></script>
-  <!-- END PAGE LEVEL PLUGINS -->
-  <!-- BEGIN THEME GLOBAL SCRIPTS -->
-  <script src="{{ asset('/manages/assets/global/scripts/app.min.js') }}" type="text/javascript"></script>
-  <!-- END THEME GLOBAL SCRIPTS -->
-  <!-- BEGIN PAGE LEVEL SCRIPTS -->
   <script src="{{ asset('/manages/assets/pages/scripts/table-datatables-buttons.min.js') }}"
           type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
-
-  <!-- BEGIN THEME LAYOUT SCRIPTS -->
-  <script src="{{ asset('/manages/assets/layouts/layout/scripts/layout.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/layouts/layout/scripts/demo.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/layouts/global/scripts/quick-sidebar.min.js') }}"
-          type="text/javascript"></script>
-  <!-- END THEME LAYOUT SCRIPTS -->
 @stop

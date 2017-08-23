@@ -881,3 +881,29 @@
 			<!-- END CONTENT BODY -->
 		</div>
 @endsection
+
+@section('scripts')
+	@parent
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="{{asset('/manages/assets/global/plugins/moment.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js')}}"
+				type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/morris/morris.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/morris/raphael-min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/counterup/jquery.waypoints.min.js')}}"
+				type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/counterup/jquery.counterup.min.js')}}"
+				type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/flot/jquery.flot.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/flot/jquery.flot.resize.min.js')}}"
+				type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/flot/jquery.flot.categories.min.js')}}"
+				type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js')}}"
+				type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/jquery.sparkline.min.js')}}" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{{asset('/manages/assets/pages/scripts/dashboard.min.js')}}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+@stop
