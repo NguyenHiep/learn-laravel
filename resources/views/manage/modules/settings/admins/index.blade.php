@@ -31,7 +31,7 @@
               </div>
               <div class="tools"></div>
               <div class="actions">
-                <a class="btn green" href="#"> Thêm mới
+                <a class="btn green" href="{{ route('admins.create') }}"> Thêm mới
                   <i class="fa fa-plus"></i>
                 </a>
               </div>
@@ -74,15 +74,19 @@
                               {{__("selector.levels.$user_info->level")}}
                             @endif
                           </td>
-                          <td>  </td>
                           <td>
-                            <span class="label label-sm label-success margin-right-10"> Approved </span>
-                            <span class="label label-sm label-danger margin-right-10"> Blocked </span>
+                            @if ($user_info->status === 1)
+                              <span class="label label-sm label-success margin-right-10"> <i class="fa fa-check-circle"></i> Kích hoạt </span>
+                            @else
+                              <span class="label label-sm label-danger margin-right-10"> <i class="fa fa-close"></i> Blocked </span>
+                            @endif
+                          </td>
+                          <td>
                             <a href="/manage/settings/admins/edit/{{$user_info->id}}" class="js-action-list-rowlink-val">
-                              <span class="label label-sm label-warning margin-right-10"> Chỉnh sửa </span>
+                              <span class="label label-sm label-warning margin-right-10"> <i class="fa fa-edit"></i> Chỉnh sửa </span>
                             </a>
                             <a href="/manage/settings/admins/delete/{{$user_info->id}}" class="">
-                              <span class="label label-sm label-info margin-right-10"> Xóa</span>
+                              <span class="label label-sm label-info margin-right-10"> <i class="fa fa-trash-o"></i> Xóa </span>
                             </a>
                         </tr>
                       @endforeach

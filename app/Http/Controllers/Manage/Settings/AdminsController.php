@@ -20,8 +20,7 @@ class AdminsController extends Controller
     public function index()
     {
     	// Get danh sách
-
-		$list_user = User::paginate(10);;
+		$list_user = User::paginate(10);
 
         return view('manage.modules.settings.admins.index', compact('list_user'));
     }
