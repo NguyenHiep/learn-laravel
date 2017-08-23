@@ -195,7 +195,12 @@
                                                 <span class="required"> * </span>
                                             </label>
                                             <div class="col-md-10">
-                                                <textarea class="ckeditor form-control" name="about_privacy" rows="6" data-error-container="#editor2_error">{{ isset($settings->about_privacy) ? $settings->about_privacy : old('about_privacy') }}</textarea>
+                                                {!! Form::textarea('about_privacy', isset($settings->about_privacy) ? $settings->about_privacy : old('about_privacy') ,
+                                                [
+                                                    'class' => 'ckeditor form-control',
+                                                    'rows' => 6,
+                                                    'data-error-container' => '#editor2_error'
+                                                ]) !!}
                                                 <div id="editor2_error"> </div>
                                             </div>
                                         </div>
@@ -205,7 +210,12 @@
                                                 <span class="required"> * </span>
                                             </label>
                                             <div class="col-md-10">
-                                                <textarea class="ckeditor form-control" name="about_terms" rows="6" data-error-container="#editor2_error" >{{ isset($settings->about_terms) ? $settings->about_terms : old('about_terms') }}</textarea>
+                                                {!! Form::textarea('about_terms', isset($settings->about_terms) ? $settings->about_terms : old('about_terms') ,
+                                                [
+                                                    'class' => 'ckeditor form-control',
+                                                    'rows' => 6,
+                                                    'data-error-container' => '#editor2_error'
+                                                ]) !!}
                                                 <div id="editor2_error"> </div>
                                             </div>
                                         </div>
@@ -215,7 +225,7 @@
                             <div class="form-actions">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button type="submit" class="btn green">Submit</button>
+                                        <button type="submit" class="btn green">Save data</button>
                                         <button type="button" class="btn default">Cancel</button>
                                     </div>
                                 </div>
