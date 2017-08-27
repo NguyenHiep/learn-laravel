@@ -12,7 +12,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1" name="viewport" />
 	<meta content="" name="description" />
-	<meta content="" name="author" />
+	<meta content="nguyenhiep" name="author" />
 
 	@section('styles')
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -418,17 +418,12 @@
 		<div class="page-sidebar navbar-collapse collapse">
 
 			<ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-light " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
-				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
 				<li class="sidebar-toggler-wrapper hide">
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 					<div class="sidebar-toggler"> </div>
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
-				<!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
 				<li class="sidebar-search-wrapper">
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
-					<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
 					<form class="sidebar-search  " action="/manage" method="POST">
 						<a href="javascript:;" class="remove">
 							<i class="icon-close"></i>
@@ -442,33 +437,30 @@
                                     </span>
 						</div>
 					</form>
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="nav-item start {{ active(['manage'],'active open') }} ">
 					<a href="{{ route('manage') }}" class="nav-link nav-toggle">
 						<i class="icon-home"></i>
-						<span class="title">Home</span>
+						<span class="title">{{__('static.sidebars.manage.manage')}}</span>
 						<span class="selected"></span>
 					</a>
 				</li>
-
-
-				<li class="nav-item  {{ active(['settings.index', 'admins.index'], 'active open') }}">
+				<li class="nav-item  {{ active(['settings.index', 'admins.index', 'admins.create'], 'active open') }}">
 					<a href="{{ route('settings.index') }}" class="nav-link nav-toggle">
 						<i class="icon-settings"></i>
-						<span class="title">Cài đặt</span>
+						<span class="title">{{__('static.sidebars.manage.settings.title')}}</span>
 						<span class="arrow"></span>
 						<span class="selected"></span>
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item">
 							<a href="{{ route('settings.index') }}" class="nav-link ">
-								<span class="title">Cài đặt thông tin website</span>
+								<span class="title">{{__('static.sidebars.manage.settings.settings')}}</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="{{ route('admins.index') }}" class="nav-link ">
-								<span class="title">Quản trị tài khoản</span>
+								<span class="title">{{__('static.sidebars.manage.settings.admins')}}</span>
 							</a>
 						</li>
 
@@ -478,28 +470,28 @@
 				<li class="nav-item  ">
 					<a href="javascript:;" class="nav-link nav-toggle">
 						<i class="icon-pin"></i>
-						<span class="title">Bài viết</span>
+						<span class="title">{{__('static.sidebars.manage.posts.title')}}</span>
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Tất cả bài viết</span>
+								<span class="title">{{__('static.sidebars.manage.posts.posts')}}</span>
 							</a>
 						</li>
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Bài viết mới</span>
+								<span class="title">{{__('static.sidebars.manage.posts.creates')}}</span>
 							</a>
 						</li>
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Chuyên mục</span>
+								<span class="title">{{__('static.sidebars.manage.posts.category')}}</span>
 							</a>
 						</li>
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Thẻ</span>
+								<span class="title">{{__('static.sidebars.manage.posts.tags')}}</span>
 							</a>
 						</li>
 
@@ -508,18 +500,18 @@
 				<li class="nav-item  ">
 					<a href="javascript:;" class="nav-link nav-toggle">
 						<i class="icon-picture"></i>
-						<span class="title">Hình ảnh</span>
+						<span class="title">{{__('static.sidebars.manage.medias.title')}}</span>
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Danh sách hình ảnh</span>
+								<span class="title">{{__('static.sidebars.manage.medias.medias')}}</span>
 							</a>
 						</li>
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Thêm mới hình ảnh</span>
+								<span class="title">{{__('static.sidebars.manage.medias.creates')}}</span>
 							</a>
 						</li>
 					</ul>
@@ -527,18 +519,18 @@
 				<li class="nav-item  ">
 					<a href="javascript:;" class="nav-link nav-toggle">
 						<i class="icon-docs"></i>
-						<span class="title">Trang</span>
+						<span class="title">{{__('static.sidebars.manage.pages.title')}}</span>
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Tất cả các trang</span>
+								<span class="title">{{__('static.sidebars.manage.pages.pages')}}</span>
 							</a>
 						</li>
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Thêm mới trang</span>
+								<span class="title">{{__('static.sidebars.manage.pages.create')}}</span>
 							</a>
 						</li>
 					</ul>
@@ -546,24 +538,24 @@
 				<li class="nav-item">
 					<a href="javascript:;" class="nav-link nav-toggle">
 						<i class="icon-bubbles"></i>
-						<span class="title">Bình luận</span>
+						<span class="title">{{__('static.sidebars.manage.comments')}}</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a href="javascript:;" class="nav-link nav-toggle">
 						<i class="icon-user"></i>
-						<span class="title">Thành viên</span>
+						<span class="title">{{__('static.sidebars.manage.customers.title')}}</span>
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Tất cả thành viên</span>
+								<span class="title">{{__('static.sidebars.manage.customers.customers')}}</span>
 							</a>
 						</li>
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Thêm mới</span>
+								<span class="title">{{__('static.sidebars.manage.customers.creates')}}</span>
 							</a>
 						</li>
 					</ul>
@@ -571,18 +563,18 @@
 				<li class="nav-item">
 					<a href="javascript:;" class="nav-link nav-toggle">
 						<i class="icon-envelope"></i>
-						<span class="title">Email</span>
+						<span class="title">{{__('static.sidebars.manage.email.title')}}</span>
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Email liên hệ</span>
+								<span class="title">{{__('static.sidebars.manage.email.contact')}}</span>
 							</a>
 						</li>
 						<li class="nav-item  ">
 							<a href="form_controls.html" class="nav-link ">
-								<span class="title">Email đăng ký theo dõi</span>
+								<span class="title">{{__('static.sidebars.manage.email.subscribe')}}</span>
 							</a>
 						</li>
 					</ul>

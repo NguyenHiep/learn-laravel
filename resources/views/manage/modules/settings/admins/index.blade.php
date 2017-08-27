@@ -31,7 +31,7 @@
               </div>
               <div class="tools"></div>
               <div class="actions">
-                <a class="btn green" href="{{ route('admins.create') }}"> Thêm mới
+                <a class="btn green" href="{{ route('admins.create') }}"> {{__('common.buttons.create')}}
                   <i class="fa fa-plus"></i>
                 </a>
               </div>
@@ -83,10 +83,10 @@
                           </td>
                           <td>
                             <a href="/manage/settings/admins/edit/{{$user_info->id}}" class="js-action-list-rowlink-val">
-                              <span class="label label-sm label-warning margin-right-10"> <i class="fa fa-edit"></i> Chỉnh sửa </span>
+                              <span class="label label-sm label-warning margin-right-10"> <i class="fa fa-edit"></i> {{__('common.buttons.edit')}} </span>
                             </a>
                             <a href="/manage/settings/admins/delete/{{$user_info->id}}" class="">
-                              <span class="label label-sm label-info margin-right-10"> <i class="fa fa-trash-o"></i> Xóa </span>
+                              <span class="label label-sm label-info margin-right-10"> <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}} </span>
                             </a>
                         </tr>
                       @endforeach

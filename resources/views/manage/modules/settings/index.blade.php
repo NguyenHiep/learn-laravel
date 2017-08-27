@@ -10,17 +10,17 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('settings.index')}}">Cài đặt</a>
+            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.settings.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Cấu hình website</span>
+            <span>{{__('static.sidebars.manage.settings.settings')}}</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Quản lý thông tin website - {{__('common.settings.title') }} </h3>
+      <h3 class="page-title"> Quản lý thông tin website  </h3>
       <!-- END PAGE TITLE-->
 
       <div class="row">
@@ -31,11 +31,11 @@
             <div class="portlet-title">
               <div class="caption">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject font-dark sbold uppercase">Cài đặt thông tin</span>
+                <span class="caption-subject font-dark sbold uppercase">{{__('static.sidebars.manage.settings.settings')}}</span>
               </div>
               <div class="actions">
-                <button type="button" class="btn default">Cancel</button>
-                <button type="submit" name="submit" class="btn green" id="submit_form">Save data</button>
+                <button type="button" class="btn default">{{__('common.buttons.cancel')}}</button>
+                <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
             </div>
 
@@ -52,75 +52,78 @@
 
                 <div class="row">
                   <div class="col-md-6">
+                    @php $key = 'company_name'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Tên công ty
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text('company_name', isset($settings->company_name) ? $settings->company_name : old('company_name'), ['class' => 'form-control', 'data-required' => '1','placeholder' => 'VD: TNHH Giadinhit.com']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder')]) !!}
                       </div>
                     </div>
+                    @php $key = 'company_zip'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Mã bưu chính
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text('company_zip', isset($settings->company_zip) ? $settings->company_zip : old('company_zip'), ['class' => 'form-control', 'data-required' => '1','placeholder' => 'VD: 700000']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' =>  __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
-
+                    @php $key = 'company_address'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Địa chỉ
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text('company_address', isset($settings->company_address) ? $settings->company_address : old('company_address'), ['class' => 'form-control', 'data-required' => '1','placeholder' => 'VD: 42/11/2 Hồ Đắc Di, Tây Thạnh, Tân Phú']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
-
-
+                    @php $key = 'company_tel'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Số điện thoại</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('company_tel',isset($settings->company_tel) ? $settings->company_tel : old('company_tel'), ['class' => 'form-control','placeholder' => 'VD: 0167-6542-578']) !!}
+                        {!! Form::text($key,isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
-
+                    @php $key = 'company_fax'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Số fax</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('company_fax', isset($settings->company_fax) ? $settings->company_fax : old('company_fax'), ['class' => 'form-control','placeholder' => 'VD: 082-246-9202']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
-
+                    @php $key = 'company_copyright'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Bản quyền website
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text('company_copyright', isset($settings->company_copyright) ? $settings->company_copyright : old('company_copyright'), ['class' => 'form-control','placeholder' => 'VD: Giadinhit.com']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
-
+                    @php $key = 'subtitle'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Tiêu đề website</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('subtitle', isset($settings->subtitle) ? $settings->subtitle : old('subtitle'), ['class' => 'form-control','placeholder' => 'VD: Thiết kế website chất lượng']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
 
                   </div>
                   <div class="col-md-6">
+                    @php $key = 'company_lat'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Vĩ độ</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('company_lat', isset($settings->company_lat) ? $settings->company_lat : old('company_lat'), ['class' => 'form-control','placeholder' => 'VD: 34.395353']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
+                    @php $key = 'company_lng'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Kinh độ</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('company_lng', isset($settings->company_lng) ? $settings->company_lng : old('company_lng'), ['class' => 'form-control','placeholder' => 'VD: 132.45482']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
                     <div class="form-group">
@@ -140,18 +143,20 @@
                 <h4 class="block-title-small">Thông tin email</h4>
                 <div class="row">
                   <div class="col-md-6">
+                    @php $key = 'email1'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Email người gửi</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('email1', isset($settings->email1) ? $settings->email1 : old('email1'), ['class' => 'form-control','placeholder' => 'VD: minhhiep.q@gmail.com']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
+                    @php $key = 'email1_name'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Tên hiển thị khi gửi email</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('email1_name', isset($settings->email1_name) ? $settings->email1_name : old('email1_name'), ['class' => 'form-control','placeholder' => 'VD: Nguyễn Minh Hiệp']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
                   </div>
@@ -159,30 +164,34 @@
                 <h4 class="block-title-small margin-top-15">Cấu hình host gửi mail SMTP</h4>
                 <div class="row">
                   <div class="col-md-6">
+                    @php $key = 'mail_smtp_host'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Host SMTP</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('mail_smtp_host', isset($settings->mail_smtp_host) ? $settings->mail_smtp_host : old('mail_smtp_host'), ['class' => 'form-control','placeholder' => 'VD: smtp.gmail.com']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
+                    @php $key = 'mail_smtp_port'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Port SMTP</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('mail_smtp_port',  isset($settings->mail_smtp_port) ? $settings->mail_smtp_port : old('mail_smtp_port'), ['class' => 'form-control','placeholder' => 'VD: 465 hoặc 587']) !!}
+                        {!! Form::text($key,  isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
+                    @php $key = 'mail_smtp_user'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Tài khoản SMTP</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('mail_smtp_user', isset($settings->mail_smtp_user) ? $settings->mail_smtp_user : old('mail_smtp_user'), ['class' => 'form-control','placeholder' => 'VD: nguyenhiep']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
+                    @php $key = 'mail_smtp_pass'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Mật khẩu SMTP</label>
+                      <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::text('mail_smtp_pass', isset($settings->mail_smtp_pass) ? $settings->mail_smtp_pass : old('mail_smtp_pass'), ['class' => 'form-control','placeholder' => 'VD: nguyenhiep']) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
                       </div>
                     </div>
                   </div>
@@ -192,12 +201,13 @@
                 <h3 class="block-title margin-bottom-15">Thông tin cá nhân và Điều khoản sử dụng</h3>
                 <div class="row">
                   <div class="col-md-12">
+                    @php $key = 'about_privacy'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-2">Bảo mật
+                      <label class="control-label col-md-2">{{__('common.settings.settings.others.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-10">
-                        {!! Form::textarea('about_privacy', isset($settings->about_privacy) ? $settings->about_privacy : old('about_privacy') ,
+                        {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
                         [
                             'class' => 'ckeditor form-control',
                             'rows' => 6,
@@ -206,13 +216,13 @@
                         <div id="editor2_error"></div>
                       </div>
                     </div>
-
+                    @php $key = 'about_terms'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-2">Điều khoản
+                      <label class="control-label col-md-2">{{__('common.settings.settings.others.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-10">
-                        {!! Form::textarea('about_terms', isset($settings->about_terms) ? $settings->about_terms : old('about_terms') ,
+                        {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
                         [
                             'class' => 'ckeditor form-control',
                             'rows' => 6,
@@ -227,8 +237,8 @@
               <div class="form-actions">
                 <div class="row">
                   <div class="col-md-offset-3 col-md-9">
-                    <button type="submit" class="btn green">Save data</button>
-                    <button type="button" class="btn default">Cancel</button>
+                    <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
+                    <button type="button" class="btn default">{{__('common.buttons.cancel')}}</button>
                   </div>
                 </div>
               </div>

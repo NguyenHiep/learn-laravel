@@ -2,6 +2,7 @@ $(window).load(function() {
 	var elemBody = $("body"),
 		elemArticle = elemBody.find("#article");
 
+	// Create link edit in table list
 	$(".js-action-list-rowlink").on("click", "tr:not(:eq(0))", function(e) {
 		var self   = $(e.target),
 			parent = self.parents("tr").eq(0),
