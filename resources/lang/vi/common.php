@@ -48,7 +48,12 @@ return [
             )
         ),
         'admins' => array(
-
+            'username' => 'Tên tài khoản',
+            'username_placeholder' => 'Vui lòng nhập tên tài khoản',
+            'password' => 'Mật khẩu',
+            'password_placeholder' => 'Vui lòng nhập mật khẩu',
+            'level' => 'Cấp độ',
+            'status' => 'Trạng thái'
         )
     ),
 ];

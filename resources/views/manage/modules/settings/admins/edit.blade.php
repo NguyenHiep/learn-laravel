@@ -14,18 +14,18 @@
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Thêm mới thành viên</span>
+            <span>Cập nhật thành viên</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Thêm mới thành viên </h3>
+      <h3 class="page-title"> Cập nhật thành viên </h3>
       <!-- END PAGE TITLE-->
 
       <div class="row">
         <div class="col-md-12">
-        {!! Form::open(['route' => 'settings.update', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
+        {!! Form::open(['route' => 'admins.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
@@ -34,8 +34,8 @@
                 <span class="caption-subject font-dark sbold uppercase">Nhập thông tin thành viên</span>
               </div>
               <div class="actions">
-                <button type="button" class="btn default">Cancel</button>
-                <button type="submit" name="submit" class="btn green" id="submit_form">Save data</button>
+                <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
             </div>
 
@@ -49,33 +49,60 @@
                 @endif
                 @include('manage.blocks.errors')
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-8">
+                    @php $key = 'username'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Tên tài khoản
+                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text('company_name', isset($settings->company_name) ? $settings->company_name : old('company_name'), ['class' => 'form-control', 'data-required' => '1','placeholder' => 'VD: TNHH Giadinhit.com']) !!}
+                        {!! Form::text($key, old($key,$user->{$key}), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
                       </div>
                     </div>
-
-                  </div>
-                  <div class="col-md-6">
+                    @php $key = 'password'; @endphp
                     <div class="form-group">
-                      <label class="control-label col-md-3">Vĩ độ</label>
+                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                        <span class="required"> * </span>
+                      </label>
                       <div class="col-md-9">
-                        {!! Form::text('company_lat', isset($settings->company_lat) ? $settings->company_lat : old('company_lat'), ['class' => 'form-control','placeholder' => 'VD: 34.395353']) !!}
+                        {!! Form::password($key, ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                      </div>
+                    </div>
+                    @php $key = 'level'; @endphp
+                    <div class="form-group">
+                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-9">
+                        {!! Form::select($key, __('selector.levels'), old($key, $user->{$key}),['class' => 'form-control select2me']) !!}
+                      </div>
+                    </div>
+                    @php $key = 'status'; @endphp
+                    <div class="form-group">
+                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-9">
+                        <div class="radio-list">
+                          @foreach(__('selector.status') as $k =>$val)
+                              @if($user->{$key} == $k)
+                                <label> {!! Form::radio($key, $k, ['class' => 'form-control', 'checked' => 'checked']) !!}  {{ $val }} </label>
+                              @else
+                                <label> {!! Form::radio($key, $k, ['class' => 'form-control']) !!}  {{ $val }} </label>
+                              @endif
+                          @endforeach
+
+                        </div>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
               <div class="form-actions">
                 <div class="row">
                   <div class="col-md-offset-3 col-md-9">
-                    <button type="submit" class="btn green">Save data</button>
-                    <button type="button" class="btn default">Cancel</button>
+                    <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
+                    <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                   </div>
                 </div>
               </div>

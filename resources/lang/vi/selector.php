@@ -6,5 +6,9 @@ return [
 		2 => 'Biên tập viên',
 		3 => 'Cộng tác viên'
 	),
+    'status' => array(
+        1 => 'Kích hoạt',
+        2 => 'Không kích hoạt',
+    ),
 
 ];

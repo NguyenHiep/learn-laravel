@@ -25,7 +25,7 @@
 
       <div class="row">
         <div class="col-md-12">
-        {!! Form::open(['route' => 'settings.update', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
+        {!! Form::open(['route' => 'admins.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
@@ -34,7 +34,7 @@
                 <span class="caption-subject font-dark sbold uppercase">Nhập thông tin thành viên</span>
               </div>
               <div class="actions">
-                <button type="button" class="btn default">{{__('common.buttons.cancel')}}</button>
+                <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
             </div>
@@ -65,7 +65,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        {!! Form::password($key, ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
                       </div>
                     </div>
                     @php $key = 'level'; @endphp
@@ -74,7 +74,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::select($key, [1 => 'Hiep', 2 => 'Tuyen'], old($key),['class' => 'form-control']) !!}
+                        {!! Form::select($key, __('selector.levels'), old($key),['class' => 'form-control select2me']) !!}
                       </div>
                     </div>
                     @php $key = 'status'; @endphp
@@ -83,8 +83,12 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::radio($key, 1, ['class' => 'form-control']) !!}
-                        {!! Form::radio($key, 0, ['class' => 'form-control']) !!}
+                        <div class="radio-list">
+                          @foreach(__('selector.status') as $k =>$val)
+                            <label> {!! Form::radio($key, $k, ['class' => 'form-control']) !!}  {{ $val }} </label>
+                          @endforeach
+
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -94,7 +98,7 @@
                 <div class="row">
                   <div class="col-md-offset-3 col-md-9">
                     <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                    <button type="button" class="btn default">{{__('common.buttons.cancel')}}</button>
+                    <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                   </div>
                 </div>
               </div>

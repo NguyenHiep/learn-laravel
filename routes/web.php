@@ -23,11 +23,12 @@ Route::group(['middleware', 'auth'], function () {
             Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);
             Route::get('admins', ['as' => 'admins.index', 'uses' => 'Settings\AdminsController@index']);
 	        Route::get('admins/create', ['as' => 'admins.create', 'uses' => 'Settings\AdminsController@create']);
-	        //Route::post('admins/create', ['as' => 'admins.create', 'uses' => 'Settings\AdminsController@create']);
+	        Route::post('admins/create', ['as' => 'admins.store', 'uses' => 'Settings\AdminsController@store']);
+            Route::get('admins/edit/{id}', ['as' => 'admins.edit', 'uses' => 'Settings\AdminsController@edit']);
         });
     });
 });
 
-Route::resource('test','Manage\Settings\AdminsController');
+//Route::resource('test','Manage\Settings\AdminsController');
 
 

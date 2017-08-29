@@ -42,7 +42,25 @@ class AdminsController extends Controller
      */
     public function store()
     {
-        //
+        // Begin validate
+        $this->validate(request(),
+            [
+                'username' => 'required',
+                'password' => 'required',
+                'level'    => 'required',
+                'status'   => 'required'
+            ],
+            [
+                'username.required' => 'Vui lòng nhập tên tài khoản',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'level.required'    => 'Vui lòng chọn cấp độ',
+                'status.required'   => 'Vui lòng chọn trạng thái'
+            ]
+        );
+
+        User::create(request()->all());
+        session()->flash('message', 'Thêm mới thành viên thành công!!');
+        return redirect()->route('admins.index');
     }
 
     /**
@@ -65,6 +83,10 @@ class AdminsController extends Controller
     public function edit($id)
     {
         //
+        $user = User::find($id);
+
+        return view('manage.modules.settings.admins.edit', compact('user'));
+
     }
 
     /**
