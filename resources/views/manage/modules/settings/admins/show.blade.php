@@ -34,8 +34,8 @@
                 <span class="caption-subject font-dark sbold uppercase">Nhập thông tin thành viên</span>
               </div>
               <div class="actions">
-                <button type="button" class="btn default">{{__('common.buttons.cancel')}}</button>
-                <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
+                <button type="button" class="btn default">Cancel</button>
+                <button type="submit" name="submit" class="btn green" id="submit_form">Save data</button>
               </div>
             </div>
 
@@ -49,52 +49,33 @@
                 @endif
                 @include('manage.blocks.errors')
                 <div class="row">
-                  <div class="col-md-8">
-                    @php $key = 'username'; @endphp
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                      <label class="control-label col-md-3">Tên tài khoản
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        {!! Form::text('company_name', isset($settings->company_name) ? $settings->company_name : old('company_name'), ['class' => 'form-control', 'data-required' => '1','placeholder' => 'VD: TNHH Giadinhit.com']) !!}
                       </div>
                     </div>
-                    @php $key = 'password'; @endphp
+
+                  </div>
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
-                        <span class="required"> * </span>
-                      </label>
+                      <label class="control-label col-md-3">Vĩ độ</label>
                       <div class="col-md-9">
-                        {!! Form::text($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
-                      </div>
-                    </div>
-                    @php $key = 'level'; @endphp
-                    <div class="form-group">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
-                        <span class="required"> * </span>
-                      </label>
-                      <div class="col-md-9">
-                        {!! Form::select($key, [1 => 'Hiep', 2 => 'Tuyen'], old($key),['class' => 'form-control']) !!}
-                      </div>
-                    </div>
-                    @php $key = 'status'; @endphp
-                    <div class="form-group">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
-                        <span class="required"> * </span>
-                      </label>
-                      <div class="col-md-9">
-                        {!! Form::radio($key, 1, ['class' => 'form-control']) !!}
-                        {!! Form::radio($key, 0, ['class' => 'form-control']) !!}
+                        {!! Form::text('company_lat', isset($settings->company_lat) ? $settings->company_lat : old('company_lat'), ['class' => 'form-control','placeholder' => 'VD: 34.395353']) !!}
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
               <div class="form-actions">
                 <div class="row">
                   <div class="col-md-offset-3 col-md-9">
-                    <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                    <button type="button" class="btn default">{{__('common.buttons.cancel')}}</button>
+                    <button type="submit" class="btn green">Save data</button>
+                    <button type="button" class="btn default">Cancel</button>
                   </div>
                 </div>
               </div>

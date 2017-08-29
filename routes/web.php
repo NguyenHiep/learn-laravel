@@ -28,6 +28,6 @@ Route::group(['middleware', 'auth'], function () {
     });
 });
 
-//Route::resource('test','ManageSettingsTestController');
+Route::resource('test','Manage\Settings\AdminsController');
 
 
