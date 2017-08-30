@@ -47,7 +47,7 @@
                   <thead>
                   <tr>
                     <th> <!-- <th class="checkbox-list">-->
-                           <input class="js-action-list-checkboxes" name="checkboxes" value="" type="checkbox" id="form_checkboxes">
+                           <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
                     </th>
                     <th> #ID</th>
                     <th> Tên tài khoản</th>
