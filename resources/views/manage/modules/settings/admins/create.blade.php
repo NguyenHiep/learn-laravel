@@ -74,7 +74,9 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::select($key, __('selector.levels'), old($key),['class' => 'form-control select2me']) !!}
+                        @if(!empty(__('selector.levels')))
+                          {!! Form::select($key, __('selector.levels'), old($key),['class' => 'form-control select2me']) !!}
+                        @endif
                       </div>
                     </div>
                     @php $key = 'status'; @endphp
@@ -84,10 +86,11 @@
                       </label>
                       <div class="col-md-9">
                         <div class="radio-list">
-                          @foreach(__('selector.status') as $k =>$val)
-                            <label> {!! Form::radio($key, $k, ['class' => 'form-control']) !!}  {{ $val }} </label>
-                          @endforeach
-
+                          @if(!empty(__('selector.status')))
+                            @foreach(__('selector.status') as $k =>$val)
+                              <label> {!! Form::radio($key, $k, true) !!}  {{ $val }} </label>
+                            @endforeach
+                           @endif
                         </div>
                       </div>
                     </div>

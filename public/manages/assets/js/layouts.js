@@ -21,7 +21,9 @@ $(window).load(function() {
 	$(".js-action-list-rowlink td a").click(function(e) {
 		e.stopPropagation();
 	});
-
+	$(".js-action-delete").click(function (e) {
+		e.stopPropagation();
+	});
 
 });
 

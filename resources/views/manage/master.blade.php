@@ -445,7 +445,7 @@
 						<span class="selected"></span>
 					</a>
 				</li>
-				<li class="nav-item  {{ active(['settings.index', 'admins.index', 'admins.create'], 'active open') }}">
+				<li class="nav-item  {{ active(['settings.index', 'admins.index', 'admins.create', 'admins.edit'], 'active open') }}">
 					<a href="{{ route('settings.index') }}" class="nav-link nav-toggle">
 						<i class="icon-settings"></i>
 						<span class="title">{{__('static.sidebars.manage.settings.title')}}</span>

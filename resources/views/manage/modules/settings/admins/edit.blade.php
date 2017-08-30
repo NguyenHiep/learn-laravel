@@ -25,7 +25,8 @@
 
       <div class="row">
         <div class="col-md-12">
-        {!! Form::open(['route' => 'admins.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
+        {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Manage\Settings\AdminsController@update',$user->id] , 'class'=> 'form-horizontal']) !!}
+
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
@@ -85,11 +86,11 @@
                       <div class="col-md-9">
                         <div class="radio-list">
                           @foreach(__('selector.status') as $k =>$val)
-                              @if($user->{$key} == $k)
-                                <label> {!! Form::radio($key, $k, ['class' => 'form-control', 'checked' => 'checked']) !!}  {{ $val }} </label>
-                              @else
-                                <label> {!! Form::radio($key, $k, ['class' => 'form-control']) !!}  {{ $val }} </label>
-                              @endif
+                            @if($k == $user->{$key})
+                              <label> {!! Form::radio($key, $k, true) !!}  {{ $val }} </label>
+                            @else
+                              <label> {!! Form::radio($key, $k) !!}  {{ $val }} </label>
+                            @endif
                           @endforeach
 
                         </div>

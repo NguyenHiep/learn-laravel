@@ -16,19 +16,22 @@ Route::get('login', 'LoginController@getlogin')->name('getlogin');
 Route::post('login', ['as' => 'login', 'uses' => 'LoginController@postlogin']);
 Route::get('logout', 'LoginController@getlogout')->name('getlogout');
 Route::group(['middleware', 'auth'], function () {
-    Route::group(['prefix' => 'manage', 'namespace' => 'Manage'], function () {
-        Route::get('/', ['as' => 'manage', 'uses' => 'ManagesController@index', function () { }]);
-        Route::group(['prefix' => 'settings'], function () {
-            Route::get('settings', ['as' => 'settings.index', 'uses' => 'SettingsController@index']);
-            Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);
-            Route::get('admins', ['as' => 'admins.index', 'uses' => 'Settings\AdminsController@index']);
-	        Route::get('admins/create', ['as' => 'admins.create', 'uses' => 'Settings\AdminsController@create']);
-	        Route::post('admins/create', ['as' => 'admins.store', 'uses' => 'Settings\AdminsController@store']);
-            Route::get('admins/edit/{id}', ['as' => 'admins.edit', 'uses' => 'Settings\AdminsController@edit']);
-        });
-    });
+	Route::group(['prefix' => 'manage', 'namespace' => 'Manage'], function () {
+		Route::get('/', ['as' => 'manage', 'uses' => 'ManagesController@index', function () { }]);
+		Route::group(['prefix' => 'settings'], function () {
+			Route::get('settings', ['as' => 'settings.index', 'uses' => 'SettingsController@index']);
+			Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);
+			Route::get('admins', ['as' => 'admins.index', 'uses' => 'Settings\AdminsController@index']);
+			Route::get('admins/create', ['as' => 'admins.create', 'uses' => 'Settings\AdminsController@create']);
+			Route::post('admins/create', ['as' => 'admins.store', 'uses' => 'Settings\AdminsController@store']);
+			Route::get('admins/edit/{id}', ['as' => 'admins.edit', 'uses' => 'Settings\AdminsController@edit'])->where('id', '[0-9]+');
+			//Route::patch('admins/edit/{id}', ['as' => 'admins.update', 'uses' => 'Settings\AdminsController@update']);
+			Route::match(['put', 'patch'], 'admins/edit/{id}', ['as' => 'admins.update', 'uses' => 'Settings\AdminsController@update'])->where('id', '[0-9]+');
+			Route::delete('admins/delete/{id}', ['as' => 'admins.destroy', 'uses' => 'Settings\AdminsController@destroy'])->where('id', '[0-9]+');
+		});
+	});
 });
 
-//Route::resource('test','Manage\Settings\AdminsController');
+//Route::resource('test','AdminsController');
 
 

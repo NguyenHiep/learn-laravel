@@ -87,12 +87,21 @@
                             @endif
                           </td>
                           <td>
-                            <a href="/manage/settings/admins/edit/{{$user_info->id}}" class="js-action-list-rowlink-val">
+                            <a href="{{ route('admins.edit',$user_info->id) }}" class="js-action-list-rowlink-val">
                               <span class="label label-sm label-warning margin-right-10"> <i class="fa fa-edit"></i> {{__('common.buttons.edit')}} </span>
                             </a>
-                            <a href="/manage/settings/admins/delete/{{$user_info->id}}" class="">
+
+                            <form action="{{ route('admins.destroy',$user_info->id) }}" method="POST">
+                              {{ method_field('DELETE') }}
+                              {{ csrf_field() }}
+                              <button class="label label-sm label-info margin-right-10 js-action-delete" type="submit">
+                                <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}}
+                              </button>
+                            </form>
+
+                            <!--<a href="{{ route('admins.destroy',$user_info->id) }}" class="">
                               <span class="label label-sm label-info margin-right-10"> <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}} </span>
-                            </a>
+                            </a>-->
                         </tr>
                       @endforeach
                     @endif
