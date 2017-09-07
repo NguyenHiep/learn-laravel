@@ -50,6 +50,25 @@
                 @include('manage.blocks.errors')
                 <div class="row">
                   <div class="col-md-8">
+
+                    <div class="form-group last">
+                      <label class="control-label col-md-3">Ảnh đại diện</label>
+                      <div class="col-md-9">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                          <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                            <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                          <div>
+                            <span class="btn default btn-file">
+                                <span class="fileinput-new"> Chọn hình ảnh </span>
+                                <span class="fileinput-exists"> Ảnh khác </span>
+                                <input type="file" name="avatar"> </span>
+                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     @php $key = 'username'; @endphp
                     <div class="form-group">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
@@ -125,6 +144,8 @@
         type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css') }}"
         rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
@@ -143,5 +164,7 @@
   <script src="{{ asset('/manages/assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js') }}"
           type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/pages/scripts/form-validation.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}"
+          type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop

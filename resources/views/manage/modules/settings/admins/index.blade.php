@@ -87,21 +87,19 @@
                             @endif
                           </td>
                           <td>
-                            <a href="{{ route('admins.edit',$user_info->id) }}" class="js-action-list-rowlink-val">
-                              <span class="label label-sm label-warning margin-right-10"> <i class="fa fa-edit"></i> {{__('common.buttons.edit')}} </span>
-                            </a>
+                            <div class="btn-group btn-group-solid">
+                              <a href="{{ route('admins.edit',$user_info->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                                <i class="fa fa-edit"></i> {{__('common.buttons.edit')}}
+                              </a>
+                              <form action="{{ route('admins.destroy',$user_info->id) }}" method="POST" style="display: inline-block">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button class="btn btn-delete js-action-delete" type="submit">
+                                  <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}}
+                                </button>
+                              </form>
+                            </div>
 
-                            <form action="{{ route('admins.destroy',$user_info->id) }}" method="POST">
-                              {{ method_field('DELETE') }}
-                              {{ csrf_field() }}
-                              <button class="label label-sm label-info margin-right-10 js-action-delete" type="submit">
-                                <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}}
-                              </button>
-                            </form>
-
-                            <!--<a href="{{ route('admins.destroy',$user_info->id) }}" class="">
-                              <span class="label label-sm label-info margin-right-10"> <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}} </span>
-                            </a>-->
                         </tr>
                       @endforeach
                     @endif
