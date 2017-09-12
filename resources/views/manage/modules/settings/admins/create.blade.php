@@ -25,7 +25,7 @@
 
       <div class="row">
         <div class="col-md-12">
-        {!! Form::open(['route' => 'admins.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
+        {!! Form::open(['route' => 'admins.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal', 'files' => true]) !!}
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
@@ -52,7 +52,9 @@
                   <div class="col-md-8">
 
                     <div class="form-group last">
-                      <label class="control-label col-md-3">Ảnh đại diện</label>
+                      <label class="control-label col-md-3">Ảnh đại diện
+                        <span class="required"> * </span>
+                      </label>
                       <div class="col-md-9">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">

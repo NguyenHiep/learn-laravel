@@ -25,7 +25,7 @@
 
       <div class="row">
         <div class="col-md-12">
-        {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Manage\Settings\AdminsController@update',$user->id] , 'class'=> 'form-horizontal']) !!}
+        {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Manage\Settings\AdminsController@update',$user->id] , 'class'=> 'form-horizontal', 'files' => true]) !!}
 
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
@@ -51,8 +51,11 @@
                 @include('manage.blocks.errors')
                 <div class="row">
                   <div class="col-md-8">
+                    @php $key = 'avatar'; @endphp
                     <div class="form-group last">
-                      <label class="control-label col-md-3">Ảnh đại diện</label>
+                      <label class="control-label col-md-3">Ảnh đại diện
+                        <span class="required"> * </span>
+                      </label>
                       <div class="col-md-9">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
