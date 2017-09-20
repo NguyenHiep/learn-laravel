@@ -62,7 +62,7 @@
                             <?php
                               if(!empty($user->{$key})){
                             ?>
-                              <img src="{{Storage::url(UPLOAD_USER_ADMIN.$user->{$key})}}" height="40px" width="40px" alt="{{$user->{$key} }}"/>
+                              <img src="{{Storage::url(UPLOAD_USER_ADMIN.$user->{$key})}}" alt="{{$user->{$key} }}"/>
                             <?php
                               }else{
                                 echo '<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />';
