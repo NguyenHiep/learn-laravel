@@ -137,7 +137,7 @@ class AdminsController extends Controller
             $filename = request()->file('avatar')->getClientOriginalName();
             //$filesize = request()->file()->getClientSize();
             request()->file('avatar')->storeAs(UPLOAD_USER_ADMIN, $filename);
-            $user->update = $filename;
+            $user->avatar = $filename;
         }
 
         $user->update($input);
