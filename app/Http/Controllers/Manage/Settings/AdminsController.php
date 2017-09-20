@@ -20,7 +20,8 @@ class AdminsController extends Controller
     public function index()
     {
         // Get danh sách
-        $list_user = User::paginate(10);
+        $list_user = User::orderBy('id', 'desc')->paginate(20);
+
         return view('manage.modules.settings.admins.index', compact('list_user'));
     }
 
@@ -62,7 +63,7 @@ class AdminsController extends Controller
         if (request()->hasFile('avatar')) {
             $filename = request()->file('avatar')->getClientOriginalName();
             //$filesize = request()->file()->getClientSize();
-            request()->file('avatar')->storeAs('public/uploads/admins', $filename);
+            request()->file('avatar')->storeAs(UPLOAD_USER_ADMIN, $filename);
             $user_info->avatar = $filename;
         }
         //$input                = request()->all();

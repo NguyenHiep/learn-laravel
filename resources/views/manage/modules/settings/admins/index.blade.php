@@ -50,6 +50,7 @@
                            <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
                     </th>
                     <th> #ID</th>
+                    <th> Ảnh đại diện</th>
                     <th> Tên tài khoản</th>
                     <th> Cấp bậc</th>
                     <th> Trạng thái</th>
@@ -65,6 +66,9 @@
                             <input id="action_ids{{$user_info->id}}" name="action_ids[]" value="{{$user_info->id}}" type="checkbox">
                           </td>
                           <td> {{$user_info->id}} </td>
+                          <td>
+                            <img src="{{Storage::url(UPLOAD_USER_ADMIN.$user_info->avatar)}}" height="30px" width="30px" alt="{{$user_info->avatar}}"/>
+                          </td>
                           <td> {{$user_info->username}} </td>
                           <td>
                             @if ($user_info->level === 1)
