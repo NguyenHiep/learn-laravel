@@ -125,12 +125,21 @@ class AdminsController extends Controller
             ]
         );
         $input = request()->all();
+
         // If password empty remove password
         if (empty(request()->password)) {
             unset($input[ 'password' ]);
         } else {
             $input[ 'password' ] = bcrypt($input[ 'password' ]);
         }
+
+        if (request()->hasFile('avatar')) {
+            $filename = request()->file('avatar')->getClientOriginalName();
+            //$filesize = request()->file()->getClientSize();
+            request()->file('avatar')->storeAs(UPLOAD_USER_ADMIN, $filename);
+            $user->update = $filename;
+        }
+
         $user->update($input);
         session()->flash('message', 'Cập nhật thông tin tài khoản thành công!!');
         return redirect()->route('admins.index');

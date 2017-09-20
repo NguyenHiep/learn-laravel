@@ -67,7 +67,7 @@
                           </td>
                           <td> {{$user_info->id}} </td>
                           <td>
-                            <img src="{{Storage::url(UPLOAD_USER_ADMIN.$user_info->avatar)}}" height="30px" width="30px" alt="{{$user_info->avatar}}"/>
+                            <img src="{{Storage::url(UPLOAD_USER_ADMIN.$user_info->avatar)}}" height="40px" width="40px" alt="{{$user_info->avatar}}"/>
                           </td>
                           <td> {{$user_info->username}} </td>
                           <td>

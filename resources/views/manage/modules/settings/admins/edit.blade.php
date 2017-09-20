@@ -59,11 +59,26 @@
                       <div class="col-md-9">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                            <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                            <?php
+                              if(!empty($user->{$key})){
+                            ?>
+                              <img src="{{Storage::url(UPLOAD_USER_ADMIN.$user->{$key})}}" height="40px" width="40px" alt="{{$user->{$key} }}"/>
+                            <?php
+                              }else{
+                                echo '<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />';
+                              }
+                            ?>
+                            </div>
                           <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
                           <div>
                             <span class="btn default btn-file">
-                                <span class="fileinput-new"> Chọn hình ảnh </span>
+                             <?php
+                                if(!empty($user->{$key})){
+                                    echo '<span class="fileinput-new"> Thay đổi ảnh </span>';
+                                }else{
+                                    echo '<span class="fileinput-new"> Chọn hình ảnh </span>';
+                                }
+                              ?>
                                 <span class="fileinput-exists"> Ảnh khác </span>
                                 <input type="file" name="avatar"> </span>
                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
