@@ -124,13 +124,10 @@ class AdminsController extends Controller
                 'status.required'   => 'Vui lòng chọn trạng thái'
             ]
         );
-        $input = request()->all();
 
         // If password empty remove password
-        if (empty(request()->password)) {
-            unset($input[ 'password' ]);
-        } else {
-            $input[ 'password' ] = bcrypt($input[ 'password' ]);
+        if (!empty(request()->password)) {
+            $user->password    = bcrypt(request()->password);
         }
 
         if (request()->hasFile('avatar')) {
@@ -140,7 +137,11 @@ class AdminsController extends Controller
             $user->avatar = $filename;
         }
 
-        $user->update($input);
+        $user->username    = request()->username;
+        $user->level       = request()->level;
+        $user->status      = request()->status;
+        $user->save();
+
         session()->flash('message', 'Cập nhật thông tin tài khoản thành công!!');
         return redirect()->route('admins.index');
     }
