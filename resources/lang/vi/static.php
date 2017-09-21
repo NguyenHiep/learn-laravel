@@ -41,7 +41,12 @@ return [
     'manage' => array(
         'settings' => array(
             'settings' => array(
-
+                'page_title'     => 'Cài đặt thông tin website',
+                'title_general'  => 'Thông tin chung',
+                'title_other'    => 'Các thông tin khác',
+                'title_email'    => 'Thông tin email',
+                'title_host'     => 'Cấu hình host gửi mail SMTP',
+                'title_personal' => 'Thông tin cá nhân và Điều khoản sử dụng',
             ),
             'admins' => array(
 

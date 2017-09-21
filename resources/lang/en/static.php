@@ -38,4 +38,19 @@ return [
             )
         )
     ),
+    'manage' => array(
+        'settings' => array(
+            'settings' => array(
+                'page_title'     => 'Information management website',
+                'title_general'  => 'General information',
+                'title_other'    => 'Other information',
+                'title_email'    => 'Email information',
+                'title_host'     => 'Configure the SMTP mail server to send',
+                'title_personal' => 'Personal Information and Terms of Use',
+            ),
+            'admins' => array(
+
+            )
+        )
+    )
 ];

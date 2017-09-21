@@ -72,7 +72,7 @@ class AdminsController extends Controller
         $user_info->level       = request()->level;
         $user_info->status      = request()->status;
         $user_info->save();
-        session()->flash('message', 'Thêm mới thành viên thành công!!');
+        session()->flash('message', __('system.message.create'));
         return redirect()->route('admins.index');
     }
 
@@ -142,7 +142,7 @@ class AdminsController extends Controller
         $user->status      = request()->status;
         $user->save();
 
-        session()->flash('message', 'Cập nhật thông tin tài khoản thành công!!');
+        session()->flash('message', __('system.message.update'));
         return redirect()->route('admins.index');
     }
 
@@ -155,7 +155,7 @@ class AdminsController extends Controller
     public function destroy($id)
     {
         User::where('id', $id)->forcedelete();
-        session()->flash('message', 'Xóa thông tin tài khoản thành công!!');
+        session()->flash('message', __('system.message.delete'));
         return redirect()->route('admins.index');
     }
 

@@ -1,11 +1,9 @@
 <?php
 return [
-    'settings' => array(
-        'general' => array(
-            'title' => 'Thông tin chung',
-        ),
-        'others'  => array(
-
-        )
+    'message' => array(
+        'create' => 'Thêm mới thành công',
+        'update' => 'Cập nhật thành công',
+        'delete'  => 'Xóa thành công',
+        'errors'  => 'Có lỗi xảy ra :errors',
     ),
 ];

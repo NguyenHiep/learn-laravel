@@ -53,8 +53,8 @@
                     <th> Ảnh đại diện</th>
                     <th> Tên tài khoản</th>
                     <th> Cấp bậc</th>
-                    <th> Trạng thái</th>
-                    <th> Hành động</th>
+                    <th class="text-center"> Trạng thái</th>
+                    <th class="text-center"> Hành động</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -83,14 +83,14 @@
                               {{__("selector.levels.$user_info->level")}}
                             @endif
                           </td>
-                          <td>
+                          <td class="text-center">
                             @if ($user_info->status === 1)
                               <span class="label label-sm label-success margin-right-10"> <i class="fa fa-check-circle"></i> Kích hoạt </span>
                             @else
                               <span class="label label-sm label-danger margin-right-10"> <i class="fa fa-close"></i> Blocked </span>
                             @endif
                           </td>
-                          <td>
+                          <td class="text-right">
                             <div class="btn-group btn-group-solid">
                               <a href="{{ route('admins.edit',$user_info->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                                 <i class="fa fa-edit"></i> {{__('common.buttons.edit')}}
@@ -111,7 +111,7 @@
                   </tbody>
                   <tfoot>
                       <tr>
-                        <td colspan="6"> {{ $list_user->links() }}</td>
+                        <td colspan="8"> {{ $list_user->links() }}</td>
                       </tr>
                   </tfoot>
                 </table>
@@ -124,24 +124,3 @@
     </div>
   </div>
 @endsection
-@section('styles')
-  @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <!-- END PAGE LEVEL PLUGINS -->
-  @stop
-@section('scripts')
-  @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <script src="{{ asset('/manages/assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/pages/scripts/table-datatables-buttons.min.js') }}"
-          type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
-@stop

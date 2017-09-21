@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Cài đặt thông tin website')
+@section('title', __('static.manage.settings.settings.page_title'))
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -14,13 +14,13 @@
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('static.sidebars.manage.settings.settings')}}</span>
+            <span>{{__('static.manage.settings.settings.page_title')}}</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Quản lý thông tin website  </h3>
+      <h3 class="page-title"> {{__('static.manage.settings.settings.page_title')}}  </h3>
       <!-- END PAGE TITLE-->
 
       <div class="row">
@@ -31,7 +31,7 @@
             <div class="portlet-title">
               <div class="caption">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject font-dark sbold uppercase">{{__('static.sidebars.manage.settings.settings')}}</span>
+                <span class="caption-subject font-dark sbold uppercase">{{__('static.manage.settings.settings.page_title')}}</span>
               </div>
               <div class="actions">
                 <button type="button" class="btn default">{{__('common.buttons.cancel')}}</button>
@@ -47,7 +47,7 @@
                     <button class="close" data-close="alert"></button> {{$flash}}
                   </div>
                 @endif
-                <h3 class="block-title margin-bottom-15">Thông tin chung</h3>
+                <h3 class="block-title margin-bottom-15">{{__('static.manage.settings.settings.title_general')}}</h3>
                 @include('manage.blocks.errors')
 
                 <div class="row">
@@ -139,8 +139,8 @@
                 </div>
               </div>
               <div class="form-body">
-                <h3 class="block-title">Các thông tin khác</h3>
-                <h4 class="block-title-small">Thông tin email</h4>
+                <h3 class="block-title">{{__('static.manage.settings.settings.title_other')}}</h3>
+                <h4 class="block-title-small">{{__('static.manage.settings.settings.title_email')}}</h4>
                 <div class="row">
                   <div class="col-md-6">
                     @php $key = 'email1'; @endphp
@@ -161,7 +161,7 @@
                     </div>
                   </div>
                 </div>
-                <h4 class="block-title-small margin-top-15">Cấu hình host gửi mail SMTP</h4>
+                <h4 class="block-title-small margin-top-15">{{__('static.manage.settings.settings.title_host')}}</h4>
                 <div class="row">
                   <div class="col-md-6">
                     @php $key = 'mail_smtp_host'; @endphp
@@ -198,7 +198,7 @@
                 </div>
               </div>
               <div class="form-body">
-                <h3 class="block-title margin-bottom-15">Thông tin cá nhân và Điều khoản sử dụng</h3>
+                <h3 class="block-title margin-bottom-15">{{__('static.manage.settings.settings.title_personal')}}</h3>
                 <div class="row">
                   <div class="col-md-12">
                     @php $key = 'about_privacy'; @endphp
@@ -207,9 +207,10 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-10">
+
                         {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
                         [
-                            'class' => 'ckeditor form-control',
+                            'class' => 'summernote_editor form-control',
                             'rows' => 6,
                             'data-error-container' => '#editor2_error'
                         ]) !!}
@@ -224,7 +225,7 @@
                       <div class="col-md-10">
                         {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
                         [
-                            'class' => 'ckeditor form-control',
+                            'class' => 'summernote_editor form-control',
                             'rows' => 6,
                             'data-error-container' => '#editor2_error'
                         ]) !!}
@@ -256,38 +257,16 @@
 @section('styles')
   @parent
   <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css') }}"
+  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
         rel="stylesheet" type="text/css"/>
   <!-- END PAGE LEVEL PLUGINS -->
   @stop
 @section('scripts')
  @parent
  <!-- BEGIN PAGE LEVEL SCRIPTS -->
-  <script src=" {{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/jquery-validation/js/additional-methods.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-markdown/lib/markdown.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/pages/scripts/form-validation.min.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
+         type="text/javascript"></script>
+ <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
+         type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop

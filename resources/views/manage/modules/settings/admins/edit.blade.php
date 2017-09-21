@@ -160,8 +160,6 @@
         type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
         type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css') }}"
-        rel="stylesheet" type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
@@ -170,17 +168,7 @@
   <!-- BEGIN PAGE LEVEL SCRIPTS -->
   <script src=" {{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}"
           type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/jquery-validation/js/additional-methods.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-markdown/lib/markdown.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/pages/scripts/form-validation.min.js') }}" type="text/javascript"></script>
+
   <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}"
           type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
