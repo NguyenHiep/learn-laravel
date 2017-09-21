@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Cài đặt thông tin website')
+@section('title', 'Thêm mới thành viên')
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->

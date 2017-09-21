@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Quản trị tài khoản')
+@section('title', 'Quản lý thông tin tài khoản')
 
 @section('content')
   <div class="page-content-wrapper">
