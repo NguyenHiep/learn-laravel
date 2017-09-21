@@ -29,6 +29,13 @@ Route::group(['middleware', 'auth'], function () {
 			Route::match(['put', 'patch'], 'admins/edit/{id}', ['as' => 'admins.update', 'uses' => 'Settings\AdminsController@update'])->where('id', '[0-9]+');
 			Route::delete('admins/delete/{id}', ['as' => 'admins.destroy', 'uses' => 'Settings\AdminsController@destroy'])->where('id', '[0-9]+');
 		});
+
+        Route::group(['prefix' => 'posts'], function () {
+            Route::get('posts', ['as' => 'posts.index', 'uses' => 'PostsController@index']);
+            Route::get('posts/create', ['as' => 'posts.create', 'uses' => 'PostsController@create']);
+            Route::post('posts/create', ['as' => 'posts.store', 'uses' => 'PostsControllerr@store']);
+        });
+
 	});
 });
 

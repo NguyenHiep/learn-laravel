@@ -48,6 +48,7 @@
                   </div>
                 @endif
                 <h3 class="block-title margin-bottom-15">{{__('static.manage.settings.settings.title_general')}}</h3>
+
                 @include('manage.blocks.errors')
 
                 <div class="row">
