@@ -36,8 +36,31 @@ class Posts extends Model
      * @var array
      */
     protected $fillable = [
-
+        'post_title',
+        'post_author',
+        'post_intro',
+        'post_full',
+        'post_image',
+        'post_status',
+        'post_format',
+        'post_keyword',
+        'visit',
+        'user_id',
     ];
 
+    /**
+     * Get the categories for the blog post.
+     */
+    public function posts_categories()
+    {
+        return $this->belongsToMany('App\Model\Posts\Category','posts_category_ids');
+    }
 
+    /**
+     * Get the tags for the blog post.
+     */
+    public function posts_tags()
+    {
+        return $this->belongsToMany('App\Model\Posts\Tags','posts_tags_ids');
+    }
 }

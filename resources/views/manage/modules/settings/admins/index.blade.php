@@ -111,7 +111,9 @@
                   </tbody>
                   <tfoot>
                       <tr>
+                        @if (!empty($list_user))
                         <td colspan="8"> {{ $list_user->links() }}</td>
+                        @endif
                       </tr>
                   </tfoot>
                 </table>

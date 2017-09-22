@@ -33,7 +33,13 @@ Route::group(['middleware', 'auth'], function () {
         Route::group(['prefix' => 'posts'], function () {
             Route::get('posts', ['as' => 'posts.index', 'uses' => 'PostsController@index']);
             Route::get('posts/create', ['as' => 'posts.create', 'uses' => 'PostsController@create']);
-            Route::post('posts/create', ['as' => 'posts.store', 'uses' => 'PostsControllerr@store']);
+            Route::post('posts/create', ['as' => 'posts.store', 'uses' => 'PostsController@store']);
+            Route::get('posts/edit/{id}', ['as' => 'posts.edit', 'uses' => 'PostsController@edit'])->where('id', '[0-9]+');
+            Route::match(['put', 'patch'], 'posts/edit/{id}', ['as' => 'posts.update', 'uses' => 'PostsController@update'])->where('id', '[0-9]+');
+            Route::delete('posts/delete/{id}', ['as' => 'posts.destroy', 'uses' => 'PostsController@destroy'])->where('id', '[0-9]+');
+
+            Route::resource('category','Posts\CategoryController');
+            Route::resource('tags','Posts\TagsController');
         });
 
 	});

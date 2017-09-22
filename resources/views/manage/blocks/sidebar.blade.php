@@ -53,7 +53,7 @@
         </ul>
       </li>
 
-      <li class="nav-item  {{ active(['posts.index', 'posts.create'], 'active open') }}">
+      <li class="nav-item  {{ active(['posts.index', 'posts.create', 'posts.edit', 'category.index', 'category.create','category.edit', 'tags.index', 'tags.create', 'tags.edit'], 'active open') }}">
         <a href="{{ route('posts.index') }}" class="nav-link nav-toggle">
           <i class="icon-pin"></i>
           <span class="title">{{__('static.sidebars.manage.posts.title')}}</span>
@@ -71,12 +71,12 @@
             </a>
           </li>
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('category.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.posts.category')}}</span>
             </a>
           </li>
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('tags.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.posts.tags')}}</span>
             </a>
           </li>

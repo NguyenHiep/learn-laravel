@@ -56,4 +56,16 @@ return [
             'status' => 'Trạng thái'
         )
     ),
+    'posts' => array(
+        'posts' => array(),
+        'category' => array(
+            'name'             => 'Tên danh mục',
+            'name_placeholder' => 'VD: Danh mục',
+            'slug'             => 'Tên không dấu',
+            'slug_placeholder' => 'VD: danh-muc',
+            'parent_id' => 'Danh mục cha',
+            'description' => 'Mô tả danh mục',
+            'description' => 'Mô tả danh mục',
+        )
+    ),
 ];
