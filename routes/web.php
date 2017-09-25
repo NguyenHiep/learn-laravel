@@ -42,6 +42,7 @@ Route::group(['middleware', 'auth'], function () {
             Route::resource('tags','Posts\TagsController');
         });
 
+        Route::resource('medias','MediasController');
 	});
 });
 

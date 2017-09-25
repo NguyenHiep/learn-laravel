@@ -83,20 +83,20 @@
 
         </ul>
       </li>
-      <li class="nav-item  ">
+      <li class="nav-item  {{ active(['medias.index', 'medias.create', 'medias.edit'], 'active open') }}">
         <a href="javascript:;" class="nav-link nav-toggle">
           <i class="icon-picture"></i>
           <span class="title">{{__('static.sidebars.manage.medias.title')}}</span>
-          <span class="arrow"></span>
+          <span class="arrow {{ active(['medias.index', 'medias.create', 'medias.edit'], 'open') }}"></span>
         </a>
         <ul class="sub-menu">
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('medias.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.medias.medias')}}</span>
             </a>
           </li>
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('medias.create') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.medias.creates')}}</span>
             </a>
           </li>
