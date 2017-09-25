@@ -51,6 +51,17 @@ return [
             'admins' => array(
 
             )
+        ),
+        'posts' => array(
+            'posts' => array(
+                'page_title'     => 'Quản lý bài viết',
+            ),
+            'category' => array(
+                'page_title'     => 'Chuyên mục',
+            ),
+            'tags' => array(
+                'page_title'     => 'Thẻ',
+            ),
         )
     )
 ];

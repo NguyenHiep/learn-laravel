@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', __('static.manage.settings.settings.page_title'))
+@section('title', __('static.manage.posts.category.page_title'))
 @section('content')
 
   <div class="page-content-wrapper">
