@@ -24,7 +24,8 @@
       <!-- END PAGE TITLE-->
       <div class="row">
         <div class="col-md-12">
-          <form action="#" class="dropzone dropzone-file-area" id="my-dropzone" style="max-width: 500px; margin-top: 50px;">
+          <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone" style="max-width: 500px; margin-top: 50px;" enctype="multipart/form-data">
+            {{ csrf_field() }}
             <h3 class="sbold">Thả tập tin vào đây</h3>
             <p> Kéo thả tập tin vào đây hoặc click vào đây</p>
           </form>

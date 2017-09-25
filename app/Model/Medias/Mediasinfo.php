@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Medias;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Medias extends Model
+class Mediasinfo extends Model
 {
     use SoftDeletes;
     //
@@ -14,7 +14,7 @@ class Medias extends Model
      *
      * @var string
      */
-    protected $table = 'posts_medias';
+    protected $table = 'posts_medias_info';
 
     /**
      * The attributes that should be mutated to dates.
@@ -36,7 +36,9 @@ class Medias extends Model
      * @var array
      */
     protected $fillable = [
-        'name','types'
+        'id','extension','width','height','size','title','caption',
+        'alt','description','lightbox','video_length','video_type',
+        'video_code_id'
     ];
 
 
