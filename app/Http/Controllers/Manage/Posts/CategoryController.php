@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         $list_cate_all = Category::all();
 
-        $records = Category::orderBy('id', 'asc')->paginate(20);
+        $records = Category::orderBy('id', 'asc')->paginate(12);
 
         //
 //        $posts_category = Category::with('children')
@@ -136,7 +136,7 @@ class CategoryController extends Controller
      */
     public function update($id)
     {
-        //Get user info
+        //Get data info
         $record = Category::findOrFail($id);
         // Begin validate
         $this->validate(request(),

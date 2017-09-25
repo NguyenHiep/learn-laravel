@@ -59,13 +59,21 @@ return [
     'posts' => array(
         'posts' => array(),
         'category' => array(
-            'name'             => 'Tên danh mục',
-            'name_placeholder' => 'VD: Danh mục',
-            'slug'             => 'Tên không dấu',
-            'slug_placeholder' => 'VD: danh-muc',
-            'parent_id' => 'Danh mục cha',
-            'description' => 'Mô tả danh mục',
-            'description' => 'Mô tả danh mục',
+            'name'                    => 'Tên danh mục',
+            'name_placeholder'        => 'VD: Danh mục',
+            'slug'                    => 'Tên không dấu',
+            'slug_placeholder'        => 'VD: danh-muc',
+            'parent_id'               => 'Danh mục cha',
+            'description'             => 'Mô tả danh mục',
+            'description_placeholder' => 'Mô tả danh mục cho SEO',
+        ),
+        'tags'     => array(
+            'name'                    => 'Tên thẻ',
+            'name_placeholder'        => 'VD: lap trinh php',
+            'slug'                    => 'Tên không dấu',
+            'slug_placeholder'        => 'VD: lap-trinh-php',
+            'description'             => 'Mô tả thẻ',
+            'description_placeholder' => 'Mô tả thẻ cho SEO',
         )
     ),
 ];
