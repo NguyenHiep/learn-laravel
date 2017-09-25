@@ -1,6 +1,7 @@
 @extends('manage.master')
 @section('title', __('static.manage.settings.settings.page_title'))
 @section('content')
+
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
@@ -59,9 +60,36 @@
                   <label class="control-label">{{__('common.posts.category.'.$key.'')}}
                   </label>
 
-                    @if(!empty(__('selector.levels')))
-                      {!! Form::select($key, $list_cate, old($key),['class' => 'form-control select2me']) !!}
-                    @endif
+                  <select name="{{$key}}" id="{{$key}}" class="form-control select2me">
+                    @php
+                      $html = ''; $text = '&nbsp; &nbsp; &nbsp;';
+                      $html .= "<option value='0'>Trống</option>";
+                      if(!empty($list_cate_all)){
+                        foreach($list_cate_all as $parent){
+                          if($parent->parent_id == 0){
+                            $html .= "<option value='{$parent->id}' class='level-0' >".$parent->name."</option>";
+                            //unset($data[$key]);
+                            foreach ($list_cate_all as $child){
+
+                              if($child->parent_id == $parent->id){
+                                $html .= "<option value='{$child->id}' class='level-1'>".$text.$child->name."</option>";
+                                foreach ($list_cate_all as $child2){
+                                  if($child2->parent_id == $child->id){
+                                      $html .= "<option value='{$child2->id}' class='level-2'>".$text.$text.$child2->name."</option>";
+                                  }
+                                } // End loop level 3
+
+                              }
+                            } // End loop level 2
+
+                          }
+
+                        } // End loop level 1
+                      }
+                      echo $html;
+                    @endphp
+
+                  </select>
 
                 </div>
                 @php $key = 'description'; @endphp
@@ -98,7 +126,6 @@
                     </th>
                     <th>Tên danh mục</th>
                     <th> Mô tả</th>
-                    <th> Slug</th>
                     <th class="text-center"> Hành động</th>
                   </tr>
                   </thead>
@@ -106,29 +133,83 @@
 
                   @if (!empty($records))
                     @foreach ($records as $record)
-                      <tr>
-                        <td> <!--<td class="checkbox-list"> -->
-                          <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
-                        </td>
-                        <td> {{$record->name}} </td>
-                        <td>{{$record->description}}</td>
-                        <td> {{$record->slug}} </td>
+                      @if($record->parent_id == 0)
+                        <tr>
+                          <td> <!--<td class="checkbox-list"> -->
+                            <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
+                          </td>
+                          <td> {{$record->name}} </td>
+                          <td>{!! $record->description !!}</td>
 
-                        <td class="text-right">
-                          <div class="btn-group btn-group-solid">
-                            <a href="{{ route('category.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                              <i class="fa fa-edit"></i>
-                            </a>
-                            <form action="{{ route('category.destroy',$record->id) }}" method="POST" style="display: inline-block">
-                              {{ method_field('DELETE') }}
-                              {{ csrf_field() }}
-                              <button class="btn btn-delete js-action-delete" type="submit">
-                                <i class="fa fa-trash-o"></i>
-                              </button>
-                            </form>
-                          </div>
+                          <td class="text-right">
+                            <div class="btn-group btn-group-solid">
+                              <a href="{{ route('category.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                                <i class="fa fa-edit"></i>
+                              </a>
+                              <form action="{{ route('category.destroy',$record->id) }}" method="POST" style="display: inline-block">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button class="btn btn-delete js-action-delete" type="submit">
+                                  <i class="fa fa-trash-o"></i>
+                                </button>
+                              </form>
+                            </div>
+                        </tr>
 
-                      </tr>
+                        @foreach ($records as $subcate)
+                          @if($subcate->parent_id == $record->id)
+                            <tr>
+                              <td> <!--<td class="checkbox-list"> -->
+                                <input id="action_ids{{$subcate->id}}" name="action_ids[]" value="{{$subcate->id}}" type="checkbox">
+                              </td>
+                              <td> __{{$subcate->name}} </td>
+                              <td>{!! $subcate->description !!}</td>
+
+                              <td class="text-right">
+                                <div class="btn-group btn-group-solid">
+                                  <a href="{{ route('category.edit',$subcate->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                                    <i class="fa fa-edit"></i>
+                                  </a>
+                                  <form action="{{ route('category.destroy',$subcate->id) }}" method="POST" style="display: inline-block">
+                                    {{ method_field('DELETE') }}
+                                    {{ csrf_field() }}
+                                    <button class="btn btn-delete js-action-delete" type="submit">
+                                      <i class="fa fa-trash-o"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                            </tr>
+
+                            @foreach ($records as $subcate2)
+                              @if($subcate2->parent_id == $subcate->id)
+                                <tr>
+                                  <td> <!--<td class="checkbox-list"> -->
+                                    <input id="action_ids{{$subcate2->id}}" name="action_ids[]" value="{{$subcate2->id}}" type="checkbox">
+                                  </td>
+                                  <td> ____{{$subcate2->name}} </td>
+                                  <td>{!! $subcate2->description !!}</td>
+
+                                  <td class="text-right">
+                                    <div class="btn-group btn-group-solid">
+                                      <a href="{{ route('category.edit',$subcate2->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                                        <i class="fa fa-edit"></i>
+                                      </a>
+                                      <form action="{{ route('category.destroy',$subcate2->id) }}" method="POST" style="display: inline-block">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+                                        <button class="btn btn-delete js-action-delete" type="submit">
+                                          <i class="fa fa-trash-o"></i>
+                                        </button>
+                                      </form>
+                                    </div>
+                                </tr>
+                              @endif
+                            @endforeach
+
+                          @endif
+                        @endforeach
+
+                      @endif
                     @endforeach
                   @endif
 

@@ -180,6 +180,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Watson\Active\ActiveServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

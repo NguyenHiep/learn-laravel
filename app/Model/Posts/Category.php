@@ -51,5 +51,16 @@ class Category extends Model
         return $this->belongsToMany('App\Model\Posts','posts_category_ids');
     }
 
+    // Each category may have one parent
+    public function parent() {
+        return $this->belongsToOne(static::class, 'category_id');
+    }
+
+    // Each category may have multiple children
+    public function children() {
+        return $this->hasMany(static::class, 'parent_id');
+    }
+
+
 
 }
