@@ -24,11 +24,12 @@
       <!-- END PAGE TITLE-->
       <div class="row">
         <div class="col-md-12">
-          <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone" style="max-width: 500px; margin-top: 50px;" enctype="multipart/form-data">
+          <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone"  enctype="multipart/form-data">
             {{ csrf_field() }}
             <h3 class="sbold">Thả tập tin vào đây</h3>
             <p> Kéo thả tập tin vào đây hoặc click vào đây</p>
           </form>
+          <div id="resultarea"></div>
         </div>
       </div>
     </div>
@@ -47,6 +48,6 @@
  @parent
  <!-- BEGIN PAGE LEVEL SCRIPTS -->
  <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
- <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.min.js')}}" type="text/javascript"></script>
+ <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop

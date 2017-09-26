@@ -15,6 +15,7 @@
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="" name="description"/>
   <meta content="nguyenhiep" name="author"/>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('styles')
   <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -53,6 +54,17 @@
   @show
 
   <link rel="shortcut icon" href="favicon.ico"/>
+  @php
+    echo '<script type="text/javascript">';
+    //echo '//<![CDATA[';
+		echo ' var ajaxcalls_vars = {
+			"token":  "'.csrf_token().'",
+			"host" : "'.url("/").'"
+		 }';
+   // echo ']]>';
+  echo '</script>';
+
+  @endphp
 </head>
 <!-- END HEAD -->
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">

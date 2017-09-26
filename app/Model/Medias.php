@@ -39,5 +39,12 @@ class Medias extends Model
         'name','types'
     ];
 
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function posts_medias_info()
+    {
+        return $this->hasOne('App\Model\Medias\Mediasinfo','id','id');
+    }
 
 }

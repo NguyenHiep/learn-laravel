@@ -41,5 +41,8 @@ class Mediasinfo extends Model
         'video_code_id'
     ];
 
-
+    public function posts_medias()
+    {
+        return $this->hasOne('App\Model\Medias','id','id');
+    }
 }

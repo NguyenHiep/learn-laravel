@@ -16,3 +16,8 @@ h3.block-title{
     box-sizing: border-box;
     background: #eee;
 }
+.dropzone{
+	margin-top: 50px;
+	min-height: 250px !important;
+	border: 2px dashed #028AF4 !important;
+}

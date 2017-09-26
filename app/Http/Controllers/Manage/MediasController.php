@@ -21,8 +21,9 @@ class MediasController extends Controller
      */
     public function index()
     {
+        $records = Medias::orderBy('id', 'asc')->paginate(12);
 
-        return view('manage.modules.medias.index');
+        return view('manage.modules.medias.index', compact('records'));
     }
 
     /**
@@ -45,7 +46,7 @@ class MediasController extends Controller
 
         $this->validate(request(),
             [
-                'file'   => 'mimes:jpeg,jpg,png,gif,svg,doc,docs,csv,txt,mp4,mp3 | max:1000',
+                'file'   => 'mimes:jpeg,jpg,png,gif,svg,doc,docs,csv,txt,mp4,mp3 | max:2048',
             ]
         );
 

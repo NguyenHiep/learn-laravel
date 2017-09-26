@@ -20,15 +20,28 @@ var FormDropzone = function () {
                           // Make sure the button click doesn't submit the form:
                           e.preventDefault();
                           e.stopPropagation();
-
                           // Remove the file preview.
                           _this.removeFile(file);
                           // If you want to the delete the file on the server as well,
                           // you can do the AJAX request here.
+                          //var _token = $(this).find( 'input[name=_token]' ).val();
+
+													$.ajax({
+														type: "POST",
+														url: ajaxcalls_vars.host+'/manage/medias/destroy/',
+														file: file,
+														_method: 'DELETE',
+														_token: ajaxcalls_vars.token,
+														cache: false,
+														success: function(data){
+															$("#resultarea").text(data);
+														}
+													});
+
                         });
 
                         // Add the button to the file preview element.
-                        file.previewElement.appendChild(removeButton);
+                        //file.previewElement.appendChild(removeButton);
                     });
                 }            
             }
