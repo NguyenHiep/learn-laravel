@@ -21,8 +21,19 @@ class MediasController extends Controller
      */
     public function index()
     {
+        //$records = \DB::table('posts_medias')->select('*')->paginate(12);
         $records = Medias::orderBy('id', 'asc')->paginate(12);
+        //var_dump(get_class_methods($records));
+        //echo $records->total().'<br/>';
+        //echo $records->perPage();
+        //$records->nextPageUrl();
 
+
+            $next_page = 0;
+//        if ($this->search_display_to < $this->result_count)
+//        {
+//            $this->next_page = $records->currentPage + 1;
+//        }
         return view('manage.modules.medias.index', compact('records'));
     }
 

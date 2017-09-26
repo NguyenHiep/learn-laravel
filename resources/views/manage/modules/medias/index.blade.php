@@ -40,31 +40,30 @@
             <div class="cbp-filter-counter"></div>
           </div>
         </div>
-        <div id="js-grid-juicy-projects" class="cbp">
+        <div id="js-grid-juicy-projects" class="cbp medias-list">
           @foreach($records as $record)
-            <div class="cbp-item graphic">
-              <div class="cbp-caption">
-                <div class="cbp-caption-defaultWrap">
-                  <img src="{{Storage::url(UPLOAD_MEDIAS.$record->name)}}" alt="{{$record->id}}"/></div>
-                <div class="cbp-caption-activeWrap">
-                  <div class="cbp-l-caption-alignCenter">
-                    <div class="cbp-l-caption-body">
-                      <a href="#view_detail_ajax" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">more info</a>
-                      <a href="{{Storage::url(UPLOAD_MEDIAS.$record->name)}}" class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="Dashboard<br>by Paul Flavius Nechita">view larger</a>
+              <div class="cbp-item graphic media__item">
+                <div class="cbp-caption">
+                  <div class="cbp-caption-defaultWrap">
+                    <img src="{{Storage::url(UPLOAD_MEDIAS.$record->name)}}" alt="{{$record->id}}"/></div>
+                  <div class="cbp-caption-activeWrap">
+                    <div class="cbp-l-caption-alignCenter">
+                      <div class="cbp-l-caption-body">
+                        <a href="#view_detail_ajax" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">more info</a>
+                        <a href="{{Storage::url(UPLOAD_MEDIAS.$record->name)}}" class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="Dashboard<br>by Paul Flavius Nechita">view larger</a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-            </div>
           @endforeach
 
         </div>
-        <div id="js-loadMore-juicy-projects" class="cbp-l-loadMore-button">
-          <a href="#load_more_ajax" class="cbp-l-loadMore-link btn grey-mint btn-outline" rel="nofollow">
+        <div id="js-loadMore-juicy-projects" class="pagination-loading__btn-more cbp-l-loadMore-button">
+          <a href="{{$records->nextPageUrl()}}" class="js-action-pagination btn grey-mint btn-outline" rel="nofollow" data-output-target=".medias-list">
             <span class="cbp-l-loadMore-defaultText">LOAD MORE</span>
             <span class="cbp-l-loadMore-loadingText">LOADING...</span>
-            <span class="cbp-l-loadMore-noMoreLoading">NO MORE WORKS</span>
+
           </a>
         </div>
       </div>
