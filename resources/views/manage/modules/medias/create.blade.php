@@ -29,7 +29,6 @@
             <h3 class="sbold">Thả tập tin vào đây</h3>
             <p> Kéo thả tập tin vào đây hoặc click vào đây</p>
           </form>
-          <div id="resultarea"></div>
         </div>
       </div>
     </div>

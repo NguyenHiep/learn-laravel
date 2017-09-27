@@ -18,6 +18,7 @@ class CreatePostsMediasTable extends Migration
             $table->increments('id');
             $table->string('name',255)->unique()->comment('Tên tập tin');
             $table->string('types', 10)->comment('Loại tập tin (image, docs, video)');
+            $table->unsignedInteger('user_id')->comment('Tác giả upload tập tin');
             $table->timestamps();
             $table->softDeletes();
         });

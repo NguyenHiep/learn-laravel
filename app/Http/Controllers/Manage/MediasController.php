@@ -6,6 +6,7 @@ use App\Model\Medias;
 use App\Model\Medias\Mediasinfo;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class MediasController extends Controller
 {
@@ -21,19 +22,7 @@ class MediasController extends Controller
      */
     public function index()
     {
-        //$records = \DB::table('posts_medias')->select('*')->paginate(12);
-        $records = Medias::orderBy('id', 'asc')->paginate(12);
-        //var_dump(get_class_methods($records));
-        //echo $records->total().'<br/>';
-        //echo $records->perPage();
-        //$records->nextPageUrl();
-
-
-            $next_page = 0;
-//        if ($this->search_display_to < $this->result_count)
-//        {
-//            $this->next_page = $records->currentPage + 1;
-//        }
+        $records = Medias::orderBy('id', 'desc')->paginate(12);
         return view('manage.modules.medias.index', compact('records'));
     }
 
@@ -54,10 +43,11 @@ class MediasController extends Controller
      */
     public function store()
     {
-
+        // Get current user login
+        $user_info = auth()->user();
         $this->validate(request(),
             [
-                'file'   => 'mimes:jpeg,jpg,png,gif,svg,doc,docs,csv,txt,mp4,mp3 | max:2048',
+                'file'   => 'mimes:jpeg,jpg,png,gif,svg,doc,docx,csv,txt,mp4,mp3 | max:2048',
             ]
         );
 
@@ -75,7 +65,7 @@ class MediasController extends Controller
                 $medias = new Medias();
                 $medias->name = $filename;
                 $extension_img = ['jpeg','jpg','png','gif','svg'];
-                $extension_files = ['doc','docs','csv','txt'];
+                $extension_files = ['doc','docx','csv','txt'];
                 $extension_video = ['mp3','mp4'];
                 if(in_array($file_extension, $extension_img, true)){
                     $medias->types = 'image';
@@ -84,6 +74,7 @@ class MediasController extends Controller
                 }elseif(in_array($file_extension, $extension_video, true)){
                     $medias->types = 'video';
                 }
+                $medias->user_id = $user_info->id;
                 $medias->save();
 
                 // Begin update medias info image
@@ -95,13 +86,18 @@ class MediasController extends Controller
                 //$medias_info->height = $medias->id;
                 $medias_info->save();
 
-                return response()->json(
-                    ['success' => 200,]
-                );
+                $data = [
+                    'status'  => 'success',
+                    'id'      => $medias->id,
+                    'message' => 'Success',
+                ];
+                return response()->json($data);
             } else {
-                return response()->json(
-                    ['error' => 400,]
-                );
+                $data = [
+                    'status'  => 'error',
+                    'message' => 'Failed',
+                ];
+                return response()->json($data);
             }
         }
 
@@ -149,6 +145,34 @@ class MediasController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->ajax == true){
+            // Get info
+            $medias = Medias::findOrFail($id);
+
+            // Delete in database
+            Medias::where('id', $id)->forcedelete();
+            Mediasinfo::where('id', $id)->forcedelete();
+
+            // Delete file
+            Storage::delete(UPLOAD_MEDIAS.$medias->name);
+
+            $data = ['message' => 'Success'];
+            return response()->json($data);
+
+        }else{
+            // Get info
+            $medias = Medias::findOrFail($id);
+
+            // Delete in database
+            Medias::where('id', $id)->forcedelete();
+            Mediasinfo::where('id', $id)->forcedelete();
+
+            // Delete file
+            Storage::delete(UPLOAD_MEDIAS.$medias->name);
+
+            session()->flash('message', __('system.message.delete'));
+            return redirect()->route('medias.index');
+        }
 
     }
 

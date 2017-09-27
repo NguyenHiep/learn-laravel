@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $query->where('level', '1');
     }
+
+    public function users()
+    {
+        return $this->hasMany('App\Model\Medias');
+    }
 }

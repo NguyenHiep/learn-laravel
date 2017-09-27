@@ -36,7 +36,7 @@ class Medias extends Model
      * @var array
      */
     protected $fillable = [
-        'name','types'
+        'name','types', 'user_id'
     ];
 
     /**
@@ -45,6 +45,12 @@ class Medias extends Model
     public function posts_medias_info()
     {
         return $this->hasOne('App\Model\Medias\Mediasinfo','id','id');
+    }
+
+
+    public function users()
+    {
+        return $this->hasOne('App\Model\User','id','user_id');
     }
 
 }
