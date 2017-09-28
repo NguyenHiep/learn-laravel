@@ -62,6 +62,9 @@ return [
             'tags' => array(
                 'page_title'     => 'Thẻ',
             ),
+        ),
+        'medias' => array(
+            'edit' => 'Cập nhật hình ảnh'
         )
     )
 ];

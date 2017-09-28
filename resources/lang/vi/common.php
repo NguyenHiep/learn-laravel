@@ -74,6 +74,17 @@ return [
             'slug_placeholder'        => 'VD: lap-trinh-php',
             'description'             => 'Mô tả thẻ',
             'description_placeholder' => 'Mô tả thẻ cho SEO',
+        ),
+        'medias' => array(
+            'mediasinfo' => array(
+                'caption' => 'Chú thích',
+                'caption_placeholder' => 'VD: Tệp tin đính kèm',
+                'alt' => 'Văn bản thay thế',
+                'alt_placeholder' => 'VD: Ảnh đẹp nè',
+                'description' => 'Mô tả tệp tin',
+                'description_placeholder' => 'Mô tả về tệp tin',
+                'lightbox' => 'Sử dụng lightbox cho hình ảnh'
+            )
         )
     ),
 ];

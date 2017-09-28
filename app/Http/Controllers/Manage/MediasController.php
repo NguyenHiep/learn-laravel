@@ -122,8 +122,15 @@ class MediasController extends Controller
      */
     public function edit($id)
     {
+        $record = Medias::find($id);
+        // TODO: Get image with and height
 
 
+        if ($record == null) {
+            return view('errors.404');
+        }
+
+        return view('manage.modules.medias.edit', compact('record'));
     }
 
     /**
@@ -134,7 +141,21 @@ class MediasController extends Controller
      */
     public function update($id)
     {
+        $medias_info = Mediasinfo::find($id);
+        $medias_info->caption       = request()->mediasinfo['caption'];
+        $medias_info->alt           = request()->mediasinfo['alt'];
+        $medias_info->description   = request()->mediasinfo['description'];
+        if(isset(request()->mediasinfo['lightbox'])){
+            $medias_info->lightbox      = request()->mediasinfo['lightbox'];
+        }
 
+        //$medias_info->save();
+
+        $medias = Medias::find($id);
+        $medias->posts_medias_info()->save($medias_info);
+
+        session()->flash('message', __('system.message.update'));
+        return redirect()->route('medias.index');
     }
 
     /**
