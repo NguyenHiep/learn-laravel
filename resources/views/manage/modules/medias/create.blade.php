@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', __('static.manage.settings.settings.page_title'))
+@section('title', __('static.sidebars.manage.medias.title'))
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -10,11 +10,11 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.settings.title')}}</a>
+            <a href="{{route('medias.index')}}">{{__('static.sidebars.manage.medias.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('static.manage.settings.settings.page_title')}}</span>
+            <span>{{__('static.sidebars.manage.medias.creates')}}</span>
           </li>
         </ul>
       </div>

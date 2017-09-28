@@ -57,7 +57,7 @@
                           {{ $record->name}} </td>
                         <td>{!! $record->users->username !!}</td>
                         <td></td>
-                        <td>{!! $record->created_at !!}</td>
+                        <td>{{ date('d/m/Y', strtotime($record->created_at)) }}</td>
 
                         <td class="text-right">
                           <div class="btn-group btn-group-solid">
@@ -79,7 +79,7 @@
                   </tbody>
                   <tfoot>
                   @if (!empty($records))
-                    <td colspan="8"> {{ $records->links() }}</td>
+                    <td colspan="5"> {{ $records->links() }}</td>
                   @endif
                   </tfoot>
                 </table>

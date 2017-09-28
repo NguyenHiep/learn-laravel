@@ -25,35 +25,35 @@ var FormDropzone = function () {
                           _this.removeFile(file);
                           // If you want to the delete the file on the server as well,
                           // you can do the AJAX request here.
-													var id = $(file.previewElement).find('.js-action-media-delete').attr('data-id');
-													$.ajax({
-														type: "post",
-														cache: false,
-														data:     {
-															_method: 'DELETE',
-															_token: ajaxcalls_vars.token,
-															ajax: true
-														},
-														url: ajaxcalls_vars.host+'/manage/medias/'+id,
-														success: function(data){
-															console.log(data.message);
-														},
-														error: function(xhr, status, error) {
-															var err = eval("(" + xhr.responseText + ")");
-															alert(err.Message);
-														}
-													});
+						var id = $(file.previewElement).find('.js-action-media-delete').attr('data-id');
+						$.ajax({
+							type: "post",
+							cache: false,
+							data:     {
+								_method: 'DELETE',
+								_token: ajaxcalls_vars.token,
+								ajax: true
+							},
+							url: ajaxcalls_vars.host+'/manage/medias/'+id,
+							success: function(data){
+								console.log(data.message);
+							},
+							error: function(xhr, status, error) {
+								var err = eval("(" + xhr.responseText + ")");
+								alert(err.Message);
+							}
+						});
                         });
 
                         // Add the button to the file preview element.
                         file.previewElement.appendChild(removeButton);
                     });
 
-									this.on("success", function(file, response) {
-										//$('#test').attr('data-id' , 'Next');
-										$(file.previewElement).find('.js-action-media-delete').attr('data-id' , response.id);
-										$(file.previewElement).find('.upload_status').html(response.message);
-									});
+					this.on("success", function(file, response) {
+						//$('#test').attr('data-id' , 'Next');
+						$(file.previewElement).find('.js-action-media-delete').attr('data-id' , response.id);
+						$(file.previewElement).find('.upload_status').html(response.message);
+					});
 
                 }            
             }

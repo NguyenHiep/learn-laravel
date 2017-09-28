@@ -16,7 +16,7 @@ class CreatePostsMediasInfoTable extends Migration
         //
         Schema::create('posts_medias_info', function (Blueprint $table) {
             $table->unsignedInteger('id')->unique()->comment('Id tập tin');
-            $table->string('extension',50)->comment('Phần mở rộng tập tin [PNG, GIF, ...]');
+            $table->string('extension',255)->comment('Phần mở rộng tập tin [PNG, GIF, ...]');
             $table->string('width', 5)->nullable()->comment('Chiều rộng');
             $table->string('height', 5)->nullable()->comment('Chiều cao');
             $table->string('size', 20)->nullable()->comment('Dung lượng tệp');
