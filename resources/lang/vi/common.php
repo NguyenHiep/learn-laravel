@@ -57,7 +57,17 @@ return [
         )
     ),
     'posts' => array(
-        'posts' => array(),
+        'posts' => array(
+            'post_title' => 'Tiêu đề bài viết',
+            'post_title_placeholder' => 'Nhập tiêu đề tại đây',
+            'slug' => 'Đường dẫn tĩnh',
+            'slug_placeholder' => '',
+            'post_full' => 'Nội dung bài viết',
+            'post_keyword' => 'Từ khóa bài viết',
+            'post_keyword_placeholder' => 'Có dấu và cách nhau bằng dấu phẩy (,)',
+            'post_intro' => 'Mô tả ngắn bài viết',
+            'post_intro_placeholder' => 'Là đoạn mô tả ngắn khoảng 128 từ',
+        ),
         'category' => array(
             'name'                    => 'Tên danh mục',
             'name_placeholder'        => 'VD: Danh mục',

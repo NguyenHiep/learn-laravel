@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Model\Posts;
-
+use App\Model\Posts\Category;
+use App\Model\Posts\Tags;
 use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
@@ -31,7 +32,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-       return view('manage.modules.posts.create');
+        $list_cate_all = Category::all();
+        $list_tags_all = Tags::all();
+        return view('manage.modules.posts.create', compact('list_cate_all','list_tags_all'));
     }
 
     /**

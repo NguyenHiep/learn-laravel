@@ -10,5 +10,17 @@ return [
         1 => 'Kích hoạt',
         2 => 'Không kích hoạt',
     ),
+    'format' => array(
+        0         => 'Chuẩn',
+        'video'   => 'Video',
+        'audio'   => 'Audio',
+        'gallery' => 'Bộ sưu tập'
+    ),
+    'icons' => array(
+        0         => '<i class="icon-pin"></i>',
+        'video'   => '<i class="fa fa-file-video-o"></i>',
+        'audio'   => '<i class="fa fa-file-audio-o"></i>',
+        'gallery' => '<i class="fa fa-picture-o"></i>'
+    )
 
 ];
