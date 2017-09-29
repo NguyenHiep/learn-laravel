@@ -25,11 +25,14 @@
       <div class="row">
         {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\MediasController@update',$record->id] ,'files' => true]) !!}
         <div class="col-md-9">
-          <div>
-            <img src="{{Storage::url(UPLOAD_MEDIAS.$record->name)}}" alt="{{$record->name}}">
+          <div class="form-group">
+            <img src="{{Storage::url(UPLOAD_MEDIAS.$record->name)}}" alt="{{$record->name}}" class="img-responsive" />
           </div>
-          <a href="#" class="btn btn-primary">Sửa ảnh</a>
-
+          <!--
+          <div class="form-group">
+            <a href="#" class="btn btn-primary">Sửa ảnh</a>
+          </div>
+          -->
           @php $key = 'mediasinfo.caption'; @endphp
           <div class="form-group">
             <label class="control-label">{{__('common.posts.medias.'.$key.'')}}
@@ -98,17 +101,20 @@
                 <li><label for="">Dung lượng tệp:</label> <strong>{{round(($record->posts_medias_info->size / 1024/ 1024),2).' MB' }}</strong></li>
 
                 <!-- image -->
+                <!--
                 <li><label for="">Kích thước</label> <strong>580 </strong> × <strong> 870</strong></li>
-
+                -->
                 <!-- Video -->
+                <!--
                 <li><label for="">Độ dài: </label> <strong>0:05</strong></li>
                 <li><label for="">Định Dạng Âm Thanh: </label> <strong>mp4</strong></li>
                 <li><label for="">Bộ Mã Hóa Âm Thanh: </label> <strong>iISO/IEC 14496-3 AAC</strong></li>
                 <li><label for="">Kích thước</label> <strong>1280 </strong> × <strong> 720</strong></li>
+                -->
               </ul>
               <div class="button-actions clearfix">
                 <a href="javascript:void(0)" data-url="{{route('medias.index')}}" data-id="{{$record->id}}" onclick="return confirm('Bạn thật sự muốn xóa');" class="pull-left text-left js-action-medias">Xóa vĩnh viễn</a>
-                <button type="submit" name="" class="btn btn-danger pull-right text-right">Cập nhật</button>
+                <button type="submit"  class="btn btn-danger pull-right text-right">Cập nhật</button>
               </div>
             </div>
           </div>
