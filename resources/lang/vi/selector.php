@@ -21,6 +21,11 @@ return [
         'video'   => '<i class="fa fa-file-video-o"></i>',
         'audio'   => '<i class="fa fa-file-audio-o"></i>',
         'gallery' => '<i class="fa fa-picture-o"></i>'
-    )
+    ),
+    'post_status' => array(
+        1 => 'Đã Đăng',
+        2 => 'Xét duyệt',
+    ),
+
 
 ];

@@ -21,3 +21,7 @@ h3.block-title{
 	min-height: 250px !important;
 	border: 2px dashed #028AF4 !important;
 }
+.bootstrap-tagsinput {
+	width: 100% !important;
+	display: block;
+}

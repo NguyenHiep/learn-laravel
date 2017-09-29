@@ -23,8 +23,8 @@
       <h3 class="page-title"> {{__('static.sidebars.manage.posts.creates')}}  </h3>
       <!-- END PAGE TITLE-->
       <div class="row">
+        {!! Form::open(['route' => 'posts.store', 'files' => true]) !!}
         <div class="col-md-9">
-          {!! Form::open(['route' => 'category.store', 'files' => true]) !!}
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -49,12 +49,13 @@
                 </div>
 
                 @php $key = 'slug'; @endphp
+                <!--
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control', 'placeholder' => __('common.posts.posts.'.$key.'_placeholder')]) !!}
+                  {!! Form::text($key, old($key), ['class' => 'form-control', 'readonly' => 'readonly', 'placeholder' => __('common.posts.posts.'.$key.'_placeholder')]) !!}
                 </div>
-
+                -->
                 @php $key = 'post_full'; @endphp
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
@@ -85,40 +86,60 @@
                   ]) !!}
                 </div>
 
+              </div>
             </div>
+
           </div>
-          {!! Form::close() !!}
-        </div>
-      </div> <!-- End .col-md-9 -->
+        </div> <!-- End .col-md-9 -->
         <div class="col-md-3">
           <div class="portlet light bordered">
             <div class="portlet-title">
-              <div class="caption">Đăng bài viết </div>
+              <div class="caption">Đăng bài viết</div>
               <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
+              <!--
               <div class="form-group">
                 <label>Ngày đăng: <strong>29/09/2017@11:58</strong> </label>
-                <label>Trạng thái: <strong>Chờ xét duyệt </strong></label>
+              </div>
+              -->
+                @php $key='post_status'; @endphp
+                <div class="form-group clearfix">
+                  <label class="control-label">Trạng thái:</label>
+                  @if(!empty(__('selector.post_status')))
+                    <div class="radio-list">
+                      @foreach(__('selector.post_status') as $k =>$val)
+                        @if($k === 2)
+                          <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
+                        @else
+                          <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
+                        @endif
+                      @endforeach
+                    </div>
+                  @endif
+              </div>
+              <!--
+              <div class="form-group">
                 <label>Ngôn ngữ: </label>
               </div>
+              -->
               <div class="form-group clearfix">
                 <a href="{{ route('posts.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" class="btn green pull-right">Đăng bài viết</button>
               </div>
             </div>
           </div>
-
           <div class="portlet light bordered">
             <div class="portlet-title">
-              <div class="caption">Định dạng </div>
+              <div class="caption">Định dạng</div>
               <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
+              @php $key='post_format'; @endphp
               @if(!empty(__('selector.format')))
                 <div class="radio-list">
                   @foreach(__('selector.format') as $k =>$val)
@@ -130,13 +151,11 @@
                   @endforeach
                 </div>
               @endif
-
             </div>
           </div>
-
           <div class="portlet light bordered">
             <div class="portlet-title">
-              <div class="caption">Chuyên mục </div>
+              <div class="caption">Chuyên mục</div>
               <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
               </div>
@@ -145,8 +164,8 @@
               <div class="form-group">
                 <div class="checkbox-list">
                   @php
-                    $key = 'post_medias.';
-                    $html = ''; $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
+                    $key = 'post_category.';
+                    $html = '<label><input type="checkbox" name="'.convert_input_name($key).'" value="0" id="id-category-0">Không xác định</label>'; $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
                     if(!empty($list_cate_all)){
                       foreach($list_cate_all as $parent){
                         if($parent->parent_id == 0){
@@ -176,32 +195,30 @@
               </div>
             </div>
           </div>
-
           <div class="portlet light bordered">
             <div class="portlet-title">
-              <div class="caption">Ảnh tiêu biểu </div>
+              <div class="caption">Ảnh tiêu biểu</div>
               <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
+              @php $key = 'post_image'; @endphp
               <a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>
             </div>
           </div>
-
           <div class="portlet light bordered">
             <div class="portlet-title">
-              <div class="caption">Thẻ </div>
+              <div class="caption">Thẻ</div>
               <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
+              @php $key = 'posts_tags'; @endphp
               <div class="input-group clearfix">
-                <input id="ms1" type="text" name="ms1" class="form-control"/>
-                <span class="input-group-btn">
-                  <button id="add_tags" class="btn btn-success" type="button">Thêm</button>
-                </span>
+                <input type="text"  name="{{$key}}" data-role="tagsinput">
+                <button id="add_tags" class="btn btn-success" type="button">Thêm</button>
               </div>
               <p class="margin-top-15">Phân cách các thẻ bằng dấu phẩy (,).</p>
               <p class="margin-top-15">
@@ -209,26 +226,30 @@
               </p>
             </div>
           </div>
-
         </div> <!-- End .col-md-3 -->
+        {!! Form::close() !!}
+      </div>
+      <!-- END CONTENT BODY -->
     </div>
-    <!-- END CONTENT BODY -->
-  </div>
 
-@endsection
-@section('styles')
-  @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <!-- END PAGE LEVEL PLUGINS -->
+  @endsection
+  @section('styles')
+    @parent
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+      <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css"/>
+      <link href="{{ asset('/manages/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ asset('/manages/assets/global/plugins/typeahead/typeahead.css') }}" rel="stylesheet" type="text/css" />
+      <!-- END PAGE LEVEL PLUGINS -->
   @stop
-@section('scripts')
- @parent
- <!-- BEGIN PAGE LEVEL SCRIPTS -->
- <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-         type="text/javascript"></script>
- <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-         type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
-@stop
+  @section('scripts')
+    @parent
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+      <script src="{{ asset('/manages/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('/manages/assets/global/plugins/typeahead/handlebars.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('/manages/assets/global/plugins/typeahead/typeahead.bundle.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('/manages/assets/pages/scripts/components-bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('/manages/assets/js/posts/posts.js')}}" type="text/javascript"></script>
+      <!-- END PAGE LEVEL SCRIPTS -->
+  @stop

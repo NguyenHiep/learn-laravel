@@ -15,10 +15,12 @@ class CreatePostsCategoryIdTable extends Migration
     {
         //
         Schema::create('posts_category_ids', function (Blueprint $table) {
+            $table->increments('id')->comment('Id bài viết');
             $table->integer('posts_id')->comment('Id bài viết');
             $table->integer('posts_category_id')->comment('Id chuyên mục');
             //$table->integer('rank')->comment('Thứ tự');
-            $table->primary(['posts_id', 'posts_category_id' ]);
+            //$table->primary(['posts_id', 'posts_category_id']);
+            $table->timestamps();
         });
     }
 
