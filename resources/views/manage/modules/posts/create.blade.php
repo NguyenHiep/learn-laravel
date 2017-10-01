@@ -236,7 +236,7 @@
       </div>
       <!-- END CONTENT BODY -->
     </div>
-
+  @include('manage.blocks.medias.modal', ['medias' => $medias])
   @endsection
   @section('styles')
     @parent

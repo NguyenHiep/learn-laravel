@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\Model\Medias;
 use App\Model\Posts;
 use App\Model\Posts\Category;
 use App\Model\Posts\Category\Posts_Category_Id;
@@ -61,9 +62,10 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $list_cate_all = Category::all();
-        $list_tags_all = Tags::all();
-        return view('manage.modules.posts.create', compact('list_cate_all', 'list_tags_all'));
+        $list_cate_all  = Category::all();
+        $list_tags_all  = Tags::all();
+        $medias         = Medias::all();
+        return view('manage.modules.posts.create', compact('list_cate_all', 'list_tags_all', 'medias'));
     }
 
     /**

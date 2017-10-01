@@ -6,7 +6,6 @@
 	</div>
 </div>
 <!-- END FOOTER -->
-@include('manage.blocks.medias.modal')
 @section('scripts')
 <!--[if lt IE 9]>
 <script src="{{asset('/manages/assets/global/plugins/respond.min.js')}}"></script>
