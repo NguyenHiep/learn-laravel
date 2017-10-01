@@ -16,8 +16,8 @@ class CreatePostsTagsIdTable extends Migration
         //
         Schema::create('posts_tags_ids', function (Blueprint $table) {
             $table->increments('id')->comment('Id bài viết');
-            $table->integer('posts_id')->unique()->comment('Id bài viết');
-            $table->integer('posts_tags_id')->unique()->comment('Id tags');
+            $table->integer('posts_id')->comment('Id bài viết');
+            $table->integer('posts_tags_id')->comment('Id tags');
             //$table->integer('rank')->comment('Thứ tự');
             //$table->primary(['id', 'posts_id', 'posts_tags_id']);
             $table->timestamps();

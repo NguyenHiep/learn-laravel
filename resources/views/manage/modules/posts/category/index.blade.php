@@ -126,7 +126,7 @@
                     </th>
                     <th>Tên danh mục</th>
                     <th> Mô tả</th>
-                    <th class="text-center"> Hành động</th>
+                    <th class="text-center width-110"> Hành động</th>
                   </tr>
                   </thead>
                   <tbody>

@@ -45,17 +45,17 @@
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                     <span class="required"> * </span>
                   </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.posts.posts.'.$key.'_placeholder')]) !!}
+                  {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.posts.posts.'.$key.'_placeholder'), 'id' => 'title' ]) !!}
                 </div>
 
                 @php $key = 'slug'; @endphp
-                <!--
+
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control', 'readonly' => 'readonly', 'placeholder' => __('common.posts.posts.'.$key.'_placeholder')]) !!}
+                  {!! Form::text($key, old($key), ['class' => 'form-control', 'readonly' => 'readonly', 'placeholder' => __('common.posts.posts.'.$key.'_placeholder'), 'id' => 'slug']) !!}
                 </div>
-                -->
+
                 @php $key = 'post_full'; @endphp
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
@@ -204,7 +204,12 @@
             </div>
             <div class="portlet-body" style="display: block;">
               @php $key = 'post_image'; @endphp
-              <a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>
+              <!--<a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>-->
+              <a class="btn btn-outline dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
+                <div class="clearfix margin-top-15" id="img_featured">
+                  <img src="http://minhhiep.info/wp-content/uploads/2017/10/cachua-300x300.jpg" draggable="false" alt="" class="img-responsive">
+                </div>
+                <input type="hidden" name="{{$key}}" value="" id="post_medias_id"/>
             </div>
           </div>
           <div class="portlet light bordered">

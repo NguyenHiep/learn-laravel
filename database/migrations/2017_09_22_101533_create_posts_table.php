@@ -27,6 +27,7 @@ class CreatePostsTable extends Migration
             $table->tinyInteger('visit')->default(0)->comment('Lượt xem bài viết');
             $table->integer('user_id')->unsigned()->comment('Tác giả bài viết');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

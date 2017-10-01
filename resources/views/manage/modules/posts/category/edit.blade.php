@@ -138,7 +138,7 @@
           {!! Form::close() !!}
         </div>
         <div class="col-md-3">
-          <div class="portlet box blue">
+          <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Đăng bài viết </div>
               <div class="tools">
@@ -150,7 +150,7 @@
             </div>
           </div>
 
-          <div class="portlet box blue">
+          <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Ảnh tiêu biểu </div>
               <div class="tools">

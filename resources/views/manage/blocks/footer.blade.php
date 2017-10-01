@@ -6,7 +6,7 @@
 	</div>
 </div>
 <!-- END FOOTER -->
-
+@include('manage.blocks.medias.modal')
 @section('scripts')
 <!--[if lt IE 9]>
 <script src="{{asset('/manages/assets/global/plugins/respond.min.js')}}"></script>
@@ -36,6 +36,7 @@
 <script src="{{asset('/manages/assets/layouts/global/scripts/quick-sidebar.min.js')}}"
         type="text/javascript"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
+@stack('custom-scripts')
 <!-- BEGIN ACTION SCRIPTS -->
 <script src="{{asset('/manages/assets/js/layouts.js')}}" type="text/javascript"></script>
 <script src="{{asset('/manages/assets/js/action.js')}}" type="text/javascript"></script>

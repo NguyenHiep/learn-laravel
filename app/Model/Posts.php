@@ -53,7 +53,8 @@ class Posts extends Model
      */
     public function posts_categories()
     {
-        return $this->belongsToMany('App\Model\Posts\Category','posts_category_ids');
+        //return $this->morphToMany('App\Model\Posts\Category', 'posts_category');
+        return $this->belongsToMany('App\Model\Posts\Category','posts_category_ids','id','posts_category_id');
     }
 
     /**
@@ -62,5 +63,13 @@ class Posts extends Model
     public function posts_tags()
     {
         return $this->belongsToMany('App\Model\Posts\Tags','posts_tags_ids');
+    }
+
+    /**
+     * Get author for the blog post
+     */
+    public function author(){
+        //return $this->belongsTo('App\Model\User');
+        return $this->hasOne('App\Model\User','id','user_id');
     }
 }
