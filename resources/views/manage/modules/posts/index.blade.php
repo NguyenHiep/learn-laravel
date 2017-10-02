@@ -10,17 +10,17 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.settings.title')}}</a>
+            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.posts.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('static.manage.settings.settings.page_title')}}</span>
+            <span>{{__('static.sidebars.manage.posts.posts')}}</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> {{__('static.manage.settings.settings.page_title')}}  </h3>
+      <h3 class="page-title"> {{__('static.sidebars.manage.posts.posts')}}  </h3>
       <!-- END PAGE TITLE-->
       <div class="row">
         <div class="col-md-12">

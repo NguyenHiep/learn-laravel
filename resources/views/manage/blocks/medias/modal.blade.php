@@ -6,32 +6,39 @@
   </div>
   <div class="modal-body">
     <div class="row">
-        <div class="col-md-12">
-          <div class="tabbable-custom ">
-            <ul class="nav nav-tabs ">
-              <li>
-                <a href="#medias_uploads" data-toggle="tab"> Tải tập tin lên </a>
-              </li>
-              <li class="active">
-                <a href="#list_medias" data-toggle="tab"> Thư viện </a>
-              </li>
+      <div class="col-md-12">
+        <div class="tabbable-custom ">
+          <ul class="nav nav-tabs ">
+            <li>
+              <a href="#medias_uploads" data-toggle="tab"> Tải tập tin lên </a>
+            </li>
+            <li class="active">
+              <a href="#list_medias" data-toggle="tab"> Thư viện </a>
+            </li>
 
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane " id="medias_uploads">
-                <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone"  enctype="multipart/form-data">
-                  {{ csrf_field() }}
-                  <h3 class="sbold">Thả tập tin vào đây</h3>
-                  <p> Kéo thả tập tin vào đây hoặc click vào đây</p>
-                </form>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane " id="medias_uploads">
+              <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone"
+                    enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <h3 class="sbold">Thả tập tin vào đây</h3>
+                <p> Kéo thả tập tin vào đây hoặc click vào đây</p>
+              </form>
 
-              </div>
-              <div class="tab-pane active clearfix" id="list_medias">
-                <div class="col-md-12">
-                  @if(!empty($medias))
-                    <ul  class="list-unstyled list-attachments">
-                      @foreach($medias as $media)
-                        <li data-id="{{$media->id}}" data-src="{{Storage::url(UPLOAD_MEDIAS.$media->name)}}" class="medias_attachment">
+            </div>
+            <div class="tab-pane active clearfix" id="list_medias">
+              <div class="col-md-12">
+                @if(!empty($medias))
+                  <ul class="list-unstyled list-attachments">
+                    @foreach($medias as $media)
+                      @if(isset($id) && $media->id == $id )
+                        <li data-id="{{$media->id}}" data-src="{{Storage::url(UPLOAD_MEDIAS.$media->name)}}"
+                            class="medias_attachment selected details">
+                      @else
+                        <li data-id="{{$media->id}}" data-src="{{Storage::url(UPLOAD_MEDIAS.$media->name)}}"
+                            class="medias_attachment">
+                          @endif
                           <div class="js-action-medias-attachment medias-attachment-preview landscape">
                             <div class="thumbnail">
                               <div class="centered">
@@ -39,16 +46,17 @@
                               </div>
                             </div>
                           </div>
-                          <button type="button" class="button-link check" tabindex="0"><span class="fa fa-check-circle"></span></button>
+                          <button type="button" class="button-link check" tabindex="0"><span
+                              class="fa fa-check-circle"></span></button>
                         </li>
-                      @endforeach
-                    </ul>
-                  @endif
-                </div>
+                        @endforeach
+                  </ul>
+                @endif
               </div>
             </div>
           </div>
         </div>
+      </div>
 
     </div>
   </div>
@@ -61,7 +69,10 @@
 @push('custom-scripts')
 <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
-<script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}" type="text/javascript"></script>
-<script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}" type="text/javascript"></script>
-<script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}" type="text/javascript"></script>
+<script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
+        type="text/javascript"></script>
+<script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
+        type="text/javascript"></script>
+<script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
+        type="text/javascript"></script>
 @endpush

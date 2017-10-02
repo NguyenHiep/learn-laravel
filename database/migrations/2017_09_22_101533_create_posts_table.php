@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('post_title')->comment('Tiêu đề bài viết');
             $table->text('post_intro')->nullable()->comment('Mô tả ngắn bài viết');
             $table->longText('post_full')->comment('Nội dung bài viết');
-            $table->string('post_image')->nullable()->comment('Ảnh bài viêt');
+            $table->unsignedInteger('posts_medias_id')->nullable()->comment('Ảnh bài viêt');
             $table->tinyInteger('post_status')->default(1)->comment('Trạng thái bài viết [1: Đã đăng, 2: Xét duyệt]');
             $table->string('post_format', 255)->comment('Định dạng bài viết [1: Chuẩn, 2: Video, 3: Audio, 4: Bộ sưu tập]');
             //$table->string('post_category_id', 255)->comment('Chuyên mục bài viết');

@@ -80,7 +80,7 @@
           src = elemBody.find("li.medias_attachment").filter(".selected").attr('data-src');
 
       if (!empty(id)) {
-        elemBody.find("#post_medias_id").val(id);
+        elemBody.find("#posts_medias_id").val(id);
       }
 
       if (!empty(src)) {

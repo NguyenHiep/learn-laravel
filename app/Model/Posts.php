@@ -40,7 +40,7 @@ class Posts extends Model
         'post_author',
         'post_intro',
         'post_full',
-        'post_image',
+        'posts_medias_id',
         'post_status',
         'post_format',
         'post_keyword',

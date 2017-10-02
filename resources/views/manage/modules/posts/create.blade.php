@@ -14,13 +14,13 @@
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('static.sidebars.manage.posts.creates')}}</span>
+            <span>{{__('static.manage.posts.posts.created')}}</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> {{__('static.sidebars.manage.posts.creates')}}  </h3>
+      <h3 class="page-title"> {{__('static.manage.posts.posts.created')}}  </h3>
       <!-- END PAGE TITLE-->
       <div class="row">
         {!! Form::open(['route' => 'posts.store', 'files' => true]) !!}
@@ -29,7 +29,7 @@
             <div class="portlet-title">
               <div class="caption font-dark">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">Thêm bài viết</span>
+                <span class="caption-subject bold uppercase">{{__('static.manage.posts.posts.created')}}</span>
               </div>
             </div>
             <div class="portlet-body form">
@@ -203,13 +203,13 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-              @php $key = 'post_image'; @endphp
+              @php $key = 'posts_medias_id'; @endphp
               <!--<a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>-->
-              <a class="btn btn-outline dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
+              <a class="btn btn-outline btn-block dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
                 <div class="clearfix margin-top-15" id="img_featured">
-                  <img src="http://minhhiep.info/wp-content/uploads/2017/10/cachua-300x300.jpg" draggable="false" alt="" class="img-responsive">
+                  <!--<img src="http://minhhiep.info/wp-content/uploads/2017/10/cachua-300x300.jpg" draggable="false" alt="" class="img-responsive"> -->
                 </div>
-                <input type="hidden" name="{{$key}}" value="" id="post_medias_id"/>
+                <input type="hidden" name="{{$key}}" value="" id="{{$key}}"/>
             </div>
           </div>
           <div class="portlet light bordered">

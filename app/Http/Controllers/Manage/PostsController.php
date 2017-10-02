@@ -105,6 +105,10 @@ class PostsController extends Controller
             if (!empty($user_info)) {
                 $data->user_id = $user_info->id;
             }
+            // Save
+            if(!empty(request()->posts_medias_id)){
+                $data->posts_medias_id = request()->posts_medias_id;
+            }
             $data->save();
             if (isset(request()->post_category) && !empty($data->id)) {
                 foreach (request()->post_category as $cat_id) {
@@ -137,7 +141,8 @@ class PostsController extends Controller
 
                 }
             }
-            session()->flash('message', __('system.message.update'));
+
+            session()->flash('message', __('system.message.create'));
             return redirect()->route('posts.index');
         } catch (Exception $e) {
             session()->flash('message', __('system.message.errors', $e->getMessage()));
@@ -164,7 +169,47 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
+        $record = \DB::table('posts')
+            ->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
+            ->select('posts.*', 'posts_medias.name as post_featured')
+            ->where('posts.id', $id)
+            ->get()->first();
+        if ($record == null) {
+            return view('errors.404');
+        }
 
+        // Get category post
+        $cat_model = \DB::table('posts_category')
+            ->leftJoin('posts_category_ids', 'posts_category.id', '=', 'posts_category_ids.posts_category_id')
+            ->where('posts_id', $id)
+            ->get();
+        $record->cats = null;
+        if (!empty($cat_model)) {
+            $cats = [];
+            foreach ($cat_model as $cat) {
+                $cats [] = $cat->posts_category_id; // Id Duplicate
+            }
+            $record->cats = $cats;
+        }
+
+        // Get list tags
+        $tags_model = \DB::table('posts_tags')
+            ->leftJoin('posts_tags_ids', 'posts_tags.id', '=', 'posts_tags_ids.posts_tags_id')
+            ->where('posts_id', $id)
+            ->get();
+        $record->tags = null;
+        if (!empty($tags_model)) {
+            $tags = null;
+            foreach ($tags_model as $tag) {
+                $tags .= ',' . $tag->name;
+            }
+            $record->tags = ltrim($tags, ',');
+        }
+
+        $list_cate_all  = Category::all();
+        $list_tags_all  = Tags::all();
+        $medias         = Medias::all();
+        return view('manage.modules.posts.edit', compact('record','list_cate_all', 'list_tags_all', 'medias'));
     }
 
     /**
@@ -175,6 +220,78 @@ class PostsController extends Controller
      */
     public function update($id)
     {
+        $this->validate(request(),
+            ['post_title' => 'required',],
+            ['post_title.required' => 'Vui lòng nhập tên bài viết']
+        );
+        try {
+            // Create posts
+            $data = Posts::find($id);
+            if($data == null){
+                return view('errors.404');
+            }
+            if (isset(request()->post_title)) {
+                $data->post_title = request()->post_title;
+            }
+            if (isset(request()->post_intro)) {
+                $data->post_intro = request()->post_intro;
+            }
+            if (isset(request()->post_full)) {
+                $data->post_full = request()->post_full;
+            }
+            if (isset(request()->post_status)) {
+                $data->post_status = request()->post_status;
+            }
+            if (isset(request()->post_format)) {
+                $data->post_format = request()->post_format;
+            }
+            if (isset(request()->post_keyword)) {
+                $data->post_keyword = request()->post_keyword;
+            }
+
+            // Save
+            if(!empty(request()->posts_medias_id)){
+                $data->posts_medias_id = request()->posts_medias_id;
+            }
+            $data->save();
+
+            if (isset(request()->post_category) && !empty($data->id)) {
+                foreach (request()->post_category as $cat_id) {
+//                    // Insert in    to table posts_category_ids
+//                    $post_category_ids = Posts_Category_Id::find($id);
+//                    $post_category_ids->posts_id = $data->id;
+//                    $post_category_ids->posts_category_id = $cat_id;
+//                    $post_category_ids->save();
+                }
+            }
+            // Begin add tags of blogs
+            if (!empty(request()->posts_tags && !empty($data->id))) {
+                $list_tags = explode(',', request()->posts_tags);
+                foreach ($list_tags as $tags) {
+//                    /*
+//                      + Neu tags bi trung thi lay id tags bi trung chen vao
+//                      + Nguoc lai thi them tags moi
+//
+//                     */
+//                    // Insert into table posts_tags
+//                    $post_tags = new Tags();
+//                    $post_tags->name = $tags;
+//                    $post_tags->slug = unicode_str_filter($tags);
+//                    $post_tags->save();
+//                    // Insert into table posts_tags_ids
+//                    $posts_tags_ids = new Posts_Tags_Id();
+//                    $posts_tags_ids->posts_tags_id = $post_tags->id;
+//                    $posts_tags_ids->posts_id = $data->id;
+//                    $posts_tags_ids->save();
+
+                }
+            }
+
+            session()->flash('message', __('system.message.update'));
+            return redirect()->route('posts.index');
+        } catch (Exception $e) {
+            session()->flash('message', __('system.message.errors', $e->getMessage()));
+        }
 
     }
 

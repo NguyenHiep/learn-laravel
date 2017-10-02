@@ -54,7 +54,9 @@ return [
         ),
         'posts' => array(
             'posts' => array(
-                'page_title'     => 'Quản lý bài viết',
+                'page_title' => 'Quản lý bài viết',
+                'created'    => 'Thêm mới bài viết',
+                'edit'       => 'Cập nhật bài viết'
             ),
             'category' => array(
                 'page_title'     => 'Chuyên mục',
