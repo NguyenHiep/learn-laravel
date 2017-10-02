@@ -27,31 +27,35 @@ class PostsController extends Controller
     {
         $records = \DB::table('posts')
             ->join('users', 'posts.user_id', '=', 'users.id')
-            ->select('posts.*', 'users.username')
+            ->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
+            ->select('posts.*', 'users.username', 'posts_medias.name as post_featured')
             ->get();
-        foreach ($records as &$record) {
-            // Get list category
-            $categories = \DB::table('posts_category')
-                ->leftJoin('posts_category_ids', 'posts_category.id', '=', 'posts_category_ids.posts_category_id')
-                ->where('posts_id', $record->id)
-                ->get();
-            $list_cate = [];
-            foreach ($categories as $category) {
-                $list_cate[] = $category->name;
-            }
-            $record->categories = implode(', ', $list_cate);
-            // Get list tags
-            $tags = \DB::table('posts_tags')
-                ->leftJoin('posts_tags_ids', 'posts_tags.id', '=', 'posts_tags_ids.posts_tags_id')
-                ->where('posts_id', $record->id)
-                ->get();
-            $list_tag = [];
-            foreach ($tags as $tag) {
-                $list_tag[] = $tag->name;
-            }
-            $record->tags = implode(', ', $list_tag);
+        if(!empty($records)){
+            foreach ($records as &$record) {
+                // Get list category
+                $categories = \DB::table('posts_category')
+                    ->leftJoin('posts_category_ids', 'posts_category.id', '=', 'posts_category_ids.posts_category_id')
+                    ->where('posts_id', $record->id)
+                    ->get();
+                $list_cate = [];
+                foreach ($categories as $category) {
+                    $list_cate[] = $category->name;
+                }
+                $record->categories = implode(', ', $list_cate);
+                // Get list tags
+                $tags = \DB::table('posts_tags')
+                    ->leftJoin('posts_tags_ids', 'posts_tags.id', '=', 'posts_tags_ids.posts_tags_id')
+                    ->where('posts_id', $record->id)
+                    ->get();
+                $list_tag = [];
+                foreach ($tags as $tag) {
+                    $list_tag[] = $tag->name;
+                }
+                $record->tags = implode(', ', $list_tag);
 
+            }
         }
+
         return view('manage.modules.posts.index', compact('records'));
     }
 

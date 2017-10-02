@@ -53,7 +53,11 @@
                           <td> <!--<td class="checkbox-list"> -->
                             <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
                           </td>
-                          <td> Hình ảnnh </td>
+                          <td>
+                            @if(!empty($record->posts_medias_id))
+                              <img src="{{Storage::url(UPLOAD_MEDIAS.$record->post_featured)}}" draggable="false" alt="" class="img-responsive">
+                            @endif
+                          </td>
                           <td> {{$record->post_title}} </td>
                           <td>{!! $record->username !!}</td>
                           <td>{!! $record->categories !!}</td>
