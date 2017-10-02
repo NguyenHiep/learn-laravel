@@ -25,6 +25,7 @@
         type="text/javascript"></script>
 <script src="{{asset('/manages/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"
         type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/bootstrap-toastr/toastr.min.js')}}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="{{asset('/manages/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>

@@ -43,6 +43,7 @@
     <link href="{{asset('/manages/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/manages/assets/global/plugins/dropzone/basic.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/manages/assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
   <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="{{asset('/manages/assets/global/css/components.min.css')}}" rel="stylesheet" id="style_components"
