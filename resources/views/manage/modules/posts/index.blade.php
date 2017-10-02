@@ -55,7 +55,7 @@
                           </td>
                           <td>
                             @if(!empty($record->posts_medias_id))
-                              <img src="{{Storage::url(UPLOAD_MEDIAS.$record->post_featured)}}" draggable="false" alt="" class="img-responsive">
+                              <img src="{{Storage::url(UPLOAD_MEDIAS.$record->post_featured)}}" draggable="false" alt="" class="img-thumbnail">
                             @endif
                           </td>
                           <td> {{$record->post_title}} </td>
