@@ -258,14 +258,21 @@ class PostsController extends Controller
                 $data->posts_medias_id = request()->posts_medias_id;
             }
             $data->save();
+
+            // Delete table posts_category_ids with posts_id
+            $post_category_ids_old = Posts_Category_Id::where('posts_id', $data->id);
+            if($post_category_ids_old->count() > 0){
+                Posts_Category_Id::where('posts_id', $data->id)->forcedelete();
+            }
+
             //TODO: Update for category when edit
             if (isset(request()->post_category) && !empty($data->id)) {
                 foreach (request()->post_category as $cat_id) {
-//                    // Insert in    to table posts_category_ids
-//                    $post_category_ids = Posts_Category_Id::find($id);
-//                    $post_category_ids->posts_id = $data->id;
-//                    $post_category_ids->posts_category_id = $cat_id;
-//                    $post_category_ids->save();
+                    // Insert into table posts_category_ids
+                    $post_category_ids = new Posts_Category_Id();
+                    $post_category_ids->posts_id = $data->id;
+                    $post_category_ids->posts_category_id = $cat_id;
+                    $post_category_ids->save();
                 }
             }
             //TODO: Update for tags when edit
@@ -273,6 +280,7 @@ class PostsController extends Controller
             if (!empty(request()->posts_tags && !empty($data->id))) {
                 $list_tags = explode(',', request()->posts_tags);
                 foreach ($list_tags as $tags) {
+
 //                    /*
 //                      + Neu tags bi trung thi lay id tags bi trung chen vao
 //                      + Nguoc lai thi them tags moi
