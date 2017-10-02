@@ -29,7 +29,7 @@
       <!-- END PAGE TITLE-->
       <div class="row">
         <div class="col-md-9">
-          {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\Posts\TagsController@update',$record->id] , 'class'=> 'form-horizontal', 'files' => true]) !!}
+          {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\Posts\TagsController@update',$record->id] , 'files' => true]) !!}
 
           <div class="portlet light bordered">
             <div class="portlet-title">

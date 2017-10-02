@@ -258,7 +258,7 @@ class PostsController extends Controller
                 $data->posts_medias_id = request()->posts_medias_id;
             }
             $data->save();
-
+            //TODO: Update for category when edit
             if (isset(request()->post_category) && !empty($data->id)) {
                 foreach (request()->post_category as $cat_id) {
 //                    // Insert in    to table posts_category_ids
@@ -268,6 +268,7 @@ class PostsController extends Controller
 //                    $post_category_ids->save();
                 }
             }
+            //TODO: Update for tags when edit
             // Begin add tags of blogs
             if (!empty(request()->posts_tags && !empty($data->id))) {
                 $list_tags = explode(',', request()->posts_tags);
