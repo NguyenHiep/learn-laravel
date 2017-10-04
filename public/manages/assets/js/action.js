@@ -31,35 +31,7 @@
         }
       });
     });
-
-    // Pagination
-
-    elemArticle.find(".pagination-loading__btn-more a").on("click", function () {
-      var $elem = $(this);
-      $elem.children("span.cbp-l-loadMore-loadingText").show();
-      $.ajax({
-        type: "GET",
-        url: $elem.attr("href"),
-        dataType: 'html',
-        success: function (data) {
-          var dom_nodes = $($.parseHTML(data)),
-              outputTarget = $elem.data("outputTarget");
-          $(outputTarget).append(dom_nodes.find(outputTarget).find('div.media__item'));
-          if (dom_nodes.find('.js-action-pagination').length > 0) {
-            $elem.prop('href', dom_nodes.find('.js-action-pagination').attr("href"));
-            $elem.children("span.cbp-l-loadMore-loadingText").hide();
-          } else {
-            $elem.remove();
-          }
-        },
-        error: function () {
-          console.log("Error loading");
-          $elem.children("span.cbp-l-loadMore-loadingText").hide();
-        }
-      });
-      return false;
-    });
-
+    
     // Begin medias action select image attachment
     elemBody.find(".medias_attachment").on("click", function () {
       var $elem = $(this);

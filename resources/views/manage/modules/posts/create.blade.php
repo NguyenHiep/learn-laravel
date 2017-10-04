@@ -49,11 +49,8 @@
                 </div>
 
                 @php $key = 'slug'; @endphp
-
                 <div class="form-group">
-                  <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
-                  </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control', 'readonly' => 'readonly', 'placeholder' => __('common.posts.posts.'.$key.'_placeholder'), 'id' => 'slug']) !!}
+                  {!! Form::hidden($key, old($key), ['class' => 'form-control', 'readonly' => 'readonly', 'placeholder' => __('common.posts.posts.'.$key.'_placeholder'), 'id' => 'slug']) !!}
                 </div>
 
                 @php $key = 'post_full'; @endphp
