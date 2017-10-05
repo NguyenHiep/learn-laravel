@@ -8,6 +8,16 @@ return [
                 'settings' => 'Cài đặt thông tin website',
                 'admins'   => 'Quản trị tài khoản',
             ),
+            'products' => array(
+                'title'   => 'Sản phẩm',
+                'create' => 'Thêm sản phẩm',
+                'list'   => 'Danh sách sản phẩm',
+            ),
+            'orders' => array(
+                'title'   => 'Đơn hàng',
+                'create' => 'Tạo mới đơn hàng',
+                'list'    => 'Danh sách đơn hàng',
+            ),
             'posts'     => array(
                 'title'    => 'Bài viết',
                 'posts'    => 'Tất cả bài viết',

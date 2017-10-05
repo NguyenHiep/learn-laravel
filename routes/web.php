@@ -30,6 +30,9 @@ Route::group(['middleware', 'auth'], function () {
 			Route::delete('admins/delete/{id}', ['as' => 'admins.destroy', 'uses' => 'Settings\AdminsController@destroy'])->where('id', '[0-9]+');
 		});
 
+        Route::resource('products', 'ProductsController');
+        Route::resource('orders', 'OrdersController');
+
         Route::group(['prefix' => 'posts'], function () {
             Route::get('posts', ['as' => 'posts.index', 'uses' => 'PostsController@index']);
             Route::get('posts/create', ['as' => 'posts.create', 'uses' => 'PostsController@create']);
@@ -42,7 +45,12 @@ Route::group(['middleware', 'auth'], function () {
             Route::resource('tags','Posts\TagsController');
         });
 
-        Route::resource('medias','MediasController');
+        Route::resource('medias', 'MediasController');
+        Route::resource('pages', 'PagesController');
+        Route::resource('comments', 'CommentsController');
+        Route::resource('customers', 'CustomersController');
+        Route::resource('email', 'EmailController');
+
 	});
 });
 

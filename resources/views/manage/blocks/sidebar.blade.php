@@ -52,7 +52,50 @@
 
         </ul>
       </li>
+      <li
+        class="nav-item  {{ active(['products.index', 'products.create', 'products.edit'], 'active open') }}">
+        <a href="{{ route('products.index') }}" class="nav-link nav-toggle">
+          <i class="icon-graph"></i>
+          <span class="title">{{__('static.sidebars.manage.products.title')}}</span>
+          <span class="arrow {{ active(['products.index', 'products.create', 'products.edit'], 'open') }}"></span>
+          <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+          <li class="nav-item">
+            <a href="{{ route('products.create') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.products.create')}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('products.index') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.products.list')}}</span>
+            </a>
+          </li>
 
+        </ul>
+      </li>
+      <li
+        class="nav-item  {{ active(['orders.index', 'orders.create', 'orders.edit'], 'active open') }}">
+        <a href="{{ route('orders.index') }}" class="nav-link nav-toggle">
+          <i class="icon-basket"></i>
+          <span class="title">{{__('static.sidebars.manage.orders.title')}}</span>
+          <span class="arrow {{ active(['orders.index', 'orders.create', 'orders.edit'], 'open') }}"></span>
+          <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+          <li class="nav-item">
+            <a href="{{ route('orders.create') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.orders.create')}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('orders.index') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.orders.list')}}</span>
+            </a>
+          </li>
+
+        </ul>
+      </li>
       <li class="nav-item  {{ active(['posts.index', 'posts.create', 'posts.edit', 'category.index', 'category.create','category.edit', 'tags.index', 'tags.create', 'tags.edit'], 'active open') }}">
         <a href="{{ route('posts.index') }}" class="nav-link nav-toggle">
           <i class="icon-pin"></i>
@@ -102,64 +145,64 @@
           </li>
         </ul>
       </li>
-      <li class="nav-item  ">
-        <a href="javascript:;" class="nav-link nav-toggle">
+      <li class="nav-item  {{ active(['pages.index', 'pages.create', 'pages.edit'], 'active open') }}">
+        <a href="{{ route('pages.index') }}" class="nav-link nav-toggle">
           <i class="icon-docs"></i>
           <span class="title">{{__('static.sidebars.manage.pages.title')}}</span>
-          <span class="arrow"></span>
+          <span class="arrow {{ active(['pages.index', 'pages.create', 'pages.edit'], 'open') }}"></span>
         </a>
         <ul class="sub-menu">
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('pages.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.pages.pages')}}</span>
             </a>
           </li>
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('pages.create') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.pages.create')}}</span>
             </a>
           </li>
         </ul>
       </li>
       <li class="nav-item">
-        <a href="javascript:;" class="nav-link nav-toggle">
+        <a href="{{ route('comments.index') }}" class="nav-link nav-toggle">
           <i class="icon-bubbles"></i>
           <span class="title">{{__('static.sidebars.manage.comments')}}</span>
         </a>
       </li>
       <li class="nav-item">
-        <a href="javascript:;" class="nav-link nav-toggle">
+        <a href="{{ route('customers.index') }}" class="nav-link nav-toggle">
           <i class="icon-user"></i>
           <span class="title">{{__('static.sidebars.manage.customers.title')}}</span>
           <span class="arrow"></span>
         </a>
         <ul class="sub-menu">
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('customers.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.customers.customers')}}</span>
             </a>
           </li>
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('customers.create') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.customers.creates')}}</span>
             </a>
           </li>
         </ul>
       </li>
       <li class="nav-item">
-        <a href="javascript:;" class="nav-link nav-toggle">
+        <a href="{{ route('email.index') }}" class="nav-link nav-toggle">
           <i class="icon-envelope"></i>
           <span class="title">{{__('static.sidebars.manage.email.title')}}</span>
           <span class="arrow"></span>
         </a>
         <ul class="sub-menu">
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('email.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.email.contact')}}</span>
             </a>
           </li>
           <li class="nav-item  ">
-            <a href="form_controls.html" class="nav-link ">
+            <a href="{{ route('email.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.email.subscribe')}}</span>
             </a>
           </li>

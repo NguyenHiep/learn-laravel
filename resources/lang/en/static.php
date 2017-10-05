@@ -8,6 +8,16 @@ return [
                 'settings' => 'Settings website information',
                 'admins'   => 'Account administration',
             ),
+            'products' => array(
+                'title'   => 'Produtcs',
+                'creates' => 'Create Products',
+                'litst'   => 'List products',
+            ),
+            'orders' => array(
+                'title'   => 'Orders',
+                'creates' => 'Create Orders',
+                'list'    => 'List Orders',
+            ),
             'posts'     => array(
                 'title'    => 'Posts',
                 'posts'    => 'All post',
