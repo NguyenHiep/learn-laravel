@@ -30,28 +30,7 @@
           <span class="selected"></span>
         </a>
       </li>
-      <li
-        class="nav-item  {{ active(['settings.index', 'admins.index', 'admins.create', 'admins.edit'], 'active open') }}">
-        <a href="{{ route('settings.index') }}" class="nav-link nav-toggle">
-          <i class="icon-settings"></i>
-          <span class="title">{{__('static.sidebars.manage.settings.title')}}</span>
-          <span class="arrow {{ active(['settings.index', 'admins.index', 'admins.create', 'admins.edit'], 'open') }}"></span>
-          <span class="selected"></span>
-        </a>
-        <ul class="sub-menu">
-          <li class="nav-item">
-            <a href="{{ route('settings.index') }}" class="nav-link ">
-              <span class="title">{{__('static.sidebars.manage.settings.settings')}}</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('admins.index') }}" class="nav-link ">
-              <span class="title">{{__('static.sidebars.manage.settings.admins')}}</span>
-            </a>
-          </li>
 
-        </ul>
-      </li>
       <li
         class="nav-item  {{ active(['products.index', 'products.create', 'products.edit'], 'active open') }}">
         <a href="{{ route('products.index') }}" class="nav-link nav-toggle">
@@ -206,6 +185,28 @@
               <span class="title">{{__('static.sidebars.manage.email.subscribe')}}</span>
             </a>
           </li>
+        </ul>
+      </li>
+      <li
+        class="nav-item  {{ active(['settings.index', 'admins.index', 'admins.create', 'admins.edit'], 'active open') }}">
+        <a href="{{ route('settings.index') }}" class="nav-link nav-toggle">
+          <i class="icon-settings"></i>
+          <span class="title">{{__('static.sidebars.manage.settings.title')}}</span>
+          <span class="arrow {{ active(['settings.index', 'admins.index', 'admins.create', 'admins.edit'], 'open') }}"></span>
+          <span class="selected"></span>
+        </a>
+        <ul class="sub-menu">
+          <li class="nav-item">
+            <a href="{{ route('settings.index') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.settings.settings')}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admins.index') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.settings.admins')}}</span>
+            </a>
+          </li>
+
         </ul>
       </li>
     </ul>
