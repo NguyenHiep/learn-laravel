@@ -218,8 +218,8 @@
             </div>
             <div class="portlet-body" style="display: block;">
               @php $key = 'posts_tags'; @endphp
-              <div class="input-group clearfix">
-                <input type="text"  name="{{$key}}" data-role="tagsinput">
+              <div class="input-group display-block clearfix">
+                <input type="text"  name="{{$key}}" data-role="tagsinput" class="form-control">
                 <button id="add_tags" class="btn btn-success" type="button">Thêm</button>
               </div>
               <p class="margin-top-15">Phân cách các thẻ bằng dấu phẩy (,).</p>
@@ -251,6 +251,7 @@
       <script src="{{ asset('/manages/assets/global/plugins/typeahead/typeahead.bundle.min.js') }}" type="text/javascript"></script>
       <script src="{{ asset('/manages/assets/pages/scripts/components-bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
       <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('/manages/assets/js/plugin/hello/summernote-ext-hello.js')}}" type="text/javascript"></script>
       <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
       <script src="{{ asset('/manages/assets/js/posts/posts.js')}}" type="text/javascript"></script>
       <!-- END PAGE LEVEL SCRIPTS -->

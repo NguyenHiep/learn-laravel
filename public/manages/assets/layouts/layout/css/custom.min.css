@@ -1,150 +1,198 @@
 /* here you can put your own css to customize and override the theme */
 
-h3.block-title{
-    background: #3e4b5c;
-    color: #fff;
-    padding: 10px;
-    font-size: 18px;
-    margin: 0;
+h3.block-title {
+	background: #3e4b5c;
+	color: #fff;
+	padding: 10px;
+	font-size: 18px;
+	margin: 0;
 }
-.block-title-small{
-    font-size: 15px;
-    font-weight: normal;
-    color: #31313f;
-    margin: 0 0 15px;
-    padding: 10px;
-    box-sizing: border-box;
-    background: #eee;
+
+.block-title-small {
+	font-size: 15px;
+	font-weight: normal;
+	color: #31313f;
+	margin: 0 0 15px;
+	padding: 10px;
+	box-sizing: border-box;
+	background: #eee;
 }
-.dropzone{
+
+.dropzone {
 	margin-top: 50px;
 	min-height: 250px !important;
 	border: 2px dashed #028AF4 !important;
 }
+
 .bootstrap-tagsinput {
 	width: 100% !important;
 	display: block;
-}
-.width-110{
-    width: 110px !important;
-}
-.list-attachments{
-    outline: 0;
-    overflow: auto;
-    padding-top: 15px;
-    max-height: 330px;
-    min-height: 330px;
-}
-.medias_attachment{
-    float: left;
-    width: 20%;
-    position: relative;
-    cursor: pointer;
-    margin: 0;
-    padding: 8px;
-}
-.medias_attachment.details{
-    -webkit-box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 7px #0073aa;
-    box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 7px #0073aa;
-}
-.medias_attachment .check{
-    display: none;
-    height: 24px;
-    width: 24px;
-    padding: 0;
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    right: 0;
-    outline: 0;
-    background: #eee;
-    -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0,0,0,.15);
-    box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0,0,0,.15);
-}
-.medias_attachment .medias-attachment-preview{
-    position: relative;
-    -webkit-box-shadow: inset 0 0 15px rgba(0,0,0,.1), inset 0 0 0 1px rgba(0,0,0,.05);
-    box-shadow: inset 0 0 15px rgba(0,0,0,.1), inset 0 0 0 1px rgba(0,0,0,.05);
-    background: #eee;
-    cursor: pointer;
-}
-.medias_attachment .medias-attachment-preview:before {
-    content: "";
-    display: block;
-    padding-top: 100%;
-}
-.medias_attachment .thumbnail{
-    border: none;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 1;
-    -webkit-transition: opacity .1s;
-    transition: opacity .1s;
-    margin: 0;
-}
-.medias_attachment .thumbnail:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
-    overflow: hidden;
-}
-.medias_attachment  .thumbnail .centered {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-transform: translate(50%,50%);
-    -ms-transform: translate(50%,50%);
-    transform: translate(50%,50%);
-}
-.medias_attachment .thumbnail .centered img {
-    -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+	min-height: 120px;
 }
 
+.width-110 {
+	width: 110px !important;
+}
+
+.list-attachments {
+	outline: 0;
+	overflow: auto;
+	padding-top: 15px;
+	max-height: 330px;
+	min-height: 330px;
+}
+
+.medias_attachment {
+	float: left;
+	width: 20%;
+	position: relative;
+	cursor: pointer;
+	margin: 0;
+	padding: 8px;
+}
+
+.medias_attachment.details {
+	-webkit-box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 7px #0073aa;
+	box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 7px #0073aa;
+}
+
+.medias_attachment .check {
+	display: none;
+	height: 24px;
+	width: 24px;
+	padding: 0;
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	right: 0;
+	outline: 0;
+	background: #eee;
+	-webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0, 0, 0, .15);
+	box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0, 0, 0, .15);
+}
+
+.medias_attachment .medias-attachment-preview {
+	position: relative;
+	-webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .1), inset 0 0 0 1px rgba(0, 0, 0, .05);
+	box-shadow: inset 0 0 15px rgba(0, 0, 0, .1), inset 0 0 0 1px rgba(0, 0, 0, .05);
+	background: #eee;
+	cursor: pointer;
+}
+
+.medias_attachment .medias-attachment-preview:before {
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+
+.medias_attachment .thumbnail {
+	border: none;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 1;
+	-webkit-transition: opacity .1s;
+	transition: opacity .1s;
+	margin: 0;
+}
+
+.medias_attachment .thumbnail:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1);
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1);
+	overflow: hidden;
+}
+
+.medias_attachment .thumbnail .centered {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transform: translate(50%, 50%);
+	-ms-transform: translate(50%, 50%);
+	transform: translate(50%, 50%);
+}
+
+.medias_attachment .thumbnail .centered img {
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
 
 .medias_attachment .thumbnail img {
-    position: absolute;
-    top: 0;
-    left: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .medias_attachment .landscape img {
-    max-height: 100%;
+	max-height: 100%;
 }
 
 .medias_attachment.details .check,
 .medias_attachment.selected .check:focus {
-    background-color: #0073aa !important;
-    -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 2px #0073aa;
-    box-shadow: 0 0 0 1px #fff, 0 0 0 2px #0073aa;
-    color: #FFF;
-    font-weight: bold;
+	background-color: #0073aa !important;
+	-webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 2px #0073aa;
+	box-shadow: 0 0 0 1px #fff, 0 0 0 2px #0073aa;
+	color: #FFF;
+	font-weight: bold;
 }
+
 .medias_attachment.selected .check {
-    display: block;
+	display: block;
 }
+
 .medias_attachment .button-link {
-    margin: 0;
-    padding: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    background: 0 0;
-    outline: 0;
-    cursor: pointer;
+	margin: 0;
+	padding: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	background: 0 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.display-block {
+	display: block !important;
+}
+
+.bootstrap-tagsinput .tag {
+	display: inline-block;
+	margin-bottom: 2px;
+}
+
+/* Css custom for editor icon image */
+.note-image-dialog.modal,
+.note-link-dialog,
+.note-help-dialog
+{
+	left: inherit;
+	 bottom: inherit;
+	 right: inherit;
+	 padding: inherit;
+	 width: inherit;
+	 margin-left: inherit;
+	 background-color: inherit;
+}
+.note-image-dialog.modal .form-group,
+.note-link-dialog .form-group
+{
+	margin: 0;
+	border-bottom: 1px solid #efefef;
+}
+.note-editor.fullscreen{
+	z-index: 9996 !important;
 }

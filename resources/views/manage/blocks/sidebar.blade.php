@@ -30,7 +30,7 @@
           <span class="selected"></span>
         </a>
       </li>
-
+      <!--
       <li
         class="nav-item  {{ active(['products.index', 'products.create', 'products.edit'], 'active open') }}">
         <a href="{{ route('products.index') }}" class="nav-link nav-toggle">
@@ -75,6 +75,7 @@
 
         </ul>
       </li>
+      -->
       <li class="nav-item  {{ active(['posts.index', 'posts.create', 'posts.edit', 'category.index', 'category.create','category.edit', 'tags.index', 'tags.create', 'tags.edit'], 'active open') }}">
         <a href="{{ route('posts.index') }}" class="nav-link nav-toggle">
           <i class="icon-pin"></i>
