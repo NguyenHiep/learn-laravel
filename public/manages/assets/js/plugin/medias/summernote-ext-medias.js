@@ -28,13 +28,13 @@
       // add hello button
       context.memo('button.medias', function () {
         // create button
+        active_items_medias();
         var button = ui.button({
           contents: '<i class="fa fa-picture-o"/> Thư viện ảnh',
           tooltip: 'Medias',
           click: function () {
             // Show popup medias
             $('#medias_libraries').modal('toggle');
-            active_items_medias();
             var src_img = get_items_selected();
             if(!empty(src_img)){
               var img_select = ajaxcalls_vars.host + src_img;
