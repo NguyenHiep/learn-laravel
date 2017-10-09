@@ -33,14 +33,19 @@
           tooltip: 'Medias',
           click: function () {
             // Show popup medias
-            $('#medias_libraries').modal('toggle');
+            $('#medias_contents_libraries').modal('toggle');
+            
             active_items_medias();
+            
             var src_img = get_items_selected();
+            
             if(!empty(src_img)){
               var img_select = ajaxcalls_vars.host + src_img;
               // Insert content to editor
               context.invoke('editor.insertImage', img_select);
             }
+            
+            closeModalMedias();
 
           },
 
@@ -55,9 +60,9 @@
       var active_items_medias = function () {
         var elemBody = $("body");
         // Begin medias action select image attachment
-        elemBody.find(".medias_attachment").on("click", function () {
+        elemBody.find(".medias_attachment_content").on("click", function () {
           var $elem = $(this);
-          elemBody.find('.medias_attachment').each(function (i) {
+          elemBody.find('.medias_attachment_content').each(function (i) {
             var $elem = $(this);
             if ($elem.hasClass('selected') || $elem.hasClass('details')) {
               $elem.removeClass('selected');
@@ -68,11 +73,19 @@
           $elem.addClass('selected details');
         });
       }
+      
+      var closeModalMedias = function () {
+        var elemBody = $("body");
+        elemBody.find(".js-action-insert-content-image").on('click', function () {
+          $('#medias_contents_libraries').modal('toggle');
+        });
+        
+      }
     
       // Get items select
       var get_items_selected = function () {
         var elemBody = $("body"),
-            src = elemBody.find("li.medias_attachment").filter(".selected").attr('data-src');
+            src = elemBody.find("li.medias_attachment_content").filter(".selected").attr('data-src');
         if (!empty(src)) {
           return src;
         }
