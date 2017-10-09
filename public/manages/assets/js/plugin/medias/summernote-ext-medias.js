@@ -50,6 +50,7 @@
     
         // Show popup medias
         $('#medias_contents_libraries').modal('toggle');
+        
         // Begin medias action select image attachment
         elemBody.find(".medias_attachment_content").on("click", function () {
           var $elem = $(this);
@@ -61,9 +62,13 @@
             }
         
           });
+          
+          // Add class active for items
           $elem.addClass('selected details');
-      
-          var src_img = get_items_selected();
+          
+          // get image select
+          var src_img = elemBody.find("li.medias_attachment_content").filter(".selected").attr('data-src');
+          
           if (!empty(src_img)) {
             var img_select = ajaxcalls_vars.host + src_img;
             
@@ -74,16 +79,6 @@
         
           }
         });
-      }
-      
-      // Get items select
-      var get_items_selected = function () {
-        var elemBody = $("body"),
-          src = elemBody.find("li.medias_attachment_content").filter(".selected").attr('data-src');
-        if (!empty(src)) {
-          return src;
-        }
-        return null;
       }
       
       //
