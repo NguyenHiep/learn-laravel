@@ -19,7 +19,7 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane " id="medias_uploads_contents">
-              <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone"
+              <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone-contents"
                     enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <h3 class="sbold">Thả tập tin vào đây</h3>
@@ -66,13 +66,3 @@
   </div>
 </div>
 
-@push('custom-scripts')
-<script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
-<script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
-<script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
-        type="text/javascript"></script>
-<script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
-        type="text/javascript"></script>
-<script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
-        type="text/javascript"></script>
-@endpush
