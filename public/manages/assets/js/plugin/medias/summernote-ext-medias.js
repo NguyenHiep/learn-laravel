@@ -60,6 +60,7 @@
   
           if (!empty(src_img)) {
             var img_select = ajaxcalls_vars.host + src_img;
+            console.log('---------');
             console.log(img_select);
             elemBody.find(".js-action-insert-content-image").on('click', function () {
               // Insert content to editor
