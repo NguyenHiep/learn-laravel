@@ -57,11 +57,10 @@
           $elem.addClass('selected details').siblings().removeClass('selected details');
           // get image select
           var src_img = $elem.attr('data-src');
-          console.log('zo');
+          
           if (!empty(src_img)) {
             var img_select = ajaxcalls_vars.host + src_img;
-            console.log('---------');
-            console.log(img_select);
+            
             elemBody.find(".js-action-insert-content-image").on('click', function () {
               // Insert content to editor
               context.invoke('editor.insertImage', img_select);
@@ -69,6 +68,7 @@
               // Insert done --> reset list items
               src_img = null;
               $elem.removeClass('selected details');
+              return false;
             })
             
           }
