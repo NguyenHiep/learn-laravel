@@ -54,17 +54,18 @@
         // Begin medias action select image attachment
         elemBody.find(".medias_attachment_content").on("click", function () {
           var $elem = $(this);
-          elemBody.find('.medias_attachment_content').each(function (i) {
-            var $elem = $(this);
-            if ($elem.hasClass('selected') || $elem.hasClass('details')) {
-              $elem.removeClass('selected');
-              $elem.removeClass('details');
-            }
-        
-          });
-          
-          // Add class active for items
-          $elem.addClass('selected details');
+          $elem.addClass('selected details').siblings().removeClass('selected details');
+          // elemBody.find('.medias_attachment_content').each(function (i) {
+          //   var $elem = $(this);
+          //   if ($elem.hasClass('selected') || $elem.hasClass('details')) {
+          //     $elem.removeClass('selected');
+          //     $elem.removeClass('details');
+          //   }
+          //
+          // });
+          //
+          // // Add class active for items
+          // $elem.addClass('selected details');
           
           // get image select
           var src_img = elemBody.find("li.medias_attachment_content").filter(".selected").attr('data-src');
@@ -84,16 +85,16 @@
       //
       
       // This events will be attached when editor is initialized.
-      this.events = {
-        // This will be called after modules are initialized.
-        'summernote.init': function (we, e) {
-          console.log('summernote initialized', we, e);
-        },
-        // This will be called when user releases a key on editable.
-        'summernote.keyup': function (we, e) {
-          console.log('summernote keyup', we, e);
-        }
-      };
+      // this.events = {
+      //   // This will be called after modules are initialized.
+      //   'summernote.init': function (we, e) {
+      //     console.log('summernote initialized', we, e);
+      //   },
+      //   // This will be called when user releases a key on editable.
+      //   'summernote.keyup': function (we, e) {
+      //     console.log('summernote keyup', we, e);
+      //   }
+      // };
       
       // This methods will be called when editor is destroyed by $('..').summernote('destroy');
       // You should remove elements on `initialize`.
