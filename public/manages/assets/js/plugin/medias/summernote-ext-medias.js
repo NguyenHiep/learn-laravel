@@ -11,7 +11,7 @@
     factory(window.jQuery);
   }
 }(function ($) {
-
+  
   // Extends plugins for adding hello.
   //  - plugin is external module for customizing.
   $.extend($.summernote.plugins, {
@@ -20,11 +20,11 @@
      */
     'medias': function (context) {
       var self = this;
-
+      
       // ui has renders to build ui elements.
       //  - you can create a button with `ui.button`
       var ui = $.summernote.ui;
-
+      
       // add hello button
       context.memo('button.medias', function () {
         // create button
@@ -39,23 +39,22 @@
             
             var src_img = get_items_selected();
             
-            if(!empty(src_img)){
+            if (!empty(src_img)) {
               var img_select = ajaxcalls_vars.host + src_img;
               // Insert content to editor
               context.invoke('editor.insertImage', img_select);
+              closeModalMedias();
             }
             
-            closeModalMedias();
-
           },
-
+          
         });
-
+        
         // create jQuery object from button instance.
         var $medias = button.render();
         return $medias;
       });
-
+      
       // Fuction active item select in medias
       var active_items_medias = function () {
         var elemBody = $("body");
@@ -68,7 +67,7 @@
               $elem.removeClass('selected');
               $elem.removeClass('details');
             }
-
+            
           });
           $elem.addClass('selected details');
         });
@@ -81,19 +80,19 @@
         });
         
       }
-    
+      
       // Get items select
       var get_items_selected = function () {
         var elemBody = $("body"),
-            src = elemBody.find("li.medias_attachment_content").filter(".selected").attr('data-src');
+          src = elemBody.find("li.medias_attachment_content").filter(".selected").attr('data-src');
         if (!empty(src)) {
           return src;
         }
         return null;
       }
-
+      
       //
-
+      
       // This events will be attached when editor is initialized.
       this.events = {
         // This will be called after modules are initialized.
@@ -112,11 +111,11 @@
         this.$panel.remove();
         this.$panel = null;
       };
-
-
+      
+      
     }
   });
-
+  
   function empty(str) {
     return str === undefined || str === false || str === null || str.length === 0 || typeof(str) === "object" && Object.keys(str).length === 0;
   }
