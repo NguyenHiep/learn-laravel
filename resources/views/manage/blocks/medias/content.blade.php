@@ -62,7 +62,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn btn-outline dark">Đóng lại</button>
-    <button type="button" data-dismiss="modal" class="btn green">Chèn vào bài viết</button>
+    <button type="button" data-dismiss="modal" class="btn green js-action-insert-content-image">Chèn vào bài viết</button>
   </div>
 </div>
 

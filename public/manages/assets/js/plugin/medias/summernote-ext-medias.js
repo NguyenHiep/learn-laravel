@@ -43,11 +43,11 @@
         var $medias = button.render();
         return $medias;
       });
-      
+  
       // Fuction active item select in medias
       var active_items_medias = function () {
         var elemBody = $("body");
-  
+    
         // Show popup medias
         $('#medias_contents_libraries').modal('toggle');
         // Begin medias action select image attachment
@@ -59,21 +59,22 @@
               $elem.removeClass('selected');
               $elem.removeClass('details');
             }
-            
+        
           });
           $elem.addClass('selected details');
-          
+      
           var src_img = get_items_selected();
           if (!empty(src_img)) {
             var img_select = ajaxcalls_vars.host + src_img;
-            // Insert content to editor
-            context.invoke('editor.insertImage', img_select);
-    
+            
+            elemBody.find(".js-action-insert-content-image").on('click', function () {
+              // Insert content to editor
+              context.invoke('editor.insertImage', img_select);
+            })
+        
           }
         });
       }
-      
-     
       
       // Get items select
       var get_items_selected = function () {
