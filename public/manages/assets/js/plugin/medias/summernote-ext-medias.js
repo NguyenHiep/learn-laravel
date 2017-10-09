@@ -68,7 +68,7 @@
           // $elem.addClass('selected details');
           
           // get image select
-          var src_img = elemBody.find("li.medias_attachment_content").filter(".selected").attr('data-src');
+          var src_img = $elem.attr('data-src');
           
           if (!empty(src_img)) {
             var img_select = ajaxcalls_vars.host + src_img;
@@ -77,7 +77,7 @@
               // Insert content to editor
               context.invoke('editor.insertImage', img_select);
             })
-        
+            src_img = null;
           }
         });
       }
