@@ -32,12 +32,8 @@
           contents: '<i class="fa fa-picture-o"/> Thư viện ảnh',
           tooltip: 'Medias',
           click: function () {
-            // Show popup medias
-            $('#medias_contents_libraries').modal('toggle');
             
             active_items_medias();
-            
-            closeModalMedias();
             
           },
           
@@ -51,6 +47,9 @@
       // Fuction active item select in medias
       var active_items_medias = function () {
         var elemBody = $("body");
+  
+        // Show popup medias
+        $('#medias_contents_libraries').modal('toggle');
         // Begin medias action select image attachment
         elemBody.find(".medias_attachment_content").on("click", function () {
           var $elem = $(this);
@@ -71,17 +70,10 @@
             context.invoke('editor.insertImage', img_select);
     
           }
-          
         });
       }
       
-      var closeModalMedias = function () {
-        var elemBody = $("body");
-        elemBody.find(".js-action-insert-content-image").on('click', function () {
-          $('#medias_contents_libraries').modal('toggle');
-        });
-        
-      }
+     
       
       // Get items select
       var get_items_selected = function () {
