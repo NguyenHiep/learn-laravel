@@ -57,8 +57,7 @@
           $elem.addClass('selected details').siblings().removeClass('selected details');
           // get image select
           var src_img = $elem.attr('data-src');
-          console.log(src_img);
-          
+  
           if (!empty(src_img)) {
             var img_select = ajaxcalls_vars.host + src_img;
             
