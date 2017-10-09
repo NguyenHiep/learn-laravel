@@ -37,14 +37,7 @@
             
             active_items_medias();
             
-            var src_img = get_items_selected();
-            
-            if (!empty(src_img)) {
-              var img_select = ajaxcalls_vars.host + src_img;
-              // Insert content to editor
-              context.invoke('editor.insertImage', img_select);
-              closeModalMedias();
-            }
+            closeModalMedias();
             
           },
           
@@ -70,6 +63,15 @@
             
           });
           $elem.addClass('selected details');
+          
+          var src_img = get_items_selected();
+          if (!empty(src_img)) {
+            var img_select = ajaxcalls_vars.host + src_img;
+            // Insert content to editor
+            context.invoke('editor.insertImage', img_select);
+    
+          }
+          
         });
       }
       
