@@ -52,7 +52,7 @@
         $('#medias_contents_libraries').modal('toggle');
         
         // Begin medias action select image attachment
-        elemBody.find(".medias_attachment_content").on("click", function () {
+        elemBody.find(".medias_attachment_content").unbind('click').click(function () {
           var $elem = $(this);
           $elem.addClass('selected details').siblings().removeClass('selected details');
           // get image select
