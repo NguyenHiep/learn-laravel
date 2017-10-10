@@ -1,9 +1,9 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
-	<div class="page-footer-inner text-center"> 2017 &copy; Custom theme by NguyenHiep.</div>
-	<div class="scroll-to-top">
-		<i class="icon-arrow-up"></i>
-	</div>
+  <div class="page-footer-inner text-center"> 2017 &copy; Custom theme by NguyenHiep.</div>
+  <div class="scroll-to-top">
+    <i class="icon-arrow-up"></i>
+  </div>
 </div>
 <!-- END FOOTER -->
 @section('scripts')
@@ -12,7 +12,7 @@
 <script src="{{asset('/manages/assets/global/plugins/excanvas.min.js')}}"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<script src="{{asset('/manages/assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('/manages/assets/global/plugins/bootstrap/js/bootstrap.min.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('/manages/assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
@@ -25,7 +25,7 @@
         type="text/javascript"></script>
 <script src="{{asset('/manages/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"
         type="text/javascript"></script>
-<script src="{{asset('/manages/assets/global/plugins/bootstrap-toastr/toastr.min.js')}}" type="text/javascript"></script>
+
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="{{asset('/manages/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>

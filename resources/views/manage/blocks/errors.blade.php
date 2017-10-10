@@ -1,8 +1,25 @@
-@if (count($errors) > 0)
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">
-            <button class="close" data-close="alert"></button>
-            <span> {{ $error }} </span>
-        </div>
-    @endforeach
-@endif
+@php
+  $html = '';
+  if (count($errors) > 0):
+    $html .= "<ul class='list-unstyled'>";
+    foreach ($errors->all() as $error):
+      $html .= "<li>{$error}</li>";
+    endforeach;
+    $html .= "</ul>";
+
+    echo '
+      <script>
+          var errors = {
+            status: "errors",
+            message: "'.$html.'"
+      }
+      show_message(errors);
+      </script>
+      ';
+
+  endif;
+
+@endphp
+
+
+

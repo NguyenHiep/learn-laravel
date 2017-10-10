@@ -54,30 +54,33 @@
                 <div class="row">
                   <div class="col-md-6">
                     @php $key = 'company_name'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder')]) !!}
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder')]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'company_zip'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' =>  __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'company_address'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'company_tel'; @endphp
@@ -95,12 +98,13 @@
                       </div>
                     </div>
                     @php $key = 'company_copyright'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'subtitle'; @endphp
@@ -203,7 +207,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     @php $key = 'about_privacy'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-2">{{__('common.settings.settings.others.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
@@ -215,11 +219,12 @@
                             'rows' => 6,
                             'data-error-container' => '#editor2_error'
                         ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                         <div id="editor2_error"></div>
                       </div>
                     </div>
                     @php $key = 'about_terms'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-2">{{__('common.settings.settings.others.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
@@ -230,6 +235,7 @@
                             'rows' => 6,
                             'data-error-container' => '#editor2_error'
                         ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                         <div id="editor2_error"></div>
                       </div>
                     </div>
