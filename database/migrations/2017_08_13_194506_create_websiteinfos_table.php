@@ -30,7 +30,7 @@ class CreateWebsiteinfosTable extends Migration
             $table->text('about_privacy')->comment('Thông tin cá nhân - Thông tin cá nhân và Điều khoản sử dụng');
             $table->text('about_terms')->comment('Thông tin cá nhân - Điều khoản Dịch vụ - Điều khoản và Điều kiện');
             $table->string('mail_smtp_host', 255)->nullable()->comment('Email người gửi - Host SMTP');
-            $table->smallInteger('mail_smtp_port')->nullable()->comment('Email người gửi - Port SMTP');
+            $table->string('mail_smtp_port', 3)->nullable()->comment('Email người gửi - Port SMTP');
             $table->string('mail_smtp_user', 255)->nullable()->comment('Email người gửi - User SMTP');
             $table->string('mail_smtp_pass', 255)->nullable()->comment('Email người gửi - PassWord SMTP');
             $table->timestamps();

@@ -50,12 +50,6 @@ class AdminsController extends Controller
                 'password' => 'required',
                 'level'    => 'required',
                 'status'   => 'required'
-            ],
-            [
-                'username.required' => 'Vui lòng nhập tên tài khoản',
-                'password.required' => 'Vui lòng nhập mật khẩu',
-                'level.required'    => 'Vui lòng chọn cấp độ',
-                'status.required'   => 'Vui lòng chọn trạng thái'
             ]
         );
         // Begin upload avatar image
@@ -117,11 +111,6 @@ class AdminsController extends Controller
                 'username' => 'required',
                 'level'    => 'required',
                 'status'   => 'required'
-            ],
-            [
-                'username.required' => 'Vui lòng nhập tên tài khoản',
-                'level.required'    => 'Vui lòng chọn cấp độ',
-                'status.required'   => 'Vui lòng chọn trạng thái'
             ]
         );
 
