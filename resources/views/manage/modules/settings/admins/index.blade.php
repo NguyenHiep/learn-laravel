@@ -37,11 +37,6 @@
               </div>
             </div>
             <div class="portlet-body">
-              @if($flash = session('message'))
-                <div class="alert alert-success display-hide" style="display: block;">
-                  <button class="close" data-close="alert"></button> {{$flash}}
-                </div>
-              @endif
               <div class="table-scrollable">
                 <table class="table table-hover js-action-list-rowlink">
                   <thead>

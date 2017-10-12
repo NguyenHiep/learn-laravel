@@ -55,9 +55,7 @@
     <link href="{{asset('/manages/assets/layouts/layout/css/themes/darkblue.min.css')}}" rel="stylesheet"
           type="text/css" id="style_color"/>
     <link href="{{asset('/manages/assets/layouts/layout/css/custom.min.css')}}" rel="stylesheet" type="text/css"/>
-    <script src="{{asset('/manages/assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('/manages/assets/global/plugins/bootstrap-toastr/toastr.min.js')}}"
-            type="text/javascript"></script>
+
     <!-- END THEME LAYOUT STYLES -->
   @show
 
@@ -73,39 +71,6 @@
   echo '</script>';
 
   @endphp
-
-  <script type="text/javascript">
-    // Config notifation
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "positionClass": "toast-top-right",
-      "showDuration": "1000",
-      "hideDuration": "5000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    }
-
-    function show_message(data) {console.log(data.status);
-      if(data.status == 'success')
-      {
-        toastr["success"](data.message, "Thông báo")
-      }
-      else if( data.status == 'warning' )
-      {
-        toastr["warning"](data.message, "Thông báo")
-      }
-      else
-      {
-        toastr["error"](data.message, "Thông báo")
-      }
-
-    }
-  </script>
 </head>
 <!-- END HEAD -->
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">

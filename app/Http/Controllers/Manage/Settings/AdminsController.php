@@ -45,7 +45,7 @@ class AdminsController extends Controller
         // Begin validate
         $this->validate(request(),
             [
-                'avatar'   => 'mimes:jpeg,jpg,png | max:1000',
+                'avatar'   => 'required|mimes:jpeg,jpg,png|max:1000',
                 'username' => 'required',
                 'password' => 'required',
                 'level'    => 'required',

@@ -36,85 +36,75 @@
               </div>
               <div class="actions">
                 <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
-                <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
+                <button type="submit" name="submit" class="btn green"
+                        id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
             </div>
 
             <div class="portlet-body">
-
               <div class="form-body">
-                @if($flash = session('message'))
-                  <div class="alert alert-success display-hide" style="display: block;">
-                    <button class="close" data-close="alert"></button> {{$flash}}
-                  </div>
-                @endif
-                @include('manage.blocks.errors')
                 <div class="row">
                   <div class="col-md-8">
                     @php $key = 'avatar'; @endphp
-                    <div class="form-group last">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif last">
                       <label class="control-label col-md-3">Ảnh đại diện
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                            <?php
-                              if(!empty($user->{$key})){
-                            ?>
-                              <img src="{{Storage::url(UPLOAD_USER_ADMIN.$user->{$key})}}" alt="{{$user->{$key} }}"/>
-                            <?php
-                              }else{
-                                echo '<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />';
-                              }
-                            ?>
-                            </div>
-                          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            @php
+                              $img_url =  (!empty($user->{$key})) ? Storage::url(UPLOAD_USER_ADMIN.$user->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
+                              echo '<img src="'.$img_url.'" alt="avatar user" />';
+                            @endphp
+                          </div>
+                          <div class="fileinput-preview fileinput-exists thumbnail"
+                               style="max-width: 200px; max-height: 150px;"></div>
                           <div>
                             <span class="btn default btn-file">
-                             <?php
-                                if(!empty($user->{$key})){
-                                    echo '<span class="fileinput-new"> Thay đổi ảnh </span>';
-                                }else{
-                                    echo '<span class="fileinput-new"> Chọn hình ảnh </span>';
-                                }
-                              ?>
-                                <span class="fileinput-exists"> Ảnh khác </span>
-                                <input type="file" name="avatar"> </span>
+                             @php
+                               echo (!empty($user->{$key})) ? '<span class="fileinput-new"> Thay đổi ảnh </span>' : '<span class="fileinput-new"> Chọn hình ảnh </span>';
+                             @endphp
+                              <span class="fileinput-exists"> Ảnh khác </span>
+                              {{ Form::file($key) }} </span>
                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
                           </div>
                         </div>
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'username'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         {!! Form::text($key, old($key,$user->{$key}), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'password'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         {!! Form::password($key, ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'level'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         {!! Form::select($key, __('selector.levels'), old($key, $user->{$key}),['class' => 'form-control select2me']) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'status'; @endphp
-                    <div class="form-group">
+                    <div class="form-group  @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
@@ -127,8 +117,8 @@
                               <label> {!! Form::radio($key, $k) !!}  {{ $val }} </label>
                             @endif
                           @endforeach
-
                         </div>
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                   </div>
@@ -160,7 +150,8 @@
         type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
         type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}"
+        rel="stylesheet" type="text/css"/>
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')

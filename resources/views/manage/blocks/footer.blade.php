@@ -1,6 +1,7 @@
+
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
-  <div class="page-footer-inner text-center"> 2017 &copy; Custom theme by NguyenHiep.</div>
+  <div class="page-footer-inner text-center display-block"> 2017 &copy; CMS NguyenHiep - Framework Laravel.</div>
   <div class="scroll-to-top">
     <i class="icon-arrow-up"></i>
   </div>
@@ -12,7 +13,9 @@
 <script src="{{asset('/manages/assets/global/plugins/excanvas.min.js')}}"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
-
+<script src="{{asset('/manages/assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/manages/assets/global/plugins/bootstrap-toastr/toastr.min.js')}}"
+        type="text/javascript"></script>
 <script src="{{asset('/manages/assets/global/plugins/bootstrap/js/bootstrap.min.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('/manages/assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
@@ -41,7 +44,51 @@
 <script src="{{asset('/manages/assets/js/layouts.js')}}" type="text/javascript"></script>
 <script src="{{asset('/manages/assets/js/action.js')}}" type="text/javascript"></script>
 <!-- END ACTION  SCRIPTS -->
+<script type="text/javascript">
+  // Config notifation
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "positionClass": "toast-top-right",
+    "showDuration": "1000",
+    "hideDuration": "5000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
+  function show_message(data) {console.log(data.status);
+    if(data.status == 'success')
+    {
+      toastr["success"](data.message, "Thông báo")
+    }
+    else if( data.status == 'warning' )
+    {
+      toastr["warning"](data.message, "Thông báo")
+    }
+    else
+    {
+      toastr["error"](data.message, "Thông báo")
+    }
+
+  }
+</script>
 @show
+
+@if($flash = session('message'))
+  @php echo '<script>
+              var messages = {
+                status: "success",
+                message: "'.$flash.'"
+                }
+              show_message(messages);
+            </script>';
+  @endphp
+@endif
+@include('manage.blocks.errors')
 </body>
 
 </html>

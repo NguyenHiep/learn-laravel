@@ -40,18 +40,11 @@
             </div>
 
             <div class="portlet-body">
-
               <div class="form-body">
-                @if($flash = session('message'))
-                  <div class="alert alert-success display-hide" style="display: block;">
-                    <button class="close" data-close="alert"></button> {{$flash}}
-                  </div>
-                @endif
-                @include('manage.blocks.errors')
                 <div class="row">
                   <div class="col-md-8">
-
-                    <div class="form-group last">
+                    @php $key = 'avatar'; @endphp
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif  last">
                       <label class="control-label col-md-3">Ảnh đại diện
                         <span class="required"> * </span>
                       </label>
@@ -62,35 +55,39 @@
                           <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
                           <div>
                             <span class="btn default btn-file">
-                                <span class="fileinput-new"> Chọn hình ảnh </span>
-                                <span class="fileinput-exists"> Ảnh khác </span>
-                                <input type="file" name="avatar"> </span>
+                              <span class="fileinput-new"> Chọn hình ảnh </span>
+                              <span class="fileinput-exists"> Ảnh khác </span>
+                              {{ Form::file($key) }}</span>
+
                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
                           </div>
                         </div>
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
 
                     @php $key = 'username'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         {!! Form::text($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'password'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
                         {!! Form::password($key, ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'level'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
@@ -98,10 +95,11 @@
                         @if(!empty(__('selector.levels')))
                           {!! Form::select($key, __('selector.levels'), old($key),['class' => 'form-control select2me']) !!}
                         @endif
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'status'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
@@ -112,6 +110,7 @@
                               <label> {!! Form::radio($key, $k, true) !!}  {{ $val }} </label>
                             @endforeach
                            @endif
+                          @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                         </div>
                       </div>
                     </div>
