@@ -40,12 +40,6 @@
             </div>
             <div class="portlet-body form">
               <div class="form-body">
-                @if($flash = session('message'))
-                  <div class="alert alert-success display-hide" style="display: block;">
-                    <button class="close" data-close="alert"></button> {{$flash}}
-                  </div>
-                @endif
-                @include('manage.blocks.errors')
                 @php $key = 'name'; @endphp
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.tags.'.$key.'')}}

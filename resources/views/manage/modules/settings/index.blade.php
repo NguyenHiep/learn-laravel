@@ -42,15 +42,7 @@
             <div class="portlet-body">
 
               <div class="form-body">
-                @if($flash = session('message'))
-                  <div class="alert alert-success display-hide" style="display: block;">
-                    <button class="close" data-close="alert"></button> {{$flash}}
-                  </div>
-                @endif
                 <h3 class="block-title margin-bottom-15">{{__('static.manage.settings.settings.title_general')}}</h3>
-
-                @include('manage.blocks.errors')
-
                 <div class="row">
                   <div class="col-md-6">
                     @php $key = 'company_name'; @endphp
