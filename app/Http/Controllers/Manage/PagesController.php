@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\Model\Medias;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,6 +20,8 @@ class PagesController extends Controller
     public function index()
     {
         //
+        $records = [];
+        return view('manage.modules.pages.index', compact('records'));
     }
 
     /**
@@ -29,6 +32,8 @@ class PagesController extends Controller
     public function create()
     {
         //
+        $medias         = Medias::all();
+        return view('manage.modules.pages.create', compact('medias'));
     }
 
     /**
