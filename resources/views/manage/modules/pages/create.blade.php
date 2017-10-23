@@ -146,48 +146,6 @@
           </div>
           <div class="portlet light bordered">
             <div class="portlet-title">
-              <div class="caption">Chuyên mục</div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-              </div>
-            </div>
-            <div class="portlet-body" style="display: block;">
-              <div class="form-group">
-                <div class="checkbox-list">
-                  @php
-                    $key = 'post_category.';
-                    $html = '<label><input type="checkbox" name="'.convert_input_name($key).'" value="0" id="id-category-0">Không xác định</label>'; $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
-                    if(!empty($list_cate_all)){
-                      foreach($list_cate_all as $parent){
-                        if($parent->parent_id == 0){
-                          $html .= '<label><input type="checkbox" name="'.convert_input_name($key).'" value="'.$parent->id.'" id="id-category-'.$parent->id.'">'.$parent->name.'</label>';
-                          //unset($data[$key]);
-                          foreach ($list_cate_all as $child){
-
-                            if($child->parent_id == $parent->id){
-                              $html .= '<label>'.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child->id.'" id="id-category-'.$child->id.'">'.$child->name.'</label>';
-                              foreach ($list_cate_all as $child2){
-                                if($child2->parent_id == $child->id){
-                                     $html .= '<label>'.$text.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child2->id.'" id="id-category-'.$child2->id.'">'.$child2->name.'</label>';
-                                }
-                              } // End loop level 3
-
-                            }
-                          } // End loop level 2
-
-                        }
-
-                      } // End loop level 1
-                    }
-                    echo $html;
-                  @endphp
-
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="portlet light bordered">
-            <div class="portlet-title">
               <div class="caption">Ảnh tiêu biểu</div>
               <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
@@ -203,25 +161,7 @@
                 <input type="hidden" name="{{$key}}" value="" id="{{$key}}"/>
             </div>
           </div>
-          <div class="portlet light bordered">
-            <div class="portlet-title">
-              <div class="caption">Thẻ</div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-              </div>
-            </div>
-            <div class="portlet-body" style="display: block;">
-              @php $key = 'posts_tags'; @endphp
-              <div class="input-group display-block clearfix">
-                <input type="text"  name="{{$key}}" data-role="tagsinput" class="form-control">
-                <button id="add_tags" class="btn btn-success" type="button">Thêm</button>
-              </div>
-              <p class="margin-top-15">Phân cách các thẻ bằng dấu phẩy (,).</p>
-              <p class="margin-top-15">
-                <a href="#">Chọn từ những thẻ được dùng nhiều nhất</a>
-              </p>
-            </div>
-          </div>
+
         </div> <!-- End .col-md-3 -->
         {!! Form::close() !!}
       </div>

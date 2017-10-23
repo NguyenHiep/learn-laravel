@@ -149,63 +149,6 @@
           </div>
           <div class="portlet light bordered">
             <div class="portlet-title">
-              <div class="caption">Chuyên mục</div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-              </div>
-            </div>
-            <div class="portlet-body" style="display: block;">
-              <div class="form-group">
-                <div class="checkbox-list">
-                  @php
-                    $key = 'post_category.';
-                    $html = '<label><input type="checkbox" name="'.convert_input_name($key).'" value="0" id="id-category-0">Không xác định</label>'; $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
-                    if(!empty($list_cate_all)){
-                      foreach($list_cate_all as $parent){
-                        if($parent->parent_id == 0){
-                          // Active menu post level 1
-                          if(in_array($parent->id, $record->cats, true)){
-                            $html .= '<label><input type="checkbox" name="'.convert_input_name($key).'" value="'.$parent->id.'" id="id-category-'.$parent->id.'" checked />'.$parent->name.'</label>';
-                          }else{
-                            $html .= '<label><input type="checkbox" name="'.convert_input_name($key).'" value="'.$parent->id.'" id="id-category-'.$parent->id.'">'.$parent->name.'</label>';
-                          }
-                          //unset($data[$key]);
-                          foreach ($list_cate_all as $child){
-                            if($child->parent_id == $parent->id){
-                              // Active menu post level 2
-                              if(in_array($child->id, $record->cats, true)){
-                                $html .= '<label>'.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child->id.'" id="id-category-'.$child->id.'" checked />'.$child->name.'</label>';
-                              }else{
-                                $html .= '<label>'.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child->id.'" id="id-category-'.$child->id.'">'.$child->name.'</label>';
-                              }
-
-                              foreach ($list_cate_all as $child2){
-                                if($child2->parent_id == $child->id){
-                                  // Active menu post level 2
-                                  if(in_array($child2->id, $record->cats, true)){
-                                  $html .= '<label>'.$text.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child2->id.'" id="id-category-'.$child2->id.'" checked />'.$child2->name.'</label>';
-                                  }else{
-                                  $html .= '<label>'.$text.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child2->id.'" id="id-category-'.$child2->id.'">'.$child2->name.'</label>';
-                                  }
-                                }
-                              } // End loop level 3
-
-                            }
-                          } // End loop level 2
-
-                        }
-
-                      } // End loop level 1
-                    }
-                    echo $html;
-                  @endphp
-
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="portlet light bordered">
-            <div class="portlet-title">
               <div class="caption">Ảnh tiêu biểu</div>
               <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
@@ -221,25 +164,6 @@
                 @endif
               </div>
               <input type="hidden" name="{{$key}}" value="{{ $record->{$key} }}" id="{{ $key }}"/>
-            </div>
-          </div>
-          <div class="portlet light bordered">
-            <div class="portlet-title">
-              <div class="caption">Thẻ</div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-              </div>
-            </div>
-            <div class="portlet-body" style="display: block;">
-              @php $key = 'posts_tags'; @endphp
-              <div class="input-group clearfix">
-                <input type="text"  value="{{$record->tags}}" name="{{$key}}" data-role="tagsinput">
-                <button id="add_tags" class="btn btn-success" type="button">Thêm</button>
-              </div>
-              <p class="margin-top-15">Phân cách các thẻ bằng dấu phẩy (,).</p>
-              <p class="margin-top-15">
-                <a href="#">Chọn từ những thẻ được dùng nhiều nhất</a>
-              </p>
             </div>
           </div>
         </div> <!-- End .col-md-3 -->

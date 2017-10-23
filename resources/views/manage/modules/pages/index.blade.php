@@ -37,8 +37,6 @@
                     <th><i class="icon-picture"></i></th>
                     <th>Tiêu đề</th>
                     <th>Tác giả</th>
-                    <th>Chuyên mục</th>
-                    <th>Thẻ</th>
                     <th>Ngày</th>
                     <th>Views</th>
                     <th>Post Style</th>
@@ -60,8 +58,6 @@
                           </td>
                           <td> {{$record->post_title}} </td>
                           <td>{!! $record->username !!}</td>
-                          <td>{!! $record->categories !!}</td>
-                          <td>{!! $record->tags !!}</td>
                           <td>{!! date('d/m/Y', strtotime($record->created_at)) !!}</td>
                           <td>{!! $record->visit !!}</td>
                           <td>{!! __('selector.format.'.$record->post_format) !!}</td>
