@@ -8,15 +8,15 @@ return [
                 'settings' => 'Cài đặt thông tin website',
                 'admins'   => 'Quản trị tài khoản',
             ),
-            'products' => array(
-                'title'   => 'Sản phẩm',
+            'products'  => array(
+                'title'  => 'Sản phẩm',
                 'create' => 'Thêm sản phẩm',
                 'list'   => 'Danh sách sản phẩm',
             ),
-            'orders' => array(
-                'title'   => 'Đơn hàng',
+            'orders'    => array(
+                'title'  => 'Đơn hàng',
                 'create' => 'Tạo mới đơn hàng',
-                'list'    => 'Danh sách đơn hàng',
+                'list'   => 'Danh sách đơn hàng',
             ),
             'posts'     => array(
                 'title'    => 'Bài viết',
@@ -33,7 +33,7 @@ return [
             'pages'     => array(
                 'title'  => 'Trang',
                 'pages'  => 'Tất cả trang',
-                'create' => 'Thêm mới trang'
+                'creates' => 'Thêm mới trang'
             ),
             'comments'  => 'Bình luận',
             'customers' => array(
@@ -48,7 +48,7 @@ return [
             )
         )
     ),
-    'manage' => array(
+    'manage'   => array(
         'settings' => array(
             'settings' => array(
                 'page_title'     => 'Cài đặt thông tin website',
@@ -58,24 +58,22 @@ return [
                 'title_host'     => 'Cấu hình host gửi mail SMTP',
                 'title_personal' => 'Thông tin cá nhân và Điều khoản sử dụng',
             ),
-            'admins' => array(
-
-            )
+            'admins'   => array()
         ),
-        'posts' => array(
-            'posts' => array(
+        'posts'    => array(
+            'posts'    => array(
                 'page_title' => 'Quản lý bài viết',
                 'created'    => 'Thêm mới bài viết',
                 'edit'       => 'Cập nhật bài viết'
             ),
             'category' => array(
-                'page_title'     => 'Chuyên mục',
+                'page_title' => 'Chuyên mục',
             ),
-            'tags' => array(
-                'page_title'     => 'Thẻ',
+            'tags'     => array(
+                'page_title' => 'Thẻ',
             ),
         ),
-        'medias' => array(
+        'medias'   => array(
             'edit' => 'Cập nhật hình ảnh'
         )
     )

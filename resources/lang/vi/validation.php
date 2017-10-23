@@ -139,7 +139,6 @@ return [
         'status'            => ' Trạng thái'
 
 
-
     ],
 
 ];

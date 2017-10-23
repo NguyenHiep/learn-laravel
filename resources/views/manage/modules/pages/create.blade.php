@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', __('static.sidebars.manage.posts.creates'))
+@section('title', __('static.sidebars.manage.pages.creates'))
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -10,70 +10,73 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('posts.index')}}">{{__('static.sidebars.manage.posts.title')}}</a>
+            <a href="{{route('pages.index')}}">{{__('static.sidebars.manage.pages.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('static.manage.posts.posts.created')}}</span>
+            <span>{{__('static.sidebars.manage.pages.creates')}}</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> {{__('static.manage.posts.posts.created')}}  </h3>
+      <h3 class="page-title"> {{__('static.sidebars.manage.pages.creates')}}  </h3>
       <!-- END PAGE TITLE-->
       <div class="row">
-        {!! Form::open(['route' => 'posts.store', 'files' => true]) !!}
+        {!! Form::open(['route' => 'pages.store', 'files' => true]) !!}
         <div class="col-md-9">
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">{{__('static.manage.posts.posts.created')}}</span>
+                <span class="caption-subject bold uppercase">{{__('static.sidebars.manage.pages.creates')}}</span>
               </div>
             </div>
             <div class="portlet-body form">
               <div class="form-body">
-                @php $key = 'post_title'; @endphp
-                <div class="form-group">
-                  <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
+                @php $key = 'page_title'; @endphp
+                <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                  <label class="control-label">{{__('common.pages.'.$key.'')}}
                     <span class="required"> * </span>
                   </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.posts.posts.'.$key.'_placeholder'), 'id' => 'title' ]) !!}
+                  {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.pages.'.$key.'_placeholder'), 'id' => 'title' ]) !!}
+                  @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                 </div>
 
-                @php $key = 'slug'; @endphp
+                @php $key = 'page_slug'; @endphp
                 <div class="form-group">
-                  {!! Form::hidden($key, old($key), ['class' => 'form-control', 'readonly' => 'readonly', 'placeholder' => __('common.posts.posts.'.$key.'_placeholder'), 'id' => 'slug']) !!}
+                  {!! Form::hidden($key, old($key), ['class' => 'form-control', 'readonly' => 'readonly', 'placeholder' => __('common.pages.'.$key.'_placeholder'), 'id' => 'slug']) !!}
                 </div>
 
-                @php $key = 'post_full'; @endphp
-                <div class="form-group">
-                  <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
+                @php $key = 'page_full'; @endphp
+                <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                  <label class="control-label">{{__('common.pages.'.$key.'')}}
+                    <span class="required"> * </span>
                   </label>
                   {!! Form::textarea($key, old($key) ,
                   [
                   'class' => 'summernote_editor form-control',
                   'rows' => 9
                   ]) !!}
+                  @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                 </div>
 
-                @php $key = 'post_keyword'; @endphp
+                @php $key = 'page_keyword'; @endphp
                 <div class="form-group">
-                  <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
+                  <label class="control-label">{{__('common.pages.'.$key.'')}}
                   </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control','placeholder' => __('common.posts.posts.'.$key.'_placeholder')]) !!}
+                  {!! Form::text($key, old($key), ['class' => 'form-control','placeholder' => __('common.pages.'.$key.'_placeholder')]) !!}
                 </div>
 
-                @php $key = 'post_intro'; @endphp
+                @php $key = 'page_intro'; @endphp
                 <div class="form-group">
-                  <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
+                  <label class="control-label">{{__('common.pages.'.$key.'')}}
                   </label>
                   {!! Form::textarea($key, old($key) ,
                   [
                   'class' => 'form-control',
                   'rows' => 3,
-                  'placeholder' => __('common.posts.posts.'.$key.'_placeholder')
+                  'placeholder' => __('common.pages.'.$key.'_placeholder')
                   ]) !!}
                 </div>
 
@@ -96,12 +99,12 @@
                 <label>Ngày đăng: <strong>29/09/2017@11:58</strong> </label>
               </div>
               -->
-                @php $key='post_status'; @endphp
+                @php $key='page_status'; @endphp
                 <div class="form-group clearfix">
                   <label class="control-label">Trạng thái:</label>
-                  @if(!empty(__('selector.post_status')))
+                  @if(!empty(__('selector.page_status')))
                     <div class="radio-list">
-                      @foreach(__('selector.post_status') as $k =>$val)
+                      @foreach(__('selector.page_status') as $k =>$val)
                         @if($k === 2)
                           <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
                         @else
@@ -117,7 +120,7 @@
               </div>
               -->
               <div class="form-group clearfix">
-                <a href="{{ route('posts.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('pages.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" class="btn green pull-right">Đăng bài viết</button>
               </div>
             </div>
@@ -130,7 +133,7 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-              @php $key='post_format'; @endphp
+              @php $key='page_attribute'; @endphp
               @if(!empty(__('selector.format')))
                 <div class="radio-list">
                   @foreach(__('selector.format') as $k =>$val)
@@ -152,7 +155,7 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-              @php $key = 'posts_medias_id'; @endphp
+              @php $key = 'page_medias_id'; @endphp
               <!--<a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>-->
               <a class="btn btn-outline btn-block dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
                 <div class="clearfix margin-top-15" id="img_featured">

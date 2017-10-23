@@ -91,10 +91,10 @@ class PostsController extends Controller
             if (isset(request()->post_title)) {
                 $data->post_title = request()->post_title;
             }
-            if (!empty(request()->slug)) {
-                $data->slug = unicode_str_filter(request()->slug);
+            if (!empty(request()->post_slug)) {
+                $data->post_slug = unicode_str_filter(request()->post_slug);
             } else {
-                $data->slug = unicode_str_filter($data->post_title);
+                $data->post_slug = unicode_str_filter(request()->post_title);
             }
             if (isset(request()->post_intro)) {
                 $data->post_intro = request()->post_intro;
@@ -245,10 +245,10 @@ class PostsController extends Controller
             if (isset(request()->post_intro)) {
                 $data->post_intro = request()->post_intro;
             }
-            if (!empty(request()->slug)) {
-                $data->slug = unicode_str_filter(request()->slug);
+            if (!empty(request()->post_slug)) {
+                $data->post_slug = unicode_str_filter(request()->post_slug);
             } else {
-                $data->slug = unicode_str_filter($data->post_title);
+                $data->post_slug = unicode_str_filter(request()->post_title);
             }
             if (isset(request()->post_full)) {
                 $data->post_full = request()->post_full;

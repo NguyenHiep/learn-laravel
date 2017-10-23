@@ -47,26 +47,26 @@ return [
                 'mail_smtp_pass_placeholder' => 'VD: nguyenhiep',
             )
         ),
-        'admins' => array(
-            'username' => 'Tên tài khoản',
+        'admins'   => array(
+            'username'             => 'Tên tài khoản',
             'username_placeholder' => 'Vui lòng nhập tên tài khoản',
-            'password' => 'Mật khẩu',
+            'password'             => 'Mật khẩu',
             'password_placeholder' => 'Vui lòng nhập mật khẩu',
-            'level' => 'Cấp độ',
-            'status' => 'Trạng thái'
+            'level'                => 'Cấp độ',
+            'status'               => 'Trạng thái'
         )
     ),
-    'posts' => array(
-        'posts' => array(
-            'post_title' => 'Tiêu đề bài viết',
-            'post_title_placeholder' => 'Nhập tiêu đề tại đây',
-            'slug' => 'Đường dẫn tĩnh',
-            'slug_placeholder' => '',
-            'post_full' => 'Nội dung bài viết',
-            'post_keyword' => 'Từ khóa bài viết',
+    'posts'    => array(
+        'posts'    => array(
+            'post_title'               => 'Tiêu đề bài viết',
+            'post_title_placeholder'   => 'Nhập tiêu đề tại đây',
+            'slug'                     => 'Đường dẫn tĩnh',
+            'slug_placeholder'         => '',
+            'post_full'                => 'Nội dung bài viết',
+            'post_keyword'             => 'Từ khóa bài viết',
             'post_keyword_placeholder' => 'Có dấu và cách nhau bằng dấu phẩy (,)',
-            'post_intro' => 'Mô tả ngắn bài viết',
-            'post_intro_placeholder' => 'Là đoạn mô tả ngắn khoảng 128 từ',
+            'post_intro'               => 'Mô tả ngắn bài viết',
+            'post_intro_placeholder'   => 'Là đoạn mô tả ngắn khoảng 128 từ',
         ),
         'category' => array(
             'name'                    => 'Tên danh mục',
@@ -85,16 +85,27 @@ return [
             'description'             => 'Mô tả thẻ',
             'description_placeholder' => 'Mô tả thẻ cho SEO',
         ),
-        'medias' => array(
+        'medias'   => array(
             'mediasinfo' => array(
-                'caption' => 'Chú thích',
-                'caption_placeholder' => 'VD: Tệp tin đính kèm',
-                'alt' => 'Văn bản thay thế',
-                'alt_placeholder' => 'VD: Ảnh đẹp nè',
-                'description' => 'Mô tả tệp tin',
+                'caption'                 => 'Chú thích',
+                'caption_placeholder'     => 'VD: Tệp tin đính kèm',
+                'alt'                     => 'Văn bản thay thế',
+                'alt_placeholder'         => 'VD: Ảnh đẹp nè',
+                'description'             => 'Mô tả tệp tin',
                 'description_placeholder' => 'Mô tả về tệp tin',
-                'lightbox' => 'Sử dụng lightbox cho hình ảnh'
+                'lightbox'                => 'Sử dụng lightbox cho hình ảnh'
             )
         )
+    ),
+    'pages'    => array(
+        'page_title'               => 'Tiêu đề trang',
+        'page_title_placeholder'   => 'Nhập tiêu đề trang tại đây',
+        'page_slug'                => 'Đường dẫn tĩnh',
+        'page_slug_placeholder'    => '',
+        'page_full'                => 'Nội dung trang',
+        'page_keyword'             => 'Từ khóa trang',
+        'page_keyword_placeholder' => 'Có dấu và cách nhau bằng dấu phẩy (,)',
+        'page_intro'               => 'Mô tả ngắn trang',
+        'page_intro_placeholder'   => 'Là đoạn mô tả ngắn khoảng 128 từ',
     ),
 ];

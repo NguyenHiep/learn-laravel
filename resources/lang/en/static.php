@@ -33,7 +33,7 @@ return [
             'pages'     => array(
                 'title'  => 'Pages',
                 'pages'  => 'All pages',
-                'create' => 'Add new pages'
+                'creates' => 'Add new pages'
             ),
             'comments'  => 'Comments',
             'customers' => array(

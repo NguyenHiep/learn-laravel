@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('post_title')->comment('Tiêu đề bài viết');
-            $table->string('slug')->comment('Tiêu đề bài viết không dấu');
+            $table->string('post_slug')->comment('Tiêu đề bài viết không dấu');
             $table->text('post_intro')->nullable()->comment('Mô tả ngắn bài viết');
             $table->longText('post_full')->comment('Nội dung bài viết');
             $table->unsignedInteger('posts_medias_id')->nullable()->comment('Ảnh bài viêt');

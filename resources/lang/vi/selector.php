@@ -26,6 +26,10 @@ return [
         1 => 'Đã Đăng',
         2 => 'Xét duyệt',
     ),
+    'page_status' => array(
+        1 => 'Đã Đăng',
+        2 => 'Xét duyệt',
+    ),
 
 
 ];

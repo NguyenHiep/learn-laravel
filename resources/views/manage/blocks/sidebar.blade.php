@@ -139,7 +139,7 @@
           </li>
           <li class="nav-item  ">
             <a href="{{ route('pages.create') }}" class="nav-link ">
-              <span class="title">{{__('static.sidebars.manage.pages.create')}}</span>
+              <span class="title">{{__('static.sidebars.manage.pages.creates')}}</span>
             </a>
           </li>
         </ul>
