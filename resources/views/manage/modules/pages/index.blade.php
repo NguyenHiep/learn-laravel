@@ -38,8 +38,7 @@
                     <th>Tiêu đề</th>
                     <th>Tác giả</th>
                     <th>Ngày</th>
-                    <th>Views</th>
-                    <th>Post Style</th>
+                    <th>Lượt xem</th>
                     <th class="text-center width-110"> Hành động</th>
                   </tr>
                   </thead>
@@ -53,21 +52,20 @@
                           </td>
                           <td>
                             @if(!empty($record->posts_medias_id))
-                              <img src="{{Storage::url(UPLOAD_MEDIAS.$record->post_featured)}}" draggable="false" alt="" class="img-thumbnail" width="80" height="40">
+                              <img src="{{Storage::url(UPLOAD_MEDIAS.$record->page_featured)}}" draggable="false" alt="" class="img-thumbnail" width="80" height="40">
                             @endif
                           </td>
-                          <td> {{$record->post_title}} </td>
+                          <td> {{$record->page_title}} </td>
                           <td>{!! $record->username !!}</td>
-                          <td>{!! date('d/m/Y', strtotime($record->created_at)) !!}</td>
+                          <td>{!! date('d/m/Y H:m', strtotime($record->created_at)) !!}</td>
                           <td>{!! $record->visit !!}</td>
-                          <td>{!! __('selector.format.'.$record->post_format) !!}</td>
 
                           <td class="text-right ">
                             <div class="btn-group btn-group-solid">
-                              <a href="{{ route('posts.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                              <a href="{{ route('pages.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                                 <i class="fa fa-edit"></i>
                               </a>
-                              <form action="{{ route('posts.destroy',$record->id) }}" method="POST" style="display: inline-block">
+                              <form action="{{ route('pages.destroy',$record->id) }}" method="POST" style="display: inline-block">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 <button class="btn btn-delete js-action-delete" type="submit">

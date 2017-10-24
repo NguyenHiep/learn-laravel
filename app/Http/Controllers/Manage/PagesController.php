@@ -23,7 +23,11 @@ class PagesController extends Controller
     public function index()
     {
         //
-        $records = [];
+        $records = \DB::table('pages')
+            ->join('users', 'pages.user_id', '=', 'users.id')
+            //->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
+            ->select('pages.*', 'users.username')
+            ->get();
         return view('manage.modules.pages.index', compact('records'));
     }
 
@@ -57,7 +61,7 @@ class PagesController extends Controller
                         'page_title'     => 'required|unique:pages|max:255',
                         'page_full'      => 'required',
                         'page_status'    => 'required',
-                        'page_attribute' => 'required',
+                        //'page_attribute' => 'required',
                     ]
                 );
 
