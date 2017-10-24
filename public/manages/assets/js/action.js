@@ -52,7 +52,13 @@
           src = elemBody.find("li.medias_attachment").filter(".selected").attr('data-src');
 
       if (!empty(id)) {
-        elemBody.find("#posts_medias_id").val(id);
+        if(elemBody.find("#posts_medias_id").length >0 ){
+          elemBody.find("#posts_medias_id").val(id);
+        }
+        
+        if(elemBody.find("#page_medias_id").length >0 ){
+          elemBody.find("#page_medias_id").val(id);
+        }
       }
 
       if (!empty(src)) {

@@ -125,7 +125,7 @@
               </div>
             </div>
           </div>
-          <div class="portlet light bordered">
+          {{--<div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Định dạng</div>
               <div class="tools">
@@ -146,7 +146,7 @@
                 </div>
               @endif
             </div>
-          </div>
+          </div>--}}
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Ảnh tiêu biểu</div>
