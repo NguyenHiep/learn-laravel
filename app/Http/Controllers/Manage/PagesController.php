@@ -27,6 +27,7 @@ class PagesController extends Controller
             ->join('users', 'pages.user_id', '=', 'users.id')
             //->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
             ->select('pages.*', 'users.username')
+            ->whereNull('pages.deleted_at')
             ->get();
         return view('manage.modules.pages.index', compact('records'));
     }
@@ -130,7 +131,8 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return view('manage.modules.pages.edit');
     }
 
     /**
@@ -153,6 +155,24 @@ class PagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!empty(Pages::find($id))) {
+            try {
+                \DB::beginTransaction();
+
+                Pages::where('id', $id)->forcedelete();
+
+                \DB::commit();
+                \Session::flash('message', __('system.message.delete'));
+            } catch (Exception $e) {
+                \DB::rollBack();
+                \Log::error($e->getMessage(), __METHOD__);
+                \Session::flash('message', __('system.message.errors', $e->getMessage()));
+            }
+
+        } else {
+            \Session::flash('message', __('system.message.errors'));
+        }
+
+        return redirect()->route('pages.index');
     }
 }

@@ -32,7 +32,8 @@
                   <thead>
                   <tr>
                     <th> <!-- <th class="checkbox-list">-->
-                      <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
+                      <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox"
+                             id="form_checkboxes">
                     </th>
                     <th><i class="icon-picture"></i></th>
                     <th>Tiêu đề</th>
@@ -46,37 +47,44 @@
 
                   @if (!empty($records))
                     @foreach ($records as $record)
-                        <tr>
-                          <td> <!--<td class="checkbox-list"> -->
-                            <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
-                          </td>
-                          <td>
-                            @if(!empty($record->posts_medias_id))
-                              <img src="{{Storage::url(UPLOAD_MEDIAS.$record->page_featured)}}" draggable="false" alt="" class="img-thumbnail" width="80" height="40">
-                            @endif
-                          </td>
-                          <td> {{$record->page_title}} </td>
-                          <td>{!! $record->username !!}</td>
-                          <td>{!! date('d/m/Y H:m', strtotime($record->created_at)) !!}</td>
-                          <td>{!! $record->visit !!}</td>
+                      <tr>
+                        <td> <!--<td class="checkbox-list"> -->
+                          <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}"
+                                 type="checkbox">
+                        </td>
+                        <td>
+                          @if(!empty($record->page_medias_id))
+                            <img src="{{Storage::url(UPLOAD_MEDIAS.$record->page_featured)}}" draggable="false" alt=""
+                                 class="img-thumbnail" width="80" height="40">
+                          @endif
+                        </td>
+                        <td> {{$record->page_title}} </td>
+                        <td>{!! $record->username !!}</td>
+                        <td>{!! date('d/m/Y H:m', strtotime($record->created_at)) !!}</td>
+                        <td>{!! $record->visit !!}</td>
 
-                          <td class="text-right ">
-                            <div class="btn-group btn-group-solid">
-                              <a href="{{ route('pages.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                                <i class="fa fa-edit"></i>
-                              </a>
-                              <form action="{{ route('pages.destroy',$record->id) }}" method="POST" style="display: inline-block">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i>
-                                </button>
-                              </form>
-                            </div>
-                        </tr>
+                        <td class="text-right ">
+                          <div class="btn-group btn-group-solid">
+                            <a href="{{ route('pages.edit',$record->id) }}"
+                               class="btn  btn-warning js-action-list-rowlink-val">
+                              <i class="fa fa-edit"></i>
+                            </a>
+                            <form action="{{ route('pages.destroy',$record->id) }}" method="POST"
+                                  style="display: inline-block">
+                              {{ method_field('DELETE') }}
+                              {{ csrf_field() }}
+                              <button class="btn btn-delete js-action-delete" type="submit">
+                                <i class="fa fa-trash-o"></i>
+                              </button>
+                            </form>
+                          </div>
+                      </tr>
                     @endforeach
+                  @else
+                    <tr>
+                      <td colspan="7"> Không có dữ liệu</td>
+                    </tr>
                   @endif
-
                   </tbody>
                   <tfoot>
                   @if (!empty($records))
@@ -101,13 +109,13 @@
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
         rel="stylesheet" type="text/css"/>
   <!-- END PAGE LEVEL PLUGINS -->
-  @stop
+@stop
 @section('scripts')
- @parent
- <!-- BEGIN PAGE LEVEL SCRIPTS -->
- <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-         type="text/javascript"></script>
- <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-         type="text/javascript"></script>
+  @parent
+  <!-- BEGIN PAGE LEVEL SCRIPTS -->
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
+          type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
+          type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop

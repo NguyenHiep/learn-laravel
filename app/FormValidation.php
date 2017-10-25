@@ -2,23 +2,11 @@
 
 namespace App;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
-class FormValidation extends FormRequest
+class FormValidation
 {
     const VALIDATION_TYPE_CREATE = 0;
-    const VALIDATION_TYPE_EDIT   = 1;
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-
+    const VALIDATION_TYPE_EDIT = 1;
 
 }
