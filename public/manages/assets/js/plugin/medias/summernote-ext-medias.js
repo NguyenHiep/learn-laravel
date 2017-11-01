@@ -1,3 +1,4 @@
+
 (function (factory) {
   /* global define */
   if (typeof define === 'function' && define.amd) {

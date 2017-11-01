@@ -75,6 +75,9 @@ return [
         ),
         'medias'   => array(
             'edit' => 'Cập nhật hình ảnh'
+        ),
+        'pages'   => array(
+            'edit' => 'Cập nhật trang'
         )
     )
 ];

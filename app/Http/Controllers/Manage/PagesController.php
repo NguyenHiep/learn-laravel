@@ -131,8 +131,12 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-
-        return view('manage.modules.pages.edit');
+        $record = Pages::find($id);
+        $medias = Medias::all();
+        if(empty($record)){
+            return view('errors.404');
+        }
+        return view('manage.modules.pages.edit', compact('record','medias'));
     }
 
     /**
