@@ -11,7 +11,7 @@
 */
 //Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'PagesController@index');
+Route::get('/', 'HomeController@index');
 Route::get('login', 'LoginController@getlogin')->name('getlogin');
 Route::post('login', ['as' => 'login', 'uses' => 'LoginController@postlogin']);
 Route::get('logout', 'LoginController@getlogout')->name('getlogout');

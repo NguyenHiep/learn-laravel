@@ -18,7 +18,13 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        //
+        // begin code
+        $records = \DB::table('comments')
+            ->join('posts', 'comments.posts_id', '=', 'posts.id')
+            //->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
+            //->select('posts.*', 'users.username', 'posts_medias.name as post_featured')
+            ->get();
+        return view('manage.modules.comments.index', compact('records'));
     }
 
     /**

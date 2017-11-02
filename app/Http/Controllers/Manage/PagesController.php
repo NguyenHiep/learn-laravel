@@ -148,7 +148,72 @@ class PagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Array data request
+        $inputs = $request->all();
+        if ($request->method() === 'PATCH') {
+
+            // Check CSRF
+            if (\Session::token() === array_get($inputs, '_token')) {
+
+                $this->validate($request,
+                    [
+                        'page_title'     => 'required|max:255|unique:pages,id,'.$id,
+                        'page_full'      => 'required',
+                        'page_status'    => 'required',
+                        //'page_attribute' => 'required',
+                    ]
+                );
+
+                // Begin
+                try {
+
+                    \DB::beginTransaction();
+
+                    // Get current user login
+                    $user_info = auth()->user();
+
+                    $pages = Pages::find($id);
+
+                    if(empty($pages)){
+                        \DB::rollBack();
+                        \Session::flash('message', __('system.message.errors'));
+                        return view('errors.404');
+                    }
+
+                    $pages->page_title      = array_get($inputs, 'page_title');
+                    if (!empty(array_get($inputs, 'page_slug'))) {
+                        $pages->page_slug   = unicode_str_filter(array_get($inputs, 'page_slug'));
+                    } else {
+                        $pages->page_slug   = unicode_str_filter(array_get($inputs, 'page_title'));
+                    }
+                    $pages->page_intro      = array_get($inputs, 'page_intro');
+                    $pages->page_full       = array_get($inputs, 'page_full');
+                    if(!empty(array_get($inputs, 'page_medias_id'))){
+                        $pages->page_medias_id  = array_get($inputs, 'page_medias_id');
+                    }
+                    $pages->page_status     = array_get($inputs, 'page_status');
+                    $pages->page_attribute  = array_get($inputs, 'page_attribute', '');
+                    $pages->page_keyword    = array_get($inputs, 'page_keyword');
+                    if (!empty($user_info)) {
+                        $pages->user_id     = $user_info->id;
+                    }
+
+                    $pages->save();
+
+                    \DB::commit();
+                    \Session::flash('message', __('system.message.update'));
+
+                } catch (Exception $e) {
+                    \DB::rollBack();
+                    \Log::error($e->getMessage(), __METHOD__);
+                    \Session::flash('message', __('system.message.errors', $e->getMessage()));
+                }
+
+                return redirect()->route('pages.index');
+
+            }
+
+        }
     }
 
     /**

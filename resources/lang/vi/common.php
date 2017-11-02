@@ -60,7 +60,7 @@ return [
         'posts'    => array(
             'post_title'               => 'Tiêu đề bài viết',
             'post_title_placeholder'   => 'Nhập tiêu đề tại đây',
-            'slug'                     => 'Đường dẫn tĩnh',
+            'post_slug'                => 'Đường dẫn tĩnh',
             'slug_placeholder'         => '',
             'post_full'                => 'Nội dung bài viết',
             'post_keyword'             => 'Từ khóa bài viết',

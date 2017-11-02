@@ -42,9 +42,9 @@
                   {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.posts.posts.'.$key.'_placeholder'), 'id' => 'title' ]) !!}
                 </div>
 
-                @php $key = 'slug'; @endphp
+                @php $key = 'post_slug'; @endphp
                 <div class="form-group">
-                  {!! Form::hidden($key, old($key), ['class' => 'form-control', 'readonly' => 'readonly', 'placeholder' => __('common.posts.posts.'.$key.'_placeholder'), 'id' => 'slug']) !!}
+                  {!! Form::hidden($key, old($key), ['id' => 'slug']) !!}
                 </div>
 
                 @php $key = 'post_full'; @endphp
