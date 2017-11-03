@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row wave-bg">
       <div class="zigzag wow slideInLeft">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 105 20" xml:space="preserve">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
+             viewBox="0 0 105 20" xml:space="preserve">
                     <g>
                       <rect class="st0" width="105" height="20"/>
                       <g>
@@ -10,7 +11,8 @@
                       </g>
                     </g>
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 105 20" xml:space="preserve">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px"
+                     y="0px" viewBox="0 0 105 20" xml:space="preserve">
                     <g>
                       <rect class="st0" width="105" height="20"/>
                       <g>
@@ -31,7 +33,7 @@
         <div class="row wow zoomIn">
           <div class="col-md-12">
             <div class="feedback-block">
-              <img class="feedback-image" src="media/feedback-images/feedback-1.jpg" alt="">
+              <img class="feedback-image" src="{{asset('theme01/media/feedback-images/feedback-1.jpg')}}" alt="">
               <h4 class="about-tittle">Stacey Don</h4>
               <p class="about-info">President @ Coolor Studio</p>
               <div class="opacity-box">
@@ -48,7 +50,7 @@
         <div class="row wow zoomIn">
           <div class="col-md-12">
             <div class="feedback-block">
-              <img class="feedback-image" src="media/feedback-images/feedback-2.jpg" alt="">
+              <img class="feedback-image" src="{{asset('theme01/media/feedback-images/feedback-2.jpg')}}" alt="">
               <h4 class="about-tittle">Anson Shura</h4>
               <p class="about-info">Project Manager @ Motion Studio</p>
               <div class="opacity-box">
@@ -64,7 +66,7 @@
         <div class="row wow zoomIn">
           <div class="col-md-12">
             <div class="feedback-block">
-              <img class="feedback-image" src="media/feedback-images/feedback-3.jpg" alt="">
+              <img class="feedback-image" src="{{asset('theme01/media/feedback-images/feedback-3.jpg')}}" alt="">
               <h4 class="about-tittle">Gaylord Jefferson</h4>
               <p class="about-info">Developer @ Illskill Agency</p>
               <div class="opacity-box">

@@ -12,6 +12,10 @@
 //Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
+// Ajax frontend
+//Route::post('sendmail', ['as' => 'sendmail', 'uses' => 'ContactController@index']);
+Route::post('sendmail', ['as' => 'sendmail.create', 'uses' => 'Apis\ContactController@index']);
+
 Route::get('login', 'LoginController@getlogin')->name('getlogin');
 Route::post('login', ['as' => 'login', 'uses' => 'LoginController@postlogin']);
 Route::get('logout', 'LoginController@getlogout')->name('getlogout');

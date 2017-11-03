@@ -127,12 +127,13 @@ $(document).ready(function () {
     var formData = {
         name: name,
         email: email,
-        message: message
+        message: message,
+        _token: ajaxcalls_vars.token,
     };
 
     $.ajax({
       type: "POST",
-      url: '/mail.php',
+      url:  ajaxcalls_vars.host + '/sendmail',
       data: formData,
       success: function() {
         $('#contact-modal').modal('hide');

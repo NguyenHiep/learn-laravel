@@ -12,6 +12,14 @@
         type="text/css"/>
   <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
   <link href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css" rel="stylesheet">
+  @php
+    echo '<script type="text/javascript">
+		          var ajaxcalls_vars = {
+                "token":  "'.csrf_token().'",
+                "host" : "'.url("/").'"
+			        }
+		      </script>';
+  @endphp
 </head>
 <body>
 

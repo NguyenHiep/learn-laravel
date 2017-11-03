@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-3 col-xs-8 slideInLeft">
         <div class="logo">
-          <span class="point">Danny</span>
+          <span class="point">Hiep Nguyen</span>
         </div>
       </div>
       <div class="col-md-9 hidden-sm hidden-xs slideInRight">

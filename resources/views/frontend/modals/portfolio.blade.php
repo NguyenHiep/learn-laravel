@@ -23,8 +23,8 @@
           </p>
         </div>
         <div class="modal-images">
-          <img src="media/modal-images/modal-image-1.jpg" alt="">
-          <img src="media/modal-images/modal-image-2.jpg" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-1.jpg')}}" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-2.jpg')}}" alt="">
         </div>
         <div class="about-btns">
           <a href="#" class="site-btn">VIsit Website</a>
@@ -52,8 +52,8 @@
           </p>
         </div>
         <div class="modal-images">
-          <img src="media/modal-images/modal-image-1.jpg" alt="">
-          <img src="media/modal-images/modal-image-2.jpg" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-1.jpg')}}" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-2.jpg')}}" alt="">
         </div>
         <div class="about-btns">
           <a href="#" class="site-btn">VIsit Website</a>
@@ -81,8 +81,8 @@
           </p>
         </div>
         <div class="modal-images">
-          <img src="media/modal-images/modal-image-1.jpg" alt="">
-          <img src="media/modal-images/modal-image-2.jpg" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-1.jpg')}}" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-2.jpg')}}" alt="">
         </div>
         <div class="about-btns">
           <a href="#" class="site-btn">VIsit Website</a>
@@ -110,8 +110,8 @@
           </p>
         </div>
         <div class="modal-images">
-          <img src="media/modal-images/modal-image-1.jpg" alt="">
-          <img src="media/modal-images/modal-image-2.jpg" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-1.jpg')}}" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-2.jpg')}}" alt="">
         </div>
         <div class="about-btns">
           <a href="#" class="site-btn">VIsit Website</a>
@@ -139,8 +139,8 @@
           </p>
         </div>
         <div class="modal-images">
-          <img src="media/modal-images/modal-image-1.jpg" alt="">
-          <img src="media/modal-images/modal-image-2.jpg" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-1.jpg')}}" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-2.jpg')}}" alt="">
         </div>
         <div class="about-btns">
           <a href="#" class="site-btn">VIsit Website</a>
@@ -168,8 +168,8 @@
           </p>
         </div>
         <div class="modal-images">
-          <img src="media/modal-images/modal-image-1.jpg" alt="">
-          <img src="media/modal-images/modal-image-2.jpg" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-1.jpg')}}" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-2.jpg')}}" alt="">
         </div>
         <div class="about-btns">
           <a href="#" class="site-btn">VIsit Website</a>
@@ -197,8 +197,8 @@
           </p>
         </div>
         <div class="modal-images">
-          <img src="media/modal-images/modal-image-1.jpg" alt="">
-          <img src="media/modal-images/modal-image-2.jpg" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-1.jpg')}}" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-2.jpg')}}" alt="">
         </div>
         <div class="about-btns">
           <a href="#" class="site-btn">VIsit Website</a>
@@ -226,8 +226,8 @@
           </p>
         </div>
         <div class="modal-images">
-          <img src="media/modal-images/modal-image-1.jpg" alt="">
-          <img src="media/modal-images/modal-image-2.jpg" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-1.jpg')}}" alt="">
+          <img src="{{asset('theme01/media/modal-images/modal-image-2.jpg')}}" alt="">
         </div>
         <div class="about-btns">
           <a href="#" class="site-btn">VIsit Website</a>
