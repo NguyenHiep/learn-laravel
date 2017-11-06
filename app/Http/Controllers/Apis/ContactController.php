@@ -36,13 +36,12 @@ class ContactController extends Controller
                     $content = array_get($inputs, 'message');
 
                     $title = 'Email liên hệ từ website http://www.esdesignweb.com/';
-                    Mail::send('mail_contact', ['title' => $title, 'content' => $content],
-                        function ($message) use ($name, $title, $email) {
-                            $message->from($email, $name);
-                            $message->to('minhhiep.q@gmail.com');
-                            $message->subject($title);
-                        });
-
+                    Mail::raw($content, function($message)use ($title, $email, $name)
+                    {
+                        $message->subject($title);
+                        $message->from($email, $name);
+                        $message->to('minhhiep.q@gmail.com');
+                    });
 
                 } catch (Exception $e) {
                     \DB::rollBack();
