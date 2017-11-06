@@ -74,6 +74,33 @@ var Actions = function () {
     });
   };
   
+  var handleBatchAction = function () {
+    elemArticle.find("select[name=batch_actions]").on("change", function () {
+      var self = $(this),
+        options_val = self.val(),
+        button = elemBody.find(".js-action-batch");
+      if (!empty(options_val)) {
+        button.removeAttr("disabled");
+      } else {
+        button.attr("disabled", "disabled");
+      }
+    });
+    
+  };
+  var handleSearchKeyword = function () {
+    elemArticle.find("input[name=search_keyword]").on("change", function () {
+      var self = $(this),
+        val_text = self.val(),
+        button = elemBody.find(".js-action-search");
+      if (!empty(val_text)) {
+        button.removeAttr("disabled");
+      } else {
+        button.attr("disabled", "disabled");
+      }
+    });
+    
+  };
+  
   return {
     initCheckBox: function () {
       handleActiveCheckBox(); // handles horizontal menu
@@ -82,10 +109,14 @@ var Actions = function () {
       handleMediasAttachment();
       handleInsertImageAttachment();
     },
+    initFilter:function () {
+      handleBatchAction();
+      handleSearchKeyword();
+    },
     init: function () {
       this.initCheckBox();
+      this.initFilter();
       this.initMedias();
-      
     },
   };
 }();

@@ -35,7 +35,7 @@
                     <option value="delete">Xóa</option>
                   </select>
                 </div>
-                <button class="btn btn-delete js-action-batch" type="submit">Áp dụng</button>
+                <button class="btn btn-delete js-action-batch" type="submit" disabled>Áp dụng</button>
               </div>
             </div>
             <div class="col-md-4">
@@ -43,7 +43,7 @@
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="Nhập từ khóa" name="search_keyword">
                 </div>
-                <button class="btn btn-delete js-action-search" type="submit">Tìm kiếm</button>
+                <button class="btn btn-delete js-action-search" type="submit" disabled>Tìm kiếm</button>
               </div>
             </div>
           </form>

@@ -24,6 +24,7 @@ class CommentsController extends Controller
             ->join('posts', 'comments.posts_id', '=', 'posts.id')
             //->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
             //->select('posts.*', 'users.username', 'posts_medias.name as post_featured')
+            ->whereNull("comments.deleted_at")
             ->get();
         return view('manage.modules.comments.index', compact('records'));
     }
