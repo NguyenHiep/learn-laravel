@@ -23,6 +23,31 @@
       <h3 class="page-title"> {{__('static.sidebars.manage.posts.posts')}}  </h3>
       <!-- END PAGE TITLE-->
       <div class="row">
+        <div class="clearfix paging-wrap margin-bottom-10">
+          <form method="POST" class="form-inline">
+            {{ csrf_field() }}
+            <div class=" col-md-8">
+              <div class="pull-left">
+                <div class="form-group">
+                  <select name="batch_actions" id="batch_actions" class="form-control">
+                    <option value="">Tác vụ</option>
+                    <option value="approve">Duyệt</option>
+                    <option value="delete">Xóa</option>
+                  </select>
+                </div>
+                <button class="btn btn-delete js-action-batch" type="submit">Áp dụng</button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="pull-right">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Nhập từ khóa" name="search_keyword">
+                </div>
+                <button class="btn btn-delete js-action-search" type="submit">Tìm kiếm</button>
+              </div>
+            </div>
+          </form>
+        </div>
         <div class="col-md-12">
           <!-- BEGIN EXAMPLE TABLE PORTLET-->
           <div class="portlet light bordered">
@@ -56,7 +81,7 @@
                         <td>
                           {!! $record->content !!}
                         </td>
-                        <td>{!! date('d/m/Y H:m', strtotime($record->created_at)) !!}</td>
+                        <td>{!! date('d/m/Y H:i', strtotime($record->created_at)) !!}</td>
                         <td>{!! $record->ip_user !!}</td>
 
                         <td class="text-right ">

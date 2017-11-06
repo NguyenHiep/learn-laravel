@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\Model\Comments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -90,6 +91,24 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!empty(Comments::find($id))) {
+            try {
+                \DB::beginTransaction();
+
+                Comments::where('id', $id)->delete();
+
+                \DB::commit();
+                \Session::flash('message', __('system.message.delete'));
+            } catch (Exception $e) {
+                \DB::rollBack();
+                \Log::error($e->getMessage(), __METHOD__);
+                \Session::flash('message', __('system.message.errors', $e->getMessage()));
+            }
+
+        } else {
+            \Session::flash('message', __('system.message.errors'));
+        }
+
+        return redirect()->route('comments.index');
     }
 }
