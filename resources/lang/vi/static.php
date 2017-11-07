@@ -78,6 +78,9 @@ return [
         ),
         'pages'   => array(
             'edit' => 'Cập nhật trang'
+        ),
+        'comments' => array(
+            'page_title' => 'Quản lý bình luận'
         )
     )
 ];
