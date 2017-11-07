@@ -14,9 +14,9 @@
     @yield('content')
   </article>
 
- <aside id="right_sidebar">
+ {{--<aside id="right_sidebar">
    @include('manage.blocks.quicksidebar')
- </aside>
+ </aside>--}}
 </div>
 <!-- END CONTAINER -->
 @include('manage.blocks.footer')
