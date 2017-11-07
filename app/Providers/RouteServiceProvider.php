@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -33,9 +34,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map()
+    public function map(Request $request)
     {
-        $this->mapWebRoutes();
+        $this->mapWebRoutes($request);
 
         $this->mapApiRoutes();
 
@@ -49,14 +50,30 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(Request $request)
     {
-        Route::group([
-            'middleware' => 'web',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/web.php');
-        });
+        $locale = $request->segment(1);
+        $this->app->setLocale($locale);
+        $skip_locales = $this->app->config->get('app.skip_locales');
+
+        // If the locale is added to to skip_locales array continue without locale
+        if (in_array($locale, $skip_locales)) {
+            Route::group([
+                'middleware' => 'web',
+                'namespace'  => $this->namespace,
+            ], function ($router) {
+                require base_path('routes/web.php');
+            });
+        } else {
+            Route::group([
+                'middleware' => 'web',
+                'namespace'  => $this->namespace,
+                'prefix'     => $locale
+            ], function ($router) {
+                require base_path('routes/web.php');
+            });
+        }
+
     }
 
     /**

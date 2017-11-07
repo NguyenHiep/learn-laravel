@@ -90,7 +90,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------
@@ -235,5 +235,10 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
+
+    'locales' => ['vi' => 'Việt Nam', 'en' => 'English'],
+
+    'skip_locales' => ['manage', 'auth', 'login'],
+    //'skip_locales' => ['nguyenhiep'],
 
 ];

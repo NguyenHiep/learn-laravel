@@ -52,6 +52,7 @@ Route::group(['middleware', 'auth'], function () {
         Route::resource('medias', 'MediasController');
         Route::resource('pages', 'PagesController');
         Route::resource('comments', 'CommentsController');
+        Route::post('comments/batch', ['as' => 'comments.batch', 'uses' => 'CommentsController@batch']);
         Route::resource('customers', 'CustomersController');
         Route::resource('email', 'EmailController');
 

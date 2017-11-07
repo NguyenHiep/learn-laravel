@@ -86,6 +86,8 @@ var Actions = function () {
       }
     });
     
+    
+    
   };
   var handleSearchKeyword = function () {
     elemArticle.find("input[name=search_keyword]").on("change", function () {

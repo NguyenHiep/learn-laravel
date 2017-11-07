@@ -60,29 +60,32 @@
     "hideMethod": "fadeOut"
   }
 
-  function show_message(data) {console.log(data.status);
-    if(data.status == 'success')
-    {
-      toastr["success"](data.message, "Thông báo")
-    }
-    else if( data.status == 'warning' )
-    {
-      toastr["warning"](data.message, "Thông báo")
-    }
-    else
-    {
-      toastr["error"](data.message, "Thông báo")
+  function show_message(data) {
+    console.log(data.status);
+    var status = data.status;
+    switch (status) {
+      case 'success':
+        toastr["success"](data.message, "Thông báo")
+        break;
+      case 'warning':
+        toastr["warning"](data.message, "Thông báo")
+        break;
+      case 'info':
+        toastr["info"](data.message, "Thông báo")
+        break;
+      default:
+        toastr["error"](data.message, "Thông báo")
     }
 
   }
 </script>
 @show
 
-@if($flash = session('message'))
+@if(!empty(session('message')) && !empty(session('status')))
   @php echo '<script>
               var messages = {
-                status: "success",
-                message: "'.$flash.'"
+                status: "'.session('status').'",
+                message: "'.session('message').'"
                 }
               show_message(messages);
             </script>';

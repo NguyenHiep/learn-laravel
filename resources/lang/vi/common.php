@@ -1,5 +1,6 @@
 <?php
 return [
+    'page_has_expired' => 'Trang đã hết hạn, vui làm đóng trang và truy cập lại',
     'buttons'  => array(
         'save'   => 'Lưu thông tin',
         'cancel' => 'Hủy bỏ',

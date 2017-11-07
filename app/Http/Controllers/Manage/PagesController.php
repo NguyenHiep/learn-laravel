@@ -96,12 +96,14 @@ class PagesController extends Controller
                     $pages->save();
 
                     \DB::commit();
-                    \Session::flash('message', __('system.message.create'));
+                    session()->flash('message', __('system.message.create'));
+                    session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
 
                 } catch (Exception $e) {
                     \DB::rollBack();
                     \Log::error($e->getMessage(), __METHOD__);
-                    \Session::flash('message', __('system.message.errors', $e->getMessage()));
+                    session()->flash('message', __('system.message.errors', $e->getMessage()));
+                    session()->flash('status', self::CTRL_MESSAGE_ERROR);
                 }
 
                 return redirect()->route('pages.index');
@@ -176,7 +178,8 @@ class PagesController extends Controller
 
                     if(empty($pages)){
                         \DB::rollBack();
-                        \Session::flash('message', __('system.message.errors'));
+                        session()->flash('message', __('system.message.errors'));
+                        session()->flash('status', self::CTRL_MESSAGE_ERROR);
                         return view('errors.404');
                     }
 
@@ -201,12 +204,14 @@ class PagesController extends Controller
                     $pages->save();
 
                     \DB::commit();
-                    \Session::flash('message', __('system.message.update'));
+                    session()->flash('message', __('system.message.update'));
+                    session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
 
                 } catch (Exception $e) {
                     \DB::rollBack();
                     \Log::error($e->getMessage(), __METHOD__);
-                    \Session::flash('message', __('system.message.errors', $e->getMessage()));
+                    session()->flash('message', __('system.message.errors', $e->getMessage()));
+                    session()->flash('status', self::CTRL_MESSAGE_ERROR);
                 }
 
                 return redirect()->route('pages.index');
@@ -231,15 +236,18 @@ class PagesController extends Controller
                 Pages::where('id', $id)->forcedelete();
 
                 \DB::commit();
-                \Session::flash('message', __('system.message.delete'));
+                session()->flash('message', __('system.message.delete'));
+                session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
             } catch (Exception $e) {
                 \DB::rollBack();
                 \Log::error($e->getMessage(), __METHOD__);
-                \Session::flash('message', __('system.message.errors', $e->getMessage()));
+                session()->flash('message', __('system.message.errors', $e->getMessage()));
+                session()->flash('status', self::CTRL_MESSAGE_ERROR);
             }
 
         } else {
-            \Session::flash('message', __('system.message.errors'));
+            session()->flash('message', __('system.message.errors'));
+            session()->flash('status', self::CTRL_MESSAGE_ERROR);
         }
 
         return redirect()->route('pages.index');

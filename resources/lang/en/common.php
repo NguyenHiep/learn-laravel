@@ -1,5 +1,6 @@
 <?php
 return [
+    'page_has_expired' => 'Page has expired, please close the page and revisit',
     'buttons'  => array(
         'save'   => 'Save Data',
         'cancel' => 'Cancel',

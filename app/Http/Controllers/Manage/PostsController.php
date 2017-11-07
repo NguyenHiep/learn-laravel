@@ -152,9 +152,11 @@ class PostsController extends Controller
             }
 
             session()->flash('message', __('system.message.create'));
+            session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
             return redirect()->route('posts.index');
         } catch (Exception $e) {
             session()->flash('message', __('system.message.errors', $e->getMessage()));
+            session()->flash('status', self::CTRL_MESSAGE_ERROR);
         }
 
     }
@@ -311,9 +313,11 @@ class PostsController extends Controller
             }
 
             session()->flash('message', __('system.message.update'));
+            session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
             return redirect()->route('posts.index');
         } catch (Exception $e) {
             session()->flash('message', __('system.message.errors', $e->getMessage()));
+            session()->flash('status', self::CTRL_MESSAGE_ERROR);
         }
 
     }

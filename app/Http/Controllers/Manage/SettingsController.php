@@ -35,6 +35,7 @@ class SettingsController extends Controller
             if(empty($settings)){
                 Settings::create($request->all());
                 session()->flash('message', __('system.message.create'));
+                session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
             }else{
 
                 // Update data info
@@ -56,11 +57,13 @@ class SettingsController extends Controller
                 $settings->mail_smtp_pass       =  $request->mail_smtp_pass;
                 $settings->save();
                 session()->flash('message', __('system.message.update'));
+                session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
             }
             return redirect()->route('settings.index');
 
         }catch(Exception $e) {
             session()->flash('message', __('system.message.errors',['errors' => $e->getMessage()]));
+            session()->flash('status', self::CTRL_MESSAGE_ERROR);
         }
 
     }

@@ -20,11 +20,10 @@ class CommentsController extends Controller
     public function index()
     {
         // begin code
-        $records = \DB::table('comments')
-            ->join('posts', 'comments.posts_id', '=', 'posts.id')
-            //->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
-            //->select('posts.*', 'users.username', 'posts_medias.name as post_featured')
-            ->whereNull("comments.deleted_at")
+        $records = \DB::table('comments AS c')
+            ->join('posts AS p', 'c.posts_id', '=', 'p.id')
+            ->select('c.*', 'p.post_title')
+            ->whereNull("c.deleted_at")
             ->get();
         return view('manage.modules.comments.index', compact('records'));
     }
@@ -99,17 +98,71 @@ class CommentsController extends Controller
                 Comments::where('id', $id)->delete();
 
                 \DB::commit();
-                \Session::flash('message', __('system.message.delete'));
+                session()->flash('message', __('system.message.delete'));
+                session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
             } catch (Exception $e) {
                 \DB::rollBack();
                 \Log::error($e->getMessage(), __METHOD__);
-                \Session::flash('message', __('system.message.errors', $e->getMessage()));
+                session()->flash('message', __('system.message.errors', $e->getMessage()));
+                session()->flash('status', self::CTRL_MESSAGE_ERROR);
             }
 
         } else {
-            \Session::flash('message', __('system.message.errors'));
+            session()->flash('message', __('system.message.errors'));
+            session()->flash('status', self::CTRL_MESSAGE_ERROR);
         }
 
         return redirect()->route('comments.index');
+    }
+
+    /**
+     * Update and delete multi records
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+
+    public function batch(Request $request){
+
+        // Array data request
+        $inputs = $request->all();
+        if ($request->method() === 'POST') {
+
+            // Check CSRF
+            if (\Session::token() === array_get($inputs, '_token')) {
+
+                $this->validate($request,
+                    [
+                        'action_ids'      => 'numeric|min:1',
+                    ]
+                );
+
+                // Begin
+                try {
+
+                    \DB::beginTransaction();
+
+                    \DB::commit();
+                    session()->flash('message', __('system.message.update'));
+                    session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
+
+                } catch (Exception $e) {
+                    \DB::rollBack();
+                    \Log::error($e->getMessage(), __METHOD__);
+                    session()->flash('message', __('system.message.errors',['errors' => $e->getMessage()]));
+                    session()->flash('status', self::CTRL_MESSAGE_ERROR);
+                }
+
+                return redirect()->route('pages.index');
+
+            }else{
+                \Log::warning('Bad request, invalid CSRF token.', __METHOD__);
+                throw new \Exception(__('common.page_has_expired'));
+            }
+
+        }else{
+            throw new \Exception(__('common.page_has_expired'));
+        }
     }
 }
