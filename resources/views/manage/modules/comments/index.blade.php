@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', __('static.manage.settings.settings.page_title'))
+@section('title', __('static.manage.comments.page_title'))
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -10,17 +10,17 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.posts.title')}}</a>
+            <a href="{{route('manage')}}">{{__('static.sidebars.manage.manage')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('static.sidebars.manage.posts.posts')}}</span>
+            <span>{{__('static.sidebars.manage.comments')}}</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> {{__('static.sidebars.manage.posts.posts')}}  </h3>
+      <h3 class="page-title"> {{__('static.sidebars.manage.comments')}}  </h3>
       <!-- END PAGE TITLE-->
       <div class="row">
         <form action="{{route('comments.batch')}}" method="POST" class="form-inline">
