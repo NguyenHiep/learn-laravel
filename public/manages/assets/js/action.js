@@ -86,8 +86,6 @@ var Actions = function () {
       }
     });
     
-    
-    
   };
   var handleSearchKeyword = function () {
     elemArticle.find("input[name=search_keyword]").on("change", function () {
@@ -102,6 +100,31 @@ var Actions = function () {
     });
     
   };
+  var handleDeleteRecord = function () {
+    elemArticle.find(".js-action-delete-record").on("click", function (e) {
+      e.preventDefault(); // does not go through with the link.
+      var self = $(this);
+      $.ajax({
+        type: "post",
+        cache: false,
+        data: {
+          _method: self.data('method'),
+          _token: ajaxcalls_vars.token,
+        },
+        url: self.attr('href'),
+        success: function (data) {
+          show_message(data);
+          if(data.status === "success"){
+            self.parent().parent().parent().hide("slow");
+          }
+        },
+        error: function (xhr, status, error) {
+          show_message(error);
+        }
+      });
+      
+    });
+  };
   
   return {
     initCheckBox: function () {
@@ -114,6 +137,7 @@ var Actions = function () {
     initFilter:function () {
       handleBatchAction();
       handleSearchKeyword();
+      handleDeleteRecord();
     },
     init: function () {
       this.initCheckBox();

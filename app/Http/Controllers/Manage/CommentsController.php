@@ -94,25 +94,28 @@ class CommentsController extends Controller
         if (!empty(Comments::find($id))) {
             try {
                 \DB::beginTransaction();
-
                 Comments::where('id', $id)->delete();
-
                 \DB::commit();
-                session()->flash('message', __('system.message.delete'));
-                session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
+                return response()->json([
+                    'message' => __('system.message.delete'),
+                    'status'  => self::CTRL_MESSAGE_SUCCESS
+                ]);
             } catch (Exception $e) {
                 \DB::rollBack();
-                \Log::error($e->getMessage(), __METHOD__);
-                session()->flash('message', __('system.message.errors', $e->getMessage()));
-                session()->flash('status', self::CTRL_MESSAGE_ERROR);
+                return response()->json([
+                    'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+                    'status'  => self::CTRL_MESSAGE_ERROR
+                ]);
             }
 
         } else {
-            session()->flash('message', __('system.message.errors'));
-            session()->flash('status', self::CTRL_MESSAGE_ERROR);
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
         }
 
-        return redirect()->route('comments.index');
+        //return redirect()->route('comments.index');
     }
 
     /**
@@ -131,17 +134,20 @@ class CommentsController extends Controller
 
             // Check CSRF
             if (\Session::token() === array_get($inputs, '_token')) {
-
                 $this->validate($request,
                     [
-                        'action_ids'      => 'numeric|min:1',
+                        'action_ids'      => 'required',
                     ]
                 );
+                /*if(!empty(array_get($inputs,'action_ids'))){
+                    array_set($inputs, 'action_ids', implode(',',array_get($inputs,'action_ids'))); // Return 1,2,3
+                }*/
 
                 // Begin
                 try {
 
                     \DB::beginTransaction();
+                    // do something
 
                     \DB::commit();
                     session()->flash('message', __('system.message.update'));
@@ -154,7 +160,7 @@ class CommentsController extends Controller
                     session()->flash('status', self::CTRL_MESSAGE_ERROR);
                 }
 
-                return redirect()->route('pages.index');
+                return redirect()->route('comments.index');
 
             }else{
                 \Log::warning('Bad request, invalid CSRF token.', __METHOD__);

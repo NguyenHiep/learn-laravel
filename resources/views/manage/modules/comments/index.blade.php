@@ -89,14 +89,16 @@
                                  class="btn  btn-warning js-action-list-rowlink-val">
                                 <i class="fa fa-edit"></i>
                               </a>
-                              <form action="{{ route('comments.destroy',$record->id) }}" method="POST"
+                              <a href="{{ route('comments.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
+
+                              {{--<form action="{{ route('comments.destroy',$record->id) }}" method="POST"
                                     style="display: inline-block">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 <button class="btn btn-delete js-action-delete" type="submit">
                                   <i class="fa fa-trash-o"></i>
                                 </button>
-                              </form>
+                              </form>--}}
                             </div>
                         </tr>
                       @endforeach
