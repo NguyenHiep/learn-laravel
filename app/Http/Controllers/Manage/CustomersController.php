@@ -18,7 +18,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        //
+        return view('manage.modules.customers.index');
     }
 
     /**
@@ -28,7 +28,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+        return view('manage.modules.customers.create');
     }
 
     /**
