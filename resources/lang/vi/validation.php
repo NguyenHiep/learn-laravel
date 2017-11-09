@@ -111,6 +111,9 @@ return [
     */
 
     'attributes' => [
+        // General
+        'action_ids'        => 'ID record',
+
         // Settings
         'company_name'      => 'Tên công ty',
         'company_zip'       => 'Mã bưu chính',
@@ -136,7 +139,7 @@ return [
         'password'          => 'Mật khẩu',
         'avatar'            => 'Ảnh đại diện',
         'level'             => 'Cấp độ',
-        'status'            => ' Trạng thái'
+        'status'            => 'Trạng thái'
 
 
     ],

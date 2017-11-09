@@ -54,7 +54,7 @@
     <link href="{{asset('/manages/assets/layouts/layout/css/layout.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('/manages/assets/layouts/layout/css/themes/darkblue.min.css')}}" rel="stylesheet"
           type="text/css" id="style_color"/>
-    <link href="{{asset('/manages/assets/layouts/layout/css/custom.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('/manages/assets/layouts/layout/css/custom.min.css?v='.VERSION)}}" rel="stylesheet" type="text/css"/>
 
     <!-- END THEME LAYOUT STYLES -->
   @show

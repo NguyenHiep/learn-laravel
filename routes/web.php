@@ -53,6 +53,8 @@ Route::group(['middleware', 'auth'], function () {
         Route::resource('pages', 'PagesController');
         Route::resource('comments', 'CommentsController');
         Route::post('comments/batch', ['as' => 'comments.batch', 'uses' => 'CommentsController@batch']);
+        Route::get('comments/batch', ['as' => 'comments.batch_get', 'uses' => 'CommentsController@batch']);
+        Route::post('comments', ['as' => 'comments.search', 'uses' => 'CommentsController@index']);
         Route::resource('customers', 'CustomersController');
         Route::resource('email', 'EmailController');
 

@@ -75,7 +75,7 @@ var Actions = function () {
   };
   
   var handleBatchAction = function () {
-    elemArticle.find("select[name=batch_actions]").on("change", function () {
+   /* elemArticle.find("select[name=batch_actions]").on("change", function () {
       var self = $(this),
         options_val = self.val(),
         button = elemBody.find(".js-action-batch");
@@ -84,8 +84,32 @@ var Actions = function () {
       } else {
         button.attr("disabled", "disabled");
       }
-    });
+    });*/
+    /*elemArticle.find(".js-action-batch").each(function () {
+      var self    = $(this),
+        parent  = self.parents("form").eq(0),
+        urlinfo = parse_url(parent.attr("action")),
+        iptstr  = 'input[name="action_ids[]"]:checked:visible';
+      self.on("click", function () {
+        var prev   = self.prev().children("select"),
+          child  = prev.children("option:selected"),
+          param  = empty(child.val()) || child.val() === "0" ? null : child.text(),
+          action = self.data("action"),
+          func   = function () {
+            parent
+              .attr("action", ((action || urlinfo.pathname) + "/batch/").replace(/\/\//g, "/") + urlinfo.search)
+              .submit();
+          };
     
+        if (empty(param) || parent.find(iptstr).length === 0) {
+          func();
+        } else {
+          parent.attr("action",urlinfo.pathname + "/batch/").submit();
+        }
+    
+        return false;
+      });
+    });*/
   };
   var handleSearchKeyword = function () {
     elemArticle.find("input[name=search_keyword]").on("change", function () {
@@ -156,7 +180,42 @@ function empty(str) {
   return str === undefined || str === false || str === null || str.length === 0 || typeof(str) === "object" && Object.keys(str).length === 0;
 }
 
-jQuery(document).ready(function () {
+/**
+ * URL Interpret and return its components
+ *
+ * @param  string url       The URL to parse
+ * @param  string component The URL component
+ * @return mixed  Returns the components.
+ */
+function parse_url(url, component) {
+  var elem = document.createElement("a");
+  
+  elem.href = url;
+  
+  var searches = elem.search.substring(1).split("&"),
+    queries = {}, pair;
+  for (var i = 0, len = searches.length; i < len; i++) {
+    pair = searches[i].split("=");
+    queries[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+  }
+  
+  if (component) {
+    return component === "queries" ? queries : elem[component];
+  } else {
+    return {
+      protocol: elem.protocol,
+      hostname: elem.hostname,
+      port: elem.port,
+      pathname: (elem.pathname.indexOf("/") === 0 ? "" : "/") + elem.pathname,
+      search: elem.search,
+      hash: elem.hash,
+      host: elem.host,
+      queries: queries
+    };
+  }
+}
+  
+  jQuery(document).ready(function () {
   Actions.init();
 });
 

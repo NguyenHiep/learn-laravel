@@ -23,7 +23,7 @@
       <h3 class="page-title"> {{__('static.sidebars.manage.comments')}}  </h3>
       <!-- END PAGE TITLE-->
       <div class="row">
-        <form action="{{route('comments.batch')}}" method="POST" class="form-inline">
+        <form action="{{route('comments.search')}}" method="POST" class="form-inline">
           {{ csrf_field() }}
           <div class="clearfix paging-wrap margin-bottom-10">
               <div class=" col-md-8">
@@ -35,7 +35,7 @@
                       <option value="delete">Xóa</option>
                     </select>
                   </div>
-                  <button class="btn btn-delete js-action-batch" type="submit" disabled>Áp dụng</button>
+                  <button class="btn btn-delete js-action-batch" type="submit">Áp dụng</button>
                 </div>
               </div>
               <div class="col-md-4">
@@ -43,7 +43,7 @@
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="Nhập từ khóa" name="search_keyword">
                   </div>
-                  <button class="btn btn-delete js-action-search" type="submit" disabled>Tìm kiếm</button>
+                  <button class="btn btn-delete js-action-search" type="submit">Tìm kiếm</button>
                 </div>
               </div>
           </div>
@@ -68,7 +68,7 @@
                     </thead>
                     <tbody>
 
-                    @if (!empty($records))
+                    @if (count($records)>0)
                       @foreach ($records as $record)
                         <tr>
                           <td> <!--<td class="checkbox-list"> -->
@@ -90,26 +90,18 @@
                                 <i class="fa fa-edit"></i>
                               </a>
                               <a href="{{ route('comments.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
-
-                              {{--<form action="{{ route('comments.destroy',$record->id) }}" method="POST"
-                                    style="display: inline-block">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i>
-                                </button>
-                              </form>--}}
                             </div>
+                          </td>
                         </tr>
                       @endforeach
                     @else
                       <tr>
-                        <td colspan="7"> Không có dữ liệu</td>
+                        <td colspan="6" class="text-center"> Không có dữ liệu</td>
                       </tr>
                     @endif
                     </tbody>
                     <tfoot>
-                    @if (!empty($records))
+                    @if (count($records) > 0)
                       {{--<td colspan="8"> {{ $records->links() }}</td>--}}
                     @endif
                     </tfoot>

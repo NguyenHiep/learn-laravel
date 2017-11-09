@@ -1,4 +1,6 @@
 <?php
+define("VERSION","1.0.1");
+
 /**
  * Converts a string of a key to a input name.
  *

@@ -41,8 +41,8 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 @stack('custom-scripts')
 <!-- BEGIN ACTION SCRIPTS -->
-<script src="{{asset('/manages/assets/js/layouts.js')}}" type="text/javascript"></script>
-<script src="{{asset('/manages/assets/js/action.js')}}" type="text/javascript"></script>
+<script src="{{asset('/manages/assets/js/layouts.js?v='.VERSION)}}" type="text/javascript"></script>
+<script src="{{asset('/manages/assets/js/action.js?v='.VERSION)}}" type="text/javascript"></script>
 <!-- END ACTION  SCRIPTS -->
 <script type="text/javascript">
   // Config notifation
