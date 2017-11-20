@@ -102,7 +102,7 @@
                     </tbody>
                     <tfoot>
                     @if (count($records) > 0)
-                      {{--<td colspan="8"> {{ $records->links() }}</td>--}}
+                      {{--<td colspan="6">{{ $records->render() }}</td>--}}
                     @endif
                     </tfoot>
                   </table>

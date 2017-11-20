@@ -62,10 +62,12 @@ class CommentsController extends Controller
                             session()->flash('status', self::CTRL_MESSAGE_WARNING);
                         }
                     }
-                    /*$search_keyword = array_get($inputs,'search_keyword');
+                    $search_keyword = array_get($inputs,'search_keyword');
                     if(!empty($search_keyword)){
                         $model->orWhere('content', 'like', '%' . $search_keyword . '%');
-                    }*/
+                        //$model->appends(['search' => $search_keyword]);
+                    }
+
 
                     \DB::commit();
 
@@ -76,7 +78,7 @@ class CommentsController extends Controller
                     session()->flash('status', self::CTRL_MESSAGE_ERROR);
                 }
 
-                return redirect()->route('comments.index');
+               // return redirect()->route('comments.index');
 
             }else{
                 \Log::warning('Bad request, invalid CSRF token.', __METHOD__);
@@ -84,7 +86,10 @@ class CommentsController extends Controller
             }
 
         }
+        $model->paginate(6);
+        //$model->withPath('comments/url');
         $records = $model->get();
+
         return view('manage.modules.comments.index', compact('records'));
     }
 
