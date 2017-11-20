@@ -24,7 +24,7 @@ class CommentsTableSeeder extends Seeder
                     'ip_user'        => $faker->ipv4,
                     'posts_id'       => 1,//$faker->unique()->randomDigit,
                     'comment_parent' => $faker->numberBetween(0, 5),
-                    'created_at'     => $faker->dateTime(),
+                    'updated_at'     => $faker->dateTime(),
                     'created_at'     => $faker->dateTime(),
                 )
             );

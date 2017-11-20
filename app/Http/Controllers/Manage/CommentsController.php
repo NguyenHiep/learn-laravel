@@ -133,7 +133,8 @@ class CommentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $record = Comments::find($id);
+        return view('manage.modules.comments.edit',['record' => $record]);
     }
 
     /**

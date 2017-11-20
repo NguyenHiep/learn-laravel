@@ -12,7 +12,7 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request $request
      * @return Response
      */
     public function index(Request $request){

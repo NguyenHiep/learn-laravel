@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', __('static.manage.pages.edit'))
+@section('title', __('Chỉnh sửa bình luận'))
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -150,8 +150,7 @@
       </div>
       <!-- END CONTENT BODY -->
     </div>
-  @include('manage.blocks.medias.modal', ['medias' => $medias, 'id' => $record->posts_medias_id])
-  @include('manage.blocks.medias.content', ['medias' => $medias])
+
   @endsection
   @section('styles')
     @parent
