@@ -110,4 +110,7 @@ return [
         'page_intro'               => 'Mô tả ngắn trang',
         'page_intro_placeholder'   => 'Là đoạn mô tả ngắn khoảng 128 từ',
     ),
+    'comments'    => array(
+        'title'                    => 'Chỉnh sửa bình luận',
+    ),
 ];

@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', __('Chỉnh sửa bình luận'))
+@section('title', __('common.comments.title'))
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -10,11 +10,11 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('pages.index')}}">{{__('static.manage.pages.edit')}}</a>
+            <a href="{{route('pages.index')}}">{{__('static.manage.comments.page_title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('static.manage.pages.edit')}}</span>
+            <span>{{__('common.comments.title')}}</span>
           </li>
         </ul>
       </div>
