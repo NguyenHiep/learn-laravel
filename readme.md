@@ -7,7 +7,13 @@
 ## Hướng dẫn cài đặt ( Install)
 - Clone code: 
 - Run composer
-- Config database
+- Config database: vào file .env cấu hình thông tin host, database
+- php artisan migrate để tạo bảng
+- php artisan db:seed để tạo data mẫu
+
+Truy cập admin: http://domainname/manage
+
+User và password: <strong>admin/admin123<strong>
 
 ## Tác giả ( Author)
 Nguyễn Minh Hiệp
