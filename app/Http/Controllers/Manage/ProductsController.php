@@ -29,7 +29,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('manage.modules.products.create');
     }
 
     /**

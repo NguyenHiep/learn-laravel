@@ -12,7 +12,7 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create("vi_VN");
-        $limit = 50;
+        $limit = 30;
         for ($i = 0; $i < $limit; $i++) {
             DB::table('comments')->insert(
                 array(

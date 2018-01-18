@@ -15,11 +15,11 @@ class CreatePostsMediasIdsTable extends Migration
     {
         //
         Schema::create('posts_medias_ids', function (Blueprint $table) {
-            //$table->increments('id')->comment('Id');
-            $table->integer('posts_id')->comment('Id bài viết');
-            $table->integer('posts_medias_id')->comment('Id hình ảnh');
-            $table->primary(['posts_id', 'posts_medias_id']);
-        });
+        //$table->increments('id')->comment('Id');
+        $table->integer('posts_id')->comment('Id bài viết');
+        $table->integer('posts_medias_id')->comment('Id hình ảnh');
+        $table->primary(['posts_id', 'posts_medias_id']);
+    });
     }
 
     /**
