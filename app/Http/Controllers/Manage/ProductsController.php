@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Manage;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Posts\Category;
 
 class ProductsController extends Controller
 {
@@ -29,8 +29,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-
-        return view('manage.modules.products.create');
+        $list_cate_all  = Category::all();
+        return view('manage.modules.products.create', compact('list_cate_all'));
     }
 
     /**

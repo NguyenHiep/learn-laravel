@@ -99,74 +99,36 @@
                           <div class="col-md-10">
                             <div class="form-control height-auto">
                               <div class="scroller" style="height:275px;" data-always-visible="1">
-                                <ul class="list-unstyled">
-                                  <li>
-                                    <label>
-                                      <input type="checkbox" name="product[categories][]" value="1">Mens</label>
-                                    <ul class="list-unstyled">
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Footwear</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Clothing</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Accessories</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Fashion Outlet</label>
-                                      </li>
-                                    </ul>
-                                  </li>
-                                  <li>
-                                    <label>
-                                      <input type="checkbox" name="product[categories][]" value="1">Football Shirts</label>
-                                    <ul class="list-unstyled">
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Premier League</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Football League</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Serie A</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Bundesliga</label>
-                                      </li>
-                                    </ul>
-                                  </li>
-                                  <li>
-                                    <label>
-                                      <input type="checkbox" name="product[categories][]" value="1">Brands</label>
-                                    <ul class="list-unstyled">
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Adidas</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Nike</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Airwalk</label>
-                                      </li>
-                                      <li>
-                                        <label>
-                                          <input type="checkbox" name="product[categories][]" value="1">Kangol</label>
-                                      </li>
-                                    </ul>
-                                  </li>
-                                </ul>
+                                <div class="checkbox-list">
+                                  @php
+                                    $key = 'post_category.';
+                                    $html = '<label><input type="checkbox" name="'.convert_input_name($key).'" value="0" id="id-category-0">Không xác định</label>'; $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
+                                    if(!empty($list_cate_all)){
+                                      foreach($list_cate_all as $parent){
+                                        if($parent->parent_id == 0){
+                                          $html .= '<label><input type="checkbox" name="'.convert_input_name($key).'" value="'.$parent->id.'" id="id-category-'.$parent->id.'">'.$parent->name.'</label>';
+                                          //unset($data[$key]);
+                                          foreach ($list_cate_all as $child){
+
+                                            if($child->parent_id == $parent->id){
+                                              $html .= '<label>'.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child->id.'" id="id-category-'.$child->id.'">'.$child->name.'</label>';
+                                              foreach ($list_cate_all as $child2){
+                                                if($child2->parent_id == $child->id){
+                                                     $html .= '<label>'.$text.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child2->id.'" id="id-category-'.$child2->id.'">'.$child2->name.'</label>';
+                                                }
+                                              } // End loop level 3
+
+                                            }
+                                          } // End loop level 2
+
+                                        }
+
+                                      } // End loop level 1
+                                    }
+                                    echo $html;
+                                  @endphp
+
+                                </div>
                               </div>
                             </div>
                             <span class="help-block"> Chọn một hoặc nhiều thể loại </span>
