@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Manage;
 use App\Model\Products;
-use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Posts\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -91,7 +91,7 @@ class ProductsController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error($e->getMessage(), __METHOD__);
+            Log::error([$e->getMessage(), __METHOD__]);
         }
         return redirect()->back()->withInput($inputs)->with([
             'message' => __('system.message.errors'),
