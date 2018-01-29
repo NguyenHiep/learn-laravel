@@ -23,8 +23,8 @@ return [
         'gallery' => '<i class="fa fa-picture-o"></i>'
     ),
     'post_status' => array(
-        1 => 'Đã Đăng',
-        2 => 'Xét duyệt',
+        ENABLE => 'Đã Đăng',
+        DISABLE => 'Xét duyệt',
     ),
     'page_status' => array(
         1 => 'Đã Đăng',

@@ -14,6 +14,9 @@
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
 <script src="{{asset('/manages/assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+
+</script>
 <script src="{{asset('/manages/assets/global/plugins/bootstrap-toastr/toastr.min.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('/manages/assets/global/plugins/bootstrap/js/bootstrap.min.js')}}"

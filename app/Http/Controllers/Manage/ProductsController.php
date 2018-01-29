@@ -1,12 +1,42 @@
 <?php
 
 namespace App\Http\Controllers\Manage;
+use App\Model\Products;
+use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Posts\Category;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
 {
+    /**
+     * Validate product field
+     * @param $data
+     * @param null $id
+     * @return mixed
+     */
+    protected static function validator($data, $id = null)
+    {
+
+        return Validator::make($data, [
+            'name'              => 'required|string',
+            'description'       => 'required|string',
+            'short_description' => 'string',
+            'category_id'       => 'string',
+            'sku'               => 'required|string|unique:products,sku,' . $id,
+            'price'             => 'required|numeric',
+            'sale_price'        => 'numeric',
+            'status'            => 'string|numeric',
+            'meta_title'        => 'string|max:100',
+            'meta_keywords'     => 'string|max:1000',
+            'meta_description'  => 'string|max:255',
+            'brand_id'          => 'string',
+            'galary_img'        => 'string',
+        ]);
+    }
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -19,7 +49,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+       $records = Products::orderBy('id', 'DESC')->paginate(12);
+       return view('manage.modules.products.index')->with(['records' => $records]);
     }
 
     /**
@@ -41,7 +72,32 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+        $validator = self::validator($inputs);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+
+        try {
+            DB::beginTransaction();
+            $education = new Products();
+            $education->fill($inputs);
+            $education->save();
+            DB::commit();
+            return redirect()->route('products.index')->with([
+                'message' => __('system.message.create'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage(), __METHOD__);
+        }
+        return redirect()->back()->withInput($inputs)->with([
+            'message' => __('system.message.errors'),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
+
     }
 
     /**
@@ -63,7 +119,11 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $record = Products::find($id);
+        if(empty($record)){
+            return abort(404);
+        }
+        return view('manage.modules.products.edit')->with(['record' => $record]);
     }
 
     /**

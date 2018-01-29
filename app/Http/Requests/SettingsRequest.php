@@ -31,13 +31,13 @@ class SettingsRequest extends FormRequest
             'about_privacy'     => 'required',
             'about_terms'       => 'required',
             'company_lat'       => [
-                                        'max:9',
-                                        'regex:/[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)/u'
-                                   ],
+                'max:9',
+                'regex:/[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)/u'
+            ],
             'company_lng'       => [
-                                        'max:9',
-                                        'regex:/[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)/u'
-                                   ],
+                'max:9',
+                'regex:/[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)/u'
+            ],
 
         ];
     }

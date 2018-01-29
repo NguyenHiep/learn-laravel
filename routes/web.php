@@ -58,6 +58,10 @@ Route::group(['middleware', 'auth'], function () {
         Route::resource('customers', 'CustomersController');
         Route::resource('email', 'EmailController');
 
+        // Begin ajax
+        Route::post('ajax/product','AjaxController@product');
+        Route::get('ajax/product', 'AjaxController@product');
+
 	});
 });
 

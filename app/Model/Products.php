@@ -2,10 +2,9 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Posts extends Model
+class Products extends BaseModel
 {
     use SoftDeletes;
     //
@@ -36,8 +35,8 @@ class Posts extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
-        'title',
         'description',
         'short_description',
         'category_id',
@@ -49,6 +48,8 @@ class Posts extends Model
         'meta_keywords',
         'meta_description',
         'brand_id',
+        'galary_img',
+        'quantity'
     ];
 
 }
