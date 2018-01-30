@@ -227,6 +227,7 @@
       </div>
       <!-- END CONTENT BODY -->
     </div>
+  </div>
   @include('manage.blocks.medias.modal', ['medias' => $medias])
   @include('manage.blocks.medias.content', ['medias' => $medias])
   @endsection

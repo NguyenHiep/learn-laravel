@@ -17,8 +17,8 @@ class CreateProuductTable extends Migration
 	    Schema::create('products', function (Blueprint $table) {
 	    $table->increments('id');
 	    $table->string('name', 255)->unique()->comment('Tên sản phẩm');
-	    $table->string('description', 2000)->comment('Mô tả sản phẩm');
-	    $table->string('short_description', 500)->nullable()->comment('Mô tả ngắn sản phẩm');
+	    $table->longText('description', 2000)->comment('Mô tả sản phẩm');
+	    $table->longText('short_description', 500)->nullable()->comment('Mô tả ngắn sản phẩm');
 	    $table->string('category_id', 100)->nullable()->comment('Chuyên mục sản phẩm');
 	    $table->string('sku', 50)->unique()->comment('Mã SKU');
         $table->integer('price')->comment('Giá sản phẩm');

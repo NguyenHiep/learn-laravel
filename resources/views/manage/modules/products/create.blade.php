@@ -70,7 +70,7 @@
                             <span class="required"> * </span>
                           </label>
                           <div class="col-md-10">
-                            {!! Form::textarea($key,  old($key), ['class' => 'form-control', 'rows' => '3', 'placeholder' => 'Vui lòng nhập mô tả']) !!}
+                            {!! Form::textarea($key,  old($key), ['class' => 'form-control summernote_editor', 'rows' => '3', 'placeholder' => 'Vui lòng nhập mô tả']) !!}
                             @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                           </div>
                         </div>
@@ -312,7 +312,10 @@
     </div>
     <!-- END CONTENT BODY -->
   </div>
-
+  <div class="product">
+    @include('manage.blocks.medias.modal', ['medias' => $medias])
+    @include('manage.blocks.medias.content', ['medias' => $medias])
+  </div>
 @endsection
 @section('styles')
   @parent
@@ -321,13 +324,18 @@
   <link href="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
 
+  <link href="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
   @parent
   <!-- BEGIN PAGE LEVEL SCRIPTS -->
+  <script src="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.min.js')}}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/js/plugin/medias/summernote-ext-medias.js')}}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
+
   <script src="{{ asset('/manages/assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>

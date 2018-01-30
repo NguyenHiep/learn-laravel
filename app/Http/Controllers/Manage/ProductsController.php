@@ -39,7 +39,7 @@ class ProductsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        parent::__construct();
     }
 
     /**
@@ -61,7 +61,7 @@ class ProductsController extends Controller
     public function create()
     {
         $list_cate_all  = Category::all();
-        return view('manage.modules.products.create', compact('list_cate_all'));
+        return view('manage.modules.products.create', compact('list_cate_all'))->with(['medias' => $this->medias]);
     }
 
     /**
@@ -80,9 +80,9 @@ class ProductsController extends Controller
 
         try {
             DB::beginTransaction();
-            $education = new Products();
-            $education->fill($inputs);
-            $education->save();
+            $product = new Products();
+            $product->fill($inputs);
+            $product->save();
             DB::commit();
             return redirect()->route('products.index')->with([
                 'message' => __('system.message.create'),
@@ -94,7 +94,7 @@ class ProductsController extends Controller
             Log::error([$e->getMessage(), __METHOD__]);
         }
         return redirect()->back()->withInput($inputs)->with([
-            'message' => __('system.message.errors'),
+            'message' => __('system.message.errors', ['errors' => 'Create product is failed']),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
 
@@ -123,7 +123,7 @@ class ProductsController extends Controller
         if(empty($record)){
             return abort(404);
         }
-        return view('manage.modules.products.edit')->with(['record' => $record]);
+        return view('manage.modules.products.edit')->with(['record' => $record, 'medias' => $this->medias]);
     }
 
     /**
@@ -135,7 +135,33 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Products::find($id);
+        if (empty($product)) {
+            return abort(404);
+        }
+        $inputs = $request->all();
+        $validator = self::validator($inputs, $id);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+
+        try {
+            DB::beginTransaction();
+            $product->update($inputs);
+            DB::commit();
+            return redirect()->route('products.index')->with([
+                'message' => __('system.message.update'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->route('products.edit', ['id' => $product->id])->withInput($inputs)->with([
+            'message' => __('system.message.error', ['errors' => 'Update product is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
+
     }
 
     /**
@@ -146,6 +172,27 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Products::find($id);
+        if (empty($product)) {
+            return abort(404);
+        }
+
+        try {
+            DB::beginTransaction();
+            $product->delete();
+            DB::commit();
+            return redirect()->route('products.index')->with([
+                'message' => 'Delete product is success',
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->route('products.index')->with([
+            'message' => __('system.message.error', ['errors' => 'Delete product is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
+
     }
 }

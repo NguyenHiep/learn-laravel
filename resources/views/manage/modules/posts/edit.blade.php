@@ -248,6 +248,7 @@
       <!-- END CONTENT BODY -->
     </div>
   @include('manage.blocks.medias.modal', ['medias' => $medias, 'id' => $record->posts_medias_id])
+  </div>
   @endsection
   @section('styles')
     @parent

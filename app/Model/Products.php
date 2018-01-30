@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Observers\ProductsObserver;
 
 class Products extends BaseModel
 {
@@ -52,4 +53,8 @@ class Products extends BaseModel
         'quantity'
     ];
 
+    public static function boot() {
+        parent::boot();
+        Products::observe(new ProductsObserver());
+    }
 }

@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Quản lý thông tin thành viên')
+@section('title', 'Quản lý sản phẩm')
 
 @section('content')
   <div class="page-content-wrapper">
@@ -65,7 +65,7 @@
                           <td> {{$record->product_img}} </td>
                           <td> {{$record->name}} </td>
                           <td> {{$record->price }}</td>
-                          <td> {{$record->qty }}</td>
+                          <td> {{$record->quantity }}</td>
                           <td class="text-center">
 
                               <span class="label label-sm  @if ($record->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
