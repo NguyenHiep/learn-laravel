@@ -15,32 +15,40 @@ class UsersTableSeeder extends Seeder
 	    DB::table('users')->insert(
 		    [
 			    [
-				    'username'   => 'supperadmin',
-				    'password'   => bcrypt('admin123'),
-				    'level'      => 1,
-				    'status'     => 1,
-				    'created_at' => new Datetime()
+                    'username'   => 'supperadmin',
+                    'email'      => 'supperadmin@gmail.com',
+                    'password'   => bcrypt('admin123'),
+                    'level'      => 1,
+                    'status'     => 1,
+                    'created_at' => \Carbon\Carbon::now(),
+                    'updated_at' => \Carbon\Carbon::now(),
 			    ],
 			    [
 				    'username'   => 'admin',
+                    'email'      => 'admin@gmail.com',
 				    'password'   => bcrypt('admin123'),
 				    'level'      => 1,
 				    'status'     => 1,
-				    'created_at' => new Datetime()
+				    'created_at' => \Carbon\Carbon::now(),
+                    'updated_at' => \Carbon\Carbon::now(),
 			    ],
 			    [
 				    'username'   => 'member',
+                    'email'      => 'member@gmail.com',
 				    'password'   => bcrypt('admin123'),
 				    'level'      => 2,
 				    'status'     => 1,
-				    'created_at' => new Datetime()
+				    'created_at' => \Carbon\Carbon::now(),
+                    'updated_at' => \Carbon\Carbon::now(),
 			    ],
 			    [
 				    'username'   => 'user',
+                    'email'      => 'user@gmail.com',
 				    'password'   => bcrypt('admin123'),
 				    'level'      => 3,
 				    'status'     => 1,
-				    'created_at' => new Datetime()
+				    'created_at' => \Carbon\Carbon::now(),
+                    'updated_at' => \Carbon\Carbon::now(),
 			    ]
 		    ]
 	    );
@@ -51,11 +59,13 @@ class UsersTableSeeder extends Seeder
 
 	    for ($i = 0; $i < $limit; $i++) {
 		    DB::table('users')->insert([
-			    'username'   => $faker->name,
-			    'password'   => bcrypt('admin123'),
-			    'level'      => $faker->numberBetween(1,3),
-			    'status'     => $faker->numberBetween(1,2),
-			    'created_at' => new Datetime()
+                'username'   => $faker->unique()->userName(),
+                'email'      => $faker->unique()->email(),
+                'password'   => bcrypt('admin123'),
+                'level'      => $faker->numberBetween(1, 3),
+                'status'     => $faker->numberBetween(1, 2),
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
 		    ]);
 	    }
 

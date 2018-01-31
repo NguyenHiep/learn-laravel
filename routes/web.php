@@ -9,16 +9,16 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-//Auth::routes();
+Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 // Ajax frontend
 //Route::post('sendmail', ['as' => 'sendmail', 'uses' => 'ContactController@index']);
 Route::post('sendmail', ['as' => 'sendmail.create', 'uses' => 'Apis\ContactController@index']);
 
-Route::get('login', 'LoginController@getlogin')->name('getlogin');
+/*Route::get('login', 'LoginController@getlogin')->name('getlogin');
 Route::post('login', ['as' => 'login', 'uses' => 'LoginController@postlogin']);
-Route::get('logout', 'LoginController@getlogout')->name('getlogout');
+Route::get('logout', 'LoginController@getlogout')->name('getlogout');*/
 Route::group(['middleware', 'auth'], function () {
 	Route::group(['prefix' => 'manage', 'namespace' => 'Manage'], function () {
 		Route::get('/', ['as' => 'manage', 'uses' => 'ManagesController@index', function () { }]);

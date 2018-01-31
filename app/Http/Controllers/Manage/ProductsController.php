@@ -118,12 +118,12 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+{       $list_cate_all  = Category::all();
         $record = Products::find($id);
         if(empty($record)){
             return abort(404);
         }
-        return view('manage.modules.products.edit')->with(['record' => $record, 'medias' => $this->medias]);
+        return view('manage.modules.products.edit')->with(['list_cate_all' => $list_cate_all, 'record' => $record, 'medias' => $this->medias]);
     }
 
     /**

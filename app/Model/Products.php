@@ -57,4 +57,12 @@ class Products extends BaseModel
         parent::boot();
         Products::observe(new ProductsObserver());
     }
+    public function setCategoryIdAttribute($value) {
+        if (!empty($value) && is_array($value)) {
+            $value = implode('|', $value);
+        } else {
+            $value = '';
+        }
+        $this->attributes['category_id'] = $value;
+    }
 }

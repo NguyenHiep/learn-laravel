@@ -219,3 +219,6 @@ h3.block-title {
 .note-editor.fullscreen{
 	z-index: 9996 !important;
 }
+.product .modal.fade.in{
+	top: 10px;
+}

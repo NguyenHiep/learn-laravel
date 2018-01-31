@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique()->comment('Tên tài khoản');
+            $table->string('email')->unique()->comment('Email tài khoản');
             $table->string('password')->comment('Mật khẩu');
 	        $table->tinyInteger('level')->default(3)->comment('Cấp bậc [1: Quản trị viên, 2: Biên tập viên, 3: Cộng tác viên]');
             $table->string('avatar')->nullable()->comment('Ảnh đại diện');

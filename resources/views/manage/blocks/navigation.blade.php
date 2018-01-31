@@ -26,17 +26,15 @@
                 <a href="/">
                   <i class="icon-user"></i> Thông tin tài khoản </a>
               </li>
-              <li>
-                <a href="{{ url('logout') }}">
-                  <i class="icon-logout"></i> Thoát </a>
-              </li>
             </ul>
           </li>
 
           <li class="dropdown">
-            <a href="{{ url('logout') }}" class="dropdown-toggle">
-              <i class="icon-logout"></i>
+
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+              Logout
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hide">{{ csrf_field() }}</form>
           </li>
           <!-- END QUICK SIDEBAR TOGGLER -->
         </ul>
