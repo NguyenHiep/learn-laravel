@@ -33,7 +33,8 @@ class ProductsController extends Controller
             'meta_keywords'     => 'string|max:1000',
             'meta_description'  => 'string|max:255',
             'brand_id'          => 'string',
-            'galary_img'        => 'string',
+            'galary_img'        => 'image|max:1024',
+            'pictures'          => 'image|max:1024',
         ]);
     }
 
@@ -73,9 +74,33 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
+        if(isset($inputs['category_id'])){
+            $inputs['category_id'] = convert_to_string($inputs['category_id']);
+        }else{
+            $inputs['category_id'] = '';
+        }
         $validator = self::validator($inputs);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+        if($request->hasFile('pictures')) {
+            if ($request->file('pictures')->isValid()) {
+                // File này có thực, bắt đầu đổi tên và move
+                $fileExtension = $request->file('pictures')->getClientOriginalExtension(); // Lấy . của file
+                // Filename cực shock để khỏi bị trùng
+                $fileName = time() . "_" . rand(0, 9999999) . "_" . md5(rand(0, 9999999)) . "." . $fileExtension;
+                // Thư mục upload
+                $uploadPath = public_path(UPLOAD_PRODUCT); // Thư mục upload
+                // Bắt đầu chuyển file vào thư mục
+                $request->file('pictures')->move($uploadPath, $fileName);
+                $inputs[ 'pictures' ] = $fileName;
+            } else {
+                // Lỗi file
+                return redirect()->back()->with([
+                    'message' => __('Upload is failed'),
+                    'status'  => self::CTRL_MESSAGE_SUCCESS,
+                ]);
+            }
         }
 
         try {
@@ -140,9 +165,37 @@ class ProductsController extends Controller
             return abort(404);
         }
         $inputs = $request->all();
+        if(isset($inputs['category_id'])){
+            $inputs['category_id'] = convert_to_string($inputs['category_id']);
+        }else{
+            $inputs['category_id'] = '';
+        }
         $validator = self::validator($inputs, $id);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+        if($request->hasFile('pictures')){
+            if ($request->file('pictures')->isValid()) {
+                // File này có thực, bắt đầu đổi tên và move
+                $fileExtension = $request->file('pictures')->getClientOriginalExtension(); // Lấy . của file
+
+                // Filename cực shock để khỏi bị trùng
+                $fileName = time() . "_" . rand(0,9999999) . "_" . md5(rand(0,9999999)) . "." . $fileExtension;
+
+                // Thư mục upload
+                $uploadPath = public_path('/upload/product'); // Thư mục upload
+
+                // Bắt đầu chuyển file vào thư mục
+                $request->file('pictures')->move($uploadPath, $fileName);
+                $inputs['pictures'] = $fileName;
+            }
+            else {
+                // Lỗi file
+                return redirect()->back()->with([
+                    'message' => __('Upload is failed'),
+                    'status'  => self::CTRL_MESSAGE_SUCCESS,
+                ]);
+            }
         }
 
         try {

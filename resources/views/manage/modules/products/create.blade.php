@@ -79,7 +79,7 @@
                         <div class="form-group @if ($errors->has($key)) has-error  @endif">
                           <label class="col-md-2 control-label">Mô tả ngắn:</label>
                           <div class="col-md-10">
-                            {!! Form::textarea($key,  old($key), ['class' => 'form-control', 'rows' => '2', 'placeholder' => 'Vui lòng nhập mô tả ngắn']) !!}
+                            {!! Form::textarea($key,  old($key), ['class' => 'form-control summernote_editor', 'rows' => '2', 'placeholder' => 'Vui lòng nhập mô tả ngắn']) !!}
                             @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                           </div>
                         </div>
@@ -128,6 +128,7 @@
                             <span class="help-block"> tối đa 100 ký tự </span>
                           </div>
                         </div>
+                        @php $key='meta_keywords'; @endphp
                         <div class="form-group">
                           <label class="col-md-2 control-label">Meta Keywords:</label>
                           <div class="col-md-10">
@@ -135,6 +136,7 @@
                             <span class="help-block"> tối đa 1000 ký tự</span>
                           </div>
                         </div>
+                        @php $key='meta_description'; @endphp
                         <div class="form-group">
                           <label class="col-md-2 control-label">Meta Description:</label>
                           <div class="col-md-10">
@@ -145,60 +147,8 @@
                       </div>
                     </div>
                     <div class="tab-pane" id="tab_images">
-                      {{--<div class="alert alert-success margin-bottom-10">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                        <i class="fa fa-warning fa-lg"></i> Image type and information need to be specified. </div>--}}
-                      <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
-                        <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
-                          <i class="fa fa-plus"></i> Select Files </a>
-                        <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
-                          <i class="fa fa-share"></i> Upload Files </a>
-                      </div>
-                      <div class="row">
-                        <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"> </div>
-                      </div>
-                      <table class="table table-bordered table-hover">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="8%"> Hình ảnh </th>
-                          <th width="25%"> Tiêu đề </th>
-                          <th width="8%"> Sort Order </th>
-                          <th width="10%"> Base Image </th>
-                          <th width="10%"> Small Image </th>
-                          <th width="10%"> Thumbnail </th>
-                          <th width="10%"> </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td>
-                            <a href="{{ asset('manages/assets/pages/media/works/img1.jpg') }}" class="fancybox-button" data-rel="fancybox-button">
-                              <img class="img-responsive" src="{{ asset('manages/assets/pages/media/works/img1.jpg') }}" alt=""> </a>
-                          </td>
-                          <td>
-                            <input type="text" class="form-control" name="product[images][1][label]" value="Thumbnail image"> </td>
-                          <td>
-                            <input type="text" class="form-control" name="product[images][1][sort_order]" value="1"> </td>
-                          <td>
-                            <label>
-                              <input type="radio" name="product[images][1][image_type]" value="1"> </label>
-                          </td>
-                          <td>
-                            <label>
-                              <input type="radio" name="product[images][1][image_type]" value="2"> </label>
-                          </td>
-                          <td>
-                            <label>
-                              <input type="radio" name="product[images][1][image_type]" value="3" checked> </label>
-                          </td>
-                          <td>
-                            <a href="javascript:;" class="btn btn-default btn-sm">
-                              <i class="fa fa-times"></i> Remove </a>
-                          </td>
-                        </tr>
-
-                        </tbody>
-                      </table>
+                      @php $key='galary_img'; @endphp
+                      {{ Form::file($key, ['multiple']) }}
                     </div>
                   </div>
                 </div>
@@ -295,14 +245,24 @@
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
               </div>
             </div>
+            @php $key='pictures' @endphp
             <div class="portlet-body" style="display: block;">
-            @php $key = 'posts_medias_id'; @endphp
-            <!--<a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>-->
-              <a class="btn btn-outline btn-block dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
-              <div class="clearfix margin-top-15" id="img_featured">
-                <!--<img src="http://minhhiep.info/wp-content/uploads/2017/10/cachua-300x300.jpg" draggable="false" alt="" class="img-responsive"> -->
+              <div class="form-group @if ($errors->has($key)) has-error  @endif last">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                  <div>
+                  <span class="btn default btn-file">
+                    <span class="fileinput-new"> Chọn hình ảnh </span>
+                    <span class="fileinput-exists"> Ảnh khác </span>
+                    {{ Form::file($key) }}
+                  </span>
+                    <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
+                  </div>
+                </div>
+                @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
               </div>
-              <input type="hidden" name="{{$key}}" value="" id="{{$key}}"/>
             </div>
           </div>
 
@@ -327,6 +287,8 @@
 
   <link href="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
@@ -344,6 +306,7 @@
   <script src="{{ asset('/manages/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script>
   <script src="{{  asset('/manages/assets/global/plugins/plupload/js/plupload.full.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
   <script src="{{  asset('/manages/assets/pages/scripts/ecommerce-products-edit.js') }}" type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop

@@ -62,7 +62,13 @@
                             <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
                           </td>
                           <td> {{$record->id}} </td>
-                          <td> {{$record->product_img}} </td>
+                          <td>
+                            @if(!empty($record->pictures))
+                              <img src="{{ asset(UPLOAD_PRODUCT.$record->pictures)}}" alt="product img" width="40" height="40" />
+                            @else
+
+                            @endif
+                          </td>
                           <td> {{$record->name}} </td>
                           <td> {{$record->price }}</td>
                           <td> {{$record->quantity }}</td>

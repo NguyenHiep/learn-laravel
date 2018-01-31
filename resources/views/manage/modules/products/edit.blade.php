@@ -145,6 +145,7 @@
                           <span class="help-block"> tối đa 100 ký tự </span>
                         </div>
                       </div>
+                      @php $key='meta_keywords'; @endphp
                       <div class="form-group">
                         <label class="col-md-2 control-label">Meta Keywords:</label>
                         <div class="col-md-10">
@@ -152,6 +153,7 @@
                           <span class="help-block"> tối đa 1000 ký tự</span>
                         </div>
                       </div>
+                      @php $key='meta_description'; @endphp
                       <div class="form-group">
                         <label class="col-md-2 control-label">Meta Description:</label>
                         <div class="col-md-10">
@@ -162,60 +164,8 @@
                     </div>
                   </div>
                   <div class="tab-pane" id="tab_images">
-                    {{--<div class="alert alert-success margin-bottom-10">
-                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                      <i class="fa fa-warning fa-lg"></i> Image type and information need to be specified. </div>--}}
-                    <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
-                      <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
-                        <i class="fa fa-plus"></i> Select Files </a>
-                      <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
-                        <i class="fa fa-share"></i> Upload Files </a>
-                    </div>
-                    <div class="row">
-                      <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"> </div>
-                    </div>
-                    <table class="table table-bordered table-hover">
-                      <thead>
-                      <tr role="row" class="heading">
-                        <th width="8%"> Hình ảnh </th>
-                        <th width="25%"> Tiêu đề </th>
-                        <th width="8%"> Sort Order </th>
-                        <th width="10%"> Base Image </th>
-                        <th width="10%"> Small Image </th>
-                        <th width="10%"> Thumbnail </th>
-                        <th width="10%"> </th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td>
-                          <a href="{{ asset('manages/assets/pages/media/works/img1.jpg') }}" class="fancybox-button" data-rel="fancybox-button">
-                            <img class="img-responsive" src="{{ asset('manages/assets/pages/media/works/img1.jpg') }}" alt=""> </a>
-                        </td>
-                        <td>
-                          <input type="text" class="form-control" name="product[images][1][label]" value="Thumbnail image"> </td>
-                        <td>
-                          <input type="text" class="form-control" name="product[images][1][sort_order]" value="1"> </td>
-                        <td>
-                          <label>
-                            <input type="radio" name="product[images][1][image_type]" value="1"> </label>
-                        </td>
-                        <td>
-                          <label>
-                            <input type="radio" name="product[images][1][image_type]" value="2"> </label>
-                        </td>
-                        <td>
-                          <label>
-                            <input type="radio" name="product[images][1][image_type]" value="3" checked> </label>
-                        </td>
-                        <td>
-                          <a href="javascript:;" class="btn btn-default btn-sm">
-                            <i class="fa fa-times"></i> Remove </a>
-                        </td>
-                      </tr>
-
-                      </tbody>
-                    </table>
+                    @php $key='galary_img'; @endphp
+                    {{ Form::file($key, ['multiple']) }}
                   </div>
                 </div>
               </div>
@@ -275,19 +225,35 @@
                 <div class="checkbox-list">
                   @php
                     $key = 'category_id.';
+                    $category_id = [];
+                    if(!empty($record->category_id)){
+                      $category_id = convert_to_array($record->category_id);
+                    }
+
                     $html = '<label><input type="checkbox" name="'.convert_input_name($key).'" value="0" id="id-category-0">Không xác định</label>'; $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
                     if(!empty($list_cate_all)){
                       foreach($list_cate_all as $parent){
                         if($parent->parent_id == 0){
-                          $html .= '<label><input type="checkbox" name="'.convert_input_name($key).'" value="'.$parent->id.'" id="id-category-'.$parent->id.'">'.$parent->name.'</label>';
+                          $checked = '';
+                          if(in_array($parent->id, $category_id)){
+                            $checked = "checked='checked'";
+                          }
+                          $html .= '<label><input type="checkbox" name="'.convert_input_name($key).'" value="'.$parent->id.'" id="id-category-'.$parent->id.'" '.$checked.'>'.$parent->name.'</label>';
                           //unset($data[$key]);
                           foreach ($list_cate_all as $child){
-
+                            $checked2= '';
+                            if(in_array($child->id, $category_id)){
+                              $checked2 = "checked='checked'";
+                            }
                             if($child->parent_id == $parent->id){
-                              $html .= '<label>'.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child->id.'" id="id-category-'.$child->id.'">'.$child->name.'</label>';
+                              $html .= '<label>'.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child->id.'" id="id-category-'.$child->id.'" '.$checked2.'>'.$child->name.'</label>';
                               foreach ($list_cate_all as $child2){
+                                $checked3= '';
+                                if(in_array($child2->id, $category_id)){
+                                  $checked3 = "checked='checked'";
+                                }
                                 if($child2->parent_id == $child->id){
-                                     $html .= '<label>'.$text.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child2->id.'" id="id-category-'.$child2->id.'">'.$child2->name.'</label>';
+                                     $html .= '<label>'.$text.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child2->id.'" id="id-category-'.$child2->id.'" '.$checked3.'>'.$child2->name.'</label>';
                                 }
                               } // End loop level 3
 
@@ -313,13 +279,32 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-            @php $key = 'posts_medias_id'; @endphp
-            <!--<a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>-->
-              <a class="btn btn-outline btn-block dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
-              <div class="clearfix margin-top-15" id="img_featured">
-                <!--<img src="http://minhhiep.info/wp-content/uploads/2017/10/cachua-300x300.jpg" draggable="false" alt="" class="img-responsive"> -->
+              @php $key='pictures' @endphp
+              <div class="portlet-body" style="display: block;">
+                <div class="form-group @if ($errors->has($key)) has-error  @endif last">
+                  <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                      @php
+                        $img_url =  (!empty($record->{$key})) ? asset(UPLOAD_PRODUCT.$record->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
+                        echo '<img src="'.$img_url.'" alt="product" />';
+                      @endphp
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                    <div>
+                  <span class="btn default btn-file">
+                     @php
+                       echo (!empty($record->{$key})) ? '<span class="fileinput-new"> Thay đổi ảnh </span>' : '<span class="fileinput-new"> Chọn hình ảnh </span>';
+                     @endphp
+                    <span class="fileinput-exists"> Ảnh khác </span>
+                    {{ Form::file($key) }}
+                  </span>
+                      <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
+                    </div>
+                  </div>
+                  @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                </div>
+
               </div>
-              <input type="hidden" name="{{$key}}" value="" id="{{$key}}"/>
             </div>
           </div>
 
@@ -345,6 +330,7 @@
 
   <link href="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
@@ -362,6 +348,7 @@
   <script src="{{ asset('/manages/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script>
   <script src="{{  asset('/manages/assets/global/plugins/plupload/js/plupload.full.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
   <script src="{{  asset('/manages/assets/pages/scripts/ecommerce-products-edit.js') }}" type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop

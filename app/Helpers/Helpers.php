@@ -51,3 +51,37 @@ if (!function_exists('unicode_str_filter')) {
         return strtolower($str);
     }
 }
+
+
+if (!function_exists('convert_to_string')) {
+    /***
+     * Convert array to string
+     * Ex: [1, 2, 3] => 1|2|3
+     *
+     * @param $value
+     * @return string
+     */
+    function convert_to_string($value)
+    {
+        if (isset($value) && is_array($value)) {
+            $value = implode('|', $value);
+        }
+        return $value;
+    }
+}
+if (!function_exists('convert_to_array')) {
+    /***
+     * Convert string to array
+     * Ex: 1|2|3 => [1, 2, 3]
+     *
+     * @param $value
+     * @return array|string
+     */
+    function convert_to_array($value)
+    {
+        if (!empty($value)) {
+            $value = explode('|', $value);
+        }
+        return $value;
+    }
+}

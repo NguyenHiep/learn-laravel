@@ -2,13 +2,12 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 use App\Observers\ProductsObserver;
 
 class Products extends BaseModel
 {
-    use SoftDeletes;
-    //
+
     /**
      * The table associated with the model.
      *
@@ -16,19 +15,6 @@ class Products extends BaseModel
      */
     protected $table = 'products';
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
@@ -50,19 +36,13 @@ class Products extends BaseModel
         'meta_description',
         'brand_id',
         'galary_img',
-        'quantity'
+        'quantity',
+        'pictures',
     ];
 
     public static function boot() {
         parent::boot();
         Products::observe(new ProductsObserver());
     }
-    public function setCategoryIdAttribute($value) {
-        if (!empty($value) && is_array($value)) {
-            $value = implode('|', $value);
-        } else {
-            $value = '';
-        }
-        $this->attributes['category_id'] = $value;
-    }
+
 }

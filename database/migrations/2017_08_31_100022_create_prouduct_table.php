@@ -30,6 +30,7 @@ class CreateProuductTable extends Migration
         $table->string('meta_description', 255)->nullable()->comment('Meta description');
 	    $table->integer('brand_id')->nullable()->comment('Thương hiệu sản phẩm');
         $table->string('galary_img', 255)->nullable()->comment('Ảnh galary');
+        $table->string('pictures', 255)->nullable()->comment('Ảnh sản phẩm');
         $table->timestamps();
         $table->softDeletes();
 
