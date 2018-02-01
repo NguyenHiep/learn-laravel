@@ -147,7 +147,7 @@
                       </div>
                     </div>
                     <div class="tab-pane" id="tab_images">
-                      @php $key='galary_img'; @endphp
+                      @php $key='galary_img[]'; @endphp
                       {{ Form::file($key, ['multiple']) }}
                     </div>
                   </div>

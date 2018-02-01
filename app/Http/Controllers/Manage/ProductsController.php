@@ -33,7 +33,7 @@ class ProductsController extends Controller
             'meta_keywords'     => 'string|max:1000',
             'meta_description'  => 'string|max:255',
             'brand_id'          => 'string',
-            'galary_img'        => 'image|max:1024',
+            'galary_img'        => 'array',
             'pictures'          => 'image|max:1024',
         ]);
     }
@@ -79,10 +79,24 @@ class ProductsController extends Controller
         }else{
             $inputs['category_id'] = '';
         }
+
         $validator = self::validator($inputs);
+        $imageRules = array(
+            'galary_img' => 'image|max:1024'
+        );
+        foreach ($inputs['galary_img'] as $image) {
+            $image = ['galary_img' => $image];
+            $imageValidator = Validator::make($image, $imageRules);
+
+            if ($imageValidator->fails()) {
+                $messages = $imageValidator->messages();
+                return Redirect::to('venue-add')->withErrors($messages);
+            }
+        }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
+
         if($request->hasFile('pictures')) {
             if ($request->file('pictures')->isValid()) {
                 // File này có thực, bắt đầu đổi tên và move
@@ -102,6 +116,35 @@ class ProductsController extends Controller
                 ]);
             }
         }
+
+        foreach ($inputs['galary_img'] as $key => $image) {
+
+            if($request->hasFile('galary_img' )) {
+                if ($request->file($inputs['galary_img'][$key])->isValid()) {
+
+                    // File này có thực, bắt đầu đổi tên và move
+                    $fileExtension = $request->file($inputs['galary_img'][$key])->getClientOriginalExtension(); // Lấy . của file
+                    // Filename cực shock để khỏi bị trùng
+                    $fileName = time() . "_" . rand(0, 9999999) . "_" . md5(rand(0, 9999999)) . "." . $fileExtension;
+                    // Thư mục upload
+                    $uploadPath = public_path(UPLOAD_PRODUCT); // Thư mục upload
+                    // Bắt đầu chuyển file vào thư mục
+                    $request->file($inputs['galary_img'][$key])->move($uploadPath, $fileName);
+                    echo "<pre>";
+                        var_dump($fileName);
+                    echo "</pre>";
+                    die();
+                    $inputs[ 'galary_img' ][] = $fileName;
+                } else {
+                    // Lỗi file
+                    return redirect()->back()->with([
+                        'message' => __('Upload is failed'),
+                        'status'  => self::CTRL_MESSAGE_SUCCESS,
+                    ]);
+                }
+            }
+        }
+
 
         try {
             DB::beginTransaction();
