@@ -157,14 +157,24 @@
                       <div class="form-group">
                         <label class="col-md-2 control-label">Meta Description:</label>
                         <div class="col-md-10">
-                          {!! Form::textarea($key,  old($key), ['class' => 'form-control maxlength-handler', 'maxlength' => '1000', 'rows' => '4', 'placeholder' => 'Meta Description']) !!}
+                          {!! Form::textarea($key,  old($key, $record->{$key}), ['class' => 'form-control maxlength-handler', 'maxlength' => '1000', 'rows' => '4', 'placeholder' => 'Meta Description']) !!}
                           <span class="help-block"> tối đa 255 ký tự </span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="tab-pane" id="tab_images">
-                    @php $key='galary_img'; @endphp
+                    @if(count($record->galary_img) > 0)
+                      <ul class="list-inline">
+                        @foreach($record->galary_img as $item)
+                          <li>
+                            <img src="{{asset(UPLOAD_PRODUCT.$item)}}" alt="image galary" class="product-galary-item" width="150" height="150"/>
+                          </li>
+                        @endforeach
+                      </ul>
+                    @endif
+
+                    @php $key='galary_img[]'; @endphp
                     {{ Form::file($key, ['multiple']) }}
                   </div>
                 </div>

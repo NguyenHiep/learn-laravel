@@ -8,6 +8,7 @@ use App\Model\Posts\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use App\Helppers\Uploads;
 
 class ProductsController extends Controller
 {
@@ -21,7 +22,7 @@ class ProductsController extends Controller
     {
 
         return Validator::make($data, [
-            'name'              => 'required|string',
+            'name'              => 'required|string|unique:products,name,' . $id,
             'description'       => 'required|string',
             'short_description' => 'string',
             'category_id'       => 'string',
@@ -81,71 +82,18 @@ class ProductsController extends Controller
         }
 
         $validator = self::validator($inputs);
-        $imageRules = array(
-            'galary_img' => 'image|max:1024'
-        );
-        foreach ($inputs['galary_img'] as $image) {
-            $image = ['galary_img' => $image];
-            $imageValidator = Validator::make($image, $imageRules);
-
-            if ($imageValidator->fails()) {
-                $messages = $imageValidator->messages();
-                return Redirect::to('venue-add')->withErrors($messages);
-            }
-        }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
 
-        if($request->hasFile('pictures')) {
-            if ($request->file('pictures')->isValid()) {
-                // File này có thực, bắt đầu đổi tên và move
-                $fileExtension = $request->file('pictures')->getClientOriginalExtension(); // Lấy . của file
-                // Filename cực shock để khỏi bị trùng
-                $fileName = time() . "_" . rand(0, 9999999) . "_" . md5(rand(0, 9999999)) . "." . $fileExtension;
-                // Thư mục upload
-                $uploadPath = public_path(UPLOAD_PRODUCT); // Thư mục upload
-                // Bắt đầu chuyển file vào thư mục
-                $request->file('pictures')->move($uploadPath, $fileName);
-                $inputs[ 'pictures' ] = $fileName;
-            } else {
-                // Lỗi file
-                return redirect()->back()->with([
-                    'message' => __('Upload is failed'),
-                    'status'  => self::CTRL_MESSAGE_SUCCESS,
-                ]);
-            }
+        $galary_upload = Uploads::multiple_upload($request, 'galary_img',UPLOAD_PRODUCT);
+        if($galary_upload){
+            $inputs['galary_img'] = json_encode($galary_upload);
         }
-
-        foreach ($inputs['galary_img'] as $key => $image) {
-
-            if($request->hasFile('galary_img' )) {
-                if ($request->file($inputs['galary_img'][$key])->isValid()) {
-
-                    // File này có thực, bắt đầu đổi tên và move
-                    $fileExtension = $request->file($inputs['galary_img'][$key])->getClientOriginalExtension(); // Lấy . của file
-                    // Filename cực shock để khỏi bị trùng
-                    $fileName = time() . "_" . rand(0, 9999999) . "_" . md5(rand(0, 9999999)) . "." . $fileExtension;
-                    // Thư mục upload
-                    $uploadPath = public_path(UPLOAD_PRODUCT); // Thư mục upload
-                    // Bắt đầu chuyển file vào thư mục
-                    $request->file($inputs['galary_img'][$key])->move($uploadPath, $fileName);
-                    echo "<pre>";
-                        var_dump($fileName);
-                    echo "</pre>";
-                    die();
-                    $inputs[ 'galary_img' ][] = $fileName;
-                } else {
-                    // Lỗi file
-                    return redirect()->back()->with([
-                        'message' => __('Upload is failed'),
-                        'status'  => self::CTRL_MESSAGE_SUCCESS,
-                    ]);
-                }
-            }
+        $pictures = Uploads::upload($request, 'pictures', UPLOAD_PRODUCT);
+        if($pictures){
+            $inputs['pictures'] = $pictures;
         }
-
-
         try {
             DB::beginTransaction();
             $product = new Products();
@@ -188,6 +136,9 @@ class ProductsController extends Controller
     public function edit($id)
 {       $list_cate_all  = Category::all();
         $record = Products::find($id);
+        if(!empty($record->galary_img)){
+            $record->galary_img = json_decode($record->galary_img);
+        }
         if(empty($record)){
             return abort(404);
         }
@@ -240,7 +191,10 @@ class ProductsController extends Controller
                 ]);
             }
         }
-
+        $galary_upload = Uploads::multiple_upload($request, 'galary_img',UPLOAD_PRODUCT);
+        if($galary_upload){
+            $inputs['galary_img'] = json_encode($galary_upload);
+        }
         try {
             DB::beginTransaction();
             $product->update($inputs);

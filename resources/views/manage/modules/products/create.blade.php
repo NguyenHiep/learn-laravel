@@ -105,7 +105,7 @@
                         @php $key='sale_price'; @endphp
                         <div class="form-group @if ($errors->has($key)) has-error  @endif">
                           <label class="col-md-2 control-label">Giá khuyến mãi:</label>
-                          <div class="col-md-10">{!! Form::number($key,  old($key), ['class' => 'form-control', 'placeholder' => 'Giá khuyến mãi']) !!}
+                          <div class="col-md-10">{!! Form::number($key,  old($key, 0), ['class' => 'form-control', 'placeholder' => 'Giá khuyến mãi']) !!}
                             @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                           </div>
                         </div>
