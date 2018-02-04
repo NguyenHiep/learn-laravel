@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Manage;
 use App\Model\Products;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Posts\Category;
+use App\Model\Categories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -62,7 +62,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $list_cate_all  = Category::all();
+        $list_cate_all  = Categories::all();
         return view('manage.modules.products.create', compact('list_cate_all'))->with(['medias' => $this->medias]);
     }
 
@@ -134,7 +134,7 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-{       $list_cate_all  = Category::all();
+{       $list_cate_all  = Categories::all();
         $record = Products::find($id);
         if(!empty($record->galary_img)){
             $record->galary_img = json_decode($record->galary_img);

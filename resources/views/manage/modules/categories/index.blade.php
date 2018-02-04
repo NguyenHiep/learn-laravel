@@ -184,7 +184,9 @@
                                 <input id="action_ids{{$subcate->id}}" name="action_ids[]" value="{{$subcate->id}}" type="checkbox">
                               </td>
                               <td> __{{$subcate->name}} </td>
-                              <td>{!! $subcate->description !!}</td>
+                              <td class="text-center">
+                                <span class="label label-sm  @if ($subcate->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate->status)}} </span>
+                              </td>
 
                               <td class="text-right">
                                 <div class="btn-group btn-group-solid">
@@ -208,7 +210,9 @@
                                     <input id="action_ids{{$subcate2->id}}" name="action_ids[]" value="{{$subcate2->id}}" type="checkbox">
                                   </td>
                                   <td> ____{{$subcate2->name}} </td>
-                                  <td>{!! $subcate2->description !!}</td>
+                                  <td class="text-center">
+                                    <span class="label label-sm  @if ($subcate2->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate2->status)}} </span>
+                                  </td>
 
                                   <td class="text-right">
                                     <div class="btn-group btn-group-solid">
