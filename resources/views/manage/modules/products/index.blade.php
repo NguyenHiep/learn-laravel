@@ -73,7 +73,6 @@
                           <td> {{$record->price }}</td>
                           <td> {{$record->quantity }}</td>
                           <td class="text-center">
-
                               <span class="label label-sm  @if ($record->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
                           </td>
                           <td class="text-right">

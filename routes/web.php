@@ -33,7 +33,7 @@ Route::group(['middleware', 'auth'], function () {
 			Route::match(['put', 'patch'], 'admins/edit/{id}', ['as' => 'admins.update', 'uses' => 'Settings\AdminsController@update'])->where('id', '[0-9]+');
 			Route::delete('admins/delete/{id}', ['as' => 'admins.destroy', 'uses' => 'Settings\AdminsController@destroy'])->where('id', '[0-9]+');
 		});
-
+        Route::resource('categories', 'CategoriesController');
         Route::resource('products', 'ProductsController');
         Route::resource('orders', 'OrdersController');
 

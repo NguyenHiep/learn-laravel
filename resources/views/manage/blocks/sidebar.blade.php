@@ -31,6 +31,12 @@
         </a>
       </li>
 
+      <li class="nav-item  {{ active(['categories.index', 'categories.create', 'categories.edit'], 'active open') }}">
+        <a href="{{ route('categories.index') }}" class="nav-link ">
+          <span class="title">{{__('static.sidebars.manage.categories.title')}}</span>
+        </a>
+      </li>
+
       <li
         class="nav-item  {{ active(['products.index', 'products.create', 'products.edit'], 'active open') }}">
         <a href="{{ route('products.index') }}" class="nav-link nav-toggle">

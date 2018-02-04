@@ -168,28 +168,9 @@ class ProductsController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
-        if($request->hasFile('pictures')){
-            if ($request->file('pictures')->isValid()) {
-                // File này có thực, bắt đầu đổi tên và move
-                $fileExtension = $request->file('pictures')->getClientOriginalExtension(); // Lấy . của file
-
-                // Filename cực shock để khỏi bị trùng
-                $fileName = time() . "_" . rand(0,9999999) . "_" . md5(rand(0,9999999)) . "." . $fileExtension;
-
-                // Thư mục upload
-                $uploadPath = public_path('/upload/product'); // Thư mục upload
-
-                // Bắt đầu chuyển file vào thư mục
-                $request->file('pictures')->move($uploadPath, $fileName);
-                $inputs['pictures'] = $fileName;
-            }
-            else {
-                // Lỗi file
-                return redirect()->back()->with([
-                    'message' => __('Upload is failed'),
-                    'status'  => self::CTRL_MESSAGE_SUCCESS,
-                ]);
-            }
+        $pictures = Uploads::upload($request, 'pictures', UPLOAD_PRODUCT);
+        if($pictures){
+            $inputs['pictures'] = $pictures;
         }
         $galary_upload = Uploads::multiple_upload($request, 'galary_img',UPLOAD_PRODUCT);
         if($galary_upload){

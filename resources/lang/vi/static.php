@@ -8,6 +8,9 @@ return [
                 'settings' => 'Cài đặt thông tin website',
                 'admins'   => 'Quản trị tài khoản',
             ],
+            'categories'  => [
+                'title'  => 'Chuyên mục',
+            ],
             'products'  => [
                 'title'  => 'Sản phẩm',
                 'create' => 'Thêm sản phẩm',
