@@ -3,7 +3,8 @@
 namespace App\Model;
 
 
-use App\Observers\ProductsObserver;
+use App\Model\Orders\Products;
+use App\Model\Orders\Deliveries;
 
 class Orders extends BaseModel
 {
@@ -23,26 +24,25 @@ class Orders extends BaseModel
      */
     protected $fillable = [
         'id',
-        'name',
-        'description',
-        'short_description',
-        'category_id',
-        'sku',
-        'price',
-        'sale_price',
+        'ordered_at',
+        'delivered_at',
+        'sub_total',
+        'total',
+        'tax_rate',
+        'delivery_fee',
+        'tax_fee',
+        'note',
+        'note',
         'status',
-        'meta_title',
-        'meta_keywords',
-        'meta_description',
-        'brand_id',
-        'galary_img',
-        'quantity',
-        'pictures',
     ];
 
-    public static function boot() {
-        parent::boot();
-        Products::observe(new ProductsObserver());
+    public function products()
+    {
+        return $this->hasMany(Products::class, 'order_id', 'id');
     }
 
+    public function deliveries()
+    {
+        return $this->hasMany(Deliveries::class, 'order_id', 'id');
+    }
 }

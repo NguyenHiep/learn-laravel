@@ -3,35 +3,34 @@
 
 @section('content')
   <div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('products.index')}}">Danh sách sản phẩm</a>
+            <a href="{{route('orders.index')}}">Danh sách đơn hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Tất cả thành viên</span>
+            <span>Tất đơn hàng</span>
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Danh sách sản phẩm </h3>
-      <!-- END PAGE TITLE-->
+      
+      <h1 class="page-title">Danh sách đơn hàng</h1>
+      
       <div class="row">
         <div class="col-md-12">
-          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+  
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">Danh sách sản phẩm</span>
+                <span class="caption-subject bold uppercase">Danh sách đơn hàng</span>
               </div>
               <div class="tools"></div>
               <div class="actions">
-                <a class="btn green" href="{{ route('products.create') }}"> {{__('common.buttons.create')}}
+                <a class="btn green" href="{{ route('orders.create') }}"> {{__('common.buttons.create')}}
                   <i class="fa fa-plus"></i>
                 </a>
               </div>
@@ -42,72 +41,182 @@
                   <thead>
                   <tr>
                     <th> <!-- <th class="checkbox-list">-->
-                           <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
+                      <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
                     </th>
                     <th> #ID</th>
-                    <th> Hình ảnh</th>
-                    <th> Tên sản phẩm</th>
-                    <th> Giá</th>
+                    <th> Họ và tên</th>
+                    <th> Điện thoại</th>
+                    <th> Email</th>
                     <th> Số lượng</th>
+                    <th> Tiền thanh toán</th>
                     <th class="text-center"> Trạng thái</th>
                     <th class="text-center"> Hành động</th>
                   </tr>
                   </thead>
                   <tbody>
-
-                    @if (!empty($records))
-                      @foreach ($records as $record)
-                        <tr>
-                          <td> <!--<td class="checkbox-list"> -->
-                            <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
-                          </td>
-                          <td> {{$record->id}} </td>
-                          <td>
-                            @if(!empty($record->pictures))
-                              <img src="{{ asset(UPLOAD_PRODUCT.$record->pictures)}}" alt="product img" width="40" height="40" />
-                            @else
-
-                            @endif
-                          </td>
-                          <td> {{$record->name}} </td>
-                          <td> {{$record->price }}</td>
-                          <td> {{$record->quantity }}</td>
-                          <td class="text-center">
-                              <span class="label label-sm  @if ($record->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
-                          </td>
-                          <td class="text-right">
-                            <div class="btn-group btn-group-solid">
-                              <a href="{{ route('products.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                                <i class="fa fa-edit"></i> {{__('common.buttons.edit')}}
-                              </a>
-                              <form action="{{ route('products.destroy',$record->id) }}" method="POST" style="display: inline-block">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}}
-                                </button>
-                              </form>
-                            </div>
-
-                        </tr>
-                      @endforeach
-                    @endif
-
+          
+                  @if (!empty($records))
+                    @foreach ($records as $record)
+                      <tr>
+                        <td> <!--<td class="checkbox-list"> -->
+                          <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
+                        </td>
+                        <td> {{$record->id}} </td>
+                        <td> {{$record->deliveries[0]->buyer_name}} </td>
+                        <td> {{$record->deliveries[0]->buyer_phone_1}} </td>
+                        <td> {{$record->deliveries[0]->buyer_email}} </td>
+                        <td> 5 </td>
+                        <td> {{$record->total}} VNĐ</td>
+                        <td class="text-center">
+                          <span class="label label-sm  @if ($record->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.orders.status.'.$record->status)}} </span>
+                        </td>
+                        <td class="text-right">
+                          <div class="btn-group btn-group-solid">
+                            <a href="{{ route('orders.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                              <i class="fa fa-edit"></i>
+                            </a>
+                            <form action="{{ route('orders.destroy',$record->id) }}" method="POST" style="display: inline-block">
+                              {{ method_field('DELETE') }}
+                              {{ csrf_field() }}
+                              <button class="btn btn-delete js-action-delete" type="submit"><i class="fa fa-trash-o"></i></button>
+                            </form>
+                          </div>
+                        </td>
+              
+                      </tr>
+                    @endforeach
+                  @endif
+          
                   </tbody>
                   <tfoot>
-                      <tr>
-                        @if (!empty($records))
-                        <td colspan="8"> {{ $records->links() }}</td>
-                        @endif
-                      </tr>
+                  <tr>
+                    @if (!empty($records))
+                      <td colspan="9"> {{ $records->links() }}</td>
+                    @endif
+                  </tr>
                   </tfoot>
                 </table>
               </div>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE PORTLET-->
         </div>
       </div>
     </div>
+    <!-- END CONTENT BODY -->
   </div>
 @endsection
+
+@section('styles')
+  @parent
+  <link href="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet"
+        type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}"
+        rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/ssets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}"
+        rel="stylesheet" type="text/css"/>
+@stop
+
+@section('scripts')
+  @parent
+  <!-- BEGIN PAGE LEVEL PLUGINS -->
+  <script src="{{ asset('/manages/assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.js')}}"
+          type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
+          type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"
+          type="text/javascript"></script>
+  {{--<script src="{{ asset('/manages/assets/pages/scripts/ecommerce-orders.js')}}" type="text/javascript"></script>--}}
+  <script>
+		var EcommerceOrders = function () {
+
+			var initPickers = function () {
+				//init date pickers
+				$('.date-picker').datepicker({
+					rtl: App.isRTL(),
+					autoclose: true
+				});
+			}
+
+			var handleOrders = function () {
+
+				var grid = new Datatable();
+
+				grid.init({
+					src: $("#datatable_orders"),
+					onSuccess: function (grid) {
+						// execute some code after table records loaded
+					},
+					onError: function (grid) {
+						// execute some code on network or other general error
+					},
+					loadingMessage: 'Loading...',
+					dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options
+						// Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+						// setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js).
+						// So when dropdowns used the scrollable div should be removed.
+						//"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+
+						"lengthMenu": [
+							[10, 20, 50, 100, 150, -1],
+							[10, 20, 50, 100, 150, "All"] // change per page values here
+						],
+						"pageLength": 10, // default record count per page
+						"ajax": {
+							"url": "../demo/ecommerce_orders.php", // ajax source
+						},
+						"order": [
+							[1, "asc"]
+						] // set first column as a default sort by asc
+					}
+				});
+
+				// handle group actionsubmit button click
+				grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
+					e.preventDefault();
+					var action = $(".table-group-action-input", grid.getTableWrapper());
+					if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
+						grid.setAjaxParam("customActionType", "group_action");
+						grid.setAjaxParam("customActionName", action.val());
+						grid.setAjaxParam("id", grid.getSelectedRows());
+						grid.getDataTable().ajax.reload();
+						grid.clearAjaxParams();
+					} else if (action.val() == "") {
+						alert({
+							type: 'danger',
+							icon: 'warning',
+							message: 'Please select an action',
+							container: grid.getTableWrapper(),
+							place: 'prepend'
+						});
+					} else if (grid.getSelectedRowsCount() === 0) {
+						alert({
+							type: 'danger',
+							icon: 'warning',
+							message: 'No record selected',
+							container: grid.getTableWrapper(),
+							place: 'prepend'
+						});
+					}
+				});
+
+			}
+
+			return {
+
+				//main function to initiate the module
+				init: function () {
+
+					initPickers();
+					handleOrders();
+				}
+
+			};
+
+		}();
+
+		jQuery(document).ready(function() {
+			EcommerceOrders.init();
+		});
+  </script>
+@stop
