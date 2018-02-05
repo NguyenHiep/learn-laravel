@@ -33,6 +33,7 @@
 
       <li class="nav-item  {{ active(['categories.index', 'categories.create', 'categories.edit'], 'active open') }}">
         <a href="{{ route('categories.index') }}" class="nav-link ">
+          <i class="fa fa-tasks"></i>
           <span class="title">{{__('static.sidebars.manage.categories.title')}}</span>
         </a>
       </li>
@@ -69,14 +70,15 @@
           <span class="selected"></span>
         </a>
         <ul class="sub-menu">
-          <li class="nav-item">
-            <a href="{{ route('orders.create') }}" class="nav-link ">
-              <span class="title">{{__('static.sidebars.manage.orders.create')}}</span>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a href="{{ route('orders.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.orders.list')}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('orders.create') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.orders.create')}}</span>
             </a>
           </li>
 
