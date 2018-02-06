@@ -51,8 +51,6 @@ if (!function_exists('unicode_str_filter')) {
         return strtolower($str);
     }
 }
-
-
 if (!function_exists('convert_to_string')) {
     /***
      * Convert array to string
@@ -83,5 +81,45 @@ if (!function_exists('convert_to_array')) {
             $value = explode('|', $value);
         }
         return $value;
+    }
+}
+
+/**
+ * Formats a date.
+ *
+ * @param  string  $time   A date/time string
+ * @param  string  $format A format parameter string
+ * @return string  Returns a string formatted according format using the given timestamp
+ *
+ *
+ **/
+
+if (!function_exists('format_date')) {
+
+    function format_date($time, $format = '%d/%m/%Y %H:%M:%S')
+    {
+        if ($time !== false and $time !== null and $time !== '' and $time !== [] and $time != '0000-00-00 00:00:00') {
+            $timestamp = is_numeric($time) ? $time : strtotime($time);
+            if ($timestamp !== false) {
+                return strftime($format, $timestamp);
+            }
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('format_price')) {
+
+    function format_price($price, $symbol ='&nbsp;vnđ')
+    {
+        if ($price !== false and $price !== null and $price !== '' and $price !== []) {
+            $price = is_numeric($price) ? $price : 0;
+            if ($price !== false) {
+                return number_format($price, 0,',','.').$symbol;
+            }
+        }
+
+        return false;
     }
 }

@@ -44,10 +44,10 @@
                       <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
                     </th>
                     <th> #ID</th>
+                    <th> Ngày đặt hàng</th>
                     <th> Họ và tên</th>
                     <th> Điện thoại</th>
                     <th> Email</th>
-                    <th> Số lượng</th>
                     <th> Tiền thanh toán</th>
                     <th class="text-center"> Trạng thái</th>
                     <th class="text-center"> Hành động</th>
@@ -55,25 +55,25 @@
                   </thead>
                   <tbody>
           
-                  @if (!empty($records))
+                  @if ($records->count())
                     @foreach ($records as $record)
                       <tr>
                         <td> <!--<td class="checkbox-list"> -->
                           <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
                         </td>
                         <td> {{$record->id}} </td>
-                        <td> {{$record->deliveries[0]->buyer_name}} </td>
-                        <td> {{$record->deliveries[0]->buyer_phone_1}} </td>
-                        <td> {{$record->deliveries[0]->buyer_email}} </td>
-                        <td> 5 </td>
-                        <td> {{$record->total}} VNĐ</td>
+                        <td> {{format_date($record->ordered_at) }} </td>
+                        <td> {{$record->deliveries->buyer_name}} </td>
+                        <td> {{$record->deliveries->buyer_phone_1}} </td>
+                        <td> {{$record->deliveries->buyer_email}} </td>
+                        <td> {{format_price($record->total)}}</td>
                         <td class="text-center">
                           <span class="label label-sm  @if ($record->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.orders.status.'.$record->status)}} </span>
                         </td>
                         <td class="text-right">
                           <div class="btn-group btn-group-solid">
-                            <a href="{{ route('orders.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                              <i class="fa fa-edit"></i>
+                            <a href="{{ route('orders.show',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                              <i class="fa fa-eye"></i>
                             </a>
                             <form action="{{ route('orders.destroy',$record->id) }}" method="POST" style="display: inline-block">
                               {{ method_field('DELETE') }}
@@ -82,7 +82,7 @@
                             </form>
                           </div>
                         </td>
-              
+
                       </tr>
                     @endforeach
                   @endif

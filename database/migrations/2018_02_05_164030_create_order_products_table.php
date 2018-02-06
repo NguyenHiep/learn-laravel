@@ -16,6 +16,7 @@ class CreateOrderProductsTable extends Migration
         Schema::create('order_products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned()->comment('ID order');
+            $table->integer('product_id')->unsigned()->comment('ID sản phẩm');
             $table->string('name', 255)->comment('Tên sản phẩm');
             $table->string('sku', 50)->comment('Mã SKU');
             $table->integer('price')->unsigned()->comment('Giá sản phẩm');

@@ -23,16 +23,6 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Orders::Orderby('id', 'desc')->paginate(12);
-        /*$orders = DB::table('orders')
-            ->leftJoin('order_products', 'orders.id', '=', 'order_products.order_id')
-            ->leftJoin('order_deliveries', 'orders.id', '=', 'order_deliveries.order_id')
-            //->select('users.*', 'contacts.phone', 'orders.price')
-            ->select('*')
-            ->get();
-        echo "<pre>";
-            var_dump($orders);
-        echo "</pre>";
-        die("Hiep123");*/
         return view('manage.modules.orders.index')->with(['records' => $orders]);
     }
 
@@ -65,7 +55,11 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        //
+        $record = Orders::find($id);
+        if (empty($record)) {
+            return abort(404);
+        }
+        return view('manage.modules.orders.show')->with(['record' => $record]);
     }
 
     /**
@@ -76,7 +70,11 @@ class OrdersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $record = Orders::find($id);
+        if (empty($record)) {
+            return abort(404);
+        }
+        return view('manage.modules.orders.edit')->with(['record' => $record]);
     }
 
     /**
