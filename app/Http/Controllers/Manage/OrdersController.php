@@ -33,7 +33,8 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('manage.modules.orders.create');
     }
 
     /**
@@ -103,4 +104,17 @@ class OrdersController extends Controller
     public function datatable(){
         $data['datatable'] = Orders::all();
     }
+
+    public function invoice_index(){
+        return view('manage.modules.orders.invoice');
+    }
+
+    public function invoice_print(){
+
+    }
+
+    public function export_order(){
+
+    }
+
 }

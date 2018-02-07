@@ -272,10 +272,7 @@
     </div>
     <!-- END CONTENT BODY -->
   </div>
-  <div class="product">
-    @include('manage.blocks.medias.modal', ['medias' => $medias])
-    @include('manage.blocks.medias.content', ['medias' => $medias])
-  </div>
+
 @endsection
 @section('styles')
   @parent

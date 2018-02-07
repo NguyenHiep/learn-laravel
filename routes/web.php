@@ -35,6 +35,8 @@ Route::group(['middleware', 'auth'], function () {
 		});
         Route::resource('categories', 'CategoriesController');
         Route::resource('products', 'ProductsController');
+
+        Route::get('orders/invoice', ['as' => 'orders.invoice', 'uses' => 'OrdersController@invoice_index']);
         Route::resource('orders', 'OrdersController');
 
         Route::group(['prefix' => 'posts'], function () {
