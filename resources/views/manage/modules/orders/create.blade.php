@@ -1,278 +1,563 @@
 @extends('manage.master')
-@section('title', 'Thêm mới sản phẩm')
+@section('title', 'Tạo mới đơn hàng')
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('customers.index')}}">Sản phẩm</a>
+            <a href="{{ route('orders.index') }}">Danh sách đơn hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Thêm mới sản phẩm</span>
+            <span>Tạo mới đơn hàng </span>
           </li>
         </ul>
+      
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Thêm mới sản phẩm </h3>
-      <!-- END PAGE TITLE-->
+      <h3 class="page-title"> Tạo mới đơn hàng</h3>
       <div class="row">
-        {!! Form::open(['route' => 'products.store', 'files' => true, 'class' => 'form-horizontal form-row-seperated']) !!}
-        <div class="col-md-9">
-            <div class="portlet">
-              <div class="portlet-title">
-                <div class="actions btn-set">
-                  <button type="button" name="back" class="btn btn-secondary-outline">
-                    <i class="fa fa-angle-left"></i> Back</button>
-                  <button class="btn btn-secondary-outline">
-                    <i class="fa fa-reply"></i> Reset</button>
-                  <button class="btn btn-success">
-                    <i class="fa fa-check"></i> Save</button>
-                  <button class="btn btn-success">
-                    <i class="fa fa-check-circle"></i> Save & Continue Edit</button>
-                </div>
+        <div class="col-md-12">
+          <!-- Begin: life time stats -->
+          <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="icon-settings font-dark"></i>
+                <span class="caption-subject font-dark sbold uppercase"> Tạo mới đơn hàng</span>
               </div>
-              <div class="portlet-body">
-                <div class="tabbable-bordered">
-                  <ul class="nav nav-tabs">
-                    <li class="active">
-                      <a href="#tab_general" data-toggle="tab"> Thông tin sản phẩm </a>
-                    </li>
-                    <li>
-                      <a href="#tab_meta" data-toggle="tab"> SEO </a>
-                    </li>
-                    <li>
-                      <a href="#tab_images" data-toggle="tab"> Ảnh galary </a>
-                    </li>
-                  </ul>
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="tab_general">
-                      <div class="form-body">
-                        @php $key='name'; @endphp
-                        <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                          <label class="col-md-2 control-label">Tên sản phẩm:
-                            <span class="required"> * </span>
-                          </label>
-                          <div class="col-md-10">
-                            {!! Form::text($key,  old($key), ['class' => 'form-control', 'placeholder' => 'Vui lòng nhập tên sản phẩm']) !!}
-                            @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+              <div class="actions">
+                <a href="{{ route('orders.index') }}" class="btn default">{{ __('common.buttons.cancel') }}</a>
+                <button type="submit" name="submit" class="btn green" id="submit_form">{{ __('common.buttons.save') }}</button>
+              </div>
+            </div>
+            <div class="portlet-body">
+              <div class="tabbable-line">
+                <ul class="nav nav-tabs nav-tabs-lg">
+                  <li class="active">
+                    <a href="#tab_1" data-toggle="tab"> Thông tin </a>
+                  </li>
+                  <li>
+                    <a href="#tab_2" data-toggle="tab"> Hóa đơn
+                      <span class="badge badge-success">4</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#tab_3" data-toggle="tab"> Bảng ghi tín dụng </a>
+                  </li>
+                  <li>
+                    <a href="#tab_4" data-toggle="tab"> Đơn hàng đang vận chuyển
+                      <span class="badge badge-danger"> 2 </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#tab_5" data-toggle="tab"> Lịch sử </a>
+                  </li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab_1">
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="portlet yellow-crusta box">
+                          <div class="portlet-title">
+                            <div class="caption">
+                              <i class="fa fa-cogs"></i>Thông tin đơn hàng </div>
+                          </div>
+                          <div class="portlet-body">
+                            @php $key = 'ordered_at' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Thời gian đặt hàng: </div>
+                              <div class="col-md-7 value">
+                                <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                  <input type="text" class="form-control form-filter input-sm" readonly name="{{ $key }}" placeholder="From">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-sm default" type="button">
+                                      <i class="fa fa-calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            @php $key = 'status' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Trạng thái đơn hàng: </div>
+                              <div class="col-md-7 value">
+                                <select name="{{ $key }}" class="form-control form-filter input-sm">
+                                  <option value="">Select...</option>
+                                  <option value="pending">Pending</option>
+                                  <option value="paid">Paid</option>
+                                  <option value="canceled">Canceled</option>
+                                </select>
+                              </div>
+                            </div>
+                            @php $key = 'method_payment' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Phương thức thanh toán: </div>
+                              <div class="col-md-7 value">
+                                <select name="{{ $key }}" class="form-control form-filter input-sm">
+                                  <option value="">Select...</option>
+                                  <option value="pending">Thanh toán khi nhận hàng</option>
+                                  <option value="paid">Paypall</option>
+                                  <option value="canceled">Credit Card</option>
+                                </select>
+                              </div>
+                            </div>
+                            @php $key = 'note' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Ghi chú đơn hàng: </div>
+                              <div class="col-md-7 value">
+                                <textarea name="{{ $key }}" id="{{ $key }}" cols="30" rows="3" class="form-control"></textarea>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        @php $key='description'; @endphp
-                        <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                          <label class="col-md-2 control-label">Mô tả:
-                            <span class="required"> * </span>
-                          </label>
-                          <div class="col-md-10">
-                            {!! Form::textarea($key,  old($key), ['class' => 'form-control summernote_editor', 'rows' => '3', 'placeholder' => 'Vui lòng nhập mô tả']) !!}
-                            @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                      </div>
+                      <div class="col-md-6 col-sm-12">
+                        <div class="portlet blue-hoki box">
+                          <div class="portlet-title">
+                            <div class="caption">
+                              <i class="fa fa-cogs"></i>Thông tin khách hàng
+                            </div>
                           </div>
-                        </div>
-
-                        @php $key='short_description'; @endphp
-                        <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                          <label class="col-md-2 control-label">Mô tả ngắn:</label>
-                          <div class="col-md-10">
-                            {!! Form::textarea($key,  old($key), ['class' => 'form-control summernote_editor', 'rows' => '2', 'placeholder' => 'Vui lòng nhập mô tả ngắn']) !!}
-                            @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
-                          </div>
-                        </div>
-                        @php $key='sku'; @endphp
-                        <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                          <label class="col-md-2 control-label">SKU:
-                            <span class="required"> * </span>
-                          </label>
-                          <div class="col-md-10">
-                            {!! Form::text($key,  old($key), ['class' => 'form-control', 'placeholder' => 'SKU']) !!}
-                            @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
-                          </div>
-                        </div>
-                        @php $key='price'; @endphp
-                        <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                          <label class="col-md-2 control-label">Giá bán:
-                            <span class="required"> * </span>
-                          </label>
-                          <div class="col-md-10">{!! Form::number($key,  old($key), ['class' => 'form-control', 'placeholder' => 'Nhập giá bán']) !!}
-                            @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
-                          </div>
-                        </div>
-                        @php $key='sale_price'; @endphp
-                        <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                          <label class="col-md-2 control-label">Giá khuyến mãi:</label>
-                          <div class="col-md-10">{!! Form::number($key,  old($key, 0), ['class' => 'form-control', 'placeholder' => 'Giá khuyến mãi']) !!}
-                            @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
-                          </div>
-                        </div>
-                        @php $key='quantity'; @endphp
-                        <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                          <label class="col-md-2 control-label">Số lượng:  <span class="required"> * </span> </label>
-                          <div class="col-md-10">{!! Form::number($key,  old($key), ['class' => 'form-control', 'placeholder' => 'Số lượng sản phẩm']) !!}
-                            @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                          <div class="portlet-body">
+                            @php $key = 'order_customers.name' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Tên khách hàng: </div>
+                              <div class="col-md-7 value"> <input type="text" class="form-control input-sm" name="{{ convert_input_name($key) }}"> </div>
+                            </div>
+                            @php $key = 'order_customers.email' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Email: </div>
+                              <div class="col-md-7 value"><input type="email" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                            </div>
+                            @php $key = 'order_customers.phone' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Số điện thoại: </div>
+                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                            </div>
+                            @php $key = 'order_customers.address' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Địa chỉ: </div>
+                              <div class="col-md-7 value"> <textarea name="{{ convert_input_name($key)  }}" cols="30" rows="3" class="form-control"></textarea></div>
+                            </div>
+                            
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="tab-pane" id="tab_meta">
-                      <div class="form-body">
-                        @php $key='meta_title'; @endphp
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">Meta Title:</label>
-                          <div class="col-md-10">
-                            {!! Form::text($key,  old($key), ['class' => 'form-control maxlength-handler', 'maxlength' => '100', 'placeholder' => 'Meta title']) !!}
-                            <span class="help-block"> tối đa 100 ký tự </span>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="portlet green-meadow box">
+                          <div class="portlet-title">
+                            <div class="caption">
+                              <i class="fa fa-cogs"></i>Địa chỉ thanh toán </div>
+                            <div class="actions">
+                              <a href="javascript:;" class="btn btn-default btn-sm">
+                                <i class="fa fa-pencil"></i> Sửa </a>
+                            </div>
+                          </div>
+                          <div class="portlet-body">
+                            @php $key = 'order_deliveries.delivery_type' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-12 mt-checkbox-list">
+                                <label class="mt-checkbox mt-checkbox-outline">
+                                  <input type="checkbox">Địa chỉ nhận hàng khác địa chỉ người mua
+                                  <span></span>
+                                </label>
+                              </div>
+                            </div>
+                            @php $key = 'order_deliveries.buyer_name' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Tên khách hàng: </div>
+                              <div class="col-md-7 value"> <input type="text" class="form-control input-sm" name="{{ convert_input_name($key) }}"> </div>
+                            </div>
+                            @php $key = 'order_deliveries.buyer_email' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Email: </div>
+                              <div class="col-md-7 value"><input type="email" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                            </div>
+                            @php $key = 'order_deliveries.buyer_phone_1' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Số điện thoại: </div>
+                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                            </div>
+                            @php $key = 'order_deliveries.buyer_phone_2' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Số điện thoại2: </div>
+                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                            </div>
+                            @php $key = 'order_deliveries.buyer_address' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Địa chỉ: </div>
+                              <div class="col-md-7 value"> <textarea name="{{ convert_input_name($key)  }}" cols="30" rows="3" class="form-control"></textarea></div>
+                            </div>
+  
                           </div>
                         </div>
-                        @php $key='meta_keywords'; @endphp
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">Meta Keywords:</label>
-                          <div class="col-md-10">
-                            {!! Form::textarea($key,  old($key), ['class' => 'form-control maxlength-handler', 'maxlength' => '1000', 'rows' => '3', 'placeholder' => 'Meta Keywords']) !!}
-                            <span class="help-block"> tối đa 1000 ký tự</span>
+                      </div>
+                      <div class="col-md-6 col-sm-12">
+                        <div class="portlet red-sunglo box">
+                          <div class="portlet-title">
+                            <div class="caption">
+                              <i class="fa fa-cogs"></i>Địa chỉ giao hàng </div>
+                            <div class="actions">
+                              <a href="javascript:;" class="btn btn-default btn-sm">
+                                <i class="fa fa-pencil"></i> Sửa </a>
+                            </div>
                           </div>
-                        </div>
-                        @php $key='meta_description'; @endphp
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">Meta Description:</label>
-                          <div class="col-md-10">
-                            {!! Form::textarea($key,  old($key), ['class' => 'form-control maxlength-handler', 'maxlength' => '1000', 'rows' => '4', 'placeholder' => 'Meta Description']) !!}
-                            <span class="help-block"> tối đa 255 ký tự </span>
+                          <div class="portlet-body">
+                            @php $key = 'order_deliveries.receiver_name' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Tên khách hàng: </div>
+                              <div class="col-md-7 value"> <input type="text" class="form-control input-sm" name="{{ convert_input_name($key) }}"> </div>
+                            </div>
+                            @php $key = 'order_deliveries.receiver_email' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Email: </div>
+                              <div class="col-md-7 value"><input type="email" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                            </div>
+                            @php $key = 'order_deliveries.receiver_phone_1' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Số điện thoại: </div>
+                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                            </div>
+                            @php $key = 'order_deliveries.receiver_phone_2' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Số điện thoại 2: </div>
+                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                            </div>
+                            @php $key = 'order_deliveries.buyer_address1' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Địa chỉ: </div>
+                              <div class="col-md-7 value"> <textarea name="{{ convert_input_name($key)  }}" cols="30" rows="3" class="form-control"></textarea></div>
+                            </div>
+                            @php $key = 'order_deliveries.receiver_address_2' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Địa chỉ 2: </div>
+                              <div class="col-md-7 value"> <textarea name="{{ convert_input_name($key)  }}" cols="30" rows="3" class="form-control"></textarea></div>
+                            </div>
+  
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="tab-pane" id="tab_images">
-                      @php $key='galary_img[]'; @endphp
-                      {{ Form::file($key, ['multiple']) }}
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="portlet grey-cascade box">
+                          <div class="portlet-title">
+                            <div class="caption">
+                              <i class="fa fa-cogs"></i>Giỏ hàng </div>
+                            <div class="actions">
+                              <a href="javascript:;" class="btn btn-default btn-sm">
+                                <i class="fa fa-pencil"></i> Sửa </a>
+                            </div>
+                          </div>
+                          <div class="portlet-body">
+                            <div class="table-responsive">
+                              <table class="table table-hover table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                  <th>STT</th>
+                                  <th> Tên sản phẩm </th>
+                                  
+                                  <th> Giá tiền </th>
+                                  <th> Số lượng </th>
+                                  <th> Tiền thuế </th>
+                                  <th> Phần trăm thuế </th>
+                                  <th> Tổng </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>
+                                    <a href="javascript:;"> Product 1 </a>
+                                  </td>
+                                  <td> 345.50$ </td>
+                                  <td> 2 </td>
+                                  <td> 2.00$ </td>
+                                  <td> 4% </td>
+                                  <td> 691.00$ </td>
+                                </tr>
+                                <tr>
+                                  <td>2</td>
+                                  <td>
+                                    <a href="javascript:;"> Product 1 </a>
+                                  </td>
+                                  <td> 345.50$ </td>
+                                  <td> 2 </td>
+                                  <td> 2.00$ </td>
+                                  <td> 4% </td>
+                                  <td> 691.00$ </td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>
+                                    <a href="javascript:;"> Product 1 </a>
+                                  </td>
+                                  
+                                  <td> 345.50$ </td>
+                                  <td> 2 </td>
+                                  <td> 2.00$ </td>
+                                  <td> 4% </td>
+                                  <td> 691.00$ </td>
+                                </tr>
+                                <tr>
+                                  <td>4</td>
+                                  <td>
+                                    <a href="javascript:;"> Product 1 </a>
+                                  </td>
+                                  <td> 345.50$ </td>
+                                  <td> 2 </td>
+                                  <td> 2.00$ </td>
+                                  <td> 4% </td>
+                                  <td> 691.00$ </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6"> </div>
+                      <div class="col-md-6">
+                        <div class="well">
+                          <div class="row static-info align-reverse">
+                            <div class="col-md-8 name"> Tổng tiền: </div>
+                            <div class="col-md-3 value"> $1,124.50 </div>
+                          </div>
+                          <div class="row static-info align-reverse">
+                            <div class="col-md-8 name"> Phí vận chuyển: </div>
+                            <div class="col-md-3 value"> $40.50 </div>
+                          </div>
+                          <div class="row static-info align-reverse">
+                            <div class="col-md-8 name"> Tổng tiền có thuế: </div>
+                            <div class="col-md-3 value"> $1,260.00 </div>
+                          </div>
+                          <div class="row static-info align-reverse">
+                            <div class="col-md-8 name"> Tổng tiền phải trả: </div>
+                            <div class="col-md-3 value"> $1,260.00 </div>
+                          </div>
+                          <div class="row static-info align-reverse">
+                            <div class="col-md-8 name"> Tổng số tiền hoàn trả lại: </div>
+                            <div class="col-md-3 value"> $0.00 </div>
+                          </div>
+                          <div class="row static-info align-reverse">
+                            <div class="col-md-8 name"> Tổng số nợ: </div>
+                            <div class="col-md-3 value"> $1,124.50 </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="tab_2">
+                    <div class="table-container">
+                      <div class="table-actions-wrapper">
+                        <span> </span>
+                        <select class="table-group-action-input form-control input-inline input-small input-sm">
+                          <option value="">Select...</option>
+                          <option value="pending">Pending</option>
+                          <option value="paid">Paid</option>
+                          <option value="canceled">Canceled</option>
+                        </select>
+                        <button class="btn btn-sm yellow table-group-action-submit">
+                          <i class="fa fa-check"></i> Submit</button>
+                      </div>
+                      <table class="table table-striped table-bordered table-hover" id="datatable_invoices">
+                        <thead>
+                        <tr role="row" class="heading">
+                          <th width="5%">
+                            <input type="checkbox" class="group-checkable"> </th>
+                          <th width="5%"> Invoice&nbsp;# </th>
+                          <th width="15%"> Bill To </th>
+                          <th width="15%"> Invoice&nbsp;Date </th>
+                          <th width="10%"> Amount </th>
+                          <th width="10%"> Status </th>
+                          <th width="10%"> Actions </th>
+                        </tr>
+                        <tr role="row" class="filter">
+                          <td> </td>
+                          <td>
+                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_no"> </td>
+                          <td>
+                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_bill_to"> </td>
+                          <td>
+                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                              <input type="text" class="form-control form-filter input-sm" readonly name="order_invoice_date_from" placeholder="From">
+                              <span class="input-group-btn">
+                                <button class="btn btn-sm default" type="button">
+                                  <i class="fa fa-calendar"></i>
+                                </button>
+                              </span>
+                            </div>
+                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                              <input type="text" class="form-control form-filter input-sm" readonly name="order_invoice_date_to" placeholder="To">
+                              <span class="input-group-btn">
+                                <button class="btn btn-sm default" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="margin-bottom-5">
+                              <input type="text" class="form-control form-filter input-sm" name="order_invoice_amount_from" placeholder="From" /> </div>
+                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_amount_to" placeholder="To" /> </td>
+                          <td>
+                            <select name="order_invoice_status" class="form-control form-filter input-sm">
+                              <option value="">Select...</option>
+                              <option value="pending">Pending</option>
+                              <option value="paid">Paid</option>
+                              <option value="canceled">Canceled</option>
+                            </select>
+                          </td>
+                          <td>
+                            <div class="margin-bottom-5">
+                              <button class="btn btn-sm yellow filter-submit margin-bottom">
+                                <i class="fa fa-search"></i> Search</button>
+                            </div>
+                            <button class="btn btn-sm red filter-cancel">
+                              <i class="fa fa-times"></i> Reset</button>
+                          </td>
+                        </tr>
+                        </thead>
+                        <tbody> </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="tab_3">
+                    <div class="table-container">
+                      <table class="table table-striped table-bordered table-hover" id="datatable_credit_memos">
+                        <thead>
+                        <tr role="row" class="heading">
+                          <th width="5%"> Credit&nbsp;Memo&nbsp;# </th>
+                          <th width="15%"> Bill To </th>
+                          <th width="15%"> Created&nbsp;Date </th>
+                          <th width="10%"> Status </th>
+                          <th width="10%"> Actions </th>
+                        </tr>
+                        </thead>
+                        <tbody> </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="tab_4">
+                    <div class="table-container">
+                      <table class="table table-striped table-bordered table-hover" id="datatable_shipment">
+                        <thead>
+                        <tr role="row" class="heading">
+                          <th width="5%"> Shipment&nbsp;# </th>
+                          <th width="15%"> Ship&nbsp;To </th>
+                          <th width="15%"> Shipped&nbsp;Date </th>
+                          <th width="10%"> Quantity </th>
+                          <th width="10%"> Actions </th>
+                        </tr>
+                        <tr role="row" class="filter">
+                          <td>
+                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_no"> </td>
+                          <td>
+                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_ship_to"> </td>
+                          <td>
+                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                              <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_from" placeholder="From">
+                              <span class="input-group-btn">
+                                <button class="btn btn-sm default" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                              </span>
+                            </div>
+                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                              <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_to" placeholder="To">
+                              <span class="input-group-btn">
+                                <button class="btn btn-sm default" type="button">
+                                <i class="fa fa-calendar"></i>
+                                </button>
+                              </span>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="margin-bottom-5">
+                              <input type="text" class="form-control form-filter input-sm" name="order_shipment_quantity_from" placeholder="From" /> </div>
+                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_quantity_to" placeholder="To" /> </td>
+                          <td>
+                            <div class="margin-bottom-5">
+                              <button class="btn btn-sm yellow filter-submit margin-bottom">
+                                <i class="fa fa-search"></i> Search</button>
+                            </div>
+                            <button class="btn btn-sm red filter-cancel">
+                              <i class="fa fa-times"></i> Reset</button>
+                          </td>
+                        </tr>
+                        </thead>
+                        <tbody> </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="tab_5">
+                    <div class="table-container">
+                      <table class="table table-striped table-bordered table-hover" id="datatable_history">
+                        <thead>
+                        <tr role="row" class="heading">
+                          <th width="25%"> Datetime </th>
+                          <th width="55%"> Description </th>
+                          <th width="10%"> Notification </th>
+                          <th width="10%"> Actions </th>
+                        </tr>
+                        <tr role="row" class="filter">
+                          <td>
+                            <div class="input-group date datetime-picker margin-bottom-5" data-date-format="dd/mm/yyyy hh:ii">
+                              <input type="text" class="form-control form-filter input-sm" readonly name="order_history_date_from" placeholder="From">
+                              <span class="input-group-btn">
+                                                                            <button class="btn btn-sm default date-set" type="button">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                            </button>
+                                                                        </span>
+                            </div>
+                            <div class="input-group date datetime-picker" data-date-format="dd/mm/yyyy hh:ii">
+                              <input type="text" class="form-control form-filter input-sm" readonly name="order_history_date_to" placeholder="To">
+                              <span class="input-group-btn">
+                                                                            <button class="btn btn-sm default date-set" type="button">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                            </button>
+                                                                        </span>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="text" class="form-control form-filter input-sm" name="order_history_desc" placeholder="To" /> </td>
+                          <td>
+                            <select name="order_history_notification" class="form-control form-filter input-sm">
+                              <option value="">Select...</option>
+                              <option value="pending">Pending</option>
+                              <option value="notified">Notified</option>
+                              <option value="failed">Failed</option>
+                            </select>
+                          </td>
+                          <td>
+                            <div class="margin-bottom-5">
+                              <button class="btn btn-sm yellow filter-submit margin-bottom">
+                                <i class="fa fa-search"></i> Search</button>
+                            </div>
+                            <button class="btn btn-sm red filter-cancel">
+                              <i class="fa fa-times"></i> Reset</button>
+                          </td>
+                        </tr>
+                        </thead>
+                        <tbody> </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
+          </div>
+          <!-- End: life time stats -->
         </div>
-        <div class="col-md-3">
-          <div class="portlet light bordered">
-            <div class="portlet-title">
-              <div class="caption">Đăng sản phẩm</div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-              </div>
-            </div>
-            <div class="portlet-body" style="display: block;">
-            <!--
-              <div class="form-group">
-                <label>Ngày đăng: <strong>29/09/2017@11:58</strong> </label>
-              </div>
-              -->
-              @php $key='status'; @endphp
-              <div class="form-group clearfix">
-                <label class="control-label">Trạng thái:</label>
-                @if(!empty(__('selector.post_status')))
-                  <div class="radio-list">
-                    @foreach(__('selector.post_status') as $k =>$val)
-                      @if($k === DISABLE)
-                        <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
-                      @else
-                        <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
-                      @endif
-                    @endforeach
-                  </div>
-                @endif
-              </div>
-              <!--
-              <div class="form-group">
-                <label>Ngôn ngữ: </label>
-              </div>
-              -->
-              <div class="form-group clearfix">
-                <a href="{{ route('products.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
-                <button type="submit" class="btn green pull-right">Đăng sản phẩm</button>
-              </div>
-            </div>
-          </div>
-          <div class="portlet light bordered">
-            <div class="portlet-title">
-              <div class="caption">Thể loại sản phẩm</div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-              </div>
-            </div>
-            <div class="portlet-body" style="display: block;">
-              <div class="form-group">
-                <div class="checkbox-list">
-                  @php
-                    $key = 'category_id.';
-                    $html = '<label><input type="checkbox" name="'.convert_input_name($key).'" value="0" id="id-category-0">Không xác định</label>'; $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
-                    if(!empty($list_cate_all)){
-                      foreach($list_cate_all as $parent){
-                        if($parent->parent_id == 0){
-                          $html .= '<label><input type="checkbox" name="'.convert_input_name($key).'" value="'.$parent->id.'" id="id-category-'.$parent->id.'">'.$parent->name.'</label>';
-                          //unset($data[$key]);
-                          foreach ($list_cate_all as $child){
-
-                            if($child->parent_id == $parent->id){
-                              $html .= '<label>'.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child->id.'" id="id-category-'.$child->id.'">'.$child->name.'</label>';
-                              foreach ($list_cate_all as $child2){
-                                if($child2->parent_id == $child->id){
-                                     $html .= '<label>'.$text.$text.'<input type="checkbox" name="'.convert_input_name($key).'" value="'.$child2->id.'" id="id-category-'.$child2->id.'">'.$child2->name.'</label>';
-                                }
-                              } // End loop level 3
-
-                            }
-                          } // End loop level 2
-
-                        }
-
-                      } // End loop level 1
-                    }
-                    echo $html;
-                  @endphp
-
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="portlet light bordered">
-            <div class="portlet-title">
-              <div class="caption">Ảnh sản phẩm</div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-              </div>
-            </div>
-            @php $key='pictures' @endphp
-            <div class="portlet-body" style="display: block;">
-              <div class="form-group @if ($errors->has($key)) has-error  @endif last">
-                <div class="fileinput fileinput-new" data-provides="fileinput">
-                  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
-                  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
-                  <div>
-                  <span class="btn default btn-file">
-                    <span class="fileinput-new"> Chọn hình ảnh </span>
-                    <span class="fileinput-exists"> Ảnh khác </span>
-                    {{ Form::file($key) }}
-                  </span>
-                    <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
-                  </div>
-                </div>
-                @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
-              </div>
-            </div>
-          </div>
-
-        </div>
-        {!! Form::close() !!}
       </div>
     </div>
     <!-- END CONTENT BODY -->
   </div>
-
 @endsection
 @section('styles')
   @parent
@@ -281,11 +566,10 @@
   <link href="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" />
-
+  
   <link href="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
-
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
@@ -294,7 +578,7 @@
   <script src="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.min.js')}}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/js/plugin/medias/summernote-ext-medias.js')}}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
-
+  
   <script src="{{ asset('/manages/assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
