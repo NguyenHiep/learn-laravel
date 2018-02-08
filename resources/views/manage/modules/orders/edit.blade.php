@@ -11,515 +11,325 @@
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Đơn hàng chi tiết </span>
+            <span>Cập nhật đơn hàng - #{{ $record->id }} </span>
           </li>
         </ul>
 
       </div>
-      <h3 class="page-title"> Đơn hàng chi tiết</h3>
+      <h3 class="page-title"> Cập nhật đơn hàng - #{{ $record->id }}</h3>
       <div class="row">
         <div class="col-md-12">
-          <!-- Begin: life time stats -->
+          {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\OrdersController@update',$record->id]]) !!}
           <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
               <div class="caption">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject font-dark sbold uppercase"> Đơn hàng #12313232
-                  <span class="hidden-xs">| Dec 27, 2013 7:16:25 </span>
-                 </span>
+                <span class="caption-subject font-dark sbold uppercase"> Cập nhật đơn hàng - #{{ $record->id }}</span>
               </div>
               <div class="actions">
-                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                  <label class="btn btn-transparent green btn-outline btn-circle btn-sm active">
-                    <input type="radio" name="options" class="toggle" id="option1">Actions</label>
-                  <label class="btn btn-transparent blue btn-outline btn-circle btn-sm">
-                    <input type="radio" name="options" class="toggle" id="option2">Settings</label>
-                </div>
-                <div class="btn-group">
-                  <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
-                    <i class="fa fa-share"></i>
-                    <span class="hidden-xs"> Tools </span>
-                    <i class="fa fa-angle-down"></i>
-                  </a>
-                  <ul class="dropdown-menu pull-right">
-                    <li>
-                      <a href="javascript:;"> Export to Excel </a>
-                    </li>
-                    <li>
-                      <a href="javascript:;"> Export to CSV </a>
-                    </li>
-                    <li>
-                      <a href="javascript:;"> Export to XML </a>
-                    </li>
-                    <li class="divider"> </li>
-                    <li>
-                      <a href="javascript:;"> Print Invoices </a>
-                    </li>
-                  </ul>
-                </div>
+                <a href="{{ route('orders.index') }}" class="btn default">{{ __('common.buttons.cancel') }}</a>
+                <button type="submit" name="submit" class="btn green" id="submit_form">{{ __('common.buttons.save') }}</button>
               </div>
             </div>
             <div class="portlet-body">
               <div class="tabbable-line">
-                <ul class="nav nav-tabs nav-tabs-lg">
-                  <li class="active">
-                    <a href="#tab_1" data-toggle="tab"> Chi tiết </a>
-                  </li>
-                  <li>
-                    <a href="#tab_2" data-toggle="tab"> Hóa đơn
-                      <span class="badge badge-success">4</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#tab_3" data-toggle="tab"> Bảng ghi tín dụng </a>
-                  </li>
-                  <li>
-                    <a href="#tab_4" data-toggle="tab"> Đơn hàng đang vận chuyển
-                      <span class="badge badge-danger"> 2 </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#tab_5" data-toggle="tab"> Lịch sử </a>
-                  </li>
-                </ul>
-                <div class="tab-content">
-                  <div class="tab-pane active" id="tab_1">
-                    <div class="row">
-                      <div class="col-md-6 col-sm-12">
-                        <div class="portlet yellow-crusta box">
-                          <div class="portlet-title">
-                            <div class="caption">
-                              <i class="fa fa-cogs"></i>Đơn hàng chi tiết </div>
-                            <div class="actions">
-                              <a href="javascript:;" class="btn btn-default btn-sm">
-                                <i class="fa fa-pencil"></i> Sửa </a>
-                            </div>
-                          </div>
-                          <div class="portlet-body">
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Order id#: </div>
-                              <div class="col-md-7 value"> 12313232
-                                <span class="label label-info label-sm"> Email confirmation was sent </span>
+                <div class="tab-pane active" id="tab_1">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="portlet yellow-crusta box">
+                        <div class="portlet-title">
+                          <div class="caption">
+                            <i class="fa fa-cogs"></i>Thông tin đơn hàng </div>
+                        </div>
+                        <div class="portlet-body">
+                          @php $key = 'ordered_at' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Ngày đặt hàng: </div>
+                            <div class="col-md-7 value">
+                              <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                {{ Form::text($key, old($key, format_date($record->{$key}, '%d/%m/%Y')), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày đặt hàng'])}}
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm default" type="button">
+                                      <i class="fa fa-calendar"></i>
+                                    </button>
+                                  </span>
                               </div>
                             </div>
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Thời gian đặt hàng: </div>
-                              <div class="col-md-7 value"> Dec 27, 2013 7:16:25 PM </div>
-                            </div>
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Trạng thái đơn hàng: </div>
-                              <div class="col-md-7 value">
-                                <span class="label label-success"> Closed </span>
+                          </div>
+                          @php $key = 'delivered_at' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Ngày giao hàng: </div>
+                            <div class="col-md-7 value">
+                              <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                {{ Form::text($key, old($key, format_date($record->{$key},'%d/%m/%Y')), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày giao hàng'])}}
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm default" type="button">
+                                      <i class="fa fa-calendar"></i>
+                                    </button>
+                                  </span>
                               </div>
                             </div>
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Tổng cộng: </div>
-                              <div class="col-md-7 value"> $175.25 </div>
-                            </div>
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Phương thức thanh toán: </div>
-                              <div class="col-md-7 value"> Credit Card </div>
-                            </div>
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Ghi chú đơn hàng: </div>
-                              <div class="col-md-7 value"> Giao hàng vào ngày mai </div>
+                          </div>
+                          @php $key = 'status' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Trạng thái đơn hàng: </div>
+                            <div class="col-md-7 value">
+                              {{  Form::select($key, __('selector.default') + __('selector.orders.status'), old($key, $record->{$key}), [ 'class' => 'form-control form-filter input-sm' ]) }}
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6 col-sm-12">
-                        <div class="portlet blue-hoki box">
-                          <div class="portlet-title">
-                            <div class="caption">
-                              <i class="fa fa-cogs"></i>Thông tin khách hàng </div>
-                            <div class="actions">
-                              <a href="javascript:;" class="btn btn-default btn-sm">
-                                <i class="fa fa-pencil"></i> Sửa </a>
+                          @php $key = 'payment_id' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Phương thức thanh toán: </div>
+                            <div class="col-md-7 value">
+                              {{  Form::select($key, __('selector.default') + __('selector.payment'), old($key, $record->{$key}), [ 'class' => 'form-control form-filter input-sm' ]) }}
                             </div>
                           </div>
-                          <div class="portlet-body">
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Tên khách hàng: </div>
-                              <div class="col-md-7 value"> Jhon Doe </div>
-                            </div>
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Email: </div>
-                              <div class="col-md-7 value"> jhon@doe.com </div>
-                            </div>
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Địa chỉ: </div>
-                              <div class="col-md-7 value"> New York </div>
-                            </div>
-                            <div class="row static-info">
-                              <div class="col-md-5 name"> Số điện thoại: </div>
-                              <div class="col-md-7 value"> 12234389 </div>
+                          @php $key = 'note' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Ghi chú đơn hàng: </div>
+                            <div class="col-md-7 value">
+                              {{  Form::textarea( $key, old($key, $record->{$key}), [ 'cols'=> 30, 'rows' => 3,'class' => 'form-control', 'placeholder' => 'Ghi chú đơn hàng']) }}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-6 col-sm-12">
-                        <div class="portlet green-meadow box">
-                          <div class="portlet-title">
-                            <div class="caption">
-                              <i class="fa fa-cogs"></i>Địa chỉ thanh toán </div>
-                            <div class="actions">
-                              <a href="javascript:;" class="btn btn-default btn-sm">
-                                <i class="fa fa-pencil"></i> Sửa </a>
-                            </div>
-                          </div>
-                          <div class="portlet-body">
-                            <div class="row static-info">
-                              <div class="col-md-12 value"> Jhon Done
-                                <br> #24 Park Avenue Str
-                                <br> New York
-                                <br> Connecticut, 23456 New York
-                                <br> United States
-                                <br> T: 123123232
-                                <br> F: 231231232
-                                <br> </div>
-                            </div>
+                    {{--<div class="col-md-6 col-sm-12">
+                      <div class="portlet blue-hoki box">
+                        <div class="portlet-title">
+                          <div class="caption">
+                            <i class="fa fa-cogs"></i>Thông tin khách hàng
                           </div>
                         </div>
-                      </div>
-                      <div class="col-md-6 col-sm-12">
-                        <div class="portlet red-sunglo box">
-                          <div class="portlet-title">
-                            <div class="caption">
-                              <i class="fa fa-cogs"></i>Địa chỉ giao hàng </div>
-                            <div class="actions">
-                              <a href="javascript:;" class="btn btn-default btn-sm">
-                                <i class="fa fa-pencil"></i> Sửa </a>
+                        <div class="portlet-body">
+                          @php $key = 'order_customers.name' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Tên khách hàng: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn Minh Hiệp'])}}
                             </div>
                           </div>
-                          <div class="portlet-body">
-                            <div class="row static-info">
-                              <div class="col-md-12 value"> Jhon Done
-                                <br> #24 Park Avenue Str
-                                <br> New York
-                                <br> Connecticut, 23456 New York
-                                <br> United States
-                                <br> T: 123123232
-                                <br> F: 231231232
-                                <br> </div>
+                          @php $key = 'order_customers.email' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Email: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::email(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: customer@gmail.com'])}}
                             </div>
                           </div>
+                          @php $key = 'order_customers.phone' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Số điện thoại: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                            </div>
+                          </div>
+                          @php $key = 'order_customers.address' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Địa chỉ: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::textarea(convert_input_name($key), old(convert_input_name($key)), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                            </div>
+                          </div>
+                    
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12 col-sm-12">
-                        <div class="portlet grey-cascade box">
-                          <div class="portlet-title">
-                            <div class="caption">
-                              <i class="fa fa-cogs"></i>Giỏ hàng </div>
-                            <div class="actions">
-                              <a href="javascript:;" class="btn btn-default btn-sm">
-                                <i class="fa fa-pencil"></i> Sửa </a>
+                    </div>--}}
+                  </div>
+                  @php $deliveries = $record->deliveries; @endphp
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="portlet green-meadow box">
+                        <div class="portlet-title">
+                          <div class="caption">
+                            <i class="fa fa-cogs"></i>Địa chỉ thanh toán </div>
+                        </div>
+                        <div class="portlet-body">
+                          @php $key = 'order_deliveries.delivery_type' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-12 mt-checkbox-list">
+                              <label class="mt-checkbox mt-checkbox-outline">
+                                <input type="checkbox">Địa chỉ nhận hàng khác địa chỉ người mua
+                                <span></span>
+                              </label>
                             </div>
                           </div>
-                          <div class="portlet-body">
-                            <div class="table-responsive">
-                              <table class="table table-hover table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                  <th>STT</th>
-                                  <th> Tên sản phẩm </th>
-
-                                  <th> Giá tiền </th>
-                                  <th> Số lượng </th>
-                                  <th> Tiền thuế </th>
-                                  <th> Phần trăm thuế </th>
-                                  <th> Tổng </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td>
-                                    <a href="javascript:;"> Product 1 </a>
-                                  </td>
-                                  <td> 345.50$ </td>
-                                  <td> 2 </td>
-                                  <td> 2.00$ </td>
-                                  <td> 4% </td>
-                                  <td> 691.00$ </td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td>
-                                    <a href="javascript:;"> Product 1 </a>
-                                  </td>
-                                  <td> 345.50$ </td>
-                                  <td> 2 </td>
-                                  <td> 2.00$ </td>
-                                  <td> 4% </td>
-                                  <td> 691.00$ </td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td>
-                                    <a href="javascript:;"> Product 1 </a>
-                                  </td>
-
-                                  <td> 345.50$ </td>
-                                  <td> 2 </td>
-                                  <td> 2.00$ </td>
-                                  <td> 4% </td>
-                                  <td> 691.00$ </td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td>
-                                    <a href="javascript:;"> Product 1 </a>
-                                  </td>
-                                  <td> 345.50$ </td>
-                                  <td> 2 </td>
-                                  <td> 2.00$ </td>
-                                  <td> 4% </td>
-                                  <td> 691.00$ </td>
-                                </tr>
-                                </tbody>
-                              </table>
+                          @php $key = 'order_deliveries.buyer_name' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Tên khách hàng: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn văn A'])}}
+                        
                             </div>
                           </div>
+                          @php $key = 'order_deliveries.buyer_email' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Email: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::email(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: email@gmail.com'])}}
+                            </div>
+                          </div>
+                          @php $key = 'order_deliveries.buyer_phone_1' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Số điện thoại: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                            </div>
+                          </div>
+                          @php $key = 'order_deliveries.buyer_phone_2' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Số điện thoại2: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                            </div>
+                          </div>
+                          @php $key = 'order_deliveries.buyer_address' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Địa chỉ: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::textarea(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                            </div>
+                          </div>
+                    
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-6"> </div>
-                      <div class="col-md-6">
-                        <div class="well">
-                          <div class="row static-info align-reverse">
-                            <div class="col-md-8 name"> Tổng tiền: </div>
-                            <div class="col-md-3 value"> $1,124.50 </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="portlet red-sunglo box">
+                        <div class="portlet-title">
+                          <div class="caption">
+                            <i class="fa fa-cogs"></i>Địa chỉ giao hàng </div>
+                        </div>
+                        <div class="portlet-body">
+                          @php $key = 'order_deliveries.receiver_name' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Tên khách hàng: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn văn A'])}}
+                            </div>
                           </div>
-                          <div class="row static-info align-reverse">
-                            <div class="col-md-8 name"> Phí vận chuyển: </div>
-                            <div class="col-md-3 value"> $40.50 </div>
+                          @php $key = 'order_deliveries.receiver_email' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Email: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::email(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: email@gmail.com'])}}
+                            </div>
                           </div>
-                          <div class="row static-info align-reverse">
-                            <div class="col-md-8 name"> Tổng tiền có thuế: </div>
-                            <div class="col-md-3 value"> $1,260.00 </div>
+                          @php $key = 'order_deliveries.receiver_phone_1' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Số điện thoại: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                            </div>
                           </div>
-                          <div class="row static-info align-reverse">
-                            <div class="col-md-8 name"> Tổng tiền phải trả: </div>
-                            <div class="col-md-3 value"> $1,260.00 </div>
+                          @php $key = 'order_deliveries.receiver_phone_2' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Số điện thoại 2: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                            </div>
                           </div>
-                          <div class="row static-info align-reverse">
-                            <div class="col-md-8 name"> Tổng số tiền hoàn trả lại: </div>
-                            <div class="col-md-3 value"> $0.00 </div>
+                          @php $key = 'order_deliveries.receiver_address_1' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Địa chỉ: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::textarea(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                            </div>
                           </div>
-                          <div class="row static-info align-reverse">
-                            <div class="col-md-8 name"> Tổng số nợ: </div>
-                            <div class="col-md-3 value"> $1,124.50 </div>
+                          @php $key = 'order_deliveries.receiver_address_2' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Địa chỉ 2: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::textarea(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                            </div>
+                          </div>
+                    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  @php $order_products = $record->products; @endphp
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="portlet grey-cascade box">
+                        <div class="portlet-title">
+                          <div class="caption">
+                            <i class="fa fa-cogs"></i>Sản phẩm đơn hàng
+                          </div>
+                        </div>
+                        <div class="portlet-body">
+                          <div class="table-responsive">
+                            <table class="table table-hover table-bordered table-striped">
+                              <thead>
+                              <tr>
+                                <th>#</th>
+                                <th> Sản phẩm </th>
+                                <th> Số lượng </th>
+                                <th> Thuế </th>
+                                <th> Giá </th>
+                                <th> Giá có thuế </th>
+                                <th> Tổng </th>
+                                <th class="text-center"></th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              @if($order_products->count())
+                                @php $count = 0; @endphp
+                                @foreach($order_products as $product)
+                                  @php
+                                    $count++;
+                                    $price_include_tax =  $product->price * (($record->tax_rate / 100) + 1);
+                                    $total_include_tax =  $price_include_tax * $product->quantity;
+                                  @endphp
+                                  <tr>
+                                    <td>{{ $count }}</td>
+                                    <td>
+                                      <a href="{{ route('products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
+                                    </td>
+                                    <td> {{ $product->quantity }} </td>
+                                    <td> {{ $record->tax_rate}}% </td>
+                                    <td> {{ format_price($product->price) }} </td>
+                                    <td> {{ format_price($price_include_tax)}} </td>
+                                    <td> {{ format_price($total_include_tax) }} </td>
+                                    <td class="text-center"><a href="#"><i class="fa fa-trash-o" title="Xóa"></i></a> </td>
+                                  </tr>
+                                @endforeach
+                              @endif
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="tab-pane" id="tab_2">
-                    <div class="table-container">
-                      <div class="table-actions-wrapper">
-                        <span> </span>
-                        <select class="table-group-action-input form-control input-inline input-small input-sm">
-                          <option value="">Select...</option>
-                          <option value="pending">Pending</option>
-                          <option value="paid">Paid</option>
-                          <option value="canceled">Canceled</option>
-                        </select>
-                        <button class="btn btn-sm yellow table-group-action-submit">
-                          <i class="fa fa-check"></i> Submit</button>
+                  @php $grand_total = $record->total + $record->delivery_fee; @endphp
+                  <div class="row">
+                    <div class="col-md-6"> </div>
+                    <div class="col-md-6">
+                      <div class="well">
+                        <div class="row static-info align-reverse">
+                          <div class="col-md-8 name"> Tổng tiền: </div>
+                          <div class="col-md-3 value"> {{ format_price($record->sub_total) }} </div>
+                        </div>
+                        <div class="row static-info align-reverse">
+                          <div class="col-md-8 name"> Phí vận chuyển: </div>
+                          <div class="col-md-3 value"> {{ format_price($record->delivery_fee) }} </div>
+                        </div>
+                        <div class="row static-info align-reverse">
+                          <div class="col-md-8 name"> Tổng tiền có thuế: </div>
+                          <div class="col-md-3 value"> {{ format_price($record->total) }} </div>
+                        </div>
+                        <div class="row static-info align-reverse">
+                          <div class="col-md-8 name"> Tổng tiền phải trả: </div>
+                          <div class="col-md-3 value"> {{ format_price($grand_total) }} </div>
+                        </div>
                       </div>
-                      <table class="table table-striped table-bordered table-hover" id="datatable_invoices">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="5%">
-                            <input type="checkbox" class="group-checkable"> </th>
-                          <th width="5%"> Invoice&nbsp;# </th>
-                          <th width="15%"> Bill To </th>
-                          <th width="15%"> Invoice&nbsp;Date </th>
-                          <th width="10%"> Amount </th>
-                          <th width="10%"> Status </th>
-                          <th width="10%"> Actions </th>
-                        </tr>
-                        <tr role="row" class="filter">
-                          <td> </td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_no"> </td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_bill_to"> </td>
-                          <td>
-                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_invoice_date_from" placeholder="From">
-                              <span class="input-group-btn">
-                                <button class="btn btn-sm default" type="button">
-                                  <i class="fa fa-calendar"></i>
-                                </button>
-                              </span>
-                          </div>
-                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_invoice_date_to" placeholder="To">
-                              <span class="input-group-btn">
-                                <button class="btn btn-sm default" type="button">
-                                    <i class="fa fa-calendar"></i>
-                                </button>
-                            </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <input type="text" class="form-control form-filter input-sm" name="order_invoice_amount_from" placeholder="From" /> </div>
-                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_amount_to" placeholder="To" /> </td>
-                          <td>
-                            <select name="order_invoice_status" class="form-control form-filter input-sm">
-                              <option value="">Select...</option>
-                              <option value="pending">Pending</option>
-                              <option value="paid">Paid</option>
-                              <option value="canceled">Canceled</option>
-                            </select>
-                          </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <button class="btn btn-sm yellow filter-submit margin-bottom">
-                                <i class="fa fa-search"></i> Search</button>
-                            </div>
-                            <button class="btn btn-sm red filter-cancel">
-                              <i class="fa fa-times"></i> Reset</button>
-                          </td>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="tab_3">
-                    <div class="table-container">
-                      <table class="table table-striped table-bordered table-hover" id="datatable_credit_memos">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="5%"> Credit&nbsp;Memo&nbsp;# </th>
-                          <th width="15%"> Bill To </th>
-                          <th width="15%"> Created&nbsp;Date </th>
-                          <th width="10%"> Status </th>
-                          <th width="10%"> Actions </th>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="tab_4">
-                    <div class="table-container">
-                      <table class="table table-striped table-bordered table-hover" id="datatable_shipment">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="5%"> Shipment&nbsp;# </th>
-                          <th width="15%"> Ship&nbsp;To </th>
-                          <th width="15%"> Shipped&nbsp;Date </th>
-                          <th width="10%"> Quantity </th>
-                          <th width="10%"> Actions </th>
-                        </tr>
-                        <tr role="row" class="filter">
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_no"> </td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_ship_to"> </td>
-                          <td>
-                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_from" placeholder="From">
-                              <span class="input-group-btn">
-                                <button class="btn btn-sm default" type="button">
-                                    <i class="fa fa-calendar"></i>
-                                </button>
-                              </span>
-                            </div>
-                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_to" placeholder="To">
-                              <span class="input-group-btn">
-                                <button class="btn btn-sm default" type="button">
-                                <i class="fa fa-calendar"></i>
-                                </button>
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <input type="text" class="form-control form-filter input-sm" name="order_shipment_quantity_from" placeholder="From" /> </div>
-                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_quantity_to" placeholder="To" /> </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <button class="btn btn-sm yellow filter-submit margin-bottom">
-                                <i class="fa fa-search"></i> Search</button>
-                            </div>
-                            <button class="btn btn-sm red filter-cancel">
-                              <i class="fa fa-times"></i> Reset</button>
-                          </td>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="tab_5">
-                    <div class="table-container">
-                      <table class="table table-striped table-bordered table-hover" id="datatable_history">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="25%"> Datetime </th>
-                          <th width="55%"> Description </th>
-                          <th width="10%"> Notification </th>
-                          <th width="10%"> Actions </th>
-                        </tr>
-                        <tr role="row" class="filter">
-                          <td>
-                            <div class="input-group date datetime-picker margin-bottom-5" data-date-format="dd/mm/yyyy hh:ii">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_history_date_from" placeholder="From">
-                              <span class="input-group-btn">
-                                                                            <button class="btn btn-sm default date-set" type="button">
-                                                                                <i class="fa fa-calendar"></i>
-                                                                            </button>
-                                                                        </span>
-                            </div>
-                            <div class="input-group date datetime-picker" data-date-format="dd/mm/yyyy hh:ii">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_history_date_to" placeholder="To">
-                              <span class="input-group-btn">
-                                                                            <button class="btn btn-sm default date-set" type="button">
-                                                                                <i class="fa fa-calendar"></i>
-                                                                            </button>
-                                                                        </span>
-                            </div>
-                          </td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_history_desc" placeholder="To" /> </td>
-                          <td>
-                            <select name="order_history_notification" class="form-control form-filter input-sm">
-                              <option value="">Select...</option>
-                              <option value="pending">Pending</option>
-                              <option value="notified">Notified</option>
-                              <option value="failed">Failed</option>
-                            </select>
-                          </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <button class="btn btn-sm yellow filter-submit margin-bottom">
-                                <i class="fa fa-search"></i> Search</button>
-                            </div>
-                            <button class="btn btn-sm red filter-cancel">
-                              <i class="fa fa-times"></i> Reset</button>
-                          </td>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                      </table>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- End: life time stats -->
+          {{ Form::close() }}
         </div>
       </div>
     </div>

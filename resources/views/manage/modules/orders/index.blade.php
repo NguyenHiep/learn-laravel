@@ -29,14 +29,11 @@
                 <span class="caption-subject bold uppercase">Danh sách đơn hàng</span>
               </div>
               <div class="tools"></div>
-              <div class="actions">
+            {{--  <div class="actions">
                 <a class="btn green" href="{{ route('orders.create') }}"> {{__('common.buttons.create')}}
                   <i class="fa fa-plus"></i>
                 </a>
-                <a class="btn green" href="{{ route('orders.invoice') }}"> {{__('Create Invoice')}}
-                  <i class="fa fa-save"></i>
-                </a>
-              </div>
+              </div>--}}
             </div>
             <div class="portlet-body">
               <div class="table-scrollable">

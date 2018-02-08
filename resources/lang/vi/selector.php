@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'default'     => [
+        '' => 'Vui lòng chọn'
+    ],
     'levels'      => [
         1 => 'Quản trị viên',
         2 => 'Biên tập viên',
@@ -38,5 +41,9 @@ return [
             3 => 'Đang giao hàng',
             4 => 'Giao hàng thành công',
         ]
+    ],
+    'payment' => [
+        1 => 'Thanh toán khi nhận hàng',
+        2 => 'Chuyển khoản ngân hàng',
     ]
 ];

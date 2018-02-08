@@ -18,6 +18,20 @@ if (!function_exists('convert_input_name')) {
         return $name . (count($parts) > 0 ? '[' . implode('][', $parts) . ']' : '');
     }
 }
+
+if (!function_exists('get_name_convert_input')) {
+    function get_name_convert_input($key)
+    {
+        if (empty($key)) {
+            return false;
+        }
+        $parts = explode('.', $key);
+        $name = end($parts);
+
+        return (!empty($name)) ? $name : false;
+    }
+}
+
 if (!function_exists('unicode_str_filter')) {
     function unicode_str_filter($str)
     {

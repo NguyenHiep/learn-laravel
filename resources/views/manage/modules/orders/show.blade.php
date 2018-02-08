@@ -29,31 +29,27 @@
                  </span>
               </div>
               <div class="actions">
-                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                  <label class="btn btn-transparent green btn-outline btn-circle btn-sm active">
-                    <input type="radio" name="options" class="toggle" id="option1">Actions</label>
-                  <label class="btn btn-transparent blue btn-outline btn-circle btn-sm">
-                    <input type="radio" name="options" class="toggle" id="option2">Settings</label>
+                <div class="btn-group btn-group-devided">
+                  <a href="{{ route('orders.index') }}" class="btn default btn-circle">{{ __('common.buttons.cancel') }}</a>
+                  <a class="btn green btn-circle " href="{{ route('orders.edit', ['id' => $record->id]) }}">Cập nhật đơn hàng</a>
+                  <a  name="send_email" class="btn green btn-circle ">Gửi lại email</a>
                 </div>
                 <div class="btn-group">
                   <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
                     <i class="fa fa-share"></i>
-                    <span class="hidden-xs"> Tools </span>
+                    <span class="hidden-xs"> Công cụ </span>
                     <i class="fa fa-angle-down"></i>
                   </a>
                   <ul class="dropdown-menu pull-right">
                     <li>
-                      <a href="javascript:;"> Export to Excel </a>
-                    </li>
-                    <li>
-                      <a href="javascript:;"> Export to CSV </a>
-                    </li>
-                    <li>
-                      <a href="javascript:;"> Export to XML </a>
+                      <a href="{{ route('orders.invoice') }}"> In hóa đơn</a>
                     </li>
                     <li class="divider"> </li>
                     <li>
-                      <a href="javascript:;"> Print Invoices </a>
+                      <a href="javascript:;"> Xuất ra Excel </a>
+                    </li>
+                    <li>
+                      <a href="javascript:;"> Xuất ra CSV </a>
                     </li>
                   </ul>
                 </div>
@@ -66,10 +62,7 @@
                     <div class="portlet yellow-crusta box">
                       <div class="portlet-title">
                         <div class="caption">
-                          <i class="fa fa-cogs"></i>Đơn hàng chi tiết </div>
-                        <div class="actions">
-                          <a href="javascript:;" class="btn btn-default btn-sm">
-                            <i class="fa fa-pencil"></i> Sửa </a>
+                          <i class="fa fa-cogs"></i>Đơn hàng chi tiết
                         </div>
                       </div>
                       <div class="portlet-body">
@@ -86,7 +79,7 @@
                         <div class="row static-info">
                           <div class="col-md-5 name"> Trạng thái đơn hàng: </div>
                           <div class="col-md-7 value">
-                            <span class="label label-success"> Đang update </span>
+                            <span class="label label-success label-sm">{{ __('selector.orders.status.'.$record->status) }}</span>
                           </div>
                         </div>
                         <div class="row static-info">
@@ -141,10 +134,7 @@
                     <div class="portlet green-meadow box">
                       <div class="portlet-title">
                         <div class="caption">
-                          <i class="fa fa-cogs"></i>Thông tin thanh toán </div>
-                        <div class="actions">
-                          <a href="javascript:;" class="btn btn-default btn-sm">
-                            <i class="fa fa-pencil"></i> Sửa </a>
+                          <i class="fa fa-cogs"></i>Thông tin thanh toán
                         </div>
                       </div>
                       <div class="portlet-body">
@@ -177,10 +167,7 @@
                     <div class="portlet red-sunglo box">
                       <div class="portlet-title">
                         <div class="caption">
-                          <i class="fa fa-cogs"></i>Địa chỉ giao hàng </div>
-                        <div class="actions">
-                          <a href="javascript:;" class="btn btn-default btn-sm">
-                            <i class="fa fa-pencil"></i> Sửa </a>
+                          <i class="fa fa-cogs"></i>Địa chỉ giao hàng
                         </div>
                       </div>
                       <div class="portlet-body">
@@ -222,10 +209,7 @@
                     <div class="portlet grey-cascade box">
                       <div class="portlet-title">
                         <div class="caption">
-                          <i class="fa fa-cogs"></i>Giỏ hàng </div>
-                        <div class="actions">
-                          <a href="javascript:;" class="btn btn-default btn-sm">
-                            <i class="fa fa-pencil"></i> Sửa </a>
+                          <i class="fa fa-cogs"></i>Giỏ hàng
                         </div>
                       </div>
                       <div class="portlet-body">
@@ -254,7 +238,7 @@
                                 <tr>
                                   <td>{{ $count }}</td>
                                   <td>
-                                    <a href="javascript:;"> {{ $product->name }} </a>
+                                    <a href="{{ route('products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
                                   </td>
                                   <td> {{ $product->quantity }} </td>
                                   <td> {{ $record->tax_rate}}% </td>
@@ -271,9 +255,7 @@
                     </div>
                   </div>
                 </div>
-                @php
-                  $grand_total = $record->total + $record->delivery_fee;
-                @endphp
+                @php $grand_total = $record->total + $record->delivery_fee; @endphp
                 <div class="row">
                   <div class="col-md-6"> </div>
                   <div class="col-md-6">

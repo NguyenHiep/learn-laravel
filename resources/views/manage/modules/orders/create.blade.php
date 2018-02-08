@@ -19,7 +19,7 @@
       <h3 class="page-title"> Tạo mới đơn hàng</h3>
       <div class="row">
         <div class="col-md-12">
-          <!-- Begin: life time stats -->
+          {!! Form::open(['route' => 'orders.store']) !!}
           <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
               <div class="caption">
@@ -32,29 +32,7 @@
               </div>
             </div>
             <div class="portlet-body">
-              <div class="tabbable-line">
-                <ul class="nav nav-tabs nav-tabs-lg">
-                  <li class="active">
-                    <a href="#tab_1" data-toggle="tab"> Thông tin </a>
-                  </li>
-                  <li>
-                    <a href="#tab_2" data-toggle="tab"> Hóa đơn
-                      <span class="badge badge-success">4</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#tab_3" data-toggle="tab"> Bảng ghi tín dụng </a>
-                  </li>
-                  <li>
-                    <a href="#tab_4" data-toggle="tab"> Đơn hàng đang vận chuyển
-                      <span class="badge badge-danger"> 2 </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#tab_5" data-toggle="tab"> Lịch sử </a>
-                  </li>
-                </ul>
-                <div class="tab-content">
+                <div class="tabbable-line">
                   <div class="tab-pane active" id="tab_1">
                     <div class="row">
                       <div class="col-md-6 col-sm-12">
@@ -66,10 +44,24 @@
                           <div class="portlet-body">
                             @php $key = 'ordered_at' @endphp
                             <div class="row static-info">
-                              <div class="col-md-5 name"> Thời gian đặt hàng: </div>
+                              <div class="col-md-5 name"> Ngày đặt hàng: </div>
                               <div class="col-md-7 value">
                                 <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                  <input type="text" class="form-control form-filter input-sm" readonly name="{{ $key }}" placeholder="From">
+                                  {{ Form::text($key, old($key), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày đặt hàng'])}}
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-sm default" type="button">
+                                      <i class="fa fa-calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            @php $key = 'delivered_at' @endphp
+                            <div class="row static-info">
+                              <div class="col-md-5 name"> Ngày giao hàng: </div>
+                              <div class="col-md-7 value">
+                                <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                  {{ Form::text($key, old($key), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày giao hàng'])}}
                                   <span class="input-group-btn">
                                     <button class="btn btn-sm default" type="button">
                                       <i class="fa fa-calendar"></i>
@@ -82,31 +74,21 @@
                             <div class="row static-info">
                               <div class="col-md-5 name"> Trạng thái đơn hàng: </div>
                               <div class="col-md-7 value">
-                                <select name="{{ $key }}" class="form-control form-filter input-sm">
-                                  <option value="">Select...</option>
-                                  <option value="pending">Pending</option>
-                                  <option value="paid">Paid</option>
-                                  <option value="canceled">Canceled</option>
-                                </select>
+                                {{  Form::select($key, __('selector.default') + __('selector.orders.status'), old($key), [ 'class' => 'form-control form-filter input-sm' ]) }}
                               </div>
                             </div>
-                            @php $key = 'method_payment' @endphp
+                            @php $key = 'payment_id' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Phương thức thanh toán: </div>
                               <div class="col-md-7 value">
-                                <select name="{{ $key }}" class="form-control form-filter input-sm">
-                                  <option value="">Select...</option>
-                                  <option value="pending">Thanh toán khi nhận hàng</option>
-                                  <option value="paid">Paypall</option>
-                                  <option value="canceled">Credit Card</option>
-                                </select>
+                                {{  Form::select($key, __('selector.default') + __('selector.payment'), old($key), [ 'class' => 'form-control form-filter input-sm' ]) }}
                               </div>
                             </div>
                             @php $key = 'note' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Ghi chú đơn hàng: </div>
                               <div class="col-md-7 value">
-                                <textarea name="{{ $key }}" id="{{ $key }}" cols="30" rows="3" class="form-control"></textarea>
+                                {{  Form::textarea( $key, old($key), [ 'cols'=> 30, 'rows' => 3,'class' => 'form-control', 'placeholder' => 'Ghi chú đơn hàng']) }}
                               </div>
                             </div>
                           </div>
@@ -123,24 +105,32 @@
                             @php $key = 'order_customers.name' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Tên khách hàng: </div>
-                              <div class="col-md-7 value"> <input type="text" class="form-control input-sm" name="{{ convert_input_name($key) }}"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn Minh Hiệp'])}}
+                              </div>
                             </div>
                             @php $key = 'order_customers.email' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Email: </div>
-                              <div class="col-md-7 value"><input type="email" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::email(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: customer@gmail.com'])}}
+                              </div>
                             </div>
                             @php $key = 'order_customers.phone' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Số điện thoại: </div>
-                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                              </div>
                             </div>
                             @php $key = 'order_customers.address' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Địa chỉ: </div>
-                              <div class="col-md-7 value"> <textarea name="{{ convert_input_name($key)  }}" cols="30" rows="3" class="form-control"></textarea></div>
+                              <div class="col-md-7 value">
+                                {{ Form::textarea(convert_input_name($key), old(convert_input_name($key)), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                              </div>
                             </div>
-                            
+          
                           </div>
                         </div>
                       </div>
@@ -151,10 +141,6 @@
                           <div class="portlet-title">
                             <div class="caption">
                               <i class="fa fa-cogs"></i>Địa chỉ thanh toán </div>
-                            <div class="actions">
-                              <a href="javascript:;" class="btn btn-default btn-sm">
-                                <i class="fa fa-pencil"></i> Sửa </a>
-                            </div>
                           </div>
                           <div class="portlet-body">
                             @php $key = 'order_deliveries.delivery_type' @endphp
@@ -169,29 +155,40 @@
                             @php $key = 'order_deliveries.buyer_name' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Tên khách hàng: </div>
-                              <div class="col-md-7 value"> <input type="text" class="form-control input-sm" name="{{ convert_input_name($key) }}"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn văn A'])}}
+                                
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.buyer_email' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Email: </div>
-                              <div class="col-md-7 value"><input type="email" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::email(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: email@gmail.com'])}}
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.buyer_phone_1' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Số điện thoại: </div>
-                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.buyer_phone_2' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Số điện thoại2: </div>
-                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.buyer_address' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Địa chỉ: </div>
-                              <div class="col-md-7 value"> <textarea name="{{ convert_input_name($key)  }}" cols="30" rows="3" class="form-control"></textarea></div>
+                              <div class="col-md-7 value">
+                                {{ Form::textarea(convert_input_name($key), old(convert_input_name($key)), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                              </div>
                             </div>
-  
+          
                           </div>
                         </div>
                       </div>
@@ -200,43 +197,51 @@
                           <div class="portlet-title">
                             <div class="caption">
                               <i class="fa fa-cogs"></i>Địa chỉ giao hàng </div>
-                            <div class="actions">
-                              <a href="javascript:;" class="btn btn-default btn-sm">
-                                <i class="fa fa-pencil"></i> Sửa </a>
-                            </div>
                           </div>
                           <div class="portlet-body">
                             @php $key = 'order_deliveries.receiver_name' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Tên khách hàng: </div>
-                              <div class="col-md-7 value"> <input type="text" class="form-control input-sm" name="{{ convert_input_name($key) }}"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn văn A'])}}
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.receiver_email' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Email: </div>
-                              <div class="col-md-7 value"><input type="email" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::email(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: email@gmail.com'])}}
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.receiver_phone_1' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Số điện thoại: </div>
-                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.receiver_phone_2' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Số điện thoại 2: </div>
-                              <div class="col-md-7 value"> <input type="text" name="{{ convert_input_name($key) }}" class="form-control input-sm"> </div>
+                              <div class="col-md-7 value">
+                                {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.buyer_address1' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Địa chỉ: </div>
-                              <div class="col-md-7 value"> <textarea name="{{ convert_input_name($key)  }}" cols="30" rows="3" class="form-control"></textarea></div>
+                              <div class="col-md-7 value">
+                                {{ Form::textarea(convert_input_name($key), old(convert_input_name($key)), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                              </div>
                             </div>
                             @php $key = 'order_deliveries.receiver_address_2' @endphp
                             <div class="row static-info">
                               <div class="col-md-5 name"> Địa chỉ 2: </div>
-                              <div class="col-md-7 value"> <textarea name="{{ convert_input_name($key)  }}" cols="30" rows="3" class="form-control"></textarea></div>
+                              <div class="col-md-7 value">
+                                {{ Form::textarea(convert_input_name($key), old(convert_input_name($key)), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                              </div>
                             </div>
-  
+          
                           </div>
                         </div>
                       </div>
@@ -259,7 +264,7 @@
                                 <tr>
                                   <th>STT</th>
                                   <th> Tên sản phẩm </th>
-                                  
+                  
                                   <th> Giá tiền </th>
                                   <th> Số lượng </th>
                                   <th> Tiền thuế </th>
@@ -295,7 +300,7 @@
                                   <td>
                                     <a href="javascript:;"> Product 1 </a>
                                   </td>
-                                  
+                  
                                   <td> 345.50$ </td>
                                   <td> 2 </td>
                                   <td> 2.00$ </td>
@@ -352,207 +357,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="tab-pane" id="tab_2">
-                    <div class="table-container">
-                      <div class="table-actions-wrapper">
-                        <span> </span>
-                        <select class="table-group-action-input form-control input-inline input-small input-sm">
-                          <option value="">Select...</option>
-                          <option value="pending">Pending</option>
-                          <option value="paid">Paid</option>
-                          <option value="canceled">Canceled</option>
-                        </select>
-                        <button class="btn btn-sm yellow table-group-action-submit">
-                          <i class="fa fa-check"></i> Submit</button>
-                      </div>
-                      <table class="table table-striped table-bordered table-hover" id="datatable_invoices">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="5%">
-                            <input type="checkbox" class="group-checkable"> </th>
-                          <th width="5%"> Invoice&nbsp;# </th>
-                          <th width="15%"> Bill To </th>
-                          <th width="15%"> Invoice&nbsp;Date </th>
-                          <th width="10%"> Amount </th>
-                          <th width="10%"> Status </th>
-                          <th width="10%"> Actions </th>
-                        </tr>
-                        <tr role="row" class="filter">
-                          <td> </td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_no"> </td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_bill_to"> </td>
-                          <td>
-                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_invoice_date_from" placeholder="From">
-                              <span class="input-group-btn">
-                                <button class="btn btn-sm default" type="button">
-                                  <i class="fa fa-calendar"></i>
-                                </button>
-                              </span>
-                            </div>
-                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_invoice_date_to" placeholder="To">
-                              <span class="input-group-btn">
-                                <button class="btn btn-sm default" type="button">
-                                    <i class="fa fa-calendar"></i>
-                                </button>
-                            </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <input type="text" class="form-control form-filter input-sm" name="order_invoice_amount_from" placeholder="From" /> </div>
-                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_amount_to" placeholder="To" /> </td>
-                          <td>
-                            <select name="order_invoice_status" class="form-control form-filter input-sm">
-                              <option value="">Select...</option>
-                              <option value="pending">Pending</option>
-                              <option value="paid">Paid</option>
-                              <option value="canceled">Canceled</option>
-                            </select>
-                          </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <button class="btn btn-sm yellow filter-submit margin-bottom">
-                                <i class="fa fa-search"></i> Search</button>
-                            </div>
-                            <button class="btn btn-sm red filter-cancel">
-                              <i class="fa fa-times"></i> Reset</button>
-                          </td>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="tab_3">
-                    <div class="table-container">
-                      <table class="table table-striped table-bordered table-hover" id="datatable_credit_memos">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="5%"> Credit&nbsp;Memo&nbsp;# </th>
-                          <th width="15%"> Bill To </th>
-                          <th width="15%"> Created&nbsp;Date </th>
-                          <th width="10%"> Status </th>
-                          <th width="10%"> Actions </th>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="tab_4">
-                    <div class="table-container">
-                      <table class="table table-striped table-bordered table-hover" id="datatable_shipment">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="5%"> Shipment&nbsp;# </th>
-                          <th width="15%"> Ship&nbsp;To </th>
-                          <th width="15%"> Shipped&nbsp;Date </th>
-                          <th width="10%"> Quantity </th>
-                          <th width="10%"> Actions </th>
-                        </tr>
-                        <tr role="row" class="filter">
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_no"> </td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_ship_to"> </td>
-                          <td>
-                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_from" placeholder="From">
-                              <span class="input-group-btn">
-                                <button class="btn btn-sm default" type="button">
-                                    <i class="fa fa-calendar"></i>
-                                </button>
-                              </span>
-                            </div>
-                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_to" placeholder="To">
-                              <span class="input-group-btn">
-                                <button class="btn btn-sm default" type="button">
-                                <i class="fa fa-calendar"></i>
-                                </button>
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <input type="text" class="form-control form-filter input-sm" name="order_shipment_quantity_from" placeholder="From" /> </div>
-                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_quantity_to" placeholder="To" /> </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <button class="btn btn-sm yellow filter-submit margin-bottom">
-                                <i class="fa fa-search"></i> Search</button>
-                            </div>
-                            <button class="btn btn-sm red filter-cancel">
-                              <i class="fa fa-times"></i> Reset</button>
-                          </td>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="tab_5">
-                    <div class="table-container">
-                      <table class="table table-striped table-bordered table-hover" id="datatable_history">
-                        <thead>
-                        <tr role="row" class="heading">
-                          <th width="25%"> Datetime </th>
-                          <th width="55%"> Description </th>
-                          <th width="10%"> Notification </th>
-                          <th width="10%"> Actions </th>
-                        </tr>
-                        <tr role="row" class="filter">
-                          <td>
-                            <div class="input-group date datetime-picker margin-bottom-5" data-date-format="dd/mm/yyyy hh:ii">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_history_date_from" placeholder="From">
-                              <span class="input-group-btn">
-                                                                            <button class="btn btn-sm default date-set" type="button">
-                                                                                <i class="fa fa-calendar"></i>
-                                                                            </button>
-                                                                        </span>
-                            </div>
-                            <div class="input-group date datetime-picker" data-date-format="dd/mm/yyyy hh:ii">
-                              <input type="text" class="form-control form-filter input-sm" readonly name="order_history_date_to" placeholder="To">
-                              <span class="input-group-btn">
-                                                                            <button class="btn btn-sm default date-set" type="button">
-                                                                                <i class="fa fa-calendar"></i>
-                                                                            </button>
-                                                                        </span>
-                            </div>
-                          </td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="order_history_desc" placeholder="To" /> </td>
-                          <td>
-                            <select name="order_history_notification" class="form-control form-filter input-sm">
-                              <option value="">Select...</option>
-                              <option value="pending">Pending</option>
-                              <option value="notified">Notified</option>
-                              <option value="failed">Failed</option>
-                            </select>
-                          </td>
-                          <td>
-                            <div class="margin-bottom-5">
-                              <button class="btn btn-sm yellow filter-submit margin-bottom">
-                                <i class="fa fa-search"></i> Search</button>
-                            </div>
-                            <button class="btn btn-sm red filter-cancel">
-                              <i class="fa fa-times"></i> Reset</button>
-                          </td>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                      </table>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
           </div>
-          <!-- End: life time stats -->
+          {{ Form::close() }}
         </div>
       </div>
     </div>

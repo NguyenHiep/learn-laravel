@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->integer('tax_fee')->unsigned()->default(0)->comment('Tiền thuế');
             $table->text('note')->nullable()->comment('Ghi chú đơn hàng');
             $table->tinyInteger('status')->default(1)->comment('Trạng thái đơn hàng [1: Chờ xử lý, 2: Xử lý xong, 3: Đang giao hàng, 4: Giao hàng thành công]');
+            $table->tinyInteger('payment_id')->default(1)->comment('Hình thức thanh toán [1: Thanh toán khi nhận hàng, 2: Chuyển khoản ngân hàng]');
             $table->timestamps();
             $table->softDeletes();
 

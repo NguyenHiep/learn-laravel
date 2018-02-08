@@ -8,6 +8,8 @@ use App\Model\Orders\Deliveries;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class OrdersController extends Controller
 {
@@ -20,6 +22,22 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * Validate product field
+     * @param $data
+     * @param null $id
+     * @return mixed
+     */
+    protected static function validator($data, $id = null)
+    {
+
+        return Validator::make($data, [
+
+        ]);
+    }
+
+
     public function index()
     {
         $orders = Orders::Orderby('id', 'desc')->paginate(12);
@@ -87,7 +105,34 @@ class OrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Orders::find($id);
+        if (empty($order)) {
+            return abort(404);
+        }
+        $inputs = $request->all();
+        // Change input save ordered_at delivered_at
+        $validator = self::validator($inputs, $id);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+
+        try {
+            DB::beginTransaction();
+            $order->update($inputs);
+            $order->deliveries->update($inputs['order_deliveries']);
+            DB::commit();
+            return redirect()->route('orders.index')->with([
+                'message' => __('system.message.update'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->route('orders.edit', ['id' => $order->id])->withInput($inputs)->with([
+            'message' => __('system.message.error', ['errors' => 'Update order is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
     }
 
     /**
