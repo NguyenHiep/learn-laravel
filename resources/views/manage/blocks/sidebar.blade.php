@@ -62,14 +62,12 @@
       </li>
 
       <li
-        class="nav-item  {{ active(['orders.index', 'orders.create', 'orders.edit'], 'active open') }}">
+        class="nav-item  {{ active(['orders.index', 'orders.create', 'orders.edit', 'orders.invoice'], 'active open') }}">
         <a href="{{ route('orders.index') }}" class="nav-link nav-toggle">
           <i class="icon-basket"></i>
           <span class="title">{{__('static.sidebars.manage.orders.title')}}</span>
-          <span class="arrow {{ active(['orders.index', 'orders.create', 'orders.edit'], 'open') }}"></span>
-          <span class="selected"></span>
         </a>
-        <ul class="sub-menu">
+    {{--    <ul class="sub-menu">
 
           <li class="nav-item">
             <a href="{{ route('orders.index') }}" class="nav-link ">
@@ -82,7 +80,7 @@
             </a>
           </li>
 
-        </ul>
+        </ul>--}}
       </li>
 
       <li class="nav-item  {{ active(['posts.index', 'posts.create', 'posts.edit', 'category.index', 'category.create','category.edit', 'tags.index', 'tags.create', 'tags.edit'], 'active open') }}">

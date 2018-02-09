@@ -36,6 +36,32 @@ class Orders extends BaseModel
         'status',
     ];
 
+   /* protected $dates = [
+        'ordered_at',
+        'delivered_at',
+    ];*/
+
+    public function setOrderedAtAttribute($value)
+    {
+        $value = format_date($value, '%Y-%m-%d %H:%M:%S');
+        if (empty($value)) {
+            $value = '';
+        }
+        $this->attributes['ordered_at'] = $value;
+
+    }
+
+    public function setDeliveredAtAttribute($value)
+    {
+        $value = format_date($value, '%Y-%m-%d %H:%M:%S');
+
+        if (empty($value)) {
+            $value = '';
+        }
+        $this->attributes['delivered_at'] = $value;
+
+    }
+
     public function products()
     {
         return $this->hasMany(Products::class, 'order_id', 'id');

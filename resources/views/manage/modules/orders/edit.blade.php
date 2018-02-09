@@ -47,7 +47,7 @@
                             <div class="col-md-5 name"> Ngày đặt hàng: </div>
                             <div class="col-md-7 value">
                               <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                {{ Form::text($key, old($key, format_date($record->{$key}, '%d/%m/%Y')), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày đặt hàng'])}}
+                                {{ Form::text($key, old($key, format_date($record->{$key})), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày đặt hàng'])}}
                                 <span class="input-group-btn">
                                     <button class="btn btn-sm default" type="button">
                                       <i class="fa fa-calendar"></i>
@@ -61,7 +61,7 @@
                             <div class="col-md-5 name"> Ngày giao hàng: </div>
                             <div class="col-md-7 value">
                               <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                {{ Form::text($key, old($key, format_date($record->{$key},'%d/%m/%Y')), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày giao hàng'])}}
+                                {{ Form::text($key, old($key, format_date($record->{$key})), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày giao hàng'])}}
                                 <span class="input-group-btn">
                                     <button class="btn btn-sm default" type="button">
                                       <i class="fa fa-calendar"></i>
@@ -285,7 +285,11 @@
                                     <td>
                                       <a href="{{ route('products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
                                     </td>
-                                    <td> {{ $product->quantity }} </td>
+                                    @php
+                                      $key = 'order_products.'.$product->product_id.'.quantity';
+                                      $key = convert_input_name($key);
+                                    @endphp
+                                    <td> {{ Form::number($key, $product->quantity, ['class' => 'form-control input-sm', 'min' => 0]) }} </td>
                                     <td> {{ $record->tax_rate}}% </td>
                                     <td> {{ format_price($product->price) }} </td>
                                     <td> {{ format_price($price_include_tax)}} </td>
@@ -365,6 +369,6 @@
   <script src="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script>
   <script src="{{  asset('/manages/assets/global/plugins/plupload/js/plupload.full.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
-  <script src="{{  asset('/manages/assets/pages/scripts/ecommerce-products-edit.js') }}" type="text/javascript"></script>
+  <script src="{{  asset('/manages/assets/pages/scripts/ecommerce-orders.js') }}" type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop

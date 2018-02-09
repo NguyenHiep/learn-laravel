@@ -4,7 +4,8 @@ var EcommerceOrders = function () {
         //init date pickers
         $('.date-picker').datepicker({
             rtl: App.isRTL(),
-            autoclose: true
+            autoclose: true,
+            dateFormat: 'yy-mm-dd'
         });
     }
 

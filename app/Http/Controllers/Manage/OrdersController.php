@@ -115,6 +115,19 @@ class OrdersController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
+        if(isset($inputs['ordered_at'])){
+            $inputs['ordered_at'] = date("Y-m-d H:i:s",strtotime(str_replace('/','-',$inputs['ordered_at'])));
+        }
+        if(isset($inputs['delivered_at'])){
+            $inputs['delivered_at'] = date("Y-m-d H:i:s",strtotime(str_replace('/','-',$inputs['ordered_at'])));
+        }
+        $inputs['order_product_items'] = [];
+        foreach ($inputs['order_products'] as $key => $product) {
+            $inputs['order_product_items'][]  = [
+                'product_id' => $key,
+                'quantity'   => $product['quantity']
+            ];
+        }
 
         try {
             DB::beginTransaction();
