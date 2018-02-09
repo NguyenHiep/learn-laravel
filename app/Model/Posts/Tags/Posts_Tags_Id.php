@@ -2,9 +2,9 @@
 
 namespace App\Model\Posts\Tags;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model\BaseModel;
 
-class Posts_Tags_Id extends Model
+class Posts_Tags_Id extends BaseModel
 {
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-
 use App\Observers\ProductsObserver;
 
 class Products extends BaseModel

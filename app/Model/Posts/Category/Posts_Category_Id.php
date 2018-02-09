@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Model\Posts\Category;
-use Illuminate\Database\Eloquent\Model;
+use App\Model\BaseModel;
 
-class Posts_Category_Id extends Model
+class Posts_Category_Id extends BaseModel
 {
 
     /**

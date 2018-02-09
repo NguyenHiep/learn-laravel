@@ -2,33 +2,16 @@
 
 namespace App\Model\Posts;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\BaseModel;
 
-class Category extends Model
+class Category extends BaseModel
 {
-    use SoftDeletes;
-    //
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'posts_category';
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
@@ -48,7 +31,7 @@ class Category extends Model
      */
     public function posts()
     {
-        return $this->belongsToMany('App\Model\Posts','posts_category_ids');
+        return $this->belongsToMany(Posts::class,'posts_category_ids');
     }
 
     // Each category may have one parent

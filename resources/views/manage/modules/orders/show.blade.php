@@ -32,7 +32,7 @@
                 <div class="btn-group btn-group-devided">
                   <a href="{{ route('orders.index') }}" class="btn default btn-circle">{{ __('common.buttons.cancel') }}</a>
                   <a class="btn green btn-circle " href="{{ route('orders.edit', ['id' => $record->id]) }}">Cập nhật đơn hàng</a>
-                  <a  name="send_email" class="btn green btn-circle ">Gửi lại email</a>
+                  <a  href="{{ route('orders.index') }}"  class="btn green btn-circle ">Gửi lại email</a>
                 </div>
                 <div class="btn-group">
                   <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">

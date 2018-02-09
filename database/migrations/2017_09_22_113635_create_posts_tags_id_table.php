@@ -21,6 +21,7 @@ class CreatePostsTagsIdTable extends Migration
             //$table->integer('rank')->comment('Thứ tự');
             //$table->primary(['id', 'posts_id', 'posts_tags_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

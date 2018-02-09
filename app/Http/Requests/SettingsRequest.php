@@ -24,12 +24,14 @@ class SettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_name'      => 'required',
-            'company_zip'       => 'required',
-            'company_address'   => 'required',
-            'company_copyright' => 'required',
-            'about_privacy'     => 'required',
-            'about_terms'       => 'required',
+            'company_name'      => 'required|string',
+            'company_zip'       => 'required|max:8',
+            'company_address'   => 'required|string',
+            'company_tel' => 'max:13',
+            'company_fax' => 'max:13',
+            'company_copyright' => 'required|string',
+            'about_privacy'     => 'required|string',
+            'about_terms'       => 'required|string',
             'company_lat'       => [
                 'max:9',
                 'regex:/[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)/u'
@@ -38,6 +40,8 @@ class SettingsRequest extends FormRequest
                 'max:9',
                 'regex:/[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)/u'
             ],
+            'email1'            => 'email',
+            'mail_smtp_port'    => 'max:3'
 
         ];
     }

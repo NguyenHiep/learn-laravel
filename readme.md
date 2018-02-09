@@ -13,7 +13,7 @@
 
 Truy cập admin: http://domainname/manage
 
-User và password: <strong>admin/admin123<strong>
+User và password: <strong>admin@gmail.com/admin123<strong>
 
 ## Tác giả ( Author)
 Nguyễn Minh Hiệp

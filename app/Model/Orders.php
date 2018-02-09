@@ -34,6 +34,7 @@ class Orders extends BaseModel
         'note',
         'note',
         'status',
+        'payment_id'
     ];
 
    /* protected $dates = [

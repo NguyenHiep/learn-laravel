@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Manage;
 use App\Model\Settings;
 use App\Http\Requests\SettingsRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SettingsController extends Controller
 {
@@ -29,42 +31,40 @@ class SettingsController extends Controller
 
     public function update(SettingsRequest $request)
     {
+        $inputs = $request->all();
         try {
+            DB::beginTransaction();
             $settings = Settings::checkWebsiteInfo(self::WEBSITE_INFO_ID);
             // If data empty --> create
-            if(empty($settings)){
-                Settings::create($request->all());
-                session()->flash('message', __('system.message.create'));
-                session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
-            }else{
-
-                // Update data info
-                $settings->company_name         =  $request->company_name;;
-                $settings->company_zip          =  $request->company_zip;;
-                $settings->company_address      =  $request->company_address;
-                $settings->company_tel          =  $request->company_tel;
-                $settings->company_fax          =  $request->company_fax;
-                $settings->company_copyright    =  $request->company_copyright;
-                $settings->subtitle             =  $request->subtitle;
-                $settings->company_lat          =  $request->company_lat;
-                // $settings->i18n_flg             =  $request->i18n_flg;
-                $settings->email1               =  $request->email1;
-                $settings->email1_name          =  $request->email1_name;
-                $settings->about_privacy        =  $request->about_privacy;
-                $settings->about_terms          =  $request->about_terms;
-                $settings->mail_smtp_host       =  $request->mail_smtp_host;
-                $settings->mail_smtp_user       =  $request->mail_smtp_user;
-                $settings->mail_smtp_pass       =  $request->mail_smtp_pass;
+            if (empty($settings)) {
+                $settings = new Settings();
+                $settings->fill($inputs);
                 $settings->save();
-                session()->flash('message', __('system.message.update'));
-                session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
+                Settings::create($request->all());
+                DB::commit();
+                return redirect()->back()->with([
+                    'message' => __('system.message.create'),
+                    'status'  => self::CTRL_MESSAGE_SUCCESS,
+                ]);
             }
-            return redirect()->route('settings.index');
 
-        }catch(Exception $e) {
-            session()->flash('message', __('system.message.errors',['errors' => $e->getMessage()]));
-            session()->flash('status', self::CTRL_MESSAGE_ERROR);
+            // Update data info
+            $settings->update($inputs);
+            DB::commit();
+            return redirect()->back()->with([
+                'message' => __('system.message.update'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
         }
+
+        return redirect()->back()->with([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
 
     }
 

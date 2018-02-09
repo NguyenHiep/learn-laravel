@@ -21,6 +21,7 @@ class CreatePostsCategoryIdTable extends Migration
             //$table->integer('rank')->comment('Thứ tự');
             //$table->primary(['posts_id', 'posts_category_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,8 @@ class CreatePostsMediasIdsTable extends Migration
         $table->integer('posts_id')->comment('Id bài viết');
         $table->integer('posts_medias_id')->comment('Id hình ảnh');
         $table->primary(['posts_id', 'posts_medias_id']);
+        $table->timestamps();
+        $table->softDeletes();
     });
     }
 

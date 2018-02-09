@@ -62,7 +62,7 @@
       </li>
 
       <li
-        class="nav-item  {{ active(['orders.index', 'orders.create', 'orders.edit', 'orders.invoice'], 'active open') }}">
+        class="nav-item  {{ active(['orders.index', 'orders.create', 'orders.edit', 'orders.invoice', 'orders.show'], 'active open') }}">
         <a href="{{ route('orders.index') }}" class="nav-link nav-toggle">
           <i class="icon-basket"></i>
           <span class="title">{{__('static.sidebars.manage.orders.title')}}</span>
@@ -176,7 +176,7 @@
           </li>
         </ul>
       </li>
-      <li class="nav-item">
+      {{--<li class="nav-item">
         <a href="{{ route('email.index') }}" class="nav-link nav-toggle">
           <i class="icon-envelope"></i>
           <span class="title">{{__('static.sidebars.manage.email.title')}}</span>
@@ -194,7 +194,7 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li>--}}
       <li
         class="nav-item  {{ active(['settings.index', 'admins.index', 'admins.create', 'admins.edit'], 'active open') }}">
         <a href="{{ route('settings.index') }}" class="nav-link nav-toggle">
