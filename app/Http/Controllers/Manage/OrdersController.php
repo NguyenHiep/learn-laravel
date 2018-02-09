@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Model\Orders;
-use App\Model\Orders\Products;
-use App\Model\Orders\Deliveries;
+use App\Model\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -121,18 +120,31 @@ class OrdersController extends Controller
         if(isset($inputs['delivered_at'])){
             $inputs['delivered_at'] = date("Y-m-d H:i:s",strtotime(str_replace('/','-',$inputs['ordered_at'])));
         }
-        $inputs['order_product_items'] = [];
-        foreach ($inputs['order_products'] as $key => $product) {
-            $inputs['order_product_items'][]  = [
-                'product_id' => $key,
-                'quantity'   => $product['quantity']
-            ];
+        $order_product = [];
+        if(isset($inputs['order_products'])){
+            $order_product = $inputs['order_products'];
+        }
+        $order_deliveries = [];
+        if(isset($inputs['order_deliveries'])){
+            $order_deliveries = $inputs['order_deliveries'];
         }
 
         try {
             DB::beginTransaction();
             $order->update($inputs);
-            $order->deliveries->update($inputs['order_deliveries']);
+
+            if(!empty($order_deliveries)){
+                $order->deliveries->update($order_deliveries);
+            }
+            if (!empty($order_product)) {
+                foreach ($order->products as $product) {
+                    if (empty($product)) {
+                        return abort(404);
+                    }
+                    $product->update($order_product[$product->product_id]);
+                }
+            }
+
             DB::commit();
             return redirect()->route('orders.index')->with([
                 'message' => __('system.message.update'),
@@ -163,8 +175,32 @@ class OrdersController extends Controller
         $data['datatable'] = Orders::all();
     }
 
-    public function invoice_index(){
-        return view('manage.modules.orders.invoice');
+    public function sent_mail_confirm($id)
+    {
+        // TODO: Sent mail confirm orders
+    }
+
+    public function sent_mail_shipping($id)
+    {
+        // TODO: Sent mail confirm shipping order
+    }
+
+    public function sent_mail_invoice($id)
+    {
+        // TODO: Sent mail confirm invoice
+    }
+
+    public function invoice_index($id)
+    {
+        $record = Orders::find($id);
+        if (empty($record)) {
+            return abort(404);
+        }
+        $store_info         = Settings::all()->first();
+        $data['record']     = $record;
+        $data['store_info'] = $store_info;
+
+        return view('manage.modules.orders.invoice', $data);
     }
 
     public function invoice_print(){

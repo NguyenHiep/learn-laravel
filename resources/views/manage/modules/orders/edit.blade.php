@@ -289,12 +289,22 @@
                                       $key = 'order_products.'.$product->product_id.'.quantity';
                                       $key = convert_input_name($key);
                                     @endphp
-                                    <td> {{ Form::number($key, $product->quantity, ['class' => 'form-control input-sm', 'min' => 0]) }} </td>
+                                    <td> {{ Form::number($key, old($key, $product->quantity), ['class' => 'form-control input-sm', 'min' => 0, 'readonly']) }} </td>
                                     <td> {{ $record->tax_rate}}% </td>
                                     <td> {{ format_price($product->price) }} </td>
                                     <td> {{ format_price($price_include_tax)}} </td>
                                     <td> {{ format_price($total_include_tax) }} </td>
-                                    <td class="text-center"><a href="#"><i class="fa fa-trash-o" title="Xóa"></i></a> </td>
+                                    <td class="text-center">
+                                      <a href="#"><i class="fa fa-trash-o" title="Xóa"></i></a>
+                                      @php
+                                        $key_price = 'order_products.'.$product->product_id.'.price';
+                                        $key_price = convert_input_name($key_price);
+                                        $key_sale_price = 'order_products.'.$product->product_id.'.sale_price';
+                                        $key_sale_price = convert_input_name($key_sale_price);
+                                      @endphp
+                                      {{ Form::hidden($key_price, $product->price) }}
+                                      {{ Form::hidden($key_sale_price, $product->sale_price) }}
+                                    </td>
                                   </tr>
                                 @endforeach
                               @endif

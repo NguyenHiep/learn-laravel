@@ -42,7 +42,7 @@
                   </a>
                   <ul class="dropdown-menu pull-right">
                     <li>
-                      <a href="{{ route('orders.invoice') }}"> In hóa đơn</a>
+                      <a href="{{ route('orders.invoice', ['id' => $record->id]) }}"> In hóa đơn</a>
                     </li>
                     <li class="divider"> </li>
                     <li>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="row static-info">
                           <div class="col-md-5 name"> Phương thức thanh toán: </div>
-                          <div class="col-md-7 value"> Đang update </div>
+                          <div class="col-md-7 value">{{ __('selector.payment.'.$record->payment_id) }}</div>
                         </div>
                         <div class="row static-info">
                           <div class="col-md-5 name"> Ghi chú đơn hàng: </div>
