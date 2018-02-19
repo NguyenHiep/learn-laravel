@@ -19,13 +19,22 @@
         </ul>
       </div>
       <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> {{__('static.sidebars.manage.posts.posts')}}  </h3>
-      <!-- END PAGE TITLE-->
-      <div class="row">
+      <div class="row margin-top-30">
         <div class="col-md-12">
           <!-- BEGIN EXAMPLE TABLE PORTLET-->
           <div class="portlet light bordered">
+            <div class="portlet-title">
+              <div class="caption font-dark">
+                <i class="icon-settings font-dark"></i>
+                <span class="caption-subject bold uppercase">{{__('static.sidebars.manage.posts.posts')}}</span>
+              </div>
+              <div class="tools"></div>
+              <div class="actions">
+                <a class="btn green" href="{{ route('pages.create') }}"> {{__('common.buttons.create')}}
+                  <i class="fa fa-plus"></i>
+                </a>
+              </div>
+            </div>
             <div class="portlet-body">
               <div class="table-scrollable">
                 <table class="table table-hover js-action-list-rowlink">
@@ -39,13 +48,13 @@
                     <th>Tiêu đề</th>
                     <th>Tác giả</th>
                     <th>Ngày</th>
-                    <th>Lượt xem</th>
+                    <th>Status</th>
                     <th class="text-center width-110"> Hành động</th>
                   </tr>
                   </thead>
                   <tbody>
 
-                  @if (!empty($records))
+                  @if (count($records) > 0)
                     @foreach ($records as $record)
                       <tr>
                         <td> <!--<td class="checkbox-list"> -->
@@ -59,9 +68,11 @@
                           @endif
                         </td>
                         <td> {{$record->page_title}} </td>
-                        <td>{!! $record->username !!}</td>
-                        <td>{!! date('d/m/Y H:m', strtotime($record->created_at)) !!}</td>
-                        <td>{!! $record->visit !!}</td>
+                        <td> {!! $record->username !!} </td>
+                        <td> {!! format_date($record->created_at) !!} </td>
+                        <td>
+                          <span class="label label-sm @if($record->page_status === STATUS_ENABLE) label-success @else label-danger @endif  margin-right-10"> {{ __('selector.status.'.$record->page_status) }} </span>
+                        </td>
 
                         <td class="text-right ">
                           <div class="btn-group btn-group-solid">

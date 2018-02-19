@@ -19,12 +19,21 @@
         </ul>
       </div>
       <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> {{__('static.sidebars.manage.medias.medias')}}  </h3>
-      <!-- END PAGE TITLE-->
-      <div class="row">
+      <div class="row margin-top-30">
         <div class="col-md-12">
           <div class="portlet light bordered">
+            <div class="portlet-title">
+              <div class="caption font-dark">
+                <i class="icon-settings font-dark"></i>
+                <span class="caption-subject bold uppercase">{{__('static.sidebars.manage.medias.medias')}}</span>
+              </div>
+              <div class="tools"></div>
+              <div class="actions">
+                <a class="btn green" href="{{ route('medias.create') }}"> {{__('common.buttons.create')}}
+                  <i class="fa fa-plus"></i>
+                </a>
+              </div>
+            </div>
             <div class="portlet-body">
               <div class="table-scrollable">
                 <table class="table table-hover js-action-list-rowlink">

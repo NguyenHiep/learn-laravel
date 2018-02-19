@@ -140,3 +140,12 @@ if (!function_exists('format_price')) {
         return false;
     }
 }
+
+if (!function_exists('limit_words')) {
+
+    function limit_words($string, $word_limit = 20)
+    {
+        $words = explode(" ",$string);
+        return implode(" ",array_splice($words,0,$word_limit));
+    }
+}

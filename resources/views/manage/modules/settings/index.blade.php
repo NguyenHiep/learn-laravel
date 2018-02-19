@@ -25,7 +25,7 @@
 
       <div class="row">
         <div class="col-md-12">
-        {!! Form::open(['route' => 'settings.update', 'id' => 'form_sample_3', 'class'=> 'form-horizontal']) !!}
+        {!! Form::open(['route' => 'settings.update', 'id' => 'form_sample_3', 'class'=> 'form-horizontal', 'files' => true]) !!}
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
@@ -100,27 +100,37 @@
                       </div>
                     </div>
                     @php $key = 'subtitle'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
-
+                    @php $key = 'company_email'; @endphp
+                    <div class="form-group  @if ($errors->has($key)) has-error  @endif">
+                      <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
+                      <div class="col-md-9">
+                        {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                      </div>
+                    </div>
                   </div>
                   <div class="col-md-6">
                     @php $key = 'company_lat'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'company_lng'; @endphp
-                    <div class="form-group">
+                    <div class="form-group  @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     <div class="form-group">
@@ -128,32 +138,105 @@
                       <div class="col-md-9">
                         <iframe
                           src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22169.609551143207!2d106.61998586636786!3d10.805926814680902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1502727694094"
-                          width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+                          width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
                       </div>
                     </div>
+                    @php $key = 'company_logo'; @endphp
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif  last">
+                      <label class="control-label col-md-3">Logo
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-9">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                          <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                            @php
+                              $img_url =  (!empty($settings->{$key})) ? asset(UPLOAD_SETTING.$settings->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
+                              echo '<img src="'.$img_url.'" alt="product" />';
+                            @endphp
+                          </div>
+                          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                          <div>
+                            <span class="btn default btn-file">
+                              @php
+                                echo (!empty($settings->{$key})) ? '<span class="fileinput-new"> Thay đổi ảnh </span>' : '<span class="fileinput-new"> Chọn hình ảnh </span>';
+                              @endphp
+                              <span class="fileinput-exists"> Ảnh khác </span>
+                              {{ Form::file($key) }}</span>
+          
+                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
+                          </div>
+                        </div>
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                      </div>
+                    </div>
+                    
                   </div>
-
                 </div>
               </div>
               <div class="form-body">
                 <h3 class="block-title">{{__('static.manage.settings.settings.title_other')}}</h3>
+                <h4 class="block-title-small margin-top-15">Mạng xã hội </h4>
+                <div class="row">
+                  @php $key = 'company_facebook'; @endphp
+                  <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                    <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
+                    <div class="col-md-9">
+                      {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                      @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                    </div>
+                  </div>
+                  @php $key = 'company_googleplus'; @endphp
+                  <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                    <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
+                    <div class="col-md-9">
+                      {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                      @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                    </div>
+                  </div>
+                  @php $key = 'company_twitter'; @endphp
+                  <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                    <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
+                    <div class="col-md-9">
+                      {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                      @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                    </div>
+                  </div>
+                  @php $key = 'company_vk'; @endphp
+                  <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                    <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
+                    <div class="col-md-9">
+                      {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                      @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                    </div>
+                  </div>
+                  @php $key = 'company_instagram'; @endphp
+                  <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                    <label class="control-label col-md-3">{{__('common.settings.settings.general.'.$key.'')}}</label>
+                    <div class="col-md-9">
+                      {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.general.'.$key.'_placeholder') ]) !!}
+                      @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                    </div>
+                  </div>
+                </div>
                 <h4 class="block-title-small">{{__('static.manage.settings.settings.title_email')}}</h4>
                 <div class="row">
                   <div class="col-md-6">
                     @php $key = 'email1'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     @php $key = 'email1_name'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                   </div>
@@ -162,26 +245,29 @@
                 <div class="row">
                   <div class="col-md-6">
                     @php $key = 'mail_smtp_host'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'mail_smtp_port'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
                         {!! Form::text($key,  isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     @php $key = 'mail_smtp_user'; @endphp
-                    <div class="form-group">
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.settings.settings.others.'.$key.'')}}</label>
                       <div class="col-md-9">
                         {!! Form::text($key, isset($settings->{$key}) ? $settings->{$key} : old($key), ['class' => 'form-control','placeholder' => __('common.settings.settings.others.'.$key.'_placeholder') ]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'mail_smtp_pass'; @endphp
@@ -258,14 +344,17 @@
   <!-- BEGIN PAGE LEVEL PLUGINS -->
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
         rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
   <!-- END PAGE LEVEL PLUGINS -->
-  @stop
+@stop
 @section('scripts')
- @parent
- <!-- BEGIN PAGE LEVEL SCRIPTS -->
- <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-         type="text/javascript"></script>
- <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-         type="text/javascript"></script>
+  @parent
+  <!-- BEGIN PAGE LEVEL SCRIPTS -->
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
+          type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
+          type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}"
+          type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop

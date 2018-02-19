@@ -1,5 +1,13 @@
 {
   "/js/app.js": "/js/app.js",
   "/css/app.css": "/css/app.css",
-  "/public/css/app.css": "/public/css/app.css"
+  "/public/css/app.css": "/public/css/app.css",
+  "/mix.js": "/mix.js",
+  "/manage/css/app.css": "/manage/css/app.css",
+  "/css/manage/app.css": "/css/manage/app.css",
+  "/js/manage/app.js": "/js/manage/app.js",
+  "/css/theme-ecommerce.css": "/css/theme-ecommerce.css",
+  "/js/theme-ecommerce.js": "/js/theme-ecommerce.js",
+  "/theme-ecommerce/css/theme-ecommerce.css": "/theme-ecommerce/css/theme-ecommerce.css",
+  "/theme-ecommerce/js/theme-ecommerce.js": "/theme-ecommerce/js/theme-ecommerce.js"
 }

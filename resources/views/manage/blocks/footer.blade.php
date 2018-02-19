@@ -13,36 +13,8 @@
 <script src="{{asset('/manages/assets/global/plugins/excanvas.min.js')}}"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<script src="{{asset('/manages/assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
-{{--<script src="{{ mix('/js/app.js') }}" type="text/javascript"></script>--}}
-<script type="text/javascript">
+<script src="{{ asset('js/manage/app.js') }}"> </script>
 
-</script>
-<script src="{{asset('/manages/assets/global/plugins/bootstrap-toastr/toastr.min.js')}}"
-        type="text/javascript"></script>
-<script src="{{asset('/manages/assets/global/plugins/bootstrap/js/bootstrap.min.js')}}"
-        type="text/javascript"></script>
-<script src="{{asset('/manages/assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/manages/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}"
-        type="text/javascript"></script>
-<script src="{{asset('/manages/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"
-        type="text/javascript"></script>
-<script src="{{asset('/manages/assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/manages/assets/global/plugins/uniform/jquery.uniform.min.js')}}"
-        type="text/javascript"></script>
-<script src="{{asset('/manages/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"
-        type="text/javascript"></script>
-
-<!-- END CORE PLUGINS -->
-<!-- BEGIN THEME GLOBAL SCRIPTS -->
-<script src="{{asset('/manages/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
-<!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN THEME LAYOUT SCRIPTS -->
-<script src="{{asset('/manages/assets/layouts/layout/scripts/layout.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/manages/assets/layouts/layout/scripts/demo.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/manages/assets/layouts/global/scripts/quick-sidebar.min.js')}}"
-        type="text/javascript"></script>
-<!-- END THEME LAYOUT SCRIPTS -->
 @stack('custom-scripts')
 <!-- BEGIN ACTION SCRIPTS -->
 <script src="{{asset('/manages/assets/js/layouts.js?v='.VERSION)}}" type="text/javascript"></script>

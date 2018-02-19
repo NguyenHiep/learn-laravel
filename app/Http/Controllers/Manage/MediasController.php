@@ -124,9 +124,7 @@ class MediasController extends Controller
     {
         $record = Medias::find($id);
         // TODO: Get image with and height
-
-
-        if ($record == null) {
+        if (empty($record)) {
             return view('errors.404');
         }
 

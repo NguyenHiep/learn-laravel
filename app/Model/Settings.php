@@ -36,7 +36,14 @@ class Settings extends BaseModel
         'mail_smtp_host',
         'mail_smtp_port',
         'mail_smtp_user',
-        'mail_smtp_pass'
+        'mail_smtp_pass',
+        'company_email',
+        'company_facebook',
+        'company_googleplus',
+        'company_twitter',
+        'company_vk',
+        'company_instagram',
+        'company_logo'
     ];
 
 	/**

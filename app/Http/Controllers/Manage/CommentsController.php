@@ -134,6 +134,9 @@ class CommentsController extends Controller
     public function edit($id)
     {
         $record = Comments::find($id);
+        if (empty($record)) {
+            return abort(404);
+        }
         return view('manage.modules.comments.edit',['record' => $record]);
     }
 
@@ -157,31 +160,29 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        if (!empty(Comments::find($id))) {
-            try {
-                \DB::beginTransaction();
-                Comments::where('id', $id)->delete();
-                \DB::commit();
-                return response()->json([
-                    'message' => __('system.message.delete'),
-                    'status'  => self::CTRL_MESSAGE_SUCCESS
-                ]);
-            } catch (Exception $e) {
-                \DB::rollBack();
-                return response()->json([
-                    'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
-                    'status'  => self::CTRL_MESSAGE_ERROR
-                ]);
-            }
-
-        } else {
+        $comment = Comments::find($id);
+        if (empty($comment)) {
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
                 'status'  => self::CTRL_MESSAGE_ERROR
             ]);
         }
 
-        //return redirect()->route('comments.index');
+        try {
+            \DB::beginTransaction();
+            Comments::where('id', $id)->delete();
+            \DB::commit();
+            return response()->json([
+                'message' => __('system.message.delete'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS
+            ]);
+        } catch (Exception $e) {
+            \DB::rollBack();
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
     }
 
     /**

@@ -12,15 +12,12 @@
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Tất cả thành viên</span>
+            <span>Danh sách thành viên</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Danh sách thành viên </h3>
-      <!-- END PAGE TITLE-->
-      <div class="row">
+      <div class="row margin-top-30">
         <div class="col-md-12">
           <!-- BEGIN EXAMPLE TABLE PORTLET-->
           <div class="portlet light bordered">

@@ -6,6 +6,9 @@ use App\Model\Posts\Category;
 
 use App\Http\Controllers\Controller;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -42,7 +45,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-       return view('manage.modules.posts.category.create');
+        return view('manage.modules.posts.category.create');
     }
 
     /**
@@ -50,58 +53,35 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
+        $inputs = $request->all();
         // Begin validate
         $this->validate(request(),
-            ['name'   => 'required',],
+            ['name' => 'required'],
             ['name.required' => 'Vui lòng nhập tên chuyên mục']
         );
-        // Begin create category
-        $description = request()->description;
-        $dom = new \DomDocument();
-        // $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), 8192 | 4);
 
-        $images = $dom->getElementsByTagName('img');
+        try {
+            DB::beginTransaction();
+            $category = new Category();
+            $category->fill($inputs);
+            $category->save();
+            DB::commit();
+            return redirect()->route('category.index')->with([
+                'message' => __('system.message.create'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
 
-        // foreach <img> in the submited message
-        foreach($images as $img){
-            $src = $img->getAttribute('src');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->back()->withInput($inputs)->with([
+            'message' => __('system.message.errors', ['errors' => 'Create category is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
 
-            // if the img source is 'data-url'
-            if(preg_match('/data:image/', $src)){
-
-                // get the mimetype
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                $mimetype = $groups['mime'];
-
-                // Generating a random filename
-                $filename = uniqid();
-                $filepath = 'category/' . $filename . '.' . $mimetype;
-
-                // @see http://image.intervention.io/api/
-                $image = Image::make($src)
-                    // resize if required
-                    /* ->resize(300, 200) */
-                    ->encode($mimetype, 100) 	// encode file to the specified mimetype
-                    ->save(public_path($filepath));
-
-                $new_src = asset($filepath);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $new_src);
-            } // <!--endif
-        } // <!--endforeach
-
-
-        $category = new Category();
-        $category->name         = request()->name;
-        $category->slug         = request()->slug;
-        $category->parent_id    = request()->parent_id;
-        $category->description  = $dom->saveHTML();
-        $category->save();
-        session()->flash('message', __('system.message.create'));
-        return redirect()->route('category.index');
     }
 
     /**
@@ -124,8 +104,11 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $list_cate_all = Category::all();
-        $record =  Category::findOrFail($id);
-        return view('manage.modules.posts.category.edit', compact('record','list_cate_all'));
+        $record = Category::findOrFail($id);
+        if (empty($record)) {
+            return abort(404);
+        }
+        return view('manage.modules.posts.category.edit', compact('record', 'list_cate_all'));
     }
 
     /**
@@ -134,57 +117,28 @@ class CategoryController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         //Get data info
         $record = Category::findOrFail($id);
+        if (empty($record)) {
+            return abort(404);
+        }
         // Begin validate
         $this->validate(request(),
-            ['name'   => 'required',],
+            ['name' => 'required',],
             ['name.required' => 'Vui lòng nhập tên chuyên mục']
         );
-        $description = request()->description;
-        $dom = new \DomDocument();
-       // $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), 8192 | 4);
+        $inputs = $request->all();
+        DB::beginTransaction();
+        $record->update($inputs);
+        DB::commit();
 
-        $images = $dom->getElementsByTagName('img');
+        return redirect()->route('category.index')->with([
+            'message' => __('system.message.update'),
+            'status'  => self::CTRL_MESSAGE_SUCCESS,
+        ]);
 
-        // foreach <img> in the submited message
-        foreach($images as $img){
-            $src = $img->getAttribute('src');
-
-            // if the img source is 'data-url'
-            if(preg_match('/data:image/', $src)){
-
-                // get the mimetype
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                $mimetype = $groups['mime'];
-
-                // Generating a random filename
-                $filename = uniqid();
-                $filepath = 'category/' . $filename . '.' . $mimetype;
-
-                // @see http://image.intervention.io/api/
-                $image = Image::make($src)
-                    // resize if required
-                    /* ->resize(300, 200) */
-                    ->encode($mimetype, 100) 	// encode file to the specified mimetype
-                    ->save(public_path($filepath));
-
-                $new_src = asset($filepath);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $new_src);
-            } // <!--endif
-        } // <!--endforeach
-
-        $record->name         = request()->name;
-        $record->slug         = request()->slug;
-        $record->parent_id    = request()->parent_id;
-        $record->description  = $dom->saveHTML();
-        $record->save();
-        session()->flash('message', __('system.message.update'));
-        return redirect()->route('category.index');
     }
 
     /**
@@ -195,11 +149,27 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //Category::where('id', $id)->forcedelete(); Delete in data
-        Category::where('id', $id)->delete();
-        session()->flash('message', __('system.message.delete'));
-        return redirect()->route('category.index');
-    }
+        $category = Category::find($id);
+        if (empty($category)) {
+            return abort(404);
+        }
 
+        try {
+            DB::beginTransaction();
+            $category->delete();
+            DB::commit();
+            return redirect()->route('category.index')->with([
+                'message' => 'Delete category is success',
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->route('category.index')->with([
+            'message' => __('system.message.error', ['errors' => 'Delete category is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
+    }
 
 }

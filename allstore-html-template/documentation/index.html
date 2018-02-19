@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AllStore Documentation</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Montserrat:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-responsive.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	
+	<header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<h1>AllStore documentation</h1>
+			<p>In this user guide you will find all required information to running</p>
+		</div>
+	</header>
+	
+	<div class="container">
+		<div class="row">
+			<div class="span3 bs-docs-sidebar">
+				<ul class="nav nav-list bs-docs-sidenav">
+					<li><a href="#thanks">Introduction</a></li>
+					<li><a href="#structure">Structure</a></li>
+					<li><a href="#contacts">Contacts page</a></li>
+					<li><a href="#forms">Contact forms</a></li>
+					<li><a href="#catalog">Catalog</a></li>
+					<li><a href="#components">Template Elements</a></li>
+					<li><a href="#update">Template Update</a></li>
+					<li><a href="#credits">Sources and Credits</a></li>
+				</ul>
+			</div>
+			
+			
+			<div class="span9">
+			
+				<section id="thanks">
+					<div class="page-header">
+						<h1>Thank You for Purchasing</h1>
+					</div>
+					<p>Thank you very much for purchasing our theme. If you have any questions, please feel free to email us via contact form <a target="_blank" href="http://themeforest.net/user/real-web?ref=real-web">here</a>.</p>
+					<p>AllStore is Html5 + CSS3 responsive template and works fine in all major browsers and IE from version 9. The code is clearly written and you will find comments for each section parts.</p>
+				</section>
+
+				<section id="structure">
+					<div class="page-header">
+						<h1>Structure of template files</h1>
+					</div>
+					<p>You will need some knowledge 'html/css' for understand the code below. <br>You can use special text editors like 'Notepad++', 'Sublime Text' to edit the code.</p>
+
+					<h3>Structure of HTML files</h3>
+					<p>All HTML files are located in the root of the site</p>
+					<ul class="list_desc">
+						<li>
+							<span>index.html</span> Homepage
+						</li>
+						<li>
+							<span>
+								catalog-gallery.html
+								<br>catalog-gallery-2.html
+								<br>catalog-list.html
+								<br>catalog-list-2.html
+								<br>catalog-table.html
+							</span>
+							Catalog
+						</li>
+						<li>
+							<span>product.html</span>
+							Product page
+						</li>
+						<li>
+							<span>elements.html</span> PageBuilder Elements
+						</li>
+						<li>
+							<span>blog.html</span> Blog
+						</li>
+						<li>
+							<span>post.html</span> Blog Post
+						</li>
+						<li>
+							<span>contacts.html</span> Contacts
+						</li>
+						<li>
+							<span>cart.html</span>
+							Shopping Cart
+						</li>
+					</ul>
+
+					<h3>Structure of CSS/JS files</h3>
+					<p>In 'css' folder contains used template styles and styles of 'jQuery' plugins.</p>
+					<ul class="list_desc">
+						<li><span>css/bootstrap.min.css</span> Bootstrap, mobile first front-end framework</li>
+						<li><span>css/flexslider.css</span> FlexSlider, responsive slider</li>
+						<li><span>css/font-awesome.min.css</span> Font Awesome, scalable vector icons</li>
+						<li><span>css/ion.rangeSlider.css</span> Ion RangeSlide, input range slider element polyfill</li>
+						<li><span>css/jQuery.Brazzers-Carousel.css</span> Brazzers, images carousel</li>
+						<li><span>css/jquery.bxslider.css</span> BxSlider, images carousel</li>
+						<li><span>css/jquery.fancybox.css</span> FancyBox, displaying images, html content that floats overtop of web page</li>
+						<li><span>css/swiper.css</span> Swiper, mobile touch slider</li>
+						<li><span>css/style.css</span> Template styles</li>
+						<li><span>css/media.css</span> Responsive styles</li>
+					</ul>
+
+					<h3>JavaScripts are located in 'js' folder</h3>
+					<ul class="list_desc">
+						<li><span>js/jquery-1.11.2.min.js</span> jQuery, JavaScript library</li>
+						<li><span>js/chosen.jquery.min</span> Chosen, plugin that makes select boxes much more user-friendly</li>
+						<li><span>js/fancybox/fancybox.js</span> FancyBox, displaying images, html content that floats overtop of web page</li>
+						<li><span>js/jQuery.Brazzers-Carousel.js</span> Brazzers, images carousel</li>
+						<li><span>js/jquery.bxslider.min.js</span> BxSlider, images carousel</li>
+						<li><span>js/jquery.flexslider-min.js</span> FlexSlider, responsive slider</li>
+						<li><span>js/jquery.waypoints.min.js</span> Waypoints, trigger a function when you scroll to an element</li>
+						<li><span>js/progressbar.min.js</span> Progressbar, progress bar plugin</li>
+						<li><span>js/swiper.jquery.min.js</span> Swiper, mobile touch slider</li>
+						<li><span>js/ion.rangeSlider.min.js</span> Ion RangeSlide, input range slider element polyfill</li>
+						<li><span>js/gmap.js</span> Init Google maps</li>
+						<li><span>js/main.js</span> Template scripts</li>
+						<li><span>js/plugins.js</span> Init jQuery scripts</li>
+					</ul>
+					<br>
+					<p><b>Social Share Links</b>. To generate links you can use special services or manually by changing onclick attribute data on &lt;a&gt;&lt;/a&gt; tag</p>
+<pre>
+&lt;ul class=&quot;post-share&quot;&gt;
+	...
+	&lt;li&gt;
+		&lt;a
+			<b>onclick="popUp=window.open('http://twitter.com/home?status=AllStore HTML Template allstore-html.real-web.pro','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;"</b>
+			data-toggle="tooltip"
+			title="Share on Twitter"
+			href="javascript:;"
+		&gt;
+			&lt;i class="fa fa-twitter"&gt;&lt;/i&gt;
+		&lt;/a&gt;
+	&lt;/li&gt;
+	...
+&lt;/ul&gt;
+</pre>
+				</section>
+
+				<section id="contacts">
+					<div class="page-header">
+						<h1>Contacts page</h1>
+					</div>
+					<p>To change the locate on the map, you will need to determine the coordinates in <a href="https://www.google.com/maps/" target="_blank">Google Maps</a>  by clicking at a certain point (as shown in the image below),</p>
+					<p>	<img alt="" src="assets/img/image_1.png"></p>
+					<p>and then add the coordinates in the file 'contacts.html'.</p>
+<pre class="prettyprint lang-js linenums">
+&lt;div class="allstore-gmap"&gt;
+	&lt;div
+		class="marker"
+		<b>data-zoom="15"</b>
+		<b>data-lat="-37.81485261872975"</b>
+		<b>data-lng="144.95655298233032"</b>
+		data-marker="img/marker.png"
+	&gt;
+		534-540 Little Bourke St, Melbourne VIC 3000, Australia
+	&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+				</section>
+
+
+
+				<section id="forms">
+
+					<div class="page-header">
+						<h1>Contact forms</h1>
+					</div>
+					<p>In the template all the forms work without reloading pages by AJAX. <br>You can easily manage the validation fields by the attributes of appropriate tags:</p>
+
+<pre class="prettyprint lang-html linenums">
+&lt;form action=&quot;#&quot; class=&quot;form-validate&quot;&gt;
+	&lt;input <b>data-required=&quot;text&quot;</b> type=&quot;text&quot; placeholder=&quot;Name&quot; <b>name=&quot;name&quot;</b>&gt;
+	&lt;input <b>data-required=&quot;text&quot;</b> type=&quot;text&quot; placeholder=&quot;Phone&quot; <b>name=&quot;phone&quot;</b>&gt;
+	&lt;input <b>data-required=&quot;text&quot;</b> <b>data-required-email=&quot;email&quot;</b> type=&quot;text&quot; placeholder=&quot;Email&quot; <b>name=&quot;email&quot;</b>&gt;
+	&lt;textarea placeholder=&quot;Your message&quot; <b>name=&quot;mess&quot;</b>&gt;&lt;/textarea&gt;
+	&lt;input type=&quot;submit&quot; value=&quot;Send&quot;&gt;
+&lt;/form&gt;
+</pre>
+
+					<p>In the file 'php/email.php' is carried out processing all the forms. You need to put the source files to the server for operability of files 'php'. <br>Changing the email address is carried out of the recipient by changing value '$to' of the variable in file 'php/emal.php'.</p>
+
+<pre class="prettyprint lang-php linenums">
+$to = &#39;&#121;&#111;&#117;&#114;&#101;&#109;&#97;&#105;&#108;&#64;&#101;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;&#39;;</pre>
+
+				</section>
+
+
+				<section id="catalog">
+					<div class="page-header">
+						<h1>Catalog View Modes</h1>
+					</div>
+					<p>In this template available to use 5 types of view modes of products catalog:</p>
+					<h3>Gallery V1 - catalog-gallery.html</h3>
+					<p><img src="assets/img/view1.jpg" alt=""></p>
+					<h3>Gallery V2 - catalog-gallery-2.html</h3>
+					<p>With Thumbnails hover carousel</p>
+					<p><img src="assets/img/view2.jpg" alt=""></p>
+					<h3>List V1 - catalog-list.html</h3>
+					<p><img src="assets/img/view3.jpg" alt=""></p>
+					<h3>List V2 - catalog-list-2.html</h3>
+					<p>With Thumbnails hover carousel</p>
+					<p><img src="assets/img/view4.jpg" alt=""></p>
+					<h3>Table - catalog-list-2.html</h3>
+					<p>With Thumbnails hover carousel and with button to showing more information of product</p>
+					<p><img src="assets/img/view5.jpg" alt=""></p>
+				</section>
+
+				<section id="components">
+					<div class="page-header">
+						<h1>Template Elements</h1>
+					</div>
+					<p>In the <b>elements.html</b> available many elements which ready to use</p>
+					<p>Also you can add element title and its description</p>
+					<p>To add element's title you need to add title tag with "component-ttl" class. For center alignment just add extra class <b>"component-ttl-ct"</b> and to use with element's description add <b>"component-ttl-hasdesc"</b> class</p>
+					<p>To add element's description you need to add paragraph tag with "component-desc" class. For center alignment just add extra class <b>"component-desc-ct"</b></p>
+<pre class="prettyprint lang-js linenums">
+&lt;h3 class="component-ttl component-ttl-ct component-ttl-hasdesc"&gt;&lt;span&gt;Title Block&lt;/span&gt;&lt;/h3&gt;
+&lt;p class="component-desc component-desc-ct"&gt;Explicabo tenetur qui accusamus impedit, nobis, perspiciatis aut&lt;/p&gt;
+</pre>
+				</section>
+
+				<section id="update">
+					<div class="page-header">
+						<h1>Template Update</h1>
+					</div>
+					<p>Before you update, it is best practice to always make a backup of your site files.</p>
+					<p>Download the new template package from your ThemeForest account.</p>
+					<p>The template is under "html" folder in the package.</p>
+				</section>
+				
+				<section id="credits">
+					<div class="page-header">
+						<h1>Sources and Credits</h1>
+					</div>
+					
+					<h3>Included Libraries</h3>
+		            <ul class="list_with_desc list_with_desc2">
+		                <li><b>JQuery</b> (<a href="http://jquery.com" target="_blank">jquery.com</a>) <br>jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.</li>
+						<li><b>Fancybox v2.1.5</b> js/fancybox/fancybox.js <br>(<a href="https://github.com/aFarkas/html5shiv" target="_blank">github.com/aFarkas/html5shiv</a>) <br>FancyBox is a tool for displaying images, html content and multi-media in a Mac-style "lightbox" that floats overtop of web page.</li>
+						<li><b>FlexSlider v2.6.0</b> js/jquery.flexslider-min.js <br>(<a href="https://www.woothemes.com/flexslider/" target="_blank">woothemes.com/flexslider/</a>) <br>An awesome, fully responsive jQuery slider toolkit</li>
+						<li><b>Ion.RangeSlider v2.1.3</b> js/ion.rangeslider.min.js <br>(<a href="http://ionden.com/a/plugins/ion.rangeSlider/en.html" target="_blank">ionden.com/a/plugins/ion.rangeSlider/en.html</a>) <br>Responsive and easily customizable range slider</li>
+						<li><b>BXslider</b> js/jquery.bxslider.min.js <br>(<a href="http://bxslider.com" target="_blank">bxslider.com</a>) <br>images carousel</li>
+						<li><b>Waypoints</b> js/jquery.waypoints.min.js <br>(<a href="http://imakewebthings.com/waypoints/" target="_blank">imakewebthings.com/waypoints/</a>) <br>trigger a function when you scroll to an element</li>
+						<li><b>Progressbar</b> js/progressbar.min.js <br>(<a href="http://kimmobrunfeldt.github.io/progressbar.js/" target="_blank">kimmobrunfeldt.github.io/progressbar.js/</a>) <br>progress bar plugin</li>
+						<li><b>Swiper</b> js/swiper.jquery.min.js <br>(<a href="http://idangero.us/swiper/" target="_blank">idangero.us/swiper/</a>) <br>mobile touch slider</li>
+						<li><b>Chosen</b> js/chosen.jquery.min.js <br>(<a href="https://harvesthq.github.io/chosen/" target="_blank">harvesthq.github.io/chosen/</a>) <br>plugin that makes select boxes much more user-friendly</li>
+						<li><b>Brazzers-Carousel</b> js/jQuery.Brazzers-Carousel.js <br>(<a href="https://agragregra.github.io/Brazzers-Carousel/" target="_blank">agragregra.github.io/Brazzers-Carousel/</a>) <br>images carousel</li>
+		            </ul>
+					<h3>Used Fonts</h3>
+					<ul>
+						<li><b>Roboto</b> (<a href="https://www.google.com/fonts/specimen/Roboto" target="_blank">google.com/fonts/specimen/Roboto</a>)</li>
+						<li><b>PT Serif</b> (<a href="https://fonts.google.com/specimen/PT+Serif" target="_blank">fonts.google.com/specimen/PT+Serif</a>)</li>
+						<li><b>Font Awesome</b> (<a href="http://fontawesome.io/" target="_blank">fontawesome.io</a>) <br>Font Awesome gives you scalable vector icons that can instantly be customized — size, color, drop shadow, and anything that can be done with the power of CSS.</li>
+					</ul>
+			        <h3>Used Photos in Demo</h3>
+					<ul>
+						<li><b>Unsplash</b> - <a href="http://www.unsplash.com/" target="_blank">unsplash.com</a></li>
+						<li><b>Pixabay</b> - <a href="http://www.pixabay.com/" target="_blank">pixabay.com</a></li>
+					</ul>
+				</section>
+
+			</div>
+		</div>
+	</div>
+	
+	
+	<footer class="footer">
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span12">
+					<p><a href="#">Back to Top</a></p>
+					<h3>If you like our theme please <a target="_blank" href="http://themeforest.net/downloads">rate us 5 stars</a></h3>
+					<p><img src="assets/img/f1.jpg" alt=""></p>
+					<br>
+					<p>If you have any questions about theme send me a message from my <a href="http://themeforest.net/user/real-web?ref=real-web" target="_blank">Envato profile</a></p>
+					<br>
+					<p>Built with <a target="_blank" href="http://getbootstrap.com">Bootstrap</a></p>
+					<br>
+					<p>2017 &copy; Real Web</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<!-- Placed at the end of the document so the pages load faster --> 
+	<script src="assets/js/jquery.js"></script> 
+	<script src="assets/js/bootstrap-transition.js"></script> 
+	<script src="assets/js/bootstrap-alert.js"></script> 
+	<script src="assets/js/bootstrap-modal.js"></script> 
+	<script src="assets/js/bootstrap-dropdown.js"></script> 
+	<script src="assets/js/bootstrap-scrollspy.js"></script> 
+	<script src="assets/js/bootstrap-tab.js"></script> 
+	<script src="assets/js/bootstrap-tooltip.js"></script> 
+	<script src="assets/js/bootstrap-popover.js"></script> 
+	<script src="assets/js/bootstrap-button.js"></script> 
+	<script src="assets/js/bootstrap-collapse.js"></script> 
+	<script src="assets/js/bootstrap-carousel.js"></script> 
+	<script src="assets/js/bootstrap-typeahead.js"></script> 
+	<script src="assets/js/bootstrap-affix.js"></script> 
+	<script src="assets/js/application.js"></script>
+
+</body>
+</html>

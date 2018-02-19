@@ -20,7 +20,7 @@ class Controller extends BaseController
     public $medias;
 
     public function __construct() {
-        $this->middleware('auth');
+        //$this->middleware('auth');
         $this->medias = Medias::all();
     }
 }

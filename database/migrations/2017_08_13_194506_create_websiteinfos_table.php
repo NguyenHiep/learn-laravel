@@ -33,6 +33,13 @@ class CreateWebsiteinfosTable extends Migration
             $table->string('mail_smtp_port', 3)->nullable()->comment('Email người gửi - Port SMTP');
             $table->string('mail_smtp_user', 255)->nullable()->comment('Email người gửi - User SMTP');
             $table->string('mail_smtp_pass', 255)->nullable()->comment('Email người gửi - PassWord SMTP');
+            $table->string('company_email', 255)->nullable()->comment('Email công ty');
+            $table->string('company_facebook', 255)->nullable()->comment('Facebook công ty');
+            $table->string('company_googleplus', 255)->nullable()->comment('Google plus công ty');
+            $table->string('company_twitter', 255)->nullable()->comment('Twitter công ty');
+            $table->string('company_vk', 255)->nullable()->comment('Vk công ty');
+            $table->string('company_instagram', 255)->nullable()->comment('Instagram công ty');
+            $table->string('company_logo', 255)->nullable()->comment('Logo company');
             $table->timestamps();
             $table->softDeletes();
 

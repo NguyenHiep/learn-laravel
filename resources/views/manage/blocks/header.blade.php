@@ -23,8 +23,7 @@
           type="text/css"/>
     <link rel="stylesheet" href="{{ asset('/manages/assets/global/plugins/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manages/assets/global/plugins/simple-line-icons/simple-line-icons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-    <link href="{{asset('/manages/assets/layouts/layout/css/custom.min.css?v='.VERSION)}}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('/css/manage/app.css') }}">
 
     <!-- END THEME LAYOUT STYLES -->
   @show

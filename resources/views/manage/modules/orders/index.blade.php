@@ -17,11 +17,8 @@
         </ul>
       </div>
       
-      <h1 class="page-title">Danh sách đơn hàng</h1>
-      
-      <div class="row">
+      <div class="row margin-top-30">
         <div class="col-md-12">
-  
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -85,6 +82,8 @@
 
                       </tr>
                     @endforeach
+                  @else
+                    <tr><td colspan="9" class="text-center">{{ __('common.data_empty') }}</td></tr>
                   @endif
           
                   </tbody>
