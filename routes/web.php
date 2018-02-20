@@ -67,6 +67,6 @@ Route::group(['middleware', 'auth'], function () {
 	});
 });
 
-//Route::resource('test','AdminsController');
+Route::get('{page_slug}','PagesController@index');
 
 

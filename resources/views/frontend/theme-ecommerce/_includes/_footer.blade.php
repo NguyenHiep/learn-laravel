@@ -108,10 +108,10 @@
           Giới thiệu
         </h3>
         <ul class="nav nav-pills nav-stacked">
-          <li class="active"><a href="#">Giới thiệu</a></li>
-          <li><a href="#">Thông tin giao hàng</a></li>
-          <li><a href="#">Chính sách bảo mật</a></li>
-          <li><a href="#">Điều khoản và điều kiện</a></li>
+          <li class="active"><a href="{{ url('gioi-thieu') }}" target="_blank">Giới thiệu</a></li>
+          <li><a href="{{ url('thong-tin-giao-hang') }}" target="_blank">Thông tin giao hàng</a></li>
+          <li><a href="{{ url('chinh-sach-bao-mat') }}" target="_blank">Chính sách bảo mật</a></li>
+          <li><a href="{{ url('dieu-khoan-va-dieu-kien') }}" target="_blank">Điều khoản và điều kiện</a></li>
         </ul>
       </div>
       
@@ -120,8 +120,8 @@
          Dịch vụ khách hàng
         </h3>
         <ul class="nav nav-pills nav-stacked">
-          <li><a href="#">Liên hệ</a></li>
-          <li><a href="#">Sơ đồ trang web</a></li>
+          <li><a href="{{ url('lien-he') }}">Liên hệ</a></li>
+          <li><a href="{{ url('so-do-trang-web') }}">Sơ đồ trang web</a></li>
         </ul>
       </div>
       <div class="f-menu">

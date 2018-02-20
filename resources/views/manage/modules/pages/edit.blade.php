@@ -45,7 +45,7 @@
                 @php $key = 'page_slug'; @endphp
 
                 <div class="form-group">
-                  <label class="control-label">{{__('common.pages.'.$key.'')}} : <a href="{{url('/')}}" target="_blank"> {{url('/')}}<span class="change_slug">{{'/'.$record->page_slug}}</span></a>
+                  <label class="control-label">{{__('common.pages.'.$key.'')}} : <a href="{{url($record->page_slug)}}" target="_blank"> {{url('/')}}<span class="change_slug">{{'/'.$record->page_slug}}</span></a>
                     {{ Form::hidden($key,old($key), array('id' => 'slug')) }}
                   </label>
                 </div>
