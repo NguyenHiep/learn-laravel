@@ -461,12 +461,12 @@
         <button type="button" class="mainmenu-btn">Menu</button>
         
         <ul class="mainmenu">
-          <li><a href="#" class="active">Sản phẩm</a></li>
-          <li><a href="#">Khuyến mãi</a></li>
-          <li><a href="#">Giới thiệu</a></li>
-          <li><a href="#">Tin tức</a></li>
-          <li><a href="#">Hướng dẫn thanh toán</a></li>
-          <li><a href="#">Liên hệ</a></li>
+          <li><a href="{{ url('/') }}" class="active">Sản phẩm</a></li>
+          <li><a href="{{ url('khuyen-mai') }}">Khuyến mãi</a></li>
+          <li><a href="{{ url('gioi-thieu') }}">Giới thiệu</a></li>
+          <li><a href="{{ url('tin-tuc') }}">Tin tức</a></li>
+          <li><a href="{{ url('huong-dan-thanh-toan') }}">Hướng dẫn thanh toán</a></li>
+          <li><a href="{{ url('lien-he') }}">Liên hệ</a></li>
           <li class="mainmenu-more">
             <span>...</span>
             <ul class="mainmenu-sub"></ul>

@@ -45,7 +45,7 @@ class CategoriesController extends Controller
     {
         $data['list_cate_all'] = Categories::all();
         //$list_cate_all = Categories::all();
-        $data['records'] =  Categories::orderBy('id', 'asc')->paginate(12);
+        $data['records'] =  Categories::orderBy('id', 'asc')->paginate(20);
         //$records = Categories::orderBy('id', 'asc')->paginate(12);
         return view('manage.modules.categories.index', $data);
     }
