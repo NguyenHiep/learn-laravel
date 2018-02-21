@@ -30,14 +30,12 @@
           <span class="selected"></span>
         </a>
       </li>
-
       <li class="nav-item  {{ active(['categories.index', 'categories.create', 'categories.edit'], 'active open') }}">
         <a href="{{ route('categories.index') }}" class="nav-link ">
           <i class="fa fa-tasks"></i>
           <span class="title">{{__('static.sidebars.manage.categories.title')}}</span>
         </a>
       </li>
-
       <li
         class="nav-item  {{ active(['products.index', 'products.create', 'products.edit'], 'active open') }}">
         <a href="{{ route('products.index') }}" class="nav-link nav-toggle">
@@ -60,7 +58,6 @@
 
         </ul>
       </li>
-
       <li
         class="nav-item  {{ active(['orders.index', 'orders.create', 'orders.edit', 'orders.invoice', 'orders.show'], 'active open') }}">
         <a href="{{ route('orders.index') }}" class="nav-link nav-toggle">
@@ -82,7 +79,6 @@
 
         </ul>--}}
       </li>
-
       <li class="nav-item  {{ active(['posts.index', 'posts.create', 'posts.edit', 'category.index', 'category.create','category.edit', 'tags.index', 'tags.create', 'tags.edit'], 'active open') }}">
         <a href="{{ route('posts.index') }}" class="nav-link nav-toggle">
           <i class="icon-pin"></i>
@@ -128,6 +124,25 @@
           <li class="nav-item  ">
             <a href="{{ route('medias.create') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.medias.creates')}}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item  {{ active(['sliders.index', 'sliders.create', 'sliders.edit'], 'active open') }}">
+        <a href="javascript:;" class="nav-link nav-toggle">
+          <i class="icon-picture"></i>
+          <span class="title">{{__('static.sidebars.manage.sliders.title')}}</span>
+          <span class="arrow {{ active(['sliders.index', 'sliders.create', 'sliders.edit'], 'open') }}"></span>
+        </a>
+        <ul class="sub-menu">
+          <li class="nav-item  ">
+            <a href="{{ route('sliders.index') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.sliders.sliders')}}</span>
+            </a>
+          </li>
+          <li class="nav-item  ">
+            <a href="{{ route('sliders.create') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.sliders.creates')}}</span>
             </a>
           </li>
         </ul>

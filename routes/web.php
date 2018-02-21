@@ -59,6 +59,7 @@ Route::group(['middleware', 'auth'], function () {
         Route::post('comments', ['as' => 'comments.search', 'uses' => 'CommentsController@index']);
         Route::resource('customers', 'CustomersController');
         Route::resource('email', 'EmailController');
+        Route::resource('sliders', 'SlidersController');
 
         // Begin ajax
         Route::post('ajax/product','AjaxController@product');

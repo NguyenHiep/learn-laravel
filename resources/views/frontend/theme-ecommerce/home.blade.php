@@ -8,44 +8,31 @@
   <!-- Main Content - start -->
   <main>
     <section class="container">
+      @if(count($sliders))
       <!-- Slider -->
       <div class="fr-slider-wrap">
         <div class="fr-slider">
           <ul class="slides">
-            <li>
-              <img src="img/slider/slide1.jpg" alt="">
-              <div class="fr-slider-cont">
-                <h3>MEGA SALE -30%</h3>
-                <p>Winter collection for women's. <br>We all have choices for you. Check it out!</p>
-                <p class="fr-slider-more-wrap">
-                  <a class="fr-slider-more" href="#">View collection</a>
-                </p>
-              </div>
-            </li>
-            <li>
-              <img src="img/slider/slide1.jpg" alt="">
-              <div class="fr-slider-cont">
-                <h3>NEW COLLECTION</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Aliquam consequuntur dolorem doloribus fuga harum</p>
-                <p class="fr-slider-more-wrap">
-                  <a class="fr-slider-more" href="#">Shopping now</a>
-                </p>
-              </div>
-            </li>
-            <li>
-              <img src="img/slider/slide1.jpg" alt="">
-              <div class="fr-slider-cont">
-                <h3>SUMMER TRENDS</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Aliquam consequuntur dolorem doloribus fuga harum</p>
-                <p class="fr-slider-more-wrap">
-                  <a class="fr-slider-more" href="#">Start shopping</a>
-                </p>
-              </div>
-            </li>
+            @foreach($sliders as $slider)
+              <li>
+                @if(empty($slider['slider_img']))
+                  <img src="img/slider/slide1.jpg" alt="">
+                @else
+                  <img src="{{ asset(UPLOAD_SLIDER.$slider['slider_img'])}}" alt="{{ $slider['slider_title'] }}" class="img-responsive"/>
+                @endif
+                <div class="fr-slider-cont">
+                  <h3>{{ $slider['slider_title'] }}</h3>
+                  <p>{{ $slider['slider_content'] }}</p>
+                  <p class="fr-slider-more-wrap">
+                    <a class="fr-slider-more" href="{{ $slider['slider_url'] }}" target="{{ __('selector.target.'.$slider['slider_target']) }}">Xem chi tiết</a>
+                  </p>
+                </div>
+              </li>
+            @endforeach
           </ul>
         </div>
       </div>
-      
+      @endif
       <!-- Popular Products -->
       <div class="fr-pop-wrap">
         <h3 class="component-ttl"><span>Giá sỉ nổi bật  </span></h3>

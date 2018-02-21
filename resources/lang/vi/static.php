@@ -2,49 +2,54 @@
 return [
     'sidebars' => [
         'manage' => [
-            'manage'    => 'Bảng điều khiển',
-            'settings'  => [
+            'manage'     => 'Bảng điều khiển',
+            'settings'   => [
                 'title'    => 'Cài đặt',
                 'settings' => 'Cài đặt thông tin website',
                 'admins'   => 'Quản trị tài khoản',
             ],
-            'categories'  => [
-                'title'  => 'Chuyên mục',
+            'categories' => [
+                'title' => 'Chuyên mục',
             ],
-            'products'  => [
+            'products'   => [
                 'title'  => 'Sản phẩm',
                 'create' => 'Thêm sản phẩm',
                 'list'   => 'Danh sách sản phẩm',
             ],
-            'orders'    => [
+            'orders'     => [
                 'title'  => 'Đơn hàng',
                 'create' => 'Tạo mới đơn hàng',
                 'list'   => 'Danh sách đơn hàng',
             ],
-            'posts'     => [
+            'posts'      => [
                 'title'    => 'Bài viết',
                 'posts'    => 'Tất cả bài viết',
                 'creates'  => 'Bài viết mới',
                 'category' => 'Chuyên mục',
                 'tags'     => 'Thẻ'
             ],
-            'medias'    => [
+            'medias'     => [
                 'title'   => 'Hình ảnh',
                 'medias'  => 'Danh sách hình ảnh',
                 'creates' => 'Thêm mới hình ảnh'
             ],
-            'pages'     => [
+            'sliders'    => [
+                'title'   => 'Sliders',
+                'sliders' => 'Danh sách slider',
+                'creates' => 'Thêm mới slider'
+            ],
+            'pages'      => [
                 'title'   => 'Trang',
                 'pages'   => 'Tất cả trang',
                 'creates' => 'Thêm mới trang'
             ],
-            'comments'  => 'Bình luận',
-            'customers' => [
+            'comments'   => 'Bình luận',
+            'customers'  => [
                 'title'     => 'Thành viên',
                 'customers' => 'Tất cả thành viên',
                 'creates'   => 'Thêm mới'
             ],
-            'email'     => [
+            'email'      => [
                 'title'     => 'Email',
                 'contact'   => 'Email liên hệ',
                 'subscribe' => 'Email đăng ký theo dõi'

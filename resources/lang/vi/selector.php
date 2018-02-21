@@ -45,5 +45,12 @@ return [
     'payment' => [
         1 => 'Thanh toán khi nhận hàng',
         2 => 'Chuyển khoản ngân hàng',
+    ],
+    'target' => [
+        1 => '_blank',
+        2 => '_self',
+        3 => '_parent',
+        4 => '_top',
+        5 => 'framename',
     ]
 ];

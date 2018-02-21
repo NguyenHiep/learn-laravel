@@ -125,5 +125,16 @@ return [
     'comments'    => array(
         'title'                    => 'Chỉnh sửa bình luận',
     ),
+    'sliders' => array(
+        'slider_img'                 => 'Hình ảnh',
+        'slider_title'               => 'Tiêu đề',
+        'slider_title_placeholder'   => 'VD: Chương trình khuyến mãi giảm giá',
+        'slider_content'             => 'Nội dung',
+        'slider_content_placeholder' => 'VD: Nội dung slider',
+        'slider_url'                 => 'Link url',
+        'slider_url_placeholder'     => 'VD: http://example.com',
+        'slider_target'              => 'Target',
+        'slider_status'              => 'Trạng thái',
+    ),
     'data_empty' => 'Không có dữ liệu'
 ];
