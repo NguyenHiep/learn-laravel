@@ -208,7 +208,8 @@
                 <div class="checkbox-list">
                   @php
                     $key = 'category_id.';
-                    $html = '<label><input type="checkbox" name="'.convert_input_name($key).'" value="0" id="id-category-0">Không xác định</label>'; $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
+                    /*$html = '<label><input type="checkbox" name="'.convert_input_name($key).'" value="0" id="id-category-0">Không xác định</label>';*/ $text = '&nbsp;&nbsp;&nbsp;&nbsp;';
+                    $html = '';
                     if(!empty($list_cate_all)){
                       foreach($list_cate_all as $parent){
                         if($parent->parent_id == 0){

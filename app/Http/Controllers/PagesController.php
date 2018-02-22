@@ -11,7 +11,7 @@ class PagesController extends FrontendController
         if(empty($page_slug)){
             return abort(404);
         }
-        $record = Pages::where('page_slug',$page_slug)->first();
+        $record = Pages::where('page_slug',$page_slug)->where('page_status', STATUS_ENABLE)->first();
         if(is_null($record)){
             return abort(404);
         }
