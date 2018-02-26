@@ -71,31 +71,36 @@ if (!function_exists('unicode_str_filter')) {
 if (!function_exists('convert_to_string')) {
     /***
      * Convert array to string
-     * Ex: [1, 2, 3] => 1|2|3
+     * Ex: [1, 2, 3] => |1|2|3|
      *
-     * @param $value
+     * @param $datas
      * @return string
      */
-    function convert_to_string($value)
+    function convert_to_string(array $datas)
     {
-        if (isset($value) && is_array($value)) {
-            $value = implode('|', $value);
+        if (isset($datas) && is_array($datas) && count($datas) > 0) {
+            $result = '';
+            foreach($datas as $value){
+                $result .= '|'.$value;
+            }
+            $result .= '|';
+            return $result;
         }
-        return $value;
+        return false;
     }
 }
 if (!function_exists('convert_to_array')) {
     /***
      * Convert string to array
-     * Ex: 1|2|3 => [1, 2, 3]
+     * Ex: |1|2|3| => [1, 2, 3]
      *
-     * @param $value
+     * @param $strings
      * @return array|string
      */
-    function convert_to_array($value)
+    function convert_to_array($strings)
     {
-        if (!empty($value)) {
-            $value = explode('|', $value);
+        if (!empty($strings)) {
+            $value = explode('|', rtrim(ltrim($strings, '|'), '|'));
         }
         return $value;
     }
