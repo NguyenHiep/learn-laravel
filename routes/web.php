@@ -68,6 +68,7 @@ Route::group(['middleware', 'auth'], function () {
 	});
 });
 
-Route::get('{page_slug}','PagesController@index');
+Route::get('{page_slug}','PagesController@index')->name('page.show');
+Route::get('/san-pham/{slug}','ProductsController@show')->name('product.show');
 
 
