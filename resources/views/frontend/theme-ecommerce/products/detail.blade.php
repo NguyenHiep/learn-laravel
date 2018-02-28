@@ -87,7 +87,7 @@
         <div class="prod-cont">
           <ul class="prod-cont-txt">
             <li>
-              <b>Mã sản phẩm</b> 05464207
+              <b>Mã sản phẩm</b> {{ $product->sku }}
             </li>
             <li>
               <b>Xuất xứ</b> 05464207

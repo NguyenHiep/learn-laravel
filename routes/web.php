@@ -70,6 +70,6 @@ Route::group(['middleware', 'auth'], function () {
 
 Route::get('{page_slug}','PagesController@index')->name('page.show');
 Route::get('/san-pham/{slug}','ProductsController@show')->name('product.show');
-Route::get('/product/quick-view/{id}','ProductsController@quick_view')->name('product.quick-view');
+Route::get('/product/quick-view/{id}','ProductsController@quick_view')->name('product.quick_view');
 
 

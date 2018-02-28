@@ -1,0 +1,116 @@
+#page-preloader {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 999999999;
+	background: transparent;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	align-items: center;
+	justify-content: center
+}
+#page-preloader .page-loading {
+	position: absolute;
+	top: 50%;
+	left: 40%;
+	margin-left: 10%;
+	-webkit-transform: translate3d(-50%, -50%, 0);
+	-moz-transform: translate3d(-50%, -50%, 0);
+	-ms-transform: translate3d(-50%, -50%, 0);
+	-o-transform: translate3d(-50%, -50%, 0);
+	transform: translate3d(-50%, -50%, 0)
+}
+.lang-rtl #page-preloader .page-loading {
+	right: 40%;
+	left: auto
+}
+.lang-rtl #page-preloader .page-loading {
+	margin-right: 10%;
+	margin-left: inherit
+}
+#page-preloader .page-loading .dot {
+	width: 24px;
+	height: 24px;
+	background: #fac777;
+	border-radius: 100%;
+	display: inline-block;
+	animation: load_page 1s infinite
+}
+#page-preloader .page-loading .dot:nth-child(1) {
+	animation-delay: 0.1s;
+	background: #fac777
+}
+#page-preloader .page-loading .dot:nth-child(2) {
+	animation-delay: 0.2s;
+	background: #cce85c
+}
+#page-preloader .page-loading .dot:nth-child(3) {
+	animation-delay: 0.3s;
+	background: #96e174
+}
+#page-preloader .page-loading .dot:nth-child(4) {
+	animation-delay: 0.4s;
+	background: #80efaf
+}
+#page-preloader .page-loading .dot:nth-child(5) {
+	animation-delay: 0.5s;
+	background: #46caeb
+}
+@-moz-keyframes load_page {
+	0% {
+		transform: scale(1)
+	}
+	50% {
+		opacity: .3;
+		transform: scale(2)
+	}
+	100% {
+		transform: scale(1)
+	}
+}
+@-webkit-keyframes load_page {
+	0% {
+		transform: scale(1)
+	}
+	50% {
+		opacity: .3;
+		transform: scale(2)
+	}
+	100% {
+		transform: scale(1)
+	}
+}
+@-o-keyframes load_page {
+	0% {
+		transform: scale(1)
+	}
+	50% {
+		opacity: .3;
+		transform: scale(2)
+	}
+	100% {
+		transform: scale(1)
+	}
+}
+@keyframes load_page {
+	0% {
+		transform: scale(1)
+	}
+	50% {
+		opacity: .3;
+		transform: scale(2)
+	}
+	100% {
+		transform: scale(1)
+	}
+}

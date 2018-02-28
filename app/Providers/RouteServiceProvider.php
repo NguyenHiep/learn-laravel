@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -34,11 +33,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map(Request $request)
+    public function map()
     {
-        $this->mapWebRoutes($request);
-
         $this->mapApiRoutes();
+
+        $this->mapWebRoutes();
 
         //
     }
@@ -50,30 +49,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes(Request $request)
+    protected function mapWebRoutes()
     {
-        $locale = $request->segment(1);
-        $this->app->setLocale($locale);
-        $skip_locales = $this->app->config->get('app.skip_locales');
-
-        // If the locale is added to to skip_locales array continue without locale
-        if (in_array($locale, $skip_locales)) {
-            Route::group([
-                'middleware' => 'web',
-                'namespace'  => $this->namespace,
-            ], function ($router) {
-                require base_path('routes/web.php');
-            });
-        } else {
-            Route::group([
-                'middleware' => 'web',
-                'namespace'  => $this->namespace,
-                'prefix'     => $locale
-            ], function ($router) {
-                require base_path('routes/web.php');
-            });
-        }
-
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -85,12 +65,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::group([
-            'middleware' => 'api',
-            'namespace' => $this->namespace,
-            'prefix' => 'api',
-        ], function ($router) {
-            require base_path('routes/api.php');
-        });
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 }

@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/swiper.css') }}">
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/media.css') }}">
+  <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/custom.css') }}">
   {{--<link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/theme-ecommerce.css') }}">--}}
   @php
     echo '<script type="text/javascript">
@@ -32,6 +33,15 @@
   @endphp
 </head>
 <body>
+<div id="page-preloader" style="display: none;">
+  <div class="page-loading">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
 @include('frontend.theme-ecommerce._includes._header')
 @yield('content')
 @include('frontend.theme-ecommerce._includes._footer')

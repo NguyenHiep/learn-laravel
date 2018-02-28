@@ -22,7 +22,23 @@ class ProductsController extends FrontendController
         return view('frontend.theme-ecommerce.products.detail', $assignData);
     }
 
-    public function quick_view(Request $request, $id){
-        //TODO: Check method ajax
+    public function quick_view($id)
+    {
+        $product = Products::find($id)->where('status', '=', STATUS_ENABLE)->first();
+        if ($product == null) {
+            return response()->json([
+                'status'  => self::CTRL_MESSAGE_ERROR,
+                'message' => 'Product not found',
+                'data'    => ''
+            ]);
+        }
+        if(!empty($product->galary_img)){
+            $product->galary_img = json_decode($product->galary_img);
+        }
+
+        return response()
+            ->view('frontend.theme-ecommerce.products.quickview', ['product' => $product], 200)
+            ->header('Content-Type', 'text/html');
+
     }
 }
