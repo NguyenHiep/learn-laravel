@@ -7,13 +7,19 @@
       @foreach($datas['products'] as $product)
         <div class="prod-i">
           <div class="prod-i-top">
-            <a href="{{ route('product.show', $product->slug) }}" class="prod-i-img"><!-- NO SPACE --><img src="http://placehold.it/378x300" alt="Sunt temporibus velit"><!-- NO SPACE --></a>
+            <a href="{{ route('product.show', $product->slug) }}" class="prod-i-img">
+              @if(!empty($product->pictures))
+                <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
+              @else
+                <img src="http://placehold.it/250x350" alt="{{ $product->name }}" title="{{ $product->name }}">
+              @endif
+            </a>
             <p class="prod-i-info">
-              <a href="#" class="prod-i-favorites"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
-              <a href="#" class="qview-btn prod-i-qview"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
-              <a class="prod-i-compare" href="#"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
+              <a href="javascript:void(0)" class="prod-i-favorites" data-id="{{ $product->id }}"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
+              <a href="javascript:void(0)" class="qview-btn prod-i-qview" data-id="{{ $product->id }}"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
+              <a class="prod-i-compare" href="javascript:void(0)" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
             </p>
-              <a href="#" class="prod-i-buy">Thêm vào giỏ hàng</a>
+              <a href="javascript:void(0)" class="prod-i-buy">Thêm vào giỏ hàng</a>
             <p class="prod-i-properties-label"><i class="fa fa-info"></i></p>
             
             <div class="prod-i-properties">

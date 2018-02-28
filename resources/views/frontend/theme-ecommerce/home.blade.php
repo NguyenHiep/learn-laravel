@@ -9,7 +9,6 @@
   <main>
     <section class="container">
       @if(count($sliders))
-      <!-- Slider -->
       <div class="fr-slider-wrap">
         <div class="fr-slider">
           <ul class="slides">
@@ -33,63 +32,7 @@
         </div>
       </div>
       @endif
-      
-      <!-- Popular Products -->
-      <div class="fr-pop-wrap">
-        <h3 class="component-ttl"><span>Giá sỉ nổi bật  </span></h3>
-        @if(count($tabs))
-          <?php
-            //TODO: check code for tab
-          ?>
-          <ul class="fr-pop-tabs sections-show">
-            @foreach($tabs as  $tab)
-            <li><a data-frpoptab-num="{{ $loop->index }}" data-frpoptab="#frpoptab-tab-{{ $loop->index }}" href="#" @if($loop->first)class="active" @endif >{{ $tab['title'] }}</a></li>
-            @endforeach
-          </ul>
-          <div class="fr-pop-tab-cont">
-            <div class="flexslider prod-items fr-pop-tab" id="frpoptab-tab-1">
-              <ul class="slides">
-                @foreach($tabs as  $key => $tab)
-                  @foreach($tab['items'] as $product)
-                    <li class="prod-i">
-                      <div class="prod-i-top">
-                        <a href="{{ route('product.show', $product->slug) }}" class="prod-i-img"><!-- NO SPACE -->
-                          <img src="http://placehold.it/250x350" alt="Aspernatur excepturi rem"><!-- NO SPACE -->
-                        </a>
-                        <p class="prod-i-info">
-                          <a href="#" class="prod-i-favorites"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
-                          <a href="#" class="prod-i-qview"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
-                          <a class="prod-i-compare" href="#"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
-                        </p>
-                        <p class="prod-i-addwrap">
-                          <a href="{{ route('product.show', $product->slug) }}" class="prod-i-add">Xem chi tiết</a>
-                        </p>
-                      </div>
-                      <h3>
-                        <a href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a>
-                      </h3>
-                      <p class="prod-i-price">
-                        <b>{{ format_price($product->price)  }}</b>
-                      </p>
-                      {{--<div class="prod-i-skuwrapcolor">
-                        <ul class="prod-i-skucolor">
-                          <li class="bx_active"><img src="img/color/red.jpg" alt="Red"></li>
-                          <li><img src="img/color/blue.jpg" alt="Blue"></li>
-                        </ul>
-                      </div>
-                      <div class="prod-sticker">
-                        <p class="prod-sticker-1">Mới</p>
-                        <br><p class="prod-sticker-2">Hot</p>
-                      </div>--}}
-                    </li>
-                  @endforeach
-                @endforeach
-              </ul>
-            </div>
-          </div><!-- .fr-pop-tab-cont -->
-        @endif
-      </div><!-- .fr-pop-wrap -->
-      
+      @include('frontend.theme-ecommerce.template-parts.loop-product-slider', ['datas' => ['category_name' => 'Giá sỉ nổi bật', 'tabs' => $tabs]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang nữ', 'products' => $thoitrang_nu]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang nam', 'products' => $thoitrang_nam]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang cho bé', 'products' => $thoitrang_chobe]])

@@ -26,10 +26,6 @@ class HomeController extends FrontendController
             ],
 
         ];
-       /* $data['tabs']['products_random']['title']     = 'Sản phẩm bán chạy nhất';
-        $data['tabs']['products_random']['Sản phẩm bán chạy nhất']     = $this->getRandomProducts();
-        $data['tabs']['products_bestseller']['title'] = 'Sản phẩm mới về';
-        $data['tabs']['products_bestseller']['items'] = $this->getProductByCategoryId(static::THOITRANG_NAM);*/
         $data['thoitrang_nu']                = $this->getProductByCategoryId(static::THOITRANG_NU);
         $data['thoitrang_nam']               = $this->getProductByCategoryId(static::THOITRANG_NAM);
         $data['thoitrang_chobe']             = $this->getProductByCategoryId(static::THOITRANG_CHOBE);
