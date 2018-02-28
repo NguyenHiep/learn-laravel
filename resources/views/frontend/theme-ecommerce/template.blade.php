@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/jquery.fancybox.css') }}">
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/flexslider.css') }}">
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/swiper.css') }}">
-  <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/swiper.css') }}">
+  <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/media.css') }}">
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/custom.css') }}">
@@ -58,12 +58,58 @@
 <script src="{{ asset('/theme-ecommerce/js/ion.rangeSlider.min.js') }}"></script>
 <script src="{{ asset('/theme-ecommerce/js/chosen.jquery.min.js') }}"></script>
 <script src="{{ asset('/theme-ecommerce/js/jQuery.Brazzers-Carousel.js') }}"></script>
+<script src="{{ asset('/theme-ecommerce/js/toastr.min.js') }}"></script>
 <script src="{{ asset('/theme-ecommerce/js/plugins.js') }}"></script>
 <script src="{{ asset('/theme-ecommerce/js/main.js') }}"></script>
 <script src="{{ asset('/theme-ecommerce/js/frontend.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhAYvx0GmLyN5hlf6Uv_e9pPvUT3YpozE"></script>
 <script src="{{ asset('/theme-ecommerce/js/gmap.js') }}"></script>
-<!-- jQuery plugins/scripts - end -->
+
+<script type="text/javascript">
+	// Config notifation
+	toastr.options = {
+		"closeButton": true,
+		"debug": false,
+		"positionClass": "toast-top-right",
+		"showDuration": "1000",
+		"hideDuration": "5000",
+		"timeOut": "5000",
+		"extendedTimeOut": "1000",
+		"showEasing": "swing",
+		"hideEasing": "linear",
+		"showMethod": "fadeIn",
+		"hideMethod": "fadeOut"
+	}
+
+	function show_message(data) {
+		console.log(data.status);
+		var status = data.status;
+		switch (status) {
+			case 'success':
+				toastr["success"](data.message, "Thông báo")
+				break;
+			case 'warning':
+				toastr["warning"](data.message, "Thông báo")
+				break;
+			case 'info':
+				toastr["info"](data.message, "Thông báo")
+				break;
+			default:
+				toastr["error"](data.message, "Thông báo")
+		}
+
+	}
+</script>
+@if(!empty(session('message')) && !empty(session('status')))
+  @php echo '<script>
+              var messages = {
+                status: "'.session('status').'",
+                message: "'.session('message').'"
+                }
+              show_message(messages);
+            </script>';
+  @endphp
+@endif
 
 </body>
 </html>

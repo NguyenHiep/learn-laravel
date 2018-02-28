@@ -24,7 +24,7 @@
                   <p class="prod-i-info">
                     <a href="javascript:void(0) " class="prod-i-favorites wishlist-product" data-id="{{ $product->id }}"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
                     <a href="javascript:void(0)" class="qview-btn prod-i-qview" data-id="{{ $product->id }}"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
-                    <a class="prod-i-compare" href="javascript:void(0)" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
+                    <a class="prod-i-compare" href="{{ route('product.add_compare', $product->id) }}" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
                   </p>
                   <p class="prod-i-addwrap">
                     <a href="{{ route('product.show', $product->slug) }}" class="prod-i-add">Xem chi tiết</a>

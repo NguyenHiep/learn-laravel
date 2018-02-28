@@ -23,6 +23,7 @@ class ProductsController extends Controller
 
         return Validator::make($data, [
             'name'              => 'required|string|unique:products,name,' . $id,
+            'slug'              => 'string|unique:products,slug,' . $id,
             'description'       => 'required|string',
             'short_description' => 'string',
             'category_id'       => 'string',
@@ -93,6 +94,11 @@ class ProductsController extends Controller
         $pictures = Uploads::upload($request, 'pictures', UPLOAD_PRODUCT);
         if($pictures){
             $inputs['pictures'] = $pictures;
+        }
+        if(isset($inputs['slug'])){
+            $inputs['slug'] = unicode_str_filter($inputs['slug']);
+        }else{
+            $inputs['slug'] = unicode_str_filter($inputs['name']);
         }
         try {
             DB::beginTransaction();
@@ -176,6 +182,12 @@ class ProductsController extends Controller
         if($galary_upload){
             $inputs['galary_img'] = json_encode($galary_upload);
         }
+        if(isset($inputs['slug'])){
+            $inputs['slug'] = unicode_str_filter($inputs['slug']);
+        }else{
+            $inputs['slug'] = unicode_str_filter($inputs['name']);
+        }
+
         try {
             DB::beginTransaction();
             $product->update($inputs);

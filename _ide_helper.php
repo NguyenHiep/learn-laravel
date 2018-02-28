@@ -19,7 +19,7 @@ namespace Illuminate\Support\Facades {
          *
          * @return string 
          * @static 
-         */ 
+         */
         public static function version()
         {
             return \Illuminate\Foundation\Application::version();

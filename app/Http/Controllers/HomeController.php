@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class HomeController extends FrontendController
 {
     const THOITRANG_NAM     = 2;
-    const THOITRANG_NU      = 1;
+    const THOITRANG_NU      = 3;
     const THOITRANG_CHOBE   = 4;
     const PHUKIEN_THOITRANG = 5;
 
@@ -30,7 +30,6 @@ class HomeController extends FrontendController
         $data['thoitrang_nam']               = $this->getProductByCategoryId(static::THOITRANG_NAM);
         $data['thoitrang_chobe']             = $this->getProductByCategoryId(static::THOITRANG_CHOBE);
         $data['phukien_thoitrang']           = $this->getProductByCategoryId(static::PHUKIEN_THOITRANG);
-
     	return view('frontend.theme-ecommerce.home', $data);
     }
 
