@@ -38,8 +38,6 @@
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang nam', 'products' => $thoitrang_nam]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang cho bé', 'products' => $thoitrang_chobe]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Phụ kiện thời trang', 'products' => $phukien_thoitrang]])
-      
-      <div class="qview-modal"></div>
     </section>
   </main>
   <!-- Main Content - end -->

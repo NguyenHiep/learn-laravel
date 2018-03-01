@@ -8,6 +8,8 @@ use Session;
 
 class ProductsController extends FrontendController
 {
+    const PRODUCT_COMPARE_MAX = 3;
+
     public function show(Request $request, $slug){
         $product = Products::where('slug', $slug)->where('status', '=', STATUS_ENABLE)->first();
         if($product == NULL)
@@ -23,9 +25,10 @@ class ProductsController extends FrontendController
         return view('frontend.theme-ecommerce.products.detail', $assignData);
     }
 
-    public function quick_view($id)
+    public function quick_view(Request $request)
     {
-        $product = Products::find($id)->where('status', '=', STATUS_ENABLE)->first();
+        $product_id = $request->query('product_id');
+        $product = Products::where('id', '=', $product_id)->where('status', '=', STATUS_ENABLE)->first();
         if ($product == null) {
             return response()->json([
                 'status'  => self::CTRL_MESSAGE_ERROR,
@@ -37,40 +40,53 @@ class ProductsController extends FrontendController
             $product->galary_img = json_decode($product->galary_img);
         }
 
-        return response()
-            ->view('frontend.theme-ecommerce.products.quickview', ['product' => $product], 200)
+        return response()->view('frontend.theme-ecommerce.products.quickview', ['product' => $product], 200)
             ->header('Content-Type', 'text/html');
 
     }
 
-    public function add_item_compare(Request $request, $id)
+    public function add_item_compare(Request $request)
     {
-        $product = Products::find($id)->where('status', '=', STATUS_ENABLE)->first();
+        // TODO: Check function compare
+        $product_id = $request->query('product_id');
+        $product = Products::where('id', '=', $product_id)->where('status', '=', STATUS_ENABLE)->first();
 
         if (empty($product)) {
-            abort(404);
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => 'Data not found']),
+                'status'  => self::CTRL_MESSAGE_ERROR,
+            ]);
         }
         //session()->flush();
+        $total_items = 1;
         if (Session::has('items_compare')) {
+            $total_items = count(Session::get('items_compare'));
+        }
 
-            if (!in_array($id, Session::get('items_compare'))) {
-                Session::push('items_compare', $id);
-            }else{
-                return redirect()->back()->with([
-                    'message' => __('system.message.errors', ['errors' => 'Sản phẩm đã tồn tại']),
+        if (Session::has('items_compare')) {
+            if ($total_items > self::PRODUCT_COMPARE_MAX) {
+                return response()->json([
+                    'message' => __('system.message.errors', ['errors' => 'So sánh tối đa chỉ được 4 sản phẩm']),
+                    'status'  => self::CTRL_MESSAGE_WARNING,
+                ]);
+            }
+            if (in_array($product_id, Session::get('items_compare'))) {
+                return response()->json([
+                    'message' => __('system.message.errors', ['errors' => $product->name . ' đã tồn tại']),
                     'status'  => self::CTRL_MESSAGE_ERROR,
                 ]);
             }
-
+            Session::push('items_compare', $product_id);
         } else {
-            Session::push('items_compare', $id);
+            Session::push('items_compare', $product_id);
         }
 
-
-        return redirect()->back()->with([
-            'message' => __('system.message.errors', ['errors' => 'Sản phẩm đã được thêm vào so sánh']),
-            'status'  => self::CTRL_MESSAGE_INFO,
+        return response()->json([
+            'message'     => __('system.message.errors', ['errors' => $product->name . ' đã được thêm vào so sánh']),
+            'status'      => self::CTRL_MESSAGE_INFO,
+            'total_items' => $total_items
         ]);
+
 
     }
 

@@ -45,6 +45,7 @@
 @include('frontend.theme-ecommerce._includes._header')
 @yield('content')
 @include('frontend.theme-ecommerce._includes._footer')
+<div class="qview-modal"></div>
 <!-- jQuery plugins/scripts - start -->
 {{--<script src="{{ asset('/theme-ecommerce/js/theme-ecommerce.js') }}"></script>--}}
 <script src="{{ asset('/theme-ecommerce/js/jquery-1.11.2.min.js') }}"></script>
