@@ -54,7 +54,7 @@ class ProductsController extends FrontendController
                 ->get();
             return view('frontend.theme-ecommerce.products.compare', $data);
         }
-        return Redirect::route('/');
+        return Redirect::route('home');
     }
 
     public function add_item_compare(Request $request)
