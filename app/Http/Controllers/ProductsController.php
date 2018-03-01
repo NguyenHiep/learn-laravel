@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Model\Products;
 use Illuminate\Http\Request;
+use Redirect;
 use Session;
 
 class ProductsController extends FrontendController
 {
-    const PRODUCT_COMPARE_MAX = 3;
+    const MAX_ITEMS = 6;
 
     public function show(Request $request, $slug){
         $product = Products::where('slug', $slug)->where('status', '=', STATUS_ENABLE)->first();
@@ -45,47 +46,55 @@ class ProductsController extends FrontendController
 
     }
 
+    public function view_item_compare(Request $request)
+    {
+        if (Session::has(self::SES_ITEMS_COMPARE)) {
+            $data['products'] = \DB::table('products')
+                ->whereIn('id', Session::get(self::SES_ITEMS_COMPARE))
+                ->get();
+            return view('frontend.theme-ecommerce.products.compare', $data);
+        }
+        return Redirect::route('/');
+    }
+
     public function add_item_compare(Request $request)
     {
-        // TODO: Check function compare
         $product_id = $request->query('product_id');
         $product = Products::where('id', '=', $product_id)->where('status', '=', STATUS_ENABLE)->first();
 
         if (empty($product)) {
             return response()->json([
-                'message' => __('system.message.errors', ['errors' => 'Data not found']),
+                'message' => __('system.message.errors', ['errors' => 'Data empty']),
                 'status'  => self::CTRL_MESSAGE_ERROR,
             ]);
         }
-        //session()->flush();
-        $total_items = 1;
-        if (Session::has('items_compare')) {
-            $total_items = count(Session::get('items_compare'));
-        }
-
-        if (Session::has('items_compare')) {
-            if ($total_items > self::PRODUCT_COMPARE_MAX) {
-                return response()->json([
-                    'message' => __('system.message.errors', ['errors' => 'So sánh tối đa chỉ được 4 sản phẩm']),
-                    'status'  => self::CTRL_MESSAGE_WARNING,
-                ]);
-            }
-            if (in_array($product_id, Session::get('items_compare'))) {
-                return response()->json([
-                    'message' => __('system.message.errors', ['errors' => $product->name . ' đã tồn tại']),
-                    'status'  => self::CTRL_MESSAGE_ERROR,
-                ]);
-            }
-            Session::push('items_compare', $product_id);
+        if (Session::has(self::SES_ITEMS_COMPARE)) {
+            $total_items = count(Session::get(self::SES_ITEMS_COMPARE)) + 1;
         } else {
-            Session::push('items_compare', $product_id);
+            $total_items = 1;
         }
 
-        return response()->json([
-            'message'     => __('system.message.errors', ['errors' => $product->name . ' đã được thêm vào so sánh']),
-            'status'      => self::CTRL_MESSAGE_INFO,
-            'total_items' => $total_items
-        ]);
+        if ($total_items <= self::MAX_ITEMS) {
+                if (Session::get(self::SES_ITEMS_COMPARE) && in_array($product_id, Session::get(self::SES_ITEMS_COMPARE))) {
+                    return response()->json([
+                        'message' => __('system.message.errors', ['errors' => $product->name . ' đã tồn tại']),
+                        'status'  => self::CTRL_MESSAGE_ERROR,
+                    ]);
+                } else {
+                    Session::push(self::SES_ITEMS_COMPARE, $product_id);
+                    return response()->json([
+                        'message'     => __('system.message.errors',
+                            ['errors' => $product->name . ' đã được thêm vào so sánh']),
+                        'status'      => self::CTRL_MESSAGE_INFO,
+                        'total_items' => $total_items
+                    ]);
+                }
+        } else {
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => 'So sánh tối đa ' . self::MAX_ITEMS . ' sản phẩm']),
+                'status'  => self::CTRL_MESSAGE_WARNING,
+            ]);
+        }
 
 
     }

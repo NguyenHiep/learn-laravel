@@ -34,7 +34,8 @@ class HomeController extends FrontendController
             var_dump(count(session()->get('items_compare')));
         echo "</pre>";
         die();*/
-       /* echo "<pre>";
+
+      /* echo "<pre>";
             var_dump(session()->all());
         echo "</pre>";
         die();*/

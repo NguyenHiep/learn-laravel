@@ -4,3 +4,5 @@ define('STATUS_ENABLE', 1);
 
 define('DISABLE', 2);
 define('ENABLE', 1);
+define('SESSION_ITEMS_COMPARE', 'ses_items_compare');
+

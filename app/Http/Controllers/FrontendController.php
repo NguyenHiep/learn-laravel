@@ -6,6 +6,7 @@ use App\Model\Products;
 
 class FrontendController extends Controller
 {
+    const SES_ITEMS_COMPARE = SESSION_ITEMS_COMPARE;
 
     protected function getBestsellerProducts(int $limit = 8)
     {

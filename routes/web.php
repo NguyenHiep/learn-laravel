@@ -68,8 +68,10 @@ Route::group(['middleware', 'auth'], function () {
 	});
 });
 
+Route::get('/so-sanh-san-pham/','ProductsController@view_item_compare')->name('product.view_compare');
 Route::get('{page_slug}','PagesController@index')->name('page.show');
 Route::get('/san-pham/{slug}','ProductsController@show')->name('product.show');
 Route::get('/product/quick-view/','ProductsController@quick_view')->name('product.quick_view');
 Route::get('/product/add-compare/','ProductsController@add_item_compare')->name('product.add_compare');
+
 

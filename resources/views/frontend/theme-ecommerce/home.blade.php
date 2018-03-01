@@ -34,7 +34,6 @@
       @endif
       @include('frontend.theme-ecommerce.template-parts.loop-product-slider', ['datas' => ['category_name' => 'Giá sỉ nổi bật', 'tabs' => $tabs]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang nữ', 'products' => $thoitrang_nu]])
-      @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang nữ', 'products' => $thoitrang_nu]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang nam', 'products' => $thoitrang_nam]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Thời trang cho bé', 'products' => $thoitrang_chobe]])
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Phụ kiện thời trang', 'products' => $phukien_thoitrang]])

@@ -73,12 +73,12 @@
           </li>
           
           <li>
-            <a href="compare.html">
+            <a href="{{ route('product.view_compare') }}">
               <i class="fa fa-bar-chart"></i>
               @php
                 $compare_item = 0;
-                if(Session::has('items_compare')){
-                  $compare_item =  count(Session::get('items_compare'));
+                if(Session::has(SESSION_ITEMS_COMPARE)){
+                  $compare_item =  count(Session::get(SESSION_ITEMS_COMPARE));
                 }
               @endphp
               <span class="shop-menu-ttl">So sánh</span> (<span id="total_compare">{{ $compare_item }}</span>)
