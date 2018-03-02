@@ -468,7 +468,7 @@
         
         <ul class="mainmenu">
           <li><a href="{{ url('/') }}" class="active">Sản phẩm</a></li>
-          <li><a href="{{ url('khuyen-mai') }}">Khuyến mãi</a></li>
+          <li><a href="{{ route('product.promotion') }}">Khuyến mãi</a></li>
           <li><a href="{{ url('gioi-thieu') }}">Giới thiệu</a></li>
           <li><a href="{{ url('tin-tuc') }}">Tin tức</a></li>
           <li><a href="{{ url('huong-dan-thanh-toan') }}">Hướng dẫn thanh toán</a></li>

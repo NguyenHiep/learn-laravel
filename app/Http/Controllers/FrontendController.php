@@ -40,6 +40,13 @@ class FrontendController extends Controller
 
     protected function getSaleProducts(int $limit = 8)
     {
+        $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->limit($limit)->get();
+        return $product;
+    }
 
+    protected function getPromotionProducts(int $limit = 8)
+    {
+        $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->paginate($limit);
+        return $product;
     }
 }

@@ -99,7 +99,7 @@
           <div class="prod-cont-txt">{!!  $product->short_description !!}</div>
           <p class="prod-actions">
             <a href="#" class="prod-favorites"><i class="fa fa-heart"></i> Yêu thích</a>
-            <a href="#" class="prod-compare"><i class="fa fa-bar-chart"></i> So sánh</a>
+            <a href="#" class="prod-compare prod-i-compare"  data-id="{{ $product->id }}"><i class="fa fa-bar-chart"></i> So sánh</a>
           </p>
           {{--<div class="prod-skuwrap">
             <p class="prod-skuttl">Color</p>
