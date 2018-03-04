@@ -67,12 +67,23 @@ Route::group(['middleware', 'auth'], function () {
 
 	});
 });
-Route::get('/san-pham-khuyen-mai/','ProductsController@promotion')->name('product.promotion');
-Route::get('/so-sanh-san-pham/','ProductsController@view_item_compare')->name('product.view_compare');
-Route::get('{page_slug}','PagesController@index')->name('page.show');
+
+
 Route::get('/san-pham/{slug}','ProductsController@show')->name('product.show');
 Route::get('/product/quick-view/','ProductsController@quick_view')->name('product.quick_view');
-Route::get('/product/add-compare/','ProductsController@add_item_compare')->name('product.add_compare');
-Route::get('/product/remove-compare/','ProductsController@delete_item_compare')->name('product.remove_compare');
+Route::get('/san-pham-khuyen-mai/','ProductsController@promotion')->name('product.promotion');
+Route::get('/so-sanh-san-pham/','ComparesController@index')->name('compare.index');
+Route::get('/compares/add/','ComparesController@add')->name('compare.add');
+Route::get('/compares/remove/','ComparesController@remove')->name('compare.remove');
+
+Route::get('/gio-hang/','Checkout\CartController@index')->name('checkout.cart.index');
+
+Route::get('/thong-tin-giao-hang/','Checkout\CheckoutController@index')->name('checkout.index');
+Route::group(['prefix' => '/checkout'], function () {
+    Route::post('/addtocart/','Checkout\CartController@add')->name('checkout.cart.add');
+    Route::post('/removecart/','Checkout\CartController@remove')->name('checkout.cart.remove');
+    Route::post('/removeallcart/','Checkout\CartController@removeAll')->name('checkout.cart.removeall');
+});
+Route::get('{page_slug}','PagesController@index')->name('page.show');
 
 

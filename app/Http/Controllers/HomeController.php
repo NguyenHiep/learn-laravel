@@ -30,6 +30,11 @@ class HomeController extends FrontendController
         $data['thoitrang_nam']               = $this->getProductByCategoryId(static::THOITRANG_NAM);
         $data['thoitrang_chobe']             = $this->getProductByCategoryId(static::THOITRANG_CHOBE);
         $data['phukien_thoitrang']           = $this->getProductByCategoryId(static::PHUKIEN_THOITRANG);
+       /*\Session::flush();*/
+        /*echo "<pre>";
+            var_dump(session()->all());
+        echo "</pre>";
+        die("Hiep123");*/
     	return view('frontend.theme-ecommerce.home', $data);
     }
 

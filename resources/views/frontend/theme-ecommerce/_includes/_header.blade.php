@@ -73,7 +73,7 @@
           </li>
           
           <li>
-            <a href="{{ route('product.view_compare') }}">
+            <a href="{{ route('compare.index') }}">
               <i class="fa fa-bar-chart"></i>
               @php
                 $compare_item = 0;
@@ -97,10 +97,16 @@
           
           <li>
             <div class="h-cart">
-              <a href="cart.html">
+              <a href="{{ route('checkout.cart.index') }}">
                 <i class="fa fa-shopping-cart"></i>
+                @php
+                  $cart_item = 0;
+                  if(Session::has(SESSION_ITEMS_CART)){
+                    $cart_item =  count(Session::get(SESSION_ITEMS_CART));
+                  }
+                @endphp
                 <span class="shop-menu-ttl">Giỏ hàng</span>
-                (<b>0</b>)
+                (<b><span id="total_cart">{{ $cart_item }}</span></b>)
               </a>
             </div>
           </li>

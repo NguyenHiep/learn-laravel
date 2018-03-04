@@ -7,6 +7,7 @@ use App\Model\Products;
 class FrontendController extends Controller
 {
     const SES_ITEMS_COMPARE = SESSION_ITEMS_COMPARE;
+    const SES_ITEMS_CART    = SESSION_ITEMS_CART;
 
     protected function getBestsellerProducts(int $limit = 8)
     {
@@ -44,7 +45,7 @@ class FrontendController extends Controller
         return $product;
     }
 
-    protected function getPromotionProducts(int $limit = 8)
+    protected function getPromotionProducts(int $limit = 12)
     {
         $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->paginate($limit);
         return $product;
