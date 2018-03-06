@@ -62,7 +62,7 @@
           <b>Mã sản phẩm</b> {{ $product->sku }}
         </li>
         <li>
-          <b>Xuất xứ</b> 05464207
+          <b>Xuất xứ</b> Việt Nam
         </li>
         <li>
           <b>Trạng thái</b> còn hàng
@@ -84,7 +84,7 @@
           <a href="javascript:void(0)" class="prod-minus"><i class="fa fa-angle-down"></i></a>
         </p>
         <p class="prod-addwrap">
-          <a href="javascript:void(0)" class="prod-add" rel="nofollow">Thêm vào giỏ hàng</a>
+          <a href="javascript:void(0)" class="prod-add" rel="nofollow">Mua</a>
         </p>
       </div>
     </div>

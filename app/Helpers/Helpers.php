@@ -154,3 +154,11 @@ if (!function_exists('limit_words')) {
         return implode(" ",array_splice($words,0,$word_limit));
     }
 }
+
+if (!function_exists('addParamsUrl')){
+    function addParamsUrl(array $params){
+        $parameters = request()->input();
+        $parameters[$params['name']] = $params['value'];
+        return $parameters;
+    }
+}

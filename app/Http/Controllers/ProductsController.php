@@ -13,7 +13,18 @@ class ProductsController extends FrontendController
 
     public function promotion(Request $request)
     {
+        $modes = [
+            'gallery',
+            'list',
+            'table'
+        ];
+        $this->set_mode = 'gallery';
+        if(in_array($request->query('mode'), $modes)){
+            $this->set_mode = $request->query('mode');
+        }
+
         $data['products'] = $this->getPromotionProducts();
+        $data['mode'] = $this->set_mode;
         return view('frontend.theme-ecommerce.products.promotion', $data);
     }
 

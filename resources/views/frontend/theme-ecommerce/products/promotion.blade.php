@@ -114,7 +114,7 @@
           </button>
           <div class="section-filter-cont">
             <div class="section-filter-price">
-              <div class="range-slider section-filter-price" data-min="0" data-max="1000" data-from="200" data-to="800" data-prefix="$" data-grid="false"></div>
+              <div class="range-slider section-filter-price" data-min="0" data-max="2000000" data-from="50000" data-to="2000000" data-prefix="vnđ" data-grid="false"></div>
             </div>
             <div class="section-filter-item">
               <p class="section-filter-ttl">Style <i class="fa fa-angle-down"></i></p>
@@ -572,32 +572,29 @@
           
           <!-- View Mode -->
           <ul class="section-mode">
-            <li class="section-mode-gallery active"><a title="View mode: Gallery" href="{{ route('product.promotion', ['mode' => 'gallery']) }}"></a></li>
-            <li class="section-mode-list"><a title="View mode: List" href="{{ route('product.promotion', ['mode' => 'list']) }}"></a></li>
-            <li class="section-mode-table"><a title="View mode: Table" href="{{ route('product.promotion', ['mode' => 'table']) }}"></a></li>
+            <li class="section-mode-gallery @if($mode == 'gallery') active @endif "><a title="View mode: Gallery" href="{{ route('product.promotion', addParamsUrl(['name' => 'mode', 'value' => 'gallery'])) }}"></a></li>
+            <li class="section-mode-list @if($mode == 'list') active @endif "><a title="View mode: List" href="{{ route('product.promotion', addParamsUrl(['name' => 'mode', 'value' => 'list'])) }}"></a></li>
+            <li class="section-mode-table @if($mode == 'table') active @endif "><a title="View mode: Table" href="{{ route('product.promotion', addParamsUrl(['name' => 'mode', 'value' => 'table'])) }}"></a></li>
           </ul>
           
           <!-- Sorting -->
           <div class="section-sortby">
-            <p>default sorting</p>
+            <p>Mặc định</p>
             <ul>
               <li>
-                <a href="#">sort by popularity</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'new']))  }}">Mới nhất</a>
               </li>
               <li>
-                <a href="#">low price to high</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name']))  }}">Sắp theo tên: A - Z</a>
               </li>
               <li>
-                <a href="#">high price to low</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name2']))  }}">Sắp theo tên: Z - A</a>
               </li>
               <li>
-                <a href="#">by title A <i class="fa fa-angle-right"></i> Z</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name4']))  }}">Giá tăng dần</a>
               </li>
               <li>
-                <a href="#">by title Z <i class="fa fa-angle-right"></i> A</a>
-              </li>
-              <li>
-                <a href="#">default sorting</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name3']))  }}">Giá giảm dần</a>
               </li>
             </ul>
           </div>
@@ -606,52 +603,15 @@
           <div class="section-count">
             <p>12</p>
             <ul>
-              <li><a href="#">12</a></li>
-              <li><a href="#">24</a></li>
-              <li><a href="#">48</a></li>
+              <li><a href="{{ route('product.promotion', addParamsUrl(['name' => 'limit', 'value' => 12]))  }}">12</a></li>
+              <li><a href="{{ route('product.promotion', addParamsUrl(['name' => 'limit', 'value' => 24]))  }}">24</a></li>
+              <li><a href="{{ route('product.promotion', addParamsUrl(['name' => 'limit', 'value' => 48]))  }}">48</a></li>
             </ul>
           </div>
         
         </div>
         <!-- Catalog Topbar - end -->
-        <div class="prod-items section-items">
-          @foreach($products as $product)
-            <div class="prod-i">
-              <div class="prod-i-top">
-                <a href="{{ route('product.show', $product->slug) }}" class="prod-i-img">
-                  @if(!empty($product->pictures))
-                    <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
-                  @else
-                    <img src="http://placehold.it/250x350" alt="{{ $product->name }}" title="{{ $product->name }}">
-                  @endif
-                </a>
-                <p class="prod-i-info">
-                  <a href="javascript:void(0)" class="prod-i-favorites" data-id="{{ $product->id }}"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
-                  <a href="javascript:void(0)" class="qview-btn prod-i-qview" data-id="{{ $product->id }}"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
-                  <a class="prod-i-compare" href="javascript:void(0)" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
-                </p>
-                <a href="javascript:void(0)" class="prod-i-buy">Thêm vào giỏ hàng</a>
-                <p class="prod-i-properties-label"><i class="fa fa-info"></i></p>
-        
-                <div class="prod-i-properties">
-                  {!! $product->short_description !!}
-                </div>
-                {{-- <div class="prod-sticker">
-                   <p class="prod-sticker-1">Mới</p>
-                   <br><p class="prod-sticker-2">Hot</p>
-                 </div>--}}
-              </div>
-              <h3>
-                <a href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a>
-              </h3>
-              <p class="prod-i-price">
-                <b>{{ format_price($product->price) }}</b>
-                <del>{{ format_price($product->price) }}</del>
-              </p>
-            </div>
-          @endforeach
-        </div>
-        
+        @include('frontend.theme-ecommerce.products.mode-view.'.$mode, ['products' => $products])
         <!-- Pagination - start -->
         <ul class="pagi">
           <li class="active"><span>1</span></li>
