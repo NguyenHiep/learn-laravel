@@ -22,9 +22,9 @@ class CartController extends FrontendController
 
     public function index()
     {
+        $data = [];
         if(Session::has(self::SES_ITEMS_CART)){
             $cartItems = Session::get(self::SES_ITEMS_CART);
-            $data = [];
             $ids = [];
             $total_price = 0;
             $this->item_quantity = [];
@@ -50,8 +50,8 @@ class CartController extends FrontendController
                 $data['total_price'] = $total_price;
             }
 
-            return view('frontend.theme-ecommerce.checkout.cart', $data);
         }
+        return view('frontend.theme-ecommerce.checkout.cart', $data);
 
     }
 
