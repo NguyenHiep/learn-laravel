@@ -87,7 +87,7 @@
           <ul class="cart-total">
             <li class="cart-summ">Tổng tiền thanh toán: <b>{{ format_price($total_price) }}</b></li>
           </ul>
-          @endif
+          
           <div class="cart-submit">
             <div class="cart-coupon">
               <input placeholder="your coupon" type="text">
@@ -97,6 +97,7 @@
             {{--<a href="#" class="cart-submit-btn">Thanh toán</a>--}}
             <a href="javascipt:void(0)" class="cart-clear">Xóa giỏ hàng</a>
           </div>
+          @endif
         </form>
      
     </section>
