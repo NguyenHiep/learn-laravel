@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Manage;
 
 use App\Model\Settings;
 use App\Http\Requests\SettingsRequest;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Helppers\Uploads;
 
-class SettingsController extends Controller
+class SettingsController extends BackendController
 {
     const WEBSITE_INFO_ID = 1;
 

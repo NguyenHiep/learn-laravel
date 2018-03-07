@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Manage;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 
 
-class AjaxController extends Controller
+class AjaxController extends BackendController
 {
 
 

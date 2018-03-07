@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Manage;
 use App\Model\Products;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 use App\Model\Categories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Helppers\Uploads;
 
-class ProductsController extends Controller
+class ProductsController extends BackendController
 {
     /**
      * Validate product field

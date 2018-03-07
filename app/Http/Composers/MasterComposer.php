@@ -4,6 +4,7 @@ namespace App\Http\Composers;
 
 use Illuminate\Contracts\View\View;
 use App\Model\Settings;
+use App\Model\Categories;
 
 class MasterComposer
 {
@@ -16,8 +17,10 @@ class MasterComposer
      */
     public function compose(View $view)
     {
-        $settings = Settings::first();
+        $settings   = Settings::first();
+        $categories = Categories::where('status', STATUS_ENABLE)->get();
         $view->with('settings', $settings);
+        $view->with('categories', $categories);
     }
 
 }

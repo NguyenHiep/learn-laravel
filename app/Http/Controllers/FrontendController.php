@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Products;
 use Illuminate\Http\Request;
+use App\Model\Categories;
 
 class FrontendController extends Controller
 {
@@ -23,6 +24,7 @@ class FrontendController extends Controller
     protected function getProductByCategoryId(int $cat_id, int $limit = 8)
     {
         $products = Products::where('category_id', 'like', '%|' . $cat_id . '|%')
+            ->where('status', STATUS_ENABLE)
             ->orderBy('id')
             ->limit($limit)
             ->get();
@@ -31,7 +33,8 @@ class FrontendController extends Controller
 
     protected function getRelatedProducts(int $limit = 8)
     {
-
+        $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->limit($limit)->get();
+        return $product;
     }
 
     protected function getRandomProducts(int $limit = 8)
@@ -83,4 +86,11 @@ class FrontendController extends Controller
             ->paginate($limit);
         return $product;
     }
+
+    protected function getMenuProductsCategory()
+    {
+        $categories = Categories::where('status', STATUS_ENABLE)->get();
+        return $categories;
+    }
+
 }

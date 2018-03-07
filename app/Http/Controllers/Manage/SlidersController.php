@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Manage;
 
 use App\Http\Requests\SlidersRequest;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 use App\Model\Sliders;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Helppers\Uploads;
 
-class SlidersController extends Controller
+class SlidersController extends BackendController
 {
     /**
      * Display a listing of the resource.

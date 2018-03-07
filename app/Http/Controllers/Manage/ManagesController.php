@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Manage;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 
-class ManagesController extends Controller
+class ManagesController extends BackendController
 {
     public function __construct()
     {

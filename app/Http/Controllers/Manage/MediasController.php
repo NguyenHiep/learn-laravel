@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Manage;
 use App\Model\Medias;
 use App\Model\Medias\Mediasinfo;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Storage;
 
-class MediasController extends Controller
+class MediasController extends BackendController
 {
     public function __construct()
     {

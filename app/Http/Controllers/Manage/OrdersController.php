@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Manage;
 use App\Model\Orders;
 use App\Model\Settings;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
-class OrdersController extends Controller
+class OrdersController extends BackendController
 {
     public function __construct()
     {

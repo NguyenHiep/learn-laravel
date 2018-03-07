@@ -8,10 +8,10 @@ use App\Model\Posts\Category;
 use App\Model\Posts\Category\Posts_Category_Id;
 use App\Model\Posts\Tags;
 use App\Model\Posts\Tags\Posts_Tags_Id;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 use Mockery\Exception;
 
-class PostsController extends Controller
+class PostsController extends BackendController
 {
     public function __construct()
     {

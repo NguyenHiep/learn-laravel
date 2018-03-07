@@ -35,9 +35,9 @@
           
           <!-- View Mode -->
           <ul class="section-mode">
-            <li class="section-mode-gallery @if($mode == 'gallery') active @endif "><a title="View mode: Gallery" href="{{ route('product.promotion', addParamsUrl(['name' => 'mode', 'value' => 'gallery'])) }}"></a></li>
-            <li class="section-mode-list @if($mode == 'list') active @endif "><a title="View mode: List" href="{{ route('product.promotion', addParamsUrl(['name' => 'mode', 'value' => 'list'])) }}"></a></li>
-            <li class="section-mode-table @if($mode == 'table') active @endif "><a title="View mode: Table" href="{{ route('product.promotion', addParamsUrl(['name' => 'mode', 'value' => 'table'])) }}"></a></li>
+            <li class="section-mode-gallery @if($mode == 'gallery') active @endif "><a title="View mode: Gallery" href="{{ route('product.category', addParamsUrl(['name' => 'mode', 'value' => 'gallery'])) }}"></a></li>
+            <li class="section-mode-list @if($mode == 'list') active @endif "><a title="View mode: List" href="{{ route('product.category', addParamsUrl(['name' => 'mode', 'value' => 'list'])) }}"></a></li>
+            <li class="section-mode-table @if($mode == 'table') active @endif "><a title="View mode: Table" href="{{ route('product.category', addParamsUrl(['name' => 'mode', 'value' => 'table'])) }}"></a></li>
           </ul>
           
           <!-- Sorting -->
@@ -45,19 +45,19 @@
             <p>Sắp xếp</p>
             <ul>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'new_desc']))  }}">Mới nhất</a>
+                <a href="{{ route('product.category', addParamsUrl(['name' => 'sort', 'value' => 'new_desc']))  }}">Mới nhất</a>
               </li>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name_asc']))  }}">Sắp theo tên: A - Z</a>
+                <a href="{{ route('product.category', addParamsUrl(['name' => 'sort', 'value' => 'name_asc']))  }}">Sắp theo tên: A - Z</a>
               </li>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name_desc']))  }}">Sắp theo tên: Z - A</a>
+                <a href="{{ route('product.category', addParamsUrl(['name' => 'sort', 'value' => 'name_desc']))  }}">Sắp theo tên: Z - A</a>
               </li>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'price_asc']))  }}">Giá tăng dần</a>
+                <a href="{{ route('product.category', addParamsUrl(['name' => 'sort', 'value' => 'price_asc']))  }}">Giá tăng dần</a>
               </li>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'price_desc']))  }}">Giá giảm dần</a>
+                <a href="{{ route('product.category', addParamsUrl(['name' => 'sort', 'value' => 'price_desc']))  }}">Giá giảm dần</a>
               </li>
             </ul>
           </div>
@@ -66,9 +66,9 @@
           <div class="section-count">
             <p>12</p>
             <ul>
-              <li><a href="{{ route('product.promotion', addParamsUrl(['name' => 'limit', 'value' => 12]))  }}">12</a></li>
-              <li><a href="{{ route('product.promotion', addParamsUrl(['name' => 'limit', 'value' => 24]))  }}">24</a></li>
-              <li><a href="{{ route('product.promotion', addParamsUrl(['name' => 'limit', 'value' => 48]))  }}">48</a></li>
+              <li><a href="{{ route('product.category', addParamsUrl(['name' => 'limit', 'value' => 12]))  }}">12</a></li>
+              <li><a href="{{ route('product.category', addParamsUrl(['name' => 'limit', 'value' => 24]))  }}">24</a></li>
+              <li><a href="{{ route('product.category', addParamsUrl(['name' => 'limit', 'value' => 48]))  }}">48</a></li>
             </ul>
           </div>
         

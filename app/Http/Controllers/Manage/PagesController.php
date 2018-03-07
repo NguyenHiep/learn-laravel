@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Manage;
 use App\Model\Pages;
 use App\Model\Medias;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 #use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
-class PagesController extends Controller
+class PagesController extends BackendController
 {
     public function __construct()
     {

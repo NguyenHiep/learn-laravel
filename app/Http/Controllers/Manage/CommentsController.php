@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Manage;
 
 use App\Model\Comments;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 
-class CommentsController extends Controller
+class CommentsController extends BackendController
 {
     public function __construct()
     {

@@ -16,11 +16,4 @@ class Controller extends BaseController
     const CTRL_MESSAGE_INFO    = "info";
     const CTRL_MESSAGE_WARNING = "warning";
     const CTRL_MESSAGE_ERROR   = "error";
-
-    public $medias;
-
-    public function __construct() {
-        //$this->middleware('auth');
-        $this->medias = Medias::all();
-    }
 }

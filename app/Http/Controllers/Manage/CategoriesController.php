@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Model\Categories;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Helppers\Uploads;
 
-class CategoriesController extends Controller
+class CategoriesController extends BackendController
 {
     public function __construct()
     {
