@@ -17,9 +17,9 @@
             <p class="prod-i-info">
               <a href="javascript:void(0)" class="prod-i-favorites" data-id="{{ $product->id }}"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
               <a href="javascript:void(0)" class="qview-btn prod-i-qview" data-id="{{ $product->id }}"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
-              <a class="prod-i-compare" href="javascript:void(0)" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
+              <a class="prod-i-compare compare_product" href="javascript:void(0)" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
             </p>
-              <a href="javascript:void(0)" class="prod-i-buy" data-id="{{ $product->id }}">Thêm vào giỏ hàng</a>
+              <a href="javascript:void(0)" class="prod-i-buy add_to_cart" data-id="{{ $product->id }}">Thêm vào giỏ hàng</a>
             <p class="prod-i-properties-label"><i class="fa fa-info"></i></p>
             
             <div class="prod-i-properties">

@@ -11,16 +11,16 @@
             <del>{{ format_price($product->price) }}</del>
           </span>
           <p class="prodtb-i-qnt">
-            <input value="1" type="text">
-            <a href="#" class="prodtb-i-plus"><i class="fa fa-angle-up"></i></a>
-            <a href="#" class="prodtb-i-minus"><i class="fa fa-angle-down"></i></a>
+            <input value="1" type="text" class="quantity_item" readonly>
+            <a href="javascript:void(0)" class="prodtb-i-plus plus_quantity"><i class="fa fa-angle-up"></i></a>
+            <a href="javascript:void(0)" class="prodtb-i-minus minus_quantity"><i class="fa fa-angle-down"></i></a>
           </p>
         </div>
         <p class="prodtb-i-action">
           <a href="javascript:void(0)" class="prodtb-i-favorites"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
-          <a class="prodtb-i-compare" href="javascript:void(0)"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
-          <a href="javascript:void(0)" class="qview-btn prodtb-i-qview"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
-          <a href="javascript:void(0)" class="prodtb-i-buy"><span>Mua</span><i class="fa fa-shopping-basket"></i></a>
+          <a class="prodtb-i-compare compare_product" href="javascript:void(0)" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
+          <a href="javascript:void(0)" class="qview-btn prodtb-i-qview" data-id="{{ $product->id }}"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
+          <a href="javascript:void(0)" class="prodtb-i-buy add_to_cart" data-id="{{ $product->id }}"><span>Mua</span><i class="fa fa-shopping-basket"></i></a>
         </p>
       </div>
       <div class="prodlist-i">

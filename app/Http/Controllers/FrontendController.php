@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Products;
+use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
@@ -45,9 +46,41 @@ class FrontendController extends Controller
         return $product;
     }
 
+    /***
+     * @param Request $request
+     * @param int $limit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     protected function getPromotionProducts(int $limit = 12)
     {
-        $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->paginate($limit);
+        // Set limit for pagination
+        $list_number = [12, 24, 48];
+        $set_limit = request()->query('limit');
+        if (in_array($set_limit, $list_number)) {
+            $limit = $set_limit;
+        }
+
+        // Set parameter sort
+        $sort = [
+            'column' => 'id',
+            'value'  => 'desc',
+        ];
+        $list_sort = ['new_desc', 'name_asc', 'name_desc', 'price_asc', 'price_desc'];
+        $set_sort = request()->query('sort');
+        if (in_array($set_sort, $list_sort)) {
+            if ($set_sort === 'new_desc') {
+                $set_sort = 'id_desc';
+            }
+            $set_sort = explode('_', $set_sort);
+            $sort = [
+                'column' => $set_sort[0],
+                'value'  => $set_sort[1],
+            ];
+        }
+
+        $product = Products::where('status', STATUS_ENABLE)
+            ->orderBy($sort['column'], $sort['value'])
+            ->paginate($limit);
         return $product;
     }
 }

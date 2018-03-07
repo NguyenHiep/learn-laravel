@@ -71,7 +71,7 @@
       <div class="prod-cont-txt">{!!  $product->short_description !!}</div>
       <p class="prod-actions">
         <a href="javascript:void(0)" class="prod-favorites"><i class="fa fa-heart"></i> Yêu thích</a>
-        <a href="javascript:void(0)" class="prod-compare prod-i-compare"  data-id="{{ $product->id }}"><i class="fa fa-bar-chart"></i> So sánh</a>
+        <a href="javascript:void(0)" class="prod-compare compare_product"  data-id="{{ $product->id }}"><i class="fa fa-bar-chart"></i> So sánh</a>
       </p>
       
       <div class="prod-info">
@@ -80,11 +80,11 @@
         </p>
         <p class="prod-qnt">
           <input value="1" type="text" class="quantity_item" readonly>
-          <a href="javascript:void(0)" class="prod-plus cart-plus"><i class="fa fa-angle-up"></i></a>
-          <a href="javascript:void(0)" class="prod-minus cart-minus"><i class="fa fa-angle-down"></i></a>
+            <a href="javascript:void(0)" class="prod-plus plus_quantity"><i class="fa fa-angle-up"></i></a>
+          <a href="javascript:void(0)" class="prod-minus minus_quantity"><i class="fa fa-angle-down"></i></a>
         </p>
         <p class="prod-addwrap">
-          <a href="javascript:void(0)" class="prod-add prod-i-buy" rel="nofollow" data-id="{{ $product->id }}">Mua</a>
+          <a href="javascript:void(0)" class="prod-add add_to_cart" rel="nofollow" data-id="{{ $product->id }}">Mua</a>
         </p>
       </div>
     </div>

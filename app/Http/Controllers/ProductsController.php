@@ -13,6 +13,20 @@ class ProductsController extends FrontendController
 
     public function promotion(Request $request)
     {
+        /**
+         *
+         */
+        /*$description = 'test description';
+        $shortdescription = 'short description';
+        $strings = '';
+        $id = 30;
+        $title_id = 4160;
+        $sku_id = 146;
+        for($i = 1; $i < 1000; $i++){
+            $strings .= "INSERT INTO `products` VALUES (".$id++.", 'Áo Sơ Mi Nữ".$title_id++."', 'ao-so-mi-nu-".$title_id++."', '".$description."','".$shortdescription."', '|1|7|', 'SOMINU".$sku_id++."', '250000', '0', 5, '', '', '', NULL, NULL, '1520396250_45835825dd6b2448daf340c2f8d5ef08.jpg', 1, '2018-03-07 11:17:30', '2018-03-07 11:17:30', NULL);";
+            $strings .= '<br/>';
+        }*/
+
         $modes = [
             'gallery',
             'list',

@@ -98,6 +98,22 @@
               </table>
             </div>
           </div>
+          <div class="wccm-tr">
+            <div class="wccm-th">Mô tả ngắn</div>
+            <div class="wccm-table-wrapper">
+              <table class="wccm-table" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                  @foreach($products as $product)
+                    <td class="wccm-td">
+                      {!! $product->short_description !!}
+                    </td>
+                  @endforeach
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     

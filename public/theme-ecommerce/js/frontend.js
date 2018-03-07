@@ -69,7 +69,7 @@ var Products = {
   },
   
   compare_product : function () {
-    this.elemBody.find('.prod-i-compare').on("click", function (e) {
+    this.elemBody.find('.compare_product').on("click", function (e) {
       e.preventDefault();
       var product_id = $(this).attr('data-id');
       if (typeof product_id !== 'undefined') {
@@ -142,7 +142,7 @@ var Products = {
 	},
 
 	plus_quantity: function () {
-		this.elemBody.find('.cart-plus').on("click", function (e) {
+		this.elemBody.find('.plus_quantity').on("click", function (e) {
 				var quantity = $(this).prev().val();
 				if(Products.check_number_input(quantity) && quantity > 0){
 					quantity++;
@@ -154,7 +154,7 @@ var Products = {
 	},
 
 	minus_quantity: function () {
-		this.elemBody.find('.cart-minus').on("click", function (e) {
+		this.elemBody.find('.minus_quantity').on("click", function (e) {
 			var quantity = $(this).prev().prev().val();
 			if(Products.check_number_input(quantity) && quantity > 1){
 				quantity--;
@@ -196,7 +196,7 @@ var Checkout = {
 
   add_to_cart : function () {
 		//TODO: Check lại trường hợp add sản phẩm có số lượng --> hiện tại bị sai
-		this.elemBody.find('.prod-i-buy').on("click", function (e) {
+		this.elemBody.find('.add_to_cart').on("click", function (e) {
 			e.preventDefault();
 			var product_id = $(this).attr('data-id');
 			var quantity   = Checkout.elemBody.find("quantity_item").val();

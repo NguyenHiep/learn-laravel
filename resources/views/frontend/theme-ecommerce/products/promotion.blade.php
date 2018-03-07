@@ -579,10 +579,10 @@
           
           <!-- Sorting -->
           <div class="section-sortby">
-            <p>Mặc định</p>
+            <p>Sắp xếp</p>
             <ul>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'new']))  }}">Mới nhất</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'new_desc']))  }}">Mới nhất</a>
               </li>
               <li>
                 <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name_asc']))  }}">Sắp theo tên: A - Z</a>
