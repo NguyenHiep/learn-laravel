@@ -58,7 +58,7 @@ class CartController extends FrontendController
     public function add(Request $request)
     {
         // Check method
-        if (!$request->isMethod('get')) {
+        if (!$request->isMethod('post')) {
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => 'Method is not allow']),
                 'status'  => self::CTRL_MESSAGE_ERROR,

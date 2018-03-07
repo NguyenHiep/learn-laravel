@@ -79,12 +79,12 @@
           <b class="item_current_price">{{ format_price($product->price) }}</b>
         </p>
         <p class="prod-qnt">
-          <input value="1" type="text">
-          <a href="javascript:void(0)" class="prod-plus"><i class="fa fa-angle-up"></i></a>
-          <a href="javascript:void(0)" class="prod-minus"><i class="fa fa-angle-down"></i></a>
+          <input value="1" type="text" class="quantity_item" readonly>
+          <a href="javascript:void(0)" class="prod-plus cart-plus"><i class="fa fa-angle-up"></i></a>
+          <a href="javascript:void(0)" class="prod-minus cart-minus"><i class="fa fa-angle-down"></i></a>
         </p>
         <p class="prod-addwrap">
-          <a href="javascript:void(0)" class="prod-add" rel="nofollow">Mua</a>
+          <a href="javascript:void(0)" class="prod-add prod-i-buy" rel="nofollow" data-id="{{ $product->id }}">Mua</a>
         </p>
       </div>
     </div>

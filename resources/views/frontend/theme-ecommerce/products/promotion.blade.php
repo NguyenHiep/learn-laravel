@@ -585,16 +585,16 @@
                 <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'new']))  }}">Mới nhất</a>
               </li>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name']))  }}">Sắp theo tên: A - Z</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name_asc']))  }}">Sắp theo tên: A - Z</a>
               </li>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name2']))  }}">Sắp theo tên: Z - A</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name_desc']))  }}">Sắp theo tên: Z - A</a>
               </li>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name4']))  }}">Giá tăng dần</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'price_asc']))  }}">Giá tăng dần</a>
               </li>
               <li>
-                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'name3']))  }}">Giá giảm dần</a>
+                <a href="{{ route('product.promotion', addParamsUrl(['name' => 'sort', 'value' => 'price_desc']))  }}">Giá giảm dần</a>
               </li>
             </ul>
           </div>
@@ -613,13 +613,7 @@
         <!-- Catalog Topbar - end -->
         @include('frontend.theme-ecommerce.products.mode-view.'.$mode, ['products' => $products])
         <!-- Pagination - start -->
-        <ul class="pagi">
-          <li class="active"><span>1</span></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li class="pagi-next"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-        </ul>
+        {{ $products->appends(request()->query())->links('vendor.pagination.theme')  }}
         <!-- Pagination - end -->
       </div>
       <!-- Catalog Items | Gallery V1 - end -->

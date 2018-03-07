@@ -155,8 +155,10 @@ if (!function_exists('limit_words')) {
     }
 }
 
-if (!function_exists('addParamsUrl')){
-    function addParamsUrl(array $params){
+if (!function_exists('addParamsUrl')) {
+
+    function addParamsUrl(array $params)
+    {
         $parameters = request()->input();
         $parameters[$params['name']] = $params['value'];
         return $parameters;

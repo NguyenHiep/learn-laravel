@@ -57,6 +57,9 @@ var Products = {
             });
           }
           Products.compare_product();
+          Checkout.add_to_cart();
+          Products.plus_quantity();
+          Products.minus_quantity();
         }).fail(function (jqXHR, textStatus) {
           console.log('Error:', jqXHR);
         });
