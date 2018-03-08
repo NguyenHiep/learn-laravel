@@ -30,4 +30,14 @@ class Pages extends BaseModel
         'user_id',
     ];
 
+    public function getPageBySlug(string $page_slug)
+    {
+        $page = Pages::where('page_slug',$page_slug)->where('page_status', STATUS_ENABLE)->first();
+        if(!empty($page))
+        {
+            return $page;
+        }
+        return $page;
+    }
+
 }

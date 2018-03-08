@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Model\Pages;
 
 class PagesController extends FrontendController
 {
-    public function index($page_slug = null){
+    public $mpage;
+
+    public function __construct()
+    {
+        $this->mpage = new Pages();
+    }
+
+    public function index($page_slug){
         if(empty($page_slug)){
             return abort(404);
         }
-        $record = Pages::where('page_slug',$page_slug)->where('page_status', STATUS_ENABLE)->first();
-        if(is_null($record)){
+        $record = $this->mpage->getPageBySlug($page_slug);
+        if(empty($record)){
             return abort(404);
         }
         return view('frontend.theme-ecommerce.page-static.pages')->with(['record'  => $record]);
@@ -20,7 +26,7 @@ class PagesController extends FrontendController
 
     public function contact($page_slug){
 
-        $record = Pages::where('page_slug',$page_slug)->first();
+        $record = $this->mpage->getPageBySlug($page_slug);
         if(is_null($record)){
             return abort(404);
         }

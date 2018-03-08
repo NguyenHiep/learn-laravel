@@ -73,7 +73,7 @@
         
         </div>
         <!-- Catalog Topbar - end -->
-        @include('frontend.theme-ecommerce.products.mode-view.'.$mode, ['products' => $products])
+        @include('frontend.theme-ecommerce.catagories.mode-view.'.$mode, ['products' => $products])
         <!-- Pagination - start -->
         {{ $products->appends(request()->query())->links('vendor.pagination.theme')  }}
         <!-- Pagination - end -->
