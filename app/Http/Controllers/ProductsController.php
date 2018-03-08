@@ -11,20 +11,6 @@ class ProductsController extends FrontendController
 {
     const MAX_ITEMS = 6;
 
-    public function category(Request $request)
-    {
-        $modes              = [ 'gallery', 'list', 'table' ];
-        $this->set_mode     = 'gallery';
-        if(in_array($request->query('mode'), $modes)){
-            $this->set_mode = $request->query('mode');
-        }
-        $data['mode']       = $this->set_mode;
-        // Get product list
-        $data['products']   = $this->getPromotionProducts();
-        $data['categories'] = $this->getMenuProductsCategory();
-        return view('frontend.theme-ecommerce.products.category', $data);
-    }
-
     public function promotion(Request $request)
     {
         /**

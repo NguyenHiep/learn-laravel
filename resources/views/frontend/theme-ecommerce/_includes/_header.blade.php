@@ -124,348 +124,31 @@
         
         <!-- Catalog menu - start -->
         <div class="topcatalog">
-          <a class="topcatalog-btn" href="catalog-list.html"><span>Tất cả </span>danh mục</a>
+          <a class="topcatalog-btn" href="javascript:void(0)"><span>Tất cả </span>danh mục</a>
+          @if(count($categories) > 0)
           <ul class="topcatalog-list">
-            <li>
-              <a href="catalog-list.html">
-                Thời trang nữ
-              </a>
-              <i class="fa fa-angle-right"></i>
-              <ul>
+            @foreach($categories as $category)
+              @if($category->parent_id === 0)
                 <li>
-                  <a href="catalog-list.html">
-                    Áo khoác nữ
-                  </a>
+                  <a href="{{ route('category.show', $category->slug) }}">{{ $category->name }}</a>
+                    <i class="fa fa-angle-right"></i>
+                    <ul>
+                      @foreach($categories as $sub_category_lv1)
+                        @if($sub_category_lv1->parent_id === $category->id)
+                          <li>
+                            <a href="{{ route('category.show', $sub_category_lv1->slug) }}">
+                              {{ $sub_category_lv1->name }}
+                            </a>
+                          </li>
+                        @endif
+                      @endforeach
+                    </ul>
+                    
                 </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Váy đầm
-                  </a>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Áo sơ mi nữ
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Shoulder Bags
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Falabella
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Becks
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Clutches
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Travel Bags
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Đồ bộ nữ
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Sunglasses
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Tech Cases
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Jewelry
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Stella
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                   Áo thun nữ
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="catalog-list.html">
-                Thời trang nam
-              </a>
-              <i class="fa fa-angle-right"></i>
-              <ul>
-                <li>
-                  <a href="catalog-list.html">
-                    Áo khoác nam
-                  </a>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Áo sơ mi nam
-                  </a>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Áo thun nam
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Bags
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Sunglasses
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Other Accessories
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Quần nam
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="catalog-list.html">
-                Thời trang cho bé
-              </a>
-              <i class="fa fa-angle-right"></i>
-              <ul>
-                <li>
-                  <a href="catalog-list.html">
-                    Áo khoác cho bé
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Outerwear
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        T-Shirts
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Blouses & Shirts
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Pants & Shorts
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Sleepwear & Underwear
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Skirts
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Váy đầm cho bé
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Shoes & Accessories
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Jumpers & Cardigans
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Shirts
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Outerwear
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Swimwear
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Quần baby
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Baby Sets
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Dresses & All-In-One
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Pants & Shorts
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Shoes & Accessories
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        T-shirts
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Outerwear
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="catalog-list.html">
-                Phụ kiện thời trang
-              </a>
-              <i class="fa fa-angle-right"></i>
-              <ul>
-                <li>
-                  <a href="catalog-list.html">
-                    Túi xách
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Elyse
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Odette
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Brody
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Flats
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Sandals
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Ví cầm tay - quà tặng
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Casual Shoes
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Sneakers
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Sandals
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Boots
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Mules & Clogs
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="catalog-list.html">
-                    Giày dép
-                  </a>
-                  <i class="fa fa-angle-right"></i>
-                  <ul>
-                    <li>
-                      <a href="catalog-list.html">
-                        Girls
-                      </a>
-                    </li>
-                    <li>
-                      <a href="catalog-list.html">
-                        Boys
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
+              @endif
+             @endforeach
           </ul>
+          @endif
         </div>
         <!-- Catalog menu - end -->
         
@@ -496,7 +179,8 @@
         </div>
         <!-- Search - end -->
       
-      </nav>		</div>
+      </nav>
+    </div>
   </div>
   <!-- Topmenu - end -->
 

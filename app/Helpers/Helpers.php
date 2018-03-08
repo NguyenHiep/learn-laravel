@@ -160,7 +160,13 @@ if (!function_exists('addParamsUrl')) {
     function addParamsUrl(array $params)
     {
         $parameters = request()->input();
-        $parameters[$params['name']] = $params['value'];
+        if(is_array($params) && !empty($params)){
+            foreach ($params as $key => $val)
+            {
+                $parameters[$key] = $val;
+            }
+        }
+
         return $parameters;
     }
 }
