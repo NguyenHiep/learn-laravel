@@ -3,27 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Model\Categories;
-use Illuminate\Http\Request;
+use App\Helppers\ToolbarConfig;
+use App\Model\Products;
 
 class CategoriesController extends FrontendController
 {
-    public function show(Request $request, $slug){
-        $category = Categories::where('slug', $slug)->where('status', '=', STATUS_ENABLE)->first();
+    public $mcategory;
+    public $mproduct;
+    public $config_toolbar;
+
+    public function __construct()
+    {
+        $this->mcategory      = new Categories();
+        $this->mproduct       = new Products();
+        $this->config_toolbar = ToolbarConfig::getInstance();
+    }
+
+    public function show($slug){
+        $category = $this->mcategory->getCategoryBySlug($slug);
         if(empty($category))
         {
             abort(404);
         }
-
-        $modes              = [ 'gallery', 'list', 'table' ];
-        $this->set_mode     = 'gallery';
-        if(in_array($request->query('mode'), $modes)){
-            $this->set_mode = $request->query('mode');
-        }
-        $data['mode']       = $this->set_mode;
+        // Get config toolbar
+        $config             = ToolbarConfig::getInstance();
+        $data['mode']       = $config->mode;
         // Get product list
         $data['category']   = $category;
-        $data['products']   = $this->getProductByCategoryId($category->id);
-        $data['categories'] = $this->getMenuProductsCategory();
+        $data['products']   = $this->mproduct->getProductByCategoryId($this->config_toolbar, $category->id);
+        $data['categories'] = $this->mcategory->getListCategory();
         return view('frontend.theme-ecommerce.catagories.show', $data);
     }
 }

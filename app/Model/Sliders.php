@@ -27,4 +27,14 @@ class Sliders extends BaseModel
         'slider_status',
         'user_id'
     ];
+
+    public function getListSlider()
+    {
+        $sliders = Sliders::where('slider_status', STATUS_ENABLE)->get();
+        if(!empty($sliders))
+        {
+            return $sliders;
+        }
+        return false;
+    }
 }

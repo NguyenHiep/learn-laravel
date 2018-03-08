@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Products;
+use DB;
 use Illuminate\Http\Request;
 use Redirect;
 use Session;
@@ -10,6 +11,12 @@ use Session;
 class ComparesController extends FrontendController
 {
     const MAX_ITEMS = 6;
+    public $mproduct;
+
+    public function __construct()
+    {
+        $this->mproduct = new Products();
+    }
 
     /***
      * Show list product compare
@@ -18,7 +25,7 @@ class ComparesController extends FrontendController
     public function index()
     {
         if (Session::has(self::SES_ITEMS_COMPARE)) {
-            $data['products'] = \DB::table('products')
+            $data['products'] = DB::table('products')
                 ->whereIn('id', Session::get(self::SES_ITEMS_COMPARE))
                 ->get();
             return view('frontend.theme-ecommerce.products.compare', $data);
@@ -34,7 +41,7 @@ class ComparesController extends FrontendController
     public function add(Request $request)
     {
         $product_id = $request->query('product_id');
-        $product = Products::where('id', '=', $product_id)->where('status', '=', STATUS_ENABLE)->first();
+        $product    = $this->mproduct->getProductById($product_id);
 
         if (empty($product)) {
             return response()->json([
@@ -84,7 +91,7 @@ class ComparesController extends FrontendController
             ]);
         }
         $product_id = $request->query('product_id');
-        $product = Products::where('id', '=', $product_id)->where('status', '=', STATUS_ENABLE)->first();
+        $product    = $this->mproduct->getProductById($product_id);
         if (empty($product)) {
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => 'Data empty']),

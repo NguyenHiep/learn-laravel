@@ -11,6 +11,12 @@ use App\Http\Controllers\FrontendController;
 
 class CartController extends FrontendController
 {
+    public $mproduct;
+
+    public function __construct()
+    {
+        $this->mproduct = new Products();
+    }
 
     protected static function validator($data)
     {
@@ -73,7 +79,7 @@ class CartController extends FrontendController
         }
 
         $product_id = $inputs['product_id'];
-        $product = Products::where('id', '=', $product_id)->where('status', '=', STATUS_ENABLE)->first();
+        $product = $this->mproduct->getProductById($product_id);
 
         if (empty($product)) {
             return response()->json([
@@ -154,9 +160,9 @@ class CartController extends FrontendController
         }
 
 
-        $inputs = $request->all();
+        $inputs     = $request->all();
         $product_id = $inputs['product_id'];
-        $product = Products::where('id', '=', $product_id)->where('status', '=', STATUS_ENABLE)->first();
+        $product    = $this->mproduct->getProductById($product_id);
         if (empty($product)) {
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => 'Data not found']),

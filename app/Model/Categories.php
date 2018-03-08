@@ -27,4 +27,26 @@ class Categories extends BaseModel
         'status'
     ];
 
+
+    public function getCategoryBySlug(string $slug)
+    {
+        if (!empty($slug)) {
+            $category = Categories::where('slug', $slug)
+                ->where('status', '=', STATUS_ENABLE)
+                ->first();
+            return $category;
+        }
+        return false;
+
+    }
+
+    public function getListCategory()
+    {
+        $categories = Categories::where('status', STATUS_ENABLE)->get();
+        if(!empty($categories)){
+            return $categories;
+        }
+        return false;
+    }
+
 }
