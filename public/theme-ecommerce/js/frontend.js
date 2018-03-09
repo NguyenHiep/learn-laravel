@@ -146,6 +146,7 @@ var Products = {
 					total_item =  parseInt( quantity * price);
 					var total_item_format = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
 					elemTotal.html(total_item_format);
+					Checkout.calc_total_price();
 				} else {
 					$(this).focus();
 					show_message({
@@ -307,18 +308,28 @@ var Checkout = {
 
 		});
 	},
-
+  calc_total_price : function () {
+    var quantity   = 0,
+        price      = 0,
+        total_item = 0;
+      this.elemBody.find('.quantity_item').each(function () {
+        quantity = $(this).val();
+				price    = $(this).next().next().next().val();
+        total_item += parseInt ( quantity * price);
+    });
+    var summary_total = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
+    this.elemBody.find('.cart-total .cart-summ b').eq(0).html(summary_total); // Render summary price
+  },
+	
 	init: function () {
 		this.setup();
 		this.add_to_cart();
 		this.remove_item_cart();
-		this.removeall_item_cart()
+		this.removeall_item_cart();
+		this.calc_total_price();
 	}
 }
 
-function change_cal_sum() {
-
-}
 $(document).ready(function () {
   Products.init();
 	Checkout.init();
