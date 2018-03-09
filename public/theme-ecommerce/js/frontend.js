@@ -1,4 +1,20 @@
 "use strict";
+
+/**
+ * Number.prototype.format(n, x, s, c)
+ *
+ * @param integer n: length of decimal
+ * @param integer x: length of whole part
+ * @param mixed   s: sections delimiter
+ * @param mixed   c: decimal delimiter
+ */
+Number.prototype.format = function(n, x, s, c) {
+	var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+		num = this.toFixed(Math.max(0, ~~n));
+
+	return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+};
+
 /**
  * Object product js
  * @type {{elemBody: (*), setup: Products.setup, quick_view_product: Products.quick_view_product, compare_product: Products.compare_product, remove_item_compare: Products.remove_item_compare, change_quantity: Products.change_quantity, plus_quantity: Products.plus_quantity, minus_quantity: Products.minus_quantity, check_number_input: Products.check_number_input, init: Products.init}}
@@ -117,18 +133,29 @@ var Products = {
 	change_quantity: function () {
 		this.elemBody.find('.quantity_item').on("change", function (e) {
 			e.preventDefault();
-			var quantity = $(this).val();
-			if (Products.check_number_input(quantity)) { // Nếu ký tự là số thì thực hiện
-				if (quantity > 0) {
-					//TODO: Begin code change quantity items
+			var quantity   = $(this).val();
+			var price      = $(this).next().next().next().val();
+			var product_id = $(this).next().next().next().next().val();
+			var total_item = 0;
+			var parent     = $(this).parents("tr").eq(0);
+			var elemTotal  = parent.find('.cart-summ b').eq(0);
 
-					console.log(quantity);
+			if (Products.check_number_input(quantity)) { // Nếu ký tự là số thì thực hiện
+				if (quantity > 0 && typeof price !== 'undefined' && typeof product_id !== 'undefined') {
+					//TODO: Begin code change quantity items
+					total_item =  parseInt( quantity * price);
+					var total_item_format = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
+					elemTotal.html(total_item_format);
 				} else {
 					$(this).focus();
 					show_message({
 						'status': 'error',
 						'message': 'Số lượng phải > 0'
 					});
+					console.log("quantity:", quantity);
+					console.log("price:", price);
+					console.log("product_id:", product_id);
+					console.log("total_item:", total_item);
 				}
 			} else {
 				$(this).focus();
@@ -194,14 +221,14 @@ var Checkout = {
 		});
 	},
 
-  add_to_cart : function () {
+  add_to_cart : function () 	{
 		//TODO: Check lại trường hợp add sản phẩm có số lượng --> hiện tại bị sai
 		this.elemBody.find('.add_to_cart').on("click", function (e) {
 			e.preventDefault();
 			var product_id = $(this).attr('data-id');
-			var quantity   = Checkout.elemBody.find("quantity_item").val();
+			var quantity   = Checkout.elemBody.find(".quantity_item").val();
 			if (typeof quantity !== 'undefined') {
-				quantity   = Checkout.elemBody.find("quantity_item").val();
+				quantity   = Checkout.elemBody.find(".quantity_item").val();
 			}else{
 				quantity = 1;
 			}

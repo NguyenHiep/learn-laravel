@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Checkout;
 
 use App\Model\Products;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
@@ -35,13 +36,14 @@ class CartController extends FrontendController
             $total_price = 0;
             $this->item_quantity = [];
             if(!empty($cartItems)){
+
                 foreach ($cartItems as $cartItem)
                 {
                     $ids[] = $cartItem['product_id'];
                     $this->item_quantity[$cartItem['product_id']]['quantity'] = $cartItem['quantity'];
                 }
 
-                $products = \DB::table('products')
+                $products = DB::table('products')
                     ->whereIn('id', $ids)
                     ->get();
 
@@ -87,6 +89,7 @@ class CartController extends FrontendController
                 'status'  => self::CTRL_MESSAGE_ERROR,
             ]);
         }
+
         if(isset($inputs['quantity'])){
             $quantity = (int) $inputs['quantity'];
         }else{

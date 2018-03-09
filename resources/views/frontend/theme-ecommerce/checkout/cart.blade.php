@@ -58,8 +58,12 @@
                     <p class="cart-qnt">
                       @php $key = 'product.'.$product->id.'.quantity' @endphp
                       <input name="{{ convert_input_name($key) }}" value="{{ $product->item_cart_quantity }}" type="text"  class="quantity_item" readonly/>
-                      <a href="javascript:void(0)" class="cart-plus"><i class="fa fa-angle-up"></i></a>
-                      <a href="javascript:void(0)" class="cart-minus"><i class="fa fa-angle-down"></i></a>
+                      <a href="javascript:void(0)" class="cart-plus plus_quantity"><i class="fa fa-angle-up"></i></a>
+                      <a href="javascript:void(0)" class="cart-minus minus_quantity"><i class="fa fa-angle-down"></i></a>
+                      @php $key = 'product.'.$product->id.'.price' @endphp
+                      <input type="hidden" name="{{ convert_input_name($key) }}" id="price{{ $product->id }}" value="{{ $product->price }}">
+                      @php $key = 'product.'.$product->id.'.id' @endphp
+                      <input type="hidden" name="{{ convert_input_name($key) }}" id="product_id{{ $product->id }}" value="{{ $product->id }}">
                     </p>
                   </td>
                   <td class="cart-summ">
@@ -68,10 +72,6 @@
                   </td>
                   <td class="cart-del">
                     <a href="javascript:void(0)" class="cart-remove" data-id="{{ $product->id }}"></a>
-                    @php $key = 'product.'.$product->id.'.price' @endphp
-                    <input type="hidden" name="{{ convert_input_name($key) }}" id="price{{ $product->id }}">
-                    @php $key = 'product.'.$product->id.'.id' @endphp
-                    <input type="hidden" name="{{ convert_input_name($key) }}" id="product_id{{ $product->id }}">
                   </td>
                 </tr>
                 @endforeach
@@ -86,6 +86,7 @@
           @if(!empty($total_price))
           <ul class="cart-total">
             <li class="cart-summ">Tổng tiền thanh toán: <b>{{ format_price($total_price) }}</b></li>
+            <li><a href="#" class="btn btn-primary">Cập nhật giỏ hàng</a></li>
           </ul>
           
           <div class="cart-submit">
