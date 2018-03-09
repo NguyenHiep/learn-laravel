@@ -131,42 +131,44 @@ var Products = {
   },
 
 	change_quantity: function () {
-		this.elemBody.find('.quantity_item').on("change", function (e) {
-			e.preventDefault();
-			var quantity   = $(this).val();
-			var price      = $(this).next().next().next().val();
-			var product_id = $(this).next().next().next().next().val();
-			var total_item = 0;
-			var parent     = $(this).parents("tr").eq(0);
-			var elemTotal  = parent.find('.cart-summ b').eq(0);
-
-			if (Products.check_number_input(quantity)) { // Nếu ký tự là số thì thực hiện
-				if (quantity > 0 && typeof price !== 'undefined' && typeof product_id !== 'undefined') {
-					//TODO: Begin code change quantity items
-					total_item =  parseInt( quantity * price);
-					var total_item_format = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
-					elemTotal.html(total_item_format);
-					Checkout.calc_total_price();
-				} else {
-					$(this).focus();
-					show_message({
-						'status': 'error',
-						'message': 'Số lượng phải > 0'
-					});
-					console.log("quantity:", quantity);
-					console.log("price:", price);
-					console.log("product_id:", product_id);
-					console.log("total_item:", total_item);
-				}
-			} else {
-				$(this).focus();
-				show_message({
-					'status': 'error',
-					'message': 'Chỉ chấp nhận giá trị là chữ số'
-				});
-			}  // End if (result)
-
-		});
+    if(typeof page !== 'undefined' && page === 'cart')
+    {
+      this.elemBody.find('.quantity_item').on("change", function (e) {
+        e.preventDefault();
+        var quantity   = $(this).val();
+        var price      = $(this).next().next().next().val();
+        var product_id = $(this).next().next().next().next().val();
+        var total_item = 0;
+        var parent     = $(this).parents("tr").eq(0);
+        var elemTotal  = parent.find('.cart-summ b').eq(0);
+    
+        if (Products.check_number_input(quantity)) { // Nếu ký tự là số thì thực hiện
+          if (quantity > 0 && typeof price !== 'undefined' && typeof product_id !== 'undefined') {
+            total_item =  parseInt( quantity * price);
+            var total_item_format = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
+            elemTotal.html(total_item_format);
+            Checkout.calc_total_price();
+          } else {
+            $(this).focus();
+            show_message({
+              'status': 'error',
+              'message': 'Số lượng phải > 0'
+            });
+            console.log("quantity:", quantity);
+            console.log("price:", price);
+            console.log("product_id:", product_id);
+            console.log("total_item:", total_item);
+          }
+        } else {
+          $(this).focus();
+          show_message({
+            'status': 'error',
+            'message': 'Chỉ chấp nhận giá trị là chữ số'
+          });
+        }  // End if (result)
+    
+      });
+    }
 	},
 
 	plus_quantity: function () {
@@ -223,13 +225,12 @@ var Checkout = {
 	},
 
   add_to_cart : function () 	{
-		//TODO: Check lại trường hợp add sản phẩm có số lượng --> hiện tại bị sai
 		this.elemBody.find('.add_to_cart').on("click", function (e) {
 			e.preventDefault();
 			var product_id = $(this).attr('data-id');
 			var quantity   = Checkout.elemBody.find(".quantity_item").val();
 			if (typeof quantity !== 'undefined') {
-				quantity   = Checkout.elemBody.find(".quantity_item").val();
+				quantity = Checkout.elemBody.find(".quantity_item").val();
 			}else{
 				quantity = 1;
 			}
@@ -309,15 +310,16 @@ var Checkout = {
 		});
 	},
   calc_total_price : function () {
-    var quantity   = 0,
-        price      = 0,
-        total_item = 0;
+    var quantity      = 0,
+        price         = 0,
+        total_item    = 0,
+        summary_total = 0;
       this.elemBody.find('.quantity_item').each(function () {
-        quantity = $(this).val();
-				price    = $(this).next().next().next().val();
-        total_item += parseInt ( quantity * price);
+        quantity    = $(this).val();
+				price       = $(this).next().next().next().val();
+        total_item += parseInt(quantity * price)
     });
-    var summary_total = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
+    summary_total = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
     this.elemBody.find('.cart-total .cart-summ b').eq(0).html(summary_total); // Render summary price
   },
 	
@@ -332,5 +334,5 @@ var Checkout = {
 
 $(document).ready(function () {
   Products.init();
-	Checkout.init();
+  Checkout.init();
 });

@@ -5,10 +5,9 @@
 @section('keywords', 'Quần áo online, áo thun online, quần kaki online')
 
 @section('content')
+  <script> var page = 'cart'; </script>
   <main>
     <section class="container stylization maincont">
-      
-      
       <ul class="b-crumbs">
         <li>
           <a href="{{ URL::to('/') }}">Trang chủ</a>
