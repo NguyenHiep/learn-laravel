@@ -141,8 +141,24 @@ class CartController extends FrontendController
 
     }
 
-    public function edit()
+    public function update(Request $request)
     {
+        $carts = $request->get('carts');
+        $cart_items = [];
+        foreach ($carts as $cart) {
+            $cart_items[$cart['name']] = $cart['value'];
+        }
+
+        if (Session::has(SESSION_ITEMS_CART)) {
+            foreach (Session::get(SESSION_ITEMS_CART) as $key => $ses_item_cart) {
+                $quantity_item = $cart_items['product['.$ses_item_cart['product_id'].'][quantity]'];
+                Session::put(self::SES_ITEMS_CART.'.'.$key.'.quantity', $quantity_item);
+            }
+            return response()->json([
+                'message'  => __('system.message.errors', ['errors' => 'Cập nhật giỏ hàng thành công']),
+                'status'   => self::CTRL_MESSAGE_INFO,
+            ]);
+        }
 
     }
 

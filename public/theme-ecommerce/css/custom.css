@@ -114,3 +114,31 @@
 		transform: scale(1)
 	}
 }
+
+.fancybox-wrap .qview-modal
+{
+	overflow: auto;
+	width: 965px;
+	min-height: 400px;
+}
+.btn-main{
+	display: inline-block;
+	border: none;
+	transition: all 0.2s;
+	font-weight: 500;
+	background: #373d54;
+	padding: 10px 15px;
+	color: #ffffff !important;
+	letter-spacing: 0.01em;
+	cursor: pointer;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 14px;
+}
+
+.btn-main:hover{
+	background: #474f6e;
+}
+.cart-submit{
+	text-align: center;
+}

@@ -88,6 +88,7 @@ Route::group(['prefix' => '/checkout/'], function () {
     Route::post('/addtocart/','Checkout\CartController@add')->name('checkout.cart.add');
     Route::post('/removecart/','Checkout\CartController@remove')->name('checkout.cart.remove');
     Route::post('/removeallcart/','Checkout\CartController@removeAll')->name('checkout.cart.removeall');
+    Route::post('/update/','Checkout\CartController@update')->name('checkout.cart.update');
 });
 Route::get('{page_slug}','PagesController@index')->name('page.show');
 

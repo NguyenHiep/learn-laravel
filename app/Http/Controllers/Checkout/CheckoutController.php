@@ -13,7 +13,7 @@ class CheckoutController extends FrontendController
 
     public function index()
     {
-
+      return view('frontend.theme-ecommerce.checkout.checkout');
     }
 
     public function add()

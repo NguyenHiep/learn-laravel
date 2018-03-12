@@ -18,9 +18,9 @@
       </ul>
       <h1 class="main-ttl"><span>Giỏ hàng của bạn</span></h1>
       
-        <form action="{{ route('checkout.cart.index') }}" method="POST">
-          {{ csrf_field() }}
+        <form action="javascript:void(0)" id="form_cart" method="POST">
           <div class="cart-items-wrap">
+            @if(!empty($products))
             <table class="cart-items">
               <thead>
               <tr>
@@ -33,7 +33,7 @@
               </tr>
               </thead>
               <tbody>
-              @if(!empty($products))
+             
                 @foreach($products as $product)
                   <tr>
                   <td class="cart-image">
@@ -74,27 +74,26 @@
                   </td>
                 </tr>
                 @endforeach
-              @else
-                <tr>
-                  <td colspan="5">Chưa có sản phẩm trong giỏ hàng của bạn.</td>
-                </tr>
-              @endif
               </tbody>
             </table>
+            @else
+              <p>Chưa có sản phẩm trong giỏ hàng của bạn.</p>
+              <a href="{{ route('home') }}" class="btn-main">Tiếp tục mua hàng</a>
+            @endif
           </div>
-          @if(!empty($total_price))
+          @if(!empty($products))
           <ul class="cart-total">
-            <li class="cart-summ">Tổng tiền thanh toán: <b>{{ format_price($total_price) }}</b></li>
-            <li><a href="#" class="btn btn-primary">Cập nhật giỏ hàng</a></li>
+            <li class="cart-summ">Tổng tiền: <b>{{ format_price($total_price) }}</b></li>
           </ul>
           
           <div class="cart-submit">
             <div class="cart-coupon">
-              <input placeholder="your coupon" type="text">
-              <a class="cart-coupon-btn" href="#"><img src="img/ok.png" alt="Mã giảm giá"></a>
+              <input placeholder="Mã giảm giá" type="text">
+              <a class="cart-coupon-btn" href="#"><img src="{{ asset('img/ok.png') }}" alt="Mã giảm giá"></a>
             </div>
-            <button type="submit" class="cart-submit-btn">Thanh toán</button>
-            {{--<a href="#" class="cart-submit-btn">Thanh toán</a>--}}
+            <a href="{{ route('home') }}" class="btn-main">Tiếp tục mua hàng</a>
+            <a href="javascipt:void(0)" class="btn-main update_cart">Cập nhật giỏ hàng <i class="fa fa-spinner fa-spin" style="display: none;"></i></a>
+            <a href="{{ route('checkout.index') }}" class="cart-submit-btn btn-main" data-update=false>Thanh toán</a>
             <a href="javascipt:void(0)" class="cart-clear">Xóa giỏ hàng</a>
           </div>
           @endif
