@@ -67,6 +67,7 @@
 <script src="{{ asset('/theme-ecommerce/js/frontend.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhAYvx0GmLyN5hlf6Uv_e9pPvUT3YpozE"></script>
 <script src="{{ asset('/theme-ecommerce/js/gmap.js') }}"></script>
+@stack('scripts')
 
 <script type="text/javascript">
 	// Config notifation

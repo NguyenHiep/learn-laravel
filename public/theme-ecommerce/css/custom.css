@@ -142,3 +142,13 @@
 .cart-submit{
 	text-align: center;
 }
+.stylization table.cart-items-checkout p{
+	margin: 0;
+}
+table.cart-items-checkout{
+	overflow: auto;
+	clear: both;
+}
+table.cart-items-checkout td{
+	vertical-align: top;
+}

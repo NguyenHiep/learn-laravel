@@ -350,17 +350,19 @@ var Checkout = {
 		});
 	},
 	calc_total_price: function () {
-		var quantity = 0,
-			price = 0,
-			total_item = 0,
-			summary_total = 0;
-		this.elemBody.find('.quantity_item').each(function () {
-			quantity = $(this).val();
-			price = $(this).next().next().next().val();
-			total_item += parseInt(quantity * price)
-		});
-		summary_total = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
-		this.elemBody.find('.cart-total .cart-summ b').eq(0).html(summary_total); // Render summary price
+		if (typeof page !== 'undefined' && page === 'cart') {
+			var quantity = 0,
+				price = 0,
+				total_item = 0,
+				summary_total = 0;
+			this.elemBody.find('.quantity_item').each(function () {
+				quantity = $(this).val();
+				price = $(this).next().next().next().val();
+				total_item += parseInt(quantity * price)
+			});
+			summary_total = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
+			this.elemBody.find('.cart-total .cart-summ b').eq(0).html(summary_total); // Render summary price
+		}
 	},
 
 	init: function () {
