@@ -44,9 +44,7 @@ class CategoriesController extends BackendController
     public function index()
     {
         $data['list_cate_all'] = Categories::all();
-        //$list_cate_all = Categories::all();
         $data['records'] =  Categories::orderBy('id', 'asc')->paginate(20);
-        //$records = Categories::orderBy('id', 'asc')->paginate(12);
         return view('manage.modules.categories.index', $data);
     }
 
@@ -118,15 +116,14 @@ class CategoriesController extends BackendController
      */
     public function edit($id)
     {
-        $list_cate_all = Categories::all();
+        $data['list_cate_all'] = Categories::all();
         $record = Categories::find($id);
         if (empty($record)) {
             return abort(404);
         }
-        return view('manage.modules.categories.edit')->with([
-            'list_cate_all' => $list_cate_all,
-            'record'        => $record
-        ]);
+        $data['record'] = $record;
+
+        return view('manage.modules.categories.edit', $data);
     }
 
     /**

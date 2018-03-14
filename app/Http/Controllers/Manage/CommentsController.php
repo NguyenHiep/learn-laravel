@@ -19,12 +19,6 @@ class CommentsController extends BackendController
      */
     public function index(Request $request)
     {
-        // begin code
-        /*$records = \DB::table('comments AS c')
-            ->join('posts AS p', 'c.posts_id', '=', 'p.id')
-            ->select('c.*', 'p.post_title')
-            ->whereNull("c.deleted_at")
-            ->get();*/
         $model = Comments::query();
         // Array data request
         $inputs = $request->all();

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Manage\Posts;
 use App\Model\Posts\Category;
 
 use App\Http\Controllers\Controller;
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -24,18 +23,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $list_cate_all = Category::all();
-
-        $records = Category::orderBy('id', 'asc')->paginate(12);
-
-        //
-//        $posts_category = Category::with('children')
-//                            ->where('parent_id', '=', 0)
-//                            ->orderBy('id', 'asc')
-//                            ->get();
-
-
-        return view('manage.modules.posts.category.index', compact('records', 'list_cate_all'));
+        $data['list_cate_all'] = Category::all();
+        $data['records'] = Category::orderBy('id', 'asc')->paginate(12);
+        return view('manage.modules.posts.category.index', $data);
     }
 
     /**

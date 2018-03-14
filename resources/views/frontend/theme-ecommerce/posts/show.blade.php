@@ -8,8 +8,6 @@
   <!-- Main Content - start -->
   <main>
     <section class="container">
-      
-      
       <ul class="b-crumbs">
         <li>
           <a href="index.html">
