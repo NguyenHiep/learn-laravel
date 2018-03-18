@@ -381,7 +381,7 @@ $(document).ready(function () {
     }
 
     // Forms Validation
-    var filterEmail  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,6})+$/;
+    /*var filterEmail  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,6})+$/;
     $('.form-validate').submit(function () {
         var errors = 0;
         $(this).find('[data-required="text"]').each(function () {
@@ -424,7 +424,7 @@ $(document).ready(function () {
         }
         if ($(this).val() != "" && ($(this).hasClass("redborder")))
             $(this).removeClass("redborder");
-    });
+    });*/
 
 
 });
