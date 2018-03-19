@@ -152,3 +152,6 @@ table.cart-items-checkout{
 table.cart-items-checkout td{
 	vertical-align: top;
 }
+.contactform-wrap .contactform-label{
+	text-align: left;
+}

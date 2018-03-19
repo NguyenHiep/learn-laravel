@@ -92,8 +92,8 @@
               <a class="cart-coupon-btn" href="#"><img src="{{ asset('img/ok.png') }}" alt="Mã giảm giá"></a>
             </div>
             <a href="{{ route('home') }}" class="btn-main">Tiếp tục mua hàng</a>
-            <a href="javascipt:void(0)" class="btn-main update_cart">Cập nhật giỏ hàng <i class="fa fa-spinner fa-spin" style="display: none;"></i></a>
-            <a href="{{ route('checkout.index') }}" class="cart-submit-btn btn-main" data-update=false>Tiến hành thanh toán</a>
+            <a href="javascipt:void(0)" class="btn-main update_cart">Cập nhật <i class="fa fa-spinner fa-spin" style="display: none;"></i></a>
+            <a href="{{ route('checkout.index') }}" class="cart-submit-btn btn-main" data-update=false>Thanh toán</a>
             <a href="javascipt:void(0)" class="cart-clear">Xóa giỏ hàng</a>
           </div>
           @endif

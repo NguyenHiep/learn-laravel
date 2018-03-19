@@ -52,5 +52,9 @@ return [
         3 => '_parent',
         4 => '_top',
         5 => 'framename',
+    ],
+    'address_type' => [
+        1 => 'Nhà riêng',
+        2 => 'Tòa nhà(chung cư)',
     ]
 ];

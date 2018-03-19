@@ -78,7 +78,7 @@ Route::get('/tin-tuc/{slug}','PostsController@detail')->name('posts.detail');
 
 Route::get('/gio-hang/','Checkout\CartController@index')->name('checkout.cart.index');
 Route::get('/thong-tin-giao-hang/','Checkout\CheckoutController@index')->name('checkout.index');
-Route::post('/order/save/','Checkout\CheckoutController@save')->name('checkout.save');
+Route::post('/dat-hang/','Checkout\CheckoutController@save')->name('checkout.save');
 
 Route::get('/so-sanh-san-pham/','ComparesController@index')->name('compare.index');
 Route::group(['prefix' => '/compares/'], function () {
