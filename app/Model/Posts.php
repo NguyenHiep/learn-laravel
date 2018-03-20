@@ -58,4 +58,24 @@ class Posts extends BaseModel
         //return $this->belongsTo('App\Model\User');
         return $this->hasOne('App\Model\User','id','user_id');
     }
+
+    public function getListAll()
+    {
+        $posts = Posts::orderBy('id', 'DESC')
+            ->where('post_status', STATUS_ENABLE)
+            ->paginate(12);
+        return $posts;
+    }
+
+    public function getPostBySlug($slug)
+    {
+        $post = Posts::where('post_slug', '=', $slug)
+            ->where('post_status', '=', STATUS_ENABLE)
+            ->first();
+        if (!empty($post)) {
+            return $post;
+        }
+        return false;
+    }
+
 }

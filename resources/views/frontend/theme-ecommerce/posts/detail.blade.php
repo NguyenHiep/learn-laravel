@@ -8,29 +8,12 @@
   <!-- Main Content - start -->
   <main>
     <section class="container">
-      
-      
       <ul class="b-crumbs">
-        <li>
-          <a href="index.html">
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="blog.html">
-            Blog
-          </a>
-        </li>
-        <li>
-          <a href="blog.html">
-            News
-          </a>
-        </li>
-        <li>
-          <span>Hic quod maxime deserunt</span>
-        </li>
+        <li><a href="{{ route('home') }}">Trang chủ</a></li>
+        <li><a href="{{ route('posts.show') }}">Tin tức</a></li>
+        <li><span>{{ $post->post_title }}</span></li>
       </ul>
-      <h1 class="main-ttl"><span>Hic quod maxime deserunt</span></h1>
+      <h1 class="main-ttl"><span>{{ $post->post_title }}</span></h1>
       <!-- Blog Post - start -->
       <div class="post-wrap stylization">
         <img class="post-img" src="http://placehold.it/1140x580" alt="">
