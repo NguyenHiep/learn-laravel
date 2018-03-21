@@ -112,36 +112,42 @@ return [
 
     'attributes' => [
         // General
-        'action_ids'        => 'ID record',
+        'action_ids'                              => 'ID record',
 
         // Settings
-        'company_name'      => 'Tên công ty',
-        'company_zip'       => 'Mã bưu chính',
-        'company_address'   => 'Địa chỉ',
-        'company_tel'       => 'Số điện thoại',
-        'company_fax'       => 'Số Fax',
-        'company_copyright' => 'Bản quyền website',
-        'subtitle'          => 'Tiêu đề website',
-        'company_lat'       => 'Vĩ độ',
-        'company_lng'       => 'Kinh độ',
-        'i18n_flg'          => 'Ngôn ngữ',
-        'email1'            => 'Email người gửi',
-        'email1_name'       => 'Tên hiển thị khi gửi email',
-        'about_privacy'     => 'Bảo mật',
-        'about_terms'       => 'Điều khoản',
-        'mail_smtp_host'    => 'Host SMTP',
-        'mail_smtp_port'    => 'Port SMTP',
-        'mail_smtp_user'    => 'Tài khoản SMTP',
-        'mail_smtp_pass'    => 'Mật khẩu SMTP',
+        'company_name'                            => 'Tên công ty',
+        'company_zip'                             => 'Mã bưu chính',
+        'company_address'                         => 'Địa chỉ',
+        'company_tel'                             => 'Số điện thoại',
+        'company_fax'                             => 'Số Fax',
+        'company_copyright'                       => 'Bản quyền website',
+        'subtitle'                                => 'Tiêu đề website',
+        'company_lat'                             => 'Vĩ độ',
+        'company_lng'                             => 'Kinh độ',
+        'i18n_flg'                                => 'Ngôn ngữ',
+        'email1'                                  => 'Email người gửi',
+        'email1_name'                             => 'Tên hiển thị khi gửi email',
+        'about_privacy'                           => 'Bảo mật',
+        'about_terms'                             => 'Điều khoản',
+        'mail_smtp_host'                          => 'Host SMTP',
+        'mail_smtp_port'                          => 'Port SMTP',
+        'mail_smtp_user'                          => 'Tài khoản SMTP',
+        'mail_smtp_pass'                          => 'Mật khẩu SMTP',
 
         // Settings - admins
-        'username'          => 'Tên tài khoản',
-        'password'          => 'Mật khẩu',
-        'avatar'            => 'Ảnh đại diện',
-        'level'             => 'Cấp độ',
-        'status'            => 'Trạng thái'
+        'username'                                => 'Tên tài khoản',
+        'password'                                => 'Mật khẩu',
+        'avatar'                                  => 'Ảnh đại diện',
+        'level'                                   => 'Cấp độ',
+        'status'                                  => 'Trạng thái',
 
-
+        // Page checkout frontend
+        'receiver_email'        => 'Email',
+        'receiver_name'         => 'Họ tên',
+        'receiver_address_type' => 'Giao hàng',
+        'receiver_address_1'    => 'Địa chỉ',
+        'receiver_address_2'    => 'Chi tiết',
+        'receiver_phone_1'      => 'Điện thoại',
     ],
 
 ];

@@ -2,25 +2,16 @@
 
 namespace App\Http\Controllers\Checkout;
 
+use App\Http\Requests\CheckoutRequest;
 use App\Model\Products;
 use DB;
-use Illuminate\Http\Request;
 use Redirect;
 use Session;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\FrontendController;
 
 class CheckoutController extends FrontendController
 {
 
-    protected static function validate_save($data, $id = null)
-    {
-
-        return Validator::make($data, [
-            'name'              => 'required|string|unique:products,name,' . $id,
-            'slug'              => 'string|unique:products,slug,' . $id,
-        ]);
-    }
 
     public function index()
     {
@@ -80,13 +71,9 @@ class CheckoutController extends FrontendController
       return view('frontend.theme-ecommerce.checkout.checkout', $data);
     }
 
-    public function save(Request $request)
+    public function save(CheckoutRequest $request)
     {
-        $inputs = $request->all();
-        echo "<pre>";
-            var_dump($inputs);
-        echo "</pre>";
-        die("Hiep123");
+
     }
 
 

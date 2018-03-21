@@ -15,86 +15,12 @@
             <div class="contactform-wrap">
               <h3 class="component-ttl component-ttl-ct component-ttl-hasdesc"><span>Thông tin giao hàng</span></h3>
               <p class="contactform-field contactform-checkbox"><!-- NO SPACE --><span class="contactform-input">
-              <label for="delivery_type"><input id="delivery_type" type="checkbox" name="delivery_type" value="2">Địa chỉ nhận hàng khác địa chỉ người mua </label></span>
+              @php $key = 'delivery_type'@endphp
+              <label for="delivery_type">
+                {{ Form::checkbox($key, 2, old($key), [ 'id' => $key]) }}Địa chỉ nhận hàng khác địa chỉ người mua </label></span>
               </p>
-              <div id="order_buyer" style="display: none;">
-                <p class="text-uppercase order-label"><strong>Người mua</strong></p>
-                @php $key = 'order_deliveries.buyer_email' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Email <span class="form-required">*</span></label><span class="contactform-input">{{ Form::email(convert_input_name($key), old($key), ['placeholder' => 'Email của bạn']) }}</span>
-                </p>
-                @php $key = 'order_deliveries.buyer_name' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Họ tên <span class="form-required">*</span></label><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'Họ tên của bạn']) }}</span>
-                </p>
-                @php $key = 'order_deliveries.buyer_address_type' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Giao hàng<span class="form-required">*</span></label><!-- NO SPACE --><span class="contactform-input">
-                  @if(!empty(__('selector.address_type')))
-                    @foreach(__('selector.address_type') as $k => $val)
-                      @if($k === STATUS_ENABLE)
-                        <label for="{{ convert_input_name($key).$loop->index }}"> {!! Form::radio(convert_input_name($key), $k, true, [ 'id' => convert_input_name($key).$loop->index, 'class' => 'address-type']) !!}    {{$val }} </label>
-                      @else
-                          <label for="{{ convert_input_name($key).$loop->index }}"> {!! Form::radio(convert_input_name($key), $k, null, [ 'id' => convert_input_name($key).$loop->index, 'class' => 'address-type']) !!}    {{$val }} </label>
-                      @endif
-                    @endforeach
-                  @endif
-                  </span>
-                </p>
-                @php $key = 'order_deliveries.buyer_address' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Địa chỉ <span class="form-required">*</span></label><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: 34 Lê Duẩn, Phường Bến Nghé, Quận 1, Hồ Chí Minh']) }}</span>
-                </p>
-                @php $key = 'order_deliveries.buyer_address_detail' @endphp
-                <p class="contactform-field contactform-text address-detail" style="display: none">
-                  <label class="contactform-label">Chi tiết <span class="form-required">*</span></label><!-- NO SPACE --><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: Romea-Tầng 6-Công ty ABC (hoăc Phòng A-15)']) }}</span>
-                </p>
-                @php $key = 'order_deliveries.buyer_phone_1' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Điện thoại <span class="form-required">*</span></label><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: 0908 091 912']) }}</span>
-                </p>
-              </div>
-              <div id="order_receiver">
-                <p class="text-uppercase order-label" style="display: none"><strong>Người nhận</strong></p>
-                @php $key = 'order_deliveries.receiver_email' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Email <span class="form-required">*</span></label><span class="contactform-input">{{ Form::email(convert_input_name($key), old($key), ['placeholder' => 'Email của bạn']) }}</span>
-                </p>
-                @php $key = 'order_deliveries.receiver_name' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Họ tên <span class="form-required">*</span></label><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'Họ tên của bạn']) }}</span>
-                </p>
-                @php $key = 'order_deliveries.receiver_address_type' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Giao hàng<span class="form-required">*</span></label><!-- NO SPACE --><span class="contactform-input">
-                  @if(!empty(__('selector.address_type')))
-                      @foreach(__('selector.address_type') as $k => $val)
-                        @if($k === STATUS_ENABLE)
-                          <label for="{{ convert_input_name($key).$loop->index }}"> {!! Form::radio(convert_input_name($key), $k, true, [ 'id' => convert_input_name($key).$loop->index, 'class' => 'address-type']) !!}    {{$val }} </label>
-                        @else
-                          <label for="{{ convert_input_name($key).$loop->index }}"> {!! Form::radio(convert_input_name($key), $k, null, [ 'id' => convert_input_name($key).$loop->index, 'class' => 'address-type']) !!}    {{$val }} </label>
-                        @endif
-                      @endforeach
-                    @endif
-                  </span>
-                </p>
-                @php $key = 'order_deliveries.receiver_address_1' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Địa chỉ <span class="form-required">*</span></label><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: 34 Lê Duẩn, Phường Bến Nghé, Quận 1, Hồ Chí Minh']) }}</span>
-                </p>
-                @php $key = 'order_deliveries.receiver_address_2' @endphp
-                <p class="contactform-field contactform-text address-detail" style="display: none">
-                  <label class="contactform-label">Chi tiết <span class="form-required">*</span></label><!-- NO SPACE --><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: Romea-Tầng 6-Công ty ABC (hoăc Phòng A-15)']) }}</span>
-                </p>
-                @php $key = 'order_deliveries.receiver_phone_1' @endphp
-                <p class="contactform-field">
-                  <label class="contactform-label">Điện thoại <span class="form-required">*</span></label><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: 0908 091 912']) }}</span>
-                </p>
-                @php $key = 'note' @endphp
-                <p class="contactform-field contactform-textarea">
-                  <label class="contactform-label">Ghi chú đơn hàng</label><!-- NO SPACE --><span class="contactform-input">{{ Form::textarea($key, old($key), [ 'placeholder' => 'Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn.']) }}</span>
-                </p>
-              </div>
+                @include('frontend.theme-ecommerce.checkout._includes.buyer')
+                @include('frontend.theme-ecommerce.checkout._includes.receiver')
             </div>
           </div>
           <div class="col-md-6 col-sm-6">
