@@ -1,6 +1,6 @@
 @extends('frontend.theme-ecommerce.template')
 
-@section('title', 'Chào mừng bạn đến với CMS E-commerce laravel Nguyễn Hiệp')
+@section('title', $post->post_title)
 @section('description', 'Cung cấp sỉ và lẻ quần áo')
 @section('keywords', 'Quần áo online, áo thun online, quần kaki online')
 
@@ -17,126 +17,71 @@
       <!-- Blog Post - start -->
       <div class="post-wrap stylization">
         <img class="post-img" src="http://placehold.it/1140x580" alt="">
-        <p>Pariatur, corrupti, officia, molestias consectetur nesciunt ratione nihil fugiat eveniet nisi quia reiciendis dolor soluta vero autem nemo reprehenderit mollitia deserunt iste quae necessitatibus dolores a atque iure ipsa voluptatum nobis saepe temporibus error corporis minus assumenda nam ullam praesentium harum enim tempora et excepturi.</p>
-        <p>Quod soluta corrupti earum officia vel inventore vitae quidem, consequuntur odit impedit, eaque dolorem odio praesentium iusto amet voluptatum distinctio iste dicta maiores doloremque porro. Ipsa doloremque illum animi laborum quo in nemo delectus veritatis, amet numquam doloribus a iure sequi nobis vero facere necessitatibus ipsam</p>
-        
-        <!-- Slider -->
-        <div class="flexslider post-slider" id="post-slider-car">
-          <ul class="slides">
-            <li>
-              <a data-fancybox-group="fancy-img" class="fancy-img" href="img/post/post1.jpg"><img src="http://placehold.it/1140x450" alt=""></a>
-            </li>
-            <li>
-              <a data-fancybox-group="fancy-img" class="fancy-img" href="img/post/post2.jpg"><img src="http://placehold.it/1140x450" alt=""></a>
-            </li>
-            <li>
-              <a data-fancybox-group="fancy-img" class="fancy-img" href="img/post/post3.jpg"><img src="http://placehold.it/1140x450" alt=""></a>
-            </li>
-          </ul>
+        <div class="content clearfix">
+          {!! $post->post_full !!}
         </div>
-        
-        <p>Minima, earum fuga maiores unde quod quae aspernatur magnam quis adipisci ipsum maxime iusto quidem? Recusandae dolore ipsam eius alias quidem. Dignissimos, recusandae, saepe, omnis, non totam vero unde mollitia natus aliquam magni qui quibusdam incidunt ea nihil error facere ut libero blanditiis accusamus quasi facilis animi repellat consequuntur in sit rerum atque voluptatibus ipsa ullam voluptatum laborum praesentium nesciunt est iusto nulla earum ab tenetur!</p>
-        
         <!-- Share Links -->
         <div class="post-share-wrap">
           <ul class="post-share">
             <li>
-              <a onclick="window.open('https://www.facebook.com/sharer.php?s=100&amp;p[url]=http://allstore-html.real-web.pro','sharer', 'toolbar=0,status=0,width=620,height=280');" data-toggle="tooltip" title="Share on Facebook" href="javascript:">
+              <a onclick="window.open('https://www.facebook.com/sharer.php?s=100&amp;p[url]=<?php echo request()->fullUrl(); ?>','sharer', 'toolbar=0,status=0,width=620,height=280');" data-toggle="tooltip" title="Share on Facebook" href="javascript:">
                 <i class="fa fa-facebook"></i>
               </a>
             </li>
             <li>
-              <a onclick="popUp=window.open('http://twitter.com/home?status=Post with Shortcodes http://allstore-html.real-web.pro','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" data-toggle="tooltip" title="Share on Twitter" href="javascript:;">
+              <a onclick="popUp=window.open('http://twitter.com/home?status=<?php echo $post->title; echo request()->fullUrl();?>','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" data-toggle="tooltip" title="Share on Twitter" href="javascript:;">
                 <i class="fa fa-twitter"></i>
               </a>
             </li>
             <li>
-              <a onclick="popUp=window.open('http://vk.com/share.php?url=http://allstore-html.real-web.pro','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" data-toggle="tooltip" title="Share on VK" href="javascript:;">
+              <a onclick="popUp=window.open('http://vk.com/share.php?url=<?php echo request()->fullUrl();?>','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" data-toggle="tooltip" title="Share on VK" href="javascript:;">
                 <i class="fa fa-vk"></i>
               </a>
             </li>
             <li>
-              <a data-toggle="tooltip" title="Share on Pinterest" onclick="popUp=window.open('http://pinterest.com/pin/create/button/?url=http://allstore-html.real-web.pro&amp;description=AllStore HTML Template&amp;media=http://discover.real-web.pro/wp-content/uploads/2016/09/insect-1130497_1920.jpg','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" href="javascript:;">
+              <a data-toggle="tooltip" title="Share on Pinterest" onclick="popUp=window.open('http://pinterest.com/pin/create/button/?url=<?php echo request()->fullUrl();?>&amp;description=<?php echo $post->post_intro; ?>&amp;media=http://discover.real-web.pro/wp-content/uploads/2016/09/insect-1130497_1920.jpg','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" href="javascript:;">
                 <i class="fa fa-pinterest"></i>
               </a>
             </li>
             <li>
-              <a data-toggle="tooltip" title="Share on Google +1" href="javascript:;" onclick="popUp=window.open('https://plus.google.com/share?url=http://allstore-html.real-web.pro','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;">
+              <a data-toggle="tooltip" title="Share on Google +1" href="javascript:;" onclick="popUp=window.open('https://plus.google.com/share?url=<?php echo request()->fullUrl();?>','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;">
                 <i class="fa fa-google-plus"></i>
               </a>
             </li>
             <li>
-              <a data-toggle="tooltip" title="Share on Linkedin" onclick="popUp=window.open('http://linkedin.com/shareArticle?mini=true&amp;url=http://allstore-html.real-web.pro&amp;title=AllStore HTML Template','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" href="javascript:;">
+              <a data-toggle="tooltip" title="Share on Linkedin" onclick="popUp=window.open('http://linkedin.com/shareArticle?mini=true&amp;url=<?php echo request()->fullUrl();?>&amp;title=<?php echo $post->post_title; ?>','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" href="javascript:;">
                 <i class="fa fa-linkedin"></i>
               </a>
             </li>
             <li>
-              <a data-toggle="tooltip" title="Share on Tumblr" onclick="popUp=window.open('http://www.tumblr.com/share/link?url=http://allstore-html.real-web.pro&amp;name=AllStore HTML Template&amp;description=Aliquam%2C+consequuntur+laboriosam+minima+neque+nesciunt+quod+repudiandae+rerum+sint.+Accusantium+adipisci+aliquid+architecto+blanditiis+dolorum+excepturi+harum+ipsa%2C+ipsam%2C...','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" href="javascript:;">
+              <a data-toggle="tooltip" title="Share on Tumblr" onclick="popUp=window.open('http://www.tumblr.com/share/link?url=<?php echo request()->fullUrl(); ?>&amp;name=<?php echo $post->post_title; ?>&amp;description=<?php echo $post->post_intro; ?>','sharer','scrollbars=yes,width=800,height=400');popUp.focus();return false;" href="javascript:;">
                 <i class="fa fa-tumblr"></i>
               </a>
             </li>
           </ul>
           <ul class="post-info">
-            <li><time datetime="2016-11-09 22:00:32">09 Nov, 2017</time></li>
-            <li><a href="blog.html" class="blog-i-categ">News</a></li>
-            <li>Comments: <a href="#">3</a></li>
+            <li><time datetime="{{ $post->created_at }}">{{ format_date($post->created_at, '%d %b, %Y') }}</time></li>
+            <li><a href="{{ route('posts.show') }}" class="blog-i-categ">Tin tức</a></li>
+            <li>Bình luận: <a href="#">{{ $comments->count() }}</a></li>
           </ul>
         </div>
-        
+        @if(count($post_related) > 0)
         <!-- Related Posts -->
         <div class="flexslider post-rel-wrap" id="post-rel-car">
           <ul class="slides">
+            @foreach($post_related as $post)
             <li class="posts-i">
-              <a class="posts-i-img" href="post.html"><span style="background: url(http://placehold.it/354x236)"></span></a>
-              <time class="posts-i-date" datetime="2017-01-01 12:19:46"><span>09</span> Feb</time>
+              <a class="posts-i-img" href="{{ route('posts.detail', $post->post_slug) }}"><span style="background: url(http://placehold.it/354x236)"></span></a>
+              <time class="posts-i-date" datetime="{{ $post->created_at }}"><span>{{ format_date($post->created_at, '%d') }}</span> {{ format_date($post->created_at, '%b') }}</time>
               <div class="posts-i-info">
-                <a class="posts-i-ctg" href="blog.html">Articles</a>
-                <h3 class="posts-i-ttl"><a href="post.html">Adipisci corporis velit</a></h3>
+                <a class="posts-i-ctg" href="{{ route('posts.show') }}">Tin tức</a>
+                <h3 class="posts-i-ttl"><a href="{{ route('posts.detail', $post->post_slug) }}">{{ $post->post_title }}</a></h3>
               </div>
             </li>
-            <li class="posts-i">
-              <a class="posts-i-img" href="post.html"><span style="background: url(http://placehold.it/360x203)"></span></a>
-              <time class="posts-i-date" datetime="2017-01-01 12:19:46"><span>05</span> Jan</time>
-              <div class="posts-i-info">
-                <a class="posts-i-ctg" href="blog.html">Reviews</a>
-                <h3 class="posts-i-ttl"><a href="post.html">Excepturi ducimus recusandae</a></h3>
-              </div>
-            </li>
-            <li class="posts-i">
-              <a class="posts-i-img" href="post.html"><span style="background: url(http://placehold.it/360x224)"></span></a>
-              <time class="posts-i-date" datetime="2017-01-01 12:19:46"><span>17</span> Apr</time>
-              <div class="posts-i-info">
-                <a class="posts-i-ctg" href="blog.html">Reviews</a>
-                <h3 class="posts-i-ttl"><a href="post.html">Consequuntur minus numquam</a></h3>
-              </div>
-            </li>
-            <li class="posts-i">
-              <a class="posts-i-img" href="post.html"><span style="background: url(http://placehold.it/314x236)"></span></a>
-              <time class="posts-i-date" datetime="2017-01-01 12:19:46"><span>21</span> May</time>
-              <div class="posts-i-info">
-                <a class="posts-i-ctg" href="blog.html">Articles</a>
-                <h3 class="posts-i-ttl"><a href="post.html">Non ex sapiente excepturi</a></h3>
-              </div>
-            </li>
-            <li class="posts-i">
-              <a class="posts-i-img" href="post.html"><span style="background: url(http://placehold.it/318x236)"></span></a>
-              <time class="posts-i-date" datetime="2017-01-01 12:19:46"><span>24</span> Jan</time>
-              <div class="posts-i-info">
-                <a class="posts-i-ctg" href="blog.html">Articles</a>
-                <h3 class="posts-i-ttl"><a href="post.html">Veritatis officiis</a></h3>
-              </div>
-            </li>
-            <li class="posts-i">
-              <a class="posts-i-img" href="post.html"><span style="background: url(http://placehold.it/354x236)"></span></a>
-              <time class="posts-i-date" datetime="2017-01-01 12:19:46"><span>08</span> Sep</time>
-              <div class="posts-i-info">
-                <a class="posts-i-ctg" href="blog.html">Reviews</a>
-                <h3 class="posts-i-ttl"><a href="post.html">Ratione magni laudantium</a></h3>
-              </div>
-            </li>
+            @endforeach
           </ul>
         </div>
-      
+        @endif
       </div>
       <!-- Blog Post - end -->
       
@@ -359,9 +304,10 @@
         </div>
       </div>
       <!-- Related Products - end -->
-      
+      @if(count($comments))
       <!-- Comments - start -->
       <ul class="reviews-list">
+        @foreach($comments as $comment)
         <li class="reviews-i existimg">
           <div class="reviews-i-img">
             <img src="http://placehold.it/120x120" alt="Jeni Margie">
@@ -372,85 +318,44 @@
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
             </div>
-            <time datetime="2017-12-21 12:19:46" class="reviews-i-date">21 May 2017</time>
+            <time datetime="2017-12-21 12:19:46" class="reviews-i-date">{{ format_date($comment->created_at, '%d %b %Y') }}</time>
           </div>
           <div class="reviews-i-cont">
-            <p>Eveniet nobis minus possimus eius, doloribus ex similique debitis nihil at facere delectus unde, commodi, alias. <br>Eius facilis, dolore officia veritatis, doloribus voluptatem aliquid rem corporis quam officiis at dignissimos dolorum, velit assumenda facere necessitatibus doloremque quos. Laudantium velit architecto ipsum nulla</p>
+            <p>{{ $comment->content }}</p>
             <span class="reviews-i-margin"></span>
-            <h3 class="reviews-i-ttl">Jeni Margie</h3>
+            <h3 class="reviews-i-ttl">{{ $comment->name }}</h3>
           </div>
         </li>
-        <li class="reviews-i existimg">
-          <div class="reviews-i-img">
-            <img src="http://placehold.it/120x120" alt="Brigham Murphy">
-            <div class="reviews-i-rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-            <time datetime="2017-12-21 12:19:46" class="reviews-i-date">12 March 2017</time>
-          </div>
-          <div class="reviews-i-cont">
-            <p>Ipsa doloremque illum animi laborum quo in nemo delectus veritatis, amet numquam doloribus a iure sequi nobis vero facere necessitatibus ipsam dolorem magnam? Tempora ea ratione vel nisi, qui perferendis nulla. <br>Minus sequi iste, nam nobis, excepturi nihil consequuntur reprehenderit ipsam, quam consequatur in. <br>Esse, doloremque consectetur veniam quo ut voluptas necessitatibus quae quis iusto quod optio eligendi distinctio dicta, nihil impedit officia aspernatur tenetur saepe expedita, odio vitae reprehenderit pariatur!</p>
-            <span class="reviews-i-margin"></span>
-            <h3 class="reviews-i-ttl">Brigham Murphy</h3>
-          </div>
-        </li>
-        <li class="reviews-i existimg">
-          <div class="reviews-i-img">
-            <img src="http://placehold.it/120x120" alt="Barrie Roderick">
-            <div class="reviews-i-rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-            <time datetime="2017-12-21 12:19:46" class="reviews-i-date">07 June 2017</time>
-          </div>
-          <div class="reviews-i-cont">
-            <p>Perferendis recusandae consequuntur quasi, non culpa. Minus porro officiis veniam facilis praesentium expedita doloribus, recusandae aut dolore autem, modi consequuntur rem perferendis dolores quisquam, sequi quas. <br>Iusto et, eius laboriosam beatae, cupiditate officiis! Iure iste, voluptate non accusamus quis, dolor quo quam dolore pariatur enim molestias rerum minima veritatis. <br>Officiis nihil culpa architecto repudiandae magni quo, ipsa nam omnis, laborum minus debitis impedit, alias eum non magnam veritatis animi.</p>
-            <span class="reviews-i-margin"></span>
-            <h3 class="reviews-i-ttl">Barrie Roderick</h3>
-          </div>
-        </li>
-        <li class="reviews-i existimg">
-          <div class="reviews-i-img">
-            <img src="http://placehold.it/120x120" alt="Edweena Chelsea">
-            <div class="reviews-i-rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-            <time datetime="2017-01-01 12:19:46" class="reviews-i-date">18 March 2017</time>
-          </div>
-          <div class="reviews-i-cont">
-            <p>Corrupti velit, vero esse, aperiam error magni illum quos, accusantium debitis et possimus recusandae tempora ad itaque dolorem veniam non voluptatem impedit iste? Dicta doloremque hic porro aspernatur. Dolores eligendi similique, cumque, eius veritatis recusandae quos dignissimos libero molestias perspiciatis.</p>
-            <span class="reviews-i-margin"></span>
-            <h3 class="reviews-i-ttl">Edweena Chelsea</h3>
-          </div>
-        </li>
+        @endforeach
       </ul>
+      {{ $comments->appends(request()->query())->links('vendor.pagination.theme')  }}
       <!-- Comments - end -->
-      
+      @endif
       <!-- Comment Form - start -->
       <div class="prod-comment-form post-form">
-        <h3>Add your comment</h3>
-        <form method="POST" action="#">
-          <input type="text" placeholder="Name">
-          <input type="text" placeholder="E-mail">
-          <textarea placeholder="Your comment"></textarea>
+        <h3>Bình luận bài viết</h3>
+        {!! Form::open(['route' => 'posts.comment']) !!}
+          {{ Form::text('name', old('name'), [ 'placeholder' => 'Họ tên']) }}
+          @if ($errors->has('name'))
+          <div class="form-required" style="clear: left;">{{$errors->first('name')}}</div>
+          @endif
+          {{ Form::text('email', old('email'), [ 'placeholder' => 'E-mail']) }}
+          @if ($errors->has('email'))
+            <div class="form-required" style="clear: left;">{{$errors->first('email')}}</div>
+          @endif
+          {{ Form::textarea('content', old('content'), [ 'placeholder' => 'Nội dung bình luận']) }}
+          @if ($errors->has('content'))
+            <div class="form-required" style="clear: left;">{{$errors->first('content')}}</div>
+          @endif
           <div class="prod-comment-submit">
-            <input type="submit" value="Submit">
             <div class="prod-rating">
               <i class="fa fa-star-o" title="5"></i><i class="fa fa-star-o" title="4"></i><i class="fa fa-star-o" title="3"></i><i class="fa fa-star-o" title="2"></i><i class="fa fa-star-o" title="1"></i>
             </div>
+            {{ Form::hidden('rate', old('rate'), ['id' => 'rate_select']) }}
+            {{ Form::hidden('post_id', $post->id) }}
+            <input type="submit" value="Bình luận">
           </div>
-        </form>
+         {!! Form::close() !!}
       </div>
       <!-- Comment Form - end -->
     

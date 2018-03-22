@@ -26,4 +26,9 @@ class Comments extends BaseModel
         'posts_id',
         'comment_parent'
     ];
+
+    public function post()
+    {
+        return $this->hasOne('App\Model\Posts','posts_id');
+    }
 }

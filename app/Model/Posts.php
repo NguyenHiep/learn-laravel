@@ -59,6 +59,12 @@ class Posts extends BaseModel
         return $this->hasOne('App\Model\User','id','user_id');
     }
 
+    public function comment()
+    {
+        return $this->hasMany('App\Model\Comments','posts_id','id');
+    }
+
+
     public function getListAll()
     {
         $posts = Posts::orderBy('id', 'DESC')
@@ -76,6 +82,22 @@ class Posts extends BaseModel
             return $post;
         }
         return false;
+    }
+
+    public function getRelatedPost($ids)
+    {
+        $posts = Posts::where('post_status', '=', STATUS_ENABLE)
+            ->whereIn('id', $ids)
+            ->get();
+        return $posts;
+    }
+
+    public function getCommentByPostId($post_id)
+    {
+        $comments = Posts::find($post_id)->comment()
+            ->where('comment_status', STATUS_ENABLE)
+            ->paginate(3);
+        return $comments;
     }
 
 }

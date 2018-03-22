@@ -75,6 +75,7 @@ Route::get('/san-pham-khuyen-mai/','ProductsController@promotion')->name('produc
 
 Route::get('/tin-tuc/','PostsController@show')->name('posts.show');
 Route::get('/tin-tuc/{slug}','PostsController@detail')->name('posts.detail');
+Route::post('/binh-luan/','PostsController@comment')->name('posts.comment');
 
 Route::get('/gio-hang/','Checkout\CartController@index')->name('checkout.cart.index');
 Route::get('/thong-tin-giao-hang/','Checkout\CheckoutController@index')->name('checkout.index');
