@@ -21,6 +21,7 @@ class Comments extends BaseModel
         'email',
         'content',
         'url',
+        'rate',
         'comment_status',
         'ip_user',
         'posts_id',

@@ -349,10 +349,10 @@
           @endif
           <div class="prod-comment-submit">
             <div class="prod-rating">
-              <i class="fa fa-star-o" title="5"></i><i class="fa fa-star-o" title="4"></i><i class="fa fa-star-o" title="3"></i><i class="fa fa-star-o" title="2"></i><i class="fa fa-star-o" title="1"></i>
+              <i class="fa fa-star-o" title="5"></i><i class="fa fa-star-o active" title="4"></i><i class="fa fa-star-o" title="3"></i><i class="fa fa-star-o" title="2"></i><i class="fa fa-star-o" title="1"></i>
             </div>
-            {{ Form::hidden('rate', old('rate'), ['id' => 'rate_select']) }}
-            {{ Form::hidden('post_id', $post->id) }}
+            {{ Form::hidden('rate', 4, ['id' => 'rate_select']) }}
+            {{ Form::hidden('posts_id', $post->id) }}
             <input type="submit" value="Bình luận">
           </div>
          {!! Form::close() !!}

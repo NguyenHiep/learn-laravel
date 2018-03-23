@@ -375,7 +375,31 @@ var Checkout = {
 	}
 }
 
+var Layout = {
+  elemBody: $('body'),
+	pageContact : function () {
+		Layout.elemBody.find('.prod-rating .fa-star-o').on('click', function () {
+      var self = $(this),
+        rate = self.attr('title');
+        $('.prod-rating .fa-star-o').each(function () {
+          if($(this).hasClass('active'))
+          {
+            $(this).removeClass('active');
+          }
+        });
+        self.addClass('active');
+        Layout.elemBody.find("#rate_select").eq(0).val(rate);
+      
+    });
+  },
+	init : function () {
+		this.pageContact();
+  }
+	
+}
 $(document).ready(function () {
 	Products.init();
 	Checkout.init();
+  Layout.init();
 });
+

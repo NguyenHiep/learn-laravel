@@ -155,3 +155,8 @@ table.cart-items-checkout td{
 .contactform-wrap .contactform-label{
 	text-align: left;
 }
+
+/* Page contact */
+.prod-rating .active:before, .prod-rating .active ~ .fa:before {
+	content: "\f005";
+}

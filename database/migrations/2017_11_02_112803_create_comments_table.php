@@ -19,6 +19,7 @@ class CreateCommentsTable extends Migration
             $table->string('email', 100)->comment('Email người bình luận');
             $table->text('content')->comment('Nội dung bình luận');
             $table->string('url')->nullable()->comment('Địa chỉ website');
+            $table->tinyInteger('rate')->default(4)->comment('Số sao cho bài viết, mặc định là 4 sao, tối thiểu là 1 sao, tối đa là 5 sao');
             $table->tinyInteger('comment_status')->default(1)->comment('Trạng thái bình luận[1: Đã đăng, 2: Xét duyệt]');
             $table->string('ip_user', 45)->comment('Địa chỉ IP người bình luận');
             $table->integer('posts_id')->nullable()->comment('Id bài viết');

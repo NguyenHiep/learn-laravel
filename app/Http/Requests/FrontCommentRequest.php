@@ -24,9 +24,11 @@ class FrontCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'    => 'required',
-            'email'   => 'required|email',
-            'content' => 'required'
+            'name'     => 'required',
+            'email'    => 'required|email',
+            'content'  => 'required',
+            'rate'     => 'required|numeric',
+            'posts_id' => 'required|numeric',
         ];
     }
     

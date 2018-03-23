@@ -1,4 +1,4 @@
-
+@if(!empty($settings))
 <!-- Header - start -->
 <header class="header">
   
@@ -186,3 +186,4 @@
 
 </header>
 <!-- Header - end -->
+@endif

@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FrontCommentRequest;
+use App\Model\Comments;
 use App\Model\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PostsController extends FrontendController
 {
     const CAT_NEWS_ID = 1;
 
     public $mposts;
+    public $mcomments;
 
     public function __construct()
     {
-        $this->mposts = new Posts();
+        $this->mposts    = new Posts();
+        $this->mcomments = new Comments();
     }
 
     public function show()
@@ -26,6 +31,10 @@ class PostsController extends FrontendController
     public function detail($slug)
     {
         $post        = $this->mposts->getPostBySlug($slug);
+        if(empty($post))
+        {
+            return abort(404);
+        }
         $post_id     = $post->id;
         $space       = 3; // Khoang cach
         $limit_max   = max($post_id + $space, 0);
@@ -40,7 +49,7 @@ class PostsController extends FrontendController
             }
         }
         $post_related = $this->mposts->getRelatedPost($ids_related);
-        $comments = $this->mposts->getCommentByPostId($post_id);
+        $comments     = $this->mposts->getCommentByPostId($post_id);
         $data['post']         = $post;
         $data['post_related'] = $post_related;
         $data['comments']     = $comments;
@@ -49,13 +58,27 @@ class PostsController extends FrontendController
 
     public function comment(FrontCommentRequest $request)
     {
-        $inputs = $request->all();
+        $inputs                   = $request->all();
         $inputs['comment_status'] = STATUS_DISABLE;
-        $inputs['ip_user'] = getRealIpAddr();
-        echo "<pre>";
-            var_dump($inputs);
-        echo "</pre>";
-        die();
+        $inputs['ip_user']        = getRealIpAddr();
+
+        try {
+            DB::beginTransaction();
+            $this->mcomments->fill($inputs)->save();
+            DB::commit();
+            return redirect()->back()->with([
+                'message' => __('system.message.comment.success'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->back()->withInput($inputs)->with([
+            'message' => __('system.message.comment.failed'),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
     }
 
 }
