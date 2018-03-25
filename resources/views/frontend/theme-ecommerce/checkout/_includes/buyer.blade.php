@@ -11,7 +11,7 @@
   @php $key = 'buyer_address_type' @endphp
   <p class="contactform-field">
     <label class="contactform-label">Giao hàng<span class="form-required">*</span></label><!-- NO SPACE --><span class="contactform-input">
-                  @if(!empty(__('selector.address_type')))
+      @if(!empty(__('selector.address_type')))
         @foreach(__('selector.address_type') as $k => $val)
           @if($k === STATUS_ENABLE)
             <label for="{{ convert_input_name($key).$loop->index }}"> {!! Form::radio(convert_input_name($key), $k, true, [ 'id' => convert_input_name($key).$loop->index, 'class' => 'address-type']) !!}    {{$val }} </label>
@@ -20,13 +20,13 @@
           @endif
         @endforeach
       @endif
-                  </span>
+    </span>
   </p>
   @php $key = 'buyer_address' @endphp
   <p class="contactform-field">
     <label class="contactform-label">Địa chỉ <span class="form-required">*</span></label><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: 34 Lê Duẩn, Phường Bến Nghé, Quận 1, Hồ Chí Minh']) }}</span>
   </p>
-  @php $key = 'buyer_address_detail' @endphp
+  @php $key = 'buyer_address_2' @endphp
   <p class="contactform-field contactform-text address-detail" style="display: none">
     <label class="contactform-label">Chi tiết <span class="form-required">*</span></label><!-- NO SPACE --><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: Romea-Tầng 6-Công ty ABC (hoăc Phòng A-15)']) }}</span>
   </p>

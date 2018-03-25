@@ -48,7 +48,7 @@
                   <td class="cart-ttl">
                     <a href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a>
                     <p><b>SKU:</b> {{ $product->sku }}</p>
-                    <div> {!! $product->short_description !!} </div>
+                   {{-- <div> {!! $product->short_description !!} </div>--}}
                   </td>
                   <td class="cart-price">
                     <b>{{ format_price($product->price) }}</b>

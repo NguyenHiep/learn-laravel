@@ -1,33 +1,29 @@
-@extends('manage.master')
-@section('title', __('404 Not Found'))
-@section('content')
-  <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
-    <div class="page-content">
-
-      <!-- END PAGE HEADER-->
-      <div class="row">
-        <div class="col-md-12 page-404">
-          <div class="number font-green"> 404 </div>
-          <div class="details">
-            <h3>Rất tiếc không tìm thấy trang</h3>
-            <p> Chúng tôi không tìm thấy trang bạn yêu cầu
-              <br/>
-              <a href="{{route('manage')}}"> Quay lại trang home </a></p>
-          </div>
-        </div>
-      </div>
-
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>404 not found</title>
+  <meta name="keywords" content="404" />
+  <link href="{{ asset('theme-ecommerce/404/css/style.css') }}" rel="stylesheet" type="text/css"  media="all" />
+</head>
+<body>
+<!--start-wrap--->
+<div class="wrap">
+  <!---start-header---->
+  <div class="header">
+    <div class="logo">
+      <h1><a href="#">Ohh</a></h1>
     </div>
-    <!-- END CONTENT BODY -->
   </div>
-
-@endsection
-@section('styles')
-  @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/pages/css/error.min.css') }}" rel="stylesheet" type="text/css" />
-  <!-- END PAGE LEVEL PLUGINS -->
-@stop
-
+  <!---End-header---->
+  <!--start-content------>
+  <div class="content">
+    <img src="{{ asset('theme-ecommerce/404/images/error-img.png') }}" title="error" />
+    <p><span><label>O</label>hh.....</span>You Requested the page that is no longer There.</p>
+    <a href="{{ route('home') }}">Quay về trang chủ</a>
+  </div>
+  <!--End-Cotent------>
+</div>
+<!--End-wrap--->
+</body>
+</html>
 
