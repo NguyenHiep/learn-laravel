@@ -52,14 +52,18 @@ mix.combine([
 
 /** Front End*/
 mix.styles([
+	  'public/theme-ecommerce/css/font-awesome.min.css',
+	  'public/theme-ecommerce/css/bootstrap.min.css',
 		'public/theme-ecommerce/css/ion.rangeSlider.css',
 		'public/theme-ecommerce/css/ion.rangeSlider.skinFlat.css',
 		'public/theme-ecommerce/css/jquery.bxslider.css',
 		'public/theme-ecommerce/css/jquery.fancybox.css',
 		'public/theme-ecommerce/css/flexslider.css',
-		'public/theme-ecommerce/css/css/swiper.css',
+		'public/theme-ecommerce/css/swiper.css',
+		'public/theme-ecommerce/css/toastr.min.css',
 		'public/theme-ecommerce/css/style.css',
 		'public/theme-ecommerce/css/css/media.css',
+		'public/theme-ecommerce/css/custom.css',
 ], 'public/theme-ecommerce/css/theme-ecommerce.css');
 
 mix.combine([
@@ -74,7 +78,10 @@ mix.combine([
 	'public/theme-ecommerce/js/ion.rangeSlider.min.js',
 	'public/theme-ecommerce/js/chosen.jquery.min.js',
 	'public/theme-ecommerce/js/jQuery.Brazzers-Carousel.js',
+	'public/theme-ecommerce/js/toastr.min.js',
 	'public/theme-ecommerce/js/plugins.js',
 	'public/theme-ecommerce/js/main.js',
+	'public/theme-ecommerce/js/frontend.js',
+	'public/theme-ecommerce/js/gmap.js',
 
 ], 'public/theme-ecommerce/js/theme-ecommerce.js');
