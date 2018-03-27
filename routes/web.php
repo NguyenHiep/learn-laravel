@@ -80,6 +80,7 @@ Route::post('/binh-luan/','PostsController@comment')->name('posts.comment');
 Route::get('/gio-hang/','Checkout\CartController@index')->name('checkout.cart.index');
 Route::get('/thong-tin-giao-hang/','Checkout\CheckoutController@index')->name('checkout.index');
 Route::post('/dat-hang/','Checkout\CheckoutController@save')->name('checkout.save');
+Route::get('/dat-hang-thanh-cong/','Checkout\CheckoutController@thanks')->name('checkout.thanks');
 
 Route::get('/so-sanh-san-pham/','ComparesController@index')->name('compare.index');
 Route::group(['prefix' => '/compares/'], function () {

@@ -63,13 +63,14 @@
                   @foreach($payment_options as $payment_method)
                   <li>
                     <label for="payment_method_{{ $loop->index + 1 }}">
-                      {{ Form::radio($key, $payment_method['id'], 'check', ['id' => 'payment_method_'.($loop->index + 1), 'class' => 'payment-method'] ) }} {{ $payment_method['name'] }}
+                      {{ Form::radio($key, $payment_method['id'], old($key), ['id' => 'payment_method_'.($loop->index + 1), 'class' => 'payment-method'] ) }} {{ $payment_method['name'] }}
                     </label>
                     <div class="payment_box payment_method_{{ $loop->index + 1 }}" style="display: none;">
                      {!! $payment_method['description'] !!}
                     </div>
                   </li>
                   @endforeach
+                  @if ($errors->has(convert_input_name($key))) <label class="contactform-label"> </label><span class="form-required">{{$errors->first(convert_input_name($key))}}</span>  @endif
                 </ul>
             </div>
             @endif

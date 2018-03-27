@@ -148,6 +148,7 @@ return [
         'receiver_address_1'    => 'Địa chỉ',
         'receiver_address_2'    => 'Chi tiết',
         'receiver_phone_1'      => 'Điện thoại',
+        'payment_id'            => 'Phương thức thanh toán'
     ],
 
 ];

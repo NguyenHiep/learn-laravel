@@ -36,6 +36,7 @@ class CheckoutRequest extends FormRequest
             $rules['receiver_address_2'] = 'required';
         }
         $rules_buyer = [];
+
         if(!empty(request()->get('delivery_type')))
         {
             $rules_buyer = [
@@ -52,6 +53,7 @@ class CheckoutRequest extends FormRequest
                 $rules_buyer['buyer_address_2'] = 'required';
             }
         }
+
         $rules = array_merge($rules, $rules_buyer);
         return $rules;
     }
