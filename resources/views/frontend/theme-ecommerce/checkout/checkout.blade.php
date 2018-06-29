@@ -89,40 +89,54 @@
 <script>
   "use strict";
   var elemBody = $('body');
-
+  checkDeliveryType();
 	elemBody.find('input[name=delivery_type]').on('change', function () {
-		var buyerEle    = $('#order_buyer'),
-		    receiverEle = $('#order_receiver');
-		    buyerEle.toggle();
-		    receiverEle.find('.order-label').toggle();
-
-    var buyerEmail = buyerEle.find('input[name="order_deliveries[buyer_email]"]');
-    if (buyerEmail.val().trim() === '') {
-      buyerEmail.val(receiverEle.find('input[name="order_deliveries[receiver_email]"]').val());
-    }
-
-    var buyerName = buyerEle.find('input[name="order_deliveries[buyer_name]"]');
-    if (buyerName.val().trim() === '') {
-      buyerName.val(receiverEle.find('input[name="order_deliveries[receiver_name]"]').val());
-    }
-
-    var buyerPhone1 = buyerEle.find('input[name="order_deliveries[buyer_phone_1]"]');
-    if (buyerPhone1.val().trim() === '') {
-      buyerPhone1.val(receiverEle.find('input[name="order_deliveries[receiver_phone_1]"]').val());
-    }
-    
+      checkDeliveryType();
 	});
  
 	elemBody.find('input.address-type').on('change', function () {
 		$(this).parent().parent().parent().next().next().toggle();
 	});
- 
+  function checkAddressTypeBuyer() {
+     // TODO: Do some thing
+  }
+  checkPaymentMethod()
 	elemBody.find('input.payment-method').on('click', function () {
-		var inputValue = $(this).attr('value');
-		var targetBox  = $('.payment_method_' + inputValue);
-		$('.payment_box').not(targetBox).hide();
-		$(targetBox).show();
+      checkPaymentMethod();
 	});
- 
+
+	function checkPaymentMethod() {
+      var inputValue = $("input[name='payment_id']:checked").val();
+      var targetBox  = $('.payment_method_' + inputValue);
+      $('.payment_box').not(targetBox).hide();
+      $(targetBox).show();
+  }
+
+  function checkDeliveryType() {
+     var checked = $('input[name=delivery_type]').is(':checked');
+     if ( checked){
+         var buyerEle    = $('#order_buyer'),
+             receiverEle = $('#order_receiver');
+         buyerEle.toggle();
+         receiverEle.find('.order-label').toggle();
+
+         var buyerEmail = buyerEle.find('input[name="buyer_email"]');
+         if (buyerEmail.val().trim() === '') {
+             buyerEmail.val(receiverEle.find('input[name="receiver_email"]').val());
+         }
+
+         var buyerName = buyerEle.find('input[name="buyer_name"]');
+         if (buyerName.val().trim() === '') {
+             buyerName.val(receiverEle.find('input[name="receiver_name"]').val());
+         }
+
+         var buyerPhone1 = buyerEle.find('input[name="buyer_phone_1"]');
+         if (buyerPhone1.val().trim() === '') {
+             buyerPhone1.val(receiverEle.find('input[name="receiver_phone_1"]').val());
+         }
+     } else {
+         $('#order_buyer').hide();
+     }
+ }
 </script>
 @endpush

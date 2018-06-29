@@ -8,6 +8,7 @@
 - Clone code: 
 - Run composer
 - Config database: vào file .env cấu hình thông tin host, database
+- Run: php artisan key:generate  để tạo key
 - php artisan migrate để tạo bảng
 - php artisan db:seed để tạo data mẫu
 

@@ -36,8 +36,7 @@ class CheckoutRequest extends FormRequest
             $rules['receiver_address_2'] = 'required';
         }
         $rules_buyer = [];
-
-        if(!empty(request()->get('delivery_type')))
+        if (!empty(request()->get('delivery_type')))
         {
             $rules_buyer = [
                 'delivery_type'        => 'required',
@@ -48,9 +47,8 @@ class CheckoutRequest extends FormRequest
                 'buyer_address_detail' => 'required',
                 'buyer_phone_1'        => 'required',
             ];
-            if(request()->get('buyer_address_type') == APARTMENT)
-            {
-                $rules_buyer['buyer_address_2'] = 'required';
+            if (request()->get('buyer_address_type') == APARTMENT) {
+                $rules_buyer[ 'buyer_address_2' ] = 'required';
             }
         }
 
