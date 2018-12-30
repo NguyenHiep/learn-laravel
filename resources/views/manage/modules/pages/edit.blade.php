@@ -150,8 +150,15 @@
       </div>
       <!-- END CONTENT BODY -->
     </div>
-  @include('manage.blocks.medias.modal', ['medias' => $medias, 'id' => $record->posts_medias_id])
-  @include('manage.blocks.medias.content', ['medias' => $medias])
+  @include('manage.blocks.medias.modal', [
+      'medias' => $medias,
+      'class' => 'posts-modal',
+      'id' => $record->posts_medias_id
+    ])
+  @include('manage.blocks.medias.content', [
+    'medias' => $medias,
+    'class' => 'posts-content',
+  ])
   @endsection
   @section('styles')
     @parent

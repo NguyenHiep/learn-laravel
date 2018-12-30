@@ -1,5 +1,5 @@
 <!-- responsive -->
-<div id="medias_contents_libraries" class="modal container fade" tabindex="-1"> <!-- Add data-width="920" -->
+<div id="medias_contents_libraries" class="{{ $class or '' }} modal container fade" tabindex="-1"> <!-- Add data-width="920" -->
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
     <h4 class="modal-title">Chèn nội dung đa phương tiện vào</h4>

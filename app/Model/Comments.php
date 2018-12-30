@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
+
 class Comments extends BaseModel
 {
     /**
@@ -27,7 +29,18 @@ class Comments extends BaseModel
         'posts_id',
         'comment_parent'
     ];
-
+    
+    /***
+     * Get create at format date
+     * @param $value
+     *
+     * @return string
+     */
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i');
+    }
+    
     public function post()
     {
         return $this->hasOne('App\Model\Posts','posts_id');

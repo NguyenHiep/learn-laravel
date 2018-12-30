@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manage;
 use App\Model\Comments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
+use Illuminate\Support\Facades\Validator;
 
 class CommentsController extends BackendController
 {
@@ -12,6 +13,26 @@ class CommentsController extends BackendController
     {
         $this->middleware('auth');
     }
+    
+    /***
+     * @param      $data
+     * @param null $id
+     *
+     * @return mixed
+     */
+    protected static function validator($data, $id = null)
+    {
+        return Validator::make($data, [
+            'name'           => 'required|string',
+            'email'          => 'required|email',
+            'content'        => 'required|string',
+            'url'            => 'required|url',
+            'comment_status' => 'required|integer',
+            //'posts_id'       => 'required|integer',
+            //'comment_parent' => 'required|integer'
+        ]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -19,71 +40,59 @@ class CommentsController extends BackendController
      */
     public function index(Request $request)
     {
-        $model = Comments::query();
         // Array data request
         $inputs = $request->all();
-
+        $model  = Comments::query();
         if ($request->method() === 'POST') {
-
             // Check CSRF
             if (\Session::token() === array_get($inputs, '_token')) {
-
                 // Begin
                 try {
-
                     \DB::beginTransaction();
-                    // do something
-                    $ids    = array_get($inputs,'action_ids');
-                    $action = array_get($inputs,'batch_actions');
-                    $model  = Comments::query();
-                    if(!empty($action)){
-                        if(!empty($ids)){
+                    $ids    = array_get($inputs, 'action_ids');
+                    $action = array_get($inputs, 'batch_actions');
+                    if (!empty($action)) {
+                        if (!empty($ids)) {
                             $model->whereIn('id', $ids);
-                            switch ($action){
+                            switch ($action) {
                                 case 'approve':
-                                    $model->update(['comment_status' => 1]);
-                                    session()->flash('message', __('system.message.update'));
-                                    session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
+                                    $model->update(['comment_status' => STATUS_ENABLE]);
+                                    return redirect()->route('comments.index')->with([
+                                        'message' => __('system.message.update'),
+                                        'status'  => self::CTRL_MESSAGE_SUCCESS
+                                    ]);
                                     break;
                                 case 'delete':
                                     $model->delete();
-                                    session()->flash('message', __('system.message.delete'));
-                                    session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
+                                    return redirect()->route('comments.index')->with([
+                                        'message' => __('system.message.delete'),
+                                        'status'  => self::CTRL_MESSAGE_SUCCESS
+                                    ]);
                                     break;
                             }
-                        }else{
+                        } else {
                             session()->flash('message', 'Vui lòng chọn mẩu tin');
                             session()->flash('status', self::CTRL_MESSAGE_WARNING);
                         }
                     }
-                    $search_keyword = array_get($inputs,'search_keyword');
-                    if(!empty($search_keyword)){
+                    $search_keyword = array_get($inputs, 'search_keyword');
+                    if (!empty($search_keyword)) {
                         $model->orWhere('content', 'like', '%' . $search_keyword . '%');
-                        //$model->appends(['search' => $search_keyword]);
                     }
-
-
                     \DB::commit();
-
-                } catch (Exception $e) {
+                
+                } catch (\Exception $e) {
                     \DB::rollBack();
                     \Log::error($e->getMessage(), __METHOD__);
-                    session()->flash('message', __('system.message.errors',['errors' => $e->getMessage()]));
+                    session()->flash('message', __('system.message.errors', ['errors' => $e->getMessage()]));
                     session()->flash('status', self::CTRL_MESSAGE_ERROR);
                 }
-
-               // return redirect()->route('comments.index');
-
-            }else{
+            } else {
                 \Log::warning('Bad request, invalid CSRF token.', __METHOD__);
                 throw new \Exception(__('common.page_has_expired'));
             }
-
         }
-        $model->paginate(6);
-        //$model->withPath('comments/url');
-        $records = $model->get();
-
+        $records = $model->paginate();
         return view('manage.modules.comments.index', compact('records'));
     }
 
@@ -143,7 +152,28 @@ class CommentsController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        //
+        $inputs    = $request->all();
+        $validator = self::validator($inputs);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+        $comment = Comments::findOrFail($id);
+        try {
+            \DB::beginTransaction();
+            $comment->update($inputs);
+            \DB::commit();
+            return redirect()->route('comments.index')->with([
+                'message' => __('system.message.update'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            \Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->route('comments.edit', ['id' => $comment->id])->withInput($inputs)->with([
+            'message' => __('system.message.error', ['errors' => 'Update comment is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
     }
 
     /**

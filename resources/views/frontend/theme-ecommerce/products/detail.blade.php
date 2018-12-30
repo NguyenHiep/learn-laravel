@@ -12,16 +12,6 @@
         <li>
           <a href="{{ URL::to('/') }}">Trang chủ</a>
         </li>
-        {{--<li>
-          <a href="catalog-list.html">
-            Catalog
-          </a>
-        </li>
-        <li>
-          <a href="catalog-list.html">
-            Women
-          </a>
-        </li>--}}
         <li>
           <span>{{ $product->name }}</span>
         </li>
@@ -45,7 +35,7 @@
                 </a>
               @endif
               </li>
-              @if(count($product->galary_img) > 0)
+              @if(!empty($product->galary_img))
                 @foreach($product->galary_img as $item)
                   <li>
                     <a data-fancybox-group="product" class="fancy-img" href="{{asset(UPLOAD_PRODUCT.$item)}}">
@@ -70,7 +60,7 @@
                   </a>
                 @endif
               </li>
-              @if(count($product->galary_img) > 0)
+              @if(!empty($product->galary_img))
                 @foreach($product->galary_img as $item)
                   <li>
                     <a data-slide-index="{{ $loop->iteration }}" href="#">

@@ -12,6 +12,11 @@ use App\Helppers\Uploads;
 
 class ProductsController extends BackendController
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        parent::__construct();
+    }
     /**
      * Validate product field
      * @param $data
@@ -38,11 +43,6 @@ class ProductsController extends BackendController
             'galary_img'        => 'array',
             'pictures'          => 'image|max:1024',
         ]);
-    }
-
-    public function __construct()
-    {
-        parent::__construct();
     }
 
     /**

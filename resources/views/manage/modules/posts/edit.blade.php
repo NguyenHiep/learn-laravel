@@ -1,7 +1,7 @@
 @extends('manage.master')
 @section('title', __('static.manage.posts.posts.edit'))
 @section('content')
-  <div class="page-content-wrapper">
+  <div class="page-content-wrapper posts-editor">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
       <!-- BEGIN PAGE HEADER-->
@@ -54,7 +54,7 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
+                  {!! Form::textarea($key, old($key, $record->{$key}) ,
                   [
                   'class' => 'summernote_editor form-control',
                   'rows' => 9
@@ -247,26 +247,49 @@
       </div>
       <!-- END CONTENT BODY -->
     </div>
-  @include('manage.blocks.medias.modal', ['medias' => $medias, 'id' => $record->posts_medias_id])
+    @include('manage.blocks.medias.modal', [
+      'medias' => $medias,
+      'class' => 'posts-modal',
+      'id' => $record->posts_medias_id
+    ])
+    @include('manage.blocks.medias.content', [
+      'medias' => $medias,
+      'class' => 'posts-content',
+    ])
   </div>
   @endsection
   @section('styles')
     @parent
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-      <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css"/>
-      <link href="{{ asset('/manages/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
-      <link href="{{ asset('/manages/assets/global/plugins/typeahead/typeahead.css') }}" rel="stylesheet" type="text/css" />
-      <!-- END PAGE LEVEL PLUGINS -->
+    {{--<link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css"/>--}}
+    <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/manages/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/manages/assets/global/plugins/typeahead/typeahead.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
   @stop
   @section('scripts')
     @parent
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-      <script src="{{ asset('/manages/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/global/plugins/typeahead/handlebars.min.js') }}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/global/plugins/typeahead/typeahead.bundle.min.js') }}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/pages/scripts/components-bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/js/posts/posts.js')}}" type="text/javascript"></script>
-      <!-- END PAGE LEVEL SCRIPTS -->
-@stop
+    <script src="{{ asset('/manages/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/manages/assets/global/plugins/typeahead/handlebars.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/manages/assets/global/plugins/typeahead/typeahead.bundle.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/manages/assets/pages/scripts/components-bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
+    <!--<script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}" type="text/javascript"></script>-->
+    <script src="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('/manages/assets/js/plugin/medias/summernote-ext-medias.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/manages/assets/js/posts/posts.js')}}" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+  @stop
+
+  {{-- Include for media uploads --}}
+  @push('custom-scripts')
+    <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
+            type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
+            type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
+            type="text/javascript"></script>
+  @endpush

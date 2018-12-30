@@ -88,7 +88,8 @@ return [
             'edit' => 'Cập nhật trang'
         ],
         'comments' => [
-            'page_title' => 'Quản lý bình luận'
+            'page_title' => 'Quản lý bình luận',
+            'edit'       => 'Cập nhật bình luận',
         ]
     ]
 ];

@@ -89,12 +89,12 @@
           
           </div>
           <div class="stylization f-block-modal f-block-modal-map" id="f-block-modal-4">
-            <div class="allstore-gmap">
-              <div class="marker" data-zoom="15" data-lat="-37.81485261872975" data-lng="144.95655298233032" data-marker="img/marker.png">534-540 Little Bourke St, Melbourne VIC 3000, Australia</div>
-            </div>
+            {{--<div class="allstore-gmap">
+              <div class="marker" data-zoom="15" data-lat="-37.81485261872975" data-lng="144.95655298233032" data-marker="{{ asset('') }}img/marker.png">534-540 Little Bourke St, Melbourne VIC 3000, Australia</div>
+            </div>--}}
           </div>
           <div class="f-delivery">
-            <img src="img/map.png" alt="">
+            {{--<img src="img/map.png" alt="">--}}
             <h4>Free delivery in London</h4>
             <p>We will deliver within 1 hour</p>
           </div>

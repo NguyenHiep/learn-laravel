@@ -1,7 +1,7 @@
 @extends('manage.master')
 @section('title', __('static.sidebars.manage.posts.creates'))
 @section('content')
-  <div class="page-content-wrapper">
+  <div class="page-content-wrapper posts-editor">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
       <!-- BEGIN PAGE HEADER-->
@@ -52,10 +52,11 @@
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
                   {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'summernote_editor form-control',
-                  'rows' => 9
-                  ]) !!}
+                    [
+                        'class' => 'summernote_editor form-control',
+                        'rows' => 9
+                    ])
+                  !!}
                 </div>
 
                 @php $key = 'post_keyword'; @endphp
@@ -69,12 +70,12 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'form-control',
-                  'rows' => 3,
-                  'placeholder' => __('common.posts.posts.'.$key.'_placeholder')
-                  ]) !!}
+                  {!! Form::textarea($key, old($key) ,[
+                          'class' => 'form-control',
+                          'rows' => 3,
+                          'placeholder' => __('common.posts.posts.'.$key.'_placeholder')
+                      ])
+                  !!}
                 </div>
 
               </div>
@@ -228,8 +229,14 @@
       <!-- END CONTENT BODY -->
     </div>
   </div>
-  @include('manage.blocks.medias.modal', ['medias' => $medias])
-  @include('manage.blocks.medias.content', ['medias' => $medias])
+  @include('manage.blocks.medias.modal', [
+    'medias' => $medias,
+    'class' => 'posts-modal'
+  ])
+  @include('manage.blocks.medias.content', [
+    'medias' => $medias,
+    'class' => 'posts-content'
+  ])
   @endsection
   @section('styles')
     @parent
@@ -259,10 +266,7 @@
   @push('custom-scripts')
     <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
     <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
-            type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}" type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}" type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}" type="text/javascript"></script>
   @endpush

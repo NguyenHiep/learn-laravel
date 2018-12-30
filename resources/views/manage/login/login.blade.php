@@ -48,29 +48,28 @@
 <!-- END SIDEBAR TOGGLER BUTTON -->
 <!-- BEGIN LOGO -->
 <div class="logo">
-    <a href="index.html">
-        <img src="../assets/pages/img/logo-big.png" alt="" /> </a>
+    <a href="{{route('home')}}">
+        <img src="{{asset('manages/assets/pages/img/logo-big.png')}}" alt="" /> </a>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
-    <form action="" method="POST" class="login-form">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <form action="{{ url('/login') }}" method="POST" class="login-form">
+        {{ csrf_field() }}
         <h3 class="form-title font-green">Đăng nhập</h3>
-
-        @php $key = 'txtUser'; @endphp
+        @php $key = 'email'; @endphp
         <div class="form-group @if ($errors->has($key)) has-error  @endif">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">Tài khoản</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Vui lòng nhập tài khoản" name="txtUser" value="{{ old('txtUser') }}"/>
+            <input class="form-control form-control-solid placeholder-no-fix" type="email" autocomplete="off" placeholder="Vui lòng nhập tài khoản" name="email" value="{{ old('email') }}" required/>
             @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
         </div>
 
-        @php $key = 'txtPass'; @endphp
+        @php $key = 'password'; @endphp
         <div class="form-group @if ($errors->has($key)) has-error  @endif">
             <label class="control-label visible-ie8 visible-ie9">Mật khẩu</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Vui lòng nhập mật khẩu" name="txtPass" />
+            <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Vui lòng nhập mật khẩu" name="password" required/>
             @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
         </div>
         <div class="form-actions">
@@ -99,7 +98,7 @@
     </form>
     <!-- END LOGIN FORM -->
     <!-- BEGIN FORGOT PASSWORD FORM -->
-    <form class="forget-form" action="index.html" method="post">
+    <form class="forget-form" action="" method="post">
         <h3 class="font-green">Forget Password ?</h3>
         <p> Enter your e-mail address below to reset your password. </p>
         <div class="form-group">
@@ -111,7 +110,7 @@
     </form>
     <!-- END FORGOT PASSWORD FORM -->
 </div>
-<div class="copyright">  Copyright © 2017 by minhhiep.info </div>
+<div class="copyright">  Copyright © <?php echo date('Y')?> by minhhiep.info </div>
 <!--[if lt IE 9]>
 <script src="{{asset('/manages/assets/global/plugins/respond.min.js')}}"></script>
 <script src="{{asset('/manages/assets/global/plugins/excanvas.min.js')}}"></script>
