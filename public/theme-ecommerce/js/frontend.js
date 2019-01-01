@@ -89,7 +89,7 @@ var Products = {
             e.preventDefault();
             var product_id = $(this).attr('data-id');
             if (typeof product_id !== 'undefined') {
-                $.ajax(s{
+                $.ajax({
                     cache: false,
                     type: "GET",
                     url: ajaxcalls_vars.host + '/compares/add/',

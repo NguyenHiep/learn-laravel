@@ -51,6 +51,7 @@
                         </li>
                         @endforeach
                   </ul>
+                  {{ $medias->appends(request()->all())->links() }}
                 @endif
               </div>
             </div>
@@ -65,4 +66,3 @@
     <button type="button" data-dismiss="modal" class="btn green js-action-insert-content-image">Chèn vào bài viết</button>
   </div>
 </div>
-

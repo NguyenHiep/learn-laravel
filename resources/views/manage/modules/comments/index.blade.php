@@ -83,11 +83,10 @@
                           <td><span class="label label-sm @if($record->comment_status == STATUS_ENABLE) label-success @else label-danger @endif margin-right-10">{{ __('selector.status.'.$record->comment_status) }}</span></td>
                           <td class="text-right ">
                             <div class="btn-group btn-group-solid">
-                              <a href="{{ route('comments.edit',$record->id) }}"
-                                 class="btn  btn-warning js-action-list-rowlink-val">
+                              <a title="{{__('common.buttons.edit')}}" href="{{ route('comments.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                                 <i class="fa fa-edit"></i>
                               </a>
-                              <a href="{{ route('comments.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
+                              <a title="{{__('common.buttons.delete')}}" href="{{ route('comments.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
                             </div>
                           </td>
                         </tr>

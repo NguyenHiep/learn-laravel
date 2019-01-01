@@ -54,11 +54,12 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key, $record->{$key}) ,
-                  [
-                  'class' => 'summernote_editor form-control',
-                  'rows' => 9
-                  ]) !!}
+                  {!! Form::textarea($key, old($key, html_entity_decode($record->{$key})) ,
+                    [
+                      'class' => 'summernote_editor form-control',
+                      'rows' => 9
+                    ])
+                  !!}
                 </div>
 
                 @php $key = 'post_keyword'; @endphp

@@ -51,7 +51,7 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
+                  {!!  Form::textarea($key, old($key) ,
                     [
                         'class' => 'summernote_editor form-control',
                         'rows' => 9

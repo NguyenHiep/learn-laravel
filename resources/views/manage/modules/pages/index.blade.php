@@ -76,7 +76,7 @@
 
                         <td class="text-right ">
                           <div class="btn-group btn-group-solid">
-                            <a href="{{ route('pages.edit',$record->id) }}"
+                            <a title="{{__('common.buttons.edit')}}" href="{{ route('pages.edit',$record->id) }}"
                                class="btn  btn-warning js-action-list-rowlink-val">
                               <i class="fa fa-edit"></i>
                             </a>
@@ -84,7 +84,7 @@
                                   style="display: inline-block">
                               {{ method_field('DELETE') }}
                               {{ csrf_field() }}
-                              <button class="btn btn-delete js-action-delete" type="submit">
+                              <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
                                 <i class="fa fa-trash-o"></i>
                               </button>
                             </form>

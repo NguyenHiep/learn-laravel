@@ -7,7 +7,8 @@ return [
         'cancel' => 'Hủy bỏ',
         'create' => 'Thêm mới',
         'delete' => 'Xóa',
-        'edit'   => 'Chỉnh sửa'
+        'edit'   => 'Chỉnh sửa',
+        'show'   => 'Xem',
     ),
     'settings' => array(
         'settings' => array(

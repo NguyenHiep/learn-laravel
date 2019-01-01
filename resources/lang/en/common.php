@@ -6,7 +6,8 @@ return [
         'cancel' => 'Cancel',
         'create' => 'Created',
         'delete' => 'Delete',
-        'edit'   => 'Edit'
+        'edit'   => 'Edit',
+        'show'   => 'Show',
     ),
     'settings' => array(
         'settings' => array(

@@ -223,8 +223,26 @@ h3.block-title {
     z-index: 10049 !important;
 }
 
+.modal-scrollable .modal {
+    margin-top: 0;
+    padding: 0;
+    top: 50%;
+}
+
 .posts-modal,
 .posts-content {
     top: 50%;
     position: absolute;
+}
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: auto;
+        margin: auto;
+    }
+}
+
+.modal-dialog {
+    margin: 0;
+    top: 50%;
 }

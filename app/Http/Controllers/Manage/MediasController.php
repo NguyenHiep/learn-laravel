@@ -43,64 +43,52 @@ class MediasController extends BackendController
      */
     public function store()
     {
-        // Get current user login
-        $user_info = auth()->user();
-        $this->validate(request(),
-            [
-                'file'   => 'mimes:jpeg,jpg,png,gif,svg,doc,docx,csv,txt,mp4,mp3 | max:2048',
+        $this->validate(request(), [
+                'file' => 'mimes:jpeg,jpg,png,gif,svg,doc,docx,csv,txt,mp4,mp3 | max:2048',
             ]
         );
-
+        $result = [
+            'status'  => 'error',
+            'message' => 'Failed',
+        ];
         if (request()->hasFile('file')) {
-            //echo $file_name = request()->file('file')->getClientOriginalName();
-            $file_size = request()->file('file')->getClientSize();
-            $file_mimes = request()->file('file')->getMimeType();
-            $file_extension = request()->file('file')->getClientOriginalExtension();
-            $filename = sha1(uniqid().time().time()).".{$file_extension}";
-            $path_filename = request()->file('file')->storeAs(UPLOAD_MEDIAS, $filename);
-
-            if( $path_filename ) {
-
-                // Begin save image in database
-                $medias = new Medias();
-                $medias->name = $filename;
-                $extension_img = ['jpeg','jpg','png','gif','svg'];
-                $extension_files = ['doc','docx','csv','txt'];
-                $extension_video = ['mp3','mp4'];
-                if(in_array($file_extension, $extension_img, true)){
-                    $medias->types = 'image';
-                }elseif(in_array($file_extension, $extension_files, true)){
-                    $medias->types = 'file';
-                }elseif(in_array($file_extension, $extension_video, true)){
-                    $medias->types = 'video';
-                }
-                $medias->user_id = $user_info->id;
-                $medias->save();
-
-                // Begin update medias info image
-                $medias_info = new Mediasinfo();
-                $medias_info->id = $medias->id;
-                $medias_info->extension = $file_mimes;
-                $medias_info->size = $file_size;
-                //$medias_info->width = $medias->id;
-                //$medias_info->height = $medias->id;
-                $medias_info->save();
-
-                $data = [
+            $files           = request()->file('file');
+            $file_size       = $files->getClientSize();
+            $file_mimes      = $files->getMimeType();
+            $file_extension  = $files->getClientOriginalExtension();
+            $filename        = sha1(uniqid() . time() . time()) . ".{$file_extension}";
+            $path_filename   = $files->storeAs(UPLOAD_MEDIAS, $filename);
+            $extension_img   = ['jpeg', 'jpg', 'png', 'gif', 'svg'];
+            $extension_files = ['doc', 'docx', 'csv', 'txt'];
+            $extension_video = ['mp3', 'mp4'];
+            $file_type       = '';
+            if (in_array($file_extension, $extension_img, true)) {
+                $file_type = 'image';
+            } elseif (in_array($file_extension, $extension_files, true)) {
+                $file_type = 'file';
+            } elseif (in_array($file_extension, $extension_video, true)) {
+                $file_type = 'video';
+            }
+            
+            if ($path_filename) {
+                $medias = Medias::create([
+                    'name'    => $filename,
+                    'types'   => $file_type,
+                    'user_id' => auth()->user()->id
+                ]);
+                $medias->posts_medias_info()->create([
+                    'extension' => $file_mimes,
+                    'size'      => $file_size,
+                ]);
+                $result = [
                     'status'  => 'success',
-                    'id'      => $medias->id,
+                    'id'      => $medias['id'],
                     'message' => 'Success',
                 ];
-                return response()->json($data);
-            } else {
-                $data = [
-                    'status'  => 'error',
-                    'message' => 'Failed',
-                ];
-                return response()->json($data);
             }
+            
         }
-
+        return response()->json($result);
     }
 
     /**
@@ -130,30 +118,39 @@ class MediasController extends BackendController
 
         return view('manage.modules.medias.edit', compact('record'));
     }
-
-    /**
-     * Update the specified resource in storage.
+    
+    /***
+     *  Update the specified resource in storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id)
     {
-        $medias_info = Mediasinfo::find($id);
-        $medias_info->caption       = request()->mediasinfo['caption'];
-        $medias_info->alt           = request()->mediasinfo['alt'];
-        $medias_info->description   = request()->mediasinfo['description'];
-        if(isset(request()->mediasinfo['lightbox'])){
-            $medias_info->lightbox      = request()->mediasinfo['lightbox'];
+        $mediaInputs = request()->mediasinfo;
+        $medias      = Medias::with('posts_medias_info')->findOrFail($id);
+        try {
+            \DB::beginTransaction();
+            $medias->posts_medias_info->update([
+                'caption'     => $mediaInputs['caption'] ?? '',
+                'alt'         => $mediaInputs['alt'] ?? '',
+                'description' => $mediaInputs['description'] ?? '',
+                'lightbox'    => $mediaInputs['lightbox'] ?? 0
+            ]);
+            \DB::commit();
+            return redirect()->route('medias.index')->with([
+                'message' => __('system.message.update'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            \Log::error([$e->getMessage(), __METHOD__]);
         }
-
-        //$medias_info->save();
-
-        $medias = Medias::find($id);
-        $medias->posts_medias_info()->save($medias_info);
-
-        session()->flash('message', __('system.message.update'));
-        return redirect()->route('medias.index');
+        return redirect()->route('medias.edit', ['id' => $medias->id])->withInput($mediaInputs)->with([
+            'message' => __('system.message.error', ['errors' => 'Update medias info is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
     }
 
     /**
@@ -164,35 +161,27 @@ class MediasController extends BackendController
      */
     public function destroy($id)
     {
-        if(request()->ajax == true){
-            // Get info
+        try {
+            \DB::beginTransaction();
             $medias = Medias::findOrFail($id);
-
-            // Delete in database
-            Medias::where('id', $id)->forcedelete();
-            Mediasinfo::where('id', $id)->forcedelete();
-
+            $medias->posts_medias_info()->forceDelete();
+            $medias->forceDelete();
             // Delete file
-            Storage::delete(UPLOAD_MEDIAS.$medias->name);
-
-            $data = ['message' => 'Success'];
-            return response()->json($data);
-
-        }else{
-            // Get info
-            $medias = Medias::findOrFail($id);
-
-            // Delete in database
-            Medias::where('id', $id)->forcedelete();
-            Mediasinfo::where('id', $id)->forcedelete();
-
-            // Delete file
-            Storage::delete(UPLOAD_MEDIAS.$medias->name);
-
-            session()->flash('message', __('system.message.delete'));
-            return redirect()->route('medias.index');
+            Storage::delete(UPLOAD_MEDIAS . $medias->name);
+            \DB::commit();
+            // If delete ajax
+            if (request()->ajax == true) {
+                $data = ['message' => 'Success'];
+                return response()->json($data);
+            }
+            return redirect()->route('medias.index')->with([
+                'message' => __('system.message.delete'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            \Log::error([$e->getMessage(), __METHOD__]);
         }
-
     }
 
 

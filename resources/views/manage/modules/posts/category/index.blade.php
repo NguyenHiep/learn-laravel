@@ -137,13 +137,13 @@
 
                           <td class="text-right">
                             <div class="btn-group btn-group-solid">
-                              <a href="{{ route('category.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                              <a title="{{__('common.buttons.edit')}}" href="{{ route('category.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                                 <i class="fa fa-edit"></i>
                               </a>
                               <form action="{{ route('category.destroy',$record->id) }}" method="POST" style="display: inline-block">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
+                                <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
                                   <i class="fa fa-trash-o"></i>
                                 </button>
                               </form>
@@ -234,7 +234,6 @@
         type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
         type="text/css"/>
-
   <!-- END PAGE LEVEL PLUGINS -->
 
   @stop
