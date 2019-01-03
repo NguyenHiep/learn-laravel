@@ -324,11 +324,14 @@
     </div>
     <!-- END CONTENT BODY -->
   </div>
-  <div class="product">
-    @include('manage.blocks.medias.modal', ['medias' => $medias])
-    @include('manage.blocks.medias.content', ['medias' => $medias])
-  </div>
-
+  @include('manage.blocks.medias.modal', [
+     'medias' => $medias,
+     'class' => 'posts-modal'
+  ])
+  @include('manage.blocks.medias.content', [
+    'medias' => $medias,
+    'class' => 'posts-content'
+  ])
 @endsection
 @section('styles')
   @parent
@@ -341,6 +344,7 @@
   <link href="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
@@ -362,3 +366,11 @@
   <script src="{{  asset('/manages/assets/pages/scripts/ecommerce-products-edit.js') }}" type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop
+{{-- Include for media uploads --}}
+@push('custom-scripts')
+  <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
+  <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}" type="text/javascript"></script>
+  <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}" type="text/javascript"></script>
+  <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}" type="text/javascript"></script>
+@endpush

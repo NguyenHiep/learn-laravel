@@ -106,7 +106,7 @@
                 @if(!empty(__('selector.post_status')))
                   <div class="radio-list">
                     @foreach(__('selector.post_status') as $k =>$val)
-                      @if($k === 2)
+                      @if($record->{$key} == $k)
                         <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
                       @else
                         <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
@@ -138,7 +138,7 @@
               @if(!empty(__('selector.format')))
                 <div class="radio-list">
                   @foreach(__('selector.format') as $k =>$val)
-                    @if($k === 0)
+                    @if($record->{$key} == $k)
                       <label> {!! Form::radio($key, $k, true) !!}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
                     @else
                       <label> {!! Form::radio($key, $k) !!}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
