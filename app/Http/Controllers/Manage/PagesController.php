@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Model\Pages;
-use App\Model\Medias;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
-#use Illuminate\Support\Facades\DB;
+use DB;
+use Illuminate\Support\Facades\Validator;
+use Log;
 use Mockery\Exception;
 
 class PagesController extends BackendController
@@ -14,6 +15,24 @@ class PagesController extends BackendController
     public function __construct()
     {
         $this->middleware('auth');
+        parent::__construct();
+    }
+    
+    /***
+     * Validate input pages
+     * @param array    $data
+     * @param int|null $id
+     *
+     * @return \Illuminate\Validation\Validator
+     */
+    protected static function validator(array $data, int $id = null)
+    {
+        return Validator::make($data, [
+            'page_title'  => 'required|string|unique:pages,page_title,' . $id,
+            'page_slug'   => 'required|string|unique:pages,page_slug,' . $id,
+            'page_full'   => 'required|string',
+            'page_status' => 'required'
+        ]);
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +44,8 @@ class PagesController extends BackendController
         //
         $records = \DB::table('pages')
             ->join('users', 'pages.user_id', '=', 'users.id')
-            //->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
-            ->select('pages.*', 'users.username')
+            ->leftJoin('posts_medias', 'pages.page_medias_id', '=', 'posts_medias.id')
+            ->select('pages.*', 'users.username', 'posts_medias.name AS page_featured')
             ->whereNull('pages.deleted_at')
             ->get();
         return view('manage.modules.pages.index', compact('records'));
@@ -39,78 +58,48 @@ class PagesController extends BackendController
      */
     public function create()
     {
-        //
-        $medias         = Medias::all();
+        $medias = $this->medias;
         return view('manage.modules.pages.create', compact('medias'));
     }
 
-    /**
+    /***
      * Store a newly created resource in storage.
+     * @param Request $request
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function store(Request $request)
     {
-        // Array data request
-        $inputs = $request->all();
-        if ($request->method() === 'POST') {
-            // Check CSRF
-            if (\Session::token() === array_get($inputs, '_token')) {
-                $this->validate($request,
-                    [
-                        'page_title'     => 'required|unique:pages|max:255',
-                        'page_full'      => 'required',
-                        'page_status'    => 'required',
-                        //'page_attribute' => 'required',
-                    ]
-                );
-
-                // Begin
-                try {
-                    \DB::beginTransaction();
-
-                    // Get current user login
-                    $user_info = auth()->user();
-
-                    $pages = new Pages;
-                    $pages->page_title      = array_get($inputs, 'page_title');
-                    if (!empty(array_get($inputs, 'page_slug'))) {
-                        $pages->page_slug   = unicode_str_filter(array_get($inputs, 'page_slug'));
-                    } else {
-                        $pages->page_slug   = unicode_str_filter(array_get($inputs, 'page_title'));
-                    }
-                    $pages->page_intro      = array_get($inputs, 'page_intro');
-                    $pages->page_full       = array_get($inputs, 'page_full');
-                    if(!empty(array_get($inputs, 'page_medias_id'))){
-                        $pages->page_medias_id  = array_get($inputs, 'page_medias_id');
-                    }
-                    $pages->page_status     = array_get($inputs, 'page_status');
-                    $pages->page_attribute  = array_get($inputs, 'page_attribute', '');
-                    $pages->page_keyword    = array_get($inputs, 'page_keyword');
-                    /*$pages->visit = array_get($inputs, 'visit');*/
-                    if (!empty($user_info)) {
-                        $pages->user_id     = $user_info->id;
-                    }
-
-                    $pages->save();
-
-                    \DB::commit();
-                    session()->flash('message', __('system.message.create'));
-                    session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
-
-                } catch (Exception $e) {
-                    \DB::rollBack();
-                    \Log::error($e->getMessage(), __METHOD__);
-                    session()->flash('message', __('system.message.errors', $e->getMessage()));
-                    session()->flash('status', self::CTRL_MESSAGE_ERROR);
-                }
-
-                return redirect()->route('pages.index');
-
-            }
-
+        $inputs    = $request->all();
+        $page_slug = unicode_str_filter($inputs['page_title']);
+        if (!empty($inputs['page_slug'])) {
+            $page_slug = unicode_str_filter($inputs['page_slug']);
         }
+        $inputs['page_slug']      = $page_slug;
+        $inputs['user_id']        = auth()->user()->id;
+        $validator = self::validator($inputs);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+        try {
+            DB::beginTransaction();
+            $pages = new Pages();
+            $pages->fill($inputs);
+            $pages->save();
+            DB::commit();
+            return redirect()->route('pages.index')->with([
+                'message' => __('system.message.create'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage(), __METHOD__);
+        }
+        return redirect()->back()->with([
+            'message' => __('system.message.errors', ['errors' => 'Create page failed!']),
+            'status'  => self::CTRL_MESSAGE_ERROR
+        ]);
 
     }
 
@@ -133,92 +122,50 @@ class PagesController extends BackendController
      */
     public function edit($id)
     {
-        $record = Pages::find($id);
-        $medias = Medias::all();
-        if(empty($record)){
-            return view('errors.404');
-        }
+        $record = Pages::with('media')->findOrFail($id);
+        $medias = $this->medias;
         return view('manage.modules.pages.edit', compact('record','medias'));
     }
 
-    /**
+    /***
      * Update the specified resource in storage.
+     * @param Request $request
+     * @param         $id
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function update(Request $request, $id)
     {
-        // Array data request
-        $inputs = $request->all();
-        if ($request->method() === 'PATCH') {
-
-            // Check CSRF
-            if (\Session::token() === array_get($inputs, '_token')) {
-
-                $this->validate($request,
-                    [
-                        'page_title'     => 'required|max:255|unique:pages,id,'.$id,
-                        'page_full'      => 'required',
-                        'page_status'    => 'required',
-                        //'page_attribute' => 'required',
-                    ]
-                );
-
-                // Begin
-                try {
-
-                    \DB::beginTransaction();
-
-                    // Get current user login
-                    $user_info = auth()->user();
-
-                    $pages = Pages::find($id);
-
-                    if(empty($pages)){
-                        \DB::rollBack();
-                        session()->flash('message', __('system.message.errors'));
-                        session()->flash('status', self::CTRL_MESSAGE_ERROR);
-                        return view('errors.404');
-                    }
-
-                    $pages->page_title      = array_get($inputs, 'page_title');
-                    if (!empty(array_get($inputs, 'page_slug'))) {
-                        $pages->page_slug   = unicode_str_filter(array_get($inputs, 'page_slug'));
-                    } else {
-                        $pages->page_slug   = unicode_str_filter(array_get($inputs, 'page_title'));
-                    }
-                    $pages->page_intro      = array_get($inputs, 'page_intro');
-                    $pages->page_full       = array_get($inputs, 'page_full');
-                    if(!empty(array_get($inputs, 'page_medias_id'))){
-                        $pages->page_medias_id  = array_get($inputs, 'page_medias_id');
-                    }
-                    $pages->page_status     = array_get($inputs, 'page_status');
-                    $pages->page_attribute  = array_get($inputs, 'page_attribute', '');
-                    $pages->page_keyword    = array_get($inputs, 'page_keyword');
-                    if (!empty($user_info)) {
-                        $pages->user_id     = $user_info->id;
-                    }
-
-                    $pages->save();
-
-                    \DB::commit();
-                    session()->flash('message', __('system.message.update'));
-                    session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
-
-                } catch (Exception $e) {
-                    \DB::rollBack();
-                    \Log::error($e->getMessage(), __METHOD__);
-                    session()->flash('message', __('system.message.errors', $e->getMessage()));
-                    session()->flash('status', self::CTRL_MESSAGE_ERROR);
-                }
-
-                return redirect()->route('pages.index');
-
-            }
-
+        $inputs    = $request->all();
+        $page_slug = unicode_str_filter($inputs['page_title']);
+        if (!empty($inputs['page_slug'])) {
+            $page_slug = unicode_str_filter($inputs['page_slug']);
         }
+        $inputs['page_slug']      = $page_slug;
+        $validator                = self::validator($inputs, $id);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+        try {
+        
+            DB::beginTransaction();
+            $pages = Pages::findOrFail($id);
+            $pages->update($inputs);
+            DB::commit();
+            return redirect()->route('pages.index')->with([
+                'message' => __('system.message.update'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS
+            ]);
+        
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage(), __METHOD__);
+        }
+        return redirect()->back()->withInput($inputs)->with([
+            'message' => __('system.message.errors', ['errors' => 'Update page is failed!']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
     }
 
     /**
@@ -229,27 +176,28 @@ class PagesController extends BackendController
      */
     public function destroy($id)
     {
-        if (!empty(Pages::find($id))) {
-            try {
-                \DB::beginTransaction();
-
-                Pages::where('id', $id)->forcedelete();
-
-                \DB::commit();
-                session()->flash('message', __('system.message.delete'));
-                session()->flash('status', self::CTRL_MESSAGE_SUCCESS);
-            } catch (Exception $e) {
-                \DB::rollBack();
-                \Log::error($e->getMessage(), __METHOD__);
-                session()->flash('message', __('system.message.errors', $e->getMessage()));
-                session()->flash('status', self::CTRL_MESSAGE_ERROR);
-            }
-
-        } else {
-            session()->flash('message', __('system.message.errors'));
-            session()->flash('status', self::CTRL_MESSAGE_ERROR);
+        $page = Pages::find($id);
+        if (empty($page)) {
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
         }
-
-        return redirect()->route('pages.index');
+    
+        try {
+            DB::beginTransaction();
+            $page->delete();
+            DB::commit();
+            return response()->json([
+                'message' => __('system.message.delete'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
     }
 }

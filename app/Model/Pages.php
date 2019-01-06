@@ -29,7 +29,12 @@ class Pages extends BaseModel
         'visit',
         'user_id',
     ];
-
+    
+    public function media()
+    {
+        return $this->hasOne('App\Model\Medias', 'id', 'page_medias_id');
+    }
+    
     public function getPageBySlug(string $page_slug)
     {
         $page = Pages::where('page_slug',$page_slug)->where('page_status', STATUS_ENABLE)->first();

@@ -107,13 +107,6 @@
                                 <i class="fa fa-edit"></i>
                               </a>
                               <a title="{{__('common.buttons.delete')}}" href="{{ route('posts.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
-                              {{--<form action="{{ route('posts.destroy',$record->id) }}" method="POST" style="display: inline-block">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i>
-                                </button>
-                              </form>--}}
                             </div>
                         </tr>
                     @endforeach

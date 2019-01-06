@@ -10,11 +10,11 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.posts.title')}}</a>
+            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.pages.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('static.sidebars.manage.posts.posts')}}</span>
+            <span>{{__('static.sidebars.manage.pages.pages')}}</span>
           </li>
         </ul>
       </div>
@@ -26,7 +26,7 @@
             <div class="portlet-title">
               <div class="caption font-dark">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">{{__('static.sidebars.manage.posts.posts')}}</span>
+                <span class="caption-subject bold uppercase">{{__('static.sidebars.manage.pages.pages')}}</span>
               </div>
               <div class="tools"></div>
               <div class="actions">
@@ -41,8 +41,7 @@
                   <thead>
                   <tr>
                     <th> <!-- <th class="checkbox-list">-->
-                      <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox"
-                             id="form_checkboxes">
+                      <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
                     </th>
                     <th><i class="icon-picture"></i></th>
                     <th>Tiêu đề</th>
@@ -80,14 +79,7 @@
                                class="btn  btn-warning js-action-list-rowlink-val">
                               <i class="fa fa-edit"></i>
                             </a>
-                            <form action="{{ route('pages.destroy',$record->id) }}" method="POST"
-                                  style="display: inline-block">
-                              {{ method_field('DELETE') }}
-                              {{ csrf_field() }}
-                              <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
-                                <i class="fa fa-trash-o"></i>
-                              </button>
-                            </form>
+                            <a title="{{__('common.buttons.delete')}}" href="{{ route('pages.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
                           </div>
                       </tr>
                     @endforeach
@@ -114,19 +106,3 @@
   </div>
 
 @endsection
-@section('styles')
-  @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <!-- END PAGE LEVEL PLUGINS -->
-@stop
-@section('scripts')
-  @parent
-  <!-- BEGIN PAGE LEVEL SCRIPTS -->
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-          type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
-@stop

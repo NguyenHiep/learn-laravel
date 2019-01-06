@@ -125,7 +125,7 @@
               </div>
             </div>
           </div>
-          {{--<div class="portlet light bordered">
+          <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Định dạng</div>
               <div class="tools">
@@ -137,16 +137,12 @@
               @if(!empty(__('selector.format')))
                 <div class="radio-list">
                   @foreach(__('selector.format') as $k =>$val)
-                    @if($k === 0)
-                      <label> {!! Form::radio($key, $k, true) !!}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
-                    @else
-                      <label> {!! Form::radio($key, $k) !!}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
-                    @endif
+                    <label> {{ Form::radio($key, $k, ($k == old($key, 'standard')) ? true : null) }}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
                   @endforeach
                 </div>
               @endif
             </div>
-          </div>--}}
+          </div>
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Ảnh tiêu biểu</div>
@@ -161,7 +157,7 @@
                 <div class="clearfix margin-top-15" id="img_featured">
                   <!--<img src="http://minhhiep.info/wp-content/uploads/2017/10/cachua-300x300.jpg" draggable="false" alt="" class="img-responsive"> -->
                 </div>
-                <input type="hidden" name="{{$key}}" value="" id="{{$key}}"/>
+                <input type="hidden" name="{{$key}}" value="0" id="{{$key}}"/>
             </div>
           </div>
 

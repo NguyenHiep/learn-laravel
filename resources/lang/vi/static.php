@@ -40,7 +40,7 @@ return [
             ],
             'pages'      => [
                 'title'   => 'Trang',
-                'pages'   => 'Tất cả trang',
+                'pages'   => 'Tất cả các trang',
                 'creates' => 'Thêm mới trang'
             ],
             'comments'   => 'Bình luận',

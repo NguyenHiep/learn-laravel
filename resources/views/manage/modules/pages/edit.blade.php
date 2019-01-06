@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('pages.index')}}">{{__('static.manage.pages.edit')}}</a>
+            <a href="{{route('pages.index')}}">{{__('static.sidebars.manage.pages.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -54,10 +54,9 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.pages.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'summernote_editor form-control',
-                  'rows' => 9
+                  {!! Form::textarea($key, old($key) ,[
+                    'class' => 'summernote_editor form-control',
+                    'rows' => 9
                   ]) !!}
                 </div>
 
@@ -72,11 +71,10 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.pages.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'form-control',
-                  'rows' => 3,
-                  'placeholder' => __('common.pages.'.$key.'_placeholder')
+                  {!! Form::textarea($key, old($key) ,[
+                    'class' => 'form-control',
+                    'rows' => 3,
+                    'placeholder' => __('common.pages.'.$key.'_placeholder')
                   ]) !!}
                 </div>
 
@@ -125,7 +123,24 @@
               </div>
             </div>
           </div>
-
+          <div class="portlet light bordered">
+            <div class="portlet-title">
+              <div class="caption">Định dạng</div>
+              <div class="tools">
+                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+              </div>
+            </div>
+            <div class="portlet-body" style="display: block;">
+              @php $key='page_attribute'; @endphp
+              @if(!empty(__('selector.format')))
+                <div class="radio-list">
+                  @foreach(__('selector.format') as $k =>$val)
+                    <label> {{ Form::radio($key, $k, ($k == old($key, 'standard')) ? true : null) }}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
+                  @endforeach
+                </div>
+              @endif
+            </div>
+          </div>
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Ảnh tiêu biểu</div>
@@ -134,12 +149,12 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-            @php $key = 'posts_medias_id'; @endphp
+            @php $key = 'page_medias_id'; @endphp
             <!--<a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>-->
               <a class="btn btn-outline btn-block dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
               <div class="clearfix margin-top-15" id="img_featured">
                 @if(!empty($record->{$key}))
-                <img src="{{Storage::url(UPLOAD_MEDIAS.$record->post_featured)}}" draggable="false" alt="" class="img-responsive">
+                  <img src="{{Storage::url(UPLOAD_MEDIAS.$record->media->name)}}" draggable="false" alt="" class="img-responsive">
                 @endif
               </div>
               <input type="hidden" name="{{$key}}" value="{{ $record->{$key} }}" id="{{ $key }}"/>
@@ -153,7 +168,7 @@
   @include('manage.blocks.medias.modal', [
       'medias' => $medias,
       'class' => 'posts-modal',
-      'id' => $record->posts_medias_id
+      'id' => $record->page_medias_id
     ])
   @include('manage.blocks.medias.content', [
     'medias' => $medias,
@@ -185,4 +200,4 @@
             type="text/javascript"></script>
     <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
             type="text/javascript"></script>
-  @endpush
+    @endpush
