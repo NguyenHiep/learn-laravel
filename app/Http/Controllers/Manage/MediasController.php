@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Model\Medias;
-use App\Model\Medias\Mediasinfo;
 
 use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Storage;
@@ -79,6 +78,7 @@ class MediasController extends BackendController
                 $medias->posts_medias_info()->create([
                     'extension' => $file_mimes,
                     'size'      => $file_size,
+                    'lightbox'  => 0
                 ]);
                 $result = [
                     'status'  => 'success',
@@ -110,12 +110,7 @@ class MediasController extends BackendController
      */
     public function edit($id)
     {
-        $record = Medias::find($id);
-        // TODO: Get image with and height
-        if (empty($record)) {
-            return view('errors.404');
-        }
-
+        $record = Medias::findOrFail($id);
         return view('manage.modules.medias.edit', compact('record'));
     }
     

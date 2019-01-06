@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Manage;
 use App\Model\Posts;
 use App\Model\Posts\Category;
 use App\Model\Posts\Tags;
-use App\Model\Posts\Tags\Posts_Tags_Id;
 use App\Http\Controllers\BackendController;
+use Carbon\Carbon;
 use DB;
 use Log;
 use Mockery\Exception;
+use Illuminate\Support\Facades\Validator;
 
 class PostsController extends BackendController
 {
@@ -18,7 +19,22 @@ class PostsController extends BackendController
         $this->middleware('auth');
         parent::__construct();
     }
-
+    
+    /***
+     * Validator in the post
+     * @param array    $data
+     * @param int|null $id
+     *
+     * @return \Illuminate\Validation\Validator
+     */
+    protected static function validator(array $data, int $id = null)
+    {
+        return Validator::make($data, [
+            'post_title' => 'required|string|unique:posts,post_title,' . $id,
+            'post_slug'  => 'required|string|unique:posts,post_slug,' . $id,
+            'post_full'  => 'required|string'
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,37 +42,16 @@ class PostsController extends BackendController
      */
     public function index()
     {
-        $records = \DB::table('posts')
-            ->join('users', 'posts.user_id', '=', 'users.id')
-            ->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
-            ->select('posts.*', 'users.username', 'posts_medias.name as post_featured')
-            ->get();
-        if(!empty($records)){
-            foreach ($records as &$record) {
-                // Get list category
-                $categories = \DB::table('posts_category')
-                    ->leftJoin('posts_category_ids', 'posts_category.id', '=', 'posts_category_ids.posts_category_id')
-                    ->where('posts_id', $record->id)
-                    ->get();
-                $list_cate = [];
-                foreach ($categories as $category) {
-                    $list_cate[] = $category->name;
-                }
-                $record->categories = implode(', ', $list_cate);
-                // Get list tags
-                $tags = \DB::table('posts_tags')
-                    ->leftJoin('posts_tags_ids', 'posts_tags.id', '=', 'posts_tags_ids.posts_tags_id')
-                    ->where('posts_id', $record->id)
-                    ->get();
-                $list_tag = [];
-                foreach ($tags as $tag) {
-                    $list_tag[] = $tag->name;
-                }
-                $record->tags = implode(', ', $list_tag);
-
-            }
-        }
-
+        $records = Posts::with([
+            'posts_categories' => function ($query) {
+                $query->select('name');
+            },
+            'posts_tags'       => function ($query) {
+                $query->select('name');
+            },
+            'author',
+            'media'
+        ])->paginate(20);
         return view('manage.modules.posts.index', compact('records'));
     }
 
@@ -89,10 +84,10 @@ class PostsController extends BackendController
         }
         $inputs['post_slug'] = $post_slug;
         $inputs['user_id']   = auth()->user()->id;
-        $this->validate(request(),
-            ['post_title' => 'required',],
-            ['post_title.required' => 'Vui lòng nhập tên bài viết']
-        );
+        $validator = self::validator($inputs);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
         try {
             DB::beginTransaction();
             $post = new Posts();
@@ -102,23 +97,20 @@ class PostsController extends BackendController
                 $post_category = Category::find($inputs['post_category']);
                 $post->posts_categories()->attach($post_category);
             }
-            //TODO: Refactor code create tags and assigned tag in new post
-            if (isset($inputs['post_tags']) && !empty($post->id)) {
-                $list_tags = explode(',', $inputs['post_tags']);
+            // Create tags
+            if (isset($inputs['posts_tags']) && !empty($post->id)) {
+                $list_tags      = explode(',', $inputs['posts_tags']);
+                $posts_tags_ids = [];
                 foreach ($list_tags as $tags) {
-                    // Insert into table posts_tags
-                    $post_tags       = new Tags();
-                    $post_tags->name = $tags;
-                    $post_tags->slug = unicode_str_filter($tags);
-                    $post_tags->save();
-                    //$post_tags->posts()->attach($post_tags);
-                    // Insert into table posts_tags_ids
-                    $posts_tags_ids                = new Posts_Tags_Id();
-                    $posts_tags_ids->posts_tags_id = $post_tags->id;
-                    $posts_tags_ids->posts_id      = $post->id;
-                    $posts_tags_ids->save();
-                
+                    if(!empty($tags)){
+                        $post_tag = Tags::firstOrCreate([
+                            'name' => $tags,
+                            'slug' => unicode_str_filter($tags)
+                        ]);
+                        $posts_tags_ids[] = $post_tag['id'];
+                    }
                 }
+                $post->posts_tags()->attach($posts_tags_ids);
             }
             DB::commit();
             return redirect()->route('posts.index')->with([
@@ -155,42 +147,11 @@ class PostsController extends BackendController
      */
     public function edit($id)
     {
-        $record = DB::table('posts')
-            ->leftJoin('posts_medias', 'posts.posts_medias_id', '=', 'posts_medias.id')
-            ->select('posts.*', 'posts_medias.name as post_featured')
-            ->where('posts.id', $id)
-            ->get()->first();
-        if (empty($record)) {
-            return view('errors.404');
-        }
-
-        // Get category post
-        $cat_model = DB::table('posts_category AS pc')
-            ->leftJoin('posts_category_ids AS pci', 'pc.id', '=', 'pci.posts_category_id')
-            ->where('pci.posts_id', $id)
-            ->get();
-        $record->cats = null;
-        if (!empty($cat_model)) {
-            $cats = [];
-            foreach ($cat_model as $cat) {
-                $cats [] = $cat->posts_category_id; // Id Duplicate
-            }
-            $record->cats = $cats;
-        }
-
-        // Get list tags
-        $tags_model = DB::table('posts_tags')
-            ->leftJoin('posts_tags_ids', 'posts_tags.id', '=', 'posts_tags_ids.posts_tags_id')
-            ->where('posts_id', $id)
-            ->get();
-        $record->tags = null;
-        if (!empty($tags_model)) {
-            $tags = null;
-            foreach ($tags_model as $tag) {
-                $tags .= ',' . $tag->name;
-            }
-            $record->tags = ltrim($tags, ',');
-        }
+        $record       = Posts::with('posts_categories', 'posts_tags', 'media')->findOrFail($id);
+        $record->cats = collect($record->posts_categories)->pluck('id')->toArray();
+        $tags         = collect($record->posts_tags)->pluck('name')->toArray();
+        $record->tags = implode(',', $tags);
+        $record->post_featured = $record->media->name ?? null;
         $assignData = [
             'list_cate_all' => Category::all(),
             'list_tags_all' => Tags::all(),
@@ -208,31 +169,37 @@ class PostsController extends BackendController
      */
     public function update($id)
     {
-        $inputs = request()->all();
+        $inputs    = request()->all();
         $post_slug = unicode_str_filter($inputs['post_title']);
         if (!empty($inputs['post_slug'])) {
             $post_slug = unicode_str_filter($inputs['post_slug']);
         }
         $inputs['post_slug'] = $post_slug;
-        $this->validate(request(),
-            ['post_title' => 'required',],
-            ['post_title.required' => 'Vui lòng nhập tên bài viết']
-        );
+        $validator = self::validator($inputs, $id);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
         try {
             DB::beginTransaction();
-            // Create posts
             $post = Posts::findOrFail($id);
             $post->update($inputs);
             if (isset($inputs['post_category']) && !empty($post->id)) {
                 $post_category = Category::find($inputs['post_category']);
                 $post->posts_categories()->sync($post_category);
             }
-            //TODO: Update for tags when edit
-            if (isset($inputs['post_tags']) && !empty($post->id)) {
-                $list_tags = explode(',', request()->posts_tags);
+            if (isset($inputs['posts_tags']) && !empty($post->id)) {
+                $list_tags      = explode(',', $inputs['posts_tags']);
+                $posts_tags_ids = [];
                 foreach ($list_tags as $tags) {
-                    // TODO: Code here
+                    if (!empty($tags)) {
+                        $post_tag = Tags::firstOrCreate([
+                            'name' => $tags,
+                            'slug' => unicode_str_filter($tags)
+                        ]);
+                        $posts_tags_ids[] = $post_tag['id'];
+                    }
                 }
+                $post->posts_tags()->sync($posts_tags_ids);
             }
             DB::commit();
             return redirect()->route('posts.index')->with([
@@ -258,7 +225,31 @@ class PostsController extends BackendController
      */
     public function destroy($id)
     {
-
+        $post = Posts::find($id);
+        if (empty($post)) {
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
+    
+        try {
+            DB::beginTransaction();
+            $post->posts_categories()->detach(); // Remove id in table pivot
+            $post->posts_tags()->detach();
+            $post->delete();
+            DB::commit();
+            return response()->json([
+                'message' => __('system.message.delete'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
     }
 
 }

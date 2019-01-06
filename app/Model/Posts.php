@@ -41,7 +41,9 @@ class Posts extends BaseModel
      */
     public function posts_categories()
     {
-        return $this->belongsToMany(Category::class,'posts_category_ids','posts_id','posts_category_id')->withTimestamps();
+        return $this->belongsToMany(Category::class,'posts_category_ids','posts_id','posts_category_id')
+            ->whereNull('posts_category_ids.deleted_at')
+            ->withTimestamps();
     }
 
     /**
@@ -49,7 +51,9 @@ class Posts extends BaseModel
      */
     public function posts_tags()
     {
-        return $this->belongsToMany(Tags::class, 'posts_tags_ids', 'posts_id', 'posts_tags_id')->withTimestamps();
+        return $this->belongsToMany(Tags::class, 'posts_tags_ids', 'posts_id', 'posts_tags_id')
+            ->whereNull('posts_tags_ids.deleted_at')
+            ->withTimestamps();
     }
 
     /**
@@ -63,6 +67,11 @@ class Posts extends BaseModel
     public function comment()
     {
         return $this->hasMany('App\Model\Comments', 'posts_id', 'id');
+    }
+    
+    public function media()
+    {
+        return $this->hasOne('App\Model\Medias', 'id', 'posts_medias_id');
     }
 
     public function getListAll()

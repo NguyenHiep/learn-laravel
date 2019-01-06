@@ -194,13 +194,13 @@ class CommentsController extends BackendController
 
         try {
             \DB::beginTransaction();
-            Comments::where('id', $id)->delete();
+            $comment->delete();
             \DB::commit();
             return response()->json([
                 'message' => __('system.message.delete'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollBack();
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
