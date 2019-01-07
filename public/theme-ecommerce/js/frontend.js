@@ -2,11 +2,11 @@
 
 /**
  * Number.prototype.format(n, x, s, c)
- *
- * @param integer n: length of decimal
- * @param integer x: length of whole part
- * @param mixed   s: sections delimiter
- * @param mixed   c: decimal delimiter
+ * @param n Length of decimal
+ * @param x Length of whole part
+ * @param s Sections delimiter
+ * @param c Decimal delimiter
+ * @returns {string}
  */
 Number.prototype.format = function (n, x, s, c) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
@@ -15,9 +15,9 @@ Number.prototype.format = function (n, x, s, c) {
     return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
 };
 
-/**
+/***
  * Object product js
- * @type {{elemBody: (*), setup: Products.setup, quick_view_product: Products.quick_view_product, compare_product: Products.compare_product, remove_item_compare: Products.remove_item_compare, change_quantity: Products.change_quantity, plus_quantity: Products.plus_quantity, minus_quantity: Products.minus_quantity, check_number_input: Products.check_number_input, init: Products.init}}
+ * @type {{elemBody: (jQuery|HTMLElement), remove_item_compare: Products.remove_item_compare, init: Products.init, confirm_checkout: Products.confirm_checkout, change_quantity: Products.change_quantity, plus_quantity: Products.plus_quantity, check_number_input: (function(*=): boolean), minus_quantity: Products.minus_quantity, setup: Products.setup, quick_view_product: Products.quick_view_product, compare_product: Products.compare_product}}
  */
 var Products = {
     elemBody: $('body'),
@@ -26,7 +26,7 @@ var Products = {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
-            beforeSend: function (xhr) {
+            beforeSend: function () {
                 $("#page-preloader").show();
             }
         });
@@ -43,10 +43,11 @@ var Products = {
                     url: ajaxcalls_vars.host + '/product/quick-view/',
                     data: {product_id: product_id}
                 }).done(function (data) {
+                    var qviewModel = $('.qview-modal');
                     $("#page-preloader").hide();
-                    $('.qview-modal').html(data);
+                    qviewModel.html(data);
                     $('.qview-btn').fancybox({
-                        content: $('.qview-modal'),
+                        content: qviewModel,
                         padding: 0,
                         helpers: {
                             overlay: {
@@ -54,8 +55,9 @@ var Products = {
                             }
                         }
                     });
-                    if ($('.prod-slider-car').length > 0) {
-                        $('.prod-slider-car').each(function () {
+                    var prodSliderCar = $('.prod-slider-car');
+                    if (prodSliderCar.length > 0) {
+                        prodSliderCar.each(function () {
                             $(this).bxSlider({
                                 pagerCustom: $(this).parents('.prod-slider-wrap').find('.prod-thumbs-car'),
                                 adaptiveHeight: true,
@@ -76,7 +78,7 @@ var Products = {
                     Checkout.add_to_cart();
                     Products.plus_quantity();
                     Products.minus_quantity();
-                }).fail(function (jqXHR, textStatus) {
+                }).fail(function (jqXHR) {
                     console.log('Error:', jqXHR);
                 });
             }
@@ -98,7 +100,7 @@ var Products = {
                     $("#page-preloader").hide();
                     $("#total_compare").html(data.total_items);
                     show_message(data);
-                }).fail(function (jqXHR, textStatus) {
+                }).fail(function (jqXHR) {
                     console.log('Error:', jqXHR);
                 });
 
@@ -123,7 +125,7 @@ var Products = {
                     if (typeof (data.redirect) !== 'undefined') {
                         window.location.href = data.redirect;
                     }
-                }).fail(function (jqXHR, textStatus) {
+                }).fail(function (jqXHR) {
                     console.log('Error:', jqXHR);
                 })
             }
@@ -172,6 +174,7 @@ var Products = {
 
     plus_quantity: function () {
         this.elemBody.find('.plus_quantity').on("click", function (e) {
+            e.preventDefault();
             var quantity = $(this).prev().val();
             if (Products.check_number_input(quantity) && quantity > 0) {
                 quantity++;
@@ -185,6 +188,7 @@ var Products = {
 
     minus_quantity: function () {
         this.elemBody.find('.minus_quantity').on("click", function (e) {
+            e.preventDefault();
             var quantity = $(this).prev().prev().val();
             if (Products.check_number_input(quantity) && quantity > 1) {
                 quantity--;
@@ -204,7 +208,7 @@ var Products = {
         this.elemBody.find('.cart-submit-btn').eq(0).on('click', function () {
             var status_update = $(this).attr('data-update');
 
-            if (status_update == "true") {
+            if (status_update === "true") {
                 show_message({
                     status: 'error',
                     message: 'Vui lòng cập nhật giỏ hàng'
@@ -225,8 +229,12 @@ var Products = {
         this.minus_quantity();
         this.confirm_checkout();
     }
-}
+};
 
+/***
+ * Object Checkout js
+ * @type {{elemBody: (jQuery|HTMLElement), init: Checkout.init, setup: Checkout.setup, removeall_item_cart: Checkout.removeall_item_cart, remove_item_cart: Checkout.remove_item_cart, calc_total_price: Checkout.calc_total_price, update_cart: Checkout.update_cart, add_to_cart: Checkout.add_to_cart}}
+ */
 var Checkout = {
     elemBody: $('body'),
     setup: function () {
@@ -234,7 +242,7 @@ var Checkout = {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
-            beforeSend: function (xhr) {
+            beforeSend: function () {
                 $("#page-preloader").show();
             }
         });
@@ -264,7 +272,7 @@ var Checkout = {
                     $("#page-preloader").hide();
                     $("#total_cart").html(data.total_items);
                     show_message(data);
-                }).fail(function (jqXHR, textStatus) {
+                }).fail(function (jqXHR) {
                     console.log('Error:', jqXHR);
                 });
 
@@ -288,7 +296,7 @@ var Checkout = {
                 $("#page-preloader").hide();
                 show_message(data);
                 $('.cart-submit-btn').attr('data-update', false);
-            }).fail(function (jqXHR, textStatus) {
+            }).fail(function (jqXHR) {
                 console.log('Error:', jqXHR);
             });
 
@@ -318,7 +326,7 @@ var Checkout = {
                     if (typeof (data.redirect) !== 'undefined') {
                         window.location.href = data.redirect;
                     }
-                }).fail(function (jqXHR, textStatus) {
+                }).fail(function (jqXHR) {
                     console.log('Error:', jqXHR);
                 })
             }
@@ -342,7 +350,7 @@ var Checkout = {
                 if (typeof (data.redirect) !== 'undefined') {
                     window.location.href = data.redirect;
                 }
-            }).fail(function (jqXHR, textStatus) {
+            }).fail(function (jqXHR) {
                 console.log('Error:', jqXHR);
             })
 
@@ -352,14 +360,13 @@ var Checkout = {
         if (typeof page !== 'undefined' && page === 'cart') {
             var quantity = 0,
                 price = 0,
-                total_item = 0,
-                summary_total = 0;
+                total_item = 0;
             this.elemBody.find('.quantity_item').each(function () {
                 quantity = $(this).val();
                 price = $(this).next().next().next().val();
                 total_item += parseInt(quantity * price)
             });
-            summary_total = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
+            var summary_total = (total_item.format(0, 3, '.', ',')) + '&nbsp;vnđ';
             this.elemBody.find('.cart-total .cart-summ b').eq(0).html(summary_total); // Render summary price
         }
     },
@@ -372,8 +379,12 @@ var Checkout = {
         this.removeall_item_cart();
         this.calc_total_price();
     }
-}
+};
 
+/***
+ *
+ * @type {{pageContact: Layout.pageContact, elemBody: (jQuery|HTMLElement), init: Layout.init}}
+ */
 var Layout = {
     elemBody: $('body'),
     pageContact: function () {
@@ -394,7 +405,7 @@ var Layout = {
         this.pageContact();
     }
 
-}
+};
 $(document).ready(function () {
     Products.init();
     Checkout.init();
