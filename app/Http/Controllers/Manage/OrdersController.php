@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manage;
 
 use App\Model\Orders;
 use App\Model\Settings;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\DB;
@@ -21,25 +22,29 @@ class OrdersController extends BackendController
      *
      * @return \Illuminate\Http\Response
      */
-
-    /**
-     * Validate product field
-     * @param $data
-     * @param null $id
-     * @return mixed
+    
+    /***
+     * @param array    $data
+     * @param int|null $id
+     *
+     * @return \Illuminate\Validation\Validator
      */
-    protected static function validator($data, $id = null)
+    protected static function validator(array $data)
     {
-
         return Validator::make($data, [
-
+            'ordered_at'       => 'required|date|date_format:Y-m-d H:i:s|before_or_equal:delivered_at',
+            'delivered_at'     => 'required|date|date_format:Y-m-d H:i:s|after_or_equal:ordered_at',
+            'status'           => 'required|integer',
+            'payment_id'       => 'required|integer',
+            'note'             => 'nullable|string',
+            'order_deliveries' => 'required|array|min:7'
         ]);
     }
 
 
     public function index()
     {
-        $orders = Orders::Orderby('id', 'desc')->paginate(12);
+        $orders = Orders::Orderby('id', 'desc')->paginate(15);
         return view('manage.modules.orders.index')->with(['records' => $orders]);
     }
 
@@ -50,7 +55,6 @@ class OrdersController extends BackendController
      */
     public function create()
     {
-
         return view('manage.modules.orders.create');
     }
 
@@ -73,10 +77,7 @@ class OrdersController extends BackendController
      */
     public function show($id)
     {
-        $record = Orders::find($id);
-        if (empty($record)) {
-            return abort(404);
-        }
+        $record = Orders::with('products', 'deliveries')->findOrFail($id);
         return view('manage.modules.orders.show')->with(['record' => $record]);
     }
 
@@ -88,10 +89,7 @@ class OrdersController extends BackendController
      */
     public function edit($id)
     {
-        $record = Orders::find($id);
-        if (empty($record)) {
-            return abort(404);
-        }
+        $record = Orders::with('products', 'deliveries')->findOrFail($id);
         return view('manage.modules.orders.edit')->with(['record' => $record]);
     }
 
@@ -104,35 +102,23 @@ class OrdersController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $order = Orders::find($id);
-        if (empty($order)) {
-            return abort(404);
-        }
+        $order  = Orders::findOrFail($id);
         $inputs = $request->all();
-        // Change input save ordered_at delivered_at
-        $validator = self::validator($inputs, $id);
+        if (!empty($inputs['ordered_at'])) {
+            $inputs['ordered_at'] = Carbon::createFromFormat('d/m/Y', $inputs['ordered_at'])->format('Y-m-d H:i:s');
+        }
+        if (!empty($inputs['delivered_at'])) {
+            $inputs['delivered_at'] = Carbon::createFromFormat('d/m/Y', $inputs['delivered_at'])->format('Y-m-d H:i:s');
+        }
+        $order_product    = $inputs['order_products'] ?? [];
+        $order_deliveries = $inputs['order_deliveries'] ?? [];
+        $validator = self::validator($inputs);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
-        if(isset($inputs['ordered_at'])){
-            $inputs['ordered_at'] = date("Y-m-d H:i:s",strtotime(str_replace('/','-',$inputs['ordered_at'])));
-        }
-        if(isset($inputs['delivered_at'])){
-            $inputs['delivered_at'] = date("Y-m-d H:i:s",strtotime(str_replace('/','-',$inputs['ordered_at'])));
-        }
-        $order_product = [];
-        if(isset($inputs['order_products'])){
-            $order_product = $inputs['order_products'];
-        }
-        $order_deliveries = [];
-        if(isset($inputs['order_deliveries'])){
-            $order_deliveries = $inputs['order_deliveries'];
-        }
-
         try {
             DB::beginTransaction();
             $order->update($inputs);
-
             if(!empty($order_deliveries)){
                 $order->deliveries->update($order_deliveries);
             }
