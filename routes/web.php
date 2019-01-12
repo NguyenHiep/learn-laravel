@@ -43,9 +43,9 @@
             });
             Route::resource('categories', 'CategoriesController');
             Route::resource('products', 'ProductsController');
-            
-            Route::get('orders/{id}/invoice',
-                ['as' => 'orders.invoice', 'uses' => 'OrdersController@invoice_index'])->where('id', '[0-9]+');
+    
+            Route::get('orders/mail/{id}/confirm', 'OrdersController@sentMailConfirm')->name('orders.mail.confirm')->where('id', '[0-9]+');
+            Route::get('orders/{id}/invoice', ['as' => 'orders.invoice', 'uses' => 'OrdersController@invoice_index'])->where('id', '[0-9]+');
             Route::resource('orders', 'OrdersController');
             
             Route::group(['prefix' => 'posts'], function () {

@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\OrderConfirm;
 
 class OrdersController extends BackendController
 {
@@ -161,17 +163,23 @@ class OrdersController extends BackendController
         $data['datatable'] = Orders::all();
     }
 
-    public function sent_mail_confirm($id)
+    public function sentMailConfirm($id)
     {
         // TODO: Sent mail confirm orders
+        $order = Orders::with('products', 'deliveries')->findOrFail($id);
+        Mail::to("nguyenminhhiep9x@gmail.com")->send(new OrderConfirm($order));
+        return redirect()->route('orders.index')->with([
+            'message' => __('system.message.update'),
+            'status'  => self::CTRL_MESSAGE_SUCCESS,
+        ]);
     }
 
-    public function sent_mail_shipping($id)
+    public function sentMailShipping($id)
     {
         // TODO: Sent mail confirm shipping order
     }
 
-    public function sent_mail_invoice($id)
+    public function sentMailInvoice($id)
     {
         // TODO: Sent mail confirm invoice
     }

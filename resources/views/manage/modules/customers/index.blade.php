@@ -1,10 +1,8 @@
 @extends('manage.master')
 @section('title', 'Quản lý thông tin thành viên')
-
 @section('content')
   <div class="page-content-wrapper">
     <div class="page-content">
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -16,10 +14,8 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
       <div class="row margin-top-30">
         <div class="col-md-12">
-          <!-- BEGIN EXAMPLE TABLE PORTLET-->
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -112,7 +108,6 @@
               </div>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE PORTLET-->
         </div>
       </div>
     </div>

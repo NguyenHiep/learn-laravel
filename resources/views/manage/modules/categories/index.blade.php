@@ -88,7 +88,7 @@
                   </label>
                   {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
                   [
-                  'class' => 'summernote_editor form-control',
+                  'class' => 'tinymce_editor form-control',
                   'rows' => 6
                   ]) !!}
 
@@ -258,27 +258,13 @@
 @endsection
 @section('styles')
   @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
-        type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
-  <!-- END PAGE LEVEL PLUGINS -->
-
   @stop
 @section('scripts')
  @parent
- <!-- BEGIN PAGE LEVEL SCRIPTS -->
- <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-         type="text/javascript"></script>
- <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-         type="text/javascript"></script>
- <script src=" {{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}"
-         type="text/javascript"></script>
+ <script src="{{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
  <script src="{{  asset('/manages/assets/global/plugins/plupload/js/plupload.full.min.js') }}" type="text/javascript"></script>
  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
- <!-- END PAGE LEVEL SCRIPTS -->
 @stop
