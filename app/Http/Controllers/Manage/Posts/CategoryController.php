@@ -4,18 +4,38 @@ namespace App\Http\Controllers\Manage\Posts;
 
 use App\Model\Posts\Category;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use App\Helppers\Uploads;
 
-class CategoryController extends Controller
+class CategoryController extends BackendController
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-
+    
+    /**
+     * Validate category field
+     * @param $data
+     * @param null $id
+     * @return mixed
+     */
+    protected static function validator($data, $id = null)
+    {
+        return Validator::make($data, [
+            'name'              => 'required|string|unique:posts_category,name,' . $id,
+            'slug'              => 'string|unique:posts_category,slug,' . $id,
+            'parent_id'         => 'numeric|min:0',
+            'image'             => 'image|max:1024',
+            'description'       => 'required|string',
+            'status'            => 'required|min:1|max:2',
+        ]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +44,7 @@ class CategoryController extends Controller
     public function index()
     {
         $data['list_cate_all'] = Category::all();
-        $data['records'] = Category::orderBy('id', 'asc')->paginate(12);
+        $data['records'] = Category::orderBy('id', 'asc')->paginate(20);
         return view('manage.modules.posts.category.index', $data);
     }
 
@@ -46,11 +66,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
-        // Begin validate
-        $this->validate(request(),
-            ['name' => 'required'],
-            ['name.required' => 'Vui lòng nhập tên chuyên mục']
-        );
+        $validator = self::validator($inputs);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+        $image = Uploads::upload($request, 'image', UPLOAD_CATEGORY);
+        if ($image) {
+            $inputs[ 'image' ] = $image;
+        }
 
         try {
             DB::beginTransaction();
@@ -68,7 +91,7 @@ class CategoryController extends Controller
             Log::error([$e->getMessage(), __METHOD__]);
         }
         return redirect()->back()->withInput($inputs)->with([
-            'message' => __('system.message.errors', ['errors' => 'Create category is failed']),
+            'message' => __('system.message.errors', ['errors' => 'Create category post is failed']),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
 
@@ -95,9 +118,6 @@ class CategoryController extends Controller
     {
         $list_cate_all = Category::all();
         $record = Category::findOrFail($id);
-        if (empty($record)) {
-            return abort(404);
-        }
         return view('manage.modules.posts.category.edit', compact('record', 'list_cate_all'));
     }
 
@@ -110,25 +130,25 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //Get data info
-        $record = Category::findOrFail($id);
-        if (empty($record)) {
-            return abort(404);
+        $category  = Category::findOrFail($id);
+        $inputs    = $request->all();
+        $validator = self::validator($inputs, $id);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
-        // Begin validate
-        $this->validate(request(),
-            ['name' => 'required',],
-            ['name.required' => 'Vui lòng nhập tên chuyên mục']
-        );
-        $inputs = $request->all();
+        $image = Uploads::upload($request, 'image', UPLOAD_CATEGORY);
+        if ($image) {
+            $inputs['image'] = $image;
+        }
+        
         DB::beginTransaction();
-        $record->update($inputs);
+        $category->update($inputs);
         DB::commit();
 
         return redirect()->route('category.index')->with([
             'message' => __('system.message.update'),
             'status'  => self::CTRL_MESSAGE_SUCCESS,
         ]);
-
     }
 
     /**
@@ -139,17 +159,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        if (empty($category)) {
-            return abort(404);
-        }
-
+        $category = Category::findOrFail($id);
         try {
             DB::beginTransaction();
             $category->delete();
             DB::commit();
             return redirect()->route('category.index')->with([
-                'message' => 'Delete category is success',
+                'message' => __('system.message.delete'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
         } catch (\Exception $e) {
@@ -157,7 +173,7 @@ class CategoryController extends Controller
             Log::error([$e->getMessage(), __METHOD__]);
         }
         return redirect()->route('category.index')->with([
-            'message' => __('system.message.error', ['errors' => 'Delete category is failed']),
+            'message' => __('system.message.error', ['errors' => 'Delete post category is failed']),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
     }

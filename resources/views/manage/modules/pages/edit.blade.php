@@ -2,11 +2,7 @@
 @section('title', __('static.manage.pages.edit'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -18,10 +14,7 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title"> {{__('static.manage.pages.edit')}}  </h3>
-      <!-- END PAGE TITLE-->
       <div class="row">
         {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\PagesController@update',$record->id], 'files' => true]) !!}
         <div class="col-md-9">
@@ -43,19 +36,17 @@
                 </div>
 
                 @php $key = 'page_slug'; @endphp
-
                 <div class="form-group">
                   <label class="control-label">{{__('common.pages.'.$key.'')}} : <a href="{{url($record->page_slug)}}" target="_blank"> {{url('/')}}<span class="change_slug">{{'/'.$record->page_slug}}</span></a>
                     {{ Form::hidden($key,old($key), array('id' => 'slug')) }}
                   </label>
                 </div>
-
                 @php $key = 'page_full'; @endphp
                 <div class="form-group">
                   <label class="control-label">{{__('common.pages.'.$key.'')}}
                   </label>
                   {!! Form::textarea($key, old($key) ,[
-                    'class' => 'summernote_editor form-control',
+                    'class' => 'tinymce_editor form-control',
                     'rows' => 9
                   ]) !!}
                 </div>
@@ -77,10 +68,8 @@
                     'placeholder' => __('common.pages.'.$key.'_placeholder')
                   ]) !!}
                 </div>
-
               </div>
             </div>
-
           </div>
         </div> <!-- End .col-md-9 -->
         <div class="col-md-3">
@@ -155,49 +144,21 @@
               <div class="clearfix margin-top-15" id="img_featured">
                 @if(!empty($record->{$key}))
                   <img src="{{Storage::url(UPLOAD_MEDIAS.$record->media->name)}}" draggable="false" alt="" class="img-responsive">
+                  {{ Form::hidden($key, old($key, $record->{$key}),['id' => $key]) }}
+                @else
+                  <input type="hidden" name="{{$key}}" value="0" id="{{$key}}"/>
                 @endif
               </div>
-              <input type="hidden" name="{{$key}}" value="{{ $record->{$key} }}" id="{{ $key }}"/>
+
             </div>
           </div>
         </div> <!-- End .col-md-3 -->
         {!! Form::close() !!}
       </div>
-      <!-- END CONTENT BODY -->
     </div>
+  </div>
   @include('manage.blocks.medias.modal', [
       'medias' => $medias,
-      'class' => 'posts-modal',
       'id' => $record->page_medias_id
-    ])
-  @include('manage.blocks.medias.content', [
-    'medias' => $medias,
-    'class' => 'posts-content',
   ])
-  @endsection
-  @section('styles')
-    @parent
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-      <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css"/>
-      <!-- END PAGE LEVEL PLUGINS -->
-  @stop
-  @section('scripts')
-    @parent
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-      <script src="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.min.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/js/plugin/medias/summernote-ext-medias.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
-      <!-- END PAGE LEVEL SCRIPTS -->
-    @stop
-
-    {{-- Include for media uploads --}}
-    @push('custom-scripts')
-    <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
-            type="text/javascript"></script>
-    @endpush
+@endsection

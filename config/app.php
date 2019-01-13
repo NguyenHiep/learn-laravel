@@ -181,7 +181,6 @@ return [
         Watson\Active\ActiveServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         //Add package managenment image
@@ -240,10 +239,5 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
 
     ],
-
-    'locales' => ['vi' => 'Việt Nam', 'en' => 'English'],
-
-    'skip_locales' => ['manage', 'auth', 'login'],
-    //'skip_locales' => ['nguyenhiep'],
 
 ];

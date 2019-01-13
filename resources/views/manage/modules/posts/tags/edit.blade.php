@@ -2,11 +2,7 @@
 @section('title', __('static.manage.posts.tags.page_title'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -17,20 +13,15 @@
             <a href="{{route('tags.index')}}">{{__('static.sidebars.manage.posts.tags')}}</a>
             <i class="fa fa-circle"></i>
           </li>
-
           <li>
             <span>Chỉnh sửa thẻ</span>
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title"> {{__('static.sidebars.manage.posts.tags')}}  </h3>
-      <!-- END PAGE TITLE-->
       <div class="row">
+        {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\Posts\TagsController@update',$record->id] , 'files' => true]) !!}
         <div class="col-md-9">
-          {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\Posts\TagsController@update',$record->id] , 'files' => true]) !!}
-
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -53,27 +44,18 @@
                   </label>
                   {!! Form::text($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.posts.tags.'.$key.'_placeholder')]) !!}
                 </div>
-
                 @php $key = 'description'; @endphp
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.tags.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, isset($record->{$key}) ? $record->{$key} : old($key) ,
-                  [
-                  'class' => 'summernote_editor form-control',
+                  {!! Form::textarea($key,old($key, $record->{$key}),[
+                  'class' => 'tinymce_editor form-control',
                   'rows' => 6
                   ]) !!}
-
                 </div>
-
-              </div>
-              <div class="form-actions">
-                <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                <a href="{{ route('tags.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
               </div>
             </div>
           </div>
-          {!! Form::close() !!}
         </div>
         <div class="col-md-3">
           <div class="portlet light bordered">
@@ -84,22 +66,28 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-
-            </div>
-          </div>
-
-          <div class="portlet light bordered">
-            <div class="portlet-title">
-              <div class="caption">Ảnh tiêu biểu </div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+              @php $key = 'status'; @endphp
+              <div class="form-group clearfix">
+                @if(!empty(__('selector.post_status')))
+                  <div class="radio-list">
+                    @foreach(__('selector.post_status') as $k =>$val)
+                      @if($k === STATUS_DISABLE)
+                        <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
+                      @else
+                        <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
+                      @endif
+                    @endforeach
+                  </div>
+                @endif
               </div>
-            </div>
-            <div class="portlet-body" style="display: block;">
-
+              <div class="form-group clearfix">
+                <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
+                <a href="{{ route('tags.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+              </div>
             </div>
           </div>
         </div>
+        {!! Form::close() !!}
       </div>
     </div>
     <!-- END CONTENT BODY -->

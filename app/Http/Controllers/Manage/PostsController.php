@@ -6,9 +6,8 @@ use App\Model\Posts;
 use App\Model\Posts\Category;
 use App\Model\Posts\Tags;
 use App\Http\Controllers\BackendController;
-use Carbon\Carbon;
-use DB;
-use Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Mockery\Exception;
 use Illuminate\Support\Facades\Validator;
 

@@ -19,6 +19,7 @@ class CreatePostsTagsTable extends Migration
             $table->string('name',255)->unique()->comment('Tên thẻ');
             $table->string('slug', 255)->comment('Tên thẻ không dấu');
             $table->string('description', 1023)->nullable()->comment('Mô tả thẻ');
+            $table->tinyInteger('status')->default(1)->comment('Trạng thái [1: Đã đăng, 2: Xét duyệt]');
             $table->timestamps();
             $table->softDeletes();
         });

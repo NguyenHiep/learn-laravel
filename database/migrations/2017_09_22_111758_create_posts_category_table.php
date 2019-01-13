@@ -21,6 +21,7 @@ class CreatePostsCategoryTable extends Migration
             $table->integer('parent_id')->comment('Id chuyên mục cha, mặc định là 0');
             $table->string('image', 255)->nullable()->comment('Hình ảnh');
             $table->string('description', 1023)->nullable()->comment('Mô tả nội dung chuyên mục');
+            $table->tinyInteger('status')->default(1)->comment('Trạng thái [1: Đã đăng, 2: Xét duyệt]');
             $table->timestamps();
             $table->softDeletes();
         });

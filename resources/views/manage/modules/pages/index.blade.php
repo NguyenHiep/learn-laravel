@@ -2,11 +2,7 @@
 @section('title', __('static.manage.settings.settings.page_title'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -18,10 +14,8 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
       <div class="row margin-top-30">
         <div class="col-md-12">
-          <!-- BEGIN EXAMPLE TABLE PORTLET-->
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -41,7 +35,7 @@
                   <thead>
                   <tr>
                     <th> <!-- <th class="checkbox-list">-->
-                      <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
+                      <input class="js-action-list-checkboxes" name="checkboxes" value="all" type="checkbox" id="form_checkboxes">
                     </th>
                     <th><i class="icon-picture"></i></th>
                     <th>Tiêu đề</th>
@@ -52,18 +46,15 @@
                   </tr>
                   </thead>
                   <tbody>
-
-                  @if (count($records) > 0)
+                  @if (!empty($records) > 0)
                     @foreach ($records as $record)
                       <tr>
                         <td> <!--<td class="checkbox-list"> -->
-                          <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}"
-                                 type="checkbox">
+                          <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
                         </td>
                         <td>
                           @if(!empty($record->page_medias_id))
-                            <img src="{{Storage::url(UPLOAD_MEDIAS.$record->page_featured)}}" draggable="false" alt=""
-                                 class="img-thumbnail" width="80" height="40">
+                            <img src="{{Storage::url(UPLOAD_MEDIAS.$record->page_featured)}}" draggable="false" alt="" class="img-thumbnail" width="80" height="40">
                           @endif
                         </td>
                         <td> {{$record->page_title}} </td>
@@ -72,7 +63,6 @@
                         <td>
                           <span class="label label-sm @if($record->page_status === STATUS_ENABLE) label-success @else label-danger @endif  margin-right-10"> {{ __('selector.status.'.$record->page_status) }} </span>
                         </td>
-
                         <td class="text-right ">
                           <div class="btn-group btn-group-solid">
                             <a title="{{__('common.buttons.edit')}}" href="{{ route('pages.edit',$record->id) }}"
@@ -98,11 +88,8 @@
               </div>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE PORTLET-->
         </div>
       </div>
     </div>
-    <!-- END CONTENT BODY -->
   </div>
-
 @endsection

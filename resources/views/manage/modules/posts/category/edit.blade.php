@@ -2,11 +2,7 @@
 @section('title', __('static.manage.posts.category.page_title'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -17,20 +13,15 @@
             <a href="{{route('category.index')}}">{{__('static.sidebars.manage.posts.category')}}</a>
             <i class="fa fa-circle"></i>
           </li>
-
           <li>
             <span>Chỉnh sửa chuyên mục</span>
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title"> {{__('static.sidebars.manage.posts.category')}}  </h3>
-      <!-- END PAGE TITLE-->
       <div class="row">
+        {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\Posts\CategoryController@update',$record->id], 'files' => true]) !!}
         <div class="col-md-9">
-          {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\Posts\CategoryController@update',$record->id], 'files' => true]) !!}
-
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -57,7 +48,6 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.category.'.$key.'')}}
                   </label>
-
                   <select name="{{$key}}" id="{{$key}}" class="form-control select2me">
                     @php
                     echo $record->id;
@@ -101,35 +91,24 @@
                             } // End loop level 2
 
                           }
-
                         } // End loop level 1
                       }
                       echo $html;
                     @endphp
-
                   </select>
-
                 </div>
                 @php $key = 'description'; @endphp
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.category.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, isset($record->{$key}) ? $record->{$key} : old($key) ,
-                  [
-                  'class' => 'summernote_editor form-control',
-                  'rows' => 6
+                  {!! Form::textarea($key, old($key, $record->{$key}),[
+                    'class' => 'tinymce_editor form-control',
+                    'rows' => 6
                   ]) !!}
-
                 </div>
-
-              </div>
-              <div class="form-actions">
-                <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                <a href="{{ route('category.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
               </div>
             </div>
           </div>
-          {!! Form::close() !!}
         </div>
         <div class="col-md-3">
           <div class="portlet light bordered">
@@ -140,7 +119,24 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-
+              @php $key = 'status'; @endphp
+              <div class="form-group clearfix">
+                @if(!empty(__('selector.post_status')))
+                  <div class="radio-list">
+                    @foreach(__('selector.post_status') as $k =>$val)
+                      @if($k === STATUS_DISABLE)
+                        <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
+                      @else
+                        <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
+                      @endif
+                    @endforeach
+                  </div>
+                @endif
+              </div>
+              <div class="form-group clearfix">
+                <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
+                <a href="{{ route('category.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+              </div>
             </div>
           </div>
 
@@ -152,35 +148,49 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
+              @php $key='image' @endphp
+              <div class="portlet-body" style="display: block;">
+                <div class="form-group @if ($errors->has($key)) has-error  @endif last">
+                  <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                      @php
+                        $img_url =  (!empty($record->{$key})) ? asset(UPLOAD_CATEGORY.$record->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
+                        echo '<img src="'.$img_url.'" alt="product" />';
+                      @endphp
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                    <div>
+                  <span class="btn default btn-file">
+                     @php
+                       echo (!empty($record->{$key})) ? '<span class="fileinput-new"> Thay đổi ảnh </span>' : '<span class="fileinput-new"> Chọn hình ảnh </span>';
+                     @endphp
+                    <span class="fileinput-exists"> Ảnh khác </span>
+                    {{ Form::file($key) }}
+                  </span>
+                      <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
+                    </div>
+                  </div>
+                  @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                </div>
 
+              </div>
             </div>
           </div>
         </div>
+        {!! Form::close() !!}
       </div>
     </div>
-    <!-- END CONTENT BODY -->
   </div>
-
 @endsection
 @section('styles')
   @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-  <!-- END PAGE LEVEL PLUGINS -->
-  @stop
+  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+@stop
 @section('scripts')
- @parent
- <!-- BEGIN PAGE LEVEL SCRIPTS -->
- <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-         type="text/javascript"></script>
- <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-         type="text/javascript"></script>
- <script src=" {{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}"
-         type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
+  @parent
+  <script src="{{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+  <script src="{{  asset('/manages/assets/global/plugins/plupload/js/plupload.full.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
 @stop

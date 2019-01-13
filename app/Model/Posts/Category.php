@@ -24,6 +24,7 @@ class Category extends BaseModel
         'parent_id',
         'image',
         'description',
+        'status'
     ];
 
     /**
