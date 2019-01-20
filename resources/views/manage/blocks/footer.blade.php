@@ -57,6 +57,7 @@
     theme: "modern",
     height: 250,
     language: 'vi_VN',
+    branding: false,
     plugins: [
       "advlist autolink lists link image charmap print preview hr anchor pagebreak",
       "searchreplace wordcount visualblocks visualchars code fullscreen",
@@ -80,7 +81,7 @@
         title : 'Filemanager',
         width : x * 0.8,
         height : y * 0.8,
-        resizable : "yes",
+        resizable : "no",
         close_previous : "no"
       });
     }

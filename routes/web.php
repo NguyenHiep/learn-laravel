@@ -105,6 +105,8 @@
         Route::post('/removeallcart/', 'Checkout\CartController@removeAll')->name('checkout.cart.removeall');
         Route::post('/update/', 'Checkout\CartController@update')->name('checkout.cart.update');
     });
+    Route::get('lien-he', 'ContactController@index')->name('contact.index');
+    Route::post('lien-he', 'ContactController@store')->name('contact.store');
     Route::get('{page_slug}', 'PagesController@index')->name('page.show');
 
 
