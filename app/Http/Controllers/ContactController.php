@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail;
 
 class ContactController extends FrontendController
 {
@@ -24,6 +23,8 @@ class ContactController extends FrontendController
             'email' => 'required|email',
             'mess'  => 'required|string',
         ]);
+        //TODO: save info
         
+        //TODO: Sent mail
     }
 }
