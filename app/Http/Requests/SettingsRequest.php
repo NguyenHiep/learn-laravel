@@ -33,11 +33,11 @@ class SettingsRequest extends FormRequest
             'about_privacy'     => 'required|string',
             'about_terms'       => 'required|string',
             'company_lat'       => [
-                'max:9',
+                'required',
                 'regex:/[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)/u'
             ],
             'company_lng'       => [
-                'max:9',
+                'required',
                 'regex:/[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)/u'
             ],
             'email1'            => 'email',

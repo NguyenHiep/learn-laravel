@@ -15,7 +15,7 @@
         <form action="{{ route('contact.store') }}" method="post" class="form-validate">
           @csrf
           <h3 class="component-ttl component-ttl-ct component-ttl-hasdesc"><span>{{__('frontend.contact.title')}}</span></h3>
-          <p class="component-desc component-desc-ct">{{__('frontend.contact.description')}}}</p>
+          <p class="component-desc component-desc-ct">{{__('frontend.contact.description')}}</p>
           <p class="contactform-field contactform-text">
             <label class="contactform-label">{{__('frontend.contact.form.name')}}</label>
             <span class="contactform-input">
