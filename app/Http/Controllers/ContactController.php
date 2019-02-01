@@ -7,14 +7,18 @@ use App\Model\Contact;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Mockery\Exception;
+use App\Jobs\SendEmail;
+use App\Model\Settings;
 
 class ContactController extends FrontendController
 {
     private $contact;
+    private $settings;
     
-    public function __construct( Contact $contact)
+    public function __construct( Contact $contact, Settings $settings)
     {
-        $this->contact = $contact;
+        $this->contact  = $contact;
+        $this->settings = $settings->checkWebsiteInfo();
     }
     
     public function index()
@@ -46,7 +50,18 @@ class ContactController extends FrontendController
             $inputs['ip_user'] = getRealIpAddr();
             $this->contact->fill($inputs);
             $this->contact->save();
-            //TODO: Sent mail
+            // Sent mail contact to company
+            $contens = __('frontend.contact.email.name') . $inputs['name'];
+            $contens .= '<br/> Email: ' . $inputs['email'];
+            $contens .= '<br/> Nội dung: ' . $inputs['content'];
+            $emailInfo = [
+                'subject'   => 'Email liên hệ từ shop store',
+                'from'      => $this->settings->email1,
+                'from_name' => $this->settings->email1_name,
+                'recipient' => $this->settings->company_email,
+                'content'   => $contens
+            ];
+            dispatch((new SendEmail($emailInfo)));
             DB::commit();
             return redirect()->route('contact.index')->with([
                 'message' => __('frontend.contact.message_thank'),
