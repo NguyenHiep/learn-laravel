@@ -13,10 +13,10 @@ class ProductsController extends FrontendController
     public $mproduct;
     public $config_toolbar;
 
-    public function __construct()
+    public function __construct(Categories $categories, Products $products)
     {
-        $this->mcategory      = new Categories();
-        $this->mproduct       = new Products();
+        $this->mcategory      = $categories;
+        $this->mproduct       = $products;
         $this->config_toolbar = ToolbarConfig::getInstance();
     }
 

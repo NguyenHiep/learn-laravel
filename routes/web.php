@@ -107,6 +107,7 @@
     });
     Route::get('lien-he', 'ContactController@index')->name('contact.index');
     Route::post('lien-he', 'ContactController@store')->name('contact.store');
+    Route::get('tim-kiem', 'SearchController@index')->name('search.index');
     Route::get('{page_slug}', 'PagesController@index')->name('page.show');
 
 

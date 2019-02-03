@@ -114,5 +114,17 @@ class Products extends BaseModel
         $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->limit($limit)->get();
         return $product;
     }
-
+    
+    public function search(ToolbarConfig $config)
+    {
+        $product = Products::where('status', STATUS_ENABLE)
+            ->where(function ($query) use ($config) {
+                $query->where('sku', $config->search)
+                    ->orWhereRaw("`name` LIKE CONCAT('%', CONVERT('" . $config->search . "', BINARY), '%')")
+                    ->orWhere('name', 'like', '%'.$config->search.'%');
+            })
+            ->orderBy($config->sort['column'], $config->sort['value'])
+            ->paginate($config->limit);
+        return $product;
+    }
 }
