@@ -1,5 +1,4 @@
 @if(count($categories))
-<!-- Catalog Categories - start -->
 <div class="section-sb-current">
   @foreach($categories as $category)
     @if($category->parent_id === 0)
@@ -18,5 +17,4 @@
     @endif
   @endforeach
 </div>
-<!-- Catalog Categories - end -->
 @endif

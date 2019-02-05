@@ -24,7 +24,7 @@ var Products = {
     setup: function () {
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             beforeSend: function () {
                 $("#page-preloader").show();
@@ -240,7 +240,7 @@ var Checkout = {
     setup: function () {
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             beforeSend: function () {
                 $("#page-preloader").show();
@@ -412,3 +412,73 @@ $(document).ready(function () {
     Layout.init();
 });
 
+function insertParam(key, value)
+{
+    key   = encodeURI(key);
+    value = encodeURI(value);
+
+    var kvp = document.location.search.substr(1).split('&');
+
+    var i = kvp.length;
+    var x;
+    while (i--) {
+        x = kvp[i].split('=');
+
+        if (x[0] == key) {
+            x[1]   = value;
+            kvp[i] = x.join('=');
+            break;
+        }
+    }
+
+    if (i < 0) {kvp[kvp.length] = [key, value].join('=');}
+
+    //this will reload the page, it's likely better to store this until finished
+    document.location.search = kvp.join('&');
+}
+
+function get_filter(class_name)
+{
+    var filter = [];
+    $('.' + class_name + ':checked').each(function() {
+        filter.push($(this).val());
+    });
+    return filter;
+}
+function filterProducts() {
+    // Get params
+    let price_from = $("input[name='price_from']").val();
+    let price_to   = $("input[name='price_to']").val();
+    let stocks     = get_filter('stocks');
+    let sizes      = get_filter('sizes');
+    let brands     = get_filter('brands');
+    let PATH_FILTER_SEARCH = ajaxcalls_vars.host + '/tim-kiem' + window.location.search;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        beforeSend: function () {
+            $("#page-preloader").show();
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url : PATH_FILTER_SEARCH,
+        data: {
+            price_from: price_from,
+            price_to  : price_to,
+            stocks    : stocks,
+            sizes     : sizes,
+            brands    : brands
+        },
+        success: function (html) {
+            console.log(html);
+            $('#page-preloader').hide();
+        }
+    });
+    return false; // Not redirect
+}
+
+function clearFilter() {
+
+}

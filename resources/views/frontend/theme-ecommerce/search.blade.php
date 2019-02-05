@@ -18,8 +18,10 @@
         @include('frontend.theme-ecommerce.sidebar.filter')
         @include('frontend.theme-ecommerce.sidebar.menu', ['categories' => $categories])
       </div>
-      <div class="section-cont">
+      @if($products->total() > 0)
+        <div class="section-cont">
         <div class="section-top">
+          <div class="section-mode">Tìm thấy: <strong>{{ $products->total() }}</strong> sản phẩm</div>
           <div class="section-sortby">
             <p>Sắp xếp</p>
             <ul>
@@ -41,7 +43,7 @@
             </ul>
           </div>
           <div class="section-count">
-            <p>12</p>
+            <p>{{ request()->query('limit') ?? 12 }}</p>
             <ul>
               <li><a href="{{ route('search.index', addParamsUrl(['limit' => 12]))  }}">12</a></li>
               <li><a href="{{ route('search.index', addParamsUrl(['limit' => 24]))  }}">24</a></li>
@@ -49,8 +51,7 @@
             </ul>
           </div>
         </div>
-        @if(!empty($products))
-          <div class="prod-items section-items">
+        <div class="prod-items section-items">
             @foreach($products as $product)
               <div class="prod-i">
                 <div class="prod-i-top">
@@ -87,9 +88,11 @@
               </div>
             @endforeach
           </div>
-      @endif
-      {{ $products->appends(request()->query())->links('vendor.pagination.theme')  }}
+        {{ $products->appends(request()->query())->links('vendor.pagination.theme')  }}
       </div>
+      @else
+        <p class="section-cont">Không tìm thấy sản phẩm nào!</p>
+      @endif
     </section>
   </main>
 @endsection

@@ -20,10 +20,19 @@ class ProductsController extends FrontendController
         $this->config_toolbar = ToolbarConfig::getInstance();
     }
 
-    public function promotion()
+    public function promotion(Request $request)
     {
+        $rules = [
+            'price_from' => 'nullable|integer',
+            'price_to'   => 'nullable|integer|gte:price_from',
+            'stocks'     => 'nullable|array',
+            'sizes'      => 'nullable|array',
+            'brands'     => 'nullable|array',
+            'colors'     => 'nullable|array',
+        ];
+        $this->validate($request, $rules);
         $data['mode']       = $this->config_toolbar->mode;
-        $data['products']   = $this->mproduct->getPromotionProducts($this->config_toolbar);
+        $data['products']   = $this->mproduct->getPromotionProducts($this->config_toolbar, $request->all());
         $data['categories'] = $this->mcategory->getListCategory();
         return view('frontend.theme-ecommerce.products.promotion', $data);
     }

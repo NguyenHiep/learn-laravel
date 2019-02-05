@@ -69,12 +69,45 @@ class Products extends BaseModel
         }
         return false;
     }
-
-    public function getPromotionProducts(ToolbarConfig $config)
+    
+    /***
+     * Show promotion product
+     * @param ToolbarConfig $config
+     * @param array         $options
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getPromotionProducts(ToolbarConfig $config, array $options)
     {
-        $product = Products::where('status', STATUS_ENABLE)
-            ->orderBy($config->sort['column'], $config->sort['value'])
-            ->paginate($config->limit);
+        $q = Products::query();
+        $q->where('status', STATUS_ENABLE);
+        // Filter by price
+        $price_from = 0;
+        if (!empty($options['price_from'])) {
+            $price_from = intval($options['price_from']);
+        }
+        $price_to = 0;
+        if (!empty($options['price_to'])) {
+            $price_to = intval($options['price_to']);
+        }
+        if (!empty($price_to)) {
+            $q->whereBetween('price', [$price_from, $price_to]);
+        }
+        // Filter stock
+        $status = $options['status'] ?? '';
+        if (!empty($status) && is_array($status)) {
+            $q->where(function ($query) use($status){
+                if (in_array('in_stock', $status)) {
+                    $query->orWhere('quantity', '>', 0);
+                }
+                if (in_array('out_stock', $status)) {
+                    $query->orWhere('quantity', 0);
+                }
+            });
+        
+        }
+        //TODO: Filter by size, colors, brands
+        $product = $q->orderBy($config->sort['column'], $config->sort['value'])->paginate($config->limit);
         return $product;
     }
 
@@ -115,16 +148,49 @@ class Products extends BaseModel
         return $product;
     }
     
-    public function search(ToolbarConfig $config)
+    /***
+     * Search function
+     * @param ToolbarConfig $config
+     * @param array         $options
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function search(ToolbarConfig $config, array $options)
     {
-        $product = Products::where('status', STATUS_ENABLE)
+        $q = Products::query();
+        $q->where('status', STATUS_ENABLE)
             ->where(function ($query) use ($config) {
                 $query->where('sku', $config->search)
                     ->orWhereRaw("`name` LIKE CONCAT('%', CONVERT('" . $config->search . "', BINARY), '%')")
-                    ->orWhere('name', 'like', '%'.$config->search.'%');
-            })
-            ->orderBy($config->sort['column'], $config->sort['value'])
-            ->paginate($config->limit);
+                    ->orWhere('name', 'like', '%' . $config->search . '%');
+            });
+        // Filter by price
+        $price_from = 0;
+        if (!empty($options['price_from'])) {
+            $price_from = intval($options['price_from']);
+        }
+        $price_to = 0;
+        if (!empty($options['price_to'])) {
+            $price_to = intval($options['price_to']);
+        }
+        if (!empty($price_to)) {
+            $q->whereBetween('price', [$price_from, $price_to]);
+        }
+        // Filter stock
+        $status = $options['status'] ?? '';
+        if (!empty($status) && is_array($status)) {
+            $q->where(function ($query) use($status){
+                if (in_array('in_stock', $status)) {
+                    $query->orWhere('quantity', '>', 0);
+                }
+                if (in_array('out_stock', $status)) {
+                    $query->orWhere('quantity', 0);
+                }
+            });
+           
+        }
+        //TODO: Filter by size, colors, brands
+        $product = $q->orderBy($config->sort['column'], $config->sort['value'])->paginate($config->limit);
         return $product;
     }
 }
