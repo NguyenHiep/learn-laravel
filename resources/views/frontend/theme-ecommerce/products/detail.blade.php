@@ -7,7 +7,6 @@
 @section('content')
   <main>
     <section class="container">
-      
       <ul class="b-crumbs">
         <li>
           <a href="{{ URL::to('/') }}">Trang chủ</a>
@@ -17,10 +16,7 @@
         </li>
       </ul>
       <h1 class="main-ttl"><span>{{ $product->name }}</span></h1>
-      <!-- Single Product - start -->
       <div class="prod-wrap">
-        
-        <!-- Product Images -->
         <div class="prod-slider-wrap">
           <div class="prod-slider">
             <ul class="prod-slider-car">
@@ -72,8 +68,6 @@
             </ul>
           </div>
         </div>
-        
-        <!-- Product Description/Info -->
         <div class="prod-cont">
           <ul class="prod-cont-txt">
             <li>
@@ -95,19 +89,19 @@
             <p class="prod-skuttl">Color</p>
             <ul class="prod-skucolor">
               <li class="active">
-                <img src="img/color/blue.jpg" alt="">
+                <img src="{{ asset('img/color/blue.jpg') }}" alt="">
               </li>
               <li>
-                <img src="img/color/red.jpg" alt="">
+                <img src="{{ asset('img/color/red.jpg') }}" alt="">
               </li>
               <li>
-                <img src="img/color/green.jpg" alt="">
+                <img src="{{ asset('img/color/green.jpg') }}" alt="">
               </li>
               <li>
-                <img src="img/color/yellow.jpg" alt="">
+                <img src="{{ asset('img/color/yellow.jpg') }}" alt="">
               </li>
               <li>
-                <img src="img/color/purple.jpg" alt="">
+                <img src="{{ asset('img/color/purple.jpg') }}" alt="">
               </li>
             </ul>
             <p class="prod-skuttl">CLOTHING SIZES</p>
@@ -168,7 +162,6 @@
             <li><a href="#" class="prod-showprops">All Features</a></li>
           </ul>--}}
         </div>
-        
         <!-- Product Tabs -->
         <div class="prod-tabs-wrap">
           <ul class="prod-tabs">
@@ -176,10 +169,8 @@
             <li><a data-prodtab-num="2" href="#" data-prodtab="#prod-tab-2">Đánh giá (3)</a></li>
           </ul>
           <div class="prod-tab-cont">
-            
             <p data-prodtab-num="1" class="prod-tab-mob active" data-prodtab="#prod-tab-1">Mô tả</p>
             <div class="prod-tab stylization" id="prod-tab-1"> {!! $product->description !!}</div>
-            
             <p data-prodtab-num="2" class="prod-tab-mob" data-prodtab="#prod-tab-2">Đánh giá (3)</p>
             <div class="prod-tab" id="prod-tab-2">
               <ul class="reviews-list">
@@ -273,9 +264,6 @@
         </div>
       
       </div>
-      <!-- Single Product - end -->
-      
-      <!-- Related Products - start -->
       <div class="prod-related">
         <h2><span>Sản phẩm tương tự</span></h2>
         <div class="prod-related-car" id="prod-related-car">
@@ -299,9 +287,6 @@
                   </div>
                 </div>
               </div>
-              
-              
-              
               <div class="prod-rel">
                 <a href="product.html" class="prod-rel-img">
                   <img src="http://placehold.it/300x366" alt="Nulla numquam obcaecati">
@@ -320,9 +305,6 @@
                   </div>
                 </div>
               </div>
-              
-              
-              
               <div class="prod-rel">
                 <a href="product.html" class="prod-rel-img">
                   <img src="http://placehold.it/370x300" alt="Dignissimos eaque earum">
@@ -341,9 +323,6 @@
                   </div>
                 </div>
               </div>
-              
-              
-              
               <div class="prod-rel">
                 <a href="product.html" class="prod-rel-img">
                   <img src="http://placehold.it/300x345" alt="Porro quae quasi">
@@ -383,9 +362,6 @@
                   </div>
                 </div>
               </div>
-              
-              
-              
               <div class="prod-rel">
                 <a href="product.html" class="prod-rel-img">
                   <img src="http://placehold.it/300x394" alt="Harum illum incidunt">
@@ -404,9 +380,6 @@
                   </div>
                 </div>
               </div>
-              
-              
-              
               <div class="prod-rel">
                 <a href="product.html" class="prod-rel-img">
                   <img src="http://placehold.it/300x303" alt="Reprehenderit rerum">
@@ -493,8 +466,6 @@
           </ul>
         </div>
       </div>
-      <!-- Related Products - end -->
-    
     </section>
   </main>
 @endsection

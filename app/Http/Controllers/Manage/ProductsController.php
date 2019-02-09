@@ -89,7 +89,7 @@ class ProductsController extends BackendController
 
         $galary_upload = Uploads::multiple_upload($request, 'galary_img',UPLOAD_PRODUCT);
         if($galary_upload){
-            $inputs['galary_img'] = json_encode($galary_upload);
+            $inputs['galary_img'] = $galary_upload;
         }
         $pictures = Uploads::upload($request, 'pictures', UPLOAD_PRODUCT);
         if($pictures){
@@ -142,9 +142,6 @@ class ProductsController extends BackendController
     public function edit($id)
 {       $list_cate_all  = Categories::all();
         $record = Products::find($id);
-        if(!empty($record->galary_img)){
-            $record->galary_img = json_decode($record->galary_img);
-        }
         if(empty($record)){
             return abort(404);
         }
@@ -180,7 +177,7 @@ class ProductsController extends BackendController
         }
         $galary_upload = Uploads::multiple_upload($request, 'galary_img',UPLOAD_PRODUCT);
         if($galary_upload){
-            $inputs['galary_img'] = json_encode($galary_upload);
+            $inputs['galary_img'] = $galary_upload;
         }
         if(isset($inputs['slug'])){
             $inputs['slug'] = unicode_str_filter($inputs['slug']);

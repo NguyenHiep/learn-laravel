@@ -39,17 +39,15 @@ class ProductsController extends FrontendController
 
     public function show($slug){
         $product = $this->mproduct->getProductBySlug($slug);
-        if(empty($product))
-        {
+        if (empty($product)) {
             abort(404);
         }
-
-        if(!empty($product->galary_img))
-        {
-            $product->galary_img = json_decode($product->galary_img);
-        }
-
-        $assignData = [ 'product' => $product ];
+        // Get related product
+        $listRelated = $this->mproduct->getRelatedProducts($product->id);
+        $assignData = [
+            'product'         => $product,
+            'product_related' => $listRelated
+        ];
         return view('frontend.theme-ecommerce.products.detail', $assignData);
     }
 
@@ -65,12 +63,6 @@ class ProductsController extends FrontendController
                 'data'    => ''
             ]);
         }
-
-        if(!empty($product->galary_img))
-        {
-            $product->galary_img = json_decode($product->galary_img);
-        }
-
         return response()->view('frontend.theme-ecommerce.products.quickview', ['product' => $product], 200)
                          ->header('Content-Type', 'text/html');
 

@@ -40,7 +40,11 @@ class Products extends BaseModel
         'quantity',
         'pictures',
     ];
-
+    
+    protected $casts = [
+        'galary_img' => 'array'
+    ];
+    
     public static function boot() {
         parent::boot();
         Products::observe(new ProductsObserver());
@@ -130,9 +134,9 @@ class Products extends BaseModel
         return $products;
     }
 
-    public function getRelatedProducts(int $limit = 8)
+    public function getRelatedProducts(int $id, int $limit = 8)
     {
-        $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->limit($limit)->get();
+        $product = Products::where('status', STATUS_ENABLE)->where('id', '!=', $id)->limit($limit)->get();
         return $product;
     }
 
