@@ -134,7 +134,7 @@ class Products extends BaseModel
         return $products;
     }
 
-    public function getRelatedProducts(int $id, int $limit = 8)
+    public function getRelatedProducts(int $id, int $limit = 4)
     {
         $product = Products::where('status', STATUS_ENABLE)->where('id', '!=', $id)->limit($limit)->get();
         return $product;
