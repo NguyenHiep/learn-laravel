@@ -1,5 +1,5 @@
 <!-- responsive -->
-<div id="medias_contents_libraries" class="modal container fade" tabindex="-1"> <!-- Add data-width="920" -->
+<div id="medias_contents_libraries" class="{{ $class or '' }} modal container fade" tabindex="-1"> <!-- Add data-width="920" -->
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
     <h4 class="modal-title">Chèn nội dung đa phương tiện vào</h4>
@@ -51,6 +51,7 @@
                         </li>
                         @endforeach
                   </ul>
+                  {{ $medias->appends(request()->all())->links() }}
                 @endif
               </div>
             </div>
@@ -65,4 +66,3 @@
     <button type="button" data-dismiss="modal" class="btn green js-action-insert-content-image">Chèn vào bài viết</button>
   </div>
 </div>
-

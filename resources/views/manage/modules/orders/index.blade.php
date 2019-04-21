@@ -69,13 +69,13 @@
                         </td>
                         <td class="text-right">
                           <div class="btn-group btn-group-solid">
-                            <a href="{{ route('orders.show',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                            <a title="{{__('common.buttons.show')}}" href="{{ route('orders.show',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                               <i class="fa fa-eye"></i>
                             </a>
                             <form action="{{ route('orders.destroy',$record->id) }}" method="POST" style="display: inline-block">
                               {{ method_field('DELETE') }}
                               {{ csrf_field() }}
-                              <button class="btn btn-delete js-action-delete" type="submit"><i class="fa fa-trash-o"></i></button>
+                              <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit"><i class="fa fa-trash-o"></i></button>
                             </form>
                           </div>
                         </td>

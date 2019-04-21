@@ -1,13 +1,8 @@
 @extends('manage.master')
 @section('title', __('static.manage.posts.category.page_title'))
 @section('content')
-
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -15,11 +10,7 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title"> {{__('static.sidebars.manage.posts.category')}}  </h3>
-      <!-- END PAGE TITLE-->
-
       <div class="row">
         <div class="col-md-5">
         {!! Form::open(['route' => 'categories.store', 'files' => true]) !!}
@@ -49,7 +40,6 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.category.'.$key.'')}}
                   </label>
-
                   <select name="{{$key}}" id="{{$key}}" class="form-control select2me">
                     @php
                       $html = ''; $text = '&nbsp; &nbsp; &nbsp;';
@@ -78,20 +68,16 @@
                       }
                       echo $html;
                     @endphp
-
                   </select>
-
                 </div>
                 @php $key = 'description'; @endphp
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.category.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
-                  [
-                  'class' => 'summernote_editor form-control',
-                  'rows' => 6
+                  {!! Form::textarea($key, old($key),[
+                    'class' => 'tinymce_editor form-control',
+                    'rows' => 6
                   ]) !!}
-
                 </div>
                 @php $key = 'image'; @endphp
                 <div class="form-group @if ($errors->has($key)) has-error  @endif last">
@@ -100,17 +86,16 @@
                       <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
                     <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
                     <div>
-                <span class="btn default btn-file">
-                  <span class="fileinput-new"> Chọn hình ảnh </span>
-                  <span class="fileinput-exists"> Ảnh khác </span>
-                  {{ Form::file($key) }}
-                </span>
+                      <span class="btn default btn-file">
+                        <span class="fileinput-new"> Chọn hình ảnh </span>
+                        <span class="fileinput-exists"> Ảnh khác </span>
+                        {{ Form::file($key) }}
+                      </span>
                       <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
                     </div>
                   </div>
                   @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                 </div>
-
                 @php $key = 'status'; @endphp
                 @if(!empty(__('selector.post_status')))
                   <div class="radio-list">
@@ -123,7 +108,6 @@
                     @endforeach
                   </div>
                 @endif
-
               </div>
               <div class="form-actions">
                   <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
@@ -134,7 +118,6 @@
           {!! Form::close() !!}
         </div>
         <div class="col-md-7">
-          <!-- BEGIN EXAMPLE TABLE PORTLET-->
           <div class="portlet light bordered">
             <div class="portlet-body">
               <div class="table-scrollable">
@@ -150,7 +133,6 @@
                   </tr>
                   </thead>
                   <tbody>
-
                   @if (!empty($records))
                     @foreach ($records as $record)
                       @if($record->parent_id == 0)
@@ -176,7 +158,6 @@
                               </form>
                             </div>
                         </tr>
-
                         @foreach ($records as $subcate)
                           @if($subcate->parent_id == $record->id)
                             <tr>
@@ -187,7 +168,6 @@
                               <td class="text-center">
                                 <span class="label label-sm  @if ($subcate->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate->status)}} </span>
                               </td>
-
                               <td class="text-right">
                                 <div class="btn-group btn-group-solid">
                                   <a href="{{ route('categories.edit',$subcate->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
@@ -202,7 +182,6 @@
                                   </form>
                                 </div>
                             </tr>
-
                             @foreach ($records as $subcate2)
                               @if($subcate2->parent_id == $subcate->id)
                                 <tr>
@@ -213,16 +192,15 @@
                                   <td class="text-center">
                                     <span class="label label-sm  @if ($subcate2->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate2->status)}} </span>
                                   </td>
-
                                   <td class="text-right">
                                     <div class="btn-group btn-group-solid">
-                                      <a href="{{ route('categories.edit',$subcate2->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                                      <a title="{{__('common.buttons.edit')}}" href="{{ route('categories.edit',$subcate2->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                                         <i class="fa fa-edit"></i>
                                       </a>
                                       <form action="{{ route('categories.destroy',$subcate2->id) }}" method="POST" style="display: inline-block">
                                         {{ method_field('DELETE') }}
                                         {{ csrf_field() }}
-                                        <button class="btn btn-delete js-action-delete" type="submit">
+                                        <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
                                           <i class="fa fa-trash-o"></i>
                                         </button>
                                       </form>
@@ -237,7 +215,6 @@
                       @endif
                     @endforeach
                   @endif
-
                   </tbody>
                   <tfoot>
                     @if (!empty($records))
@@ -248,37 +225,20 @@
               </div>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE PORTLET-->
         </div>
       </div>
     </div>
-    <!-- END CONTENT BODY -->
   </div>
-
 @endsection
 @section('styles')
   @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
-        type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
-  <!-- END PAGE LEVEL PLUGINS -->
-
   @stop
 @section('scripts')
  @parent
- <!-- BEGIN PAGE LEVEL SCRIPTS -->
- <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-         type="text/javascript"></script>
- <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-         type="text/javascript"></script>
- <script src=" {{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}"
-         type="text/javascript"></script>
+ <script src="{{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
  <script src="{{  asset('/manages/assets/global/plugins/plupload/js/plupload.full.min.js') }}" type="text/javascript"></script>
  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
- <!-- END PAGE LEVEL SCRIPTS -->
 @stop

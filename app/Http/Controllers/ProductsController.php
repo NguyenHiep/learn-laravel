@@ -13,34 +13,41 @@ class ProductsController extends FrontendController
     public $mproduct;
     public $config_toolbar;
 
-    public function __construct()
+    public function __construct(Categories $categories, Products $products)
     {
-        $this->mcategory      = new Categories();
-        $this->mproduct       = new Products();
+        $this->mcategory      = $categories;
+        $this->mproduct       = $products;
         $this->config_toolbar = ToolbarConfig::getInstance();
     }
 
-    public function promotion()
+    public function promotion(Request $request)
     {
+        $rules = [
+            'price_from' => 'nullable|integer',
+            'price_to'   => 'nullable|integer|gte:price_from',
+            'stocks'     => 'nullable|array',
+            'sizes'      => 'nullable|array',
+            'brands'     => 'nullable|array',
+            'colors'     => 'nullable|array',
+        ];
+        $this->validate($request, $rules);
         $data['mode']       = $this->config_toolbar->mode;
-        $data['products']   = $this->mproduct->getPromotionProducts($this->config_toolbar);
+        $data['products']   = $this->mproduct->getPromotionProducts($this->config_toolbar, $request->all());
         $data['categories'] = $this->mcategory->getListCategory();
         return view('frontend.theme-ecommerce.products.promotion', $data);
     }
 
     public function show($slug){
         $product = $this->mproduct->getProductBySlug($slug);
-        if(empty($product))
-        {
+        if (empty($product)) {
             abort(404);
         }
-
-        if(!empty($product->galary_img))
-        {
-            $product->galary_img = json_decode($product->galary_img);
-        }
-
-        $assignData = [ 'product' => $product ];
+        // Get related product
+        $listRelated = $this->mproduct->getRelatedProducts($product->id);
+        $assignData = [
+            'product'         => $product,
+            'product_related' => $listRelated
+        ];
         return view('frontend.theme-ecommerce.products.detail', $assignData);
     }
 
@@ -56,12 +63,6 @@ class ProductsController extends FrontendController
                 'data'    => ''
             ]);
         }
-
-        if(!empty($product->galary_img))
-        {
-            $product->galary_img = json_decode($product->galary_img);
-        }
-
         return response()->view('frontend.theme-ecommerce.products.quickview', ['product' => $product], 200)
                          ->header('Content-Type', 'text/html');
 

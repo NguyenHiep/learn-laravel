@@ -22,6 +22,7 @@ class Tags extends BaseModel
         'name',
         'slug',
         'description',
+        'status'
     ];
 
     /**

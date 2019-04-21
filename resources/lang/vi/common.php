@@ -7,7 +7,8 @@ return [
         'cancel' => 'Hủy bỏ',
         'create' => 'Thêm mới',
         'delete' => 'Xóa',
-        'edit'   => 'Chỉnh sửa'
+        'edit'   => 'Chỉnh sửa',
+        'show'   => 'Xem',
     ),
     'settings' => array(
         'settings' => array(
@@ -122,8 +123,12 @@ return [
         'page_intro'               => 'Mô tả ngắn trang',
         'page_intro_placeholder'   => 'Là đoạn mô tả ngắn khoảng 128 từ',
     ),
-    'comments'    => array(
-        'title'                    => 'Chỉnh sửa bình luận',
+    'comments' => array(
+        'title'   => 'Chỉnh sửa bình luận',
+        'name'    => 'Người bình luận',
+        'email'   => 'Email',
+        'content' => 'Nội dung',
+        'url'     => 'Liên kết',
     ),
     'sliders' => array(
         'slider_img'                 => 'Hình ảnh',

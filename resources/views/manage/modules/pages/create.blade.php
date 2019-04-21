@@ -2,11 +2,7 @@
 @section('title', __('static.sidebars.manage.pages.creates'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -18,10 +14,7 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title"> {{__('static.sidebars.manage.pages.creates')}}  </h3>
-      <!-- END PAGE TITLE-->
       <div class="row">
         {!! Form::open(['route' => 'pages.store', 'files' => true]) !!}
         <div class="col-md-9">
@@ -55,7 +48,7 @@
                   </label>
                   {!! Form::textarea($key, old($key) ,
                   [
-                  'class' => 'summernote_editor form-control',
+                  'class' => 'tinymce_editor form-control',
                   'rows' => 9
                   ]) !!}
                   @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
@@ -79,10 +72,8 @@
                   'placeholder' => __('common.pages.'.$key.'_placeholder')
                   ]) !!}
                 </div>
-
               </div>
             </div>
-
           </div>
         </div> <!-- End .col-md-9 -->
         <div class="col-md-3">
@@ -125,7 +116,7 @@
               </div>
             </div>
           </div>
-          {{--<div class="portlet light bordered">
+          <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Định dạng</div>
               <div class="tools">
@@ -137,16 +128,12 @@
               @if(!empty(__('selector.format')))
                 <div class="radio-list">
                   @foreach(__('selector.format') as $k =>$val)
-                    @if($k === 0)
-                      <label> {!! Form::radio($key, $k, true) !!}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
-                    @else
-                      <label> {!! Form::radio($key, $k) !!}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
-                    @endif
+                    <label> {{ Form::radio($key, $k, ($k == old($key, 'standard')) ? true : null) }}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
                   @endforeach
                 </div>
               @endif
             </div>
-          </div>--}}
+          </div>
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption">Ảnh tiêu biểu</div>
@@ -155,49 +142,22 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-              @php $key = 'page_medias_id'; @endphp
+                @php $key = 'page_medias_id'; @endphp
               <!--<a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>-->
               <a class="btn btn-outline btn-block dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
                 <div class="clearfix margin-top-15" id="img_featured">
                   <!--<img src="http://minhhiep.info/wp-content/uploads/2017/10/cachua-300x300.jpg" draggable="false" alt="" class="img-responsive"> -->
                 </div>
-                <input type="hidden" name="{{$key}}" value="" id="{{$key}}"/>
+                <input type="hidden" name="{{$key}}" value="0" id="{{$key}}"/>
             </div>
           </div>
 
         </div> <!-- End .col-md-3 -->
         {!! Form::close() !!}
       </div>
-      <!-- END CONTENT BODY -->
     </div>
-  @include('manage.blocks.medias.modal', ['medias' => $medias])
-  @include('manage.blocks.medias.content', ['medias' => $medias])
-  @endsection
-  @section('styles')
-    @parent
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-      {{--<link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css"/>--}}
-      <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
-
-      <!-- END PAGE LEVEL PLUGINS -->
-  @stop
-  @section('scripts')
-    @parent
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-      <script src="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.min.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/js/plugin/medias/summernote-ext-medias.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
-      <!-- END PAGE LEVEL SCRIPTS -->
-  @stop
-
-  {{-- Include for media uploads --}}
-  @push('custom-scripts')
-    <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
-            type="text/javascript"></script>
-  @endpush
+  </div>
+  @include('manage.blocks.medias.modal', [
+     'medias' => $medias
+   ])
+@endsection

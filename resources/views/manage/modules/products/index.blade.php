@@ -74,14 +74,14 @@
                           </td>
                           <td class="text-right">
                             <div class="btn-group btn-group-solid">
-                              <a href="{{ route('products.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                                <i class="fa fa-edit"></i> {{__('common.buttons.edit')}}
+                              <a title="{{__('common.buttons.edit')}}" href="{{ route('products.edit',$record->id) }}" class="btn btn-warning js-action-list-rowlink-val">
+                                <i class="fa fa-edit"></i>
                               </a>
                               <form action="{{ route('products.destroy',$record->id) }}" method="POST" style="display: inline-block">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}}
+                                <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
+                                  <i class="fa fa-trash-o"></i>
                                 </button>
                               </form>
                             </div>

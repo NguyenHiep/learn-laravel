@@ -2,11 +2,7 @@
 @section('title', 'Cập nhật sản phẩm')
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -18,13 +14,9 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title"> Cập nhật sản phẩm </h3>
-      <!-- END PAGE TITLE-->
       <div class="row">
         {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\ProductsController@update',$record->id], 'files' => true, 'class' => 'form-horizontal form-row-seperated']) !!}
-
         <div class="col-md-9">
           <div class="portlet">
             <div class="portlet-title">
@@ -91,12 +83,11 @@
                           @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                         </div>
                       </div>
-
                       @php $key='short_description'; @endphp
                       <div class="form-group @if ($errors->has($key)) has-error  @endif">
                         <label class="col-md-2 control-label">Mô tả ngắn:</label>
                         <div class="col-md-10">
-                          {!! Form::textarea($key, old($key, htmlspecialchars_decode($record->{$key})), ['class' => 'form-control summernote_editor', 'rows' => '2', 'placeholder' => 'Vui lòng nhập mô tả ngắn']) !!}
+                          {!! Form::textarea($key, old($key, $record->{$key}), ['class' => 'form-control summernote_editor', 'rows' => '2', 'placeholder' => 'Vui lòng nhập mô tả ngắn']) !!}
                           @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                         </div>
                       </div>
@@ -105,8 +96,15 @@
                         <label class="col-md-2 control-label">SKU:
                           <span class="required"> * </span>
                         </label>
-                        <div class="col-md-10">
+                        <div class="col-md-4">
                           {!! Form::text($key,  old($key, $record->{$key}), ['class' => 'form-control', 'placeholder' => 'SKU']) !!}
+                          @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                        </div>
+                      </div>
+                      @php $key='quantity'; @endphp
+                      <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                        <label class="col-md-2 control-label">Số lượng:  <span class="required"> * </span> </label>
+                        <div class="col-md-4">{!! Form::number($key,  old($key, $record->{$key}), ['class' => 'form-control', 'placeholder' => 'Số lượng sản phẩm']) !!}
                           @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                         </div>
                       </div>
@@ -115,21 +113,14 @@
                         <label class="col-md-2 control-label">Giá bán:
                           <span class="required"> * </span>
                         </label>
-                        <div class="col-md-10">{!! Form::number($key,  old($key, $record->{$key}), ['class' => 'form-control', 'placeholder' => 'Nhập giá bán']) !!}
+                        <div class="col-md-4">{!! Form::number($key,  old($key, $record->{$key}), ['class' => 'form-control', 'placeholder' => 'Nhập giá bán']) !!}
                           @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                         </div>
                       </div>
                       @php $key='sale_price'; @endphp
                       <div class="form-group @if ($errors->has($key)) has-error  @endif">
                         <label class="col-md-2 control-label">Giá khuyến mãi:</label>
-                        <div class="col-md-10">{!! Form::number($key,  old($key, $record->{$key}), ['class' => 'form-control', 'placeholder' => 'Giá khuyến mãi']) !!}
-                          @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
-                        </div>
-                      </div>
-                      @php $key='quantity'; @endphp
-                      <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                        <label class="col-md-2 control-label">Số lượng:  <span class="required"> * </span> </label>
-                        <div class="col-md-10">{!! Form::number($key,  old($key, $record->{$key}), ['class' => 'form-control', 'placeholder' => 'Số lượng sản phẩm']) !!}
+                        <div class="col-md-4">{!! Form::number($key,  old($key, $record->{$key}), ['class' => 'form-control', 'placeholder' => 'Giá khuyến mãi']) !!}
                           @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                         </div>
                       </div>
@@ -202,8 +193,8 @@
                 <label class="control-label">Trạng thái:</label>
                 @if(!empty(__('selector.post_status')))
                   <div class="radio-list">
-                    @foreach(__('selector.post_status') as $k =>$val)
-                      @if($k === DISABLE)
+                    @foreach(__('selector.post_status') as $k => $val)
+                      @if($k === STATUS_DISABLE)
                         <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
                       @else
                         <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
@@ -324,11 +315,14 @@
     </div>
     <!-- END CONTENT BODY -->
   </div>
-  <div class="product">
-    @include('manage.blocks.medias.modal', ['medias' => $medias])
-    @include('manage.blocks.medias.content', ['medias' => $medias])
-  </div>
-
+  @include('manage.blocks.medias.modal', [
+     'medias' => $medias,
+     'class' => 'posts-modal'
+  ])
+  @include('manage.blocks.medias.content', [
+    'medias' => $medias,
+    'class' => 'posts-content'
+  ])
 @endsection
 @section('styles')
   @parent
@@ -341,6 +335,7 @@
   <link href="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+
   <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
@@ -362,3 +357,11 @@
   <script src="{{  asset('/manages/assets/pages/scripts/ecommerce-products-edit.js') }}" type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
 @stop
+{{-- Include for media uploads --}}
+@push('custom-scripts')
+  <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
+  <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
+  <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}" type="text/javascript"></script>
+  <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}" type="text/javascript"></script>
+  <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}" type="text/javascript"></script>
+@endpush

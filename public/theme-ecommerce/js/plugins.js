@@ -269,6 +269,8 @@ $(window).load(function () {
 	if ($('.range-slider').length > 0) {
 		$('.range-slider').each(function () {
 			var range_slider = $(this);
+      $("input[name='price_from']").val(range_slider.data('min'));
+      $("input[name='price_to']").val(range_slider.data('max'));
 			$(range_slider).ionRangeSlider({
 				type: "double",
 				grid: range_slider.data('grid'),
@@ -276,7 +278,27 @@ $(window).load(function () {
 				max: range_slider.data('max'),
 				from: range_slider.data('from'),
 				to: range_slider.data('to'),
-				prefix: range_slider.data('prefix')
+				prefix: range_slider.data('prefix'),
+				onFinish: function(data) {
+					let min  = data.min,
+							max  = data.max,
+							from = data.from,
+							to   = data.to;
+					if (from < 0) {
+						from = min;
+					}
+					if (from > max) {
+						from = max;
+					}
+					if (to < 0) {
+						to = min;
+					}
+					if (to > max) {
+						to = max;
+					}
+					$("input[name='price_from']").val(from);
+					$("input[name='price_to']").val(to);
+				}
 			});
 		});
 	}

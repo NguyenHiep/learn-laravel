@@ -1,10 +1,8 @@
 @extends('manage.master')
 @section('title', 'Quản lý thông tin thành viên')
-
 @section('content')
   <div class="page-content-wrapper">
     <div class="page-content">
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -16,10 +14,8 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
       <div class="row margin-top-30">
         <div class="col-md-12">
-          <!-- BEGIN EXAMPLE TABLE PORTLET-->
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -84,14 +80,14 @@
                           </td>
                           <td class="text-right">
                             <div class="btn-group btn-group-solid">
-                              <a href="{{ route('admins.edit',$user_info->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                                <i class="fa fa-edit"></i> {{__('common.buttons.edit')}}
+                              <a title="{{__('common.buttons.edit')}}" href="{{ route('admins.edit',$user_info->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                                <i class="fa fa-edit"></i>
                               </a>
                               <form action="{{ route('admins.destroy',$user_info->id) }}" method="POST" style="display: inline-block">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i> {{__('common.buttons.delete')}}
+                                <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
+                                  <i class="fa fa-trash-o"></i>
                                 </button>
                               </form>
                             </div>
@@ -112,7 +108,6 @@
               </div>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE PORTLET-->
         </div>
       </div>
     </div>

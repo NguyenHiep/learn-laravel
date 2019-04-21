@@ -1,4 +1,4 @@
-@if(count($product) > 0)
+@if(!empty($product))
   <div class="prod-wrap">
     <a href="{{ route('product.show', $product->slug) }}">
       <h1 class="main-ttl">
@@ -19,7 +19,7 @@
               </a>
             @endif
           </li>
-          @if(count($product->galary_img) > 0)
+          @if(!empty($product->galary_img))
             @foreach($product->galary_img as $item)
               <li>
                 <a data-fancybox-group="product" class="fancy-img" href="{{asset(UPLOAD_PRODUCT.$item)}}">
@@ -43,7 +43,7 @@
               </a>
             @endif
           </li>
-          @if(count($product->galary_img) > 0)
+          @if(!empty($product->galary_img))
             @foreach($product->galary_img as $item)
               <li>
                 <a data-slide-index="{{ $loop->iteration }}" href="#">

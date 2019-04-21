@@ -19,7 +19,6 @@
       <h3 class="page-title"> Đơn hàng chi tiết</h3>
       <div class="row">
         <div class="col-md-12">
-          <!-- Begin: life time stats -->
           <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
               <div class="caption">
@@ -32,7 +31,7 @@
                 <div class="btn-group btn-group-devided">
                   <a href="{{ route('orders.index') }}" class="btn default btn-circle">{{ __('common.buttons.cancel') }}</a>
                   <a class="btn green btn-circle " href="{{ route('orders.edit', ['id' => $record->id]) }}">Cập nhật đơn hàng</a>
-                  <a  href="{{ route('orders.index') }}"  class="btn green btn-circle ">Gửi lại email</a>
+                  <a  href="{{ route('orders.mail.confirm', ['id' => $record->id]) }}"  class="btn green btn-circle ">Gửi lại email</a>
                 </div>
                 <div class="btn-group">
                   <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
@@ -41,13 +40,8 @@
                     <i class="fa fa-angle-down"></i>
                   </a>
                   <ul class="dropdown-menu pull-right">
-                    <li>
-                      <a href="{{ route('orders.invoice', ['id' => $record->id]) }}"> In hóa đơn</a>
-                    </li>
+                    <li><a href="{{ route('orders.invoice', ['id' => $record->id]) }}"> In hóa đơn</a></li>
                     <li class="divider"> </li>
-                    <li>
-                      <a href="javascript:;"> Xuất ra Excel </a>
-                    </li>
                     <li>
                       <a href="javascript:;"> Xuất ra CSV </a>
                     </li>
@@ -55,14 +49,16 @@
                 </div>
               </div>
             </div>
+            @php $deliveries = $record->deliveries; @endphp
+            @php $order_products = $record->products; @endphp
+            @php $grand_total = $record->total + $record->delivery_fee; @endphp
             <div class="portlet-body">
-              <div class="tab-pane active" id="tab_1">
+              <div class="tab-pane">
                 <div class="row">
-                  <div class="col-md-12 col-sm-12">
+                  <div class="col-md-6 col-sm-12">
                     <div class="portlet yellow-crusta box">
                       <div class="portlet-title">
-                        <div class="caption">
-                          <i class="fa fa-cogs"></i>Đơn hàng chi tiết
+                        <div class="caption">Thông tin đơn hàng
                         </div>
                       </div>
                       <div class="portlet-body">
@@ -73,11 +69,11 @@
                           </div>
                         </div>
                         <div class="row static-info">
-                          <div class="col-md-5 name"> Thời gian đặt hàng: </div>
+                          <div class="col-md-5 name"> Ngày đặt: </div>
                           <div class="col-md-7 value"> {{ format_date($record->ordered_at ) }} </div>
                         </div>
                         <div class="row static-info">
-                          <div class="col-md-5 name"> Trạng thái đơn hàng: </div>
+                          <div class="col-md-5 name"> Trạng thái: </div>
                           <div class="col-md-7 value">
                             <span class="label label-success label-sm">{{ __('selector.orders.status.'.$record->status) }}</span>
                           </div>
@@ -91,74 +87,8 @@
                           <div class="col-md-7 value">{{ __('selector.payment.'.$record->payment_id) }}</div>
                         </div>
                         <div class="row static-info">
-                          <div class="col-md-5 name"> Ghi chú đơn hàng: </div>
+                          <div class="col-md-5 name"> Ghi chú: </div>
                           <div class="col-md-7 value"> {{ $record->note }} </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {{--<div class="col-md-6 col-sm-12">
-                    <div class="portlet blue-hoki box">
-                      <div class="portlet-title">
-                        <div class="caption">
-                          <i class="fa fa-cogs"></i>Thông tin khách hàng </div>
-                        <div class="actions">
-                          <a href="javascript:;" class="btn btn-default btn-sm">
-                            <i class="fa fa-pencil"></i> Sửa </a>
-                        </div>
-                      </div>
-                      <div class="portlet-body">
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Tên khách hàng: </div>
-                          <div class="col-md-7 value"> Jhon Doe </div>
-                        </div>
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Email: </div>
-                          <div class="col-md-7 value"> jhon@doe.com </div>
-                        </div>
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Địa chỉ: </div>
-                          <div class="col-md-7 value"> New York </div>
-                        </div>
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Số điện thoại: </div>
-                          <div class="col-md-7 value"> 12234389 </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>--}}
-                </div>
-                @php $deliveries = $record->deliveries; @endphp
-                <div class="row">
-                  <div class="col-md-6 col-sm-12">
-                    <div class="portlet green-meadow box">
-                      <div class="portlet-title">
-                        <div class="caption">
-                          <i class="fa fa-cogs"></i>Thông tin thanh toán
-                        </div>
-                      </div>
-                      <div class="portlet-body">
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Tên khách hàng: </div>
-                          <div class="col-md-7 value"> {{ $deliveries->buyer_name }} </div>
-                        </div>
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Email: </div>
-                          <div class="col-md-7 value"> {{ $deliveries->buyer_email }} </div>
-                        </div>
-
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Số điện thoại: </div>
-                          <div class="col-md-7 value">
-                            {{ $deliveries->buyer_phone_1 }}
-                            <br>{{ $deliveries->buyer_phone_2 }}
-                          </div>
-                        </div>
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Địa chỉ: </div>
-                          <div class="col-md-7 value">
-                            {{ nl2br($deliveries->buyer_address) }}
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -166,8 +96,7 @@
                   <div class="col-md-6 col-sm-12">
                     <div class="portlet red-sunglo box">
                       <div class="portlet-title">
-                        <div class="caption">
-                          <i class="fa fa-cogs"></i>Địa chỉ giao hàng
+                        <div class="caption">Địa chỉ giao hàng
                         </div>
                       </div>
                       <div class="portlet-body">
@@ -194,7 +123,7 @@
                           </div>
                         </div>
                         <div class="row static-info">
-                          <div class="col-md-5 name"> Địa chỉ công ty: </div>
+                          <div class="col-md-5 name"> Địa chỉ khác: </div>
                           <div class="col-md-7 value">
                             {{ nl2br($deliveries->receiver_address_2) }}
                           </div>
@@ -203,13 +132,12 @@
                     </div>
                   </div>
                 </div>
-                @php $order_products = $record->products; @endphp
+
                 <div class="row">
                   <div class="col-md-12 col-sm-12">
                     <div class="portlet grey-cascade box">
                       <div class="portlet-title">
-                        <div class="caption">
-                          <i class="fa fa-cogs"></i>Giỏ hàng
+                        <div class="caption">Chi tiết đơn hàng
                         </div>
                       </div>
                       <div class="portlet-body">
@@ -255,7 +183,6 @@
                     </div>
                   </div>
                 </div>
-                @php $grand_total = $record->total + $record->delivery_fee; @endphp
                 <div class="row">
                   <div class="col-md-6"> </div>
                   <div class="col-md-6">
@@ -275,6 +202,38 @@
                       <div class="row static-info align-reverse">
                         <div class="col-md-8 name"> Tổng tiền phải trả: </div>
                         <div class="col-md-3 value"> {{ format_price($grand_total) }} </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <div class="portlet green-meadow box">
+                      <div class="portlet-title">
+                        <div class="caption">Thông tin khách hàng
+                        </div>
+                      </div>
+                      <div class="portlet-body">
+                        <div class="row static-info">
+                          <div class="col-md-5 name"> Tên khách hàng: </div>
+                          <div class="col-md-7 value"> {{ $deliveries->buyer_name }} </div>
+                        </div>
+                        <div class="row static-info">
+                          <div class="col-md-5 name"> Email: </div>
+                          <div class="col-md-7 value"> {{ $deliveries->buyer_email }} </div>
+                        </div>
+                        <div class="row static-info">
+                          <div class="col-md-5 name"> Điện thoại: </div>
+                          <div class="col-md-7 value">
+                            {{ $deliveries->buyer_phone_1 }}
+                          </div>
+                        </div>
+                        <div class="row static-info">
+                          <div class="col-md-5 name"> Địa chỉ: </div>
+                          <div class="col-md-7 value">
+                            {{ nl2br($deliveries->buyer_address) }}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

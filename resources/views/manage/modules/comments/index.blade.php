@@ -2,11 +2,7 @@
 @section('title', __('static.manage.comments.page_title'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -56,9 +52,9 @@
                     <thead>
                     <tr>
                       <th> <!-- <th class="checkbox-list">-->
-                        <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox"
-                               id="form_checkboxes">
+                        <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
                       </th>
+                      <th>Họ và tên</th>
                       <th>Email</th>
                       <th>Nội dung</th>
                       <th>Ngày bình luận</th>
@@ -72,26 +68,21 @@
                     @if (count($records)>0)
                       @foreach ($records as $record)
                         <tr>
-                          <td> <!--<td class="checkbox-list"> -->
-                            <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}"
-                                   type="checkbox">
-                          </td>
-
-                          <td>{!! $record->email !!}</td>
                           <td>
-                            {!! limit_words($record->content) !!}
+                            <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
                           </td>
-                          <td>{!! date('d/m/Y H:i', strtotime($record->created_at)) !!}</td>
+                          <td>{{ $record->name }}</td>
+                          <td>{!! $record->email !!}</td>
+                          <td>{!! limit_words($record->content, 10) !!}</td>
+                          <td>{!! $record->created_at !!}</td>
                           <td>{!! $record->ip_user !!}</td>
                           <td><span class="label label-sm @if($record->comment_status == STATUS_ENABLE) label-success @else label-danger @endif margin-right-10">{{ __('selector.status.'.$record->comment_status) }}</span></td>
-
                           <td class="text-right ">
                             <div class="btn-group btn-group-solid">
-                              <a href="{{ route('comments.edit',$record->id) }}"
-                                 class="btn  btn-warning js-action-list-rowlink-val">
+                              <a title="{{__('common.buttons.edit')}}" href="{{ route('comments.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                                 <i class="fa fa-edit"></i>
                               </a>
-                              <a href="{{ route('comments.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
+                              <a title="{{__('common.buttons.delete')}}" href="{{ route('comments.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
                             </div>
                           </td>
                         </tr>
@@ -103,8 +94,8 @@
                     @endif
                     </tbody>
                     <tfoot>
-                    @if (count($records) > 0)
-                      {{--<td colspan="6">{{ $records->render() }}</td>--}}
+                    @if (!empty($records) > 0)
+                      <td colspan="7">{{ $records->appends(request()->all())->links() }}</td>
                     @endif
                     </tfoot>
                   </table>
@@ -116,23 +107,5 @@
         </form>
       </div>
     </div>
-    <!-- END CONTENT BODY -->
   </div>
-
 @endsection
-@section('styles')
-  @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <!-- END PAGE LEVEL PLUGINS -->
-@stop
-@section('scripts')
-  @parent
-  <!-- BEGIN PAGE LEVEL SCRIPTS -->
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-          type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
-@stop

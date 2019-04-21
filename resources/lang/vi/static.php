@@ -40,7 +40,7 @@ return [
             ],
             'pages'      => [
                 'title'   => 'Trang',
-                'pages'   => 'Tất cả trang',
+                'pages'   => 'Tất cả các trang',
                 'creates' => 'Thêm mới trang'
             ],
             'comments'   => 'Bình luận',
@@ -88,7 +88,8 @@ return [
             'edit' => 'Cập nhật trang'
         ],
         'comments' => [
-            'page_title' => 'Quản lý bình luận'
+            'page_title' => 'Quản lý bình luận',
+            'edit'       => 'Cập nhật bình luận',
         ]
     ]
 ];

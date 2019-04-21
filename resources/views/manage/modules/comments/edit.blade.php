@@ -2,15 +2,11 @@
 @section('title', __('common.comments.title'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('pages.index')}}">{{__('static.manage.comments.page_title')}}</a>
+            <a href="{{route('comments.index')}}">{{__('static.manage.comments.page_title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -18,69 +14,50 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> {{__('static.manage.pages.edit')}}  </h3>
-      <!-- END PAGE TITLE-->
+      <h3 class="page-title"> {{__('static.manage.comments.edit')}}  </h3>
       <div class="row">
-        {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\PagesController@update',$record->id], 'files' => true]) !!}
+        {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\CommentsController@update',$record->id], 'files' => false]) !!}
         <div class="col-md-9">
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">{{ __('static.manage.pages.edit') }}</span>
+                <span class="caption-subject bold uppercase">{{ __('static.manage.comments.edit') }}</span>
               </div>
             </div>
             <div class="portlet-body form">
               <div class="form-body">
-                @php $key = 'page_title'; @endphp
+                @php $key = 'name'; @endphp
                 <div class="form-group">
-                  <label class="control-label">{{__('common.pages.'.$key.'')}}
+                  <label class="control-label">{{__('common.comments.'.$key.'')}}
                     <span class="required"> * </span>
                   </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.pages.'.$key.'_placeholder'), 'id' => 'title' ]) !!}
+                  {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.comments.'.$key.'_placeholder') ]) !!}
                 </div>
-
-                @php $key = 'page_slug'; @endphp
-
+                @php $key = 'email'; @endphp
                 <div class="form-group">
-                  <label class="control-label">{{__('common.pages.'.$key.'')}} : <a href="{{url('/')}}" target="_blank"> {{url('/')}}<span class="change_slug">{{'/'.$record->page_slug}}</span></a>
-                    {{ Form::hidden($key,old($key), array('id' => 'slug')) }}
+                  <label class="control-label">{{__('common.comments.'.$key.'')}}
+                    <span class="required"> * </span>
                   </label>
+                  {!! Form::email($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.comments.'.$key.'_placeholder') ]) !!}
                 </div>
-
-                @php $key = 'page_full'; @endphp
+                @php $key = 'content'; @endphp
                 <div class="form-group">
-                  <label class="control-label">{{__('common.pages.'.$key.'')}}
+                  <label class="control-label">{{__('common.comments.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'summernote_editor form-control',
-                  'rows' => 9
+                  {!! Form::textarea($key, old($key) ,[
+                    'class' => 'tinymce_editor form-control',
+                    'rows' => 9
                   ]) !!}
                 </div>
 
-                @php $key = 'page_keyword'; @endphp
+                @php $key = 'url'; @endphp
                 <div class="form-group">
-                  <label class="control-label">{{__('common.pages.'.$key.'')}}
+                  <label class="control-label">{{__('common.comments.'.$key.'')}}
                   </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control','placeholder' => __('common.pages.'.$key.'_placeholder')]) !!}
+                  {!! Form::url($key, old($key), ['class' => 'form-control','placeholder' => __('common.comments.'.$key.'_placeholder')]) !!}
                 </div>
-
-                @php $key = 'page_intro'; @endphp
-                <div class="form-group">
-                  <label class="control-label">{{__('common.pages.'.$key.'')}}
-                  </label>
-                  {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'form-control',
-                  'rows' => 3,
-                  'placeholder' => __('common.pages.'.$key.'_placeholder')
-                  ]) !!}
-                </div>
-
-              </div>
+              </div> <!-- End .form-body -->
             </div>
 
           </div>
@@ -88,93 +65,48 @@
         <div class="col-md-3">
           <div class="portlet light bordered">
             <div class="portlet-title">
-              <div class="caption">Đăng bài viết</div>
+              <div class="caption">Đăng bình luận</div>
               <div class="tools">
                 <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
-            <!--
+              @php $key = 'created_at'; @endphp
               <div class="form-group">
-                <label>Ngày đăng: <strong>29/09/2017@11:58</strong> </label>
+                <label>Ngày bình luận: <strong>{{ $record->$key }} - 29/09/2017@11:58</strong> </label>
               </div>
-              -->
-              @php $key='page_status'; @endphp
+              @php $key = 'ip_user'; @endphp
+              <div class="form-group clearfix">
+                <label>Ip: {{$record->$key}}</label>
+              </div>
+              @php $key = 'rate'; @endphp
+              <div class="form-group clearfix">
+                <label>Số sao: {{$record->$key}}</label>
+              </div>
+              @php $key='comment_status'; @endphp
               <div class="form-group clearfix">
                 <label class="control-label">Trạng thái:</label>
                 @if(!empty(__('selector.page_status')))
                   <div class="radio-list">
-                    @foreach(__('selector.page_status') as $k =>$val)
-                      @if($k === 2)
-                        <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
+                    @foreach(__('selector.page_status') as $k => $val)
+                      @if($k === $record->$key)
+                        <label class="radio-inline"> {!! Form::radio($key, $k, true) !!} {{$val }} </label>
                       @else
-                        <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
+                        <label class="radio-inline"> {!! Form::radio($key, $k) !!} {{$val }} </label>
                       @endif
                     @endforeach
                   </div>
                 @endif
               </div>
-              <!--
-              <div class="form-group">
-                <label>Ngôn ngữ: </label>
-              </div>
-              -->
               <div class="form-group clearfix">
-                <a href="{{ route('pages.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
-                <button type="submit" class="btn green pull-right">Đăng bài viết</button>
+                <a href="{{ route('comments.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <button type="submit" class="btn green pull-right">Đăng bình luận</button>
               </div>
-            </div>
-          </div>
-
-          <div class="portlet light bordered">
-            <div class="portlet-title">
-              <div class="caption">Ảnh tiêu biểu</div>
-              <div class="tools">
-                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-              </div>
-            </div>
-            <div class="portlet-body" style="display: block;">
-            @php $key = 'posts_medias_id'; @endphp
-            <!--<a href="javascript:void(0)" class="">Chọn ảnh tiêu biểu</a>-->
-              <a class="btn btn-outline btn-block dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
-              <div class="clearfix margin-top-15" id="img_featured">
-                @if(!empty($record->{$key}))
-                <img src="{{Storage::url(UPLOAD_MEDIAS.$record->post_featured)}}" draggable="false" alt="" class="img-responsive">
-                @endif
-              </div>
-              <input type="hidden" name="{{$key}}" value="{{ $record->{$key} }}" id="{{ $key }}"/>
             </div>
           </div>
         </div> <!-- End .col-md-3 -->
         {!! Form::close() !!}
       </div>
-      <!-- END CONTENT BODY -->
     </div>
-
-  @endsection
-  @section('styles')
-    @parent
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-      <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css"/>
-      <!-- END PAGE LEVEL PLUGINS -->
-  @stop
-  @section('scripts')
-    @parent
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-      <script src="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.min.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/js/plugin/medias/summernote-ext-medias.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
-      <!-- END PAGE LEVEL SCRIPTS -->
-    @stop
-
-    {{-- Include for media uploads --}}
-    @push('custom-scripts')
-    <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
-            type="text/javascript"></script>
-  @endpush
+  </div>
+@endsection

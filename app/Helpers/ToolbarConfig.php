@@ -12,6 +12,7 @@ class ToolbarConfig
     public $limit = 12;
     public $sort  = [ 'column' => 'id', 'value'  => 'desc' ];
     public $mode  = 'gallery';
+    public $search = '';
     /**
      * @var ToolbarConfig The reference to *Singleton* instance of this class
      */
@@ -62,6 +63,12 @@ class ToolbarConfig
         $set_mode  = request()->query('mode');
         if (in_array($set_mode, $list_mode)) {
             $this->mode = request()->query('mode');
+        }
+        
+        //  Set parameter search
+        $set_search = request()->query('q');
+        if (!empty($set_search)) {
+            $this->search = $set_search;
         }
     }
 

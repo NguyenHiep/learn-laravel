@@ -3,11 +3,7 @@
 @section('content')
 
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -19,11 +15,7 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title"> {{__('static.sidebars.manage.posts.tags')}}  </h3>
-      <!-- END PAGE TITLE-->
-
       <div class="row">
         <div class="col-md-5">
           {!! Form::open(['route' => 'tags.store', 'files' => true]) !!}
@@ -49,19 +41,27 @@
                   </label>
                   {!! Form::text($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.posts.tags.'.$key.'_placeholder')]) !!}
                 </div>
-
                 @php $key = 'description'; @endphp
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.tags.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
-                  [
-                  'class' => 'summernote_editor form-control',
-                  'rows' => 6
+                  {!! Form::textarea($key, old($key),[
+                    'class' => 'tinymce_editor form-control',
+                    'rows' => 6
                   ]) !!}
-
                 </div>
-
+                @php $key = 'status'; @endphp
+                @if(!empty(__('selector.post_status')))
+                  <div class="radio-list">
+                    @foreach(__('selector.post_status') as $k =>$val)
+                      @if($k === STATUS_DISABLE)
+                        <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
+                      @else
+                        <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
+                      @endif
+                    @endforeach
+                  </div>
+                @endif
               </div>
               <div class="form-actions">
                 <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
@@ -72,7 +72,6 @@
           {!! Form::close() !!}
         </div>
         <div class="col-md-7">
-          <!-- BEGIN EXAMPLE TABLE PORTLET-->
           <div class="portlet light bordered">
             <div class="portlet-body">
               <div class="table-scrollable">
@@ -83,12 +82,11 @@
                       <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
                     </th>
                     <th>Tên thẻ</th>
-                    <th> Mô tả</th>
+                    <th> Trạng thái</th>
                     <th class="text-center"> Hành động</th>
                   </tr>
                   </thead>
                   <tbody>
-
                   @if (!empty($records))
                     @foreach ($records as $record)
                         <tr>
@@ -96,17 +94,18 @@
                             <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
                           </td>
                           <td> {{$record->name}} </td>
-                          <td>{!! $record->description !!}</td>
-
+                          <td class="text-center">
+                            <span class="label label-sm  @if ($record->status === STATUS_ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
+                          </td>
                           <td class="text-right">
                             <div class="btn-group btn-group-solid">
-                              <a href="{{ route('tags.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                              <a title="{{__('common.buttons.edit')}}" href="{{ route('tags.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                                 <i class="fa fa-edit"></i>
                               </a>
                               <form action="{{ route('tags.destroy',$record->id) }}" method="POST" style="display: inline-block">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
+                                <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
                                   <i class="fa fa-trash-o"></i>
                                 </button>
                               </form>
@@ -114,7 +113,6 @@
                         </tr>
                     @endforeach
                   @endif
-
                   </tbody>
                   <tfoot>
                   @if (!empty($records))
@@ -125,35 +123,17 @@
               </div>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE PORTLET-->
         </div>
       </div>
     </div>
-    <!-- END CONTENT BODY -->
   </div>
-
 @endsection
 @section('styles')
   @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
-        type="text/css"/>
-
-  <!-- END PAGE LEVEL PLUGINS -->
-
+  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('/manages/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
 @stop
 @section('scripts')
   @parent
-  <!-- BEGIN PAGE LEVEL SCRIPTS -->
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-          type="text/javascript"></script>
-  <script src=" {{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}"
-          type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
+   <script src=" {{ asset('/manages/assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
 @stop

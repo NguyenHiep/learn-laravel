@@ -14,16 +14,16 @@ return [
         STATUS_DISABLE => 'Không kích hoạt',
     ],
     'format'      => [
-        0         => 'Chuẩn',
-        'video'   => 'Video',
-        'audio'   => 'Audio',
-        'gallery' => 'Bộ sưu tập'
+        'standard' => 'Chuẩn',
+        'video'    => 'Video',
+        'audio'    => 'Audio',
+        'gallery'  => 'Bộ sưu tập'
     ],
     'icons'       => [
-        0         => '<i class="icon-pin"></i>',
-        'video'   => '<i class="fa fa-file-video-o"></i>',
-        'audio'   => '<i class="fa fa-file-audio-o"></i>',
-        'gallery' => '<i class="fa fa-picture-o"></i>'
+        'standard' => '<i class="icon-pin"></i>',
+        'video'    => '<i class="fa fa-file-video-o"></i>',
+        'audio'    => '<i class="fa fa-file-audio-o"></i>',
+        'gallery'  => '<i class="fa fa-picture-o"></i>'
     ],
     'post_status' => [
         STATUS_ENABLE  => 'Đã Đăng',

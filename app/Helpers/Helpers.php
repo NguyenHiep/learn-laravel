@@ -133,7 +133,7 @@ if (!function_exists('format_date')) {
 
 if (!function_exists('format_price')) {
 
-    function format_price($price, $symbol = '&nbsp;vnđ')
+    function format_price($price, $symbol = ' đ')
     {
         if ($price !== false and $price !== null and $price !== '' and $price !== []) {
             $price = is_numeric($price) ? $price : 0;

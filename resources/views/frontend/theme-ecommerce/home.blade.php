@@ -5,7 +5,6 @@
 @section('keywords', 'Quần áo online, áo thun online, quần kaki online')
 
 @section('content')
-  <!-- Main Content - start -->
   <main>
     <section class="container">
       @if(count($sliders))
@@ -15,7 +14,7 @@
             @foreach($sliders as $slider)
               <li>
                 @if(empty($slider['slider_img']))
-                  <img src="img/slider/slide1.jpg" alt="">
+                  <img src="{{ asset('img/slider/slide1.jpg') }}" alt="">
                 @else
                   <img src="{{ asset(UPLOAD_SLIDER.$slider['slider_img'])}}" alt="{{ $slider['slider_title'] }}" class="img-responsive"/>
                 @endif
@@ -39,5 +38,4 @@
       @include('frontend.theme-ecommerce.template-parts.loop-product', ['datas' => ['category_name' => 'Phụ kiện thời trang', 'products' => $phukien_thoitrang]])
     </section>
   </main>
-  <!-- Main Content - end -->
 @endsection

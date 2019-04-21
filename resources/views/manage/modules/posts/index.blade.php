@@ -64,29 +64,49 @@
                           </td>
                           <td>
                             @if(!empty($record->posts_medias_id))
-                              <img src="{{Storage::url(UPLOAD_MEDIAS.$record->post_featured)}}" draggable="false" alt="" class="img-thumbnail" width="80" height="40">
+                              <img src="{{Storage::url(UPLOAD_MEDIAS.$record->media->name)}}" draggable="false" alt="" class="img-thumbnail" width="80" height="40">
                             @endif
                           </td>
                           <td> {{$record->post_title}} </td>
-                          <td>{!! $record->username !!}</td>
-                          <td>{!! $record->categories !!}</td>
-                          <td>{!! $record->tags !!}</td>
+                          <td>{!! $record->author->username !!}</td>
+                          <td>
+                            <?php
+                              $listCat = '';
+                              if (!empty($record->posts_categories)) {
+                                foreach ($record->posts_categories as $category) {
+                                  if (!empty($listCat)) {
+                                    $listCat .= ', ';
+                                  }
+                                  $listCat .= $category->name;
+                                }
+                              }
+                              echo $listCat;
+                            ?>
+                          </td>
+                          <td>
+                            <?php
+                              $listTag = '';
+                              if (!empty($record->posts_tags)) {
+                                foreach ($record->posts_tags as $tag) {
+                                  if (!empty($listTag)) {
+                                    $listTag .= ', ';
+                                  }
+                                  $listTag .= $tag->name;
+                                }
+                              }
+                              echo $listTag;
+                            ?>
+                          </td>
                           <td>{!! date('d/m/Y', strtotime($record->created_at)) !!}</td>
                           <td>{!! $record->visit !!}</td>
                           <td>{!! __('selector.format.'.$record->post_format) !!}</td>
 
                           <td class="text-right ">
                             <div class="btn-group btn-group-solid">
-                              <a href="{{ route('posts.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
+                              <a title="{{__('common.buttons.edit')}}" href="{{ route('posts.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
                                 <i class="fa fa-edit"></i>
                               </a>
-                              <form action="{{ route('posts.destroy',$record->id) }}" method="POST" style="display: inline-block">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i>
-                                </button>
-                              </form>
+                              <a title="{{__('common.buttons.delete')}}" href="{{ route('posts.destroy',$record->id) }}" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>
                             </div>
                         </tr>
                     @endforeach
@@ -95,7 +115,7 @@
                   </tbody>
                   <tfoot>
                   @if (!empty($records))
-                    {{--<td colspan="8"> {{ $records->links() }}</td>--}}
+                    <td colspan="10"> {{ $records->links() }}</td>
                   @endif
                   </tfoot>
                 </table>
@@ -110,19 +130,3 @@
   </div>
 
 @endsection
-@section('styles')
-  @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
-  <!-- END PAGE LEVEL PLUGINS -->
-  @stop
-@section('scripts')
- @parent
- <!-- BEGIN PAGE LEVEL SCRIPTS -->
- <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-         type="text/javascript"></script>
- <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-         type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
-@stop

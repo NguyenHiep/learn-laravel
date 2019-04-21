@@ -4,6 +4,8 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\Posts\Category;
+use App\Model\Posts\Tags;
 
 class Posts extends BaseModel
 {
@@ -39,8 +41,9 @@ class Posts extends BaseModel
      */
     public function posts_categories()
     {
-        //return $this->morphToMany('App\Model\Posts\Category', 'posts_category');
-        return $this->belongsToMany('App\Model\Posts\Category','posts_category_ids','id','posts_category_id');
+        return $this->belongsToMany(Category::class,'posts_category_ids','posts_id','posts_category_id')
+            ->whereNull('posts_category_ids.deleted_at')
+            ->withTimestamps();
     }
 
     /**
@@ -48,22 +51,28 @@ class Posts extends BaseModel
      */
     public function posts_tags()
     {
-        return $this->belongsToMany('App\Model\Posts\Tags','posts_tags_ids');
+        return $this->belongsToMany(Tags::class, 'posts_tags_ids', 'posts_id', 'posts_tags_id')
+            ->whereNull('posts_tags_ids.deleted_at')
+            ->withTimestamps();
     }
 
     /**
      * Get author for the blog post
      */
-    public function author(){
-        //return $this->belongsTo('App\Model\User');
-        return $this->hasOne('App\Model\User','id','user_id');
+    public function author()
+    {
+        return $this->hasOne('App\Model\User', 'id', 'user_id');
     }
-
+    
     public function comment()
     {
-        return $this->hasMany('App\Model\Comments','posts_id','id');
+        return $this->hasMany('App\Model\Comments', 'posts_id', 'id');
     }
-
+    
+    public function media()
+    {
+        return $this->hasOne('App\Model\Medias', 'id', 'posts_medias_id');
+    }
 
     public function getListAll()
     {

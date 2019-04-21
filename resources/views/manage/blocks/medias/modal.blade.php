@@ -1,5 +1,5 @@
 <!-- responsive -->
-<div id="medias_libraries" class="modal container fade" tabindex="-1"> <!-- Add data-width="920" -->
+<div id="medias_libraries" class="{{ $class or '' }} modal container fade" tabindex="-1"> <!-- Add data-width="920" -->
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
     <h4 class="modal-title">Ảnh tiêu biểu</h4>

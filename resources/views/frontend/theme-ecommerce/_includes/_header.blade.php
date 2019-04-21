@@ -1,8 +1,5 @@
 @if(!empty($settings))
-<!-- Header - start -->
 <header class="header">
-  
-  <!-- Topbar - start -->
   <div class="header_top">
     <div class="container">
       <ul class="contactinfo nav nav-pills">
@@ -37,7 +34,6 @@
           ],
       ]
       @endphp
-      <!-- Social links -->
       <ul class="social-icons nav navbar-nav">
         @foreach($socials as $social)
           @if(!empty($social['url']))
@@ -49,9 +45,6 @@
       </ul>
     </div>
   </div>
-  <!-- Topbar - end -->
-  
-  <!-- Logo, Shop-menu - start -->
   <div class="header-middle">
     <div class="container header-middle-cont">
       <div class="toplogo">
@@ -63,7 +56,6 @@
       </div>
       <div class="shop-menu">
         <ul>
-          
         <li>
             <a href="wishlist.html">
               <i class="fa fa-heart"></i>
@@ -71,7 +63,6 @@
               (<span id="topbar-favorites">1</span>)
             </a>
           </li>
-          
           <li>
             <a href="{{ route('compare.index') }}">
               <i class="fa fa-bar-chart"></i>
@@ -94,7 +85,6 @@
               <span class="shop-menu-ttl">Đăng nhập</span>
             </a>
           </li>
-          
           <li>
             <div class="h-cart">
               <a href="{{ route('checkout.cart.index') }}">
@@ -110,19 +100,13 @@
               </a>
             </div>
           </li>
-        
         </ul>
       </div>
     </div>
   </div>
-  <!-- Logo, Shop-menu - end -->
-  
-  <!-- Topmenu - start -->
   <div class="header-bottom">
     <div class="container">
       <nav class="topmenu">
-        
-        <!-- Catalog menu - start -->
         <div class="topcatalog">
           <a class="topcatalog-btn" href="javascript:void(0)"><span>Tất cả </span>danh mục</a>
           @if(count($categories) > 0)
@@ -150,11 +134,7 @@
           </ul>
           @endif
         </div>
-        <!-- Catalog menu - end -->
-        
-        <!-- Main menu - start -->
         <button type="button" class="mainmenu-btn">Menu</button>
-        
         <ul class="mainmenu">
           <li><a href="{{ url('/') }}" class="active">Sản phẩm</a></li>
           <li><a href="{{ route('product.promotion') }}">Khuyến mãi</a></li>
@@ -167,23 +147,15 @@
             <ul class="mainmenu-sub"></ul>
           </li>
         </ul>
-        <!-- Main menu - end -->
-        
-        <!-- Search - start -->
         <div class="topsearch">
-          <a id="topsearch-btn" class="topsearch-btn" href="#"><i class="fa fa-search"></i></a>
-          <form class="topsearch-form" action="#">
-            <input type="text" placeholder="Nhập tên hoặc mã sku của sản phẩm">
+          <a id="topsearch-btn" class="topsearch-btn" href="javascript:void(0)"><i class="fa fa-search"></i></a>
+          <form class="topsearch-form" action="{{ route('search.index') }}" method="GET">
+            <input name="q" type="text" placeholder="Nhập tên hoặc mã sku của sản phẩm">
             <button type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
-        <!-- Search - end -->
-      
       </nav>
     </div>
   </div>
-  <!-- Topmenu - end -->
-
 </header>
-<!-- Header - end -->
 @endif

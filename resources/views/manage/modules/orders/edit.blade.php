@@ -2,7 +2,6 @@
 @section('title', 'Chi tiết đơn hàng')
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
       <div class="page-bar">
         <ul class="page-breadcrumb">
@@ -27,27 +26,32 @@
                 <span class="caption-subject font-dark sbold uppercase"> Cập nhật đơn hàng - #{{ $record->id }}</span>
               </div>
               <div class="actions">
-                <a href="{{ route('orders.index') }}" class="btn default">{{ __('common.buttons.cancel') }}</a>
-                <button type="submit" name="submit" class="btn green" id="submit_form">{{ __('common.buttons.save') }}</button>
+                <div class="btn-group btn-group-devided">
+                  <a href="{{ route('orders.index') }}" class="btn default btn-circle">{{ __('common.buttons.cancel') }}</a>
+                  <button type="submit" name="submit" class="btn green  btn-circle" id="submit_form">{{ __('common.buttons.save') }}</button>
+                  <a  href="{{ route('orders.index') }}"  class="btn green btn-circle ">Gửi lại email</a>
+                </div>
               </div>
             </div>
+            @php $order_products = $record->products; @endphp
+            @php $grand_total = $record->total + $record->delivery_fee; @endphp
+            @php $deliveries = $record->deliveries; @endphp
             <div class="portlet-body">
               <div class="tabbable-line">
-                <div class="tab-pane active" id="tab_1">
+                <div class="tab-pane">
                   <div class="row">
-                    <div class="col-md-12 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                       <div class="portlet yellow-crusta box">
                         <div class="portlet-title">
-                          <div class="caption">
-                            <i class="fa fa-cogs"></i>Thông tin đơn hàng </div>
+                          <div class="caption">Thông tin đơn hàng </div>
                         </div>
                         <div class="portlet-body">
                           @php $key = 'ordered_at' @endphp
                           <div class="row static-info">
-                            <div class="col-md-5 name"> Ngày đặt hàng: </div>
+                            <div class="col-md-5 name"> Ngày đặt: </div>
                             <div class="col-md-7 value">
                               <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                {{ Form::text($key, old($key, format_date($record->{$key})), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày đặt hàng'])}}
+                                {{ Form::text($key, old($key, format_date($record->{$key}, '%d/%m/%Y')), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày đặt hàng'])}}
                                 <span class="input-group-btn">
                                     <button class="btn btn-sm default" type="button">
                                       <i class="fa fa-calendar"></i>
@@ -58,10 +62,10 @@
                           </div>
                           @php $key = 'delivered_at' @endphp
                           <div class="row static-info">
-                            <div class="col-md-5 name"> Ngày giao hàng: </div>
+                            <div class="col-md-5 name"> Ngày giao: </div>
                             <div class="col-md-7 value">
                               <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                {{ Form::text($key, old($key, format_date($record->{$key})), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày giao hàng'])}}
+                                {{ Form::text($key, old($key, format_date($record->{$key}, '%d/%m/%Y')), ['class' => 'form-control form-filter input-sm', 'readonly','placeholder' => 'Ngày giao hàng'])}}
                                 <span class="input-group-btn">
                                     <button class="btn btn-sm default" type="button">
                                       <i class="fa fa-calendar"></i>
@@ -72,7 +76,7 @@
                           </div>
                           @php $key = 'status' @endphp
                           <div class="row static-info">
-                            <div class="col-md-5 name"> Trạng thái đơn hàng: </div>
+                            <div class="col-md-5 name"> Trạng thái: </div>
                             <div class="col-md-7 value">
                               {{  Form::select($key, __('selector.default') + __('selector.orders.status'), old($key, $record->{$key}), [ 'class' => 'form-control form-filter input-sm' ]) }}
                             </div>
@@ -86,123 +90,23 @@
                           </div>
                           @php $key = 'note' @endphp
                           <div class="row static-info">
-                            <div class="col-md-5 name"> Ghi chú đơn hàng: </div>
+                            <div class="col-md-5 name"> Ghi chú: </div>
                             <div class="col-md-7 value">
-                              {{  Form::textarea( $key, old($key, $record->{$key}), [ 'cols'=> 30, 'rows' => 3,'class' => 'form-control', 'placeholder' => 'Ghi chú đơn hàng']) }}
+                              {{  Form::textarea( $key, old($key, $record->{$key}), [ 'cols'=> 30, 'rows' => 3,'class' => 'form-control', 'placeholder' => 'Ghi chú']) }}
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                    {{--<div class="col-md-6 col-sm-12">
-                      <div class="portlet blue-hoki box">
-                        <div class="portlet-title">
-                          <div class="caption">
-                            <i class="fa fa-cogs"></i>Thông tin khách hàng
-                          </div>
-                        </div>
-                        <div class="portlet-body">
-                          @php $key = 'order_customers.name' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Tên khách hàng: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn Minh Hiệp'])}}
-                            </div>
-                          </div>
-                          @php $key = 'order_customers.email' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Email: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::email(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: customer@gmail.com'])}}
-                            </div>
-                          </div>
-                          @php $key = 'order_customers.phone' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Số điện thoại: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::text(convert_input_name($key), old(convert_input_name($key)), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
-                            </div>
-                          </div>
-                          @php $key = 'order_customers.address' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Địa chỉ: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::textarea(convert_input_name($key), old(convert_input_name($key)), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
-                            </div>
-                          </div>
-                    
-                        </div>
-                      </div>
-                    </div>--}}
-                  </div>
-                  @php $deliveries = $record->deliveries; @endphp
-                  <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                      <div class="portlet green-meadow box">
-                        <div class="portlet-title">
-                          <div class="caption">
-                            <i class="fa fa-cogs"></i>Địa chỉ thanh toán </div>
-                        </div>
-                        <div class="portlet-body">
-                          @php $key = 'order_deliveries.delivery_type' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-12 mt-checkbox-list">
-                              <label class="mt-checkbox mt-checkbox-outline">
-                                <input type="checkbox">Địa chỉ nhận hàng khác địa chỉ người mua
-                                <span></span>
-                              </label>
-                            </div>
-                          </div>
-                          @php $key = 'order_deliveries.buyer_name' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Tên khách hàng: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn văn A'])}}
-                        
-                            </div>
-                          </div>
-                          @php $key = 'order_deliveries.buyer_email' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Email: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::email(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: email@gmail.com'])}}
-                            </div>
-                          </div>
-                          @php $key = 'order_deliveries.buyer_phone_1' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Số điện thoại: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
-                            </div>
-                          </div>
-                          @php $key = 'order_deliveries.buyer_phone_2' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Số điện thoại2: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
-                            </div>
-                          </div>
-                          @php $key = 'order_deliveries.buyer_address' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Địa chỉ: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::textarea(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
-                            </div>
-                          </div>
-                    
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                       <div class="portlet red-sunglo box">
                         <div class="portlet-title">
-                          <div class="caption">
-                            <i class="fa fa-cogs"></i>Địa chỉ giao hàng </div>
+                          <div class="caption">Địa chỉ giao hàng </div>
                         </div>
                         <div class="portlet-body">
                           @php $key = 'order_deliveries.receiver_name' @endphp
                           <div class="row static-info">
-                            <div class="col-md-5 name"> Tên khách hàng: </div>
+                            <div class="col-md-5 name"> Người nhận: </div>
                             <div class="col-md-7 value">
                               {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn văn A'])}}
                             </div>
@@ -216,14 +120,7 @@
                           </div>
                           @php $key = 'order_deliveries.receiver_phone_1' @endphp
                           <div class="row static-info">
-                            <div class="col-md-5 name"> Số điện thoại: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
-                            </div>
-                          </div>
-                          @php $key = 'order_deliveries.receiver_phone_2' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Số điện thoại 2: </div>
+                            <div class="col-md-5 name"> Điện thoại: </div>
                             <div class="col-md-7 value">
                               {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
                             </div>
@@ -235,25 +132,15 @@
                               {{ Form::textarea(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
                             </div>
                           </div>
-                          @php $key = 'order_deliveries.receiver_address_2' @endphp
-                          <div class="row static-info">
-                            <div class="col-md-5 name"> Địa chỉ 2: </div>
-                            <div class="col-md-7 value">
-                              {{ Form::textarea(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
-                            </div>
-                          </div>
-                    
                         </div>
                       </div>
                     </div>
-                  </div>
-                  @php $order_products = $record->products; @endphp
+                  </div> <!-- Info order-->
                   <div class="row">
                     <div class="col-md-12 col-sm-12">
                       <div class="portlet grey-cascade box">
                         <div class="portlet-title">
-                          <div class="caption">
-                            <i class="fa fa-cogs"></i>Sản phẩm đơn hàng
+                          <div class="caption">Chi tiết đơn hàng
                           </div>
                         </div>
                         <div class="portlet-body">
@@ -267,8 +154,8 @@
                                 <th> Thuế </th>
                                 <th> Giá </th>
                                 <th> Giá có thuế </th>
-                                <th> Tổng </th>
-                                <th class="text-center"></th>
+                                <th> Tổng tiền</th>
+                                <th class="text-center">Action</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -315,7 +202,6 @@
                       </div>
                     </div>
                   </div>
-                  @php $grand_total = $record->total + $record->delivery_fee; @endphp
                   <div class="row">
                     <div class="col-md-6"> </div>
                     <div class="col-md-6">
@@ -339,6 +225,47 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="portlet green-meadow box">
+                        <div class="portlet-title">
+                          <div class="caption">Thông tin khách hàng </div>
+                        </div>
+                        <div class="portlet-body">
+                          @php $key = 'order_deliveries.buyer_name' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Tên khách hàng: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn văn A'])}}
+                        
+                            </div>
+                          </div>
+                          @php $key = 'order_deliveries.buyer_email' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Email: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::email(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: email@gmail.com'])}}
+                            </div>
+                          </div>
+                          @php $key = 'order_deliveries.buyer_phone_1' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Số điện thoại: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: 0167 5485 123'])}}
+                            </div>
+                          </div>
+                          @php $key = 'order_deliveries.buyer_address' @endphp
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Địa chỉ: </div>
+                            <div class="col-md-7 value">
+                              {{ Form::textarea(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
+                            </div>
+                          </div>
+                    
+                        </div>
+                      </div>
+                    </div>
+                  </div> <!-- Deliveries -->
                 </div>
               </div>
             </div>
@@ -352,33 +279,10 @@
 @endsection
 @section('styles')
   @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" />
-
-  <link href="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
-  <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
   @parent
-  <!-- BEGIN PAGE LEVEL SCRIPTS -->
-  <script src="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.min.js')}}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/js/plugin/medias/summernote-ext-medias.js')}}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
-
-  <script src="{{ asset('/manages/assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
   <script src="{{ asset('/manages/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script>
-  <script src="{{  asset('/manages/assets/global/plugins/plupload/js/plupload.full.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
   <script src="{{  asset('/manages/assets/pages/scripts/ecommerce-orders.js') }}" type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
 @stop

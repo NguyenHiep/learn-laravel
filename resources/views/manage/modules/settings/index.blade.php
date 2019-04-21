@@ -2,11 +2,7 @@
 @section('title', __('static.manage.settings.settings.page_title'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
@@ -18,11 +14,7 @@
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title"> {{__('static.manage.settings.settings.page_title')}}  </h3>
-      <!-- END PAGE TITLE-->
-
       <div class="row">
         <div class="col-md-12">
         {!! Form::open(['route' => 'settings.update', 'id' => 'form_sample_3', 'class'=> 'form-horizontal', 'files' => true]) !!}
@@ -293,7 +285,7 @@
 
                         {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
                         [
-                            'class' => 'summernote_editor form-control',
+                            'class' => 'tinymce_editor form-control',
                             'rows' => 6,
                             'data-error-container' => '#editor2_error'
                         ]) !!}
@@ -309,7 +301,7 @@
                       <div class="col-md-10">
                         {!! Form::textarea($key, isset($settings->{$key}) ? $settings->{$key} : old($key) ,
                         [
-                            'class' => 'summernote_editor form-control',
+                            'class' => 'tinymce_editor form-control',
                             'rows' => 6,
                             'data-error-container' => '#editor2_error'
                         ]) !!}
@@ -329,32 +321,18 @@
                 </div>
               </div>
             </div>
-            <!-- END VALIDATION STATES-->
           </div>
           {!! Form::close() !!}
         </div>
       </div>
     </div>
-    <!-- END CONTENT BODY -->
   </div>
-
 @endsection
 @section('styles')
   @parent
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}"
-        rel="stylesheet" type="text/css"/>
   <link href="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
-  <!-- END PAGE LEVEL PLUGINS -->
 @stop
 @section('scripts')
   @parent
-  <!-- BEGIN PAGE LEVEL SCRIPTS -->
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}"
-          type="text/javascript"></script>
-  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}"
-          type="text/javascript"></script>
-  <!-- END PAGE LEVEL SCRIPTS -->
+  <script src="{{ asset('/manages/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
 @stop

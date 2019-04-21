@@ -122,7 +122,7 @@ return [
 
     'log' => env('APP_LOG', 'daily'),
 
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    'log_level' => env('APP_LOG_LEVEL', 'daily'),
 
     /*
     |--------------------------------------------------------------------------
@@ -181,10 +181,11 @@ return [
         Watson\Active\ActiveServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        App\Providers\ComposerServiceProvider::class
-
+        App\Providers\ComposerServiceProvider::class,
+        //Add package managenment image
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -235,12 +236,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
-
-    'locales' => ['vi' => 'Việt Nam', 'en' => 'English'],
-
-    'skip_locales' => ['manage', 'auth', 'login'],
-    //'skip_locales' => ['nguyenhiep'],
 
 ];

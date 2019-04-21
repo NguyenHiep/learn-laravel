@@ -4,16 +4,35 @@ namespace App\Http\Controllers\Manage\Posts;
 
 use App\Model\Posts\Tags;
 
-use App\Http\Controllers\Controller;
-use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\Request;
+use App\Http\Controllers\BackendController;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
-class TagsController extends Controller
+class TagsController extends BackendController
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-
+    
+    /**
+     * Validate tags field
+     * @param $data
+     * @param null $id
+     * @return mixed
+     */
+    protected static function validator($data, $id = null)
+    {
+        return Validator::make($data, [
+            'name'              => 'required|string|unique:posts_tags,name,' . $id,
+            'slug'              => 'string|unique:posts_tags,slug,' . $id,
+            'description'       => 'nullable|string',
+            'status'            => 'required|min:1|max:2'
+        ]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +40,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        $records = Tags::orderBy('id', 'asc')->paginate(12);
+        $records = Tags::orderBy('id', 'asc')->paginate(20);
         return view('manage.modules.posts.tags.index', compact('records'));
     }
 
@@ -40,57 +59,33 @@ class TagsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        // Begin validate
-        $this->validate(request(),
-            ['name'   => 'required',],
-            ['name.required' => 'Vui lòng nhập tên thẻ']
-        );
-        // Begin create category
-        $description = request()->description;
-        $dom = new \DomDocument();
-        // $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), 8192 | 4);
-
-        $images = $dom->getElementsByTagName('img');
-
-        // foreach <img> in the submited message
-        foreach($images as $img){
-            $src = $img->getAttribute('src');
-
-            // if the img source is 'data-url'
-            if(preg_match('/data:image/', $src)){
-
-                // get the mimetype
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                $mimetype = $groups['mime'];
-
-                // Generating a random filename
-                $filename = uniqid();
-                $filepath = 'category/' . $filename . '.' . $mimetype;
-
-                // @see http://image.intervention.io/api/
-                $image = Image::make($src)
-                    // resize if required
-                    /* ->resize(300, 200) */
-                    ->encode($mimetype, 100) 	// encode file to the specified mimetype
-                    ->save(public_path($filepath));
-
-                $new_src = asset($filepath);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $new_src);
-            } // <!--endif
-        } // <!--endforeach
-
-
-        $tags = new Tags();
-        $tags->name         = request()->name;
-        $tags->slug         = request()->slug;
-        $tags->description  = $dom->saveHTML();
-        $tags->save();
-        session()->flash('message', __('system.message.create'));
-        return redirect()->route('tags.index');
+        $inputs    = $request->all();
+        $validator = self::validator($inputs);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+        try {
+            DB::beginTransaction();
+            $tags = new Tags();
+            $tags->fill($inputs);
+            $tags->save();
+            DB::commit();
+            return redirect()->route('tags.index')->with([
+                'message' => __('system.message.create'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->back()->withInput($inputs)->with([
+            'message' => __('system.message.errors', ['errors' => 'Create tags post is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
+        
     }
 
     /**
@@ -122,56 +117,22 @@ class TagsController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //Get data info
-        $record = Tags::findOrFail($id);
-        // Begin validate
-        $this->validate(request(),
-            ['name'   => 'required',],
-            ['name.required' => 'Vui lòng nhập tên thẻ']
-        );
-        $description = request()->description;
-        $dom = new \DomDocument();
-        // $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), 8192 | 4);
-
-        $images = $dom->getElementsByTagName('img');
-
-        // foreach <img> in the submited message
-        foreach($images as $img){
-            $src = $img->getAttribute('src');
-
-            // if the img source is 'data-url'
-            if(preg_match('/data:image/', $src)){
-
-                // get the mimetype
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                $mimetype = $groups['mime'];
-
-                // Generating a random filename
-                $filename = uniqid();
-                $filepath = 'category/' . $filename . '.' . $mimetype;
-
-                // @see http://image.intervention.io/api/
-                $image = Image::make($src)
-                    // resize if required
-                    /* ->resize(300, 200) */
-                    ->encode($mimetype, 100) 	// encode file to the specified mimetype
-                    ->save(public_path($filepath));
-
-                $new_src = asset($filepath);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $new_src);
-            } // <!--endif
-        } // <!--endforeach
-
-        $record->name         = request()->name;
-        $record->slug         = request()->slug;
-        $record->description  = $dom->saveHTML();
-        $record->save();
-        session()->flash('message', __('system.message.update'));
-        return redirect()->route('tags.index');
+        $tags      = Tags::findOrFail($id);
+        $inputs    = $request->all();
+        $validator = self::validator($inputs, $id);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($inputs);
+        }
+        DB::beginTransaction();
+        $tags->update($inputs);
+        DB::commit();
+    
+        return redirect()->route('tags.index')->with([
+            'message' => __('system.message.update'),
+            'status'  => self::CTRL_MESSAGE_SUCCESS,
+        ]);
     }
 
     /**
@@ -182,9 +143,23 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        Tags::where('id', $id)->delete();
-        session()->flash('message', __('system.message.delete'));
-        return redirect()->route('tags.index');
+        $tags = Tags::findOrFail($id);
+        try {
+            DB::beginTransaction();
+            $tags->delete();
+            DB::commit();
+            return redirect()->route('tags.index')->with([
+                'message' => __('system.message.delete'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->route('tags.index')->with([
+            'message' => __('system.message.error', ['errors' => 'Delete post tags is failed']),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
     }
 
 

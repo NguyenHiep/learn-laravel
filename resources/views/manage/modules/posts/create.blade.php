@@ -1,7 +1,7 @@
 @extends('manage.master')
 @section('title', __('static.sidebars.manage.posts.creates'))
 @section('content')
-  <div class="page-content-wrapper">
+  <div class="page-content-wrapper posts-editor">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
       <!-- BEGIN PAGE HEADER-->
@@ -51,11 +51,12 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'summernote_editor form-control',
-                  'rows' => 9
-                  ]) !!}
+                  {!!  Form::textarea($key, old($key) ,
+                    [
+                        'class' => 'summernote_editor form-control',
+                        'rows' => 9
+                    ])
+                  !!}
                 </div>
 
                 @php $key = 'post_keyword'; @endphp
@@ -69,12 +70,12 @@
                 <div class="form-group">
                   <label class="control-label">{{__('common.posts.posts.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'form-control',
-                  'rows' => 3,
-                  'placeholder' => __('common.posts.posts.'.$key.'_placeholder')
-                  ]) !!}
+                  {!! Form::textarea($key, old($key) ,[
+                          'class' => 'form-control',
+                          'rows' => 3,
+                          'placeholder' => __('common.posts.posts.'.$key.'_placeholder')
+                      ])
+                  !!}
                 </div>
 
               </div>
@@ -101,12 +102,8 @@
                   <label class="control-label">Trạng thái:</label>
                   @if(!empty(__('selector.post_status')))
                     <div class="radio-list">
-                      @foreach(__('selector.post_status') as $k =>$val)
-                        @if($k === 2)
-                          <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
-                        @else
-                          <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
-                        @endif
+                      @foreach(__('selector.post_status') as  $k =>$val)
+                          <label class="radio-inline"> {!! Form::radio($key, $k, ($k == old($key, STATUS_DISABLE)) ? true : null) !!}    {{$val }} </label>
                       @endforeach
                     </div>
                   @endif
@@ -134,11 +131,7 @@
               @if(!empty(__('selector.format')))
                 <div class="radio-list">
                   @foreach(__('selector.format') as $k =>$val)
-                    @if($k === 0)
-                      <label> {!! Form::radio($key, $k, true) !!}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
-                    @else
-                      <label> {!! Form::radio($key, $k) !!}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
-                    @endif
+                      <label> {{ Form::radio($key, $k, ($k == old($key, 'standard')) ? true : null) }}    {!! __('selector.icons.'.$k).'&nbsp;&nbsp;'.$val !!} </label>
                   @endforeach
                 </div>
               @endif
@@ -200,7 +193,7 @@
                 <div class="clearfix margin-top-15" id="img_featured">
                   <!--<img src="http://minhhiep.info/wp-content/uploads/2017/10/cachua-300x300.jpg" draggable="false" alt="" class="img-responsive"> -->
                 </div>
-                <input type="hidden" name="{{$key}}" value="" id="{{$key}}"/>
+                <input type="hidden" name="{{$key}}" value="0" id="{{$key}}"/>
             </div>
           </div>
           <div class="portlet light bordered">
@@ -228,8 +221,14 @@
       <!-- END CONTENT BODY -->
     </div>
   </div>
-  @include('manage.blocks.medias.modal', ['medias' => $medias])
-  @include('manage.blocks.medias.content', ['medias' => $medias])
+  @include('manage.blocks.medias.modal', [
+    'medias' => $medias,
+    'class' => 'posts-modal'
+  ])
+  @include('manage.blocks.medias.content', [
+    'medias' => $medias,
+    'class' => 'posts-content'
+  ])
   @endsection
   @section('styles')
     @parent
@@ -259,10 +258,7 @@
   @push('custom-scripts')
     <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
     <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
-            type="text/javascript"></script>
-    <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
-            type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}" type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}" type="text/javascript"></script>
+    <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}" type="text/javascript"></script>
   @endpush

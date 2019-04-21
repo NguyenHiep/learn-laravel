@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use App\Model\Settings;
+use App\Model\Categories;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,9 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('frontend.theme-ecommerce.template', 'App\Http\Composers\MasterComposer');
+        $settings   = Settings::first();
+        $categories = Categories::where('status', STATUS_ENABLE)->get();
+        View::share(['settings' => $settings, 'categories' => $categories]);
     }
 
     /**

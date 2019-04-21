@@ -10,6 +10,6 @@ class BackendController extends Controller
 
     public function __construct()
     {
-        $this->medias = Medias::all();
+        $this->medias = Medias::orderBy('id', 'desc')->paginate(20);
     }
 }
