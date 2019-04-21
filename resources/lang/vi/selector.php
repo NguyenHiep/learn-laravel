@@ -43,8 +43,9 @@ return [
         ]
     ],
     'payment' => [
-        1 => 'Thanh toán khi nhận hàng',
+        1 => 'Thanh toán online',
         2 => 'Chuyển khoản ngân hàng',
+        3 => 'Thanh toán khi nhận hàng',
     ],
     'target' => [
         1 => '_blank',

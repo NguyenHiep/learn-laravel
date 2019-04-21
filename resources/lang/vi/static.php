@@ -13,8 +13,8 @@ return [
             ],
             'products'   => [
                 'title'  => 'Sản phẩm',
-                'create' => 'Thêm sản phẩm',
-                'list'   => 'Danh sách sản phẩm',
+                'create' => 'Sản phẩm mới',
+                'list'   => 'Tất cả sản phẩm',
             ],
             'orders'     => [
                 'title'  => 'Đơn hàng',

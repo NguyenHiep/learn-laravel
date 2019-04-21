@@ -31,7 +31,7 @@
     @if ($errors->has(convert_input_name($key))) <label class="contactform-label"> </label><span class="form-required">{{$errors->first(convert_input_name($key))}}</span>  @endif
   </p>
   @php $key = 'buyer_address_2' @endphp
-  <p class="contactform-field contactform-text address-detail" style="display: none">
+  <p class="contactform-field contactform-text buyer_address_2" style="display: none">
     <label class="contactform-label">Chi tiết <span class="form-required">*</span></label><!-- NO SPACE --><span class="contactform-input">{{ Form::text(convert_input_name($key), old($key), ['placeholder' => 'VD: Romea-Tầng 6-Công ty ABC (hoăc Phòng A-15)']) }}</span>
     @if ($errors->has(convert_input_name($key))) <label class="contactform-label"> </label><span class="form-required">{{$errors->first(convert_input_name($key))}}</span>  @endif
   </p>

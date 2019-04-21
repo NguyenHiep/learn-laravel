@@ -44,7 +44,6 @@ class CheckoutRequest extends FormRequest
                 'buyer_name'           => 'required',
                 'buyer_address_type'   => 'required',
                 'buyer_address'        => 'required',
-                'buyer_address_detail' => 'required',
                 'buyer_phone_1'        => 'required',
             ];
             if (request()->get('buyer_address_type') == APARTMENT) {

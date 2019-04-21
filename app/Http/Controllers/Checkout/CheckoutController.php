@@ -27,7 +27,7 @@ class CheckoutController extends FrontendController
         $this->payment_options = [
             [
                 'id'          => 1,
-                'name'        => 'Thanh toán qua paypal',
+                'name'        => 'Thanh toán online',
                 'description' => 'Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.'
             ],
             [
@@ -42,8 +42,8 @@ class CheckoutController extends FrontendController
             ],
             [
                 'id'          => 3,
-                'name'        => 'Trả tiền mặt khi nhận hàng',
-                'description' => '3Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.'
+                'name'        => 'Thanh toán khi nhận hàng',
+                'description' => 'Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.'
             ],
         ];
         $data['payment_options'] = $this->payment_options;
@@ -81,8 +81,7 @@ class CheckoutController extends FrontendController
             // Process deliveries
             // Địa chỉ nhận hàng cùng với địa chỉ mua
             $inputs['order_id'] = $order->id;
-            if(!isset($inputs['delivery_type']))
-            {
+            if (!isset($inputs['delivery_type'])) {
                 $inputs['delivery_type'] = static::DELIVERY_TYPE_SAME;
             }
 
@@ -97,20 +96,8 @@ class CheckoutController extends FrontendController
             }
 
             $order_deliveries = new Orders\Deliveries();
-            $order_deliveries->order_id              = $inputs['order_id'];
-            $order_deliveries->buyer_name            = $inputs['buyer_name'];
-            $order_deliveries->buyer_email           = $inputs['buyer_email'];
-            $order_deliveries->buyer_phone_1         = $inputs['buyer_phone_1'];
-            $order_deliveries->buyer_address         = $inputs['buyer_address'];
-            $order_deliveries->delivery_type         = $inputs['delivery_type'];
-            $order_deliveries->receiver_name         = $inputs['receiver_name'];
-            $order_deliveries->receiver_email        = $inputs['receiver_email'];
-            $order_deliveries->receiver_phone_1      = $inputs['receiver_phone_1'];
-            $order_deliveries->receiver_address_1    = $inputs['receiver_address_1'];
-            $order_deliveries->receiver_address_2    = $inputs['receiver_address_2'];
-            $order_deliveries->receiver_address_type = $inputs['receiver_address_type'];
+            $order_deliveries->fill($inputs);
             $order_deliveries->save();
-
             // Process products
             $list_product = [];
 

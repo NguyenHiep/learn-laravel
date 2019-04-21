@@ -36,8 +36,7 @@
           <span class="title">{{__('static.sidebars.manage.categories.title')}}</span>
         </a>
       </li>
-      <li
-        class="nav-item  {{ active(['products.index', 'products.create', 'products.edit'], 'active open') }}">
+      <li class="nav-item  {{ active(['products.index', 'products.create', 'products.edit'], 'active open') }}">
         <a href="{{ route('products.index') }}" class="nav-link nav-toggle">
           <i class="icon-graph"></i>
           <span class="title">{{__('static.sidebars.manage.products.title')}}</span>
@@ -46,13 +45,19 @@
         </a>
         <ul class="sub-menu">
           <li class="nav-item">
+            <a href="{{ route('products.index') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.products.list')}}</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
             <a href="{{ route('products.create') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.products.create')}}</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('products.index') }}" class="nav-link ">
-              <span class="title">{{__('static.sidebars.manage.products.list')}}</span>
+            <a href="{{ route('categories.index') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.categories.title')}}</span>
             </a>
           </li>
 
@@ -64,7 +69,7 @@
           <i class="icon-basket"></i>
           <span class="title">{{__('static.sidebars.manage.orders.title')}}</span>
         </a>
-    {{--    <ul class="sub-menu">
+        <ul class="sub-menu">
 
           <li class="nav-item">
             <a href="{{ route('orders.index') }}" class="nav-link ">
@@ -77,7 +82,7 @@
             </a>
           </li>
 
-        </ul>--}}
+        </ul>
       </li>
       <li class="nav-item  {{ active(['posts.index', 'posts.create', 'posts.edit', 'category.index', 'category.create','category.edit', 'tags.index', 'tags.create', 'tags.edit'], 'active open') }}">
         <a href="{{ route('posts.index') }}" class="nav-link nav-toggle">

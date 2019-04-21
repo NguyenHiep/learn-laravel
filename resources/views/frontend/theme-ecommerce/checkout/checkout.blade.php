@@ -93,18 +93,44 @@
 	elemBody.find('input[name=delivery_type]').on('change', function () {
       checkDeliveryType();
 	});
- 
-	elemBody.find('input.address-type').on('change', function () {
-		$(this).parent().parent().parent().next().next().toggle();
+
+	checkAddressTypeReceiver();
+	elemBody.find("input[name='receiver_address_type']").on('change', function () {
+		checkAddressTypeReceiver();
 	});
-  function checkAddressTypeBuyer() {
-     // TODO: Do some thing
-  }
+
+	checkAddressTypeBuyer();
+	elemBody.find("input[name='buyer_address_type']").on('change', function () {
+		checkAddressTypeBuyer();
+	});
+  
   checkPaymentMethod()
 	elemBody.find('input.payment-method').on('click', function () {
       checkPaymentMethod();
 	});
 
+	function checkAddressTypeReceiver() {
+		var inputValue = parseInt($("input[name='receiver_address_type']:checked").val());
+		var address_detail = $('.receiver_address_2');
+		if (inputValue === 2) {
+			address_detail.show();
+		} else {
+			address_detail.hide();
+		}
+
+	}
+
+	function checkAddressTypeBuyer() {
+		var inputValue = parseInt($("input[name='buyer_address_type']:checked").val());
+		var address_detail = $('.buyer_address_2');
+		if (inputValue === 2) {
+			address_detail.show();
+		} else {
+			address_detail.hide();
+		}
+
+	}
+	
 	function checkPaymentMethod() {
       var inputValue = $("input[name='payment_id']:checked").val();
       var targetBox  = $('.payment_method_' + inputValue);
