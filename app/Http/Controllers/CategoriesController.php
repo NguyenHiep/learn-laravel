@@ -12,10 +12,10 @@ class CategoriesController extends FrontendController
     public $mproduct;
     public $config_toolbar;
 
-    public function __construct()
+    public function __construct(Categories $categories, Products $products)
     {
-        $this->mcategory      = new Categories();
-        $this->mproduct       = new Products();
+        $this->mcategory      = $categories;
+        $this->mproduct       = $products;
         $this->config_toolbar = ToolbarConfig::getInstance();
     }
 
@@ -26,8 +26,7 @@ class CategoriesController extends FrontendController
             abort(404);
         }
         // Get config toolbar
-        $config             = ToolbarConfig::getInstance();
-        $data['mode']       = $config->mode;
+        $data['mode']       = $this->config_toolbar->mode;
         // Get product list
         $data['category']   = $category;
         $data['products']   = $this->mproduct->getProductByCategoryId($this->config_toolbar, $category->id);

@@ -1,7 +1,7 @@
 @extends('frontend.theme-ecommerce.template')
 
-@section('title', 'Chào mừng bạn đến với CMS E-commerce laravel Nguyễn Hiệp')
-@section('description', 'Cung cấp sỉ và lẻ quần áo')
+@section('title', 'Giỏ hàng của bạn')
+@section('description', 'Giỏ hàng của bạn, cung cấp sỉ và lẻ quần áo')
 @section('keywords', 'Quần áo online, áo thun online, quần kaki online')
 
 @section('content')
@@ -41,7 +41,7 @@
                       @if(!empty($product->pictures))
                         <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
                       @else
-                        <img src="http://placehold.it/61x80" alt="{{ $product->name }}" title="{{ $product->name }}">
+                        <img src="{{ asset('theme-ecommerce/img/120x120.png') }}" alt="{{ $product->name }}" title="{{ $product->name }}">
                       @endif
                     </a>
                   </td>

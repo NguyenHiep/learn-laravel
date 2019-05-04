@@ -19,15 +19,6 @@
           </ul>
         </div>
         @auth
-        <div class="f-menu">
-          <h3>Tài khoản</h3>
-          <ul class="nav nav-pills nav-stacked">
-            <li><a href="#">Tài khoản của tôi</a></li>
-            <li><a href="#">Lịch sử đặt hàng</a></li>
-            <li><a href="#">Danh sách yêu thích</a></li>
-            <li><a href="#">Bản tin</a></li>
-          </ul>
-        </div>
         @endauth
         <div class="f-menu">
           <h3>Thông tin</h3>
@@ -35,14 +26,6 @@
             <li><a href="tel:{{ $settings->company_tel }}"><i class="fa fa-phone"></i>{{ $settings->company_tel }}</a></li>
             <li><a href="mailto:{{ $settings->company_email }}"><i class="fa fa-envelope"></i>{{ $settings->company_email }}</a></li>
           </ul>
-        </div>
-        <div class="f-subscribe">
-          <h3>Đăng ký theo dõi</h3>
-          <form class="f-subscribe-form" action="">
-            <input placeholder="Email của bạn" type="text" />
-            <button type="submit"><i class="fa fa-paper-plane"></i></button>
-          </form>
-          <p>Nhập email nếu bạn muốn nhận tin mới. Đăng ký theo dõi ngay bây giờ</p>
         </div>
       </div>
     </div>

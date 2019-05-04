@@ -8,10 +8,10 @@ use App\Model\Products;
 
 class HomeController extends FrontendController
 {
+    const THOITRANG_NU      = 1;
     const THOITRANG_NAM     = 2;
-    const THOITRANG_NU      = 3;
-    const THOITRANG_CHOBE   = 4;
-    const PHUKIEN_THOITRANG = 5;
+    const THOITRANG_CHOBE   = 3;
+    const PHUKIEN_THOITRANG = 4;
     public $mslider;
     public $mproduct;
     public $config_toolbar;

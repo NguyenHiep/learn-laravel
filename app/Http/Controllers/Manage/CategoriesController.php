@@ -66,6 +66,11 @@ class CategoriesController extends BackendController
     public function store(Request $request)
     {
         $inputs = $request->all();
+        $slug = unicode_str_filter($inputs['name']);
+        if (!empty($inputs['slug'])) {
+            $slug = unicode_str_filter($inputs['slug']);
+        }
+        $inputs['slug'] = $slug;
         $validator = self::validator($inputs);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput($inputs);
@@ -139,6 +144,11 @@ class CategoriesController extends BackendController
             return abort(404);
         }
         $inputs = $request->all();
+        $slug = unicode_str_filter($inputs['name']);
+        if (!empty($inputs['slug'])) {
+            $slug = unicode_str_filter($inputs['slug']);
+        }
+        $inputs['slug'] = $slug;
         $validator = self::validator($inputs, $id);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);

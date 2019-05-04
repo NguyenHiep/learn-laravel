@@ -17,7 +17,6 @@
           </p>
         </div>
         <p class="prodtb-i-action">
-          <a href="javascript:void(0)" class="prodtb-i-favorites"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
           <a class="prodtb-i-compare compare_product" href="javascript:void(0)" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
           <a href="javascript:void(0)" class="qview-btn prodtb-i-qview" data-id="{{ $product->id }}"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
           <a href="javascript:void(0)" class="prodtb-i-buy add_to_cart" data-id="{{ $product->id }}"><span>Mua</span><i class="fa fa-shopping-basket"></i></a>
@@ -28,7 +27,7 @@
           @if(!empty($product->pictures))
             <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
           @else
-            <img src="http://placehold.it/250x350" alt="{{ $product->name }}" title="{{ $product->name }}">
+            <img src="{{ asset('theme-ecommerce/img/354x236.png') }}" alt="{{ $product->name }}" title="{{ $product->name }}">
           @endif
         </a>
         <div class="prodlist-i-cont">
@@ -39,8 +38,7 @@
         
         <ul class="prodlist-i-props2">
           <li><span class="prodlist-i-propttl"><span>Mã sản phẩm</span></span> <span class="prodlist-i-propval">{{ $product->sku }}</span></li>
-          <li><span class="prodlist-i-propttl"><span>Xuất xứ</span></span> <span class="prodlist-i-propval">Việt Nam</span></li>
-          <li><span class="prodlist-i-propttl"><span>Tình trạng</span></span> <span class="prodlist-i-propval">còn hàng</span></li>
+          <li><span class="prodlist-i-propttl"><span>Tình trạng</span></span> <span class="prodlist-i-propval">{{ $product->quantity > 0 ? 'Còn hàng' : 'Hết hàng' }}</span></li>
         </ul>
       </div>
     </div>

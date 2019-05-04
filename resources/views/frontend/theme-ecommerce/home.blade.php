@@ -1,8 +1,8 @@
 @extends('frontend.theme-ecommerce.template')
 
-@section('title', 'Chào mừng bạn đến với CMS E-commerce laravel Nguyễn Hiệp')
-@section('description', 'Cung cấp sỉ và lẻ quần áo')
-@section('keywords', 'Quần áo online, áo thun online, quần kaki online')
+@section('title', 'Trang chủ - Shop chuyên cung cấp sỉ và lẻ quần áo')
+@section('description', 'Shop chuyên cung cấp sỉ và lẻ quần áo')
+@section('keywords', 'Quần áo giá sỷ, Quần áo online, áo thun online, quần kaki online')
 
 @section('content')
   <main>

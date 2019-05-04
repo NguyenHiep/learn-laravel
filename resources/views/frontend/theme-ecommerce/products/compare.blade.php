@@ -1,6 +1,6 @@
 @extends('frontend.theme-ecommerce.template')
 
-@section('title', 'Chào mừng bạn đến với CMS E-commerce laravel Nguyễn Hiệp')
+@section('title', 'So sánh sản phẩm')
 @section('description', 'Cung cấp sỉ và lẻ quần áo')
 @section('keywords', 'Quần áo online, áo thun online, quần kaki online')
 
@@ -33,7 +33,7 @@
                         @if(!empty($product->pictures))
                             <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
                         @else
-                          <img src="http://placehold.it/300x345" alt="">
+                          <img src="{{ asset('theme-ecommerce/img/354x236.png') }}" alt="">
                         @endif
                       </div>
                       <div>
@@ -67,22 +67,6 @@
             </div>
           </div>
           <div class="wccm-tr">
-            <div class="wccm-th">Xuất xứ</div>
-            <div class="wccm-table-wrapper">
-              <table class="wccm-table" cellspacing="0" cellpadding="0" border="0">
-                <tbody>
-                <tr>
-                  @foreach($products as $product)
-                    <td class="wccm-td">
-                      <p> Việt Nam</p>
-                    </td>
-                  @endforeach
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="wccm-tr">
             <div class="wccm-th">Trạng thái</div>
             <div class="wccm-table-wrapper">
               <table class="wccm-table" cellspacing="0" cellpadding="0" border="0">
@@ -90,7 +74,7 @@
                 <tr>
                   @foreach($products as $product)
                     <td class="wccm-td">
-                      <p> Còn hàng</p>
+                      <p> {{ $product->quantity > 0 ? 'Còn hàng' : 'Hết hàng' }}</p>
                     </td>
                   @endforeach
                 </tr>

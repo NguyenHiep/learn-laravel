@@ -6,7 +6,7 @@
         @if(!empty($product->pictures))
           <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
         @else
-          <img src="http://placehold.it/300x311" alt="{{ $product->name }}" title="{{ $product->name }}">
+          <img src="{{ asset('theme-ecommerce/img/354x236.png') }}" alt="{{ $product->name }}" title="{{ $product->name }}">
         @endif
       </a>
       <div class="prodlist-i-cont">
@@ -30,7 +30,6 @@
 					</span>
         </div>
         <p class="prodlist-i-info">
-          <a href="#" class="prodlist-i-favorites"><i class="fa fa-heart"></i> Yêu thích</a>
           <a href="#" class="qview-btn prodlist-i-qview"  data-id="{{ $product->id }}"><i class="fa fa-search"></i> Xem nhanh</a>
           <a class="prodlist-i-compare compare_product" href="javascript:void(0)" data-id="{{ $product->id }}"><i class="fa fa-bar-chart"></i> So sánh</a>
         </p>
@@ -39,8 +38,7 @@
       <div class="prodlist-i-props-wrap">
         <ul class="prodlist-i-props">
           <li><b>Mã sản phẩm</b> {{ $product->sku }}</li>
-          <li><b>Xuất xứ</b> Việt Nam</li>
-          <li><b>Tình trạng</b> Còn hàng</li>
+          <li><b>Tình trạng</b> {{ $product->quantity > 0 ? 'Còn hàng' : 'Hết hàng' }}</li>
         </ul>
       </div>
       <div class="prod-sticker">

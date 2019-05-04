@@ -1,7 +1,7 @@
 @extends('frontend.theme-ecommerce.template')
 
-@section('title', 'Chào mừng bạn đến với CMS E-commerce laravel Nguyễn Hiệp')
-@section('description', 'Cung cấp sỉ và lẻ quần áo')
+@section('title', 'Tìm kiếm sản phẩm')
+@section('description', 'Tìm kiếm sản phẩm, cung cấp sỉ và lẻ quần áo')
 @section('keywords', 'Quần áo online, áo thun online, quần kaki online')
 
 @section('content')
@@ -59,11 +59,10 @@
                     @if(!empty($product->pictures))
                       <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
                     @else
-                      <img src="http://placehold.it/250x350" alt="{{ $product->name }}" title="{{ $product->name }}">
+                      <img src="{{ asset('theme-ecommerce/img/354x236.png') }}" alt="{{ $product->name }}" title="{{ $product->name }}">
                     @endif
                   </a>
                   <p class="prod-i-info">
-                    <a href="javascript:void(0)" class="prod-i-favorites" data-id="{{ $product->id }}"><span>Yêu thích</span><i class="fa fa-heart"></i></a>
                     <a href="javascript:void(0)" class="qview-btn prod-i-qview" data-id="{{ $product->id }}"><span>Xem nhanh</span><i class="fa fa-search"></i></a>
                     <a class="prod-i-compare compare_product" href="javascript:void(0)" data-id="{{ $product->id }}"><span>So sánh</span><i class="fa fa-bar-chart"></i></a>
                   </p>

@@ -56,13 +56,6 @@
       </div>
       <div class="shop-menu">
         <ul>
-        <li>
-            <a href="wishlist.html">
-              <i class="fa fa-heart"></i>
-              <span class="shop-menu-ttl">Yêu thích</span>
-              (<span id="topbar-favorites">1</span>)
-            </a>
-          </li>
           <li>
             <a href="{{ route('compare.index') }}">
               <i class="fa fa-bar-chart"></i>
@@ -75,16 +68,7 @@
               <span class="shop-menu-ttl">So sánh</span> (<span id="total_compare">{{ $compare_item }}</span>)
             </a>
           </li>
-          
-          <li class="topauth">
-            <a href="auth.html">
-              <i class="fa fa-lock"></i>
-              <span class="shop-menu-ttl">Đăng ký</span>
-            </a>
-            <a href="auth.html">
-              <span class="shop-menu-ttl">Đăng nhập</span>
-            </a>
-          </li>
+
           <li>
             <div class="h-cart">
               <a href="{{ route('checkout.cart.index') }}">
@@ -136,12 +120,12 @@
         </div>
         <button type="button" class="mainmenu-btn">Menu</button>
         <ul class="mainmenu">
-          <li><a href="{{ url('/') }}" class="active">Sản phẩm</a></li>
-          <li><a href="{{ route('product.promotion') }}">Khuyến mãi</a></li>
-          <li><a href="{{ url('gioi-thieu') }}">Giới thiệu</a></li>
-          <li><a href="{{ url('tin-tuc') }}">Tin tức</a></li>
-          <li><a href="{{ url('huong-dan-thanh-toan') }}">Hướng dẫn thanh toán</a></li>
-          <li><a href="{{ url('lien-he') }}">Liên hệ</a></li>
+          <li><a href="{{ url('/') }}" class="{{ url()->current() == url('/') ? 'active' : '' }}">Sản phẩm</a></li>
+          <li><a href="{{ route('product.promotion') }}" class="{{ url()->current() == route('product.promotion') ? 'active' : '' }}">Khuyến mãi</a></li>
+          <li><a href="{{ url('gioi-thieu') }}" class="{{ url()->current() == url('gioi-thieu') ? 'active' : '' }}">Giới thiệu</a></li>
+          <li><a href="{{ url('tin-tuc') }}" class="{{ url()->current() == url('tin-tuc') ? 'active' : '' }}">Tin tức</a></li>
+          <li><a href="{{ url('huong-dan-thanh-toan') }}" class="{{ url()->current() == url('huong-dan-thanh-toan') ? 'active' : '' }}">Hướng dẫn thanh toán</a></li>
+          <li><a href="{{ url('lien-he') }}" class="{{ url()->current() == url('lien-he') ? 'active' : '' }}">Liên hệ</a></li>
           <li class="mainmenu-more">
             <span>...</span>
             <ul class="mainmenu-sub"></ul>
