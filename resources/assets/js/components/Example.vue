@@ -15,9 +15,9 @@
 </template>
 
 <script>
-    export default {
-        ready() {
-            console.log('Component ready.')
-        }
+  export default {
+    mounted() {
+      console.log('Component mounted.')
     }
+  }
 </script>

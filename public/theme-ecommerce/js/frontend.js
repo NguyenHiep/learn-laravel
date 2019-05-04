@@ -250,7 +250,6 @@ var Checkout = {
 
     add_to_cart: function () {
         this.elemBody.find('.add_to_cart').on("click", function (e) {
-            e.preventDefault();
             var product_id = $(this).attr('data-id');
             var quantity = Checkout.elemBody.find(".quantity_item").val();
             if (typeof quantity !== 'undefined') {
@@ -260,8 +259,8 @@ var Checkout = {
             }
             if (typeof product_id !== 'undefined') {
                 $.ajax({
-                    url: ajaxcalls_vars.host + '/checkout/addtocart/',
                     type: "POST",
+                    url: ajaxcalls_vars.host + '/checkout/addtocart/',
                     data: {
                         _token: ajaxcalls_vars.token,
                         product_id: product_id,
@@ -277,6 +276,7 @@ var Checkout = {
                 });
 
             }
+            e.preventDefault();
 
         });
     },
