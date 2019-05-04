@@ -9,7 +9,7 @@
   <title>@yield('title')</title>
   <meta name="description" content="@yield('description')"/>
   <meta name="keywords" content="@yield('keywords')"/>
-  <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700ii%7CRoboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700ii%7CRoboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('/theme-ecommerce/css/theme-ecommerce.css') }}">
   @php
     echo '<script type="text/javascript">
@@ -37,7 +37,7 @@
 <div class="qview-modal"></div>
 <!-- Quick View Product - end -->
 <!-- jQuery plugins/scripts - start -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhAYvx0GmLyN5hlf6Uv_e9pPvUT3YpozE"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDhAYvx0GmLyN5hlf6Uv_e9pPvUT3YpozE"></script>
 <script src="{{ asset('/theme-ecommerce/js/theme-ecommerce.js') }}"></script>
 @stack('scripts')
 <script type="text/javascript">

@@ -158,6 +158,11 @@
     </div>
   </div>
   @include('manage.blocks.medias.modal', [
-     'medias' => $medias
-   ])
+    'medias' => $medias,
+    'class' => 'page-modal'
+  ])
+  @include('manage.blocks.medias.content', [
+    'medias' => $medias,
+    'class' => 'page-content'
+  ])
 @endsection

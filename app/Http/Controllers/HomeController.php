@@ -16,10 +16,10 @@ class HomeController extends FrontendController
     public $mproduct;
     public $config_toolbar;
 
-    public function __construct()
+    public function __construct(Sliders $sliders, Products $products)
     {
-        $this->mslider        = new Sliders();
-        $this->mproduct       = new Products();
+        $this->mslider        = $sliders;
+        $this->mproduct       = $products;
         $this->config_toolbar = ToolbarConfig::getInstance();
         $this->config_toolbar->limit = 8;
     }
@@ -42,7 +42,8 @@ class HomeController extends FrontendController
         $data['thoitrang_nam']     = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::THOITRANG_NAM);
         $data['thoitrang_chobe']   = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::THOITRANG_CHOBE);
         $data['phukien_thoitrang'] = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::PHUKIEN_THOITRANG);
-    	return view('frontend.theme-ecommerce.home', $data);
+        //$data['section_display'] = ['hello','skill', 'experience', 'education','portfolio', 'feedback','contact'];
+        return view('frontend.theme-ecommerce.home', $data);
     }
 
 }

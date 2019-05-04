@@ -23,14 +23,14 @@
 </head>
 <body>
 
-@include('frontend._includes._header')
-@include('frontend._includes._navtop')
+@include('frontend.theme-cv._includes._header')
+@include('frontend.theme-cv._includes._navtop')
 @yield('content')
-@include('frontend._includes._footer')
-@include('frontend.modals.contact')
-@include('frontend.modals.portfolio')
-@include('frontend.modals.thanks')
-@include('frontend.modals.errors')
+@include('frontend.theme-cv._includes._footer')
+@include('frontend.theme-cv.modals.contact')
+@include('frontend.theme-cv.modals.portfolio')
+@include('frontend.theme-cv.modals.thanks')
+@include('frontend.theme-cv.modals.errors')
 
 <script src="{{asset('/theme01/js/jquery-2.2.3.min.js')}}"></script>
 <script src="{{asset('/theme01/js/bootstrap.min.js')}}"></script>

@@ -159,6 +159,11 @@
   </div>
   @include('manage.blocks.medias.modal', [
       'medias' => $medias,
+      'class' => 'page-modal',
       'id' => $record->page_medias_id
+    ])
+  @include('manage.blocks.medias.content', [
+    'medias' => $medias,
+    'class' => 'page-content',
   ])
 @endsection
