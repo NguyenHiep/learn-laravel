@@ -54,37 +54,29 @@ mix.combine([
 
 /** Front End*/
 mix.styles([
-    'public/theme-ecommerce/css/font-awesome.min.css',
-    'public/theme-ecommerce/css/bootstrap.min.css',
-    'public/theme-ecommerce/css/ion.rangeSlider.css',
-    'public/theme-ecommerce/css/ion.rangeSlider.skinFlat.css',
-    'public/theme-ecommerce/css/jquery.bxslider.css',
-    'public/theme-ecommerce/css/jquery.fancybox.css',
-    'public/theme-ecommerce/css/flexslider.css',
-    'public/theme-ecommerce/css/swiper.css',
-    'public/theme-ecommerce/css/toastr.min.css',
-    'public/theme-ecommerce/css/style.css',
-    'public/theme-ecommerce/css/css/media.css',
-    'public/theme-ecommerce/css/custom.css'
-], 'public/theme-ecommerce/css/theme-ecommerce.css');
+    'public/theme-onetech/styles/bootstrap4/bootstrap.min.css',
+    'public/theme-onetech/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css',
+    'public/theme-onetech/plugins/OwlCarousel2-2.2.1/owl.carousel.css',
+    'public/theme-onetech/plugins/OwlCarousel2-2.2.1/owl.theme.default.css',
+    'public/theme-onetech/plugins/OwlCarousel2-2.2.1/animate.css',
+    'public/theme-onetech/plugins/slick-1.8.0/slick.css',
+    'public/theme-onetech/styles/main_styles.css',
+    'public/theme-onetech/styles/responsive.css',
+], 'public/theme-onetech/styles/styles.css');
 
 mix.combine([
-    'public/theme-ecommerce/js/jquery-1.11.2.min.js',
-    'public/theme-ecommerce/js/jquery-migrate.min.js',
-    'public/theme-ecommerce/js/jquery.bxslider.min.js',
-    'public/theme-ecommerce/js/fancybox/fancybox.js',
-    'public/theme-ecommerce/js/fancybox/helpers/jquery.fancybox-thumbs.js',
-    'public/theme-ecommerce/js/jquery.flexslider-min.js',
-    'public/theme-ecommerce/js/swiper.jquery.min.js',
-    'public/theme-ecommerce/js/jquery.waypoints.min.js',
-    'public/theme-ecommerce/js/progressbar.min.js',
-    'public/theme-ecommerce/js/ion.rangeSlider.min.js',
-    'public/theme-ecommerce/js/chosen.jquery.min.js',
-    'public/theme-ecommerce/js/jQuery.Brazzers-Carousel.js',
-    'public/theme-ecommerce/js/toastr.min.js',
-    'public/theme-ecommerce/js/plugins.js',
-    'public/theme-ecommerce/js/main.js',
-    'public/theme-ecommerce/js/frontend.js',
-    'public/theme-ecommerce/js/gmap.js'
-
-], 'public/theme-ecommerce/js/theme-ecommerce.js');
+      'public/theme-onetech/js/jquery-3.3.1.min.js',
+      'public/theme-onetech/styles/bootstrap4/popper.js',
+      'public/theme-onetech/styles/bootstrap4/bootstrap.min.js',
+      'public/theme-onetech/plugins/greensock/TweenMax.min.js',
+      'public/theme-onetech/plugins/scrollmagic/ScrollMagic.min.js',
+      'public/theme-onetech/plugins/greensock/animation.gsap.min.js',
+      'public/theme-ecommerce/js/toastr.min.js',
+      'public/theme-onetech/plugins/greensock/ScrollToPlugin.min.js',
+      'public/theme-onetech/plugins/OwlCarousel2-2.2.1/owl.carousel.js',
+      'public/theme-onetech/plugins/slick-1.8.0/slick.js',
+      'public/theme-onetech/plugins/easing/easing.js',
+      'public/theme-onetech/js/custom.js'
+   /* 'public/theme-ecommerce/js/frontend.js',
+    'public/theme-ecommerce/js/gmap.js'*/
+], 'public/theme-onetech/js/main.js');

@@ -42,8 +42,7 @@ class HomeController extends FrontendController
         $data['thoitrang_nam']     = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::THOITRANG_NAM);
         $data['thoitrang_chobe']   = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::THOITRANG_CHOBE);
         $data['phukien_thoitrang'] = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::PHUKIEN_THOITRANG);
-        //$data['section_display'] = ['hello','skill', 'experience', 'education','portfolio', 'feedback','contact'];
-        return view('frontend.theme-ecommerce.home', $data);
+        return view('frontend.theme-onetech.home', $data);
     }
 
 }

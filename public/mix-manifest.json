@@ -3,6 +3,6 @@
     "/css/app.css": "/css/app.css",
     "/css/manage/app.css": "/css/manage/app.css",
     "/js/manage/app.js": "/js/manage/app.js",
-    "/theme-ecommerce/css/theme-ecommerce.css": "/theme-ecommerce/css/theme-ecommerce.css",
-    "/theme-ecommerce/js/theme-ecommerce.js": "/theme-ecommerce/js/theme-ecommerce.js"
+    "/theme-onetech/styles/styles.css": "/theme-onetech/styles/styles.css",
+    "/theme-onetech/js/main.js": "/theme-onetech/js/main.js"
 }

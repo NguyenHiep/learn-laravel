@@ -258,14 +258,17 @@ var Checkout = {
                 quantity = 1;
             }
             if (typeof product_id !== 'undefined') {
-                $.ajax({
+                let url = ajaxcalls_vars.host + '/checkout/addtocart/';
+                let dataSend = {
+                    _token: ajaxcalls_vars.token,
+                    product_id: product_id,
+                    quantity: quantity
+                }
+
+               $.ajax({
                     type: "POST",
-                    url: ajaxcalls_vars.host + '/checkout/addtocart/',
-                    data: {
-                        _token: ajaxcalls_vars.token,
-                        product_id: product_id,
-                        quantity: quantity
-                    },
+                    url: url,
+                    data: dataSend,
                     dataType: "json",
                 }).done(function (data) {
                     $("#page-preloader").hide();
