@@ -27,8 +27,8 @@
               </div>
               <div class="top_bar_user">
                 <div class="user_icon"><img src="{{ asset('theme-onetech/images/user.svg') }}" alt=""></div>
-                <div><a href="#">Register</a></div>
-                <div><a href="#">Sign in</a></div>
+                <div><a href="#">{{__('frontend.header.register')}}</a></div>
+                <div><a href="#">{{__('frontend.header.sign_in')}}</a></div>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
           <!-- Logo -->
           <div class="col-lg-2 col-sm-3 col-3 order-1">
             <div class="logo_container">
-              <div class="logo"><a href="{{ route('home') }}">OneTech</a></div>
+              <div class="logo"><a href="{{ route('home') }}">{{$settings->company_name}}</a></div>
             </div>
           </div>
 
@@ -55,22 +55,22 @@
               <div class="header_search_content">
                 <div class="header_search_form_container">
                   <form action="#" class="header_search_form clearfix">
-                    <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+                    <input type="search" required="required" class="header_search_input" placeholder="{{__('frontend.header.input_search')}}">
                     <div class="custom_dropdown">
                       <div class="custom_dropdown_list">
-                        <span class="custom_dropdown_placeholder clc">All Categories</span>
+                        <span class="custom_dropdown_placeholder clc">{{__('frontend.header.categories')}}</span>
                         <i class="fas fa-chevron-down"></i>
                         <ul class="custom_list clc">
-                          <li><a class="clc" href="#">All Categories</a></li>
-                          <li><a class="clc" href="#">Computers</a></li>
-                          <li><a class="clc" href="#">Laptops</a></li>
-                          <li><a class="clc" href="#">Cameras</a></li>
-                          <li><a class="clc" href="#">Hardware</a></li>
-                          <li><a class="clc" href="#">Smartphones</a></li>
+                          <li><a class="clc" href="#">{{__('frontend.header.categories')}}</a></li>
+                          @isset($categories)
+                            @foreach ($categories as $category)
+                              <li><a class="clc" href="{{ route('category.show', $category->slug) }}">{{$category->name}}</a></li>
+                            @endforeach
+                          @endisset
                         </ul>
                       </div>
                     </div>
-                    <button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{ asset('theme-onetech/images/search.png') }}" alt=""></button>
+                    <button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{ asset('theme-onetech/images/search.png') }}" alt="search"></button>
                   </form>
                 </div>
               </div>
@@ -83,7 +83,7 @@
               <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                 <div class="wishlist_icon"><img src="{{ asset('theme-onetech/images/heart.png') }}" alt=""></div>
                 <div class="wishlist_content">
-                  <div class="wishlist_text"><a href="#">Wishlist</a></div>
+                  <div class="wishlist_text"><a href="#">{{__('frontend.header.wishlist')}}</a></div>
                   <div class="wishlist_count">115</div>
                 </div>
               </div>
@@ -96,8 +96,8 @@
                     <div class="cart_count"><span>10</span></div>
                   </div>
                   <div class="cart_content">
-                    <div class="cart_text"><a href="#">Cart</a></div>
-                    <div class="cart_price">$85</div>
+                    <div class="cart_text"><a href="#">{{__('frontend.header.cart')}}</a></div>
+                    <div class="cart_price">1.500.000 Đ</div>
                   </div>
                 </div>
               </div>
@@ -121,89 +121,29 @@
               <div class="cat_menu_container">
                 <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
                   <div class="cat_burger"><span></span><span></span><span></span></div>
-                  <div class="cat_menu_text">categories</div>
+                  <div class="cat_menu_text">{{__('frontend.header.categories')}}</div>
                 </div>
-
+                @isset($categories)
                 <ul class="cat_menu">
-                  <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
-                  <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
-                  <li class="hassubs">
-                    <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
-                    <ul>
-                      <li class="hassubs">
-                        <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-                        <ul>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                        </ul>
-                      </li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
-                  <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
-                  <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-                  <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-                  <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
-                  <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+                  @foreach($categories as $category)
+                    @if($category->parent_id === 0)
+                      <li><a href="{{ route('category.show', $category->slug) }}" title="{{ $category->name }}">{{ $category->name }} <i class="fas fa-chevron-right ml-auto"></i></a></li>
+                    @endif
+                  @endforeach
                 </ul>
+                @endisset
               </div>
 
               <!-- Main Nav Menu -->
 
               <div class="main_nav_menu ml-auto">
                 <ul class="standard_dropdown main_nav_dropdown">
-                  <li><a href="#">Sản phẩm<i class="fas fa-chevron-down"></i></a></li>
-                  <li class="hassubs">
-                    <a href="#">Khuyến mãi<i class="fas fa-chevron-down"></i></a>
-                    <ul>
-                      <li>
-                        <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                        <ul>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                        </ul>
-                      </li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                    </ul>
-                  </li>
-                  <li class="hassubs">
-                    <a href="#">Giới thiệu<i class="fas fa-chevron-down"></i></a>
-                    <ul>
-                      <li>
-                        <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                        <ul>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                          <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                        </ul>
-                      </li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                    </ul>
-                  </li>
-                  <li class="hassubs">
-                    <a href="#">Tin tức<i class="fas fa-chevron-down"></i></a>
-                    <ul>
-                      <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-                      <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-                    </ul>
-                  </li>
-                  <li><a href="blog.html">Hướng dẫn thanh toán<i class="fas fa-chevron-down"></i></a></li>
-                  <li><a href="contact.html">Liên hệ<i class="fas fa-chevron-down"></i></a></li>
+                  <li><a href="{{ url('/') }}">Sản phẩm<i class="fas fa-chevron-down"></i></a></li>
+                  <li><a href="{{ url('san-pham-khuyen-mai') }}">Khuyến mãi<i class="fas fa-chevron-down"></i></a></li>
+                  <li><a href="{{ url('gioi-thieu') }}">Giới thiệu<i class="fas fa-chevron-down"></i></a></li>
+                  <li><a href="{{ url('tin-tuc') }}">Tin tức<i class="fas fa-chevron-down"></i></a></li>
+                  <li><a href="{{ url('huong-dan-thanh-toan') }}">Hướng dẫn thanh toán<i class="fas fa-chevron-down"></i></a></li>
+                  <li><a href="{{ url('lien-he') }}">Liên hệ<i class="fas fa-chevron-down"></i></a></li>
                 </ul>
               </div>
 
@@ -235,74 +175,43 @@
 
               <div class="page_menu_search">
                 <form action="#">
-                  <input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
+                  <input type="search" required="required" class="page_menu_search_input" placeholder="{{__('frontend.header.input_search')}}">
                 </form>
               </div>
               <ul class="page_menu_nav">
                 <li class="page_menu_item has-children">
-                  <a href="#">Language<i class="fa fa-angle-down"></i></a>
+                  <a href="#">Ngôn ngữ<i class="fa fa-angle-down"></i></a>
                   <ul class="page_menu_selection">
+                    <li><a href="#">Tiếng việt<i class="fa fa-angle-down"></i></a></li>
                     <li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
                   </ul>
                 </li>
                 <li class="page_menu_item has-children">
-                  <a href="#">Currency<i class="fa fa-angle-down"></i></a>
+                  <a href="#">Tiền tệ<i class="fa fa-angle-down"></i></a>
                   <ul class="page_menu_selection">
+                    <li><a href="#">VNĐ<i class="fa fa-angle-down"></i></a></li>
                     <li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
                   </ul>
                 </li>
                 <li class="page_menu_item">
-                  <a href="#">Home<i class="fa fa-angle-down"></i></a>
+                  <a href="{{ url('/') }}">Sản phẩm<i class="fa fa-angle-down"></i></a>
                 </li>
-                <li class="page_menu_item has-children">
-                  <a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
-                  <ul class="page_menu_selection">
-                    <li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
-                    <li class="page_menu_item has-children">
-                      <a href="#">Menu Item<i class="fa fa-angle-down"></i></a>
-                      <ul class="page_menu_selection">
-                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                  </ul>
+                <li class="page_menu_item">
+                  <a href="{{ url('san-pham-khuyen-mai') }}">Khuyến mãi<i class="fa fa-angle-down"></i></a>
                 </li>
-                <li class="page_menu_item has-children">
-                  <a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
-                  <ul class="page_menu_selection">
-                    <li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                  </ul>
+                <li class="page_menu_item">
+                  <a href="{{ url('gioi-thieu') }}">Giới thiệu<i class="fa fa-angle-down"></i></a>
                 </li>
-                <li class="page_menu_item has-children">
-                  <a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
-                  <ul class="page_menu_selection">
-                    <li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                  </ul>
+                <li class="page_menu_item">
+                  <a href="{{ url('tin-tuc') }}">Tin tức<i class="fa fa-angle-down"></i></a>
                 </li>
-                <li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
-                <li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
+                <li class="page_menu_item"><a href="{{ url('huong-dan-thanh-toan') }}">Hướng dẫn thanh toán<i class="fa fa-angle-down"></i></a></li>
+                <li class="page_menu_item"><a href="{{ url('lien-he') }}">Liên hệ<i class="fa fa-angle-down"></i></a></li>
               </ul>
 
               <div class="menu_contact">
-                <div class="menu_contact_item"><div class="menu_contact_icon"><img src="{{ asset('theme-onetech/images/phone_white.png') }}" alt=""></div>+38 068 005 3570</div>
-                <div class="menu_contact_item"><div class="menu_contact_icon"><img src="{{ asset('theme-onetech/images/mail_white.png') }}" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+                <div class="menu_contact_item"><div class="menu_contact_icon"><img src="{{ asset('theme-onetech/images/phone_white.png') }}" alt=""></div>{{ $settings->company_tel ??  $settings->company_fax}}</div>
+                <div class="menu_contact_item"><div class="menu_contact_icon"><img src="{{ asset('theme-onetech/images/mail_white.png') }}" alt=""></div><a href="mailto:{{ $settings->company_email }}">{{ $settings->company_email }}</a></div>
               </div>
             </div>
           </div>

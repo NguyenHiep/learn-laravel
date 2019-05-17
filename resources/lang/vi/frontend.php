@@ -14,5 +14,13 @@ return [
             'submit'              => 'Gửi mail',
         ],
         'message_thank' => 'Cảm ơn bạn đã gửi thông tin, chúng tôi sẽ liên lạc với bạn sớm nhất.'
+    ],
+    'header' => [
+        'register' => 'Đăng ký',
+        'sign_in'  => 'Đăng nhập',
+        'input_search' => 'Nhập sản phẩm muốn tìm...',
+        'categories' => 'Tất cả danh mục',
+        'wishlist' => 'Yêu thích',
+        'cart' => 'Giỏ hàng'
     ]
 ];
