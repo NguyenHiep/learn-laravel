@@ -1596,7 +1596,7 @@ var Products = {
                 $.ajax({
                     cache: false,
                     type: "GET",
-                    url: ajaxcalls_vars.host + '/product/quick-view/',
+                    url: ajaxcalls_vars.host + '/product/quick-view',
                     data: {product_id: product_id}
                 }).done(function (data) {
                     var qviewModel = $('.qview-modal');
@@ -1650,7 +1650,7 @@ var Products = {
                 $.ajax({
                     cache: false,
                     type: "GET",
-                    url: ajaxcalls_vars.host + '/compares/add/',
+                    url: ajaxcalls_vars.host + '/compares/add',
                     data: {product_id: product_id}
                 }).done(function (data) {
                     $("#page-preloader").hide();
@@ -1673,7 +1673,7 @@ var Products = {
                 $.ajax({
                     cache: false,
                     type: "GET",
-                    url: ajaxcalls_vars.host + '/compares/remove/',
+                    url: ajaxcalls_vars.host + '/compares/remove',
                     data: {product_id: product_id}
                 }).done(function (data) {
                     $("#page-preloader").hide();
@@ -1806,6 +1806,7 @@ var Checkout = {
 
     add_to_cart: function () {
         this.elemBody.find('.add_to_cart').on("click", function (e) {
+            e.preventDefault();
             var product_id = $(this).attr('data-id');
             var quantity = Checkout.elemBody.find(".quantity_item").val();
             if (typeof quantity !== 'undefined') {
@@ -1814,32 +1815,9 @@ var Checkout = {
                 quantity = 1;
             }
             if (typeof product_id !== 'undefined') {
-                let url = ajaxcalls_vars.host + '/checkout/addtocart/';
-                let dataSend = {
-                    _token: ajaxcalls_vars.token,
-                    product_id: product_id,
-                    quantity: quantity
-                }
-               /* axios.post(url, dataSend)
-                  .then(function (response) {
-                      $("#page-preloader").hide();
-                      $("#total_cart").html(data.total_items);
-                      show_message(data);
-                  })
-                  .catch(function (error) {
-                      console.log('Error:', jqXHR);
-                  });*/
-
-               $.post(url, dataSend, function(data){
-                    $("#page-preloader").hide();
-                    $("#total_cart").html(data.total_items);
-                    show_message(data);
-                }).fail(function() {
-                    console.log('Error:', jqXHR);
-                });
-               /* $.ajax({
+               $.ajax({
                     type: "POST",
-                    url: ajaxcalls_vars.host + '/checkout/addtocart/',
+                    url: ajaxcalls_vars.host + '/checkout/addtocart',
                     data: {
                         _token: ajaxcalls_vars.token,
                         product_id: product_id,
@@ -1852,8 +1830,7 @@ var Checkout = {
                     show_message(data);
                 }).fail(function (jqXHR) {
                     console.log('Error:', jqXHR);
-                });*/
-
+                });
             }
             e.preventDefault();
 
@@ -1866,7 +1843,7 @@ var Checkout = {
             $.ajax({
                 cache: false,
                 type: "POST",
-                url: ajaxcalls_vars.host + '/checkout/update/',
+                url: ajaxcalls_vars.host + '/checkout/update',
                 data: {
                     _token: ajaxcalls_vars.token,
                     carts: form.serializeArray(),
@@ -1891,7 +1868,7 @@ var Checkout = {
                 $.ajax({
                     cache: false,
                     type: "POST",
-                    url: ajaxcalls_vars.host + '/checkout/removecart/',
+                    url: ajaxcalls_vars.host + '/checkout/removecart',
                     data: {
                         _token: ajaxcalls_vars.token,
                         product_id: product_id,
@@ -1918,7 +1895,7 @@ var Checkout = {
             $.ajax({
                 cache: false,
                 type: "POST",
-                url: ajaxcalls_vars.host + '/checkout/removeallcart/',
+                url: ajaxcalls_vars.host + '/checkout/removeallcart',
                 data: {
                     _token: ajaxcalls_vars.token,
                     delete_all: true,

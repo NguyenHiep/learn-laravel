@@ -155,7 +155,7 @@
                     </div>
                   </div>
                   <div class="tab-pane" id="tab_images">
-                    @if(count($record->galary_img) > 0)
+                    @if(!empty($record->galary_img) && count($record->galary_img) > 0)
                       <ul class="list-inline">
                         @foreach($record->galary_img as $item)
                           <li>

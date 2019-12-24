@@ -40,7 +40,7 @@ var Products = {
                 $.ajax({
                     cache: false,
                     type: "GET",
-                    url: ajaxcalls_vars.host + '/product/quick-view/',
+                    url: ajaxcalls_vars.host + '/product/quick-view',
                     data: {product_id: product_id}
                 }).done(function (data) {
                     var qviewModel = $('.qview-modal');
@@ -94,7 +94,7 @@ var Products = {
                 $.ajax({
                     cache: false,
                     type: "GET",
-                    url: ajaxcalls_vars.host + '/compares/add/',
+                    url: ajaxcalls_vars.host + '/compares/add',
                     data: {product_id: product_id}
                 }).done(function (data) {
                     $("#page-preloader").hide();
@@ -117,7 +117,7 @@ var Products = {
                 $.ajax({
                     cache: false,
                     type: "GET",
-                    url: ajaxcalls_vars.host + '/compares/remove/',
+                    url: ajaxcalls_vars.host + '/compares/remove',
                     data: {product_id: product_id}
                 }).done(function (data) {
                     $("#page-preloader").hide();
@@ -258,7 +258,7 @@ var Checkout = {
                 quantity = 1;
             }
             if (typeof product_id !== 'undefined') {
-                let url = ajaxcalls_vars.host + '/checkout/addtocart/';
+                let url = ajaxcalls_vars.host + '/checkout/addtocart';
                 let dataSend = {
                     _token: ajaxcalls_vars.token,
                     product_id: product_id,
@@ -271,6 +271,7 @@ var Checkout = {
                     data: dataSend,
                     dataType: "json",
                 }).done(function (data) {
+                    console.log(data)
                     $("#page-preloader").hide();
                     $("#total_cart").html(data.total_items);
                     show_message(data);
@@ -290,7 +291,8 @@ var Checkout = {
             $.ajax({
                 cache: false,
                 type: "POST",
-                url: ajaxcalls_vars.host + '/checkout/update/',
+                contentType: "application/json",
+                url: ajaxcalls_vars.host + '/checkout/update',
                 data: {
                     _token: ajaxcalls_vars.token,
                     carts: form.serializeArray(),
@@ -315,7 +317,7 @@ var Checkout = {
                 $.ajax({
                     cache: false,
                     type: "POST",
-                    url: ajaxcalls_vars.host + '/checkout/removecart/',
+                    url: ajaxcalls_vars.host + '/checkout/removecart',
                     data: {
                         _token: ajaxcalls_vars.token,
                         product_id: product_id,
@@ -342,7 +344,7 @@ var Checkout = {
             $.ajax({
                 cache: false,
                 type: "POST",
-                url: ajaxcalls_vars.host + '/checkout/removeallcart/',
+                url: ajaxcalls_vars.host + '/checkout/removeallcart',
                 data: {
                     _token: ajaxcalls_vars.token,
                     delete_all: true,
