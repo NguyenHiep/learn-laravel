@@ -54,7 +54,7 @@
                   </label>
                   {!! Form::textarea($key, old($key) ,
                   [
-                  'class' => 'summernote_editor form-control',
+                  'class' => 'tinymce_editor form-control',
                   'rows' => 9
                   ]) !!}
                 </div>
@@ -115,33 +115,5 @@
         </div> <!-- End .col-md-3 -->
         {!! Form::close() !!}
       </div>
-      <!-- END CONTENT BODY -->
     </div>
-
-  @endsection
-  @section('styles')
-    @parent
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-      <link href="{{ asset('/manages/assets/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css"/>
-      <!-- END PAGE LEVEL PLUGINS -->
-  @stop
-  @section('scripts')
-    @parent
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-      <script src="{{ asset('/manages/assets/js/plugin/summernote-0.7.0/dist/summernote.min.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/js/plugin/medias/summernote-ext-medias.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/pages/scripts/components-editors.min.js') }}" type="text/javascript"></script>
-      <!-- END PAGE LEVEL SCRIPTS -->
-    @stop
-
-    {{-- Include for media uploads --}}
-    @push('custom-scripts')
-      <script src="{{ asset('/manages/assets/global/plugins/dropzone/dropzone.min.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('/manages/assets/pages/scripts/form-dropzone.js')}}" type="text/javascript"></script>
-      <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')}}"
-              type="text/javascript"></script>
-      <script src="{{ URL::asset ('manages/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js')}}"
-              type="text/javascript"></script>
-      <script src="{{ URL::asset ('manages/assets/pages/scripts/ui-extended-modals.min.js')}}"
-              type="text/javascript"></script>
-  @endpush
+@endsection

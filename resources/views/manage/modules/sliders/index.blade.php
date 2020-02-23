@@ -24,7 +24,7 @@
             <div class="portlet-title">
               <div class="caption font-dark">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">Danh sách slidersn</span>
+                <span class="caption-subject bold uppercase">Danh sách slider</span>
               </div>
               <div class="tools"></div>
               <div class="actions">

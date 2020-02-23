@@ -63,7 +63,7 @@
                             <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
                           </td>
                           <td>
-                            @if(!empty($record->posts_medias_id))
+                            @if(!empty($record->posts_medias_id) && !empty($record->media->name))
                               <img src="{{Storage::url(UPLOAD_MEDIAS.$record->media->name)}}" draggable="false" alt="" class="img-thumbnail" width="80" height="40">
                             @endif
                           </td>

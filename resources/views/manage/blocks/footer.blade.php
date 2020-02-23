@@ -34,7 +34,6 @@
   };
 
   function show_message(data) {
-    console.log(data.status);
     var status = data.status;
     switch (status) {
       case 'success':
