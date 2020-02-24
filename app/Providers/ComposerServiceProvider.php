@@ -17,7 +17,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         $settings   = Settings::first();
-        $categories = Categories::where('status', STATUS_ENABLE)->get();
+        $categories = Categories::where('status', config('define.STATUS_ENABLE'))->get();
         View::share(['settings' => $settings, 'categories' => $categories]);
     }
 

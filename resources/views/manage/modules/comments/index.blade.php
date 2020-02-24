@@ -76,7 +76,7 @@
                           <td>{!! limit_words($record->content, 10) !!}</td>
                           <td>{!! $record->created_at !!}</td>
                           <td>{!! $record->ip_user !!}</td>
-                          <td><span class="label label-sm @if($record->comment_status == STATUS_ENABLE) label-success @else label-danger @endif margin-right-10">{{ __('selector.status.'.$record->comment_status) }}</span></td>
+                          <td><span class="label label-sm @if($record->comment_status == config('define.STATUS_ENABLE')) label-success @else label-danger @endif margin-right-10">{{ __('selector.status.'.$record->comment_status) }}</span></td>
                           <td class="text-right ">
                             <div class="btn-group btn-group-solid">
                               <a title="{{__('common.buttons.edit')}}" href="{{ route('comments.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">

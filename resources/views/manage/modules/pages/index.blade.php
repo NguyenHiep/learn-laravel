@@ -61,7 +61,7 @@
                         <td> {!! $record->username !!} </td>
                         <td> {!! format_date($record->created_at) !!} </td>
                         <td>
-                          <span class="label label-sm @if($record->page_status === STATUS_ENABLE) label-success @else label-danger @endif  margin-right-10"> {{ __('selector.status.'.$record->page_status) }} </span>
+                          <span class="label label-sm @if($record->page_status === config('define.STATUS_ENABLE')) label-success @else label-danger @endif  margin-right-10"> {{ __('selector.status.'.$record->page_status) }} </span>
                         </td>
                         <td class="text-right ">
                           <div class="btn-group btn-group-solid">

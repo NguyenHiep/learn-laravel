@@ -30,7 +30,7 @@ class Sliders extends BaseModel
 
     public function getListSlider()
     {
-        $sliders = Sliders::where('slider_status', STATUS_ENABLE)->get();
+        $sliders = Sliders::where('slider_status', config('define.STATUS_ENABLE'))->get();
         if(!empty($sliders))
         {
             return $sliders;

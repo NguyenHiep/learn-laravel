@@ -37,7 +37,7 @@ class Pages extends BaseModel
     
     public function getPageBySlug(string $page_slug)
     {
-        $page = Pages::where('page_slug',$page_slug)->where('page_status', STATUS_ENABLE)->first();
+        $page = Pages::where('page_slug',$page_slug)->where('page_status', config('define.STATUS_ENABLE'))->first();
         if(!empty($page))
         {
             return $page;

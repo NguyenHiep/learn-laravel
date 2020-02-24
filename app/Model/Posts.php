@@ -77,7 +77,7 @@ class Posts extends BaseModel
     public function getListAll()
     {
         $posts = Posts::orderBy('id', 'DESC')
-            ->where('post_status', STATUS_ENABLE)
+            ->where('post_status', config('define.STATUS_ENABLE'))
             ->paginate(12);
         return $posts;
     }
@@ -85,7 +85,7 @@ class Posts extends BaseModel
     public function getPostBySlug($slug)
     {
         $post = Posts::where('post_slug', '=', $slug)
-            ->where('post_status', '=', STATUS_ENABLE)
+            ->where('post_status', '=', config('define.STATUS_ENABLE'))
             ->first();
         if (!empty($post)) {
             return $post;
@@ -95,7 +95,7 @@ class Posts extends BaseModel
 
     public function getRelatedPost($ids)
     {
-        $posts = Posts::where('post_status', '=', STATUS_ENABLE)
+        $posts = Posts::where('post_status', '=', config('define.STATUS_ENABLE'))
             ->whereIn('id', $ids)
             ->get();
         return $posts;
@@ -104,7 +104,7 @@ class Posts extends BaseModel
     public function getCommentByPostId($post_id)
     {
         $comments = Posts::find($post_id)->comment()
-            ->where('comment_status', STATUS_ENABLE)
+            ->where('comment_status', config('define.STATUS_ENABLE'))
             ->paginate(3);
         return $comments;
     }

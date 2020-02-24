@@ -10,8 +10,8 @@ return [
         3 => 'Cộng tác viên'
     ],
     'status'      => [
-        STATUS_ENABLE  => 'Kích hoạt',
-        STATUS_DISABLE => 'Không kích hoạt',
+        config('define.STATUS_ENABLE')  => 'Kích hoạt',
+        config('define.STATUS_DISABLE') => 'Không kích hoạt',
     ],
     'format'      => [
         'standard' => 'Chuẩn',
@@ -26,12 +26,12 @@ return [
         'gallery'  => '<i class="fa fa-picture-o"></i>'
     ],
     'post_status' => [
-        STATUS_ENABLE  => 'Đã Đăng',
-        STATUS_DISABLE => 'Xét duyệt',
+        config('define.STATUS_ENABLE')  => 'Đã Đăng',
+        config('define.STATUS_DISABLE') => 'Xét duyệt',
     ],
     'page_status' => [
-        STATUS_ENABLE  => 'Đã Đăng',
-        STATUS_DISABLE => 'Xét duyệt',
+        config('define.STATUS_ENABLE')  => 'Đã Đăng',
+        config('define.STATUS_DISABLE') => 'Xét duyệt',
     ],
 
     'orders' => [

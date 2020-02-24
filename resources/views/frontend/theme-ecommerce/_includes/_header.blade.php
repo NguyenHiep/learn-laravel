@@ -61,8 +61,8 @@
               <i class="fa fa-bar-chart"></i>
               @php
                 $compare_item = 0;
-                if(Session::has(SESSION_ITEMS_COMPARE)){
-                  $compare_item =  count(Session::get(SESSION_ITEMS_COMPARE));
+                if(Session::has(config('define.SESSION_ITEMS_COMPARE'))){
+                  $compare_item =  count(Session::get(config('define.SESSION_ITEMS_COMPARE')));
                 }
               @endphp
               <span class="shop-menu-ttl">So sánh</span> (<span id="total_compare">{{ $compare_item }}</span>)
@@ -75,8 +75,8 @@
                 <i class="fa fa-shopping-cart"></i>
                 @php
                   $cart_item = 0;
-                  if(Session::has(SESSION_ITEMS_CART)){
-                    $cart_item =  count(Session::get(SESSION_ITEMS_CART));
+                  if(Session::has(config('define.SESSION_ITEMS_CART'))){
+                    $cart_item =  count(Session::get(config('define.SESSION_ITEMS_CART')));
                   }
                 @endphp
                 <span class="shop-menu-ttl">Giỏ hàng</span>

@@ -32,11 +32,12 @@ class CommentsController extends BackendController
             //'comment_parent' => 'required|integer'
         ]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -56,7 +57,7 @@ class CommentsController extends BackendController
                             $model->whereIn('id', $ids);
                             switch ($action) {
                                 case 'approve':
-                                    $model->update(['comment_status' => STATUS_ENABLE]);
+                                    $model->update(['comment_status' => config('define.STATUS_ENABLE')]);
                                     return redirect()->route('comments.index')->with([
                                         'message' => __('system.message.update'),
                                         'status'  => self::CTRL_MESSAGE_SUCCESS

@@ -32,7 +32,7 @@ class Categories extends BaseModel
     {
         if (!empty($slug)) {
             $category = Categories::where('slug', $slug)
-                ->where('status', '=', STATUS_ENABLE)
+                ->where('status', '=', config('define.STATUS_ENABLE'))
                 ->first();
             return $category;
         }
@@ -42,7 +42,7 @@ class Categories extends BaseModel
 
     public function getListCategory()
     {
-        $categories = Categories::where('status', STATUS_ENABLE)->get();
+        $categories = Categories::where('status', config('define.STATUS_ENABLE'))->get();
         if(!empty($categories)){
             return $categories;
         }

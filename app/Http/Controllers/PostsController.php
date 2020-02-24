@@ -59,7 +59,7 @@ class PostsController extends FrontendController
     public function comment(FrontCommentRequest $request)
     {
         $inputs                   = $request->all();
-        $inputs['comment_status'] = STATUS_DISABLE;
+        $inputs['comment_status'] = config('define.STATUS_DISABLE');
         $inputs['ip_user']        = getRealIpAddr();
 
         try {

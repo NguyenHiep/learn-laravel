@@ -65,7 +65,7 @@
                         <td> {{$record->deliveries->buyer_email}} </td>
                         <td> {{format_price($record->total)}}</td>
                         <td class="text-center">
-                          <span class="label label-sm  @if ($record->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.orders.status.'.$record->status)}} </span>
+                          <span class="label label-sm  @if ($record->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.orders.status.'.$record->status)}} </span>
                         </td>
                         <td class="text-right">
                           <div class="btn-group btn-group-solid">

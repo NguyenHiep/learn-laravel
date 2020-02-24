@@ -9,7 +9,7 @@ use App\Helppers\ToolbarConfig;
 
 class FrontendController extends Controller
 {
-    const SES_ITEMS_COMPARE = SESSION_ITEMS_COMPARE;
-    const SES_ITEMS_CART    = SESSION_ITEMS_CART;
+    const SES_ITEMS_COMPARE = 'ses_items_compare';
+    const SES_ITEMS_CART    = 'ses_items_cart';
 
 }

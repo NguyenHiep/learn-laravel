@@ -100,7 +100,7 @@
                 @if(!empty(__('selector.post_status')))
                   <div class="radio-list">
                     @foreach(__('selector.post_status') as $k =>$val)
-                      @if($k === STATUS_DISABLE)
+                      @if($k === config('define.STATUS_DISABLE'))
                         <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
                       @else
                         <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
@@ -142,7 +142,7 @@
                           </td>
                           <td> {{$record->name}} </td>
                           <td class="text-center">
-                            <span class="label label-sm  @if ($record->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
+                            <span class="label label-sm  @if ($record->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
                           </td>
                           <td class="text-right">
                             <div class="btn-group btn-group-solid">
@@ -166,7 +166,7 @@
                               </td>
                               <td> __{{$subcate->name}} </td>
                               <td class="text-center">
-                                <span class="label label-sm  @if ($subcate->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate->status)}} </span>
+                                <span class="label label-sm  @if ($subcate->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate->status)}} </span>
                               </td>
                               <td class="text-right">
                                 <div class="btn-group btn-group-solid">
@@ -190,7 +190,7 @@
                                   </td>
                                   <td> ____{{$subcate2->name}} </td>
                                   <td class="text-center">
-                                    <span class="label label-sm  @if ($subcate2->status === ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate2->status)}} </span>
+                                    <span class="label label-sm  @if ($subcate2->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate2->status)}} </span>
                                   </td>
                                   <td class="text-right">
                                     <div class="btn-group btn-group-solid">

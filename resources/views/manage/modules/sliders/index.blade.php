@@ -69,7 +69,7 @@
                           <td> {{$record->slider_title}} </td>
                           <td> {{$record->slider_content}} </td>
                           <td class="text-center">
-                              <span class="label label-sm  @if ($record->slider_status === STATUS_ENABLE) label-success @else label-danger @endif margin-right-10"> <i class="fa fa-check-circle"></i> {{__('selector.post_status.'.$record->slider_status)}} </span>
+                              <span class="label label-sm  @if ($record->slider_status === config('define.STATUS_ENABLE')) label-success @else label-danger @endif margin-right-10"> <i class="fa fa-check-circle"></i> {{__('selector.post_status.'.$record->slider_status)}} </span>
                            
                           </td>
                           <td class="text-right">

@@ -32,8 +32,8 @@ class CartController extends FrontendController
     public function index()
     {
         $data = [];
-        if(Session::has(SESSION_ITEMS_CART)){
-            $cartItems = Session::get(SESSION_ITEMS_CART);
+        if(Session::has(config('define.SESSION_ITEMS_CART'))){
+            $cartItems = Session::get(config('define.SESSION_ITEMS_CART'));
             $data['products']    = $this->getListItemsCart($cartItems);
             $data['total_price'] = $this->getToTalPriceCart();
         }
@@ -127,8 +127,8 @@ class CartController extends FrontendController
             $cart_items[$cart['name']] = $cart['value'];
         }
 
-        if (Session::has(SESSION_ITEMS_CART)) {
-            foreach (Session::get(SESSION_ITEMS_CART) as $key => $ses_item_cart) {
+        if (Session::has(config('define.SESSION_ITEMS_CART'))) {
+            foreach (Session::get(config('define.SESSION_ITEMS_CART')) as $key => $ses_item_cart) {
                 $quantity_item = $cart_items['product['.$ses_item_cart['product_id'].'][quantity]'];
                 Session::put(self::SES_ITEMS_CART.'.'.$key.'.quantity', $quantity_item);
             }

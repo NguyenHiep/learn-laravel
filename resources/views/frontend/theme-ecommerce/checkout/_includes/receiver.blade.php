@@ -15,7 +15,7 @@
     <label class="contactform-label">Giao hàng<span class="form-required">*</span></label><!-- NO SPACE --><span class="contactform-input">
       @if(!empty(__('selector.address_type')))
         @foreach(__('selector.address_type') as $k => $val)
-          @if($k === STATUS_ENABLE)
+          @if($k === config('define.STATUS_ENABLE'))
             <label for="{{ convert_input_name($key).$loop->index }}"> {!! Form::radio(convert_input_name($key), $k, true, [ 'id' => convert_input_name($key).$loop->index, 'class' => 'address-type']) !!}    {{$val }} </label>
           @else
             <label for="{{ convert_input_name($key).$loop->index }}"> {!! Form::radio(convert_input_name($key), $k, old($key), [ 'id' => convert_input_name($key).$loop->index, 'class' => 'address-type']) !!}    {{$val }} </label>

@@ -103,7 +103,7 @@
                   @if(!empty(__('selector.post_status')))
                     <div class="radio-list">
                       @foreach(__('selector.post_status') as  $k =>$val)
-                          <label class="radio-inline"> {!! Form::radio($key, $k, ($k == old($key, STATUS_DISABLE)) ? true : null) !!}    {{$val }} </label>
+                          <label class="radio-inline"> {!! Form::radio($key, $k, ($k == old($key, config('define.STATUS_DISABLE'))) ? true : null) !!}    {{$val }} </label>
                       @endforeach
                     </div>
                   @endif

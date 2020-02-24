@@ -54,7 +54,7 @@
                 @if(!empty(__('selector.post_status')))
                   <div class="radio-list">
                     @foreach(__('selector.post_status') as $k =>$val)
-                      @if($k === STATUS_DISABLE)
+                      @if($k === config('define.STATUS_DISABLE'))
                         <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
                       @else
                         <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
@@ -95,7 +95,7 @@
                           </td>
                           <td> {{$record->name}} </td>
                           <td class="text-center">
-                            <span class="label label-sm  @if ($record->status === STATUS_ENABLE) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
+                            <span class="label label-sm  @if ($record->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
                           </td>
                           <td class="text-right">
                             <div class="btn-group btn-group-solid">

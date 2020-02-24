@@ -53,7 +53,7 @@ class Products extends BaseModel
     public function getProductById($id)
     {
         $product = Products::where('id', '=', $id)
-            ->where('status', '=', STATUS_ENABLE)
+            ->where('status', '=', config('define.STATUS_ENABLE'))
             ->first();
         if (!empty($product))
         {
@@ -65,7 +65,7 @@ class Products extends BaseModel
     public function getProductBySlug($slug)
     {
         $product = Products::where('slug', '=', $slug)
-            ->where('status', '=', STATUS_ENABLE)
+            ->where('status', '=', config('define.STATUS_ENABLE'))
             ->first();
         if (!empty($product))
         {
@@ -84,7 +84,7 @@ class Products extends BaseModel
     public function getPromotionProducts(ToolbarConfig $config, array $options)
     {
         $q = Products::query();
-        $q->where('status', STATUS_ENABLE);
+        $q->where('status', config('define.STATUS_ENABLE'));
         // Filter by price
         $price_from = 0;
         if (!empty($options['price_from'])) {
@@ -128,7 +128,7 @@ class Products extends BaseModel
     public function getProductByCategoryId(ToolbarConfig $config, int $cat_id)
     {
         $products = Products::where('category_id', 'like', '%|' . $cat_id . '|%')
-            ->where('status', STATUS_ENABLE)
+            ->where('status', config('define.STATUS_ENABLE'))
             ->orderBy($config->sort['column'], $config->sort['value'])
             ->paginate($config->limit);
         return $products;
@@ -136,19 +136,19 @@ class Products extends BaseModel
 
     public function getRelatedProducts(int $id, int $limit = 4)
     {
-        $product = Products::where('status', STATUS_ENABLE)->where('id', '!=', $id)->limit($limit)->get();
+        $product = Products::where('status', config('define.STATUS_ENABLE'))->where('id', '!=', $id)->limit($limit)->get();
         return $product;
     }
 
     public function getRandomProducts(int $limit = 8)
     {
-        $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->limit($limit)->get();
+        $product = Products::where('status', config('define.STATUS_ENABLE'))->inRandomOrder()->limit($limit)->get();
         return $product;
     }
 
     public function getSaleProducts(int $limit = 8)
     {
-        $product = Products::where('status', STATUS_ENABLE)->inRandomOrder()->limit($limit)->get();
+        $product = Products::where('status', config('define.STATUS_ENABLE'))->inRandomOrder()->limit($limit)->get();
         return $product;
     }
     
@@ -162,7 +162,7 @@ class Products extends BaseModel
     public function search(ToolbarConfig $config, array $options)
     {
         $q = Products::query();
-        $q->where('status', STATUS_ENABLE)
+        $q->where('status', config('define.STATUS_ENABLE'))
             ->where(function ($query) use ($config) {
                 $query->where('sku', $config->search)
                     ->orWhereRaw("`name` LIKE CONCAT('%', CONVERT('" . $config->search . "', BINARY), '%')")
