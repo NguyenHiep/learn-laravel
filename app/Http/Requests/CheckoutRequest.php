@@ -31,7 +31,7 @@ class CheckoutRequest extends FormRequest
             'receiver_phone_1'      => 'required',
             'payment_id'            => 'required',
         ];
-        if(request()->get('receiver_address_type') == APARTMENT)
+        if(request()->get('receiver_address_type') == config('define.APARTMENT'))
         {
             $rules['receiver_address_2'] = 'required';
         }
@@ -46,7 +46,7 @@ class CheckoutRequest extends FormRequest
                 'buyer_address'        => 'required',
                 'buyer_phone_1'        => 'required',
             ];
-            if (request()->get('buyer_address_type') == APARTMENT) {
+            if (request()->get('buyer_address_type') == config('define.APARTMENT')) {
                 $rules_buyer[ 'buyer_address_2' ] = 'required';
             }
         }
