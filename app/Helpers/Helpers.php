@@ -186,3 +186,14 @@ if (!function_exists('getRealIpAddr')) {
         return $ip;
     }
 }
+
+if (!function_exists('format_order_id')) {
+
+    function format_order_id($orderId)
+    {
+        if ($orderId <= 0) {
+            $orderId = 0;
+        }
+        return str_pad($orderId, 7, '0', 0);
+    }
+}

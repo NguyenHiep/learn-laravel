@@ -14,7 +14,8 @@
         "doctrine/dbal": "^2.5",
         "unisharp/laravel-filemanager": "~1.8",
         "fideloper/proxy": "^4.0",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "niklasravnsborg/laravel-pdf": "^4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

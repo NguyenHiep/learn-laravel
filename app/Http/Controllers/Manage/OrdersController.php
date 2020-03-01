@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\OrderConfirm;
+use PDF;
 
 class OrdersController extends BackendController
 {
@@ -46,7 +47,7 @@ class OrdersController extends BackendController
 
     public function index()
     {
-        $orders = Orders::Orderby('id', 'desc')->paginate(15);
+        $orders = Orders::with('deliveries')->orderby('id', 'desc')->paginate(15);
         return view('manage.modules.orders.index')->with(['records' => $orders]);
     }
 
@@ -186,23 +187,35 @@ class OrdersController extends BackendController
 
     public function invoice_index($id)
     {
-        $record = Orders::find($id);
-        if (empty($record)) {
-            return abort(404);
-        }
-        $store_info         = Settings::all()->first();
+        $record             = Orders::findOrFail($id);
+        $store_info         = Settings::first();
         $data['record']     = $record;
         $data['store_info'] = $store_info;
 
         return view('manage.modules.orders.invoice', $data);
     }
 
-    public function invoice_print(){
+    public function invoice_print()
+    {
 
     }
 
-    public function export_order(){
-
+    /****
+     * General invoice to pdf
+     *
+     * @param Request $request
+     * @param int $orderId
+     * @return mixed
+     */
+    public function exportOrderPdf(Request $request, int $orderId)
+    {
+        $record             = Orders::findOrFail($orderId);
+        $store_info         = Settings::first();
+        $data['record']     = $record;
+        $data['store_info'] = $store_info;
+        $pdf = PDF::loadView('manage.modules.orders.export_invoice_pdf', $data);
+        $name_pdf = 'invoice_' . format_date($record->delivered_at, '%d%m%Y') . '_' . str_pad($record->id, 7, '0', 0) . '.pdf';
+        return $pdf->stream($name_pdf);
     }
 
 }

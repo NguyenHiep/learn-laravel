@@ -246,3 +246,9 @@ h3.block-title {
     margin: 0;
     top: 50%;
 }
+
+.invoice .invoice-logo p {
+    font-size: 15px !important;
+    line-height: 20px !important;
+    margin: 0;
+}

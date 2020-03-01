@@ -13,10 +13,11 @@ class OrderConfirm extends Mailable
     use Queueable, SerializesModels;
     
     protected  $order;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param Orders $order
      */
     public function __construct(Orders $order)
     {

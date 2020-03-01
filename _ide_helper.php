@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.14 on 2019-04-29 10:09:53.
+ * Generated for Laravel 5.8.14 on 2020-03-01 18:01:20.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16075,6 +16075,59 @@ namespace Barryvdh\Debugbar {
  
 }
 
+namespace niklasravnsborg\LaravelPdf\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Pdf {
+        
+        /**
+         * Load a HTML string
+         *
+         * @param string $html
+         * @return \Pdf 
+         * @static 
+         */ 
+        public static function loadHTML($html, $config = array())
+        {
+                        /** @var \niklasravnsborg\LaravelPdf\PdfWrapper $instance */
+                        return $instance->loadHTML($html, $config);
+        }
+        
+        /**
+         * Load a HTML file
+         *
+         * @param string $file
+         * @return \Pdf 
+         * @static 
+         */ 
+        public static function loadFile($file, $config = array())
+        {
+                        /** @var \niklasravnsborg\LaravelPdf\PdfWrapper $instance */
+                        return $instance->loadFile($file, $config);
+        }
+        
+        /**
+         * Load a View and convert to HTML
+         *
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @return \Pdf 
+         * @static 
+         */ 
+        public static function loadView($view, $data = array(), $mergeData = array(), $config = array())
+        {
+                        /** @var \niklasravnsborg\LaravelPdf\PdfWrapper $instance */
+                        return $instance->loadView($view, $data, $mergeData, $config);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -18703,6 +18756,8 @@ namespace  {
     class Image extends \Intervention\Image\Facades\Image {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
+    class PDF extends \niklasravnsborg\LaravelPdf\Facades\Pdf {}
  
 }
 

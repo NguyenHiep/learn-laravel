@@ -31,7 +31,7 @@
 
           <li class="dropdown">
 
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout_form').submit();" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+            <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout_form').submit();" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
               Logout
             </a>
             {{ Form::open(['url' => '/logout', 'method' => 'POST', 'id' => 'logout_form']) }}

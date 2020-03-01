@@ -23,7 +23,7 @@
             <div class="portlet-title">
               <div class="caption">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject font-dark sbold uppercase"> Đơn hàng #{{ $record->id }}
+                <span class="caption-subject font-dark sbold uppercase"> Đơn hàng #{{ format_order_id($record->id) }}
                   <span class="hidden-xs">| {{ format_date($record->ordered_at) }} </span>
                  </span>
               </div>
@@ -64,7 +64,7 @@
                       <div class="portlet-body">
                         <div class="row static-info">
                           <div class="col-md-5 name"> Order id#: </div>
-                          <div class="col-md-7 value"> {{ $record->id }}
+                          <div class="col-md-7 value"> {{ format_order_id($record->id) }}
                             <span class="label label-info label-sm"> Xác nhận email đã được gửi </span>
                           </div>
                         </div>
@@ -147,31 +147,28 @@
                             <tr>
                               <th>STT</th>
                               <th> Sản phẩm </th>
+                              <th> Đơn Giá </th>
                               <th> Số lượng </th>
-                              <th> Thuế </th>
-                              <th> Giá </th>
-                              <th> Giá có thuế </th>
-                              <th> Tổng </th>
+                              <th> Thành tiền </th>
                             </tr>
                             </thead>
                             <tbody>
+                            @php $totalPrice = 0 @endphp
                             @if($order_products->count())
                               @php $count = 0; @endphp
                               @foreach($order_products as $product)
                                 @php
                                   $count++;
-                                  $price_include_tax =  $product->price * (($record->tax_rate / 100) + 1);
-                                  $total_include_tax =  $price_include_tax * $product->quantity;
+                                  $total_include_tax =  $product->price * $product->quantity;
+                                  $totalPrice += $total_include_tax;
                                 @endphp
                                 <tr>
                                   <td>{{ $count }}</td>
                                   <td>
                                     <a href="{{ route('products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
                                   </td>
-                                  <td> {{ $product->quantity }} </td>
-                                  <td> {{ $record->tax_rate}}% </td>
                                   <td> {{ format_price($product->price) }} </td>
-                                  <td> {{ format_price($price_include_tax)}} </td>
+                                  <td> {{ $product->quantity }} </td>
                                   <td> {{ format_price($total_include_tax) }} </td>
                                 </tr>
                               @endforeach
@@ -189,18 +186,14 @@
                     <div class="well">
                       <div class="row static-info align-reverse">
                         <div class="col-md-8 name"> Tổng tiền: </div>
-                        <div class="col-md-3 value"> {{ format_price($record->sub_total) }} </div>
+                        <div class="col-md-3 value"> {{ format_price($totalPrice) }} </div>
                       </div>
                       <div class="row static-info align-reverse">
                         <div class="col-md-8 name"> Phí vận chuyển: </div>
                         <div class="col-md-3 value"> {{ format_price($record->delivery_fee) }} </div>
                       </div>
                       <div class="row static-info align-reverse">
-                        <div class="col-md-8 name"> Tổng tiền có thuế: </div>
-                        <div class="col-md-3 value"> {{ format_price($record->total) }} </div>
-                      </div>
-                      <div class="row static-info align-reverse">
-                        <div class="col-md-8 name"> Tổng tiền phải trả: </div>
+                        <div class="col-md-8 name"> Tổng thanh toán: </div>
                         <div class="col-md-3 value"> {{ format_price($grand_total) }} </div>
                       </div>
                     </div>

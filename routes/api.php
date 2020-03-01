@@ -13,8 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
+/*Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:api');
+})->middleware('auth:api');*/
 
 Route::get('/sliders/{alias}', 'Apis\SlidersController@index')->where('alias', '[A-Za-z0-9-]+');
