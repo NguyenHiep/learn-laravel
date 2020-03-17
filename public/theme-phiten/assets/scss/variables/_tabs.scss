@@ -1,0 +1,30 @@
+//TAB V1
+
+$v1_line:2 ; // 0:top - 1:bottom - 2:middle - 3:both
+$v1_line_size : 1px; 
+$v1_line_style : solid;
+$v1_line_color : #D3D3D3;
+//item
+$v1_item_font : $font1;  
+$v1_item_weight :500;  
+$v1_item_size :16px; 
+$v1_item_pd_lr :0;   
+$v1_item_pd_tb :15px;   
+$v1_item_lineheight:inherit;  //inherit 
+$v1_item_transform:uppercase;
+$v1_item_color:inherit; //inherit
+$v1_item_bg:none;
+
+	//triangle
+	$v1_triangle:right; // left - right - none
+	$v1_triangle_color:inherit; //inherit
+	$v1_triangle_align:center;
+	$v1_triangle_width:50px;
+	$v1_triangle_opacity:0;
+
+	//item - active
+	$v1_item_hover_color:$color1; 
+	$v1_item_active_color:$color1; 
+	$v1_item_active_bg:inherit;   //inherit
+		$v1_triangle_active_content:inherit; //inherit
+

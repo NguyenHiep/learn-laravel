@@ -252,3 +252,11 @@ h3.block-title {
     line-height: 20px !important;
     margin: 0;
 }
+
+/* Styel Overide datatable */
+
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_desc {
+    background-image: none !important;
+}

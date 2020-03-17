@@ -127,6 +127,10 @@ var Actions = function () {
   var handleDeleteRecord = function () {
     elemArticle.find(".js-action-delete-record").on("click", function (e) {
       e.preventDefault(); // does not go through with the link.
+      var result = confirm('Want to delete?')
+      if (!result) {
+        return
+      }
       var self = $(this);
       $.ajax({
         type: "post",

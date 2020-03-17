@@ -1,0 +1,111 @@
+//PAGINATION V0
+	//UL
+	$pg0_ul_padding: 50px 0;
+	$pg0_ul_align:center; // left - right - center
+
+		//Item
+		$pg0_i_font : n;
+		$pg0_i_weight : n;
+		$pg0_i_size : 40px;
+		$pg0_i_fs : n;
+		$pg0_i_color: n;
+		$pg0_i_bg: #EBEBEB;
+		$pg0_i_radius: 5px;
+		$pg0_i_border: n;
+		$pg0_i_border_color: $color1;
+			$pg0_i_arr_fs : 12px;
+
+		// active
+		$pg0_i_a_color: #fff;
+		$pg0_i_a_bg: $color1;
+		$pg0_i_a_border_color:n;
+
+
+//PAGINATION V1
+
+//UL
+$pg1_ul_font : n;
+$pg1_ul_weight : n;
+$pg1_ul_size : n;
+$pg1_ul_lineheight: n;
+$pg1_ul_color: n;
+$pg1_ul_bg: n;
+$pg1_ul_radius: n;
+$pg1_ul_border: n;
+$pg1_ul_border_color: $color1;
+$pg1_ul_width: n;
+$pg1_ul_height: n;
+$pg1_ul_text_align: left;
+$pg1_ul_padding: n;
+$pg1_ul_margin: n;
+$pg1_ul_shadow: n;
+$pg1_ul_float: left;
+$pg1_ul_transform: n;
+
+	//LI
+	$pg1_li_space:1px;
+	$pg1_li_float: left;
+
+		//Icon
+		$pg1_icon_size:14px;
+
+		//Item
+		$pg1_i_font : n;
+		$pg1_i_weight : 500;
+		$pg1_i_size : 13px;
+		$pg1_i_lineheight: 20px;
+		$pg1_i_color: $color1;
+		$pg1_i_bg: #fff;
+		$pg1_i_radius: 100%;
+		$pg1_i_border: 1px;
+		$pg1_i_border_color: $color1;
+		$pg1_i_width: 20px;
+		$pg1_i_height: 20px;
+		$pg1_i_text_align: center;
+		$pg1_i_padding: n;
+		$pg1_i_margin: n;
+		$pg1_i_shadow: n;
+		$pg1_i_float: n;
+		$pg1_i_transform: n;
+
+			//Item : Hover
+			$pg1_i_hover_font : n;
+			$pg1_i_hover_weight : n;
+			$pg1_i_hover_size : n;
+			$pg1_i_hover_lineheight: n;
+			$pg1_i_hover_color:#fff;
+			$pg1_i_hover_bg: #333;
+			$pg1_i_hover_radius: n;
+			$pg1_i_hover_border: n;
+			$pg1_i_hover_border_color: #333;
+			$pg1_i_hover_width: n;
+			$pg1_i_hover_height: n;
+			$pg1_i_hover_text_align: n;
+			$pg1_i_hover_padding: n;
+			$pg1_i_hover_margin: n;
+			$pg1_i_hover_shadow: n;
+			$pg1_i_hover_float: n;
+			$pg1_i_hover_transform: n;
+			//Item : Active
+			$pg1_i_active_font : n;
+			$pg1_i_active_weight : n;
+			$pg1_i_active_size : n;
+			$pg1_i_active_lineheight: n;
+			$pg1_i_active_color: #fff;
+			$pg1_i_active_bg: $color1;
+			$pg1_i_active_radius: n;
+			$pg1_i_active_border: n;
+			$pg1_i_active_border_color: $color1;
+			$pg1_i_active_width: n; 
+			$pg1_i_active_height: n;
+			$pg1_i_active_text_align: n;
+			$pg1_i_active_padding: n;
+			$pg1_i_active_margin: n;
+			$pg1_i_active_shadow: n;
+			$pg1_i_active_float: n;
+			$pg1_i_active_transform: n;
+
+
+
+
+

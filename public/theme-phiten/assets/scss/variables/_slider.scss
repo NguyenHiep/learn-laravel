@@ -1,0 +1,66 @@
+// NAV
+$nav_position : 1;  // top : 0, middle : 1, bottom: 2;
+	$nav_item_size : 60px;
+	$nav_item_fs : 18px;
+	$nav_item_bg :transparent; 
+	$nav_item_color :$color1;
+	$nav_item_radius :0;
+	$nav_item_border_width :0;
+	$nav_item_border_color :#fff;
+	$nav_item_space :10px;
+	$nav_item_shadow : n; // 0px 2px 5px rgba(0, 0, 0, 0.25); 
+		$nav_item_hover_color :$color1;
+
+	// nav style
+	$nav_1_mg:50px;
+	$nav_2_mg:50px;   
+
+
+//NAV 3
+$nav3_position: 1; // top :1; - bottom :2;
+$nav3_space : -28px ; // 0
+$nav3_align: 1; // left :0; - right:1; - center:2;
+$nav3_width : 70px;  
+	$nav3_item_size : 30px;
+	$nav3_item_fs : 18px;
+	$nav3_item_bg :n; 
+	$nav3_item_color :#A6A6A6;
+	$nav3_item_radius :n;
+	$nav3_item_border_width :n;
+	$nav3_item_border_color :$color1;
+	$nav3_item_shadow :n; //0px 2px 5px rgba(0, 0, 0, 0.25)	
+		$nav3_item_hover_color :$color1;
+
+	//NAV 3-1 - Sync Nav 3
+	$nav3_1_position: 2; // n,1,2
+	$nav3_1_align: 2; // n,0,1,2
+
+	//NAV 3-2 - Sync Nav 3
+	$nav3_2_position: 1; // n
+	$nav3_2_align: 2; // n
+
+	//NAV 3-3 - Sync Nav 3
+	$nav3_3_position: 1; //n
+	$nav3_3_align: 0; // n
+
+// DOTS   ------------------------------------------------------------------------------------
+
+$dots_space : 20px;
+$dots_positon : 0; // after : 0, bottom : 1, top : 2;  
+$dots_assign : 1;  // left : 0, center : 1, right: 2;
+	$dots_item_size : 10px;
+	$dots_item_mg : 6px;
+	$dots_item_radius : 100%;
+	$dots_item_color : #D3D3D3;
+	$dots_item_border : 0;
+	$dots_item_border_color : $color1;
+		$dots_item_hover_color : $color1;
+		$dots_item_hover_border_color : $color1;
+
+
+
+
+
+
+
+

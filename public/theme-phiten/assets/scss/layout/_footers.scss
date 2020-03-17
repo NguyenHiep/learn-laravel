@@ -1,0 +1,106 @@
+#footer {
+	font-size: 13px; position: relative;  color: rgba(255,255,255,0.6);
+
+
+	@include gradient(right,#00254C,#004EA2);
+
+	.widget { margin-bottom: 30px; }
+	h3.widget-title { color: #fff; font-weight: 700; text-transform: uppercase; font-size: 16px; }
+	ul.menu { 
+		list-style: none; margin:0; padding:0;
+		li { 
+			display: block;  margin-bottom: 10px; 
+			&[class*="active"], &:hover {
+				&>a { color: $color2}
+			}
+		}
+		a { 
+			display: block; position: relative;   @extend .tss;
+		}
+	}
+
+	.widget-about {
+		.title { 
+			font-size: 16px;
+			i { position: relative; top: -2px; }
+		}
+	}
+
+
+	.widget-ubscribe {
+		.widget-title { margin:0; line-height: 45px }
+		form { 
+			position: relative; display: block; overflow: hidden; 
+			@include min1200 {
+				margin-right: 100px;
+			}
+		} 
+		input { 
+			height: 45px; border:none; color: #fff; border-radius: 50px; background: rgba(255,255,255,0.2); padding: 0 15px; width: 100%;
+			font-size: 16px; padding:0 25px;
+		}
+		.btn {
+			@include gradient(right,#006CE0,#00468e); border:none; position: absolute; top: 2px; right: 2px; height: 41px;
+			    padding: 0 20px; font-size: 16px; @extend .tss;
+			&:hover { 
+				color: #fff; 
+				background-size: 150%;
+			}
+		}
+
+	}
+
+
+	@include placeholder(#D8D8D8);
+
+
+	@include max767 {
+		padding:30px 0;
+
+		.group_cta{
+			.widget-mail {
+				li  { display: block; margin:0 !important;}
+			}
+
+			.widget { margin-bottom: 0; }
+		}
+	}
+
+	.row-1 {
+		position: relative; overflow: hidden;
+		&:before {
+			content: ""; background-color: #0097D2; opacity: 0.14; @include absolute;
+		}
+		.tr { top: 20px; right: 20px; }
+	}
+
+}
+
+.copyright {
+	padding: 15px 0;  background-color: #fff; font-size: 13px; line-height: 20px; font-weight: 400;
+
+
+
+		.blog-item-social  {
+			list-style: none; margin:0; padding:0; font-size: 20px; text-align: right;
+			li {
+				display: inline-block;  
+				&+li { margin-left: 10px; }
+			}
+			a { 
+				display: block; color: $color1;   @extend .tss;
+				&:hover {color: $color3; }
+			} 
+		}
+
+
+}
+
+
+@include max767 {
+	.copyright {
+		text-align: center;
+		.blog-item-social  { text-align: center; }
+	}
+
+}

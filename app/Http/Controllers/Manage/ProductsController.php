@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Helppers\Uploads;
+use Yajra\DataTables\DataTables;
 
 class ProductsController extends BackendController
 {
@@ -48,13 +49,33 @@ class ProductsController extends BackendController
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function index()
+    public function index(Request $request)
     {
-       $records = Products::orderBy('id', 'DESC')->paginate(12);
-       return view('manage.modules.products.index')->with(['records' => $records]);
+        if ($request->ajax()) {
+            $products = Products::select(['id', 'name', 'sku', 'price', 'quantity', 'status', 'created_at']);
+            return Datatables::of($products)
+                ->editColumn('status', function ($product) {
+                    $statusClass = $product->status === config('define.STATUS_ENABLE') ? 'label-success' : 'label-danger';
+                    $showText = __('selector.post_status.' . $product->status);
+                    return '<span class="label label-sm ' . $statusClass . ' margin-right-10"> ' . $showText . '</span>';
+                })
+                ->addColumn('action', function ($product) {
+                    $html = '<div class="btn-group btn-group-solid">';
+                    $html .= ' <a title="'.__('common.buttons.edit') . '" href=" '.route('products.edit',$product->id) . '" class="btn  btn-warning js-action-list-rowlink-val"><i class="fa fa-edit"></i></a>';
+                    $html .= ' <a title="'.__('common.buttons.delete') . '" href=" '.route('products.destroy',$product->id) . '" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>';
+                    $html .= '</div>';
+                    return $html;
+                })
+                ->rawColumns(['status', 'action'])
+                ->make(true);
+        }
+        return view('manage.modules.products.index');
     }
+
 
     /**
      * Show the form for creating a new resource.

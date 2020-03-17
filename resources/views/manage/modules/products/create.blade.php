@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('customers.index')}}">Sản phẩm</a>
+            <a href="{{route('products.index')}}">Sản phẩm</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>

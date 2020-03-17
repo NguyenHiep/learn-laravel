@@ -187,7 +187,10 @@ return [
         //Add package management image
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        niklasravnsborg\LaravelPdf\PdfServiceProvider::class
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        NMH\WSDelivery\WSDeliveryServiceProvider::class,
     ],
 
     /*
@@ -238,7 +241,11 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'WSDelivery' => NMH\WSDelivery\WSDeliveryFacade::class
     ],
 
 ];

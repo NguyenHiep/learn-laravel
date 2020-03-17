@@ -15,7 +15,10 @@
         "unisharp/laravel-filemanager": "~1.8",
         "fideloper/proxy": "^4.0",
         "laravel/tinker": "~1.0",
-        "niklasravnsborg/laravel-pdf": "^4.0"
+        "niklasravnsborg/laravel-pdf": "^4.0",
+        "milon/barcode": "^6.0",
+        "yajra/laravel-datatables-oracle": "^9.9",
+        "yajra/laravel-datatables-buttons": "^4.9"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -35,7 +38,8 @@
 
         },
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "NMH\\WSDelivery\\": "packages/NMH/wsdelivery/src/"
         }
     },
     "autoload-dev": {

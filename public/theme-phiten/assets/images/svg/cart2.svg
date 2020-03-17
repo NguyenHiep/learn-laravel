@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>ico_shopping-cart</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0,0 L2.28431655,0 L3.81480863,8.92666667 C3.92259238,9.56015436 4.40381048,10.0123749 4.95696691,10 L10.5078561,10 C11.0610125,10.0123749 11.5422306,9.56015436 11.6500144,8.92666667 L12.563741,3.33333333 L2.85539568,3.33333333" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="_btt-AddToCart---Product-Detail" transform="translate(-188.000000, -17.000000)">
+            <g id="_btt-AddToCart---Product">
+                <g id="Group-3" transform="translate(78.000000, 15.000000)">
+                    <g id="ico_shopping-cart" transform="translate(111.674729, 2.969697)">
+                        <ellipse id="Oval" stroke="#FFFFFF" stroke-width="1.782" fill="#FFFFFF" cx="4.56863309" cy="13.3333333" rx="1" ry="1"></ellipse>
+                        <ellipse id="Oval" stroke="#FFFFFF" stroke-width="1.782" fill="#FFFFFF" cx="10.8505036" cy="13.3333333" rx="1" ry="1"></ellipse>
+                        <g id="Shape">
+                            <use fill="#D8D8D8" xlink:href="#path-1"></use>
+                            <use stroke="#FFFFFF" stroke-width="1.782" fill="#FFFFFF" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

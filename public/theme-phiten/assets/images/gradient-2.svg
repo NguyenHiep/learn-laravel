@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="543px" height="507px" viewBox="0 0 543 507" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Mask Copy 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="40.3838041%" y1="22.5077323%" x2="40.3838041%" y2="88.0291568%" id="linearGradient-1">
+            <stop stop-color="#0E82FF" stop-opacity="0.16295856" offset="0%"></stop>
+            <stop stop-color="#004EA2" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="910 1970 1453 1970 1453 2477 910 2477"></polygon>
+    </defs>
+    <g id="01.HomePage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-910.000000, -1970.000000)">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <use id="Mask-Copy-4" fill="url(#linearGradient-1)" opacity="0.942243304" xlink:href="#path-2"></use>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,66 @@
+//TOP MENU
+$tm_ul_float : right; 
+$tm_ul_align : left;
+	$tm_li_ml : 0; $tm_li_mr : 0; 
+		$tm_a_font : $font1;  
+		$tm_a_height :$header;  
+		$tm_a_weight :500;  
+		$tm_a_size :18px; 
+		$tm_a_padding :20px; 
+		$tm_a_transform:uppercase;
+		$tm_a_color:inherit;
+			$tm_a_hover_color:$color1; 
+			$tm_a_active_color:$color1;
+
+		$tm_s_ul_width : 250px;   
+		$tm_s_ul_bg : #fff; 
+		$tm_s_ul_shadow : 1px 2px 4px rgba(0, 0, 0, 0.3); 
+			$tm_s_li_border_color : #f1f1f1; 
+				$tm_s_a_font : $font1;  
+				$tm_s_a_height :28px;  
+				$tm_s_a_weight :500;  
+				$tm_s_a_size :16px; 
+				$tm_s_a_padding :10px 5px 10px 10px ; 
+				$tm_s_a_transform:capitalize;
+				$tm_s_a_color:inherit;
+					$tm_s_a_hover_color:$color1;
+					$tm_s_a_hover_padding_left:20px; 
+					$tm_s_a_active_color:#fff;
+					$tm_s_a_active_bg: $color1; 
+
+// MENU MOBILE
+$mmb_bg : #fff;
+$mmb_width : 400px;  
+	$mmb_li_border_color : #f1f1f1;    
+		$mmb_a_font : $font1;  
+		$mmb_a_height :30px;  
+		$mmb_a_weight :500;  
+		$mmb_a_size :18px; 
+		$mmb_a_pl :20px; 
+		$mmb_a_pr :5px; 
+		$mmb_a_pt :10px; 
+		$mmb_a_pb :10px; 
+		$mmb_a_transform:uppercase;
+		$mmb_a_color:inherit;
+			$mmb_a_active_color:$color1;  
+			$mmb_a_active_bg:#fff;  
+
+		$mmb_s_li_border_color : #f1f1f1; 		
+			$mmb_s_a_font : $font1;  
+			$mmb_s_a_height :25px;  
+			$mmb_s_a_weight :500;  
+			$mmb_s_a_size :16px; 
+			$mmb_s_a_pl :30px; 
+			$mmb_s_a_pr :0; 
+			$mmb_s_a_pt :10px; 
+			$mmb_s_a_pb :10px; 
+			$mmb_s_a_transform:capitalize; 
+			$mmb_s_a_color:inherit;
+
+				$mmb_s_a_active_color:$color1;
+				$mmb_s_a_active_bg: #fff; 
+
+		$mmb_caret_color : inherit;	
+		$mmb_caret_size :12px;		
+		$mmb_caret_border_color :	 #f1f1f1;  	
+

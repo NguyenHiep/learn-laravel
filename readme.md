@@ -11,6 +11,8 @@
 - Run: php artisan key:generate  để tạo key
 - php artisan migrate để tạo bảng
 - php artisan db:seed để tạo data mẫu
+- php artisan vendor:publish --tag=datatables
+- php artisan vendor:publish --tag=datatables-buttons
 
 Truy cập admin: http://domainname/manage
 

@@ -1,0 +1,34 @@
+$header:75px; 
+$header-md:60px; 
+$header-sm:60px;  
+$header-xs:60px;       
+
+$sticky:n; 
+$sticky-md:n;  
+$sticky-sm:n; 
+
+$logo-sticky : $sticky - 20; 
+$logo-sticky-md : $sticky-md - 5; 
+$logo-sticky-sm : n; 
+
+// Logo  
+$logo-img : $header - 20; 
+$logo-img-md : $header-md - 20;  
+$logo-img-sm : $header-sm - 20; 
+$logo-img-xs : $header-xs - 20; 
+
+
+$hd_bg :#fff;
+$hd_color :n;  
+$hd_zindex : 1000; 
+
+
+$hd_border : 1px; 
+$hd_border_color : #e6e2eb;   
+$hd_shadow : n; 
+
+	// Fixe
+	$hd_fix_shadow :n; 
+	$hd_fix_bg : #fff;
+	$hd_fix_border_color : n;   
+	

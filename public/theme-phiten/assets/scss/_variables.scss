@@ -1,0 +1,46 @@
+// DEFAULT
+$color1 : #004EA2;  
+$color2: #1E1E1E;
+$color3: #00254C;
+$color4: #F8A01B; 
+
+$color5: #ec2028;
+$color6: #5497f4;  
+
+
+
+$section_pd : 50px; 
+
+
+//@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700|Roboto:100,300,400,400i,500,700,900&subset=vietnamese');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,400i,700&display=swap&subset=vietnamese');
+
+@font-face {
+  font-family: 'Roboto Condensed', sans-serif;
+  src: url(../fonts/YesevaOne-Regular.ttf);
+  font-weight: normal;
+}
+
+
+
+// Font 
+$font1 : 'Roboto Condensed', sans-serif;
+$font2 : 'YesevaOne';
+
+.font1 { font-family: $font1; }
+.font2 { font-family: $font2; }
+
+
+@import "variables/extend";   
+@import "variables/header";
+@import "variables/menu";
+@import "variables/form";
+@import "variables/slider";
+@import "variables/tabs";
+@import "variables/pagination";   
+@import "variables/thumb";   
+@import "variables/sub";   
+
+
+
+

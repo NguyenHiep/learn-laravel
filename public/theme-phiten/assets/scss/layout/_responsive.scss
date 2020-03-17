@@ -1,0 +1,14 @@
+@include max991 {
+	h1,.h1 { font-size: 32px;} 
+	h2,.h2 { font-size: 24px;} 
+	h3,.h3 { font-size: 22px}
+	h4,.h4 { font-size: 18px}
+	h5,.h5 { font-size: 17px}
+	.sec{
+		&-tb {padding-top: 30px;padding-bottom: 30px;	}
+		&-t {padding-top: 30px;}
+		&-b {padding-bottom: 30px;	}
+	}
+
+}
+

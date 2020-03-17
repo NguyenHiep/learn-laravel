@@ -1,0 +1,330 @@
+// USE MENU
+$tm_use :1;     // 1:yes, 0:no;
+$mmb_use : 1;    
+$mpc_use : 0;    
+
+
+// BUTTON
+$btn_mn_size : 42px;
+$btn_mn_font : 32px;
+$btn_mn_line : 2px; 
+$btn_mn_color : #5F4B5B;
+$btn_mn_overlay : 0.06;  
+
+
+//TOP MENU   
+$tm_mobile : 0; // 1:yes, 0:no;
+$tm_res :2 ;    // 1: 1199, 2:991, 3:767;
+$tm_mega :0 ;   // 1:yes, 0:no;
+
+//ul
+$tm_ul_float : right; 
+$tm_ul_align : left;
+
+	//ul>li
+	$tm_li_ml : 0; $tm_li_mr : 10px; 
+	$tm_li_bd:0;  //0   
+	$tm_li_bd_color:#9B9B9B;		 
+		//ul>li>a
+        $tm_a_font : n;
+        $tm_a_weight : n;
+        $tm_a_size : 15px;
+        $tm_a_color: #27171F;
+        $tm_a_padding: 0 15px;
+        $tm_a_transform: n;
+		$tm_a_lineheight: n;        
+        $tm_a_bg: n;
+        $tm_a_radius: n;
+        $tm_a_border: n;
+        $tm_a_border_color: $color1;
+        $tm_a_width: n;
+        $tm_a_height: n;
+        $tm_a_text_align: n;
+        $tm_a_margin: n;
+        $tm_a_shadow: n;
+        $tm_a_float: n;
+        $tm_a_arrow: 0; // 1 : yes, 0 :no;   
+        
+			//ul>li>a:after
+			$tm_a_bd_bottom: 0; 
+			$tm_a_bd_bottom_color:$color2;   
+			//ul>li>a:hover;
+            $tm_a_hover_font : n;
+            $tm_a_hover_weight : n;
+            $tm_a_hover_size : n;
+            $tm_a_hover_color: $color1;
+            $tm_a_hover_padding: n;
+            $tm_a_hover_transform: n;
+            $tm_a_hover_lineheight: n;        
+            $tm_a_hover_bg: n;
+            $tm_a_hover_radius: n;
+            $tm_a_hover_border: n;
+            $tm_a_hover_border_color: $color1;
+            $tm_a_hover_width: n;
+            $tm_a_hover_height: n;
+            $tm_a_hover_text_align: n;
+            $tm_a_hover_margin: n; 
+            $tm_a_hover_shadow: n;
+            $tm_a_hover_float: n;
+
+	        //ul>li>a.active
+	        $tm_a_active_font : n;
+	        $tm_a_active_weight : 500;
+	        $tm_a_active_size : n;
+	        $tm_a_active_color: #fff;
+	        $tm_a_active_padding: n;
+	        $tm_a_active_transform: n;
+	        $tm_a_active_lineheight: n;        
+	        $tm_a_active_bg: $color1;
+	        $tm_a_active_radius: n;
+	        $tm_a_active_border: n;
+	        $tm_a_active_border_color: $color1;
+	        $tm_a_active_width: n;
+	        $tm_a_active_height: n;
+	        $tm_a_active_text_align: n;
+	        $tm_a_active_margin: n;
+	        $tm_a_active_shadow: n;
+	        $tm_a_active_float: n;
+
+		//ul ul
+		$tm_s_ul_width : 220px;    
+		$tm_s_ul_bg : $color1; 
+		$tm_s_ul_shadow :none; 
+			//ul ul li
+			$tm_s_li_border_color : transparent; 
+				//ul ul li a
+
+		        $tm_s_a_font : n;
+		        $tm_s_a_weight : 300;
+		        $tm_s_a_size : n;
+		        $tm_s_a_color: #fff;
+		        $tm_s_a_padding: 8px 15px;
+		        $tm_s_a_transform: n;
+		        $tm_s_a_lineheight: 30px;        
+		        $tm_s_a_bg: n;
+		        $tm_s_a_radius: n;
+		        $tm_s_a_border: n;
+		        $tm_s_a_border_color: $color1;
+		        $tm_s_a_width: n;
+		        $tm_s_a_height: n;
+		        $tm_s_a_text_align: n;
+		        $tm_s_a_margin: n;
+		        $tm_s_a_shadow: n;
+		        $tm_s_a_float: n;
+		        $tm_s_a_arrow: 1; // 1 : yes, 0 :no;       
+
+		        	//ul ul li a - hover
+		        	$tm_s_a_hover_pd_left: 20px; // 25px 
+		        	$tm_s_a_hover_color: #fff; 
+	                $tm_s_a_hover_font : n;
+	                $tm_s_a_hover_weight : n;
+	                $tm_s_a_hover_size : n;
+	                $tm_s_a_hover_padding: n;
+	                $tm_s_a_hover_transform: n;
+	                $tm_s_a_hover_lineheight: n;        
+	                $tm_s_a_hover_bg: n;
+	                $tm_s_a_hover_radius: n;
+	                $tm_s_a_hover_border: n;
+	                $tm_s_a_hover_border_color: $color1;
+	                $tm_s_a_hover_width: n;
+	                $tm_s_a_hover_height: n;
+	                $tm_s_a_hover_text_align: n;
+	                $tm_s_a_hover_margin: n;
+	                $tm_s_a_hover_shadow: n;
+	                $tm_s_a_hover_float: n;
+
+					//ul ul li a - active
+	                $tm_s_a_active_font : n;
+	                $tm_s_a_active_weight : n;
+	                $tm_s_a_active_size : n;
+	                $tm_s_a_active_color: #fff; 
+	                $tm_s_a_active_padding: n;
+	                $tm_s_a_active_transform: n;
+	                $tm_s_a_active_lineheight: n;        
+	                $tm_s_a_active_bg: n;
+	                $tm_s_a_active_radius: n;
+	                $tm_s_a_active_border: n;
+	                $tm_s_a_active_border_color: $color1;
+	                $tm_s_a_active_width: n;
+	                $tm_s_a_active_height: n;
+	                $tm_s_a_active_text_align: n;
+	                $tm_s_a_active_margin: n;
+	                $tm_s_a_active_shadow: n;
+	                $tm_s_a_active_float: n;
+
+
+// MEGA MENU   
+
+//wrap mega
+$tm_mega_pd : 25px 5px 0; 
+$tm_mega_bg : n; 
+$tm_mega_shadow : n;  
+
+	//ul>li ---- Column
+	$tm_mega_col_mb : 30px; 
+	$tm_mega_col_space : 10px; 
+ 
+		//ul>li>a
+	        $tm_mega_a_font : n;
+	        $tm_mega_a_weight : 700;
+	        $tm_mega_a_size : 18px;
+	        $tm_mega_a_color: #000; 
+	        $tm_mega_a_ptb: n;
+	        $tm_mega_a_pl: 0;
+	        $tm_mega_a_pr: 0;
+	        $tm_mega_a_transform: n;
+	        $tm_mega_a_lineheight: n;        
+	        $tm_mega_a_bg: n;
+	        $tm_mega_a_radius: n;
+	        $tm_mega_a_border: n;
+	        $tm_mega_a_border_color: #f1f1f1;
+	        $tm_mega_a_text_align: n;
+	        $tm_mega_a_shadow: n; 
+
+				//ul ul li a
+		        $tm_mega_s_font : n;
+		        $tm_mega_s_weight : 400;
+		        $tm_mega_s_size : 15px;
+		        $tm_mega_s_color: #000; 
+		        $tm_mega_s_ptb: n;
+		        $tm_mega_s_pl: 0;
+		        $tm_mega_s_pr: 0;
+		        $tm_mega_s_transform: n;
+		        $tm_mega_s_lineheight: 1.5;        
+		        $tm_mega_s_bg: n;
+		        $tm_mega_s_radius: n;
+		        $tm_mega_s_border: n;
+		        $tm_mega_s_border_color: $color1;
+		        $tm_mega_s_text_align: n;
+		        $tm_mega_s_shadow: n; 
+
+		        	//ul ul li a - hover
+				        $tm_mega_s_hover_font : n;
+				        $tm_mega_s_hover_weight : n;
+				        $tm_mega_s_hover_size : n;
+				        $tm_mega_s_hover_color: n; 
+				        $tm_mega_s_hover_ptb: n;
+				        $tm_mega_s_hover_pl: 5px;
+				        $tm_mega_s_hover_pr: n;
+				        $tm_mega_s_hover_transform: n;
+				        $tm_mega_s_hover_lineheight: n;        
+				        $tm_mega_s_hover_bg: n;
+				        $tm_mega_s_hover_radius: n;
+				        $tm_mega_s_hover_border: n;
+				        $tm_mega_s_hover_border_color: $color1;
+				        $tm_mega_s_hover_text_align: n;
+				        $tm_mega_s_hover_shadow: n; 
+
+					//ul ul li a - active
+				        $tm_mega_s_active_font : n;
+				        $tm_mega_s_active_weight : n;
+				        $tm_mega_s_active_size : n;
+				        $tm_mega_s_active_color: $color1; 
+				        $tm_mega_s_active_ptb: n;
+				        $tm_mega_s_active_pl: n;
+				        $tm_mega_s_active_pr: n;
+				        $tm_mega_s_active_transform: n;
+				        $tm_mega_s_active_lineheight: n;        
+				        $tm_mega_s_active_bg: n;
+				        $tm_mega_s_active_radius: n;
+				        $tm_mega_s_active_border: n;
+				        $tm_mega_s_active_border_color: $color1;
+				        $tm_mega_s_active_text_align: n;
+				        $tm_mega_s_active_shadow: n; 
+
+				        	                
+
+// MENU MOBILE 
+//wrapper
+$mmb_style : 1;     
+$mmb_top : 0;    
+$mmb_assign: right;       
+$mmb_shadow: 0 0 4px rgba(0, 0, 0, 0.3); 
+$mmb_bg : #fff;    
+$mmb_width : 400px;   
+	// .head
+	$mmb_head_top : 70px;   
+
+	// .inner
+	$mmb_inner_top : 70px;  
+	$mmb_inner_bottom : 10px; 
+	$mmb_inner_pb : 40px;   
+
+	//ul > li
+	$mmb_li_border_color : #f1f1f1;    
+		//ul > li > a
+        $mmb_a_font : n;
+        $mmb_a_weight : 500;
+        $mmb_a_size : 18px;
+        $mmb_a_color: #000;
+        $mmb_a_ptb: 10px;
+        $mmb_a_pl: 20px;
+        $mmb_a_pr: 5px;
+        $mmb_a_transform: uppercase;
+        $mmb_a_lineheight: 30px;        
+        $mmb_a_bg: n;
+        $mmb_a_radius: n;
+        $mmb_a_border: n;
+        $mmb_a_border_color: $color1;
+        $mmb_a_text_align: n;
+        $mmb_a_shadow: n;
+
+			//ul > li > a - active
+	        $mmb_a_active_font : n;
+	        $mmb_a_active_weight : n;
+	        $mmb_a_active_size : n;
+	        $mmb_a_active_color: $color1;
+	        $mmb_a_active_ptb: n;
+	        $mmb_a_active_pl: n;
+	        $mmb_a_active_pr: n;
+	        $mmb_a_active_transform: n;
+	        $mmb_a_active_lineheight: n;        
+	        $mmb_a_active_bg: n; 
+	        $mmb_a_active_radius: n;
+	        $mmb_a_active_border: n;
+	        $mmb_a_active_border_color: $color1;
+	        $mmb_a_active_text_align: n;
+	        $mmb_a_active_shadow: n;
+
+		//ul ul li  
+		$mmb_s_li_border_color : #f1f1f1; 	
+			//ul ul li  a	
+	        $mmb_s_a_font : n;
+	        $mmb_s_a_weight : 500;
+	        $mmb_s_a_size : 16px;
+	        $mmb_s_a_color: #000;
+	        $mmb_s_a_ptb: 8px;
+	        $mmb_s_a_pl: 30px;
+	        $mmb_s_a_pr: 5px;
+	        $mmb_s_a_transform: n;
+	        $mmb_s_a_lineheight: 26px;        
+	        $mmb_s_a_bg: n;
+	        $mmb_s_a_radius: n;
+	        $mmb_s_a_border: n;
+	        $mmb_s_a_border_color: $color1;
+	        $mmb_s_a_text_align: n;
+	        $mmb_s_a_shadow: n;     
+	        	$mmb_s_a_space : 15px;   
+
+				//ul ul li  a - active	
+	            $mmb_s_a_active_font : n;
+	            $mmb_s_a_active_weight : n;
+	            $mmb_s_a_active_size : n;
+	            $mmb_s_a_active_color: $color1;
+	            $mmb_s_a_active_ptb: n;
+	            $mmb_s_a_active_pl: n;
+	            $mmb_s_a_active_pr: n;
+	            $mmb_s_a_active_transform: n;
+	            $mmb_s_a_active_lineheight: n;        
+	            $mmb_s_a_active_bg: n; 
+	            $mmb_s_a_active_radius: n;
+	            $mmb_s_a_active_border: n;
+	            $mmb_s_a_active_border_color: $color1;
+	            $mmb_s_a_active_text_align: n;
+	            $mmb_s_a_active_shadow: n;    
+
+		//li > caret icon
+		$mmb_caret_color : inherit;	
+		$mmb_caret_size :12px;		
+		$mmb_caret_border_color :	 #f1f1f1;  	
+

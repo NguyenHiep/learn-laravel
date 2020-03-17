@@ -31,8 +31,8 @@
               <thead>
               <tr>
                 <td class="cart-ttl" style="width: 270px;">Tên sản phẩm</td>
-                <td class="cart-price">Giá tiền</td>
-                <td class="cart-summ">Đơn giá</td>
+                <td class="cart-price">Đơn giá</td>
+                <td class="cart-summ">Thành tiền</td>
               </tr>
               </thead>
               <tbody>

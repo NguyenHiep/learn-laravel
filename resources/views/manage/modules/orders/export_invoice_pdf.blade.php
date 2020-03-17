@@ -15,8 +15,9 @@
     .invoice table {
       margin: 0;
     }
-    hr {
-      margin: 0
+
+    .border-dotted {
+      border-top: 1px dotted #000;
     }
     .invoice .invoice-logo-space {
       margin: 0;
@@ -37,9 +38,14 @@
       vertical-align: top;
     }
     .invoice .invoice-logo p {
-      font-size: 15px !important;
+      font-size: 13px !important;
       line-height: 20px !important;
       margin: 0;
+      text-align: left;
+    }
+    .invoice .invoice-logo img {
+      width: 250px;
+      height: 80px;
     }
   </style>
 </head>
@@ -54,11 +60,15 @@
               <img class="img-responsive" src="{{ asset(UPLOAD_SETTING . $store_info->company_logo) }}" alt="{{ $store_info->subtitle }}" style="max-width: 200px" />
           @endif
         </div>
-        <div class="col-xs-offset-1 col-xs-5">
-          <p>Mã đơn hàng: #{{ format_order_id($record->id) }}</p>
-          <p>Đặt hàng: {{ format_date($record->delivered_at, '%d/%m/%Y') }}</p>
+        <div class="col-xs-offset-1 col-xs-5 text-left">
+          <img src="{{ asset('/storage/barcode/' . strtolower(format_order_id($record->id).'.png')) }}" alt="{{$record->id}}" style="width: 200px; height: 50px"/>
+          <p>
+            Mã đơn vận: {{ format_order_id($record->id) }} <br/>
+            Mã đơn hàng: <strong>{{ format_order_id($record->id) }}</strong>
+          </p>
         </div>
       </div>
+      <div class="border-dotted"></div>
       @php $deliveries = $record->deliveries; @endphp
       <div class="row">
         <div class="col-xs-5">

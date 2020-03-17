@@ -1,0 +1,61 @@
+/* EXTEND 
+-------------------------------------------------*/
+#header             {   @extend %header-1;         }    // extend/header
+.owl-carousel       {   
+                        @extend %owl;           // extend/slider      
+
+                        &.nav-1     {  @extend %owl-nav-1;  } 
+
+                        &.nav-3     {  @extend %owl-nav-3;  }  
+                        //&.nav-3-1     {  @extend %owl-nav-3-1;  }  
+                        //&.nav-3-2     {  @extend %owl-nav-3-2;  }  
+                        //&.nav-3-3     {  @extend %owl-nav-3-3;  }  
+                    }
+.wrap-syn-owl       {   @extend %syn-owl;          }  // extend/slider                    
+
+.rowlabel           {   @extend %rowlabel;         }  // extend/extend
+
+span.imgres         {   @extend %imgres;           }  // extend/extend
+
+ul.page-numbers     {   @extend %pagination-0;     }  // extend/pagination
+
+.dropdown           {  
+                        @extend %dropdown;            // extend/extend
+  & >.content       {   @extend %sub-1;             } // extend/sub
+}
+
+
+//---------
+
+.wrap-rotate-text   {   @extend %wrap-rotate-text; }  // extend/extend
+
+//.list-check         {   @extend %list-check;       }  // extend/form 
+
+//.ama-wrap-alo       {   @extend %ama-wrap-alo;     }  // extend/extend 
+
+.modal              {   
+                        @extend %modal;            
+  &-backdrop        {   @extend %modal-backdrop;   }  // extend/extend    
+}
+
+.toggleHeight       {   @extend %toggleHeight;     }  // extend/extend 
+
+.cttab-v1           {   @extend %cttab-v1;         }  // extend/cttab 
+
+.box-acordion           {   @extend %acordion-1;         }  // extend/cttab 
+
+
+
+
+//Form --------------------------------------       // extend/form
+.btn                {   @extend %btn;       }
+.input              {   @extend %input;     }
+select              {   @extend %select;    }
+.select2-container  {   @extend %select2;   }
+label.checkbox      {   @extend %checkbox;  }
+label.radio         {   @extend %radio;     }
+label.switch        {   @extend %switch;    }
+.table              {   @extend %table;     }
+
+
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200px" height="398px" viewBox="0 0 1200 398" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Tech's Bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="39.8287861%" y1="53.898507%" x2="39.7886705%" y2="86.8565295%" id="linearGradient-1">
+            <stop stop-color="#0E82FF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#0767CF" stop-opacity="0.277372056" offset="40.0876084%"></stop>
+            <stop stop-color="#004EA2" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="01.HomePage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.942243304">
+        <g id="Artboard" transform="translate(-0.000000, -1890.000000)" fill="url(#linearGradient-1)">
+            <polygon id="Tech's-Bg" points="-2 1319 1442 1319 1443 2294 723 2288.62925 -2 2287.82911"></polygon>
+        </g>
+    </g>
+</svg>

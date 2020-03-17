@@ -1,0 +1,247 @@
+//BUTTON
+	//Item
+	$btn_font : n;
+	$btn_weight : 400;
+	$btn_size : 18px;
+	$btn_height: 45px; // emty
+	$btn_radius: 45px;
+	$btn_width: n;
+	$btn_color: #fff; 
+	$btn_bg: $color1;
+	$btn_border: 1px; 
+	$btn_border_color: $color1;
+	$btn_pd: 40px; 
+	$btn_margin: n; 
+	$btn_shadow: none;
+	$btn_transform: n;  
+
+	    //Hover 
+	    $btn_hover_font : n;
+	    $btn_hover_weight : n;
+	    $btn_hover_size : n;
+	    $btn_hover_radius: n;
+	    $btn_hover_height: n; // emty
+	    $btn_hover_width: n;
+	    $btn_hover_color:  $color1;
+	    $btn_hover_bg: #fff;
+	    $btn_hover_border: 1px;
+	    $btn_hover_border_color: n;
+	    $btn_hover_pd: n; 
+	    $btn_hover_shadow:n;
+	    $btn_hover_transform: n;   
+
+		//Arrow
+		$btn_arr_space: 50px;	
+
+			$btn_arr_content: "\e90d";
+			$btn_arr_size: n;
+			$btn_arr_bg: n;
+			$btn_arr_cl: n; 
+			$btn_arr_radius: n;
+			$btn_arr_fs: 18px;	
+			$btn_arr_con_space: 16px;
+			$btn_arr_con_space_lg: $btn_arr_con_space + 4;
+			$btn_arr_con_space_sm: $btn_arr_con_space - 4;
+
+	//Round
+	$btn_round:100px;
+
+
+
+
+
+	//Size lg
+	$btn_lg_height : $btn_height + 10;		
+	$btn_lg_pd : $btn_pd + 10;
+	$btn_lg_size : $btn_size + 1; 
+	//Size sm
+	$btn_sm_height : $btn_height - 5;		
+	$btn_sm_pd : $btn_pd - 5;
+	$btn_sm_size : $btn_size - 1; 
+
+
+/* 
+SELECT - INPUT
+--------------------------------------------------------------------------
+*/
+$input_select_fs : 13px;
+$input_select_height: 40px; 
+$input_select_radius: 6px;
+$input_select_bg: #fff;
+$input_select_border: 1px;
+$input_select_border_color: #D3D3D3;
+$input_select_pd: 15px; 
+$input_select_color: n;    
+
+	//Size lg
+	$input_select_lg_height : $input_select_height + 30;		
+	$input_select_lg_pd : $input_select_pd + 20;
+	$input_select_lg_fs : $input_select_fs + 5; 
+	//Size sm
+	$input_select_sm_height : $input_select_height - 5;		
+	$input_select_sm_pd : $input_select_pd - 5;
+	$input_select_sm_fs : $input_select_fs - 1; 
+
+// SELECT
+    //Item
+    $select_font : n;
+    $select_weight : n; 
+    $select_width: n;
+    $select_color: n;    
+    $select_margin: n; 
+    $select_shadow: n;
+    $select_transform: n;
+    	//img
+    	$select_img : '../images/select.svg'; 
+
+
+// SELECT 2 - JS
+	$select_drop_bg: #fff;
+    $select_drop_size : n; //n
+    $select_drop_radius: 6px; //n
+    $select_drop_shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); //n    
+    $select_drop_border: n; //n
+    $select_drop_border_color: #D3D3D3;    
+    $select_drop_pd: n;  //n
+    $select_drop_color: n;  //n   
+    $select_drop_minwidth: 150px; 
+
+    	// Open
+    	$select_drop_open: n; //0 - n
+
+    	//Arrow
+    	$select_drop_arrow: 1; // 1 :yes, 0 :no
+    	$select_drop_arrow_positon: left; //left - right
+
+
+		$select_drop_arrow_1:8px;
+		$select_drop_arrow_2:10px;
+		$select_drop_arrow_bg_color : $select_drop_border_color;
+		$select_drop_arrow_mg:30px;
+
+
+		//search
+		$select_search_bg: n; //n
+    	$select_search_pd: 8px 0; //n
+    	$select_search_mg: 0 20px;   //n
+
+		//results
+    	$select_results_h: 200px;
+
+    		$select_results_item_pd: 6px 6px 6px 20px;
+
+	    		$select_results_item_ac_current: #fff;
+
+	    		$select_results_item_ac_bg: $color1;
+	    		$select_results_item_ac_cl: #fff;
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------------*/
+
+
+
+
+//INPUT
+    //Item
+    $input_font : n;
+    $input_weight : n;
+    $input_width: n;
+    $input_color: n;
+    $input_margin: n; 
+    $input_shadow: n;
+    $input_float: n;
+    $input_transform: n;
+
+        //focus
+        $input_focus_border: 1px;
+        $input_focus_border_color: $color1;        
+        $input_focus_font : n;
+        $input_focus_weight : n;
+        $input_focus_size : n;
+        $input_focus_radius: n;
+        $input_focus_height: n; // emty
+        $input_focus_width: n;
+        $input_focus_color: n;
+        $input_focus_bg: n;
+        $input_focus_pd: n; 
+        $input_focus_shadow: n;
+        $input_focus_transform: n;            
+
+
+
+
+
+// CHECKBOX - RADIO
+	$ch_pd_left : 30px;  
+	$ch_margin : 0 0 5px;    
+		$ch_i_top:0;
+		$ch_i_left:0;
+		$ch_i_size:20px;
+		$ch_i_bg:#fff;
+		$ch_i_border:2px;
+		$ch_i_border_color:#ebebeb;
+		$ch_i_radius:3px; 
+		$ch_i_disabled:0.2;
+			$ch_i_hover_color:$color1;
+			$ch_i_active_color:$color1;
+			$ch_i_active_bg:$color1;
+
+            $ch_icon_top:-2px;
+            $ch_icon_left:0;
+            $ch_icon_w:5px;
+            $ch_icon_h:10px;
+            $ch_icon_border:3px;
+            $ch_icon_border_color:#fff;
+            $ch_icon_radius:3px;
+            $ch_icon_rotate:35deg;
+
+
+		// radio
+        $ra_i_active_bg:n;
+        $ra_icon_size:10px;
+        $ra_icon_bg:$color1;
+
+
+// SWITCH
+	$sw_w : 50px;
+	$sw_h : 30px;   
+
+	$swt_w : 66px;    
+	$swt_color : #59595B;    
+	$swt_active_color : #fff;   
+	$swt_fs : 11px;  
+	$swt_i_s_radius1 : 30px;   
+	$swt_i_s_radius2 : 3px;   
+
+	$sw_i_bg : #fff;
+	$sw_i_border : 1px;
+	$sw_i_border_color : #E6E6E6;
+		
+		$sw_i_s_space : 4px; 
+		$sw_i_s_size : $sw_h - ($sw_i_s_space*2 + $sw_i_border*2 );
+		$sw_i_s_bg : $sw_i_border_color ;
+		$sw_i_s_right : $sw_w - $sw_i_s_size - $sw_i_border*2 - $sw_i_s_space;
+		$swt_i_s_right : $swt_w - $sw_i_s_size - $sw_i_border*2 - $sw_i_s_space;
+
+
+// LIST - CHECK
+	$list_ch_li_asign :left; // left - right
+	$list_ch_li_pd :50px;
+	$list_ch_li_space :15px;
+	$list_ch_li_lineheight :n; 
+
+		$list_ch_ic_size :30px; 
+		$list_ch_ic_top :0; 
+		$list_ch_ic_bg :$color1;
+		$list_ch_ic_cl :#fff; 
+		$list_ch_ic_radius :100%;
+		$list_ch_ic_content :"\e926";
+		$list_ch_ic_fs :16px;
+	
+

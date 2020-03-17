@@ -1,3 +1,7 @@
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
+Version: 4.7.1
+-->
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -13,22 +17,17 @@
   <title>@yield('title')</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="" name="description"/>
+  <meta content="CMS Laravel" name="description"/>
   <meta content="nguyenhiep" name="author"/>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('styles')
-  <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
-          type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="{{ asset('/manages/assets/global/plugins/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manages/assets/global/plugins/simple-line-icons/simple-line-icons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/manage/app.css') }}">
-
-    <!-- END THEME LAYOUT STYLES -->
+    <link rel="stylesheet" href="{{ asset('/css/manage/app.css') }}" />
   @show
 
-  <link rel="shortcut icon" href="favicon.ico"/>
   @php
     echo '<script type="text/javascript">';
     //echo '//<![CDATA[';

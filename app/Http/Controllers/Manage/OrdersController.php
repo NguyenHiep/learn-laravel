@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\Http\Controllers\BackendController;
+use App\Mail\OrderConfirm;
 use App\Model\Orders;
 use App\Model\Settings;
 use Carbon\Carbon;
+use DNS1D;
 use Illuminate\Http\Request;
-use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use App\Mail\OrderConfirm;
 use PDF;
 
 class OrdersController extends BackendController
@@ -213,6 +214,8 @@ class OrdersController extends BackendController
         $store_info         = Settings::first();
         $data['record']     = $record;
         $data['store_info'] = $store_info;
+        // Create barcode order deliveries
+        DNS1D::getBarcodePNGPath(format_order_id($record->id), 'C128', '1');
         $pdf = PDF::loadView('manage.modules.orders.export_invoice_pdf', $data);
         $name_pdf = 'invoice_' . format_date($record->delivered_at, '%d%m%Y') . '_' . str_pad($record->id, 7, '0', 0) . '.pdf';
         return $pdf->stream($name_pdf);
