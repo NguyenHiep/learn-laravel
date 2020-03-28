@@ -1,10 +1,11 @@
-var Actions = function () {
-  "use strict";
-  var elemBody = $("body"),
+"use strict";
+
+let Actions = function () {
+  let elemBody = $("body"),
     elemArticle = elemBody.find("#article");
-  var handleActiveCheckBox = function () {
+  let handleActiveCheckBox = function () {
     elemArticle.find(".js-action-list-checkboxes").each(function () {
-      var self = $(this),
+      let self = $(this),
         parent = self.parents("table").eq(0),
         iptstr = 'input[name^="action_ids"]:visible',
         span_parent = $('.checker > span');
@@ -33,11 +34,11 @@ var Actions = function () {
   };
   
   // Begin medias action select image attachment
-  var handleMediasAttachment = function () {
+  let handleMediasAttachment = function () {
     elemBody.find(".medias_attachment").on("click", function () {
-      var $elem = $(this);
+      let $elem = $(this);
       elemBody.find('.medias_attachment').each(function (i) {
-        var $elem = $(this);
+        let $elem = $(this);
         if ($elem.hasClass('selected') || $elem.hasClass('details')) {
           $elem.removeClass('selected');
           $elem.removeClass('details');
@@ -49,9 +50,9 @@ var Actions = function () {
   };
   
   // Insert image post
-  var handleInsertImageAttachment = function () {
+  let handleInsertImageAttachment = function () {
     elemBody.find(".js-action-insert-image").on('click', function () {
-      var id = elemBody.find("li.medias_attachment").filter(".selected").attr('data-id'),
+      let id = elemBody.find("li.medias_attachment").filter(".selected").attr('data-id'),
         src = elemBody.find("li.medias_attachment").filter(".selected").attr('data-src');
       
       if (!empty(id)) {
@@ -65,7 +66,7 @@ var Actions = function () {
       }
       
       if (!empty(src)) {
-        var img = '<img src="' + src + '" draggable="false" alt="" class="img-responsive">';
+        let img = '<img src="' + src + '" draggable="false" alt="" class="img-responsive">';
         elemArticle.find("#img_featured").html(img);
       }
       // Close modal :)
@@ -73,47 +74,10 @@ var Actions = function () {
       
     });
   };
-  
-  var handleBatchAction = function () {
-   /* elemArticle.find("select[name=batch_actions]").on("change", function () {
-      var self = $(this),
-        options_val = self.val(),
-        button = elemBody.find(".js-action-batch");
-      if (!empty(options_val)) {
-        button.removeAttr("disabled");
-      } else {
-        button.attr("disabled", "disabled");
-      }
-    });*/
-    /*elemArticle.find(".js-action-batch").each(function () {
-      var self    = $(this),
-        parent  = self.parents("form").eq(0),
-        urlinfo = parse_url(parent.attr("action")),
-        iptstr  = 'input[name="action_ids[]"]:checked:visible';
-      self.on("click", function () {
-        var prev   = self.prev().children("select"),
-          child  = prev.children("option:selected"),
-          param  = empty(child.val()) || child.val() === "0" ? null : child.text(),
-          action = self.data("action"),
-          func   = function () {
-            parent
-              .attr("action", ((action || urlinfo.pathname) + "/batch/").replace(/\/\//g, "/") + urlinfo.search)
-              .submit();
-          };
-    
-        if (empty(param) || parent.find(iptstr).length === 0) {
-          func();
-        } else {
-          parent.attr("action",urlinfo.pathname + "/batch/").submit();
-        }
-    
-        return false;
-      });
-    });*/
-  };
-  var handleSearchKeyword = function () {
+
+  let handleSearchKeyword = function () {
     elemArticle.find("input[name=search_keyword]").on("change", function () {
-      var self = $(this),
+      let self = $(this),
         val_text = self.val(),
         button = elemBody.find(".js-action-search");
       if (!empty(val_text)) {
@@ -124,33 +88,35 @@ var Actions = function () {
     });
     
   };
-  var handleDeleteRecord = function () {
-    elemArticle.find(".js-action-delete-record").on("click", function (e) {
-      e.preventDefault(); // does not go through with the link.
-      var result = confirm('Want to delete?')
-      if (!result) {
-        return
-      }
-      var self = $(this);
-      $.ajax({
-        type: "post",
-        cache: false,
-        data: {
-          _method: self.data('method'),
-          _token: ajaxcalls_vars.token,
-        },
-        url: self.attr('href'),
-        success: function (data) {
-          show_message(data);
-          if(data.status === "success"){
-            self.parent().parent().parent().hide("slow");
-          }
-        },
-        error: function (xhr, status, error) {
-          show_message(error);
+  let handleDeleteRecord = function () {
+    $(document).ready(function () {
+      elemArticle.find(".js-action-delete-record").on("click", function (e) {
+        e.preventDefault(); // does not go through with the link.
+        let result = confirm('Want to delete?')
+        if (!result) {
+          return
         }
+        let self = $(this);
+        $.ajax({
+          type: "post",
+          cache: false,
+          data: {
+            _method: self.data('method'),
+            _token: ajaxcalls_lets.token,
+          },
+          url: self.attr('href'),
+          success: function (data) {
+            show_message(data);
+            if (data.status === "success") {
+              self.parent().parent().parent().hide("slow");
+            }
+          },
+          error: function (xhr, status, error) {
+            show_message(error);
+          }
+        });
+
       });
-      
     });
   };
   
@@ -163,7 +129,6 @@ var Actions = function () {
       handleInsertImageAttachment();
     },
     initFilter:function () {
-      handleBatchAction();
       handleSearchKeyword();
       handleDeleteRecord();
     },
@@ -192,13 +157,13 @@ function empty(str) {
  * @return mixed  Returns the components.
  */
 function parse_url(url, component) {
-  var elem = document.createElement("a");
+  let elem = document.createElement("a");
   
   elem.href = url;
   
-  var searches = elem.search.substring(1).split("&"),
+  let searches = elem.search.substring(1).split("&"),
     queries = {}, pair;
-  for (var i = 0, len = searches.length; i < len; i++) {
+  for (let i = 0, len = searches.length; i < len; i++) {
     pair = searches[i].split("=");
     queries[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
   }
@@ -219,7 +184,7 @@ function parse_url(url, component) {
   }
 }
   
-  jQuery(document).ready(function () {
+$(document).ready(function () {
   Actions.init();
 });
 

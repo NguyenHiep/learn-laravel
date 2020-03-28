@@ -15,10 +15,9 @@ class Uploads
      * @param Request $request
      * @param $key
      * @param $path_save
-     * @param null $new_name
      * @return int|string
      */
-    public static function upload(Request $request, $key, $path_save, $new_name = null)
+    public static function upload(Request $request, $key, $path_save)
     {
         if ($request->hasFile($key)) {
             if ($request->file($key)->isValid()) {

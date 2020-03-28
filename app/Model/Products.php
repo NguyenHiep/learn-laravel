@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Observers\ProductsObserver;
 use App\Helppers\ToolbarConfig;
+use App\Model\ProductAttributes;
 
 class Products extends BaseModel
 {
@@ -44,7 +45,13 @@ class Products extends BaseModel
     protected $casts = [
         'galary_img' => 'array'
     ];
-    
+
+
+    public function productAttributes()
+    {
+        return $this->hasMany(ProductAttributes::class, 'product_id', 'id');
+    }
+
     public static function boot() {
         parent::boot();
         Products::observe(new ProductsObserver());

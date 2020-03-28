@@ -1,5 +1,12 @@
 /* here you can put your own css to customize and override the theme */
-
+.portlet.light {
+    padding: 12px 10px 15px;
+    background-color: #fff;
+}
+.products .portlet.light {
+    padding: 12px 20px 15px;
+    background-color: #fff;
+}
 h3.block-title {
     background: #3e4b5c;
     color: #fff;
@@ -259,4 +266,72 @@ table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_desc {
     background-image: none !important;
+}
+
+.upload-gallery li{
+    position: relative;
+    background-color: #fff;
+    border: 1px dashed #ccc;
+    border-radius: 5px !important;
+    width: calc((100% - 90px)/ 5);
+    min-height: 100px;
+    max-height: 100px;
+    float: left;
+    margin-left: 15px;
+    padding: 0;
+}
+.upload-gallery li:first-child {
+    margin-left: 0;
+}
+.upload-gallery li:hover {
+    border-color: #999;
+}
+
+.upload-gallery li label {
+    margin-bottom: 0;
+    width: 100%;
+    overflow: hidden !important;
+    border-radius: 5px !important;
+    display: block;
+}
+
+.upload-gallery label span {
+    background-color: transparent;
+    border: none;
+    display: block;
+    opacity: 0;
+    width: 100%;
+    line-height: 98px;
+    height: 98px;
+    font-weight: 400;
+    color: #999;
+    padding: 0;
+    text-align: center;
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+}
+.upload-gallery label:hover span {
+    color: #000;
+    opacity: 1;
+}
+.upload-gallery li img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+.upload-gallery li .deleteImage {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 50% !important;
+}
+.upload-gallery li .deleteImage i {
+    font-size: 16px;
 }

@@ -141,5 +141,30 @@ return [
         'slider_target'              => 'Target',
         'slider_status'              => 'Trạng thái',
     ),
+    'products' => array(
+        'title_general'     => 'Thông tin chung',
+        'title_description' => 'Mô tả',
+        'title_meta'        => 'SEO',
+        'title_gallery'     => 'Ảnh gallery',
+        'id'                => 'ID',
+        'name'              => 'Tên sản phẩm',
+        'sku'               => 'SKU',
+        'price'             => 'Giá bán',
+        'sale_price'        => 'Giá khuyến mãi',
+        'quantity'          => 'Số lượng',
+        'short_description' => 'Mô tả ngắn',
+        'description'       => 'Mô tả chi tiết',
+        'meta_title'        => 'Meta Title',
+        'meta_keywords'     => 'Meta Keywords',
+        'meta_description'  => 'Meta Description',
+        'attributes' => array(
+            'title_attribute'   => 'Thuộc tính sản phẩm',
+            'size'              => 'Size',
+            'sku'               => 'Mã',
+            'price'             => 'Giá bán',
+            'quantity'          => 'Tồn kho',
+            'add_new_attribute' => 'Thêm thuộc tính mới',
+        )
+    ),
     'data_empty' => 'Không có dữ liệu'
 ];

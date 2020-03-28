@@ -34,4 +34,8 @@ class Medias extends BaseModel
         return $this->hasOne('App\Model\User','id','user_id');
     }
 
+    public static function getListMedias()
+    {
+        return Medias::orderBy('id', 'desc')->paginate(20);
+    }
 }

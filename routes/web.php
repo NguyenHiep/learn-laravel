@@ -30,6 +30,7 @@
                     ['as' => 'admins.destroy', 'uses' => 'Settings\AdminsController@destroy'])->where('id', '[0-9]+');
             });
             Route::resource('categories', 'CategoriesController');
+            Route::post('products/attributes/delete/{id}', 'ProductsController@deleteAttribute')->name('products.attributes.delete')->where('id', '[0-9]+');
             Route::resource('products', 'ProductsController');
 
             Route::get('orders/mail/{id}/confirm', 'OrdersController@sentMailConfirm')->name('orders.mail.confirm')->where('id', '[0-9]+');
