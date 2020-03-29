@@ -24,20 +24,12 @@
             </div>
             <div class="portlet-body">
               <div class="table-container">
-                <table id="products_table" class="table table-striped table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Tên sản phẩm</th>
-                      <th>Mã</th>
-                      <th>Giá bán</th>
-                      <th>Số lượng</th>
-                      <th>Trạng thái</th>
-                      <th>Ngày tạo</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                </table>
+                @includeIf('manage.blocks.partials.dataTable', [
+                   'id'        => 'products',
+                   'routeAjax' => route('products.index'),
+                   'columns'   => $columns,
+                   'fields'    => $fields,
+                ])
               </div>
             </div>
           </div>
@@ -45,35 +37,4 @@
       </div>
     </div>
   </div>
-@endsection
-
-@section('styles')
-  @parent
-  <link href="{{asset('/manages/assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
-  <link href="{{asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet" type="text/css" />
-@endsection
-@section('scripts')
-  @parent
-  <script src="{{asset('/manages/assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
-  <script src="{{asset('/manages/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}" type="text/javascript"></script>
-  <script>
-    $(function () {
-      $('#products_table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '',
-        columns: [
-          { data: 'id', name: 'id' },
-          { data: 'name', name: 'name' },
-          { data: 'sku', name: 'sku' },
-          { data: 'price', name: 'price' },
-          { data: 'quantity', name: 'quantity' },
-          { data: 'status', name: 'status' },
-          { data: 'created_at', name: 'created_at' },
-          { data: 'action', name: 'action', orderable: false, searchable: false }
-        ],
-        order : [[ 0, "desc" ]]
-      })
-    })
-  </script>
 @endsection

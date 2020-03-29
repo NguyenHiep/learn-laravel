@@ -18,7 +18,11 @@
         "niklasravnsborg/laravel-pdf": "^4.0",
         "milon/barcode": "^6.0",
         "yajra/laravel-datatables-oracle": "^9.9",
-        "yajra/laravel-datatables-buttons": "^4.9"
+        "yajra/laravel-datatables-buttons": "^4.9",
+        "prettus/l5-repository": "^2.6",
+        "league/fractal": "^0.18.0",
+        "yajra/laravel-datatables-fractal": "^1.5",
+        "prettus/laravel-validation": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

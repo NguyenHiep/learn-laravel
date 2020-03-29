@@ -157,6 +157,9 @@ return [
         'meta_title'        => 'Meta Title',
         'meta_keywords'     => 'Meta Keywords',
         'meta_description'  => 'Meta Description',
+        'status'            => 'Trạng thái',
+        'created_at'        => 'Ngày tạo',
+        'actions'           => 'Hành động',
         'attributes' => array(
             'title_attribute'   => 'Thuộc tính sản phẩm',
             'size'              => 'Size',

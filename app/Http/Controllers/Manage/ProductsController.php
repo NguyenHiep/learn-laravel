@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manage;
 
 use App\Model\ProductAttributes;
 use App\Model\Products;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
 use App\Model\Categories;
@@ -11,15 +12,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Helppers\Uploads;
-use Yajra\DataTables\DataTables;
+use App\DataTables\ProductsDataTable;
 
 class ProductsController extends BackendController
 {
-    public function __construct()
+
+    /**
+     * The product repository implementation.
+     *
+     * @var ProductRepository
+     */
+    protected $repository;
+
+    public function __construct(ProductRepository $repository)
     {
-        $this->middleware('auth');
-        parent::__construct();
+        $this->repository = $repository;
     }
+
     /**
      * Validate product field
      * @param $data
@@ -56,33 +65,51 @@ class ProductsController extends BackendController
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            $products = Products::select(['id', 'name', 'sku', 'price', 'quantity', 'status', 'created_at']);
-            return Datatables::of($products)
-                ->editColumn('status', function ($product) {
-                    $statusClass = $product->status === config('define.STATUS_ENABLE') ? 'label-success' : 'label-danger';
-                    $showText = __('selector.post_status.' . $product->status);
-                    return '<span class="label label-sm ' . $statusClass . ' margin-right-10"> ' . $showText . '</span>';
-                })
-                ->addColumn('action', function ($product) {
-                    $html = '<div class="btn-group btn-group-solid">';
-                    $html .= ' <a title="' . __('common.buttons.edit') . '" href=" ' . route('products.edit',
-                            $product->id) . '" class="btn  btn-warning js-action-list-rowlink-val"><i class="fa fa-edit"></i></a>';
-                    $html .= ' <a title="' . __('common.buttons.delete') . '" href=" ' . route('products.destroy',
-                            $product->id) . '" data-method="delete" class="btn btn-default btn-delete js-action-delete-record"><i class="fa fa-trash-o"></i></a>';
-                    $html .= '</div>';
-                    return $html;
-                })
-                ->rawColumns(['status', 'action'])
-                ->make(true);
+        if (request()->ajax()) {
+            $products = $this->repository->getListProduct();
+            $dataTables = new ProductsDataTable($products);
+            return $dataTables->getTransformerData();
         }
-        return view('manage.modules.products.index');
+
+        $fields = [
+            'id' => [
+                'label' => __('common.products.id'),
+            ],
+            'name' => [
+                'label' => __('common.products.name'),
+            ],
+            'sku' => [
+                'label' => __('common.products.sku'),
+            ],
+            'price' => [
+                'label' => __('common.products.price'),
+            ],
+            'quantity' => [
+                'label' => __('common.products.quantity'),
+            ],
+            'status' => [
+                'label' => __('common.products.status'),
+            ],
+            'created_at' => [
+                'label' => __('common.products.created_at'),
+            ],
+            'actions' => [
+                'label'      => __('common.products.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = ProductsDataTable::getColumns($fields);
+        $withData = [
+            'fields'  => $fields,
+            'columns' => $dtColumns,
+        ];
+        return view('manage.modules.products.index')->with($withData);
     }
 
     /**
@@ -269,18 +296,18 @@ class ProductsController extends BackendController
             DB::beginTransaction();
             $product->delete();
             DB::commit();
-            return redirect()->route('products.index')->with([
-                'message' => 'Delete product is successfully',
-                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            return response()->json([
+                'message' => __('system.message.delete'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error([$e->getMessage(), __METHOD__]);
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
         }
-        return redirect()->route('products.index')->with([
-            'message' => __('system.message.errors', ['errors' => 'Delete product is failed']),
-            'status'  => self::CTRL_MESSAGE_ERROR,
-        ]);
 
     }
 
@@ -318,6 +345,7 @@ class ProductsController extends BackendController
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
                 'status'  => self::CTRL_MESSAGE_ERROR

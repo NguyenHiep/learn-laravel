@@ -181,6 +181,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Watson\Active\ActiveServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
