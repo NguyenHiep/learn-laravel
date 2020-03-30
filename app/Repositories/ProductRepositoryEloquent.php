@@ -45,7 +45,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
             'quantity',
             'status',
             'created_at'
-        ])->whereNull('deleted_at');
+        ]);
     }
 
 }

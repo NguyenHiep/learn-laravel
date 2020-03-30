@@ -82,6 +82,16 @@ return [
             'post_keyword_placeholder' => 'Có dấu và cách nhau bằng dấu phẩy (,)',
             'post_intro'               => 'Mô tả ngắn bài viết',
             'post_intro_placeholder'   => 'Là đoạn mô tả ngắn khoảng 128 từ',
+            'list' => array(
+                'id'         => 'ID',
+                'picture'    => 'Hình ảnh',
+                'title'      => 'Tiêu đề',
+                'category'   => 'Chuyên mục',
+                'updated_at' => 'Cập nhật',
+                'visit'      => 'Lượt xem',
+                'status'     => 'Trạng thái',
+                'actions'    => 'Hành động'
+            )
         ),
         'category' => array(
             'name'                    => 'Tên danh mục',

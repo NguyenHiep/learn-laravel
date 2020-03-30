@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\DataTables\PostsDataTable;
 use App\Model\Posts;
 use App\Model\Posts\Category;
 use App\Model\Posts\Tags;
 use App\Http\Controllers\BackendController;
+use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Mockery\Exception;
@@ -13,10 +15,16 @@ use Illuminate\Support\Facades\Validator;
 
 class PostsController extends BackendController
 {
-    public function __construct()
+    /**
+     * The product repository implementation.
+     *
+     * @var PostRepository
+     */
+    protected $repository;
+
+    public function __construct(PostRepository $repository)
     {
-        $this->middleware('auth');
-        parent::__construct();
+        $this->repository = $repository;
     }
     
     /***
@@ -41,17 +49,50 @@ class PostsController extends BackendController
      */
     public function index()
     {
-        $records = Posts::with([
-            'posts_categories' => function ($query) {
-                $query->select('name');
-            },
-            'posts_tags'       => function ($query) {
-                $query->select('name');
-            },
-            'author',
-            'media'
-        ])->paginate(20);
-        return view('manage.modules.posts.index', compact('records'));
+        if (request()->ajax()) {
+            $posts = $this->repository->getListPost();
+            $dataTables = new PostsDataTable($posts);
+            return $dataTables->getTransformerData();
+        }
+
+        $fields = [
+            'id' => [
+                'label' => __('common.posts.posts.list.id')
+            ],
+            'post_picture' => [
+                'label' => __('common.posts.posts.list.picture'),
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'post_title' => [
+                'label' => __('common.posts.posts.list.title')
+            ],
+            'categories' => [
+                'label' => __('common.posts.posts.list.category'),
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'updated_at' => [
+                'label' => __('common.posts.posts.list.updated_at')
+            ],
+            'visit' => [
+                'label' => __('common.posts.posts.list.visit')
+            ],
+            'post_status' => [
+                'label' => __('common.posts.posts.list.status')
+            ],
+            'actions' => [
+                'label'      => __('common.posts.posts.list.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = PostsDataTable::getColumns($fields);
+        $withData = [
+            'fields'  => $fields,
+            'columns' => $dtColumns,
+        ];
+        return view('manage.modules.posts.index')->with($withData);
     }
 
     /**
