@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Validator;
 class PostsController extends BackendController
 {
     /**
-     * The product repository implementation.
+     * The post repository implementation.
      *
      * @var PostRepository
      */

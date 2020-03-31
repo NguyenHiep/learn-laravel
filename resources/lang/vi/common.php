@@ -134,11 +134,23 @@ return [
         'page_intro_placeholder'   => 'Là đoạn mô tả ngắn khoảng 128 từ',
     ),
     'comments' => array(
-        'title'   => 'Chỉnh sửa bình luận',
-        'name'    => 'Người bình luận',
-        'email'   => 'Email',
-        'content' => 'Nội dung',
-        'url'     => 'Liên kết',
+        'title'             => 'Chỉnh sửa bình luận',
+        'name'              => 'Người bình luận',
+        'name_placeholder'  => 'Nhập họ và tên',
+        'email'             => 'Email',
+        'email_placeholder' => 'VD: example@gmail.com',
+        'content'           => 'Nội dung',
+        'url'               => 'Liên kết',
+        'url_placeholder'   => 'VD: https://minhhhiep.info',
+        'list' => array(
+            'id'             => 'ID',
+            'name'           => 'Họ và tên',
+            'email'          => 'Email',
+            'created_at'     => 'Ngày tạo',
+            'ip_user'        => 'IP',
+            'comment_status' => 'Trạng thái',
+            'actions'        => 'Hành động'
+        )
     ),
     'sliders' => array(
         'slider_img'                 => 'Hình ảnh',

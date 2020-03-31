@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\DataTables\CommentsDataTable;
 use App\Model\Comments;
+use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Validator;
 
 class CommentsController extends BackendController
 {
-    public function __construct()
+    /**
+     * The post repository implementation.
+     *
+     * @var CommentRepository
+     */
+    protected $repository;
+
+    public function __construct(CommentRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
     
     /***
@@ -27,9 +36,7 @@ class CommentsController extends BackendController
             'email'          => 'required|email',
             'content'        => 'required|string',
             'url'            => 'required|url',
-            'comment_status' => 'required|integer',
-            //'posts_id'       => 'required|integer',
-            //'comment_parent' => 'required|integer'
+            'comment_status' => 'required|integer'
         ]);
     }
 
@@ -39,62 +46,46 @@ class CommentsController extends BackendController
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index()
     {
-        // Array data request
-        $inputs = $request->all();
-        $model  = Comments::query();
-        if ($request->method() === 'POST') {
-            // Check CSRF
-            if (\Session::token() === array_get($inputs, '_token')) {
-                // Begin
-                try {
-                    \DB::beginTransaction();
-                    $ids    = array_get($inputs, 'action_ids');
-                    $action = array_get($inputs, 'batch_actions');
-                    if (!empty($action)) {
-                        if (!empty($ids)) {
-                            $model->whereIn('id', $ids);
-                            switch ($action) {
-                                case 'approve':
-                                    $model->update(['comment_status' => config('define.STATUS_ENABLE')]);
-                                    return redirect()->route('comments.index')->with([
-                                        'message' => __('system.message.update'),
-                                        'status'  => self::CTRL_MESSAGE_SUCCESS
-                                    ]);
-                                    break;
-                                case 'delete':
-                                    $model->delete();
-                                    return redirect()->route('comments.index')->with([
-                                        'message' => __('system.message.delete'),
-                                        'status'  => self::CTRL_MESSAGE_SUCCESS
-                                    ]);
-                                    break;
-                            }
-                        } else {
-                            session()->flash('message', 'Vui lòng chọn mẩu tin');
-                            session()->flash('status', self::CTRL_MESSAGE_WARNING);
-                        }
-                    }
-                    $search_keyword = array_get($inputs, 'search_keyword');
-                    if (!empty($search_keyword)) {
-                        $model->orWhere('content', 'like', '%' . $search_keyword . '%');
-                    }
-                    \DB::commit();
-                
-                } catch (\Exception $e) {
-                    \DB::rollBack();
-                    \Log::error($e->getMessage(), __METHOD__);
-                    session()->flash('message', __('system.message.errors', ['errors' => $e->getMessage()]));
-                    session()->flash('status', self::CTRL_MESSAGE_ERROR);
-                }
-            } else {
-                \Log::warning('Bad request, invalid CSRF token.', __METHOD__);
-                throw new \Exception(__('common.page_has_expired'));
-            }
+        if (request()->ajax()) {
+            $comments = $this->repository->getListComment();
+            $dataTables = new CommentsDataTable($comments);
+            return $dataTables->getTransformerData();
         }
-        $records = $model->paginate();
-        return view('manage.modules.comments.index', compact('records'));
+        $fields = [
+            'id' => [
+                'label' => __('common.comments.list.id')
+            ],
+            'name' => [
+                'label' => __('common.comments.list.name'),
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'email' => [
+                'label' => __('common.comments.list.email')
+            ],
+            'created_at' => [
+                'label' => __('common.comments.list.created_at')
+            ],
+            'ip_user' => [
+                'label' => __('common.comments.list.ip_user')
+            ],
+            'comment_status' => [
+                'label' => __('common.comments.list.comment_status')
+            ],
+            'actions' => [
+                'label'      => __('common.comments.list.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = CommentsDataTable::getColumns($fields);
+        $withData = [
+            'fields'  => $fields,
+            'columns' => $dtColumns,
+        ];
+        return view('manage.modules.comments.index')->with($withData);;
     }
 
     /**
@@ -137,10 +128,7 @@ class CommentsController extends BackendController
      */
     public function edit($id)
     {
-        $record = Comments::find($id);
-        if (empty($record)) {
-            return abort(404);
-        }
+        $record = Comments::findOrFail($id);
         return view('manage.modules.comments.edit',['record' => $record]);
     }
 
