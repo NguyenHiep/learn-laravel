@@ -36,7 +36,7 @@
             <div class="portlet-body">
               <div class="table-container">
                 @includeIf('manage.blocks.partials.dataTable', [
-                   'id'        => 'comments',
+                   'id'        => 'sliders',
                    'routeAjax' => route('sliders.index'),
                    'columns'   => $columns,
                    'fields'    => $fields,

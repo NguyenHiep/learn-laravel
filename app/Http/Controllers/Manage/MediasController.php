@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\DataTables\PostMediasDataTable;
 use App\Model\Medias;
 
 use App\Http\Controllers\BackendController;
+use App\Repositories\PostMediaRepository;
 use Illuminate\Support\Facades\Storage;
 
 class MediasController extends BackendController
 {
-    public function __construct()
+    /**
+     * The post media repository implementation.
+     *
+     * @var PostMediaRepository
+     */
+    protected $repository;
+
+    public function __construct(PostMediaRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
 
     /**
@@ -21,8 +30,45 @@ class MediasController extends BackendController
      */
     public function index()
     {
-        $records = Medias::orderBy('id', 'desc')->paginate(12);
-        return view('manage.modules.medias.index', compact('records'));
+        if (request()->ajax()) {
+            $postMedias = $this->repository->getListPostMedia();
+            $dataTables = new PostMediasDataTable($postMedias);
+            return $dataTables->getTransformerData();
+        }
+        $fields = [
+            'id' => [
+                'label' => __('common.comments.list.id')
+            ],
+            'name' => [
+                'label' => __('Tập tin'),
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'username' => [
+                'label' => __('Tác giả'),
+                'searchable' => false,
+                'orderable'  => false
+            ],
+            'attachment' => [
+                'label' => __('Đính kèm'),
+                'searchable' => false,
+                'orderable'  => false
+            ],
+            'created_at' => [
+                'label' => __('Ngày tải lên')
+            ],
+            'actions' => [
+                'label'      => __('common.comments.list.actions'),
+                'searchable' => false,
+                'orderable'  => false
+            ]
+        ];
+        $dtColumns = PostMediasDataTable::getColumns($fields);
+        $withData = [
+            'fields'  => $fields,
+            'columns' => $dtColumns,
+        ];
+        return view('manage.modules.medias.index')->with($withData);
     }
 
     /**
@@ -151,33 +197,38 @@ class MediasController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return Response
+     * @throws \Exception
      */
     public function destroy($id)
     {
+        $medias = Medias::find($id);
+        if (empty($medias)) {
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
+
         try {
             \DB::beginTransaction();
-            $medias = Medias::findOrFail($id);
             $medias->posts_medias_info()->forceDelete();
-            $medias->forceDelete();
-            // Delete file
             Storage::delete(UPLOAD_MEDIAS . $medias->name);
+            $medias->forceDelete();
             \DB::commit();
-            // If delete ajax
-            if (request()->ajax == true) {
-                $data = ['message' => 'Success'];
-                return response()->json($data);
-            }
-            return redirect()->route('medias.index')->with([
+            return response()->json([
                 'message' => __('system.message.delete'),
-                'status'  => self::CTRL_MESSAGE_SUCCESS,
+                'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
         } catch (\Exception $e) {
             \DB::rollBack();
             \Log::error([$e->getMessage(), __METHOD__]);
         }
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
+        ]);
     }
-
 
 }

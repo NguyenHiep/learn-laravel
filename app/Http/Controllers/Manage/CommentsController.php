@@ -85,7 +85,7 @@ class CommentsController extends BackendController
             'fields'  => $fields,
             'columns' => $dtColumns,
         ];
-        return view('manage.modules.comments.index')->with($withData);;
+        return view('manage.modules.comments.index')->with($withData);
     }
 
     /**
