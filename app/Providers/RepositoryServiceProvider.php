@@ -8,6 +8,8 @@ use App\Repositories\PostRepository;
 use App\Repositories\PostRepositoryEloquent;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProductRepositoryEloquent;
+use App\Repositories\SliderRepository;
+use App\Repositories\SliderRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -32,5 +34,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductRepository::class, ProductRepositoryEloquent::class);
         $this->app->bind(PostRepository::class, PostRepositoryEloquent::class);
         $this->app->bind(CommentRepository::class, CommentRepositoryEloquent::class);
+        $this->app->bind(SliderRepository::class, SliderRepositoryEloquent::class);
     }
 }

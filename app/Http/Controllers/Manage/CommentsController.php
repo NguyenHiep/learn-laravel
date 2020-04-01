@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class CommentsController extends BackendController
 {
     /**
-     * The post repository implementation.
+     * The comment repository implementation.
      *
      * @var CommentRepository
      */

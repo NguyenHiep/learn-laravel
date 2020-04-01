@@ -34,71 +34,16 @@
               </div>
             </div>
             <div class="portlet-body">
-              <div class="table-scrollable">
-                <table class="table table-hover js-action-list-rowlink">
-                  <thead>
-                  <tr>
-                    <th> <!-- <th class="checkbox-list">-->
-                           <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
-                    </th>
-                    <th> #ID</th>
-                    <th> Hình ảnh</th>
-                    <th> Tiêu đề</th>
-                    <th> Nội dung</th>
-                    <th class="text-center"> Trạng thái</th>
-                    <th class="text-center"> Hành động</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-
-                    @if (!empty($records))
-                      @foreach ($records as $record)
-                        <tr>
-                          <td> <!--<td class="checkbox-list"> -->
-                            <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
-                          </td>
-                          <td> {{$record->id}} </td>
-                          <td>
-                            @if(!empty($record->slider_img))
-                              <img src="{{ asset(UPLOAD_SLIDER.$record->slider_img)}}" alt="slider img" width="40" height="40" />
-                            @else
-    
-                            @endif
-                          </td>
-                          </td>
-                          <td> {{$record->slider_title}} </td>
-                          <td> {{$record->slider_content}} </td>
-                          <td class="text-center">
-                              <span class="label label-sm  @if ($record->slider_status === config('define.STATUS_ENABLE')) label-success @else label-danger @endif margin-right-10"> <i class="fa fa-check-circle"></i> {{__('selector.post_status.'.$record->slider_status)}} </span>
-                           
-                          </td>
-                          <td class="text-right">
-                            <div class="btn-group btn-group-solid">
-                              <a href="{{ route('sliders.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val"><i class="fa fa-edit"></i></a>
-                              <form action="{{ route('sliders.destroy',$record->id) }}" method="POST" style="display: inline-block">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit"><i class="fa fa-trash-o"></i></button>
-                              </form>
-                            </div>
-
-                        </tr>
-                      @endforeach
-                    @endif
-
-                  </tbody>
-                  <tfoot>
-                      <tr>
-                        @if (!empty($records))
-                        <td colspan="8"> {{ $records->links() }}</td>
-                        @endif
-                      </tr>
-                  </tfoot>
-                </table>
+              <div class="table-container">
+                @includeIf('manage.blocks.partials.dataTable', [
+                   'id'        => 'comments',
+                   'routeAjax' => route('sliders.index'),
+                   'columns'   => $columns,
+                   'fields'    => $fields,
+                ])
               </div>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE PORTLET-->
         </div>
       </div>
     </div>

@@ -162,6 +162,8 @@ return [
         'slider_url_placeholder'     => 'VD: http://example.com',
         'slider_target'              => 'Target',
         'slider_status'              => 'Trạng thái',
+        'slider_id'                  => 'ID',
+        'slider_actions'             => 'Hành động'
     ),
     'products' => array(
         'title_general'     => 'Thông tin chung',
