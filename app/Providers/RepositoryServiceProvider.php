@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\CommentRepository;
 use App\Repositories\CommentRepositoryEloquent;
+use App\Repositories\PageRepository;
+use App\Repositories\PageRepositoryEloquent;
 use App\Repositories\PostMediaRepository;
 use App\Repositories\PostMediaRepositoryEloquent;
 use App\Repositories\PostRepository;
@@ -38,5 +40,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CommentRepository::class, CommentRepositoryEloquent::class);
         $this->app->bind(SliderRepository::class, SliderRepositoryEloquent::class);
         $this->app->bind(PostMediaRepository::class, PostMediaRepositoryEloquent::class);
+        $this->app->bind(PageRepository::class, PageRepositoryEloquent::class);
     }
 }

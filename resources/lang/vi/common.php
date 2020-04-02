@@ -132,6 +132,15 @@ return [
         'page_keyword_placeholder' => 'Có dấu và cách nhau bằng dấu phẩy (,)',
         'page_intro'               => 'Mô tả ngắn trang',
         'page_intro_placeholder'   => 'Là đoạn mô tả ngắn khoảng 128 từ',
+        'list' => array(
+            'id'            => 'ID',
+            'page_featured' => 'Hình ảnh',
+            'page_title'    => 'Tiêu đề',
+            'author'        => 'Tác giả',
+            'created_at'    => 'Ngày tạo',
+            'page_status'   => 'Trạng thái',
+            'actions'       => 'Hành động'
+        )
     ),
     'comments' => array(
         'title'             => 'Chỉnh sửa bình luận',

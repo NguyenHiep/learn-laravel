@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\DataTables\PagesDataTable;
 use App\Model\Pages;
+use App\Repositories\PageRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
 use DB;
@@ -12,9 +14,16 @@ use Mockery\Exception;
 
 class PagesController extends BackendController
 {
-    public function __construct()
+    /**
+     * The page repository implementation.
+     *
+     * @var PageRepository
+     */
+    protected $repository;
+
+    public function __construct(PageRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
         parent::__construct();
     }
     
@@ -41,14 +50,46 @@ class PagesController extends BackendController
      */
     public function index()
     {
-        //
-        $records = \DB::table('pages')
-            ->join('users', 'pages.user_id', '=', 'users.id')
-            ->leftJoin('posts_medias', 'pages.page_medias_id', '=', 'posts_medias.id')
-            ->select('pages.*', 'users.username', 'posts_medias.name AS page_featured')
-            ->whereNull('pages.deleted_at')
-            ->get();
-        return view('manage.modules.pages.index', compact('records'));
+        if (request()->ajax()) {
+            $pages = $this->repository->getListPage();
+            $dataTables = new PagesDataTable($pages);
+            return $dataTables->getTransformerData();
+        }
+        $fields = [
+            'id' => [
+                'label' => __('common.pages.list.id')
+            ],
+            'page_featured' => [
+                'label'      => __('common.pages.list.page_featured'),
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'page_title' => [
+                'label' => __('common.pages.list.page_title')
+            ],
+            'author' => [
+                'label'      => __('common.pages.list.author'),
+                'searchable' => false,
+                'orderable'  => false
+            ],
+            'created_at' => [
+                'label' => __('common.pages.list.created_at')
+            ],
+            'page_status' => [
+                'label' => __('common.pages.list.page_status')
+            ],
+            'actions' => [
+                'label'      => __('common.pages.list.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = PagesDataTable::getColumns($fields);
+        $withData = [
+            'fields'  => $fields,
+            'columns' => $dtColumns,
+        ];
+        return view('manage.modules.pages.index')->with($withData);
     }
 
     /**
@@ -58,8 +99,7 @@ class PagesController extends BackendController
      */
     public function create()
     {
-        $medias = $this->medias;
-        return view('manage.modules.pages.create', compact('medias'));
+        return view('manage.modules.pages.create')->with(['medias' => $this->medias]);
     }
 
     /***
@@ -183,7 +223,7 @@ class PagesController extends BackendController
                 'status'  => self::CTRL_MESSAGE_ERROR
             ]);
         }
-    
+
         try {
             DB::beginTransaction();
             $page->delete();
@@ -194,10 +234,12 @@ class PagesController extends BackendController
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
-                'status'  => self::CTRL_MESSAGE_ERROR
-            ]);
+            Log::error($e->getMessage(), __METHOD__);
         }
+
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
+        ]);
     }
 }
