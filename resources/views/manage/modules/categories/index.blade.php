@@ -120,108 +120,13 @@
         <div class="col-md-7">
           <div class="portlet light bordered">
             <div class="portlet-body">
-              <div class="table-scrollable">
-                <table class="table table-hover js-action-list-rowlink">
-                  <thead>
-                  <tr>
-                    <th> <!-- <th class="checkbox-list">-->
-                      <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
-                    </th>
-                    <th>Tên danh mục</th>
-                    <th class="text-center"> Trạng thái</th>
-                    <th class="text-center width-110"> Hành động</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  @if (!empty($records))
-                    @foreach ($records as $record)
-                      @if($record->parent_id == 0)
-                        <tr>
-                          <td> <!--<td class="checkbox-list"> -->
-                            <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
-                          </td>
-                          <td> {{$record->name}} </td>
-                          <td class="text-center">
-                            <span class="label label-sm  @if ($record->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
-                          </td>
-                          <td class="text-right">
-                            <div class="btn-group btn-group-solid">
-                              <a href="{{ route('categories.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                                <i class="fa fa-edit"></i>
-                              </a>
-                              <form action="{{ route('categories.destroy',$record->id) }}" method="POST" style="display: inline-block">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i>
-                                </button>
-                              </form>
-                            </div>
-                        </tr>
-                        @foreach ($records as $subcate)
-                          @if($subcate->parent_id == $record->id)
-                            <tr>
-                              <td> <!--<td class="checkbox-list"> -->
-                                <input id="action_ids{{$subcate->id}}" name="action_ids[]" value="{{$subcate->id}}" type="checkbox">
-                              </td>
-                              <td> __{{$subcate->name}} </td>
-                              <td class="text-center">
-                                <span class="label label-sm  @if ($subcate->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate->status)}} </span>
-                              </td>
-                              <td class="text-right">
-                                <div class="btn-group btn-group-solid">
-                                  <a href="{{ route('categories.edit',$subcate->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                                    <i class="fa fa-edit"></i>
-                                  </a>
-                                  <form action="{{ route('categories.destroy',$subcate->id) }}" method="POST" style="display: inline-block">
-                                    {{ method_field('DELETE') }}
-                                    {{ csrf_field() }}
-                                    <button class="btn btn-delete js-action-delete" type="submit">
-                                      <i class="fa fa-trash-o"></i>
-                                    </button>
-                                  </form>
-                                </div>
-                            </tr>
-                            @foreach ($records as $subcate2)
-                              @if($subcate2->parent_id == $subcate->id)
-                                <tr>
-                                  <td> <!--<td class="checkbox-list"> -->
-                                    <input id="action_ids{{$subcate2->id}}" name="action_ids[]" value="{{$subcate2->id}}" type="checkbox">
-                                  </td>
-                                  <td> ____{{$subcate2->name}} </td>
-                                  <td class="text-center">
-                                    <span class="label label-sm  @if ($subcate2->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$subcate2->status)}} </span>
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="btn-group btn-group-solid">
-                                      <a title="{{__('common.buttons.edit')}}" href="{{ route('categories.edit',$subcate2->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                                        <i class="fa fa-edit"></i>
-                                      </a>
-                                      <form action="{{ route('categories.destroy',$subcate2->id) }}" method="POST" style="display: inline-block">
-                                        {{ method_field('DELETE') }}
-                                        {{ csrf_field() }}
-                                        <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
-                                          <i class="fa fa-trash-o"></i>
-                                        </button>
-                                      </form>
-                                    </div>
-                                </tr>
-                              @endif
-                            @endforeach
-
-                          @endif
-                        @endforeach
-
-                      @endif
-                    @endforeach
-                  @endif
-                  </tbody>
-                  <tfoot>
-                    @if (!empty($records))
-                      <td colspan="8"> {{ $records->links() }}</td>
-                    @endif
-                  </tfoot>
-                </table>
+              <div class="table-container">
+                @includeIf('manage.blocks.partials.dataTable', [
+                   'id'        => 'categories',
+                   'routeAjax' => route('categories.index'),
+                   'columns'   => $columns,
+                   'fields'    => $fields,
+                ])
               </div>
             </div>
           </div>

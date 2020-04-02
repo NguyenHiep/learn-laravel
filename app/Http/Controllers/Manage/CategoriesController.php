@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\DataTables\CategoriesDataTable;
 use App\Model\Categories;
 use App\Http\Controllers\BackendController;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -12,9 +14,16 @@ use App\Helppers\Uploads;
 
 class CategoriesController extends BackendController
 {
-    public function __construct()
+    /**
+     * The category repository implementation.
+     *
+     * @var CategoryRepository
+     */
+    protected $repository;
+
+    public function __construct(CategoryRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
 
     /**
@@ -43,9 +52,34 @@ class CategoriesController extends BackendController
      */
     public function index()
     {
-        $data['list_cate_all'] = Categories::all();
-        $data['records'] =  Categories::orderBy('id', 'asc')->paginate(20);
-        return view('manage.modules.categories.index', $data);
+        if (request()->ajax()) {
+            $category = $this->repository->getListCategory();
+            $dataTables = new CategoriesDataTable($category);
+            return $dataTables->getTransformerData();
+        }
+        $fields = [
+            'id' => [
+                'label' => __('common.categories.id')
+            ],
+            'name' => [
+                'label' => __('common.categories.name')
+            ],
+            'status' => [
+                'label' => __('common.categories.status')
+            ],
+            'actions' => [
+                'label'      => __('common.categories.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = CategoriesDataTable::getColumns($fields);
+        $withData = [
+            'fields'        => $fields,
+            'columns'       => $dtColumns,
+            'list_cate_all' => $this->repository->all(['id', 'name', 'parent_id'])
+        ];
+        return view('manage.modules.categories.index')->with($withData);
     }
 
     /**

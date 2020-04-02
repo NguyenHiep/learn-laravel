@@ -97,13 +97,13 @@ return [
             )
         ),
         'category' => array(
-            'name'                    => 'Tên danh mục',
-            'name_placeholder'        => 'VD: Danh mục',
+            'name'                    => 'Tên chuyên mục',
+            'name_placeholder'        => 'VD: Chuyên mục',
             'slug'                    => 'Tên không dấu',
-            'slug_placeholder'        => 'VD: danh-muc',
-            'parent_id'               => 'Danh mục cha',
-            'description'             => 'Mô tả danh mục',
-            'description_placeholder' => 'Mô tả danh mục cho SEO',
+            'slug_placeholder'        => 'VD: chuyen-muc',
+            'parent_id'               => 'Chuyên mục cha',
+            'description'             => 'Mô tả chuyên mục',
+            'description_placeholder' => 'Mô tả chuyên mục cho SEO',
         ),
         'tags'     => array(
             'name'                    => 'Tên thẻ',
@@ -204,6 +204,12 @@ return [
             'quantity'          => 'Tồn kho',
             'add_new_attribute' => 'Thêm thuộc tính mới',
         )
+    ),
+    'categories' => array(
+        'id'      => 'ID',
+        'name'    => 'Tên chuyên mục',
+        'status'  => 'Trạng thái',
+        'actions' => 'Hành động',
     ),
     'data_empty' => 'Không có dữ liệu'
 ];
