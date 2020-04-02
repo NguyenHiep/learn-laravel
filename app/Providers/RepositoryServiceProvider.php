@@ -8,6 +8,8 @@ use App\Repositories\CommentRepository;
 use App\Repositories\CommentRepositoryEloquent;
 use App\Repositories\PageRepository;
 use App\Repositories\PageRepositoryEloquent;
+use App\Repositories\PostCategoryRepository;
+use App\Repositories\PostCategoryRepositoryEloquent;
 use App\Repositories\PostMediaRepository;
 use App\Repositories\PostMediaRepositoryEloquent;
 use App\Repositories\PostRepository;
@@ -47,5 +49,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PageRepository::class, PageRepositoryEloquent::class);
         $this->app->bind(CategoryRepository::class, CategoryRepositoryEloquent::class);
         $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
+        $this->app->bind(PostCategoryRepository::class, PostCategoryRepositoryEloquent::class);
     }
 }

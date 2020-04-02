@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Manage\Posts;
 
+use App\DataTables\PostCategoriesDataTable;
 use App\Model\Posts\Category;
 
 use App\Http\Controllers\BackendController;
+use App\Repositories\PostCategoryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -13,9 +15,16 @@ use App\Helppers\Uploads;
 
 class CategoryController extends BackendController
 {
-    public function __construct()
+    /**
+     * The post category repository implementation.
+     *
+     * @var PostCategoryRepository
+     */
+    protected $repository;
+
+    public function __construct(PostCategoryRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
     
     /**
@@ -43,9 +52,34 @@ class CategoryController extends BackendController
      */
     public function index()
     {
-        $data['list_cate_all'] = Category::all();
-        $data['records'] = Category::orderBy('id', 'asc')->paginate(20);
-        return view('manage.modules.posts.category.index', $data);
+        if (request()->ajax()) {
+            $postCategories = $this->repository->getListCategory();
+            $dataTables = new PostCategoriesDataTable($postCategories);
+            return $dataTables->getTransformerData();
+        }
+        $fields = [
+            'id' => [
+                'label' => __('common.categories.id')
+            ],
+            'name' => [
+                'label' => __('common.categories.name')
+            ],
+            'status' => [
+                'label' => __('common.categories.status')
+            ],
+            'actions' => [
+                'label'      => __('common.categories.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = PostCategoriesDataTable::getColumns($fields);
+        $withData = [
+            'fields'        => $fields,
+            'columns'       => $dtColumns,
+            'list_cate_all' => $this->repository->all(['id', 'name', 'parent_id'])
+        ];
+        return view('manage.modules.posts.category.index')->with($withData);
     }
 
     /**
@@ -159,22 +193,29 @@ class CategoryController extends BackendController
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::find($id);
+        if (empty($category)) {
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
+
         try {
-            DB::beginTransaction();
+            \DB::beginTransaction();
             $category->delete();
-            DB::commit();
-            return redirect()->route('category.index')->with([
+            \DB::commit();
+            return response()->json([
                 'message' => __('system.message.delete'),
-                'status'  => self::CTRL_MESSAGE_SUCCESS,
+                'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
         } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            \DB::rollBack();
+            \Log::error([$e->getMessage(), __METHOD__]);
         }
-        return redirect()->route('category.index')->with([
-            'message' => __('system.message.error', ['errors' => 'Delete post category is failed']),
-            'status'  => self::CTRL_MESSAGE_ERROR,
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
         ]);
     }
 
