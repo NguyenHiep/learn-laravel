@@ -220,24 +220,27 @@ class CategoriesController extends BackendController
     {
         $categories = Categories::find($id);
         if (empty($categories)) {
-            return abort(404);
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
         }
 
         try {
-            DB::beginTransaction();
+            \DB::beginTransaction();
             $categories->delete();
-            DB::commit();
-            return redirect()->route('categories.index')->with([
+            \DB::commit();
+            return response()->json([
                 'message' => __('system.message.delete'),
-                'status'  => self::CTRL_MESSAGE_SUCCESS,
+                'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
         } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            \DB::rollBack();
+            \Log::error([$e->getMessage(), __METHOD__]);
         }
-        return redirect()->route('categories.index')->with([
-            'message' => __('system.message.error', ['errors' => 'Delete category is failed']),
-            'status'  => self::CTRL_MESSAGE_ERROR,
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
         ]);
     }
 
