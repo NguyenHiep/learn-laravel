@@ -63,12 +63,15 @@ return [
             )
         ),
         'admins'   => array(
+            'id'                   => 'ID',
             'username'             => 'Tên tài khoản',
             'username_placeholder' => 'Vui lòng nhập tên tài khoản',
             'password'             => 'Mật khẩu',
             'password_placeholder' => 'Vui lòng nhập mật khẩu',
-            'level'                => 'Cấp độ',
-            'status'               => 'Trạng thái'
+            'level'                => 'Cấp bậc',
+            'status'               => 'Trạng thái',
+            'email'                => 'Email',
+            'actions'              => 'Hành động'
         )
     ),
     'posts'    => array(

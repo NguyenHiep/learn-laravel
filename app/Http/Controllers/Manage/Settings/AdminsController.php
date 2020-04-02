@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers\Manage\Settings;
 
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Model\User;
+use App\Repositories\UserRepository;
 
 class AdminsController extends Controller
 {
-    public function __construct()
+    /**
+     * The user repository implementation.
+     *
+     * @var UserRepository
+     */
+    protected $repository;
+
+    public function __construct(UserRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
 
     /**
@@ -19,10 +28,39 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        // Get danh sách
-        $list_user = User::orderBy('id', 'desc')->paginate(20);
-
-        return view('manage.modules.settings.admins.index', compact('list_user'));
+        if (request()->ajax()) {
+            $comments = $this->repository->getListUser();
+            $dataTables = new UsersDataTable($comments);
+            return $dataTables->getTransformerData();
+        }
+        $fields = [
+            'id' => [
+                'label' => __('common.settings.admins.id')
+            ],
+            'username' => [
+                'label' => __('common.settings.admins.username')
+            ],
+            'email' => [
+                'label' => __('common.settings.admins.email')
+            ],
+            'level' => [
+                'label' => __('common.settings.admins.level')
+            ],
+            'status' => [
+                'label' => __('common.settings.admins.status')
+            ],
+            'actions' => [
+                'label'      => __('common.settings.admins.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = UsersDataTable::getColumns($fields);
+        $withData = [
+            'fields'  => $fields,
+            'columns' => $dtColumns,
+        ];
+        return view('manage.modules.settings.admins.index')->with($withData);
     }
 
     /**
@@ -138,14 +176,36 @@ class AdminsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return Response
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        User::where('id', $id)->forcedelete();
-        session()->flash('message', __('system.message.delete'));
-        return redirect()->route('admins.index');
+        $admin = User::find($id);
+        if (empty($admin)) {
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
+
+        try {
+            \DB::beginTransaction();
+            $admin->delete();
+            \DB::commit();
+            return response()->json([
+                'message' => __('system.message.delete'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS
+            ]);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            \Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
+        ]);
     }
 
 }

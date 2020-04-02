@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\CategoryRepository;
+use App\Repositories\CategoryRepositoryEloquent;
 use App\Repositories\CommentRepository;
 use App\Repositories\CommentRepositoryEloquent;
 use App\Repositories\PageRepository;
@@ -14,6 +16,8 @@ use App\Repositories\ProductRepository;
 use App\Repositories\ProductRepositoryEloquent;
 use App\Repositories\SliderRepository;
 use App\Repositories\SliderRepositoryEloquent;
+use App\Repositories\UserRepository;
+use App\Repositories\UserRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -41,5 +45,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SliderRepository::class, SliderRepositoryEloquent::class);
         $this->app->bind(PostMediaRepository::class, PostMediaRepositoryEloquent::class);
         $this->app->bind(PageRepository::class, PageRepositoryEloquent::class);
+        $this->app->bind(CategoryRepository::class, CategoryRepositoryEloquent::class);
+        $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
     }
 }

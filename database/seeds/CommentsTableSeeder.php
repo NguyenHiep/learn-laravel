@@ -11,6 +11,7 @@ class CommentsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('comments')->truncate();
         $faker = Faker\Factory::create("vi_VN");
         $limit = 10;
         for ($i = 0; $i < $limit; $i++) {

@@ -30,6 +30,7 @@ function loadDatatables (obj) {
     url = $(self).data('ajax')
   if (typeof url != 'undefined') {
     window.Tables = $(self).DataTable({
+      stateSave: true,
       pageLength: limit,
       processing: true,
       serverSide: true,
@@ -38,6 +39,7 @@ function loadDatatables (obj) {
     })
   } else {
     window.Tables = $(self).DataTable({
+      stateSave: true,
       pageLength: 10,
       order: [[0, 'desc']]
     })

@@ -191,11 +191,12 @@ class CommentsController extends BackendController
             ]);
         } catch (\Exception $e) {
             \DB::rollBack();
-            return response()->json([
-                'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
-                'status'  => self::CTRL_MESSAGE_ERROR
-            ]);
+            \Log::error([$e->getMessage(), __METHOD__]);
         }
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
+        ]);
     }
 
     /**
