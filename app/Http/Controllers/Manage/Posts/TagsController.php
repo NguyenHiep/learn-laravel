@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Manage\Posts;
 
+use App\DataTables\PostTagsDataTable;
 use App\Model\Posts\Tags;
 
+use App\Repositories\PostTagRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\DB;
@@ -12,9 +14,16 @@ use Illuminate\Support\Facades\Validator;
 
 class TagsController extends BackendController
 {
-    public function __construct()
+    /**
+     * The post tag repository implementation.
+     *
+     * @var PostTagRepository
+     */
+    protected $repository;
+
+    public function __construct(PostTagRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
     
     /**
@@ -40,8 +49,33 @@ class TagsController extends BackendController
      */
     public function index()
     {
-        $records = Tags::orderBy('id', 'asc')->paginate(20);
-        return view('manage.modules.posts.tags.index', compact('records'));
+        if (request()->ajax()) {
+            $postTags = $this->repository->getListTag();
+            $dataTables = new PostTagsDataTable($postTags);
+            return $dataTables->getTransformerData();
+        }
+        $fields = [
+            'id' => [
+                'label' => __('common.posts.tags.id')
+            ],
+            'name' => [
+                'label' => __('common.posts.tags.name')
+            ],
+            'status' => [
+                'label' => __('common.posts.tags.status')
+            ],
+            'actions' => [
+                'label'      => __('common.posts.tags.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = PostTagsDataTable::getColumns($fields);
+        $withData = [
+            'fields'        => $fields,
+            'columns'       => $dtColumns
+        ];
+        return view('manage.modules.posts.tags.index')->with($withData);
     }
 
     /**
@@ -138,27 +172,35 @@ class TagsController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return Response
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        $tags = Tags::findOrFail($id);
+        $tags = Tags::find($id);
+        if (empty($tags)) {
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
+
         try {
-            DB::beginTransaction();
+            \DB::beginTransaction();
             $tags->delete();
-            DB::commit();
-            return redirect()->route('tags.index')->with([
+            \DB::commit();
+            return response()->json([
                 'message' => __('system.message.delete'),
-                'status'  => self::CTRL_MESSAGE_SUCCESS,
+                'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
         } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            \DB::rollBack();
+            \Log::error([$e->getMessage(), __METHOD__]);
         }
-        return redirect()->route('tags.index')->with([
-            'message' => __('system.message.error', ['errors' => 'Delete post tags is failed']),
-            'status'  => self::CTRL_MESSAGE_ERROR,
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
         ]);
     }
 

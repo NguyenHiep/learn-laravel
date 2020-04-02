@@ -106,12 +106,15 @@ return [
             'description_placeholder' => 'Mô tả chuyên mục cho SEO',
         ),
         'tags'     => array(
+            'id'                      => 'ID',
             'name'                    => 'Tên thẻ',
             'name_placeholder'        => 'VD: lap trinh php',
             'slug'                    => 'Tên không dấu',
             'slug_placeholder'        => 'VD: lap-trinh-php',
             'description'             => 'Mô tả thẻ',
             'description_placeholder' => 'Mô tả thẻ cho SEO',
+            'status'                  => 'Trạng thái',
+            'actions'                 => 'Hành động'
         ),
         'medias'   => array(
             'mediasinfo' => array(

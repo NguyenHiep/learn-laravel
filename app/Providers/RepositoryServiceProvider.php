@@ -14,6 +14,8 @@ use App\Repositories\PostMediaRepository;
 use App\Repositories\PostMediaRepositoryEloquent;
 use App\Repositories\PostRepository;
 use App\Repositories\PostRepositoryEloquent;
+use App\Repositories\PostTagRepository;
+use App\Repositories\PostTagRepositoryEloquent;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProductRepositoryEloquent;
 use App\Repositories\SliderRepository;
@@ -50,5 +52,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepository::class, CategoryRepositoryEloquent::class);
         $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
         $this->app->bind(PostCategoryRepository::class, PostCategoryRepositoryEloquent::class);
+        $this->app->bind(PostTagRepository::class, PostTagRepositoryEloquent::class);
     }
 }

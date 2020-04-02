@@ -74,52 +74,13 @@
         <div class="col-md-7">
           <div class="portlet light bordered">
             <div class="portlet-body">
-              <div class="table-scrollable">
-                <table class="table table-hover js-action-list-rowlink">
-                  <thead>
-                  <tr>
-                    <th> <!-- <th class="checkbox-list">-->
-                      <input class="js-action-list-checkboxes" name="checkboxes" value="Hiep123" type="checkbox" id="form_checkboxes">
-                    </th>
-                    <th>Tên thẻ</th>
-                    <th> Trạng thái</th>
-                    <th class="text-center"> Hành động</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  @if (!empty($records))
-                    @foreach ($records as $record)
-                        <tr>
-                          <td> <!--<td class="checkbox-list"> -->
-                            <input id="action_ids{{$record->id}}" name="action_ids[]" value="{{$record->id}}" type="checkbox">
-                          </td>
-                          <td> {{$record->name}} </td>
-                          <td class="text-center">
-                            <span class="label label-sm  @if ($record->status === config('define.STATUS_ENABLE')) label-success @else  label-danger @endif margin-right-10"> {{__('selector.post_status.'.$record->status)}} </span>
-                          </td>
-                          <td class="text-right">
-                            <div class="btn-group btn-group-solid">
-                              <a title="{{__('common.buttons.edit')}}" href="{{ route('tags.edit',$record->id) }}" class="btn  btn-warning js-action-list-rowlink-val">
-                                <i class="fa fa-edit"></i>
-                              </a>
-                              <form action="{{ route('tags.destroy',$record->id) }}" method="POST" style="display: inline-block">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button title="{{__('common.buttons.delete')}}" class="btn btn-delete js-action-delete" type="submit">
-                                  <i class="fa fa-trash-o"></i>
-                                </button>
-                              </form>
-                            </div>
-                        </tr>
-                    @endforeach
-                  @endif
-                  </tbody>
-                  <tfoot>
-                  @if (!empty($records))
-                    <td colspan="8"> {{ $records->links() }}</td>
-                  @endif
-                  </tfoot>
-                </table>
+              <div class="table-container">
+                @includeIf('manage.blocks.partials.dataTable', [
+                   'id'        => 'tags',
+                   'routeAjax' => route('tags.index'),
+                   'columns'   => $columns,
+                   'fields'    => $fields,
+                ])
               </div>
             </div>
           </div>
