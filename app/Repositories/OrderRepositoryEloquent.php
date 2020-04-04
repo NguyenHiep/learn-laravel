@@ -4,14 +4,14 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Entities\User;
+use App\Entities\Order;
 
 /**
- * Class UserRepositoryEloquent.
+ * Class OrderRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +20,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function model()
     {
-        return User::class;
+        return Order::class;
     }
 
 
@@ -33,9 +33,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     }
 
 
-    public function getListUser()
+    public function getListOrder()
     {
-        return $this->model::query()->select(['id', 'username', 'email', 'level', 'status']);
+        return $this->model::with('deliveries')->select(['id', 'ordered_at', 'total', 'status']);
     }
 
 }

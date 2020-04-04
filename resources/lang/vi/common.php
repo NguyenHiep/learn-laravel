@@ -214,5 +214,14 @@ return [
         'status'  => 'Trạng thái',
         'actions' => 'Hành động',
     ),
+    'orders' => array(
+        'id'         => 'ID',
+        'ordered_at' => 'Ngày đặt hàng',
+        'name'       => 'Khách hàng',
+        'phone'      => 'Điện thoại',
+        'total'      => 'Tổng tiền',
+        'status'     => 'Trạng thái',
+        'actions'    => 'Hành động',
+    ),
     'data_empty' => 'Không có dữ liệu'
 ];

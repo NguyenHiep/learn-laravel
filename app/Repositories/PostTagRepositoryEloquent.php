@@ -24,7 +24,6 @@ class PostTagRepositoryEloquent extends BaseRepository implements PostTagReposit
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */

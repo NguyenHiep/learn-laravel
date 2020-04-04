@@ -25,7 +25,6 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */

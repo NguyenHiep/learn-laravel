@@ -24,7 +24,6 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */

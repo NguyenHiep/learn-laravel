@@ -24,7 +24,6 @@ class PostCategoryRepositoryEloquent extends BaseRepository implements PostCateg
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */

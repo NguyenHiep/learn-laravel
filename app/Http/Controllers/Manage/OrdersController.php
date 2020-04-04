@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\DataTables\OrdersDataTable;
 use App\Http\Controllers\BackendController;
 use App\Mail\OrderConfirm;
 use App\Model\Orders;
 use App\Model\Settings;
+use App\Repositories\OrderRepository;
 use Carbon\Carbon;
 use DNS1D;
 use Illuminate\Http\Request;
@@ -17,9 +19,16 @@ use PDF;
 
 class OrdersController extends BackendController
 {
-    public function __construct()
+    /**
+     * The order repository implementation.
+     *
+     * @var OrderRepository
+     */
+    protected $repository;
+
+    public function __construct(OrderRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
     /**
      * Display a listing of the resource.
@@ -48,8 +57,46 @@ class OrdersController extends BackendController
 
     public function index()
     {
-        $orders = Orders::with('deliveries')->orderby('id', 'desc')->paginate(15);
-        return view('manage.modules.orders.index')->with(['records' => $orders]);
+        if (request()->ajax()) {
+            $orders = $this->repository->getListOrder();
+            $dataTables = new OrdersDataTable($orders);
+            return $dataTables->getTransformerData();
+        }
+        $fields = [
+            'id' => [
+                'label' => __('common.orders.id')
+            ],
+            'ordered_at' => [
+                'label' => __('common.orders.ordered_at')
+            ],
+            'buyer_name' => [
+                'label' => __('common.orders.name'),
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'buyer_phone_1' => [
+                'label'      => __('common.orders.phone'),
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'total' => [
+                'label' => __('common.orders.total')
+            ],
+            'status' => [
+                'label' => __('common.orders.status')
+            ],
+            'actions' => [
+                'label'      => __('common.orders.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = OrdersDataTable::getColumns($fields);
+        $withData = [
+            'fields'  => $fields,
+            'columns' => $dtColumns,
+        ];
+        return view('manage.modules.orders.index')->with($withData);
     }
 
     /**

@@ -35,7 +35,13 @@ class PostMediaRepositoryEloquent extends BaseRepository implements PostMediaRep
 
     public function getListPostMedia()
     {
-        return $this->model::with(['posts_medias_info', 'users'])->select(['id', 'name', 'types', 'user_id', 'created_at']);
+        return $this->model::with(['posts_medias_info', 'users'])->select([
+            'id',
+            'name',
+            'types',
+            'user_id',
+            'created_at'
+        ]);
     }
 
 }

@@ -6,7 +6,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.pages.title')}}</a>
+            <a href="{{route('pages.index')}}">{{__('static.sidebars.manage.pages.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
