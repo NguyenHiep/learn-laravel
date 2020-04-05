@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Manage;
 
 use App\DataTables\CustomersDataTable;
 use App\Repositories\CustomerRepository;
+use App\Validators\CustomerValidator;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
+use Log;
+use Prettus\Validator\Exceptions\ValidatorException;
+use Storage;
 
 class CustomersController extends BackendController
 {
@@ -16,9 +21,15 @@ class CustomersController extends BackendController
      */
     protected $repository;
 
-    public function __construct(CustomerRepository $repository)
+    /**
+     * @var CustomerValidator
+     */
+    protected $validator;
+
+    public function __construct(CustomerRepository $repository, CustomerValidator $validator)
     {
         $this->repository = $repository;
+        $this->validator = $validator;
     }
     /**
      * Display a listing of the resource.
@@ -76,11 +87,38 @@ class CustomersController extends BackendController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+        try {
+            $this->validator->with($inputs)->passesOrFail( CustomerValidator::RULE_CREATE );
+            $inputs['password'] = bcrypt($inputs['password']);
+            if ($request->hasFile('avatar')) {
+                $pathAvatar = Storage::put('avatars', $request->file('avatar'));
+                $inputs['avatar'] = $pathAvatar;
+            }
+            if (empty($inputs['birthday'])) {
+                $inputs['birthday'] = null;
+            }
+            DB::beginTransaction();
+            $this->repository->create($inputs);
+            DB::commit();
+            return redirect()->route('customers.index')->with([
+                'message' => __('system.message.create'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput($inputs);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->back()->withInput($inputs)->with([
+            'message' => __('system.message.errors', ['errors' => __('Create customer is failed')]),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
     }
 
     /**

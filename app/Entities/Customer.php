@@ -40,4 +40,9 @@ class Customer extends BaseModel implements Transformable
         'status'
     ];
 
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
+
 }
