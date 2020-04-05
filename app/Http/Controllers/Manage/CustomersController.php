@@ -125,6 +125,29 @@ class CustomersController extends BackendController
      */
     public function destroy($id)
     {
-        //
+        $customer = $this->repository->find($id);
+        if (empty($customer)) {
+            return response()->json([
+                'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
+                'status'  => self::CTRL_MESSAGE_ERROR
+            ]);
+        }
+
+        try {
+            \DB::beginTransaction();
+            $customer->delete();
+            \DB::commit();
+            return response()->json([
+                'message' => __('system.message.delete'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS
+            ]);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            \Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
+        ]);
     }
 }
