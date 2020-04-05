@@ -29,7 +29,7 @@ class CustomerValidator extends LaravelValidator
             'first_name'  => 'required|string|max:191',
             'last_name'   => 'required|string|max:191',
             'username'    => 'required|string|max:191|unique:customers',
-            'password'    => 'required|string|max:191',
+            'password'    => 'nullable|string|max:191',
             'phone'       => 'required|max:20',
             'email'       => 'required|max:191|email|unique:customers',
             'gender'      => 'required|integer|min:1|max:2',

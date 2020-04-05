@@ -34,7 +34,7 @@ class CustomersController extends BackendController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -76,7 +76,7 @@ class CustomersController extends BackendController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -96,7 +96,7 @@ class CustomersController extends BackendController
             $this->validator->with($inputs)->passesOrFail( CustomerValidator::RULE_CREATE );
             $inputs['password'] = bcrypt($inputs['password']);
             if ($request->hasFile('avatar')) {
-                $pathAvatar = Storage::put('avatars', $request->file('avatar'));
+                $pathAvatar = Storage::put(UPLOAD_AVATAR, $request->file('avatar'));
                 $inputs['avatar'] = $pathAvatar;
             }
             if (empty($inputs['birthday'])) {
@@ -136,11 +136,12 @@ class CustomersController extends BackendController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        //
+        $user = $this->repository->find($id);
+        return view('manage.modules.customers.edit')->with(['user' => $user]);
     }
 
     /**
@@ -148,18 +149,49 @@ class CustomersController extends BackendController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $inputs = $request->all();
+        try {
+            $this->validator->setId($id);
+            $this->validator->with($inputs)->passesOrFail( CustomerValidator::RULE_UPDATE );
+            if (!empty($inputs['password'])) {
+                $inputs['password'] = bcrypt($inputs['password']);
+            }
+            if ($request->hasFile('avatar')) {
+                $pathAvatar = Storage::put(UPLOAD_AVATAR, $request->file('avatar'));
+                $inputs['avatar'] = $pathAvatar;
+            }
+            if (empty($inputs['birthday'])) {
+                $inputs['birthday'] = null;
+            }
+            DB::beginTransaction();
+            $this->repository->update($inputs, $id);
+            DB::commit();
+            return redirect()->route('customers.index')->with([
+                'message' => __('system.message.create'),
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+            ]);
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput($inputs);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error([$e->getMessage(), __METHOD__]);
+        }
+        return redirect()->back()->withInput($inputs)->with([
+            'message' => __('system.message.errors', ['errors' => __('Update customer is failed')]),
+            'status'  => self::CTRL_MESSAGE_ERROR,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

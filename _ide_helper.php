@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.37 on 2020-03-17 00:11:49.
+ * Generated for Laravel 5.8.37 on 2020-03-29 21:23:48.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -19562,6 +19562,8 @@ namespace  {
     class DNS1D extends \Milon\Barcode\Facades\DNS1DFacade {}
 
     class DNS2D extends \Milon\Barcode\Facades\DNS2DFacade {}
+
+    class Datatables extends \Yajra\Datatables\Facades\Datatables {}
 
     class WSDelivery extends \NMH\WSDelivery\WSDeliveryFacade {}
 

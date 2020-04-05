@@ -45,8 +45,8 @@ return [
             ],
             'comments'   => 'Bình luận',
             'customers'  => [
-                'title'     => 'Thành viên',
-                'customers' => 'Tất cả thành viên',
+                'title'     => 'Khách hàng',
+                'customers' => 'Danh sách khách hàng',
                 'creates'   => 'Thêm mới'
             ],
             'email'      => [

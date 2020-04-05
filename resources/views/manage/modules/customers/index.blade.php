@@ -1,16 +1,16 @@
 @extends('manage.master')
-@section('title', 'Quản lý thông tin thành viên')
+@section('title', 'Quản lý thông tin khách hàng')
 @section('content')
   <div class="page-content-wrapper">
     <div class="page-content">
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('customers.index')}}">Thành viên</a>
+            <a href="{{route('customers.index')}}">Khách hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Danh sách thành viên</span>
+            <span>Danh sách khách hàng</span>
           </li>
         </ul>
       </div>
@@ -20,7 +20,7 @@
             <div class="portlet-title">
               <div class="caption font-dark">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">Danh sách thành viên</span>
+                <span class="caption-subject bold uppercase">Danh sách khách hàng</span>
               </div>
               <div class="tools"></div>
               <div class="actions">

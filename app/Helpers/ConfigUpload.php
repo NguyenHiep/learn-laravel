@@ -8,3 +8,4 @@ define('UPLOAD_PRODUCT','/upload/product/');
 define('UPLOAD_CATEGORY','/upload/category/');
 define('UPLOAD_SETTING','/upload/setting/');
 define('UPLOAD_SLIDER','/upload/slider/');
+define('UPLOAD_AVATAR', 'avatars');
