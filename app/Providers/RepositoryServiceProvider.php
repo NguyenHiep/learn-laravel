@@ -6,6 +6,8 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\CategoryRepositoryEloquent;
 use App\Repositories\CommentRepository;
 use App\Repositories\CommentRepositoryEloquent;
+use App\Repositories\CustomerRepository;
+use App\Repositories\CustomerRepositoryEloquent;
 use App\Repositories\OrderRepository;
 use App\Repositories\OrderRepositoryEloquent;
 use App\Repositories\PageRepository;
@@ -56,5 +58,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PostCategoryRepository::class, PostCategoryRepositoryEloquent::class);
         $this->app->bind(PostTagRepository::class, PostTagRepositoryEloquent::class);
         $this->app->bind(OrderRepository::class, OrderRepositoryEloquent::class);
+        $this->app->bind(CustomerRepository::class, CustomerRepositoryEloquent::class);
     }
 }

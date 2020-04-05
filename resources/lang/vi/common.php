@@ -223,5 +223,16 @@ return [
         'status'     => 'Trạng thái',
         'actions'    => 'Hành động',
     ),
+    'customers' => array(
+        'id'                   => 'ID',
+        'username'             => 'Tên tài khoản',
+        'username_placeholder' => 'Vui lòng nhập tên tài khoản',
+        'password'             => 'Mật khẩu',
+        'password_placeholder' => 'Vui lòng nhập mật khẩu',
+        'status'               => 'Trạng thái',
+        'email'                => 'Email',
+        'last_login'           => 'Lần đăng nhập cuối',
+        'actions'              => 'Hành động'
+    ),
     'data_empty' => 'Không có dữ liệu'
 ];

@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\DataTables\CustomersDataTable;
+use App\Repositories\CustomerRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
 
 class CustomersController extends BackendController
 {
-    public function __construct()
+    /**
+     * The customer repository implementation.
+     *
+     * @var CustomerRepository
+     */
+    protected $repository;
+
+    public function __construct(CustomerRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
     /**
      * Display a listing of the resource.
@@ -18,7 +27,39 @@ class CustomersController extends BackendController
      */
     public function index()
     {
-        return view('manage.modules.customers.index');
+        if (request()->ajax()) {
+            $customers = $this->repository->getListCustomer();
+            $dataTables = new CustomersDataTable($customers);
+            return $dataTables->getTransformerData();
+        }
+        $fields = [
+            'id' => [
+                'label' => __('common.customers.id')
+            ],
+            'username' => [
+                'label' => __('common.customers.username')
+            ],
+            'email' => [
+                'label' => __('common.customers.email')
+            ],
+            'last_login' => [
+                'label' => __('common.customers.last_login')
+            ],
+            'status' => [
+                'label' => __('common.customers.status')
+            ],
+            'actions' => [
+                'label'      => __('common.customers.actions'),
+                'searchable' => false,
+                'orderable'  => false,
+            ]
+        ];
+        $dtColumns = CustomersDataTable::getColumns($fields);
+        $withData = [
+            'fields'  => $fields,
+            'columns' => $dtColumns,
+        ];
+        return view('manage.modules.customers.index')->with($withData);
     }
 
     /**
