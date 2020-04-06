@@ -44,10 +44,12 @@ return [
                 'creates' => 'Thêm mới trang'
             ],
             'comments'   => 'Bình luận',
-            'customers'  => [
+            'customers' => [
                 'title'     => 'Khách hàng',
                 'customers' => 'Danh sách khách hàng',
-                'creates'   => 'Thêm mới'
+                'creates'   => 'Thêm mới',
+                'admins'    => 'Danh sách người dùng',
+                'roles'     => 'Vai trò'
             ],
             'email'      => [
                 'title'     => 'Email',
@@ -65,8 +67,7 @@ return [
                 'title_email'    => 'Thông tin email',
                 'title_host'     => 'Cấu hình host gửi mail SMTP',
                 'title_personal' => 'Thông tin cá nhân và Điều khoản sử dụng',
-            ],
-            'admins'   => []
+            ]
         ],
         'posts'    => [
             'posts'    => [

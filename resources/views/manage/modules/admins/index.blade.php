@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Quản lý thông tin tài khoản')
+@section('title', 'Quản lý thông tin người dùng')
 
 @section('content')
   <div class="page-content-wrapper">
@@ -8,17 +8,17 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('admins.index')}}">Quản trị tài khoản</a>
+            <a href="{{route('manage')}}">{{__('static.sidebars.manage.manage')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Danh sách tài khoản quản trị</span>
+            <span>{{__('static.sidebars.manage.customers.admins')}}</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Quản trị tài khoản</h3>
+      <h3 class="page-title">{{__('static.sidebars.manage.customers.admins')}}</h3>
       <!-- END PAGE TITLE-->
       <div class="row">
         <div class="col-md-12">
@@ -26,8 +26,8 @@
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
-                <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">Danh sách tài khoản</span>
+                <i class="icon-user font-dark"></i>
+                <span class="caption-subject bold uppercase">{{__('static.sidebars.manage.customers.admins')}}</span>
               </div>
               <div class="tools"></div>
               <div class="actions">

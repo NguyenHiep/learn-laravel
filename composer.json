@@ -22,7 +22,8 @@
         "prettus/l5-repository": "^2.6",
         "league/fractal": "^0.18.0",
         "yajra/laravel-datatables-fractal": "^1.5",
-        "prettus/laravel-validation": "^1.2"
+        "prettus/laravel-validation": "^1.2",
+        "spatie/laravel-permission": "^3.11"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

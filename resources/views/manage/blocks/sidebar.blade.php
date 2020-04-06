@@ -162,21 +162,27 @@
           <span class="title">{{__('static.sidebars.manage.comments')}}</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item {{ active(['customers.index', 'customers.create', 'customers.edit', 'admins.index', 'admins.create', 'admins.edit'], 'active open') }}">
         <a href="{{ route('customers.index') }}" class="nav-link nav-toggle">
           <i class="icon-user"></i>
           <span class="title">{{__('static.sidebars.manage.customers.title')}}</span>
-          <span class="arrow"></span>
+          <span class="arrow" {{ active(['customers.index', 'admins.index', 'admins.create', 'admins.edit'], 'open') }}></span>
+          <span class="selected"></span>
         </a>
         <ul class="sub-menu">
-          <li class="nav-item  ">
+          <li class="nav-item">
             <a href="{{ route('customers.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.customers.customers')}}</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admins.index') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.customers.admins')}}</span>
+            </a>
+          </li>
           <li class="nav-item  ">
             <a href="{{ route('customers.create') }}" class="nav-link ">
-              <span class="title">{{__('static.sidebars.manage.customers.creates')}}</span>
+              <span class="title">{{__('static.sidebars.manage.customers.roles')}}</span>
             </a>
           </li>
         </ul>
@@ -201,7 +207,7 @@
         </ul>
       </li>--}}
       <li
-        class="nav-item  {{ active(['settings.index', 'admins.index', 'admins.create', 'admins.edit'], 'active open') }}">
+        class="nav-item  {{ active(['settings.index'], 'active open') }}">
         <a href="{{ route('settings.index') }}" class="nav-link nav-toggle">
           <i class="icon-settings"></i>
           <span class="title">{{__('static.sidebars.manage.settings.title')}}</span>
@@ -214,12 +220,6 @@
               <span class="title">{{__('static.sidebars.manage.settings.settings')}}</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('admins.index') }}" class="nav-link ">
-              <span class="title">{{__('static.sidebars.manage.settings.admins')}}</span>
-            </a>
-          </li>
-
         </ul>
       </li>
     </ul>

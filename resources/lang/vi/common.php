@@ -62,17 +62,18 @@ return [
                 'mail_smtp_pass_placeholder' => 'VD: nguyenhiep',
             )
         ),
-        'admins'   => array(
-            'id'                   => 'ID',
-            'username'             => 'Tên tài khoản',
-            'username_placeholder' => 'Vui lòng nhập tên tài khoản',
-            'password'             => 'Mật khẩu',
-            'password_placeholder' => 'Vui lòng nhập mật khẩu',
-            'level'                => 'Cấp bậc',
-            'status'               => 'Trạng thái',
-            'email'                => 'Email',
-            'actions'              => 'Hành động'
-        )
+    ),
+    'admins' => array(
+        'id'                   => 'ID',
+        'username'             => 'Tên tài khoản',
+        'username_placeholder' => 'Vui lòng nhập tên tài khoản',
+        'password'             => 'Mật khẩu',
+        'password_placeholder' => 'Vui lòng nhập mật khẩu',
+        'level'                => 'Cấp bậc',
+        'status'               => 'Trạng thái',
+        'email'                => 'Email',
+        'email_placeholder'    => 'Vui lòng nhập email',
+        'actions'              => 'Hành động'
     ),
     'posts'    => array(
         'posts'    => array(

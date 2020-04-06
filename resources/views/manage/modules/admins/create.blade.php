@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Thêm mới thành viên')
+@section('title', 'Thêm mới người dùng')
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -10,17 +10,17 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('admins.index')}}">Quản lý tài khoản</a>
+            <a href="{{route('admins.index')}}">{{__('static.sidebars.manage.customers.admins')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Thêm mới thành viên</span>
+            <span>Thêm mới người dùng</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Thêm mới thành viên </h3>
+      <h3 class="page-title">Thêm mới người dùng</h3>
       <!-- END PAGE TITLE-->
 
       <div class="row">
@@ -30,8 +30,8 @@
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
               <div class="caption">
-                <i class="icon-settings font-dark"></i>
-                <span class="caption-subject font-dark sbold uppercase">Nhập thông tin thành viên</span>
+                <i class="icon-user font-dark"></i>
+                <span class="caption-subject font-dark sbold uppercase">Nhập thông tin người dùng</span>
               </div>
               <div class="actions">
                 <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
@@ -45,9 +45,7 @@
                   <div class="col-md-8">
                     @php $key = 'avatar'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif  last">
-                      <label class="control-label col-md-3">Ảnh đại diện
-                        <span class="required"> * </span>
-                      </label>
+                      <label class="control-label col-md-3">Ảnh đại diện</label>
                       <div class="col-md-9">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
@@ -65,30 +63,39 @@
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
-
-                    @php $key = 'username'; @endphp
+                    @php $key = 'email'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        {!! Form::email($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.admins.'.$key.'_placeholder')]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                      </div>
+                    </div>
+                    @php $key = 'username'; @endphp
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-9">
+                        {!! Form::text($key, old($key), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.admins.'.$key.'_placeholder')]) !!}
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'password'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::password($key, ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        {!! Form::password($key, ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.admins.'.$key.'_placeholder')]) !!}
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'level'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
@@ -100,7 +107,7 @@
                     </div>
                     @php $key = 'status'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">

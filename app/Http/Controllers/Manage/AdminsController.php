@@ -2,35 +2,37 @@
 
 namespace App\Http\Controllers\Manage;
 
-use App\DataTables\CustomersDataTable;
-use App\Repositories\CustomerRepository;
-use App\Validators\CustomerValidator;
+use App\DataTables\UsersDataTable;
+use App\Http\Controllers\Controller;
+use App\Model\User;
+use App\Repositories\UserRepository;
+use App\Validators\UserValidator;
 use DB;
 use Illuminate\Http\Request;
-use App\Http\Controllers\BackendController;
 use Log;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Storage;
 
-class CustomersController extends BackendController
+class AdminsController extends Controller
 {
     /**
-     * The customer repository implementation.
+     * The user repository implementation.
      *
-     * @var CustomerRepository
+     * @var UserRepository
      */
     protected $repository;
 
     /**
-     * @var CustomerValidator
+     * @var UserValidator
      */
     protected $validator;
 
-    public function __construct(CustomerRepository $repository, CustomerValidator $validator)
+    public function __construct(UserRepository $repository, UserValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,38 +41,38 @@ class CustomersController extends BackendController
     public function index()
     {
         if (request()->ajax()) {
-            $customers = $this->repository->getListCustomer();
-            $dataTables = new CustomersDataTable($customers);
+            $comments = $this->repository->getListUser();
+            $dataTables = new UsersDataTable($comments);
             return $dataTables->getTransformerData();
         }
         $fields = [
-            'id' => [
-                'label' => __('common.customers.id')
+            'id'       => [
+                'label' => __('common.admins.id')
             ],
             'username' => [
-                'label' => __('common.customers.username')
+                'label' => __('common.admins.username')
             ],
-            'email' => [
-                'label' => __('common.customers.email')
+            'email'    => [
+                'label' => __('common.admins.email')
             ],
-            'last_login' => [
-                'label' => __('common.customers.last_login')
+            'level'    => [
+                'label' => __('common.admins.level')
             ],
-            'status' => [
-                'label' => __('common.customers.status')
+            'status'   => [
+                'label' => __('common.admins.status')
             ],
-            'actions' => [
-                'label'      => __('common.customers.actions'),
+            'actions'  => [
+                'label'      => __('common.admins.actions'),
                 'searchable' => false,
                 'orderable'  => false,
             ]
         ];
-        $dtColumns = CustomersDataTable::getColumns($fields);
+        $dtColumns = UsersDataTable::getColumns($fields);
         $withData = [
             'fields'  => $fields,
             'columns' => $dtColumns,
         ];
-        return view('manage.modules.customers.index')->with($withData);
+        return view('manage.modules.admins.index')->with($withData);
     }
 
     /**
@@ -80,32 +82,30 @@ class CustomersController extends BackendController
      */
     public function create()
     {
-        return view('manage.modules.customers.create');
+        return view('manage.modules.admins.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function store(Request $request)
     {
         $inputs = $request->all();
         try {
-            $this->validator->with($inputs)->passesOrFail( CustomerValidator::RULE_CREATE );
-            $inputs['password'] = bcrypt($inputs['password']);
+            $this->validator->with($inputs)->passesOrFail(UserValidator::RULE_CREATE);
             if ($request->hasFile('avatar')) {
-                $pathAvatar = Storage::put(UPLOAD_AVATAR, $request->file('avatar'));
+                $pathAvatar = Storage::put(UPLOAD_USER_ADMIN, $request->file('avatar'));
                 $inputs['avatar'] = $pathAvatar;
             }
-            if (empty($inputs['birthday'])) {
-                $inputs['birthday'] = null;
-            }
+
             DB::beginTransaction();
             $this->repository->create($inputs);
             DB::commit();
-            return redirect()->route('customers.index')->with([
+            return redirect()->route('admins.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
@@ -116,7 +116,7 @@ class CustomersController extends BackendController
             Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->withInput($inputs)->with([
-            'message' => __('system.message.errors', ['errors' => __('Create customer is failed')]),
+            'message' => __('system.message.errors', ['errors' => __('Create user is failed')]),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
     }
@@ -124,8 +124,8 @@ class CustomersController extends BackendController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function show($id)
     {
@@ -135,43 +135,41 @@ class CustomersController extends BackendController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
         $user = $this->repository->find($id);
-        return view('manage.modules.customers.edit')->with(['user' => $user]);
+        return view('manage.modules.admins.edit', compact('user'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function update(Request $request, $id)
     {
-
         $inputs = $request->all();
         try {
             $this->validator->setId($id);
-            $this->validator->with($inputs)->passesOrFail( CustomerValidator::RULE_UPDATE );
+            $this->validator->with($inputs)->passesOrFail(UserValidator::RULE_UPDATE);
             if (!empty($inputs['password'])) {
                 $inputs['password'] = bcrypt($inputs['password']);
             }
             if ($request->hasFile('avatar')) {
-                $pathAvatar = Storage::put(UPLOAD_AVATAR, $request->file('avatar'));
+                $pathAvatar = Storage::put(UPLOAD_USER_ADMIN, $request->file('avatar'));
                 $inputs['avatar'] = $pathAvatar;
-            }
-            if (empty($inputs['birthday'])) {
-                $inputs['birthday'] = null;
             }
             DB::beginTransaction();
             $this->repository->update($inputs, $id);
             DB::commit();
-            return redirect()->route('customers.index')->with([
+            return redirect()->route('admins.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
@@ -182,7 +180,7 @@ class CustomersController extends BackendController
             Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->withInput($inputs)->with([
-            'message' => __('system.message.errors', ['errors' => __('Update customer is failed')]),
+            'message' => __('system.message.errors', ['errors' => __('Update user is failed')]),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
     }
@@ -190,13 +188,14 @@ class CustomersController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        $customer = $this->repository->find($id);
-        if (empty($customer)) {
+        $admin = User::find($id);
+        if (empty($admin)) {
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
                 'status'  => self::CTRL_MESSAGE_ERROR
@@ -205,7 +204,7 @@ class CustomersController extends BackendController
 
         try {
             \DB::beginTransaction();
-            $customer->delete();
+            $admin->delete();
             \DB::commit();
             return response()->json([
                 'message' => __('system.message.delete'),
@@ -213,11 +212,12 @@ class CustomersController extends BackendController
             ]);
         } catch (\Exception $e) {
             \DB::rollBack();
-            \Log::error(__METHOD__, [$e->getMessage()]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return response()->json([
             'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
             'status'  => self::CTRL_MESSAGE_ERROR
         ]);
     }
+
 }

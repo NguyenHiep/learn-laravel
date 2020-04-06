@@ -22,6 +22,13 @@ class User extends BaseModel implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'username',
+        'email',
+        'password',
+        'level',
+        'avatar',
+        'status'
+    ];
 
 }

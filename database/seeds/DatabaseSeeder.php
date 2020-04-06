@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Comments seeded.');
         $this->call(CustomersTableSeeder::class);
         $this->command->info('Customers seeded.');
+        $this->call(PermissionsTableSeeder::class);
+        $this->command->info('Permission seeded.');
         Model::reguard();
 
     }

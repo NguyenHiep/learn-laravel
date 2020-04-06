@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Cập nhật thông tin thành viên')
+@section('title', 'Cập nhật thông tin người dùng')
 @section('content')
   <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -10,29 +10,29 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('admins.index')}}">Quản lý tài khoản</a>
+            <a href="{{route('admins.index')}}">{{__('static.sidebars.manage.customers.admins')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>Cập nhật thành viên</span>
+            <span>Cập nhật người dùng</span>
           </li>
         </ul>
       </div>
       <!-- END PAGE BAR -->
       <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> Cập nhật thành viên </h3>
+      <h3 class="page-title"> Cập nhật người dùng </h3>
       <!-- END PAGE TITLE-->
 
       <div class="row">
         <div class="col-md-12">
-        {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Manage\Settings\AdminsController@update',$user->id] , 'class'=> 'form-horizontal', 'files' => true]) !!}
+        {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Manage\AdminsController@update', $user->id] , 'class'=> 'form-horizontal', 'files' => true]) !!}
 
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
               <div class="caption">
-                <i class="icon-settings font-dark"></i>
-                <span class="caption-subject font-dark sbold uppercase">Nhập thông tin thành viên</span>
+                <i class="icon-user font-dark"></i>
+                <span class="caption-subject font-dark sbold uppercase">Nhập thông tin người dùng</span>
               </div>
               <div class="actions">
                 <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
@@ -47,14 +47,12 @@
                   <div class="col-md-8">
                     @php $key = 'avatar'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif last">
-                      <label class="control-label col-md-3">Ảnh đại diện
-                        <span class="required"> * </span>
-                      </label>
+                      <label class="control-label col-md-3">Ảnh đại diện</label>
                       <div class="col-md-9">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                             @php
-                              $img_url =  (!empty($user->{$key})) ? Storage::url(UPLOAD_USER_ADMIN.$user->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
+                              $img_url =  (!empty($user->{$key})) ? Storage::url($user->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
                               echo '<img src="'.$img_url.'" alt="avatar user" />';
                             @endphp
                           </div>
@@ -73,29 +71,37 @@
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
-                    @php $key = 'username'; @endphp
+                    @php $key = 'email'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
-                        {!! Form::text($key, old($key,$user->{$key}), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        {!! Form::email($key, old($key, $user->{$key}), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.admins.'.$key.'_placeholder')]) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                      </div>
+                    </div>
+                    @php $key = 'username'; @endphp
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-9">
+                        {!! Form::text($key, old($key,$user->{$key}), ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.admins.'.$key.'_placeholder')]) !!}
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'password'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
-                        <span class="required"> * </span>
-                      </label>
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}</label>
                       <div class="col-md-9">
-                        {!! Form::password($key, ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.settings.admins.'.$key.'_placeholder')]) !!}
+                        {!! Form::password($key, ['class' => 'form-control', 'data-required' => '1','placeholder' => __('common.admins.'.$key.'_placeholder')]) !!}
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
                     @php $key = 'level'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">
@@ -105,7 +111,7 @@
                     </div>
                     @php $key = 'status'; @endphp
                     <div class="form-group  @if ($errors->has($key)) has-error  @endif">
-                      <label class="control-label col-md-3">{{__('common.settings.admins.'.$key.'')}}
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
                         <span class="required"> * </span>
                       </label>
                       <div class="col-md-9">

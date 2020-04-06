@@ -2,7 +2,7 @@
 
 // define folder upload
 
-define('UPLOAD_USER_ADMIN','public/uploads/admins/');
+define('UPLOAD_USER_ADMIN','user_admin');
 define('UPLOAD_MEDIAS','public/uploads/medias/');
 define('UPLOAD_PRODUCT','/upload/product/');
 define('UPLOAD_CATEGORY','/upload/category/');
