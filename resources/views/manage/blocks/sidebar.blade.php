@@ -162,11 +162,20 @@
           <span class="title">{{__('static.sidebars.manage.comments')}}</span>
         </a>
       </li>
-      <li class="nav-item {{ active(['customers.index', 'customers.create', 'customers.edit', 'admins.index', 'admins.create', 'admins.edit'], 'active open') }}">
+      <li class="nav-item {{ active([
+    'customers.index', 'customers.create', 'customers.edit',
+    'admins.index', 'admins.create', 'admins.edit',
+    'roles.index', 'roles.create', 'roles.edit'
+    ], 'active open') }}">
         <a href="{{ route('customers.index') }}" class="nav-link nav-toggle">
           <i class="icon-user"></i>
           <span class="title">{{__('static.sidebars.manage.customers.title')}}</span>
-          <span class="arrow" {{ active(['customers.index', 'admins.index', 'admins.create', 'admins.edit'], 'open') }}></span>
+          <span class="arrow" {{ active([
+    'customers.index', 'customers.create', 'customers.edit',
+    'admins.index', 'admins.create', 'admins.edit',
+    'roles.index', 'roles.create', 'roles.edit'
+    ], 'open') }}>
+          </span>
           <span class="selected"></span>
         </a>
         <ul class="sub-menu">
@@ -181,7 +190,7 @@
             </a>
           </li>
           <li class="nav-item  ">
-            <a href="{{ route('customers.create') }}" class="nav-link ">
+            <a href="{{ route('roles.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.customers.roles')}}</span>
             </a>
           </li>

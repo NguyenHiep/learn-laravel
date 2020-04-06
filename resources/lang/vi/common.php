@@ -75,6 +75,15 @@ return [
         'email_placeholder'    => 'Vui lòng nhập email',
         'actions'              => 'Hành động'
     ),
+    'roles' => array(
+        'id'               => 'ID',
+        'name'             => 'Tên vai trò',
+        'name_placeholder' => 'Vui lòng nhập tên vai trò',
+        'permission'       => 'Cho phép',
+        'created_at'       => 'Ngày tạo',
+        'updated_at'       => 'Ngày cập nhật',
+        'actions'          => 'Hành động'
+    ),
     'posts'    => array(
         'posts'    => array(
             'post_title'               => 'Tiêu đề bài viết',

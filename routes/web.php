@@ -20,8 +20,8 @@
                 Route::get('settings', ['as' => 'settings.index', 'uses' => 'SettingsController@index']);
                 Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);
             });
-
             Route::resource('admins', 'AdminsController');
+            Route::resource('roles', 'RolesController');
             Route::resource('categories', 'CategoriesController');
             Route::post('products/attributes/delete/{id}', 'ProductsController@deleteAttribute')->name('products.attributes.delete')->where('id', '[0-9]+');
             Route::resource('products', 'ProductsController');
