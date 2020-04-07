@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manage;
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Model\User;
+use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use DB;
@@ -58,6 +59,12 @@ class AdminsController extends Controller
             'level'    => [
                 'label' => __('common.admins.level')
             ],
+            'roles' => [
+                'label'      => __('common.admins.roles'),
+                'searchable' => false,
+                'orderable'  => false
+
+            ],
             'status'   => [
                 'label' => __('common.admins.status')
             ],
@@ -82,7 +89,8 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        return view('manage.modules.admins.create');
+        $roles = app(RoleRepository::class)->getListRole()->pluck('name', 'name');
+        return view('manage.modules.admins.create', compact('roles'));
     }
 
     /**
@@ -103,7 +111,8 @@ class AdminsController extends Controller
             }
 
             DB::beginTransaction();
-            $this->repository->create($inputs);
+            $user = $this->repository->create($inputs);
+            $user->assignRole($request->input('roles'));
             DB::commit();
             return redirect()->route('admins.index')->with([
                 'message' => __('system.message.create'),
@@ -141,7 +150,9 @@ class AdminsController extends Controller
     public function edit($id)
     {
         $user = $this->repository->find($id);
-        return view('manage.modules.admins.edit', compact('user'));
+        $userRole = $user->roles->pluck('name', 'name')->all();
+        $roles = app(RoleRepository::class)->getListRole()->pluck('name', 'name');
+        return view('manage.modules.admins.edit', compact('user', 'roles', 'userRole'));
 
     }
 
@@ -167,7 +178,11 @@ class AdminsController extends Controller
                 $inputs['avatar'] = $pathAvatar;
             }
             DB::beginTransaction();
-            $this->repository->update($inputs, $id);
+            $user = $this->repository->update($inputs, $id);
+            if (!in_array($request->input('roles'), $user->getRoleNames()->toArray())) {
+                DB::table('model_has_roles')->where('model_id', $id)->delete();
+                $user->assignRole($request->input('roles'));
+            }
             DB::commit();
             return redirect()->route('admins.index')->with([
                 'message' => __('system.message.update'),

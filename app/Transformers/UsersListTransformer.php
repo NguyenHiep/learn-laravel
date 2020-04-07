@@ -35,6 +35,7 @@ class UsersListTransformer extends BaseTransformer
             'username' => $user->username,
             'email'    => $user->email,
             'level'    => $this->getLevelHtml($user->level),
+            'roles'    => $this->getRoleNameHtml($user->getRoleNames()),
             'status'   => $this->getStatusHtml($user->status),
             'actions'  => $this->getActionsHtml($actions)
         ];
@@ -56,5 +57,20 @@ class UsersListTransformer extends BaseTransformer
             return '<span class="font-green-dark bold">' . $levelText . '</span>';
         }
         return $levelText;
+    }
+
+    /****
+     * get role name
+     *
+     * @param $roles
+     * @return string
+     */
+    private function getRoleNameHtml($roles)
+    {
+        $html = '';
+        foreach ($roles as $role) {
+            $html .= '<label class="badge badge-primary">' . $role . '</label>';
+        }
+        return $html;
     }
 }

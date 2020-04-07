@@ -109,6 +109,16 @@
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
+                    @php $key = 'roles'; @endphp
+                    <div class="form-group @if ($errors->has($key)) has-error  @endif">
+                      <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-9">
+                        {!! Form::select($key, $roles, old($key, $userRole),['class' => 'form-control select2me']) !!}
+                        @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
+                      </div>
+                    </div>
                     @php $key = 'status'; @endphp
                     <div class="form-group  @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.admins.'.$key.'')}}

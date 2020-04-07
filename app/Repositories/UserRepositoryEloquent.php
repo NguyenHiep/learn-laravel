@@ -35,7 +35,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function getListUser()
     {
-        return $this->model::query()->select(['id', 'username', 'email', 'level', 'status']);
+        return $this->model::with('roles')->select(['id', 'username', 'email', 'level', 'status']);
     }
 
 }

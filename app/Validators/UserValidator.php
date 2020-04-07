@@ -14,6 +14,7 @@ class UserValidator extends LaravelValidator
             'password' => 'required|string|max:191',
             'email'    => 'required|max:191|email|unique:users',
             'level'    => 'required|integer|min:1|max:3',
+            'roles'    => 'required|string|exists:roles,name',
             'status'   => 'required|integer|min:1|max:2'
         ],
         ValidatorInterface::RULE_UPDATE => [
@@ -22,6 +23,7 @@ class UserValidator extends LaravelValidator
             'password' => 'nullable|string|max:191',
             'email'    => 'required|max:191|email|unique:users',
             'level'    => 'required|integer|min:1|max:3',
+            'roles'    => 'required|string|exists:roles,name',
             'status'   => 'required|integer|min:1|max:2'
         ]
     ];

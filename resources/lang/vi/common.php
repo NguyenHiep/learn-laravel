@@ -73,6 +73,7 @@ return [
         'status'               => 'Trạng thái',
         'email'                => 'Email',
         'email_placeholder'    => 'Vui lòng nhập email',
+        'roles'                => 'Vai trò',
         'actions'              => 'Hành động'
     ),
     'roles' => array(
