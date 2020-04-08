@@ -119,11 +119,13 @@ class RolesController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        $role = $this->repository->find($id);
+        $rolePermissions = app(PermissionRepository::class)->getDetailRolePermission($id);
+        return view('manage.modules.roles.show', compact('role', 'rolePermissions'));
     }
 
     /**

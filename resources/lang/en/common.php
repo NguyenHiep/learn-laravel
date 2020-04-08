@@ -8,6 +8,7 @@ return [
         'delete' => 'Delete',
         'edit'   => 'Edit',
         'show'   => 'Show',
+        'back'   => 'Back'
     ),
     'settings' => array(
         'settings' => array(

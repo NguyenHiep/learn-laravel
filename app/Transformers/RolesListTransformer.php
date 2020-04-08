@@ -11,6 +11,14 @@ class RolesListTransformer extends BaseTransformer
     {
         $routeParams = ['id' => $role->id];
         $actions = [
+            'view'   => [
+                'label' => '<i class="fa fa-eye"></i>',
+                'attributes' => [
+                    'title' => __('common.buttons.show'),
+                    'class' => 'btn btn-primary',
+                    'href'  => route('roles.show', $routeParams),
+                ]
+            ],
             'edit'   => [
                 'label' => '<i class="fa fa-edit"></i>',
                 'attributes' => [

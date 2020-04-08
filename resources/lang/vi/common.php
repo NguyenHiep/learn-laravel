@@ -9,6 +9,7 @@ return [
         'delete' => 'Xóa',
         'edit'   => 'Chỉnh sửa',
         'show'   => 'Xem',
+        'back'   => 'Quay lại'
     ),
     'settings' => array(
         'settings' => array(

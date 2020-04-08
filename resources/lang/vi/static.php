@@ -91,6 +91,9 @@ return [
         'comments' => [
             'page_title' => 'Quản lý bình luận',
             'edit'       => 'Cập nhật bình luận',
+        ],
+        'roles' => [
+            'show' => 'Chi tiết vai trò :name'
         ]
     ]
 ];

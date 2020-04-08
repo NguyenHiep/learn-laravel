@@ -12,4 +12,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface PermissionRepository extends RepositoryInterface
 {
     public function getListPermission();
+
+    public function getDetailRolePermission(int $roleId);
 }
