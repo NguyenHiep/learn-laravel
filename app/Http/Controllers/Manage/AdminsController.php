@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Manage;
 
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
-use App\Model\User;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use DB;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\View\View;
 use Log;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Storage;
@@ -37,7 +42,7 @@ class AdminsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -85,7 +90,7 @@ class AdminsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -97,8 +102,8 @@ class AdminsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function store(Request $request)
     {
@@ -120,7 +125,7 @@ class AdminsController extends Controller
             ]);
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput($inputs);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error(__METHOD__, [$e->getMessage()]);
         }
@@ -134,7 +139,7 @@ class AdminsController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return void
      */
     public function show($id)
     {
@@ -145,7 +150,7 @@ class AdminsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit($id)
     {
@@ -159,10 +164,10 @@ class AdminsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function update(Request $request, $id)
     {
@@ -172,6 +177,8 @@ class AdminsController extends Controller
             $this->validator->with($inputs)->passesOrFail(UserValidator::RULE_UPDATE);
             if (!empty($inputs['password'])) {
                 $inputs['password'] = bcrypt($inputs['password']);
+            } else {
+                $inputs = Arr::except($inputs, array('password'));
             }
             if ($request->hasFile('avatar')) {
                 $pathAvatar = Storage::put(UPLOAD_USER_ADMIN, $request->file('avatar'));
@@ -190,7 +197,7 @@ class AdminsController extends Controller
             ]);
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput($inputs);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error(__METHOD__, [$e->getMessage()]);
         }
@@ -204,12 +211,12 @@ class AdminsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function destroy($id)
     {
-        $admin = User::find($id);
+        $admin = $this->repository->find($id);
         if (empty($admin)) {
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
@@ -218,15 +225,15 @@ class AdminsController extends Controller
         }
 
         try {
-            \DB::beginTransaction();
+            DB::beginTransaction();
             $admin->delete();
-            \DB::commit();
+            DB::commit();
             return response()->json([
                 'message' => __('system.message.delete'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
-        } catch (\Exception $e) {
-            \DB::rollBack();
+        } catch (Exception $e) {
+            DB::rollBack();
             Log::error(__METHOD__, [$e->getMessage()]);
         }
         return response()->json([
