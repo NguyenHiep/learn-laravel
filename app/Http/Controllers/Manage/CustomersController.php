@@ -105,7 +105,7 @@ class CustomersController extends BackendController
             DB::beginTransaction();
             $this->repository->create($inputs);
             DB::commit();
-            return redirect()->route('customers.index')->with([
+            return redirect()->route('manage.customers.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
@@ -171,7 +171,7 @@ class CustomersController extends BackendController
             DB::beginTransaction();
             $this->repository->update($inputs, $id);
             DB::commit();
-            return redirect()->route('customers.index')->with([
+            return redirect()->route('manage.customers.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);

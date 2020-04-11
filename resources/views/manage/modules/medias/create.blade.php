@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('medias.index')}}">{{__('static.sidebars.manage.medias.title')}}</a>
+            <a href="{{route('manage.medias.index')}}">{{__('static.sidebars.manage.medias.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -24,7 +24,7 @@
       <!-- END PAGE TITLE-->
       <div class="row">
         <div class="col-md-12">
-          <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone"  enctype="multipart/form-data">
+          <form action="{{route('manage.medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone"  enctype="multipart/form-data">
             {{ csrf_field() }}
             <h3 class="sbold">Thả tập tin vào đây</h3>
             <p> Kéo thả tập tin vào đây hoặc click vào đây</p>

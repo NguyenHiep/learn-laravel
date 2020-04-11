@@ -16,7 +16,7 @@ class OrdersListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.show'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('orders.show', $routeParams),
+                    'href'  => route('manage.orders.show', $routeParams),
                 ]
             ]
         ];

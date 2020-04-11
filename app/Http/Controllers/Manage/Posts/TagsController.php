@@ -106,7 +106,7 @@ class TagsController extends BackendController
             $tags->fill($inputs);
             $tags->save();
             DB::commit();
-            return redirect()->route('tags.index')->with([
+            return redirect()->route('manage.tags.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
@@ -163,7 +163,7 @@ class TagsController extends BackendController
         $tags->update($inputs);
         DB::commit();
     
-        return redirect()->route('tags.index')->with([
+        return redirect()->route('manage.tags.index')->with([
             'message' => __('system.message.update'),
             'status'  => self::CTRL_MESSAGE_SUCCESS,
         ]);

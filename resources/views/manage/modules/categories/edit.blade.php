@@ -6,7 +6,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('categories.index')}}">{{__('static.sidebars.manage.posts.category')}}</a>
+            <a href="{{route('manage.categories.index')}}">{{__('static.sidebars.manage.posts.category')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -138,7 +138,7 @@
               </div>
               <div class="form-group clearfix">
                 <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                <a href="{{ route('categories.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.categories.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('medias.index')}}">{{__('static.sidebars.manage.medias.title')}}</a>
+            <a href="{{route('manage.medias.index')}}">{{__('static.sidebars.manage.medias.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -29,7 +29,7 @@
               </div>
               <div class="tools"></div>
               <div class="actions">
-                <a class="btn green" href="{{ route('medias.create') }}"> {{__('common.buttons.create')}}
+                <a class="btn green" href="{{ route('manage.medias.create') }}"> {{__('common.buttons.create')}}
                   <i class="fa fa-plus"></i>
                 </a>
               </div>
@@ -38,7 +38,7 @@
               <div class="table-container">
                 @includeIf('manage.blocks.partials.dataTable', [
                    'id'        => 'medias',
-                   'routeAjax' => route('medias.index'),
+                   'routeAjax' => route('manage.medias.index'),
                    'columns'   => $columns,
                    'fields'    => $fields,
                 ])

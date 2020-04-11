@@ -16,7 +16,7 @@ class CommentsListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('comments.edit', $routeParams),
+                    'href'  => route('manage.comments.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -27,7 +27,7 @@ class CommentsListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('comments.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.comments.destroy', $routeParams)
                 ]
             ]
         ];

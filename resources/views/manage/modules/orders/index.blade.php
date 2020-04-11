@@ -8,7 +8,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('orders.index')}}">{{__('static.sidebars.manage.orders.title')}}</a>
+            <a href="{{route('manage.orders.index')}}">{{__('static.sidebars.manage.orders.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -27,7 +27,7 @@
               </div>
               <div class="tools"></div>
             {{--  <div class="actions">
-                <a class="btn green" href="{{ route('orders.create') }}"> {{__('common.buttons.create')}}
+                <a class="btn green" href="{{ route('manage.orders.create') }}"> {{__('common.buttons.create')}}
                   <i class="fa fa-plus"></i>
                 </a>
               </div>--}}
@@ -36,7 +36,7 @@
               <div class="table-container">
                 @includeIf('manage.blocks.partials.dataTable', [
                    'id'        => 'orders',
-                   'routeAjax' => route('orders.index'),
+                   'routeAjax' => route('manage.orders.index'),
                    'columns'   => $columns,
                    'fields'    => $fields,
                 ])

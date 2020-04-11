@@ -7,7 +7,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{ route('orders.index') }}">Danh sách đơn hàng</a>
+            <a href="{{ route('manage.orders.index') }}">Danh sách đơn hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -112,7 +112,7 @@
             <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();"> In hóa đơn
               <i class="fa fa-print"></i>
             </a>
-            <a class="btn btn-lg green hidden-print margin-bottom-5" href="{{ route('orders.invoice.pdf', ['id' => $record->id]) }}"> Xuất hóa đơn Pdf<i class="fa fa-check"></i></a>
+            <a class="btn btn-lg green hidden-print margin-bottom-5" href="{{ route('manage.orders.invoice.pdf', ['id' => $record->id]) }}"> Xuất hóa đơn Pdf<i class="fa fa-check"></i></a>
           </div>
         </div>
       </div>

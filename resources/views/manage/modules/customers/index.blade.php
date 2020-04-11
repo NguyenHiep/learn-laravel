@@ -6,7 +6,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('customers.index')}}">Khách hàng</a>
+            <a href="{{route('manage.customers.index')}}">Khách hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -24,7 +24,7 @@
               </div>
               <div class="tools"></div>
               <div class="actions">
-                <a class="btn green" href="{{ route('customers.create') }}"> {{__('common.buttons.create')}}
+                <a class="btn green" href="{{ route('manage.customers.create') }}"> {{__('common.buttons.create')}}
                   <i class="fa fa-plus"></i>
                 </a>
               </div>
@@ -33,7 +33,7 @@
               <div class="table-container">
                 @includeIf('manage.blocks.partials.dataTable', [
                    'id'        => 'customers',
-                   'routeAjax' => route('customers.index'),
+                   'routeAjax' => route('manage.customers.index'),
                    'columns'   => $columns,
                    'fields'    => $fields,
                 ])

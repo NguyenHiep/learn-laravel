@@ -45,7 +45,7 @@ class PostsController extends BackendController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -98,7 +98,7 @@ class PostsController extends BackendController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -113,7 +113,8 @@ class PostsController extends BackendController
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function store()
     {
@@ -153,13 +154,13 @@ class PostsController extends BackendController
                 $post->posts_tags()->attach($posts_tags_ids);
             }
             DB::commit();
-            return redirect()->route('posts.index')->with([
+            return redirect()->route('manage.posts.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->with([
             'message' => __('system.message.errors', ['errors' => 'Create post failed!']),
@@ -183,7 +184,7 @@ class PostsController extends BackendController
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -204,8 +205,9 @@ class PostsController extends BackendController
     /**
      * Update the specified resource in storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function update($id)
     {
@@ -242,13 +244,13 @@ class PostsController extends BackendController
                 $post->posts_tags()->sync($posts_tags_ids);
             }
             DB::commit();
-            return redirect()->route('posts.index')->with([
+            return redirect()->route('manage.posts.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->withInput($inputs)->with([
             'message' => __('system.message.errors', ['errors' => 'Update post is failed!']),
@@ -260,8 +262,9 @@ class PostsController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
@@ -285,11 +288,12 @@ class PostsController extends BackendController
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
-                'status'  => self::CTRL_MESSAGE_ERROR
-            ]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
+        return response()->json([
+            'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
+            'status'  => self::CTRL_MESSAGE_ERROR
+        ]);
     }
 
 }

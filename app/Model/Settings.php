@@ -46,18 +46,18 @@ class Settings extends BaseModel
         'company_logo'
     ];
 
-	/**
-	 * Check data empty in table website_info
-	 * @param int $id
-	 * @return array|mixed|static
-	 */
-	public static function checkWebsiteInfo($id = 1)
-	{
-		$settings = Settings::find($id);
-		if (empty($settings)) {
-			return [];
-		}
-		return $settings;
-	}
+    /**
+     * Check data empty in table website_info
+     * @param int $id
+     * @return array|mixed|static
+     */
+    public static function checkWebsiteInfo($id = 1)
+    {
+        $settings = Settings::find($id);
+        if (empty($settings)) {
+            return [];
+        }
+        return $settings;
+    }
 
 }

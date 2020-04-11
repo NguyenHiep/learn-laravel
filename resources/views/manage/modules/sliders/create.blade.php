@@ -7,7 +7,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('sliders.index')}}">Slider</a>
+            <a href="{{route('manage.sliders.index')}}">Slider</a>
             <i class="fa fa-circle"></i>
           </li>
           <li><span>Thêm mới slider</span></li>
@@ -19,7 +19,7 @@
 
       <div class="row">
         <div class="col-md-12">
-        {!! Form::open(['route' => 'sliders.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal', 'files' => true]) !!}
+        {!! Form::open(['route' => 'manage.sliders.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal', 'files' => true]) !!}
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
@@ -28,7 +28,7 @@
                 <span class="caption-subject font-dark sbold uppercase">Thêm mới slider</span>
               </div>
               <div class="actions">
-                <a href="{{ route('sliders.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.sliders.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
             </div>
@@ -123,7 +123,7 @@
                 <div class="row">
                   <div class="col-md-offset-3 col-md-9">
                     <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                    <a href="{{ route('sliders.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                    <a href="{{ route('manage.sliders.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                   </div>
                 </div>
               </div>

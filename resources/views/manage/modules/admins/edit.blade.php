@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('admins.index')}}">{{__('static.sidebars.manage.customers.admins')}}</a>
+            <a href="{{route('manage.admins.index')}}">{{__('static.sidebars.manage.customers.admins')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -35,7 +35,7 @@
                 <span class="caption-subject font-dark sbold uppercase">Nhập thông tin người dùng</span>
               </div>
               <div class="actions">
-                <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" name="submit" class="btn green"
                         id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
@@ -144,7 +144,7 @@
                 <div class="row">
                   <div class="col-md-offset-3 col-md-9">
                     <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                    <a href="{{ route('admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                    <a href="{{ route('manage.admins.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                   </div>
                 </div>
               </div>

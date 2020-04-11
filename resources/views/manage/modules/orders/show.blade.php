@@ -7,7 +7,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{ route('orders.index') }}">Danh sách đơn hàng</a>
+            <a href="{{ route('manage.orders.index') }}">Danh sách đơn hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -29,9 +29,9 @@
               </div>
               <div class="actions">
                 <div class="btn-group btn-group-devided">
-                  <a href="{{ route('orders.index') }}" class="btn default btn-circle">{{ __('common.buttons.cancel') }}</a>
-                  <a class="btn green btn-circle " href="{{ route('orders.edit', ['id' => $record->id]) }}">Cập nhật đơn hàng</a>
-                  <a  href="{{ route('orders.mail.confirm', ['id' => $record->id]) }}"  class="btn green btn-circle ">Gửi lại email</a>
+                  <a href="{{ route('manage.orders.index') }}" class="btn default btn-circle">{{ __('common.buttons.cancel') }}</a>
+                  <a class="btn green btn-circle " href="{{ route('manage.orders.edit', ['id' => $record->id]) }}">Cập nhật đơn hàng</a>
+                  <a  href="{{ route('manage.orders.mail.confirm', ['id' => $record->id]) }}"  class="btn green btn-circle ">Gửi lại email</a>
                 </div>
                 <div class="btn-group">
                   <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
@@ -40,7 +40,7 @@
                     <i class="fa fa-angle-down"></i>
                   </a>
                   <ul class="dropdown-menu pull-right">
-                    <li><a href="{{ route('orders.invoice', ['id' => $record->id]) }}"> In hóa đơn</a></li>
+                    <li><a href="{{ route('manage.orders.invoice', ['id' => $record->id]) }}"> In hóa đơn</a></li>
                     <li class="divider"> </li>
                     <li>
                       <a href="javascript:;"> Xuất ra CSV </a>
@@ -165,7 +165,7 @@
                                 <tr>
                                   <td>{{ $count }}</td>
                                   <td>
-                                    <a href="{{ route('products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
+                                    <a href="{{ route('manage.products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
                                   </td>
                                   <td> {{ format_price($product->price) }} </td>
                                   <td> {{ $product->quantity }} </td>

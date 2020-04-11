@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use App\Helppers\Uploads;
+use App\Helpers\Uploads;
 
 class CategoryController extends BackendController
 {
@@ -115,7 +115,7 @@ class CategoryController extends BackendController
             $category->fill($inputs);
             $category->save();
             DB::commit();
-            return redirect()->route('category.index')->with([
+            return redirect()->route('manage.category.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
@@ -179,7 +179,7 @@ class CategoryController extends BackendController
         $category->update($inputs);
         DB::commit();
 
-        return redirect()->route('category.index')->with([
+        return redirect()->route('manage.category.index')->with([
             'message' => __('system.message.update'),
             'status'  => self::CTRL_MESSAGE_SUCCESS,
         ]);

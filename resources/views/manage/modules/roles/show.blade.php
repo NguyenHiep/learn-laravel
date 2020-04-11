@@ -8,7 +8,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('roles.index')}}">{{__('static.sidebars.manage.customers.roles')}}</a>
+            <a href="{{route('manage.roles.index')}}">{{__('static.sidebars.manage.customers.roles')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -31,7 +31,7 @@
               </div>
               <div class="tools"></div>
               <div class="actions">
-                <a class="btn default" href="{{ route('roles.index') }}">
+                <a class="btn default" href="{{ route('manage.roles.index') }}">
                   <i class="fa fa-arrow-left"></i> {{__('common.buttons.back')}}
                 </a>
               </div>

@@ -6,7 +6,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{ route('orders.index') }}">Danh sách đơn hàng</a>
+            <a href="{{ route('manage.orders.index') }}">Danh sách đơn hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -27,9 +27,9 @@
               </div>
               <div class="actions">
                 <div class="btn-group btn-group-devided">
-                  <a href="{{ route('orders.index') }}" class="btn default btn-circle">{{ __('common.buttons.cancel') }}</a>
+                  <a href="{{ route('manage.orders.index') }}" class="btn default btn-circle">{{ __('common.buttons.cancel') }}</a>
                   <button type="submit" name="submit" class="btn green  btn-circle" id="submit_form">{{ __('common.buttons.save') }}</button>
-                  <a  href="{{ route('orders.index') }}"  class="btn green btn-circle ">Gửi lại email</a>
+                  <a  href="{{ route('manage.orders.index') }}"  class="btn green btn-circle ">Gửi lại email</a>
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
                                   <tr>
                                     <td>{{ $count }}</td>
                                     <td>
-                                      <a href="{{ route('products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
+                                      <a href="{{ route('manage.products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
                                     </td>
                                     @php
                                       $key = 'order_products.'.$product->product_id.'.quantity';

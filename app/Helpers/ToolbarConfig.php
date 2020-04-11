@@ -6,7 +6,7 @@
  * Date: 3/8/2018
  * Time: 9:51 AM
  */
-namespace App\Helppers;
+namespace App\Helpers;
 class ToolbarConfig
 {
     public $limit = 12;

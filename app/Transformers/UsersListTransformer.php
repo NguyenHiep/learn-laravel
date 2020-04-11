@@ -15,7 +15,7 @@ class UsersListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('admins.edit', $routeParams),
+                    'href'  => route('manage.admins.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -26,7 +26,7 @@ class UsersListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('admins.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.admins.destroy', $routeParams)
                 ]
             ]
         ];

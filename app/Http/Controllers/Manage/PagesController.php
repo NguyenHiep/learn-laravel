@@ -46,7 +46,7 @@ class PagesController extends BackendController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -95,7 +95,7 @@ class PagesController extends BackendController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -128,13 +128,13 @@ class PagesController extends BackendController
             $pages->fill($inputs);
             $pages->save();
             DB::commit();
-            return redirect()->route('pages.index')->with([
+            return redirect()->route('manage.pages.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error($e->getMessage(), __METHOD__);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->with([
             'message' => __('system.message.errors', ['errors' => 'Create page failed!']),
@@ -158,7 +158,7 @@ class PagesController extends BackendController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -193,14 +193,14 @@ class PagesController extends BackendController
             $pages = Pages::findOrFail($id);
             $pages->update($inputs);
             DB::commit();
-            return redirect()->route('pages.index')->with([
+            return redirect()->route('manage.pages.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
         
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error($e->getMessage(), __METHOD__);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->withInput($inputs)->with([
             'message' => __('system.message.errors', ['errors' => 'Update page is failed!']),
@@ -212,7 +212,7 @@ class PagesController extends BackendController
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -234,7 +234,7 @@ class PagesController extends BackendController
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error($e->getMessage(), __METHOD__);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
 
         return response()->json([

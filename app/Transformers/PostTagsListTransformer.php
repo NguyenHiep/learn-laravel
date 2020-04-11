@@ -15,7 +15,7 @@ class PostTagsListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('tags.edit', $routeParams),
+                    'href'  => route('manage.tags.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -26,7 +26,7 @@ class PostTagsListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('tags.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.tags.destroy', $routeParams)
                 ]
             ]
         ];

@@ -16,7 +16,7 @@ class CustomersListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('customers.edit', $routeParams),
+                    'href'  => route('manage.customers.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -27,7 +27,7 @@ class CustomersListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('customers.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.customers.destroy', $routeParams)
                 ]
             ]
         ];

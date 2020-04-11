@@ -87,17 +87,17 @@ class PermissionsTableSeeder extends Seeder
         // Update role for user
         foreach ($permissions as $permission) {
             Permission::updateOrCreate([
-                'guard_name' => 'admin',
+                'guard_name' => 'user',
                 'name'       => $permission
             ]);
         }
 
         //Assign role to admins
         $roleAdmin = Role::updateOrCreate([
-            'guard_name' => 'admin',
+            'guard_name' => 'user',
             'name'       => 'Supper Admin'
         ]);
-        $roleAdmin->givePermissionTo(Permission::where('guard_name', 'admin')->get());
+        $roleAdmin->givePermissionTo(Permission::where('guard_name', 'user')->get());
 
         $user = User::where('email', 'admin@gmail.com')->first();
         $user->assignRole($roleAdmin);

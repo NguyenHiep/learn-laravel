@@ -16,7 +16,7 @@ class RolesListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.show'),
                     'class' => 'btn btn-primary',
-                    'href'  => route('roles.show', $routeParams),
+                    'href'  => route('manage.roles.show', $routeParams),
                 ]
             ],
             'edit'   => [
@@ -24,7 +24,7 @@ class RolesListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('roles.edit', $routeParams),
+                    'href'  => route('manage.roles.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -35,7 +35,7 @@ class RolesListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('roles.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.roles.destroy', $routeParams)
                 ]
             ]
         ];

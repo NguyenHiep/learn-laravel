@@ -119,7 +119,7 @@ class AdminsController extends Controller
             $user = $this->repository->create($inputs);
             $user->assignRole($request->input('roles'));
             DB::commit();
-            return redirect()->route('admins.index')->with([
+            return redirect()->route('manage.admins.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
@@ -191,7 +191,7 @@ class AdminsController extends Controller
                 $user->assignRole($request->input('roles'));
             }
             DB::commit();
-            return redirect()->route('admins.index')->with([
+            return redirect()->route('manage.admins.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);

@@ -7,7 +7,7 @@
       <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
-          <li><a href="{{route('products.index')}}">Sản phẩm</a><i class="fa fa-circle"></i></li>
+          <li><a href="{{route('manage.products.index')}}">Sản phẩm</a><i class="fa fa-circle"></i></li>
           <li><span>Tất cả sản phẩm</span></li>
         </ul>
       </div>
@@ -18,7 +18,7 @@
               <div class="caption">
                 <i class="icon-graph"></i>Tất cả sản phẩm </div>
               <div class="actions">
-                <a class="btn green" href="{{ route('products.create') }}">{{__('common.buttons.create')}}
+                <a class="btn green" href="{{ route('manage.products.create') }}">{{__('common.buttons.create')}}
                   <i class="fa fa-plus"></i></a>
               </div>
             </div>
@@ -26,7 +26,7 @@
               <div class="table-container">
                 @includeIf('manage.blocks.partials.dataTable', [
                    'id'        => 'products',
-                   'routeAjax' => route('products.index'),
+                   'routeAjax' => route('manage.products.index'),
                    'columns'   => $columns,
                    'fields'    => $fields,
                 ])

@@ -17,7 +17,7 @@ class PostMediasListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('medias.edit', $routeParams),
+                    'href'  => route('manage.medias.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -28,7 +28,7 @@ class PostMediasListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('medias.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.medias.destroy', $routeParams)
                 ]
             ]
         ];

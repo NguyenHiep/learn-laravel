@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('settings.index')}}">{{__('static.sidebars.manage.medias.title')}}</a>
+            <a href="{{route('manage.settings.index')}}">{{__('static.sidebars.manage.medias.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -116,7 +116,7 @@
                 -->
               </ul>
               <div class="button-actions clearfix">
-                <a href="javascript:void(0)" data-url="{{route('medias.index')}}" data-id="{{$record->id}}" onclick="return confirm('Bạn thật sự muốn xóa');" class="pull-left text-left js-action-medias">Xóa vĩnh viễn</a>
+                <a href="javascript:void(0)" data-url="{{route('manage.medias.index')}}" data-id="{{$record->id}}" onclick="return confirm('Bạn thật sự muốn xóa');" class="pull-left text-left js-action-medias">Xóa vĩnh viễn</a>
                 <button type="submit"  class="btn btn-danger pull-right text-right">Cập nhật</button>
               </div>
             </div>

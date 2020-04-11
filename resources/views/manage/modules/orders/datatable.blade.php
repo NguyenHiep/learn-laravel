@@ -8,7 +8,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('orders.index')}}">Danh sách đơn hàng</a>
+            <a href="{{route('manage.orders.index')}}">Danh sách đơn hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>

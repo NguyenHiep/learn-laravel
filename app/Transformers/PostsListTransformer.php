@@ -17,7 +17,7 @@ class PostsListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('posts.edit', $routeParams),
+                    'href'  => route('manage.posts.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -28,7 +28,7 @@ class PostsListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('posts.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.posts.destroy', $routeParams)
                 ]
             ]
         ];

@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use App\Observers\ProductsObserver;
-use App\Helppers\ToolbarConfig;
+use App\Helpers\ToolbarConfig;
 use App\Model\ProductAttributes;
 
 class Products extends BaseModel

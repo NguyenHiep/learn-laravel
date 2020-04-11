@@ -43,7 +43,7 @@ class CommentsController extends BackendController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
     public function index()
@@ -124,7 +124,7 @@ class CommentsController extends BackendController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -137,7 +137,7 @@ class CommentsController extends BackendController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -151,15 +151,15 @@ class CommentsController extends BackendController
             \DB::beginTransaction();
             $comment->update($inputs);
             \DB::commit();
-            return redirect()->route('comments.index')->with([
+            return redirect()->route('manage.comments.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
         } catch (\Exception $e) {
             \DB::rollBack();
-            \Log::error([$e->getMessage(), __METHOD__]);
+            \Log::error(__METHOD__, [$e->getMessage()]);
         }
-        return redirect()->route('comments.edit', ['id' => $comment->id])->withInput($inputs)->with([
+        return redirect()->route('manage.comments.edit', ['id' => $comment->id])->withInput($inputs)->with([
             'message' => __('system.message.error', ['errors' => 'Update comment is failed']),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
@@ -169,7 +169,7 @@ class CommentsController extends BackendController
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -191,7 +191,7 @@ class CommentsController extends BackendController
             ]);
         } catch (\Exception $e) {
             \DB::rollBack();
-            \Log::error([$e->getMessage(), __METHOD__]);
+            \Log::error(__METHOD__, [$e->getMessage()]);
         }
         return response()->json([
             'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
@@ -244,14 +244,14 @@ class CommentsController extends BackendController
 
                     \DB::commit();
 
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     \DB::rollBack();
-                    \Log::error($e->getMessage(), __METHOD__);
+                    \Log::error(__METHOD__, [$e->getMessage()]);
                     session()->flash('message', __('system.message.errors',['errors' => $e->getMessage()]));
                     session()->flash('status', self::CTRL_MESSAGE_ERROR);
                 }
 
-                return redirect()->route('comments.index');
+                return redirect()->route('manage.comments.index');
 
             }else{
                 \Log::warning('Bad request, invalid CSRF token.', __METHOD__);

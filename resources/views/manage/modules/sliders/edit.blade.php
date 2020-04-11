@@ -7,7 +7,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('sliders.index')}}">Slider</a>
+            <a href="{{route('manage.sliders.index')}}">Slider</a>
             <i class="fa fa-circle"></i>
           </li>
           <li><span>Cập nhật slider</span></li>
@@ -28,7 +28,7 @@
                 <span class="caption-subject font-dark sbold uppercase">Cập nhật slider</span>
               </div>
               <div class="actions">
-                <a href="{{ route('sliders.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.sliders.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
             </div>
@@ -127,7 +127,7 @@
                 <div class="row">
                   <div class="col-md-offset-3 col-md-9">
                     <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                    <a href="{{ route('sliders.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                    <a href="{{ route('manage.sliders.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                   </div>
                 </div>
               </div>

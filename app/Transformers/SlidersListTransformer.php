@@ -15,7 +15,7 @@ class SlidersListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('sliders.edit', $routeParams),
+                    'href'  => route('manage.sliders.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -26,7 +26,7 @@ class SlidersListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('sliders.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.sliders.destroy', $routeParams)
                 ]
             ]
         ];

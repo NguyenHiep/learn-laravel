@@ -11,7 +11,7 @@ use App\Model\Categories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use App\Helppers\Uploads;
+use App\Helpers\Uploads;
 use App\DataTables\ProductsDataTable;
 
 class ProductsController extends BackendController
@@ -65,7 +65,7 @@ class ProductsController extends BackendController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
     public function index()
@@ -115,7 +115,7 @@ class ProductsController extends BackendController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -130,7 +130,7 @@ class ProductsController extends BackendController
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -167,14 +167,14 @@ class ProductsController extends BackendController
                 $product->productAttributes()->createMany($inputs['attributes']);
             }
             DB::commit();
-            return redirect()->route('products.index')->with([
+            return redirect()->route('manage.products.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
 
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error( __METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->withInput($inputs)->with([
             'message' => __('system.message.errors', ['errors' => 'Create product is failed']),
@@ -198,7 +198,7 @@ class ProductsController extends BackendController
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -224,7 +224,7 @@ class ProductsController extends BackendController
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
     public function update(Request $request, $id)
@@ -267,15 +267,15 @@ class ProductsController extends BackendController
                 }
             }
             DB::commit();
-            return redirect()->route('products.index')->with([
+            return redirect()->route('manage.products.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
-        return redirect()->route('products.edit', ['id' => $product->id])->withInput($inputs)->with([
+        return redirect()->route('manage.products.edit', ['id' => $product->id])->withInput($inputs)->with([
             'message' => __('system.message.errors', ['errors' => __('Update product is failed')]),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
@@ -286,7 +286,7 @@ class ProductsController extends BackendController
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function destroy($id)
@@ -302,7 +302,7 @@ class ProductsController extends BackendController
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
                 'status'  => self::CTRL_MESSAGE_ERROR
@@ -345,7 +345,7 @@ class ProductsController extends BackendController
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => $e->getMessage()]),
                 'status'  => self::CTRL_MESSAGE_ERROR

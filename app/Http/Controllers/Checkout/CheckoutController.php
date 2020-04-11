@@ -9,8 +9,8 @@ use Carbon\Carbon;
 use Session;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use App\Helppers\Cart;
+use Log;
+use App\Helpers\Cart;
 
 class CheckoutController extends FrontendController
 {
@@ -123,7 +123,7 @@ class CheckoutController extends FrontendController
 
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->withInput($inputs)->with([
             'message' => __('system.message.errors', ['errors' => 'Create order is failed']),

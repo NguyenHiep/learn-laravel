@@ -8,7 +8,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('sliders.index')}}">Sliders</a>
+            <a href="{{route('manage.sliders.index')}}">Sliders</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -28,7 +28,7 @@
               </div>
               <div class="tools"></div>
               <div class="actions">
-                <a class="btn green" href="{{ route('sliders.create') }}"> {{__('common.buttons.create')}}
+                <a class="btn green" href="{{ route('manage.sliders.create') }}"> {{__('common.buttons.create')}}
                   <i class="fa fa-plus"></i>
                 </a>
               </div>
@@ -37,7 +37,7 @@
               <div class="table-container">
                 @includeIf('manage.blocks.partials.dataTable', [
                    'id'        => 'sliders',
-                   'routeAjax' => route('sliders.index'),
+                   'routeAjax' => route('manage.sliders.index'),
                    'columns'   => $columns,
                    'fields'    => $fields,
                 ])

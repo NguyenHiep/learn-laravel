@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helppers\ToolbarConfig;
+use App\Helpers\ToolbarConfig;
 use App\Model\Sliders;
 use App\Model\Products;
 

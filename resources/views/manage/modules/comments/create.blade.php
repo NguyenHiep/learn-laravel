@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('comments.index')}}">{{__('static.manage.comments.page_title')}}</a>
+            <a href="{{route('manage.comments.index')}}">{{__('static.manage.comments.page_title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -107,7 +107,7 @@
                 @endif
               </div>
               <div class="form-group clearfix">
-                <a href="{{ route('comments.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.comments.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" class="btn green pull-right">Đăng bình luận</button>
               </div>
             </div>

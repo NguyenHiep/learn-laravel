@@ -69,7 +69,7 @@ class ContactController extends FrontendController
             ]);
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->with([
             'message' => __('system.message.errors', ['errors' => 'Create contact failed!']),

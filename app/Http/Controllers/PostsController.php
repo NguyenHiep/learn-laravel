@@ -73,7 +73,7 @@ class PostsController extends FrontendController
 
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->withInput($inputs)->with([
             'message' => __('system.message.comment.failed'),

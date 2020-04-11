@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use Notifiable, SoftDeletes, HasRoles;
 
-    protected $guard_name = 'admin';
+    protected $guard_name = 'user';
 
     /**
      * The attributes that should be mutated to dates.
@@ -74,8 +74,4 @@ class User extends Authenticatable
         return $query->where('level', '1');
     }
 
-    public function users()
-    {
-        return $this->hasMany('App\Model\Medias');
-    }
 }

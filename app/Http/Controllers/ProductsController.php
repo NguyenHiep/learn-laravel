@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Categories;
 use App\Model\Products;
 use Illuminate\Http\Request;
-use App\Helppers\ToolbarConfig;
+use App\Helpers\ToolbarConfig;
 
 class ProductsController extends FrontendController
 {

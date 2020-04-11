@@ -6,7 +6,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('pages.index')}}">{{__('static.sidebars.manage.pages.title')}}</a>
+            <a href="{{route('manage.pages.index')}}">{{__('static.sidebars.manage.pages.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -16,7 +16,7 @@
       </div>
       <h3 class="page-title"> {{__('static.sidebars.manage.pages.creates')}}  </h3>
       <div class="row">
-        {!! Form::open(['route' => 'pages.store', 'files' => true]) !!}
+        {!! Form::open(['route' => 'manage.pages.store', 'files' => true]) !!}
         <div class="col-md-9">
           <div class="portlet light bordered">
             <div class="portlet-title">
@@ -111,7 +111,7 @@
               </div>
               -->
               <div class="form-group clearfix">
-                <a href="{{ route('pages.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.pages.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" class="btn green pull-right">Đăng bài viết</button>
               </div>
             </div>

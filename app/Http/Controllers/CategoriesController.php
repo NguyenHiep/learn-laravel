@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Categories;
-use App\Helppers\ToolbarConfig;
+use App\Helpers\ToolbarConfig;
 use App\Model\Products;
 
 class CategoriesController extends FrontendController

@@ -6,7 +6,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('manage')}}">{{__('static.sidebars.manage.manage')}}</a>
+            <a href="{{route('manage.dashboard')}}">{{__('static.sidebars.manage.manage')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -26,7 +26,7 @@
                 <div class="table-container">
                   @includeIf('manage.blocks.partials.dataTable', [
                      'id'        => 'comments',
-                     'routeAjax' => route('comments.index'),
+                     'routeAjax' => route('manage.comments.index'),
                      'columns'   => $columns,
                      'fields'    => $fields,
                   ])

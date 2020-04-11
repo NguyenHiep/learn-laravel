@@ -16,7 +16,7 @@ class User extends BaseModel implements Transformable
 {
     use TransformableTrait, HasRoles;
 
-    protected $guard_name = 'admin';
+    protected $guard_name = 'user';
 
     protected $table = 'users';
 

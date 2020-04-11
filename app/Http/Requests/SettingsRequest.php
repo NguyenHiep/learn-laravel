@@ -27,8 +27,8 @@ class SettingsRequest extends FormRequest
             'company_name'      => 'required|string',
             'company_zip'       => 'required|max:8',
             'company_address'   => 'required|string',
-            'company_tel'       => 'max:13',
-            'company_fax'       => 'max:13',
+            'company_tel'       => 'nullable|max:13',
+            'company_fax'       => 'nullable|max:13',
             'company_copyright' => 'required|string',
             'about_privacy'     => 'required|string',
             'about_terms'       => 'required|string',
@@ -40,10 +40,10 @@ class SettingsRequest extends FormRequest
                 'required',
                 'regex:/[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)/u'
             ],
-            'email1'            => 'email',
-            'mail_smtp_port'    => 'max:3',
-            'company_email'     => 'email|max:255',
-            'company_logo'      => 'image|max:1024',
+            'email1'            => 'nullable|email',
+            'mail_smtp_port'    => 'nullable|max:3',
+            'company_email'     => 'nullable|email|max:255',
+            'company_logo'      => 'nullable|image|max:1024',
 
         ];
     }

@@ -6,7 +6,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('posts.index')}}">{{__('static.sidebars.manage.posts.title')}}</a>
+            <a href="{{route('manage.posts.index')}}">{{__('static.sidebars.manage.posts.title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -17,7 +17,7 @@
       <h3 class="page-title"> {{__('static.sidebars.manage.posts.category')}}  </h3>
       <div class="row">
         <div class="col-md-5">
-        {!! Form::open(['route' => 'category.store', 'files' => true]) !!}
+        {!! Form::open(['route' => 'manage.category.store', 'files' => true]) !!}
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -115,7 +115,7 @@
               </div>
               <div class="form-actions">
                   <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                  <a href="{{ route('category.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                  <a href="{{ route('manage.category.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@
               <div class="table-container">
                 @includeIf('manage.blocks.partials.dataTable', [
                    'id'        => 'category',
-                   'routeAjax' => route('category.index'),
+                   'routeAjax' => route('manage.category.index'),
                    'columns'   => $columns,
                    'fields'    => $fields,
                 ])

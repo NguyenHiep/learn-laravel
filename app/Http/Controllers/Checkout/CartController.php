@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Redirect;
 use Session;
 use App\Http\Controllers\FrontendController;
-use App\Helppers\Cart;
+use App\Helpers\Cart;
 
 class CartController extends FrontendController
 {

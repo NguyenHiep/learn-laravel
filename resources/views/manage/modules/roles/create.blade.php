@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('roles.index')}}">{{__('static.sidebars.manage.customers.roles')}}</a>
+            <a href="{{route('manage.roles.index')}}">{{__('static.sidebars.manage.customers.roles')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -23,7 +23,7 @@
       <h3 class="page-title">Thêm mới vai trò</h3>
       <div class="row">
         <div class="col-md-12">
-        {!! Form::open(['route' => 'roles.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal', 'files' => true]) !!}
+        {!! Form::open(['route' => 'manage.roles.store', 'id' => 'form_sample_3', 'class'=> 'form-horizontal', 'files' => true]) !!}
         <!-- BEGIN VALIDATION STATES-->
           <div class="portlet light portlet-fit portlet-form bordered">
             <div class="portlet-title">
@@ -32,7 +32,7 @@
                 <span class="caption-subject font-dark sbold uppercase">Nhập thông tin vai trò</span>
               </div>
               <div class="actions">
-                <a href="{{ route('roles.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.roles.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
             </div>
@@ -69,7 +69,7 @@
                 <div class="row">
                   <div class="col-md-offset-3 col-md-9">
                     <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                    <a href="{{ route('roles.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                    <a href="{{ route('manage.roles.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                   </div>
                 </div>
               </div>

@@ -13,7 +13,7 @@
       <h3 class="page-title"> {{__('static.sidebars.manage.posts.category')}}  </h3>
       <div class="row">
         <div class="col-md-5">
-        {!! Form::open(['route' => 'categories.store', 'files' => true]) !!}
+        {!! Form::open(['route' => 'manage.categories.store', 'files' => true]) !!}
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
@@ -111,7 +111,7 @@
               </div>
               <div class="form-actions">
                   <button type="submit" class="btn green">{{__('common.buttons.save')}}</button>
-                  <a href="{{ route('categories.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                  <a href="{{ route('manage.categories.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@
               <div class="table-container">
                 @includeIf('manage.blocks.partials.dataTable', [
                    'id'        => 'categories',
-                   'routeAjax' => route('categories.index'),
+                   'routeAjax' => route('manage.categories.index'),
                    'columns'   => $columns,
                    'fields'    => $fields,
                 ])

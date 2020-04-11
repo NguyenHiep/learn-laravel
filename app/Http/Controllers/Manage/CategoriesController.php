@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use App\Helppers\Uploads;
+use App\Helpers\Uploads;
 
 class CategoriesController extends BackendController
 {
@@ -36,12 +36,12 @@ class CategoriesController extends BackendController
     {
 
         return Validator::make($data, [
-            'name'              => 'required|string|unique:categories,name,' . $id,
-            'slug'              => 'string|unique:categories,slug,' . $id,
-            'parent_id'         => 'numeric|min:0',
-            'image'             => 'image|max:1024',
-            'description'       => 'required|string',
-            'status'            => 'required|min:1|max:2',
+            'name'        => 'required|string|unique:categories,name,' . $id,
+            'slug'        => 'string|unique:categories,slug,' . $id,
+            'parent_id'   => 'numeric|min:0',
+            'image'       => 'image|max:1024',
+            'description' => 'required|string',
+            'status'      => 'required|min:1|max:2',
         ]);
     }
 
@@ -58,13 +58,13 @@ class CategoriesController extends BackendController
             return $dataTables->getTransformerData();
         }
         $fields = [
-            'id' => [
+            'id'      => [
                 'label' => __('common.categories.id')
             ],
-            'name' => [
+            'name'    => [
                 'label' => __('common.categories.name')
             ],
-            'status' => [
+            'status'  => [
                 'label' => __('common.categories.status')
             ],
             'actions' => [
@@ -85,17 +85,18 @@ class CategoriesController extends BackendController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-       return view('manage.modules.categories.index');
+        return view('manage.modules.categories.index');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function store(Request $request)
     {
@@ -106,12 +107,12 @@ class CategoriesController extends BackendController
         }
         $inputs['slug'] = $slug;
         $validator = self::validator($inputs);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
         $image = Uploads::upload($request, 'image', UPLOAD_CATEGORY);
         if ($image) {
-            $inputs[ 'image' ] = $image;
+            $inputs['image'] = $image;
         }
 
         try {
@@ -120,14 +121,14 @@ class CategoriesController extends BackendController
             $categories->fill($inputs);
             $categories->save();
             DB::commit();
-            return redirect()->route('categories.index')->with([
+            return redirect()->route('manage.categories.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
 
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
         return redirect()->back()->withInput($inputs)->with([
             'message' => __('system.message.errors', ['errors' => 'Create category is failed']),
@@ -139,8 +140,8 @@ class CategoriesController extends BackendController
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     * @return Response
+     * @param int $id
+     * @return void
      */
     public function show($id)
     {
@@ -150,8 +151,8 @@ class CategoriesController extends BackendController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
-     * @return Response
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -168,8 +169,9 @@ class CategoriesController extends BackendController
     /**
      * Update the specified resource in storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function update(Request $request, $id)
     {
@@ -189,22 +191,22 @@ class CategoriesController extends BackendController
         }
         $image = Uploads::upload($request, 'image', UPLOAD_CATEGORY);
         if ($image) {
-            $inputs[ 'image' ] = $image;
+            $inputs['image'] = $image;
         }
 
         try {
             DB::beginTransaction();
             $categories->update($inputs);
             DB::commit();
-            return redirect()->route('categories.index')->with([
+            return redirect()->route('manage.categories.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
-        return redirect()->route('categories.edit', ['id' => $categories->id])->withInput($inputs)->with([
+        return redirect()->route('manage.categories.edit', ['id' => $categories->id])->withInput($inputs)->with([
             'message' => __('system.message.error', ['errors' => 'Update category is failed']),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
@@ -213,8 +215,8 @@ class CategoriesController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

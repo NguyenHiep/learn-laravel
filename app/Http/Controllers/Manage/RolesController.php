@@ -99,7 +99,7 @@ class RolesController extends Controller
             $role = $this->repository->create($inputs);
             $role->syncPermissions($request->input('permission'));
             DB::commit();
-            return redirect()->route('roles.index')->with([
+            return redirect()->route('manage.roles.index')->with([
                 'message' => __('system.message.create'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
@@ -160,7 +160,7 @@ class RolesController extends Controller
             $role = $this->repository->update($inputs, $id);
             $role->syncPermissions($request->input('permission'));
             DB::commit();
-            return redirect()->route('roles.index')->with([
+            return redirect()->route('manage.roles.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);

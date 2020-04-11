@@ -26,7 +26,7 @@ class MediasController extends BackendController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -74,7 +74,7 @@ class MediasController extends BackendController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -84,7 +84,8 @@ class MediasController extends BackendController
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store()
     {
@@ -152,7 +153,7 @@ class MediasController extends BackendController
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -180,15 +181,15 @@ class MediasController extends BackendController
                 'lightbox'    => $mediaInputs['lightbox'] ?? 0
             ]);
             \DB::commit();
-            return redirect()->route('medias.index')->with([
+            return redirect()->route('manage.medias.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
         } catch (\Exception $e) {
             \DB::rollBack();
-            \Log::error([$e->getMessage(), __METHOD__]);
+            \Log::error(__METHOD__, [$e->getMessage()]);
         }
-        return redirect()->route('medias.edit', ['id' => $medias->id])->withInput($mediaInputs)->with([
+        return redirect()->route('manage.medias.edit', ['id' => $medias->id])->withInput($mediaInputs)->with([
             'message' => __('system.message.error', ['errors' => 'Update medias info is failed']),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
@@ -198,7 +199,7 @@ class MediasController extends BackendController
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function destroy($id)
@@ -223,7 +224,7 @@ class MediasController extends BackendController
             ]);
         } catch (\Exception $e) {
             \DB::rollBack();
-            \Log::error([$e->getMessage(), __METHOD__]);
+            \Log::error(__METHOD__, [$e->getMessage()]);
         }
         return response()->json([
             'message' => __('system.message.errors', ['errors' => $e->getMessage()]),

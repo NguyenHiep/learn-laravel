@@ -19,7 +19,7 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane " id="medias_uploads_contents">
-              <form action="{{route('medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone-contents"
+              <form action="{{route('manage.medias.store')}}" class="dropzone dropzone-file-area" id="my-dropzone-contents"
                     enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <h3 class="sbold">Thả tập tin vào đây</h3>

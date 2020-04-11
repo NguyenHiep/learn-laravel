@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helppers;
+namespace App\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -31,7 +31,7 @@ class Uploads
                 $request->file($key)->move($uploadPath, $fileName);
                 return $fileName;
             } else {
-                Log::error(['Upload is failed', __METHOD__]);
+                Log::error(__METHOD__, ['Upload is failed']);
                 return self::UPLOAD_FILE_ERROR;
             }
         }
@@ -45,7 +45,7 @@ class Uploads
      * @param $path_save path upload
      * @param array $rule validation for image
      * @param null $new_name
-     * @return $this|array|bool
+     * @return \Illuminate\Http\RedirectResponse|int|array
      */
     public static function multiple_upload(
         Request $request,
@@ -83,7 +83,7 @@ class Uploads
                     $image->move($uploadPath, $fileName);
                     $galary_img[] = $fileName;
                 } else {
-                    Log::error(['Upload is failed', __METHOD__]);
+                    Log::error(__METHOD__, ['Upload is failed']);
                     return self::UPLOAD_FILE_ERROR;
                 }
 

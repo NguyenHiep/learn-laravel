@@ -14,7 +14,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 class PermissionRepositoryEloquent extends BaseRepository implements PermissionRepository
 {
 
-    protected $guard_name = 'admin';
+    protected $guard_name = 'user';
 
     /**
      * Specify Model class name

@@ -102,7 +102,7 @@ class OrdersController extends BackendController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -124,7 +124,7 @@ class OrdersController extends BackendController
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -136,7 +136,7 @@ class OrdersController extends BackendController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -149,7 +149,7 @@ class OrdersController extends BackendController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -183,15 +183,15 @@ class OrdersController extends BackendController
             }
 
             DB::commit();
-            return redirect()->route('orders.index')->with([
+            return redirect()->route('manage.orders.index')->with([
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error([$e->getMessage(), __METHOD__]);
+            Log::error(__METHOD__, [$e->getMessage()]);
         }
-        return redirect()->route('orders.edit', ['id' => $order->id])->withInput($inputs)->with([
+        return redirect()->route('manage.orders.edit', ['id' => $order->id])->withInput($inputs)->with([
             'message' => __('system.message.error', ['errors' => 'Update order is failed']),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
@@ -217,7 +217,7 @@ class OrdersController extends BackendController
         // TODO: Sent mail confirm orders
         $order = Orders::with('products', 'deliveries')->findOrFail($id);
         Mail::to("nguyenminhhiep9x@gmail.com")->send(new OrderConfirm($order));
-        return redirect()->route('orders.index')->with([
+        return redirect()->route('manage.orders.index')->with([
             'message' => __('system.message.update'),
             'status'  => self::CTRL_MESSAGE_SUCCESS,
         ]);

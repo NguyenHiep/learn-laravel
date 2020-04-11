@@ -15,7 +15,7 @@ class CategoriesListTransformer extends BaseTransformer
                 'attributes' => [
                     'title' => __('common.buttons.edit'),
                     'class' => 'btn btn-warning js-action-list-rowlink-val',
-                    'href'  => route('categories.edit', $routeParams),
+                    'href'  => route('manage.categories.edit', $routeParams),
                 ]
             ],
             'delete' => [
@@ -26,7 +26,7 @@ class CategoriesListTransformer extends BaseTransformer
                     'href'          => 'javascript:void(0);',
                     'onclick'       => 'deleteItem(this)',
                     'data-type'     => 'DELETE',
-                    'data-ajax-url' => route('categories.destroy', $routeParams)
+                    'data-ajax-url' => route('manage.categories.destroy', $routeParams)
                 ]
             ]
         ];

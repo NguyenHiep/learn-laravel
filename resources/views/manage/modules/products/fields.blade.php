@@ -115,7 +115,7 @@
                                                             <button type="button"
                                                                 class="btn btn-default js-action-delete-attribute-row"
                                                                 data-attribute-id="{{$attributes->id}}"
-                                                                data-url="{{ route('products.attributes.delete', $attributes->id) }}"
+                                                                data-url="{{ route('manage.products.attributes.delete', $attributes->id) }}"
                                                                 title="Xóa thuộc tính">
                                                                 <i class="fa fa-trash"></i>
                                                             </button>

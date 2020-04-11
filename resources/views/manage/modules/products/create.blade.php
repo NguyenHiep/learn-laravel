@@ -10,7 +10,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('products.index')}}">Sản phẩm</a>
+            <a href="{{route('manage.products.index')}}">Sản phẩm</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -23,7 +23,7 @@
       <h3 class="page-title"> Thêm mới sản phẩm </h3>
       <!-- END PAGE TITLE-->
       <div class="row">
-        {!! Form::open(['route' => 'products.store', 'files' => true, 'class' => 'form-horizontal form-row-seperated']) !!}
+        {!! Form::open(['route' => 'manage.products.store', 'files' => true, 'class' => 'form-horizontal form-row-seperated']) !!}
         <div class="col-md-9">
             <div class="portlet">
               <div class="portlet-title">
@@ -69,7 +69,7 @@
                 @endif
               </div>
               <div class="form-group clearfix">
-                <a href="{{ route('products.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.products.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" class="btn green pull-right">Đăng sản phẩm</button>
               </div>
             </div>

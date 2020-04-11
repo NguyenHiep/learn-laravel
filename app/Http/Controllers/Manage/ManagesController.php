@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\BackendController;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class ManagesController extends BackendController
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function index()
     {

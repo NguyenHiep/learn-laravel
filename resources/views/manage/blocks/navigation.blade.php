@@ -5,7 +5,7 @@
     <div class="page-header-inner ">
       <!-- BEGIN LOGO -->
       <div class="page-logo">
-        <a href="{{ route('manage') }}">
+        <a href="{{ route('manage.dashboard') }}">
           <img src="{{asset('/manages/assets/layouts/layout/img/logo.png')}}" alt="logo" class="logo-default"/> </a>
         <div class="menu-toggler sidebar-toggler"></div>
       </div>
@@ -18,24 +18,24 @@
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                data-close-others="true">
               <img alt="" class="img-circle" src="{{asset('/manages/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
-              <span class="username username-hide-on-mobile"> Nguyễn Hiệp </span>
+              <span class="username username-hide-on-mobile">{{ auth('user')->user()->username }}</span>
               <i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-default">
               <li>
-                <a href="/">
+                <a href="{{ route('manage.admins.edit',['id' => auth('user')->id()]) }}">
                   <i class="icon-user"></i> Thông tin tài khoản </a>
               </li>
             </ul>
           </li>
 
           <li class="dropdown">
-
-            <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout_form').submit();" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
-              Logout
-            </a>
-            {{ Form::open(['url' => '/logout', 'method' => 'POST', 'id' => 'logout_form']) }}
-            {!! Form::close() !!}
+            <a href="javascript:void(0)"
+               onclick="event.preventDefault(); document.getElementById('user-logout-form').submit();"
+               class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
+            <form id="user-logout-form" action="{{ route('manage.logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
           </li>
           <!-- END QUICK SIDEBAR TOGGLER -->
         </ul>

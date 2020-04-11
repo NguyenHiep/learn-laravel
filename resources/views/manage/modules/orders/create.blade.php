@@ -7,7 +7,7 @@
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{ route('orders.index') }}">Danh sách đơn hàng</a>
+            <a href="{{ route('manage.orders.index') }}">Danh sách đơn hàng</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
@@ -19,7 +19,7 @@
       <h3 class="page-title"> Tạo mới đơn hàng</h3>
       <div class="row">
         <div class="col-md-12">
-          {!! Form::open(['route' => 'orders.store']) !!}
+          {!! Form::open(['route' => 'manage.orders.store']) !!}
           <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
               <div class="caption">
@@ -27,7 +27,7 @@
                 <span class="caption-subject font-dark sbold uppercase"> Tạo mới đơn hàng</span>
               </div>
               <div class="actions">
-                <a href="{{ route('orders.index') }}" class="btn default">{{ __('common.buttons.cancel') }}</a>
+                <a href="{{ route('manage.orders.index') }}" class="btn default">{{ __('common.buttons.cancel') }}</a>
                 <button type="submit" name="submit" class="btn green" id="submit_form">{{ __('common.buttons.save') }}</button>
               </div>
             </div>

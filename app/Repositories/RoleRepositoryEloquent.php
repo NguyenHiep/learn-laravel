@@ -15,7 +15,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
 {
 
-    public $guard_name = 'admin';
+    public $guard_name = 'user';
 
     /**
      * Specify Model class name
