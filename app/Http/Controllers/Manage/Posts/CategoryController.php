@@ -24,6 +24,10 @@ class CategoryController extends BackendController
 
     public function __construct(PostCategoryRepository $repository)
     {
+        $this->middleware('permission:post-category-list', ['only' => ['index']]);
+        $this->middleware('permission:post-category-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:post-category-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:post-category-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
     }
     

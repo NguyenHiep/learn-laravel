@@ -2,7 +2,10 @@
 
 namespace App\Entities;
 
-use App\Entities\BaseModel as BaseModel;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Spatie\Permission\Traits\HasRoles;
@@ -12,13 +15,28 @@ use Spatie\Permission\Traits\HasRoles;
  *
  * @package namespace App\Entities;
  */
-class User extends BaseModel implements Transformable
+class User extends Authenticatable implements Transformable
 {
-    use TransformableTrait, HasRoles;
+    use Notifiable, SoftDeletes, TransformableTrait, HasRoles;
 
     protected $guard_name = 'user';
 
     protected $table = 'users';
+
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.

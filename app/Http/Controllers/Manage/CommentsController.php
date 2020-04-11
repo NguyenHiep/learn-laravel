@@ -20,6 +20,10 @@ class CommentsController extends BackendController
 
     public function __construct(CommentRepository $repository)
     {
+        $this->middleware('permission:comment-list', ['only' => ['index']]);
+        $this->middleware('permission:comment-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:comment-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:comment-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
     }
     

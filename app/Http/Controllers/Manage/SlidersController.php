@@ -25,6 +25,10 @@ class SlidersController extends BackendController
 
     public function __construct(SliderRepository $repository)
     {
+        $this->middleware('permission:slider-list', ['only' => ['index']]);
+        $this->middleware('permission:slider-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:slider-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:slider-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
     }
 

@@ -24,6 +24,10 @@ class PostsController extends BackendController
 
     public function __construct(PostRepository $repository)
     {
+        $this->middleware('permission:post-list', ['only' => ['index']]);
+        $this->middleware('permission:post-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:post-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:post-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
     }
     

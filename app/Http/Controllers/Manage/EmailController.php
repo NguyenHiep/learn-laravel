@@ -7,6 +7,15 @@ use App\Http\Controllers\BackendController;
 
 class EmailController extends BackendController
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:email-list', ['only' => ['index']]);
+        $this->middleware('permission:email-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:email-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:email-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

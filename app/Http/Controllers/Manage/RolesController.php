@@ -28,6 +28,10 @@ class RolesController extends Controller
 
     public function __construct(RoleRepository $repository, RoleValidator $validator)
     {
+        $this->middleware('permission:role-list', ['only' => ['index']]);
+        $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
         $this->validator = $validator;
     }

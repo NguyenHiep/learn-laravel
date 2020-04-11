@@ -8,6 +8,12 @@ use Illuminate\View\View;
 
 class ManagesController extends BackendController
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:dashboard-list', ['only' => ['index']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -13,6 +13,15 @@ use Illuminate\View\View;
 
 class SettingsController extends BackendController
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:setting-list', ['only' => ['index']]);
+        $this->middleware('permission:setting-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:setting-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:setting-delete', ['only' => ['destroy']]);
+    }
+
     const WEBSITE_INFO_ID = 1;
 
     /**

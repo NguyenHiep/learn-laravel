@@ -28,6 +28,10 @@ class CustomersController extends BackendController
 
     public function __construct(CustomerRepository $repository, CustomerValidator $validator)
     {
+        $this->middleware('permission:customer-list', ['only' => ['index']]);
+        $this->middleware('permission:customer-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:customer-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:customer-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
         $this->validator = $validator;
     }

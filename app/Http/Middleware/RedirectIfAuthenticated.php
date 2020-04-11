@@ -22,7 +22,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             if ($guard === $this->guard_manage) {
                 //user was authenticated with admin guard.
-                return redirect()->route('manage');
+                return redirect()->route('manage.dashboard');
             } else {
                 //default guard.
                 return redirect()->route('customer.dashboard');

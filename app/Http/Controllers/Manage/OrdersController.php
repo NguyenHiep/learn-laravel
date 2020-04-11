@@ -28,6 +28,10 @@ class OrdersController extends BackendController
 
     public function __construct(OrderRepository $repository)
     {
+        $this->middleware('permission:order-list', ['only' => ['index']]);
+        $this->middleware('permission:order-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:order-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:order-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
     }
     /**

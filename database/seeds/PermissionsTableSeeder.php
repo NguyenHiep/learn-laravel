@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\User;
+use App\Entities\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
@@ -77,6 +77,14 @@ class PermissionsTableSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
+            'role-list',
+            'role-create',
+            'role-edit',
+            'role-delete',
+            'email-list',
+            'email-create',
+            'email-edit',
+            'email-delete',
             'setting-list',
             'setting-create',
             'setting-edit',

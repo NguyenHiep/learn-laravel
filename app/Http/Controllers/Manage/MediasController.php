@@ -20,6 +20,10 @@ class MediasController extends BackendController
 
     public function __construct(PostMediaRepository $repository)
     {
+        $this->middleware('permission:media-list', ['only' => ['index']]);
+        $this->middleware('permission:media-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:media-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:media-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
     }
 

@@ -23,6 +23,10 @@ class PagesController extends BackendController
 
     public function __construct(PageRepository $repository)
     {
+        $this->middleware('permission:page-list', ['only' => ['index']]);
+        $this->middleware('permission:page-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:page-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:page-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
         parent::__construct();
     }

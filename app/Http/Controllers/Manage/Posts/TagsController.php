@@ -23,6 +23,10 @@ class TagsController extends BackendController
 
     public function __construct(PostTagRepository $repository)
     {
+        $this->middleware('permission:post-tag-list', ['only' => ['index']]);
+        $this->middleware('permission:post-tag-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:post-tag-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:post-tag-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
     }
     
