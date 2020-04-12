@@ -26,9 +26,27 @@ Route::prefix('manage')->name('manage.')->namespace('Manage')->group(function ()
         Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
         Route::post('/password/reset', 'ResetPasswordController@reset')->name('password.update');
     });
-
     // Backend route
     Route::middleware(['auth:user'])->group(function () {
+        # Package editor
+        Route::prefix('/filemanager')->name('unisharp.lfm.')->namespace('\UniSharp\LaravelFilemanager\Controllers')->group(function () {
+            Route::get('/', 'LfmController@show')->name('show');
+            Route::any('/upload', 'UploadController@upload')->name('upload');
+            Route::get('/errors', 'LfmController@getErrors')->name('getErrors');
+            Route::get('/jsonitems', 'ItemsController@getItems')->name('getItems');
+            Route::get('/move', 'ItemsController@move')->name('move');
+            Route::get('/domove', 'ItemsController@move')->name('domove');
+            Route::get('/newfolder', 'FolderController@getAddfolder')->name('getAddfolder');
+            Route::get('/folders', 'FolderController@getFolders')->name('getFolders');
+            Route::get('/crop', 'CropController@getCrop')->name('getCrop');
+            Route::get('/cropimage', 'CropController@getCropimage')->name('getCropimage');
+            Route::get('/cropnewimage', 'CropController@getNewCropimage')->name('getCropimage');
+            Route::get('/rename', 'RenameController@getRename')->name('getRename');
+            Route::get('/resize', 'ResizeController@getResize')->name('getResize');
+            Route::get('/doresize', 'ResizeController@performResize')->name('performResize');
+            Route::get('/download', 'DownloadController@getDownload')->name('getDownload');
+            Route::get('/delete', 'DeleteController@getDelete')->name('getDelete');
+        });
         Route::get('/', 'ManagesController@index')->name('dashboard');
         Route::resource('categories', 'CategoriesController');
         Route::post('products/attributes/delete/{id}', 'ProductsController@deleteAttribute')->name('products.attributes.delete')->where('id', '[0-9]+');

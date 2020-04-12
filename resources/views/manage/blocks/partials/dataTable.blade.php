@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered table-hover custom-table"
+<table class="table table-striped table-bordered table-hover custom-table js-action-list-rowlink"
        id="DataTable_{{ $id }}"
        role="grid"
        data-provide="datatables"

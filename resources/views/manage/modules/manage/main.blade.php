@@ -5,7 +5,7 @@
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
-            <h3 class="page-title"> Bảng điều khiển</h3>
+            <h1 class="page-title"> Ngày hiển thị <span class="font-weight-bold"><input type="text" name="selected_date" value="2020-04-13" style="background: transparent; border: 0; outline: none; font-weight: 400"/></span></h1>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat2 ">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="portlet-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover table-bordered">
+                                <table class="table table-striped table-hover table-bordered js-action-list-rowlink">
                                     <thead>
                                     <tr>
                                         <th> Id</th>
@@ -142,15 +142,42 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @if(count($latestOrder) > 0)
+                                        @foreach($latestOrder as $order)
+                                            <tr>
+                                                <td>{{ $order->id }}</td>
+                                                <td>{{ $order->deliveries->buyer_name }}</td>
+                                                <td>
+                                                    @php
+                                                        $status = $order->status;
+                                                        $statusText =__('selector.orders.status.'.$status);
+                                                        if ($status === 1) {
+                                                            $statusText =  '<span class="font-red-thunderbird">' . $statusText . '</span>';
+                                                        }
+                                                        if ($status === 2) {
+                                                            $statusText = '<span class="font-green-dark">' . $statusText . '</span>';
+                                                        }
+                                                        if ($status === 3) {
+                                                            $statusText = '<span class="font-yellow-gold">' . $statusText . '</span>';
+                                                        }
+                                                    @endphp
+                                                    {!! $statusText !!}
+                                                </td>
+                                                <td>
+                                                    {{ format_price($order->total) }}
+                                                    <a href="{{ route('manage.orders.show', ['id' => $order->id]) }}" class="js-action-list-rowlink-val"></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="4">{{ __('common.data_empty') }}</td>
+                                        </tr>
+                                    @endif
                                     <?php
                                     for($i = 0; $i < 10; $i++):
                                     ?>
-                                    <tr>
-                                        <td><?php echo 10 - $i;?></td>
-                                        <td>Nguyễn Hiệp </td>
-                                        <td> <span class="label label-sm label-warning"> Pending </span></td>
-                                        <td> 1.800.000 đ</td>
-                                    </tr>
+
                                     <?php
                                     endfor
                                     ?>
@@ -179,11 +206,16 @@
         .text-stat h3 {
             font-size: 13px;
         }
+        .dashboard-stat2 {
+            padding: 15px 15px 5px
+        }
     </style>
 @stop
 @section('scripts')
     @parent
     <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="{{asset('/manages/assets/global/plugins/moment.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/manages/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/manages/assets/global/plugins/counterup/jquery.waypoints.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/manages/assets/global/plugins/counterup/jquery.counterup.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/manages/assets/global/plugins/flot/jquery.flot.min.js')}}" type="text/javascript"></script>
@@ -191,4 +223,43 @@
     <script src="{{asset('/manages/assets/global/plugins/flot/jquery.flot.categories.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/manages/assets/pages/scripts/ecommerce-dashboard.js')}}" type="text/javascript"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
+    <script>
+      function dashboardDateRange() {
+        if (!jQuery().daterangepicker) {
+          return;
+        }
+        $('input[name="selected_date"]').daterangepicker({
+          singleDatePicker: true,
+          minYear: 1901,
+          locale: {
+            "format": "YYYY-MM-DD",
+            "daysOfWeek": [
+              "Su",
+              "Mo",
+              "Tu",
+              "We",
+              "Th",
+              "Fr",
+              "Sa"
+            ],
+            "monthNames": [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December"
+            ],
+            "firstDay": 1
+          }
+        });
+      }
+      dashboardDateRange();
+    </script>
 @stop

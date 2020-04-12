@@ -38,4 +38,9 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         return $this->model::with('deliveries')->select(['id', 'ordered_at', 'total', 'status']);
     }
 
+    public function getLatestOrder(int $limit = 10)
+    {
+        return $this->model::with('deliveries')->latest('id')->limit($limit)->get();
+    }
+
 }

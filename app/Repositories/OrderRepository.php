@@ -12,4 +12,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface OrderRepository extends RepositoryInterface
 {
     public function getListOrder();
+
+    public function getLatestOrder(int $limit = 10);
 }
