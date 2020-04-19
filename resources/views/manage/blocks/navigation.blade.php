@@ -17,13 +17,13 @@
           <li class="dropdown dropdown-user">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                data-close-others="true">
-              <img alt="" class="img-circle" src="{{asset('/manages/assets/layouts/layout/img/avatar3_small.jpg')}}"/>
+              <img alt="" class="img-circle" src="{{Storage::url(auth('user')->user()->avatar)}}"/>
               <span class="username username-hide-on-mobile">{{ auth('user')->user()->username }}</span>
               <i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-default">
               <li>
-                <a href="{{ route('manage.admins.edit',['id' => auth('user')->id()]) }}">
+                <a href="{{ route('manage.admins.edit',['admin' => auth('user')->id()]) }}">
                   <i class="icon-user"></i> Thông tin tài khoản </a>
               </li>
             </ul>

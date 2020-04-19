@@ -12,7 +12,7 @@
                         <div class="display">
                             <div class="number">
                                 <h3 class="font-green-sharp">
-                                    <span data-counter="counterup" data-value="10000000">0</span>
+                                    <span data-counter="counterup" data-value="{{$totalSales->total_sales}}">0</span>
                                     <small class="font-green-sharp">đ</small>
                                 </h3>
                                 <small>Tổng Doanh thu</small>
@@ -28,7 +28,7 @@
                         <div class="display">
                             <div class="number">
                                 <h3 class="font-red-haze">
-                                    <span data-counter="counterup" data-value="1349">0</span>
+                                    <span data-counter="counterup" data-value="{{$commentTotal}}">0</span>
                                 </h3>
                                 <small>Bình luận</small>
                             </div>
@@ -43,7 +43,7 @@
                         <div class="display">
                             <div class="number">
                                 <h3 class="font-blue-sharp">
-                                    <span data-counter="counterup" data-value="567"></span>
+                                    <span data-counter="counterup" data-value="{{$totalSales->total_order}}"></span>
                                 </h3>
                                 <small>Tổng Đơn hàng</small>
                             </div>
@@ -58,7 +58,7 @@
                         <div class="display">
                             <div class="number">
                                 <h3 class="font-purple-soft">
-                                    <span data-counter="counterup" data-value="276"></span>
+                                    <span data-counter="counterup" data-value="{{$customerTotal}}"></span>
                                 </h3>
                                 <small>Tổng Thành viên</small>
                             </div>
@@ -165,7 +165,7 @@
                                                 </td>
                                                 <td>
                                                     {{ format_price($order->total) }}
-                                                    <a href="{{ route('manage.orders.show', ['id' => $order->id]) }}" class="js-action-list-rowlink-val"></a>
+                                                    <a href="{{ route('manage.orders.show', ['order' => $order->id]) }}" class="js-action-list-rowlink-val"></a>
                                                 </td>
                                             </tr>
                                         @endforeach

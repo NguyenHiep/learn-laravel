@@ -43,26 +43,26 @@ class ProductsController extends BackendController
     {
         return Validator::make($data, [
             'name'                  => 'required|string|unique:products,name,' . $id,
-            'slug'                  => 'string|unique:products,slug,' . $id,
+            'slug'                  => 'required|string|unique:products,slug,' . $id,
             'description'           => 'required|string',
-            'short_description'     => 'string',
-            'category_id'           => 'string',
+            'short_description'     => 'nullable|string',
+            'category_id'           => 'nullable|string',
             'sku'                   => 'required|string|unique:products,sku,' . $id,
             'price'                 => 'required|numeric|min:0',
-            'sale_price'            => 'numeric|min:0',
+            'sale_price'            => 'nullable|numeric|min:0',
             'quantity'              => 'required|integer|min:0',
-            'status'                => 'string|numeric',
-            'meta_title'            => 'string|max:100',
-            'meta_keywords'         => 'string|max:1000',
-            'meta_description'      => 'string|max:255',
-            'brand_id'              => 'string',
-            'gallery_img'           => 'array',
-            'pictures'              => 'image|max:1024',
-            'attributes'            => 'array',
+            'status'                => 'required|string|numeric',
+            'meta_title'            => 'nullable|string|max:100',
+            'meta_keywords'         => 'nullable|string|max:1000',
+            'meta_description'      => 'nullable|string|max:255',
+            'brand_id'              => 'nullable|string',
+            'gallery_img'           => 'nullable|array',
+            'pictures'              => 'nullable|image|max:1024',
+            'attributes'            => 'nullable|array',
             'attributes.*.size'     => 'nullable|string',
             'attributes.*.sku'      => 'nullable|string',
-            'attributes.*.price'    => 'integer|min:0',
-            'attributes.*.quantity' => 'integer|min:0'
+            'attributes.*.price'    => 'nullable|integer|min:0',
+            'attributes.*.quantity' => 'nullable|integer|min:0'
         ]);
     }
 

@@ -43,4 +43,9 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         return $this->model::with('deliveries')->latest('id')->limit($limit)->get();
     }
 
+    public function getTotalPrice()
+    {
+        return $this->model::selectRaw('SUM(`total`) AS `total_sales`, COUNT(`id`) AS `total_order`')->first();
+    }
+
 }
