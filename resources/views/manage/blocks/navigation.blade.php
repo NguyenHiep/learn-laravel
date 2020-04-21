@@ -23,7 +23,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-default">
               <li>
-                <a href="{{ route('manage.admins.edit',['admin' => auth('user')->id()]) }}">
+                <a href="{{ route('manage.admins.edit',['id' => auth('user')->id()]) }}">
                   <i class="icon-user"></i> Thông tin tài khoản </a>
               </li>
             </ul>

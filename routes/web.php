@@ -48,30 +48,58 @@ Route::prefix('manage')->name('manage.')->namespace('Manage')->group(function ()
             Route::get('/delete', 'DeleteController@getDelete')->name('getDelete');
         });
         Route::get('/', 'ManagesController@index')->name('dashboard');
-        Route::resource('categories', 'CategoriesController');
+        Route::resource('categories', 'CategoriesController')->parameters([
+            'categories' => 'id'
+        ]);
         Route::post('products/attributes/delete/{id}', 'ProductsController@deleteAttribute')->name('products.attributes.delete')->where('id', '[0-9]+');
-        Route::resource('products', 'ProductsController');
+        Route::resource('products', 'ProductsController')->parameters([
+            'products' => 'id'
+        ]);
         Route::prefix('orders')->group(function () {
             Route::get('mail/{id}/confirm', 'OrdersController@sentMailConfirm')->name('orders.mail.confirm')->where('id', '[0-9]+');
             Route::get('{id}/invoice', 'OrdersController@invoice_index')->name('orders.invoice')->where('id', '[0-9]+');
             Route::get('{id}/invoice/pdf', 'OrdersController@exportOrderPdf')->name('orders.invoice.pdf')->where('id', '[0-9]+');
         });
-        Route::resource('orders', 'OrdersController');
+        Route::resource('orders', 'OrdersController')->parameters([
+            'orders' => 'id'
+        ]);
         Route::prefix('posts')->group(function () {
-            Route::resource('posts', 'PostsController');
+            Route::resource('posts', 'PostsController')->parameters([
+                'posts' => 'id'
+            ]);
             Route::namespace('Posts')->group(function () {
-                Route::resource('category', 'CategoryController');
-                Route::resource('tags', 'TagsController');
+                Route::resource('category', 'CategoryController')->parameters([
+                    'category' => 'id'
+                ]);
+                Route::resource('tags', 'TagsController')->parameters([
+                    'tags' => 'id'
+                ]);
             });
         });
-        Route::resource('medias', 'MediasController');
-        Route::resource('sliders', 'SlidersController');
-        Route::resource('pages', 'PagesController');
-        Route::resource('comments', 'CommentsController');
-        Route::resource('customers', 'CustomersController');
-        Route::resource('admins', 'AdminsController');
-        Route::resource('roles', 'RolesController');
-        Route::resource('email', 'EmailController');
+        Route::resource('medias', 'MediasController')->parameters([
+            'medias' => 'id'
+        ]);
+        Route::resource('sliders', 'SlidersController')->parameters([
+            'sliders' => 'id'
+        ]);
+        Route::resource('pages', 'PagesController')->parameters([
+            'pages' => 'id'
+        ]);
+        Route::resource('comments', 'CommentsController')->parameters([
+            'comments' => 'id'
+        ]);
+        Route::resource('customers', 'CustomersController')->parameters([
+            'customers' => 'id'
+        ]);
+        Route::resource('admins', 'AdminsController')->parameters([
+            'admins' => 'id'
+        ]);
+        Route::resource('roles', 'RolesController')->parameters([
+            'roles' => 'id'
+        ]);
+        Route::resource('email', 'EmailController')->parameters([
+            'email' => 'id'
+        ]);
         Route::prefix('settings')->group(function () {
             Route::get('settings', 'SettingsController@index')->name('settings.index');
             Route::post('settings', 'SettingsController@update')->name('settings.update');

@@ -165,7 +165,7 @@
                                                 </td>
                                                 <td>
                                                     {{ format_price($order->total) }}
-                                                    <a href="{{ route('manage.orders.show', ['order' => $order->id]) }}" class="js-action-list-rowlink-val"></a>
+                                                    <a href="{{ route('manage.orders.show', ['id' => $order->id]) }}" class="js-action-list-rowlink-val"></a>
                                                 </td>
                                             </tr>
                                         @endforeach

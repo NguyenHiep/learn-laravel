@@ -8,7 +8,7 @@ class UsersListTransformer extends BaseTransformer
 {
     public function transform(User $user)
     {
-        $routeParams = ['admin' => $user->id];
+        $routeParams = ['id' => $user->id];
         $actions = [
             'edit'   => [
                 'label' => '<i class="fa fa-edit"></i>',

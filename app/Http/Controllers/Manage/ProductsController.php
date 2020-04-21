@@ -43,7 +43,7 @@ class ProductsController extends BackendController
     {
         return Validator::make($data, [
             'name'                  => 'required|string|unique:products,name,' . $id,
-            'slug'                  => 'required|string|unique:products,slug,' . $id,
+            'slug'                  => 'nullable|string|unique:products,slug,' . $id,
             'description'           => 'required|string',
             'short_description'     => 'nullable|string',
             'category_id'           => 'nullable|string',
