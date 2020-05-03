@@ -1,47 +1,22 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@extends('frontend.theme-phiten.template')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
+@section('title', '503 - Shop chuyên cung cấp sỉ và lẻ quần áo')
+@section('content')
+    <main id="main">
         <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
+            <div class="content-wrapper clearfix">
+                <div class="row">
+                    <div class="page-error col-md-4">
+                        <span>50<span>3</span></span>
+                        <div class="">
+                            <div class="error-text text-center">
+                                <h1>Oh no!</h1>
+                                <h4>Dịch vụ không có sẵn.</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </body>
-</html>
+    </main>
+@endsection

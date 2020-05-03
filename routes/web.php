@@ -110,31 +110,35 @@ Route::prefix('manage')->name('manage.')->namespace('Manage')->group(function ()
 Route::get('/chuyen-muc/{slug}/', 'CategoriesController@show')->name('category.show');
 Route::get('/san-pham/{slug}/', 'ProductsController@show')->name('product.show');
 Route::get('/product/quick-view/', 'ProductsController@quick_view')->name('product.quick_view');
-Route::get('/san-pham-khuyen-mai/', 'ProductsController@promotion')->name('product.promotion');
+Route::get('/san-pham/', 'ProductsController@listProduct')->name('product.list');
 
 Route::get('/tin-tuc/', 'PostsController@show')->name('posts.show');
 Route::get('/tin-tuc/{slug}', 'PostsController@detail')->name('posts.detail');
 Route::post('/binh-luan/', 'PostsController@comment')->name('posts.comment');
 
-Route::get('/gio-hang/', 'Checkout\CartController@index')->name('checkout.cart.index');
-Route::get('/thong-tin-giao-hang/', 'Checkout\CheckoutController@index')->name('checkout.index');
-Route::post('/dat-hang/', 'Checkout\CheckoutController@save')->name('checkout.save');
-Route::get('/dat-hang-thanh-cong/', 'Checkout\CheckoutController@thanks')->name('checkout.thanks');
+Route::namespace('Checkout')->group(function () {
+    Route::get('/gio-hang/', 'CartController@index')->name('checkout.cart.index');
+    Route::get('/thong-tin-giao-hang/', 'CheckoutController@index')->name('checkout.index');
+    Route::post('/dat-hang/', 'CheckoutController@save')->name('checkout.save');
+    Route::get('/dat-hang-thanh-cong/', 'CheckoutController@thanks')->name('checkout.thanks');
+    Route::prefix('/checkout/')->group(function () {
+        Route::post('/addtocart/', 'CartController@add')->name('checkout.cart.add');
+        Route::post('/removecart/', 'CartController@remove')->name('checkout.cart.remove');
+        Route::post('/removeallcart/', 'CartController@removeAll')->name('checkout.cart.removeall');
+        Route::post('/update/', 'CartController@update')->name('checkout.cart.update');
+    });
+});
+
 
 Route::get('/so-sanh-san-pham/', 'ComparesController@index')->name('compare.index');
 Route::group(['prefix' => '/compares/'], function () {
     Route::get('/add/', 'ComparesController@add')->name('compare.add');
     Route::get('/remove/', 'ComparesController@remove')->name('compare.remove');
 });
-Route::group(['prefix' => '/checkout/'], function () {
-    Route::post('/addtocart/', 'Checkout\CartController@add')->name('checkout.cart.add');
-    Route::post('/removecart/', 'Checkout\CartController@remove')->name('checkout.cart.remove');
-    Route::post('/removeallcart/', 'Checkout\CartController@removeAll')->name('checkout.cart.removeall');
-    Route::post('/update/', 'Checkout\CartController@update')->name('checkout.cart.update');
-});
+
 Route::get('lien-he', 'ContactController@index')->name('contact.index');
 Route::post('lien-he', 'ContactController@store')->name('contact.store');
 Route::get('tim-kiem', 'SearchController@index')->name('search.index');
-Route::get('{page_slug}', 'PagesController@index')->name('page.show');
+Route::get('page/{page_slug}', 'PagesController@index')->name('page.show');
 
 

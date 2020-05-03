@@ -47,4 +47,76 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         ]);
     }
 
+    /****
+     * Get product by category Ids
+     *
+     * @param array $catIds
+     * @param int $limit
+     * @return mixed
+     */
+    public function getProductByCategoryIds(array $catIds, int $limit = 0)
+    {
+        $count = count($catIds);
+        $model = $this->model::select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id'])
+            ->where('status', config('define.STATUS_ENABLE'))->orderBy('id', 'DESC');
+        if ($count > 1) {
+            $model->where(function ($query) use ($catIds) {
+                collect($catIds)->map(function ($catId) use ($query) {
+                    $query->orWhere('category_id', 'like', '%|' . $catId . '|%');
+                });
+            });
+        } else {
+            $model->where('category_id', 'like', '%|' . $catIds[0] . '|%');
+        }
+
+        if ($limit > 0) {
+            return $model->paginate($limit);
+        }
+        return $model->get();
+    }
+
+    /****
+     * Get list product top trending (most viewed)
+     *
+     * @param int $limit
+     * @return mixed
+     */
+    public function getListProductTrending(int $limit = 0)
+    {
+        $model = $this->model::where('status', config('define.STATUS_ENABLE'))->orderBy('id', 'DESC');
+        if ($limit > 0) {
+            $model->limit($limit);
+        }
+        return $model->get(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id']);
+    }
+
+    public function getProducts(array $conditions = [], int $limit = 20)
+    {
+        $model = $this->model::query()
+            ->select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id'])
+            ->where('status', config('define.STATUS_ENABLE'));
+        if (!empty($conditions)
+            && !empty($conditions['column'])
+            && !empty($conditions['direction'])) {
+            $model->orderBy($conditions['column'], $conditions['direction']);
+            $model->orderBy('name', 'ASC');
+        }
+        return $model->paginate($limit);
+    }
+
+    public function getProductBySlug($slug)
+    {
+        return $this->model::where('slug', $slug)->where('status', config('define.STATUS_ENABLE'))->first();
+    }
+
+    public function getRelatedProducts(int $id, int $limit = 4)
+    {
+        return $this->model::where('status', config('define.STATUS_ENABLE'))->where('id', '!=', $id)->limit($limit)->get();
+    }
+
+    public function getProductById(int $id)
+    {
+        return $this->model::where('id', $id)->where('status', config('define.STATUS_ENABLE'))->first();
+    }
+
 }

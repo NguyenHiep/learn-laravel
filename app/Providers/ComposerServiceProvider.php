@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\SettingRepository;
+use App\Repositories\CategoryRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-use App\Model\Settings;
-use App\Model\Categories;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -16,8 +16,8 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $settings   = Settings::first();
-        $categories = Categories::where('status', config('define.STATUS_ENABLE'))->get();
+        $settings   = app(SettingRepository::class)->getSettings();
+        $categories = app(CategoryRepository::class)->getListCategoryMenu();
         View::share(['settings' => $settings, 'categories' => $categories]);
     }
 

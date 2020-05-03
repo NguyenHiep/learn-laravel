@@ -26,6 +26,8 @@ use App\Repositories\ProductRepository;
 use App\Repositories\ProductRepositoryEloquent;
 use App\Repositories\RoleRepository;
 use App\Repositories\RoleRepositoryEloquent;
+use App\Repositories\SettingRepository;
+use App\Repositories\SettingRepositoryEloquent;
 use App\Repositories\SliderRepository;
 use App\Repositories\SliderRepositoryEloquent;
 use App\Repositories\UserRepository;
@@ -51,6 +53,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind(SettingRepository::class, SettingRepositoryEloquent::class);
         $this->app->bind(ProductRepository::class, ProductRepositoryEloquent::class);
         $this->app->bind(PostRepository::class, PostRepositoryEloquent::class);
         $this->app->bind(CommentRepository::class, CommentRepositoryEloquent::class);

@@ -121,7 +121,7 @@
         <button type="button" class="mainmenu-btn">Menu</button>
         <ul class="mainmenu">
           <li><a href="{{ url('/') }}" class="{{ url()->current() == url('/') ? 'active' : '' }}">Sản phẩm</a></li>
-          <li><a href="{{ route('product.promotion') }}" class="{{ url()->current() == route('product.promotion') ? 'active' : '' }}">Khuyến mãi</a></li>
+          <li><a href="{{ route('product.list') }}" class="{{ url()->current() == route('product.list') ? 'active' : '' }}">Khuyến mãi</a></li>
           <li><a href="{{ url('gioi-thieu') }}" class="{{ url()->current() == url('gioi-thieu') ? 'active' : '' }}">Giới thiệu</a></li>
           <li><a href="{{ url('tin-tuc') }}" class="{{ url()->current() == url('tin-tuc') ? 'active' : '' }}">Tin tức</a></li>
           <li><a href="{{ url('huong-dan-thanh-toan') }}" class="{{ url()->current() == url('huong-dan-thanh-toan') ? 'active' : '' }}">Hướng dẫn thanh toán</a></li>

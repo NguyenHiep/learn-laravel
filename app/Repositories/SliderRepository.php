@@ -12,4 +12,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface SliderRepository extends RepositoryInterface
 {
     public function getListSlider();
+
+    public function getSliderHomePage();
 }

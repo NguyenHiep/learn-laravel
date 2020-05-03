@@ -38,4 +38,16 @@ class SliderRepositoryEloquent extends BaseRepository implements SliderRepositor
         return $this->model::select(['id', 'slider_img', 'slider_title', 'slider_content', 'slider_status']);
     }
 
+    public function getSliderHomePage()
+    {
+        return $this->model::select([
+            'id',
+            'slider_img',
+            'slider_title',
+            'slider_content',
+            'slider_url',
+            'slider_target'
+        ])->where('slider_status', config('define.STATUS_ENABLE'))->get();
+    }
+
 }

@@ -21,17 +21,16 @@ class PagesController extends FrontendController
         if(empty($record)){
             return abort(404);
         }
-        return view('frontend.theme-ecommerce.page-static.pages')->with(['record'  => $record]);
+        return view('frontend.theme-phiten.page-static.pages')->with(['record'  => $record]);
     }
 
-    public function contact($page_slug){
-
+    public function contact($page_slug)
+    {
         $record = $this->mpage->getPageBySlug($page_slug);
-        if(is_null($record)){
+        if (is_null($record)) {
             return abort(404);
         }
-        return view('frontend.theme-ecommerce.page-static.contact')->with(['record'  => $record]);
+        return view('frontend.theme-phiten.page-static.contact')->with(['record' => $record]);
     }
-
 
 }

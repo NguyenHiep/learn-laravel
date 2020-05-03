@@ -27,7 +27,7 @@ class ContactController extends FrontendController
         $record->page_title   = 'Liên hệ';
         $record->page_intro   = 'Liên hệ';
         $record->page_keyword = 'Liên hệ';
-        return view('frontend.theme-ecommerce.contact')->with(['record' => $record]);
+        return view('frontend.theme-phiten.contact')->with(['record' => $record]);
     }
     
     public function store(Request $request)

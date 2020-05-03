@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Helpers\ToolbarConfig;
 use App\Model\Sliders;
 use App\Model\Products;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
+use App\Repositories\SliderRepository;
 
 class HomeController extends FrontendController
 {
@@ -12,37 +15,35 @@ class HomeController extends FrontendController
     const THOITRANG_NAM     = 2;
     const THOITRANG_CHOBE   = 3;
     const PHUKIEN_THOITRANG = 4;
-    public $mslider;
-    public $mproduct;
-    public $config_toolbar;
+    const CATEGORIES = [
+        'thoitrang_nu'      => 1,
+        'thoitrang_name'    => 2,
+        'thoitrang_chobe'   => 3,
+        'phukien_thoitrang' => 4
+    ];
+    public $sliderRepository;
+    public $productRepository;
 
-    public function __construct(Sliders $sliders, Products $products)
+    public function __construct(SliderRepository $sliderRepository, ProductRepository $productRepository)
     {
-        $this->mslider        = $sliders;
-        $this->mproduct       = $products;
-        $this->config_toolbar = ToolbarConfig::getInstance();
-        $this->config_toolbar->limit = 8;
+        $this->sliderRepository = $sliderRepository;
+        $this->productRepository = $productRepository;
     }
 
-    public function index(){
-
-        $data['sliders']           = $this->mslider->getListSlider();
-        $data['tabs']              = [
-            [
-                'title' => 'Sản phẩm bán chạy nhất',
-                'items' => $this->mproduct->getRandomProducts()
-            ],
-            [
-                'title' => 'Sản phẩm mới về',
-                'items' => $this->mproduct->getProductByCategoryId($this->config_toolbar, static::THOITRANG_NAM)
-            ],
-
-        ];
-        $data['thoitrang_nu']      = $this->mproduct->getProductByCategoryId($this->config_toolbar, static::THOITRANG_NU);
-        $data['thoitrang_nam']     = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::THOITRANG_NAM);
-        $data['thoitrang_chobe']   = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::THOITRANG_CHOBE);
-        $data['phukien_thoitrang'] = $this->mproduct->getProductByCategoryId($this->config_toolbar,static::PHUKIEN_THOITRANG);
-        return view('frontend.theme-onetech.home', $data);
+    public function index()
+    {
+        $data['sliders'] = $this->sliderRepository->getSliderHomePage();
+        $products = $this->productRepository->getProductByCategoryIds([1, 2, 3, 4]);
+        $categories = app(CategoryRepository::class)->getListCategoryMenu(static::CATEGORIES);
+        if ($categories->isNotEmpty()) {
+            foreach ($categories as $category) {
+                $category->products = collect($products)->where('category_id', '|' . $category->id . '|')->slice(0,14);
+            }
+        }
+        $data['categories'] = $categories;
+        $data['products_trending'] = $this->productRepository->getListProductTrending(14);
+        $data['products_viewed'] = $this->productRepository->getListProductTrending(14);
+        return view('frontend.theme-phiten.home', $data);
     }
 
 }

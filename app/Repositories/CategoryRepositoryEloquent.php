@@ -38,4 +38,13 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return $this->model::query()->select(['id', 'name', 'status']);
     }
 
+    public function getListCategoryMenu(array $catIds = [])
+    {
+        $model = $this->model::where('status', config('define.STATUS_ENABLE'));
+        if (count($catIds) > 0) {
+            $model->whereIn('id', $catIds);
+        }
+        return $model->get();
+    }
+
 }

@@ -2,70 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Categories;
-use App\Model\Products;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
-use App\Helpers\ToolbarConfig;
 
 class ProductsController extends FrontendController
 {
-    public $mcategory;
-    public $mproduct;
-    public $config_toolbar;
+    public $categoryRepository;
+    public $productRepository;
 
-    public function __construct(Categories $categories, Products $products)
+    public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository)
     {
-        $this->mcategory      = $categories;
-        $this->mproduct       = $products;
-        $this->config_toolbar = ToolbarConfig::getInstance();
+        $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
     }
 
-    public function promotion(Request $request)
+    public function listProduct(Request $request)
     {
-        $rules = [
-            'price_from' => 'nullable|integer',
-            'price_to'   => 'nullable|integer|gte:price_from',
-            'stocks'     => 'nullable|array',
-            'sizes'      => 'nullable|array',
-            'brands'     => 'nullable|array',
-            'colors'     => 'nullable|array',
+        $data['sort'] = $request->input('sort', 'latest');
+        switch ($data['sort']) {
+            case 'priceLowToHigh' :
+                $column = 'price';
+                $direction = 'asc';
+                break;
+            case 'topRated' :
+                //TODO: Need change order by
+                $column = 'id';
+                $direction = 'desc';
+                break;
+            case 'priceHighToLow' :
+                $column = 'price';
+                $direction = 'desc';
+                break;
+            default:
+                $column = 'id';
+                $direction = 'desc';
+        }
+        $conditions = [
+            'column'    => $column,
+            'direction' => $direction,
         ];
-        $this->validate($request, $rules);
-        $data['mode']       = $this->config_toolbar->mode;
-        $data['products']   = $this->mproduct->getPromotionProducts($this->config_toolbar, $request->all());
-        $data['categories'] = $this->mcategory->getListCategory();
-        return view('frontend.theme-ecommerce.products.promotion', $data);
+
+        $data['products'] = $this->productRepository->getProducts($conditions);
+        $data['categories'] = $this->categoryRepository->getListCategoryMenu();
+        return view('frontend.theme-phiten.products.list', $data);
     }
 
-    public function show($slug){
-        $product = $this->mproduct->getProductBySlug($slug);
+    public function show($slug)
+    {
+        $product = $this->productRepository->getProductBySlug($slug);
         if (empty($product)) {
             abort(404);
         }
         // Get related product
-        $listRelated = $this->mproduct->getRelatedProducts($product->id);
         $assignData = [
             'product'         => $product,
-            'product_related' => $listRelated
+            'product_related' => $this->productRepository->getRelatedProducts($product->id)
         ];
-        return view('frontend.theme-ecommerce.products.detail', $assignData);
+        return view('frontend.theme-phiten.products.detail', $assignData);
     }
 
     public function quick_view(Request $request)
     {
         $product_id = $request->query('product_id');
-        $product    = $this->mproduct->getProductById($product_id);
-        if (empty($product))
-        {
+        $product = $this->productRepository->getProductById($product_id);
+        if (empty($product)) {
             return response()->json([
                 'status'  => self::CTRL_MESSAGE_ERROR,
                 'message' => 'Product not found',
                 'data'    => ''
             ]);
         }
-        return response()->view('frontend.theme-ecommerce.products.quickview', ['product' => $product], 200)
-                         ->header('Content-Type', 'text/html');
-
+        return response()->view('frontend.theme-phiten.products.quickview', ['product' => $product], 200)
+            ->header('Content-Type', 'text/html');
     }
 
 }
