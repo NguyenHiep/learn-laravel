@@ -3,6 +3,6 @@
     "/css/app.css": "/css/app.css",
     "/css/manage/app.css": "/css/manage/app.css",
     "/js/manage/app.js": "/js/manage/app.js",
-    "/theme-onetech/styles/styles.css": "/theme-onetech/styles/styles.css",
-    "/theme-onetech/js/main.js": "/theme-onetech/js/main.js"
+    "/theme-phiten/assets/css/app.css": "/theme-phiten/assets/css/app.css",
+    "/theme-phiten/assets/js/app.js": "/theme-phiten/assets/js/app.js"
 }

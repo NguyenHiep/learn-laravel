@@ -2,19 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ToolbarConfig;
-use App\Model\Sliders;
-use App\Model\Products;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\SliderRepository;
 
 class HomeController extends FrontendController
 {
-    const THOITRANG_NU      = 1;
-    const THOITRANG_NAM     = 2;
-    const THOITRANG_CHOBE   = 3;
-    const PHUKIEN_THOITRANG = 4;
     const CATEGORIES = [
         'thoitrang_nu'      => 1,
         'thoitrang_name'    => 2,
@@ -37,7 +30,7 @@ class HomeController extends FrontendController
         $categories = app(CategoryRepository::class)->getListCategoryMenu(static::CATEGORIES);
         if ($categories->isNotEmpty()) {
             foreach ($categories as $category) {
-                $category->products = collect($products)->where('category_id', '|' . $category->id . '|')->slice(0,14);
+                $category->products = collect($products)->where('category_id', '|' . $category->id . '|')->slice(0, 14);
             }
         }
         $data['categories'] = $categories;

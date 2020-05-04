@@ -54,29 +54,15 @@ mix.combine([
 
 /** Front End*/
 mix.styles([
-    'public/theme-onetech/styles/bootstrap4/bootstrap.min.css',
-    'public/theme-onetech/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css',
-    'public/theme-onetech/plugins/OwlCarousel2-2.2.1/owl.carousel.css',
-    'public/theme-onetech/plugins/OwlCarousel2-2.2.1/owl.theme.default.css',
-    'public/theme-onetech/plugins/OwlCarousel2-2.2.1/animate.css',
-    'public/theme-onetech/plugins/slick-1.8.0/slick.css',
-    'public/theme-onetech/styles/main_styles.css',
-    'public/theme-onetech/styles/responsive.css',
-], 'public/theme-onetech/styles/styles.css');
+  'public/theme-phiten/assets/css/toastr.min.css',
+  'public/theme-phiten/assets/css/main.css',
+  'public/theme-phiten/assets/css/style.css'
+], 'public/theme-phiten/assets/css/app.css');
 
 mix.combine([
-      'public/theme-onetech/js/jquery-3.3.1.min.js',
-      'public/theme-onetech/styles/bootstrap4/popper.js',
-      'public/theme-onetech/styles/bootstrap4/bootstrap.min.js',
-      'public/theme-onetech/plugins/greensock/TweenMax.min.js',
-      'public/theme-onetech/plugins/scrollmagic/ScrollMagic.min.js',
-      'public/theme-onetech/plugins/greensock/animation.gsap.min.js',
-      'public/theme-ecommerce/js/toastr.min.js',
-      'public/theme-onetech/plugins/greensock/ScrollToPlugin.min.js',
-      'public/theme-onetech/plugins/OwlCarousel2-2.2.1/owl.carousel.js',
-      'public/theme-onetech/plugins/slick-1.8.0/slick.js',
-      'public/theme-onetech/plugins/easing/easing.js',
-      'public/theme-onetech/js/custom.js'
-   /* 'public/theme-ecommerce/js/frontend.js',
-    'public/theme-ecommerce/js/gmap.js'*/
-], 'public/theme-onetech/js/main.js');
+  'public/theme-phiten/assets/js/jquery.js',
+  'public/theme-phiten/assets/js/bootstrap.min.js',
+  'public/theme-phiten/assets/js/toastr.min.js',
+  'public/theme-phiten/assets/js/script.js',
+  'public/theme-phiten/assets/js/action.js',
+], 'public/theme-phiten/assets/js/app.js');
