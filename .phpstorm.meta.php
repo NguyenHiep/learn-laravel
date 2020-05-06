@@ -5,7 +5,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2020-04-19 23:57:33.
+    * Generated on 2020-05-06 20:48:09.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -24,6 +24,7 @@ namespace PHPSTORM_META {
         'App\Repositories\PostTagRepository' => \App\Repositories\PostTagRepositoryEloquent::class,
         'App\Repositories\ProductRepository' => \App\Repositories\ProductRepositoryEloquent::class,
         'App\Repositories\RoleRepository' => \App\Repositories\RoleRepositoryEloquent::class,
+        'App\Repositories\SettingRepository' => \App\Repositories\SettingRepositoryEloquent::class,
         'App\Repositories\SliderRepository' => \App\Repositories\SliderRepositoryEloquent::class,
         'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
@@ -200,6 +201,7 @@ namespace PHPSTORM_META {
         'App\Repositories\PostTagRepository' => \App\Repositories\PostTagRepositoryEloquent::class,
         'App\Repositories\ProductRepository' => \App\Repositories\ProductRepositoryEloquent::class,
         'App\Repositories\RoleRepository' => \App\Repositories\RoleRepositoryEloquent::class,
+        'App\Repositories\SettingRepository' => \App\Repositories\SettingRepositoryEloquent::class,
         'App\Repositories\SliderRepository' => \App\Repositories\SliderRepositoryEloquent::class,
         'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
@@ -376,6 +378,7 @@ namespace PHPSTORM_META {
         'App\Repositories\PostTagRepository' => \App\Repositories\PostTagRepositoryEloquent::class,
         'App\Repositories\ProductRepository' => \App\Repositories\ProductRepositoryEloquent::class,
         'App\Repositories\RoleRepository' => \App\Repositories\RoleRepositoryEloquent::class,
+        'App\Repositories\SettingRepository' => \App\Repositories\SettingRepositoryEloquent::class,
         'App\Repositories\SliderRepository' => \App\Repositories\SliderRepositoryEloquent::class,
         'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
@@ -552,6 +555,7 @@ namespace PHPSTORM_META {
         'App\Repositories\PostTagRepository' => \App\Repositories\PostTagRepositoryEloquent::class,
         'App\Repositories\ProductRepository' => \App\Repositories\ProductRepositoryEloquent::class,
         'App\Repositories\RoleRepository' => \App\Repositories\RoleRepositoryEloquent::class,
+        'App\Repositories\SettingRepository' => \App\Repositories\SettingRepositoryEloquent::class,
         'App\Repositories\SliderRepository' => \App\Repositories\SliderRepositoryEloquent::class,
         'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
@@ -728,6 +732,7 @@ namespace PHPSTORM_META {
         'App\Repositories\PostTagRepository' => \App\Repositories\PostTagRepositoryEloquent::class,
         'App\Repositories\ProductRepository' => \App\Repositories\ProductRepositoryEloquent::class,
         'App\Repositories\RoleRepository' => \App\Repositories\RoleRepositoryEloquent::class,
+        'App\Repositories\SettingRepository' => \App\Repositories\SettingRepositoryEloquent::class,
         'App\Repositories\SliderRepository' => \App\Repositories\SliderRepositoryEloquent::class,
         'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
@@ -904,6 +909,7 @@ namespace PHPSTORM_META {
         'App\Repositories\PostTagRepository' => \App\Repositories\PostTagRepositoryEloquent::class,
         'App\Repositories\ProductRepository' => \App\Repositories\ProductRepositoryEloquent::class,
         'App\Repositories\RoleRepository' => \App\Repositories\RoleRepositoryEloquent::class,
+        'App\Repositories\SettingRepository' => \App\Repositories\SettingRepositoryEloquent::class,
         'App\Repositories\SliderRepository' => \App\Repositories\SliderRepositoryEloquent::class,
         'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
@@ -1080,6 +1086,7 @@ namespace PHPSTORM_META {
         'App\Repositories\PostTagRepository' => \App\Repositories\PostTagRepositoryEloquent::class,
         'App\Repositories\ProductRepository' => \App\Repositories\ProductRepositoryEloquent::class,
         'App\Repositories\RoleRepository' => \App\Repositories\RoleRepositoryEloquent::class,
+        'App\Repositories\SettingRepository' => \App\Repositories\SettingRepositoryEloquent::class,
         'App\Repositories\SliderRepository' => \App\Repositories\SliderRepositoryEloquent::class,
         'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
@@ -1256,6 +1263,7 @@ namespace PHPSTORM_META {
         'App\Repositories\PostTagRepository' => \App\Repositories\PostTagRepositoryEloquent::class,
         'App\Repositories\ProductRepository' => \App\Repositories\ProductRepositoryEloquent::class,
         'App\Repositories\RoleRepository' => \App\Repositories\RoleRepositoryEloquent::class,
+        'App\Repositories\SettingRepository' => \App\Repositories\SettingRepositoryEloquent::class,
         'App\Repositories\SliderRepository' => \App\Repositories\SliderRepositoryEloquent::class,
         'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,

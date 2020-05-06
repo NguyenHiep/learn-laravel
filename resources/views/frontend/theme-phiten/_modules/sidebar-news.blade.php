@@ -24,7 +24,7 @@
               <li >
                 <div class="item">
                     <a href="11_news_detail.php" class="title">Cosmetic Surgery A Review Of Facial Surgery With Personal Experiences</a>
-                    <div class="date"><img src="assets/images/svg/time.svg"   alt="" />  2 hours ago</div>
+                    <div class="date"><img src="{{ asset('theme-phiten/assets/images/svg/time.svg') }}"   alt="" />  2 hours ago</div>
                 </div>
               </li>
               <?php

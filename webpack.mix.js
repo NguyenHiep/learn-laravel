@@ -60,6 +60,9 @@ mix.styles([
 ], 'public/theme-phiten/assets/css/app.css');
 
 mix.combine([
+  'public/theme-phiten/assets/js/vue.js',
+  'public/theme-phiten/assets/js/axios.min.js',
+  'public/theme-phiten/assets/js/lodash.min.js',
   'public/theme-phiten/assets/js/jquery.js',
   'public/theme-phiten/assets/js/bootstrap.min.js',
   'public/theme-phiten/assets/js/toastr.min.js',

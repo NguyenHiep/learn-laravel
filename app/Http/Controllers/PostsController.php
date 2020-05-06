@@ -3,36 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FrontCommentRequest;
-use App\Model\Comments;
-use App\Model\Posts;
-use Illuminate\Http\Request;
+use App\Repositories\CommentRepository;
+use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PostsController extends FrontendController
 {
-    const CAT_NEWS_ID = 1;
+    public $postRepository;
+    public $commentRepository;
 
-    public $mposts;
-    public $mcomments;
-
-    public function __construct()
+    public function __construct(PostRepository $postRepository, CommentRepository $commentRepository)
     {
-        $this->mposts    = new Posts();
-        $this->mcomments = new Comments();
+        $this->postRepository    = $postRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     public function show()
     {
-        $data['posts'] = $this->mposts->getListAll();
-        return view('frontend.theme-ecommerce.posts.show', $data);
+        $data['posts'] = $this->postRepository->getListPostNew();
+        return view('frontend.theme-phiten.posts.show', $data);
     }
 
     public function detail($slug)
     {
-        $post        = $this->mposts->getPostBySlug($slug);
-        if(empty($post))
-        {
+        $post = $this->postRepository->getPostBySlug($slug);
+        if (empty($post)) {
             return abort(404);
         }
         $post_id     = $post->id;
@@ -41,19 +37,14 @@ class PostsController extends FrontendController
         $limit_min   = max($post_id - $space, 0);
         $ids_related = [];
 
-        for ($i = $limit_min; $i <= $limit_max; $i++)
-        {
-            if($i != $post_id)
-            {
+        for ($i = $limit_min; $i <= $limit_max; $i++) {
+            if ($i != $post_id) {
                 $ids_related[] = $i;
             }
         }
-        $post_related = $this->mposts->getRelatedPost($ids_related);
-        $comments     = $this->mposts->getCommentByPostId($post_id);
-        $data['post']         = $post;
-        $data['post_related'] = $post_related;
-        $data['comments']     = $comments;
-        return view('frontend.theme-ecommerce.posts.detail', $data);
+        $data['post'] = $post;
+        $data['post_related'] = $this->postRepository->getRelatedPost($ids_related);
+        return view('frontend.theme-phiten.posts.detail', $data);
     }
 
     public function comment(FrontCommentRequest $request)
@@ -64,7 +55,7 @@ class PostsController extends FrontendController
 
         try {
             DB::beginTransaction();
-            $this->mcomments->fill($inputs)->save();
+            $this->commentRepository->fill($inputs)->save();
             DB::commit();
             return redirect()->back()->with([
                 'message' => __('system.message.comment.success'),

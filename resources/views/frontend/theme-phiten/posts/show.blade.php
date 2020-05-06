@@ -1,39 +1,64 @@
-@extends('frontend.theme-ecommerce.template')
+@extends('frontend.theme-phiten.template')
 
 @section('title', 'Chuyên mục tin tức')
-@section('description', 'Chuyên mục tin tức | Cung cấp sỉ và lẻ quần áo')
-@section('keywords', 'Quần áo online, áo thun online, quần kaki online')
+
+@push('meta')
+    <meta name="title" content="Chuyên mục tin tức - Shop chuyên cung cấp sỉ và lẻ quần áo">
+    <meta name="keywords" content="Quần áo giá sỷ, Quần áo online, áo thun online, quần kaki online">
+    <meta name="description" content="Chuyên mục tin tức - Shop chuyên cung cấp sỉ và lẻ quần áo">
+    <meta property="og:title" content="Chuyên mục tin tức - Shop chuyên cung cấp sỉ và lẻ quần áo">
+    <meta property="og:description" content="Chuyên mục tin tức - Shop chuyên cung cấp sỉ và lẻ quần áo">
+@endpush
+
+@section('breadcrumb')
+    <li class="active"><a href="javascript:void(0)">Tin tức</a></li>
+@endsection
 
 @section('content')
-  <!-- Main Content - start -->
-  <main>
-    <section class="container">
-      <ul class="b-crumbs">
-        <li><a href="{{ route('home') }}">Trang chủ</a></li>
-        <li><span>Tin tức</span></li>
-      </ul>
-      <h1 class="main-ttl main-ttl-categs"><span>Tin tức</span></h1>
-      @if(count($posts) > 0)
-      <!-- Blog Posts - start -->
-      <div class="posts-list blog-page">
-        @foreach($posts as $post)
-        <div class="cf-sm-6 cf-lg-4 col-xs-6 col-sm-6 col-md-4 posts2-i">
-          <a class="posts-i-img" href="{{ route('posts.detail', $post->post_slug) }}"><span style="background: url({{ asset('theme-ecommerce/img/354x236.png') }})"></span></a>
-          <time class="posts-i-date" datetime="{{ $post->created_at }}"><span>{{ format_date($post->created_at, '%d') }}</span> {{ format_date($post->created_at, '%b') }}</time>
-          <h3 class="posts-i-ttl"><a href="{{ route('posts.detail', $post->post_slug) }}">{{ $post->post_title }}</a></h3>
-          <div>{!! $post->post_intro !!}</div>
-          <a href="{{ route('posts.detail', $post->post_slug) }}" class="posts-i-more">Đọc tiếp...</a>
+    <main id="main" class="page-footer-2 page-news">
+        <div class="container">
+            <div class="row grid-space-60 end">
+                <div class="col-md-8 col-lg-9">
+                    @if($posts->total() > 1)
+                        <ul class="list-news">
+                            @foreach($posts as $post)
+                                <li class="item">
+                                    <div class=" row grid-space-20">
+                                        <div class="col-sm-3">
+                                            <a href="{{ route('posts.detail', $post->post_slug) }}" class="img tRes" title="{{ $post->post_title }}">
+                                                @php
+                                                    $mediaName = $post->media->name ?? null;
+                                                    if (!empty($post->posts_medias_id) && !empty($mediaName)) {
+                                                        $imgUrl = Storage::url(UPLOAD_MEDIAS . $mediaName);
+                                                    } else {
+                                                        $imgUrl = asset('theme-phiten/assets/images/img-1.jpg');
+                                                    }
+                                                @endphp
+                                                <img class="lazy-hidden" data-lazy-type="image" data-lazy-src="{{ $imgUrl }}" alt="{{ $post->post_title }}"/>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <h2><a href="{{ route('posts.detail', $post->post_slug) }}" class="title h4">{{ $post->post_title }}</a></h2>
+                                            <div class="desc mb-5 mt-2">{!! limit_words($post->post_intro, 150) !!}</div>
+                                            <div class="date"><i class="icon icon-date-2"></i> {{ $post->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p>Không tìm thấy bài viết trong chuyên mục này</p>
+                    @endif
+                    @if($posts->lastPage() > 1)
+                      <div class="pages">
+                        {{ $posts->appends(request()->query())->links('vendor.pagination.bootstrap-4')  }}
+                      </div>
+                    @endif
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    @includeIf('frontend.theme-phiten._modules.sidebar-news')
+                </div>
+            </div>
         </div>
-        @endforeach
-      </div>
-      <!-- Blog Posts - end -->
-      @endif
-      
-      <!-- Pagination - start -->
-    {{ $posts->appends(request()->query())->links('vendor.pagination.theme')  }}
-      <!-- Pagination - end -->
-    </section>
-  </main>
-  <!-- Main Content - end -->
-
+    </main>
 @endsection
