@@ -2,35 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Categories;
-use App\Helpers\ToolbarConfig;
-use App\Model\Products;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 
 class CategoriesController extends FrontendController
 {
-    public $mcategory;
-    public $mproduct;
-    public $config_toolbar;
+    public $categoryRepository;
+    public $productRepository;
 
-    public function __construct(Categories $categories, Products $products)
+    public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository)
     {
-        $this->mcategory      = $categories;
-        $this->mproduct       = $products;
-        $this->config_toolbar = ToolbarConfig::getInstance();
+        $this->categoryRepository = $categoryRepository;
+        $this->productRepository  = $productRepository;
     }
 
-    public function show($slug){
-        $category = $this->mcategory->getCategoryBySlug($slug);
-        if(empty($category))
-        {
+    public function show($slug)
+    {
+        $category = $this->categoryRepository->getCategoryBySlug($slug);
+        if (empty($category)) {
             abort(404);
         }
-        // Get config toolbar
-        $data['mode']       = $this->config_toolbar->mode;
-        // Get product list
-        $data['category']   = $category;
-        $data['products']   = $this->mproduct->getProductByCategoryId($this->config_toolbar, $category->id);
-        $data['categories'] = $this->mcategory->getListCategory();
-        return view('frontend.theme-ecommerce.catagories.show', $data);
+        $data['sort'] = request()->input('sort', 'latest');
+        switch ($data['sort']) {
+            case 'priceLowToHigh' :
+                $column = 'price';
+                $direction = 'asc';
+                break;
+            case 'topRated' :
+                //TODO: Need change order by
+                $column = 'id';
+                $direction = 'desc';
+                break;
+            case 'priceHighToLow' :
+                $column = 'price';
+                $direction = 'desc';
+                break;
+            default:
+                $column = 'id';
+                $direction = 'desc';
+        }
+        $conditions = [
+            'column'    => $column,
+            'direction' => $direction,
+        ];
+        $data['category'] = $category;
+        $data['products'] = $this->productRepository->getProductByCategoryIds([$category->id], $conditions, 20);
+        return view('frontend.theme-phiten.catagories.show', $data);
     }
 }

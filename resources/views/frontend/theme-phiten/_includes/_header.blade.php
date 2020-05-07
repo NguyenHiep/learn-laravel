@@ -58,7 +58,7 @@
         @endif
         <div class="wrap-menu-header "> <!--Detect only show PC-->
             <ul class="menu-top-header">
-                @includeIf('frontend.theme-phiten._includes.mainmenu')
+                @includeIf('frontend.theme-phiten._includes._mainmenu')
             </ul>
         </div>
         <div class="group-header">
@@ -84,7 +84,7 @@
         </div>
         <div class="inner">
             <ul class="menu">
-                @includeIf('frontend.theme-phiten._includes.mainmenu')
+                @includeIf('frontend.theme-phiten._includes._mainmenu')
             </ul>
             @if(!empty($settings))
             <div class="language">

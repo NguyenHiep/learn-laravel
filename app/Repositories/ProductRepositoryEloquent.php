@@ -51,10 +51,11 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      * Get product by category Ids
      *
      * @param array $catIds
+     * @param array $condition
      * @param int $limit
      * @return mixed
      */
-    public function getProductByCategoryIds(array $catIds, int $limit = 0)
+    public function getProductByCategoryIds(array $catIds, array $condition = [], int $limit = 0)
     {
         $count = count($catIds);
         $model = $this->model::select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id'])
@@ -67,6 +68,13 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
             });
         } else {
             $model->where('category_id', 'like', '%|' . $catIds[0] . '|%');
+        }
+
+        if (count($condition) > 0
+            && !empty($condition['column'])
+            && !empty($condition['direction'])) {
+            $model->orderBy($condition['column'], $condition['direction']);
+            $model->orderBy('name', 'ASC');
         }
 
         if ($limit > 0) {

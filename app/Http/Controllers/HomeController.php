@@ -26,7 +26,7 @@ class HomeController extends FrontendController
     public function index()
     {
         $data['sliders'] = $this->sliderRepository->getSliderHomePage();
-        $products = $this->productRepository->getProductByCategoryIds([1, 2, 3, 4]);
+        $products = $this->productRepository->getProductByCategoryIds(static::CATEGORIES);
         $categories = app(CategoryRepository::class)->getListCategoryMenu(static::CATEGORIES);
         if ($categories->isNotEmpty()) {
             foreach ($categories as $category) {

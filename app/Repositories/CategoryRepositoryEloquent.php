@@ -47,4 +47,11 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return $model->get();
     }
 
+    public function getCategoryBySlug($slug)
+    {
+        return $this->model::where('slug', $slug)
+            ->where('status', config('define.STATUS_ENABLE'))
+            ->first();
+    }
+
 }

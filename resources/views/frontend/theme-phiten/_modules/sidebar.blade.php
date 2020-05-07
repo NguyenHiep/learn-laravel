@@ -1,7 +1,13 @@
 <div class="sidebar-filter">
+    <div class="mini-breadcrumb">
+        <ul class="list-inline breadcrumbs">
+            <li><a href="{{ route('product.list') }}">Cửa hàng</a></li>
+            <li class="active">{{ $category->name }}</li>
+        </ul>
+    </div>
     <div class="inner">
         <div class="widget widget-price">
-            <div class="widget-title"> Price</div>
+            <div class="widget-title">Giá (VND)</div>
 
             <div class="rangeprice">
 
@@ -18,41 +24,6 @@
                 </div>
                 <input type="hidden" id="amount1" name="amount1">
                 <input type="hidden" id="amount2" name="amount2">
-            </div>
-        </div> <!--End widget-->
-
-        <div class="widget widget-category">
-            <div class="widget-title"> Bracelet</div>
-
-            <label class="checkbox ">
-                <input type="checkbox">
-                <span></span>
-                RIKUWA Bracelet
-            </label>
-            <label class="checkbox ">
-                <input type="checkbox" checked="">
-                <span></span>
-                TITANIUM Bracelet
-            </label>
-
-        </div> <!--End widget-->
-
-
-        <div class="widget widget-size">
-            <div class="widget-title">Kích thước</div>
-            <div class="row grid-space-10">
-                <?php
-                $array_1 = ['L', 'M', 'S'];
-                for($i = 0;$i < 3;$i++) { ?>
-                <div class="col-4">
-                    <label class="checkbox ">
-                        <input type="checkbox">
-                        <span></span>
-                        <?php echo $array_1[$i]; ?>
-                    </label>
-                </div>
-                <?php
-                } ?>
             </div>
         </div> <!--End widget-->
 
@@ -96,45 +67,49 @@
         </div> <!--End widget-->
 
         <div class="widget widget-star">
-            <div class="widget-title"> Star</div>
+            <div class="widget-title">Sao</div>
 
-            <div class="item active"><span class="text">(Từ 4 sao)</span> <img src="{{ asset('theme-phiten/assets/images/star4.svg') }}" alt=""/>
+            <div class="item active"><span class="text">(Từ 4 sao)</span> <img
+                        src="{{ asset('theme-phiten/assets/images/star4.svg') }}" alt=""/>
             </div>
-            <div class="item"><span class="text">(Từ 3 sao)</span> <img src="{{ asset('theme-phiten/assets/images/star3.svg') }}" alt=""/></div>
-            <div class="item"><span class="text">(Từ 2 sao)</span> <img src="{{ asset('theme-phiten/assets/images/star4.svg') }}" alt=""/></div>
-            <div class="item"><span class="text">(Từ 1 sao)</span> <img src="{{ asset('theme-phiten/assets/images/star1.svg') }}" alt=""/></div>
+            <div class="item"><span class="text">(Từ 3 sao)</span> <img
+                        src="{{ asset('theme-phiten/assets/images/star3.svg') }}" alt=""/></div>
+            <div class="item"><span class="text">(Từ 2 sao)</span> <img
+                        src="{{ asset('theme-phiten/assets/images/star4.svg') }}" alt=""/></div>
+            <div class="item"><span class="text">(Từ 1 sao)</span> <img
+                        src="{{ asset('theme-phiten/assets/images/star1.svg') }}" alt=""/></div>
         </div> <!--End widget-->
     </div>
 </div>
 @push('scripts')
-  <script src="{{ asset('theme-phiten/assets/js/jquery-ui.js') }}"></script>
-  <script>
-    (function ($) {
-      $(document).ready(function () {
+    <script src="{{ asset('theme-phiten/assets/js/jquery-ui.js') }}"></script>
+    <script>
+      (function ($) {
+        $(document).ready(function () {
 
-        $('#slider-range').slider({
-          range: true,
-          min: 0,
-          max: 500,
-          values: [100, 300],
-          slide: function (event, ui) {
-            //$( "#amount" ).html( "Price Range : $" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-            //$( "#amount" ).html( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-            $('#amount1').val(ui.values[0])
-            $('#amount2').val(ui.values[1])
-            $('.gprice .val1').html(ui.values[0])
-            $('.gprice .val2').html(ui.values[1])
+          $('#slider-range').slider({
+            range: true,
+            min: 0,
+            max: 2000000,
+            values: [0, 1000000],
+            slide: function (event, ui) {
+              //$( "#amount" ).html( "Price Range : $" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+              //$( "#amount" ).html( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+              $('#amount1').val(ui.values[0])
+              $('#amount2').val(ui.values[1])
+              $('.gprice .val1').html(ui.values[0])
+              $('.gprice .val2').html(ui.values[1])
 
-          }
+            }
+          })
+          //$( "#amount" ).html( $( "#slider-range" ).slider( "values", 0 ) +    " - " + $( "#slider-range" ).slider( "values", 1 ) );
+          $('#amount1').val($('#slider-range').slider('values', 0))
+          $('#amount2').val($('#slider-range').slider('values', 1))
+
+          $('.gprice .val1').html($('#slider-range').slider('values', 0))
+          $('.gprice .val2').html($('#slider-range').slider('values', 1))
+
         })
-        //$( "#amount" ).html( $( "#slider-range" ).slider( "values", 0 ) +    " - " + $( "#slider-range" ).slider( "values", 1 ) );
-        $('#amount1').val($('#slider-range').slider('values', 0))
-        $('#amount2').val($('#slider-range').slider('values', 1))
-
-        $('.gprice .val1').html($('#slider-range').slider('values', 0))
-        $('.gprice .val2').html($('#slider-range').slider('values', 1))
-
-      })
-    })(jQuery)
-  </script>
+      })(jQuery)
+    </script>
 @endpush

@@ -14,4 +14,6 @@ interface CategoryRepository extends RepositoryInterface
     public function getListCategory();
 
     public function getListCategoryMenu(array $catIds = []);
+
+    public function getCategoryBySlug($slug);
 }

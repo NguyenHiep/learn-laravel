@@ -13,7 +13,7 @@ interface ProductRepository extends RepositoryInterface
 {
     public function getListProduct();
 
-    public function getProductByCategoryIds(array $catIds, int $limit = 0);
+    public function getProductByCategoryIds(array $catIds, array $condition = [], int $limit = 0);
 
     public function getListProductTrending(int $limit = 0);
 
