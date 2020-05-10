@@ -17,6 +17,10 @@ class Setting extends BaseModel implements Transformable
 
     protected $table = 'website_info';
 
+    protected $casts = [
+        'params' => 'array'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -47,7 +51,8 @@ class Setting extends BaseModel implements Transformable
         'company_twitter',
         'company_vk',
         'company_instagram',
-        'company_logo'
+        'company_logo',
+        'params'
     ];
 
 }

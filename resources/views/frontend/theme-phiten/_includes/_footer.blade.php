@@ -1,4 +1,5 @@
 <div id="footer">
+  @if(!empty($settings->params) && !empty($settings->params['enable_subscribe']))
   <div class="row-1 sec-tb">
     <div class="container">
       <div class="widget-ubscribe">
@@ -7,8 +8,9 @@
             <h3 class="widget-title">Theo dõi để nhận thêm ưu đãi!</h3>
           </div>
           <div class="col-md-8">
-            <form action="">
-              <input type="email" placeholder="Nhập email để đăng ký">
+            <form action="" method="POST">
+              @csrf
+              <input type="email" placeholder="Nhập email để đăng ký" />
               <button class="btn">Đăng Ký</button>
             </form>
           </div>
@@ -17,6 +19,7 @@
     </div>
     <img class=" tr lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset('theme-phiten/assets/images/subscribe.png') }}"  alt="" />
   </div>
+  @endif
   <div class="sec-tb">
     <div class="container">
       <div class="row">
@@ -116,3 +119,4 @@
     </div>
   </div>
 </div>
+<div id="back-top"><i class="icon icon-chevron-up"></i></div>

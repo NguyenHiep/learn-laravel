@@ -54,10 +54,19 @@ class ProductsController extends FrontendController
         if (empty($product)) {
             abort(404);
         }
-        // Get related product
+        if (!empty($product->pictures)) {
+          $product->listImages = is_array($product->galary_img) ? array_merge([$product->pictures], $product->galary_img) : [$product->pictures];
+        }
+        $cateId = explode('|', $product->category_id);
+        $category = app(CategoryRepository::class)->getListCategoryMenu($cateId)->first();
+        if (empty($category)) {
+            abort(404);
+        }
         $assignData = [
-            'product'         => $product,
-            'product_related' => $this->productRepository->getRelatedProducts($product->id)
+            'category'         => $category,
+            'product'          => $product,
+            'products_related' => $this->productRepository->getRelatedProducts($product->id, 14),
+            'products_viewed'  => $this->productRepository->getListProductTrending(14),
         ];
         return view('frontend.theme-phiten.products.detail', $assignData);
     }

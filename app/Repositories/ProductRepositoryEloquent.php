@@ -91,7 +91,10 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      */
     public function getListProductTrending(int $limit = 0)
     {
-        $model = $this->model::where('status', config('define.STATUS_ENABLE'))->orderBy('id', 'DESC');
+        $model = $this->model::where('status', config('define.STATUS_ENABLE'))
+            ->whereNotNull('category_id')
+            ->where('category_id', '!=', '')
+            ->orderBy('id', 'DESC');
         if ($limit > 0) {
             $model->limit($limit);
         }
@@ -102,6 +105,8 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     {
         $model = $this->model::query()
             ->select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id'])
+            ->whereNotNull('category_id')
+            ->where('category_id', '!=', '')
             ->where('status', config('define.STATUS_ENABLE'));
         if (!empty($conditions)
             && !empty($conditions['column'])
@@ -114,17 +119,27 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
 
     public function getProductBySlug($slug)
     {
-        return $this->model::where('slug', $slug)->where('status', config('define.STATUS_ENABLE'))->first();
+        return $this->model::where('slug', $slug)
+            ->whereNotNull('category_id')
+            ->where('category_id', '!=', '')
+            ->where('status', config('define.STATUS_ENABLE'))->first();
     }
 
     public function getRelatedProducts(int $id, int $limit = 4)
     {
-        return $this->model::where('status', config('define.STATUS_ENABLE'))->where('id', '!=', $id)->limit($limit)->get();
+        return $this->model::where('status', config('define.STATUS_ENABLE'))
+            ->where('id', '!=', $id)
+            ->whereNotNull('category_id')
+            ->where('category_id', '!=', '')
+            ->limit($limit)->get();
     }
 
     public function getProductById(int $id)
     {
-        return $this->model::where('id', $id)->where('status', config('define.STATUS_ENABLE'))->first();
+        return $this->model::where('id', $id)
+            ->whereNotNull('category_id')
+            ->where('category_id', '!=', '')
+            ->where('status', config('define.STATUS_ENABLE'))->first();
     }
 
 }
