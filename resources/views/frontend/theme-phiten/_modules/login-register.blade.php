@@ -89,7 +89,7 @@
                     <i class="icon-home3"></i>
                 </p>
                 <p class="winput">
-                    <input type="password" name="password" class="form-control input" id="password" placeholder="Mật khẩu" required="">
+                    <input type="password" name="register_password" class="form-control input" id="register_password" placeholder="Mật khẩu" required="">
                     <i class="icon-lock"></i>
 
                 </p>

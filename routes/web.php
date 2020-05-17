@@ -122,6 +122,7 @@ Route::namespace('Checkout')->group(function () {
     Route::post('/dat-hang/', 'CheckoutController@save')->name('checkout.save');
     Route::get('/dat-hang-thanh-cong/', 'CheckoutController@thanks')->name('checkout.thanks');
     Route::prefix('/checkout/')->group(function () {
+        Route::get('/get-item-cart/', 'CartController@getListItem')->name('checkout.cart.listitem');
         Route::post('/addtocart/', 'CartController@add')->name('checkout.cart.add');
         Route::post('/removecart/', 'CartController@remove')->name('checkout.cart.remove');
         Route::post('/removeallcart/', 'CartController@removeAll')->name('checkout.cart.removeall');

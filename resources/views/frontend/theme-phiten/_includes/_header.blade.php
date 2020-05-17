@@ -23,26 +23,27 @@
 
 <header id="header" class="fixe" role="banner">
     <div class="container">
-        @if(!empty($settings) && !empty($settings->company_logo))
-            <a href="{{ route('home') }}" id="logo"> <img src="{{ asset(UPLOAD_SETTING.$settings->company_logo) }}" alt="{{ $settings->subtitle }}"></a>
+        @if(!empty($settings) && !empty($settings->company_logo) && !empty($settings->params['enable_show_logo_site']))
+            <a href="{{ route('home') }}" id="logo"> <img src="{{ asset(UPLOAD_SETTING . $settings->company_logo) }}" alt="{{ $settings->subtitle }}"></a>
         @endif
         <div class="wrap-menu-header "> <!--Detect only show PC-->
             <ul class="menu-top-header">
                 @includeIf('frontend.theme-phiten._includes._mainmenu')
             </ul>
         </div>
+        @if(!request()->routeIs('checkout.cart.index'))
         <div class="group-header">
             <div class="item widget-mini-cart toggleClass">
                 <span class="toggle">
                     <img src="{{ asset('theme-phiten/assets/images/svg/shopping-cart-black.svg') }}" alt="shopping-cart" width="24px"/>
-                    <span class="qty cart-count">0</span>
+                    <span class="qty cart-count">@{{ listItemCart.length }}</span>
                 </span>
                 <div class="toggle-content">
                     @includeIf('frontend.theme-phiten._modules.mini-cart')
                 </div>
             </div>
-
         </div>
+        @endif
         <span class="menu-btn x"><span></span></span>
     </div>
 </header>

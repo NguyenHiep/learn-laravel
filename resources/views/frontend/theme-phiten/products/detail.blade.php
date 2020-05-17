@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-    <main id="main" class="page-product-detail">
+    <main id="main" class="page-product-detail" v-cloak>
         <div class="container">
             <div class="row grid-space-80">
                 <div class="col-lg-6">
@@ -75,9 +75,9 @@
                             <div class="col-md-4">
                                 <div class="title">Số lượng:</div>
                                 <div class="quality" data-min="1" data-max="10">
-                                    <a href="javascript:void(0)" class="minus"><i class="icon-minus"></i></a>
-                                    <input type="text" value="1">
-                                    <a href="javascript:void(0)" class="plus"><i class="icon-plus"></i></a>
+                                    <a href="javascript:void(0)" class="minus" @click="decrementQuantity()"><i class="icon-minus"></i></a>
+                                    <input type="number" v-model.number="quantity" @change="changeQuantity()"/>
+                                    <a href="javascript:void(0)" class="plus" @click="incrementQuantity()"><i class="icon-plus"></i></a>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -104,23 +104,8 @@
                         <div class="desc">{!! $product->short_description !!}</div>
 
                         <div class="cart-like">
-                            <button
-                                class="btn sm btn-buy-now"
-                                value="buynow"
-                                data-price="1080000.0000"
-                                data-name="Vòng cổ Phiten Rakuwa S II MG"
-                                data-category="Vòng cổ"
-                                data-currency="VND"
-                                data-id="3718"
-                                title="Mua ngay">Mua ngay
-                            </button>
-                            <a class="add-to-cart detail_add_to_cart_2  btn-loading disabled"
-                               data-loading=""
-                               data-price="1080000.0000"
-                               data-name="Vòng cổ Phiten Rakuwa S II MG"
-                               data-category="Vòng cổ"
-                               data-id="3718" disabled="disabled">
-                            </a>
+                            <button class="btn sm btn-buy-now" title="Mua ngay" @click="addToCart(itemCartBuyNow)">Mua ngay</button>
+                            <a class="add-to-cart detail_add_to_cart_2" @click="addToCart(itemCart)"></a>
                         </div>
                     </div>
                 </div>
@@ -192,21 +177,21 @@
             </div>
             @if($products_related->isNotEmpty())
             <div class="owl-carousel s-auto s-nav nav-1" data-res="5,4,3,1" data-margin="10,10,10,10">
-                @foreach($products_related as $product)
+                @foreach($products_related as $relatedProduct)
                     <div class="item">
                         <div class="img">
-                            <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $product->pictures) }}"  alt="{{ $product->name }}" />
+                            <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $relatedProduct->pictures) }}"  alt="{{ $relatedProduct->name }}" />
                             <div class="groupbtn">
-                                <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="btn btn2 sm"> View Detail</a>
+                                <a href="{{ route('product.show', ['slug' => $relatedProduct->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                 <div class="group">
                                     <span class="gitem like"><i class="icon-heart"></i></span>
-                                    <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="gitem cart"><i class="icon-cart"></i></a>
+                                    <a href="{{ route('product.show', ['slug' => $relatedProduct->slug]) }}" class="gitem cart"><i class="icon-cart"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="divtext">
-                            <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="title equal_{{ $loop->iteration + 1 }}">{{ $product->name }}</a>
-                            <p class="price"> {{ format_price($product->sale_price) }} </p>
+                            <a href="{{ route('product.show', ['slug' => $relatedProduct->slug]) }}" class="title equal_{{ $loop->iteration + 1 }}">{{ $relatedProduct->name }}</a>
+                            <p class="price"> {{ format_price($relatedProduct->sale_price) }} </p>
                         </div>
                     </div>
                 @endforeach
@@ -222,21 +207,21 @@
                 <h3 class="widget-title">Sản phẩm đã xem</h3>
                 @if($products_viewed->isNotEmpty())
                 <div class="owl-carousel s-auto s-nav nav-3" data-res="5,4,3,1" data-margin="10,10,10,10">
-                    @foreach($products_viewed as $product)
+                    @foreach($products_viewed as $viewedProduct)
                         <div class="item">
                             <div class="img">
-                                <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $product->pictures) }}"  alt="{{ $product->name }}" />
+                                <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $viewedProduct->pictures) }}"  alt="{{ $viewedProduct->name }}" />
                                 <div class="groupbtn">
-                                    <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="btn btn2 sm"> View Detail</a>
+                                    <a href="{{ route('product.show', ['slug' => $viewedProduct->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                     <div class="group">
                                         <span class="gitem like"><i class="icon-heart"></i></span>
-                                        <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="gitem cart"><i class="icon-cart"></i></a>
+                                        <a href="{{ route('product.show', ['slug' => $viewedProduct->slug]) }}" class="gitem cart"><i class="icon-cart"></i></a>
                                     </div>
                                 </div>
                             </div>
                             <div class="divtext">
-                                <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="title equal_{{ $loop->iteration + 1 }}">{{ $product->name }}</a>
-                                <p class="price"> {{ format_price($product->sale_price) }} </p>
+                                <a href="{{ route('product.show', ['slug' => $viewedProduct->slug]) }}" class="title equal_{{ $loop->iteration + 1 }}">{{ $viewedProduct->name }}</a>
+                                <p class="price"> {{ format_price($viewedProduct->sale_price) }} </p>
                             </div>
                         </div>
                     @endforeach
@@ -264,4 +249,38 @@
       })
     </script>
     @endif
+    <script>
+      const MAX_NUMBER = 10
+      const MIN_NUMBER = 1
+
+      new Vue({
+        el: '#wrapper',
+        data: {
+          quantity: 1,
+          itemCart: {
+            quantity: 1,
+            product_id: '{{ $product->id }}'
+          },
+          itemCartBuyNow: {
+            quantity: 1,
+            product_id: '{{ $product->id }}',
+            redirectUrl: '{{ route('checkout.cart.index') }}'
+          }
+        },
+        methods: {
+          changeQuantity () {
+            this.quantity = (this.quantity > MAX_NUMBER) ? MAX_NUMBER : ((this.quantity < MIN_NUMBER) ? MIN_NUMBER : this.quantity)
+            this.itemCartBuyNow.quantity = this.quantity
+          },
+          decrementQuantity () {
+            this.quantity = (this.quantity < 2) ? MIN_NUMBER : this.quantity - 1
+            this.itemCartBuyNow.quantity = this.quantity
+          },
+          incrementQuantity () {
+            this.quantity = (this.quantity > MAX_NUMBER) ? MAX_NUMBER : this.quantity + 1
+            this.itemCartBuyNow.quantity = this.quantity
+          }
+        }
+      })
+    </script>
 @endpush

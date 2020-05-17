@@ -24,4 +24,6 @@ interface ProductRepository extends RepositoryInterface
     public function getRelatedProducts(int $id, int $limit = 4);
 
     public function getProductById(int $id);
+
+    public function getProductByIds(array $ids);
 }

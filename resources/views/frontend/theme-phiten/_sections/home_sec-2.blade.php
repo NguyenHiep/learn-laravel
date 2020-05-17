@@ -1,6 +1,11 @@
 @if($categories->isNotEmpty())
     @foreach($categories as $category)
-        <section class=" sec-product sec-product-{{ $loop->iteration }}">
+    @if(($loop->iteration == 1 && !empty($settings->params['enable_home_category_one']))
+       || ($loop->iteration == 2 && !empty($settings->params['enable_home_category_two']))
+       || ($loop->iteration == 3 && !empty($settings->params['enable_home_category_three']))
+       || ($loop->iteration == 4 && !empty($settings->params['enable_home_category_four']))
+    )
+    <section class=" sec-product sec-product-{{ $loop->iteration }}">
         <div class="row grid-space-0 {{ $loop->iteration % 2 == 0 ? 'end' : '' }}">
             <div class="col-md-4">
                 <div class="item_intro">
@@ -40,5 +45,6 @@
             </div>
         </div>
     </section>
+    @endif
     @endforeach
 @endif

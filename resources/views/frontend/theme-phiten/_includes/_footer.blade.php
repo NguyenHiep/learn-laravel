@@ -83,7 +83,7 @@
                 <h3 class="widget-title">Tài khoản của tôi</h3>
                 <ul class="menu menu-footer 2">
                   <li><a href="#" data-toggle="modal" data-target="#myLogin" id="flogin">Đăng nhập / Đăng ký</a></li>
-                  <li><a href="/cart">Giỏ hàng của tôi</a></li>
+                  <li><a href="{{ route('checkout.cart.index') }}">Giỏ hàng của tôi</a></li>
                 </ul>
               </div>
               </div>
@@ -96,8 +96,8 @@
 <div class="copyright">
   <div class="container">
     <div class="row end">
+      @if(!empty($settings) && !empty($settings->params['enable_social']))
       <div class="col-md-6">
-        @if(!empty($settings))
           <ul class="blog-item-social">
             @if(!empty($settings->company_twitter))
               <li><a href="{{ $settings->company_twitter }}" target="_blank"><i class="icon icon-twitter"></i></a></li>
@@ -109,14 +109,17 @@
               <li><a href="{{ $settings->company_instagram }}" target="_blank"><i class="icon icon-instagram"></i></a></li>
             @endif
           </ul>
-        @endif
       </div>
+      @endif
+    @if(!empty($settings) && !empty($settings->company_copyright) && !empty($settings->params['enable_copyright']))
       <div class="col-md-6">
-        @if(!empty($settings) && !empty($settings->company_copyright))
           <span class="cl1">{!! $settings->company_copyright !!}</span>
-        @endif
       </div>
+      @endif
     </div>
   </div>
 </div>
 <div id="back-top"><i class="icon icon-chevron-up"></i></div>
+<div id="loading" v-show="loading">
+  <img src="{{ asset('theme-phiten//assets/img/loading.gif') }}">
+</div>

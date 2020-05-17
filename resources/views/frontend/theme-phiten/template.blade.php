@@ -13,12 +13,15 @@
     <script>
         window.WifeCart = {
             csrfToken: "{{ csrf_token() }}",
+            pathImageProduct: "{{ UPLOAD_PRODUCT }}",
+            language: '',
+            currency: ''
         }
     </script>
 </head>
 
 <body>
-<div id="wrapper">
+<div id="wrapper" v-cloak>
     @includeIf('frontend.theme-phiten._includes._header')
     @if(!request()->routeIs('home'))
         @includeIf('frontend.theme-phiten.components.breadcrumb')
@@ -27,8 +30,13 @@
     @includeIf('frontend.theme-phiten._includes._footer')
     @includeIf('frontend.theme-phiten._modules.login-register')
     <script src="{{ asset('theme-phiten/assets/js/app.js') }}"></script>
-    @stack('scripts')
     @includeIf('frontend.theme-phiten.components.alert')
+    @stack('scripts')
+    <script>
+      var vm = new Vue({
+        el: '#wrapper'
+      })
+    </script>
 </div>
 </body>
 </html>

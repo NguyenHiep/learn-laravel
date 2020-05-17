@@ -1,4 +1,4 @@
-@if($sliders->isNotEmpty())
+@if($sliders->isNotEmpty() && !empty($settings->params['enable_home_slider']))
     <section class="slideshow owl-carousel  s-loop s-nav s-auto__">
         @foreach($sliders as $slider)
             <div class="item item-visible">
