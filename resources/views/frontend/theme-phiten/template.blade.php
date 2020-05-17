@@ -8,6 +8,7 @@
     @stack('meta')
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{ asset('theme-phiten/assets/images/favicon.png') }}" type="image/x-icon"/>
+    <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap&subset=vietnamese" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme-phiten/assets/css/app.css') }}" />
     @stack('styles')
     <script>

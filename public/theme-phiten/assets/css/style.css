@@ -14,3 +14,67 @@
 #loading img {
     width: 70px;
 }
+
+.checkout input.has_error, select.has_error {
+    border-color: red
+}
+
+.checkout .form-address .item {
+    width: 100%
+}
+
+.checkout .form-address h6 a {
+    font-weight: bold
+}
+
+.paging-cart button:not(.btn) {
+    background: transparent;
+    border: none;
+}
+
+.cart-summary .btn-checkout {
+    width: 100%;
+}
+
+.error {
+    color: red;
+}
+
+.checkbox input[type=checkbox]:not(.checked) + label:before {
+    background: #004EA2;
+}
+
+.checkbox input[type=checkbox].checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+
+.checkbox input[type=checkbox].checked + label:before,
+.checkbox input[type=checkbox]:not(.checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 17px;
+    height: 17px;
+    border-radius: 3px;
+    -webkit-transition: 200ms ease-in-out;
+    -o-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+}
+
+.checkbox input[type=checkbox].checked + label:after,
+.checkbox input[type=checkbox]:not(.checked) + label:after {
+    content: "\e947";
+    font-family: "icomoon";
+    font-size: 13px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: #ffffff;
+    -webkit-transition: 200ms ease-in-out;
+    -o-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+}

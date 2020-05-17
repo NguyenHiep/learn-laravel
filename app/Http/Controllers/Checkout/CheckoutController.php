@@ -23,7 +23,7 @@ class CheckoutController extends FrontendController
         if (!Session::has(self::SES_ITEMS_CART)) {
             return redirect()->route('home');
         }
-        $data        = [];
+        $data = [];
         $this->payment_options = [
             [
                 'id'          => 1,
@@ -49,10 +49,10 @@ class CheckoutController extends FrontendController
         $data['payment_options'] = $this->payment_options;
         // Get and set item cart to list
         $cartItems = Session::get(self::SES_ITEMS_CART);
-        $data['products']    = $this->getListItemsCart($cartItems);
+        $data['products'] = $this->getListItemsCart($cartItems);
         $data['total_price'] = $this->getToTalPriceCart();
 
-      return view('frontend.theme-ecommerce.checkout.checkout', $data);
+        return view('frontend.theme-phiten.checkout.index', $data);
     }
 
     public function save(CheckoutRequest $request)
