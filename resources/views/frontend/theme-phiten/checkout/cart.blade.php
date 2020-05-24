@@ -127,6 +127,9 @@
         data: {
           quantity: 1,
         },
+        created () {
+          this.getListItemCart()
+        },
         methods: {
           changeQuantity (product) {
             let itemCurrent = _.find(this.listItemCart, ['id', product.id])

@@ -267,6 +267,9 @@
             redirectUrl: '{{ route('checkout.cart.index') }}'
           }
         },
+        created () {
+          this.getListItemCart()
+        },
         methods: {
           changeQuantity () {
             this.quantity = (this.quantity > MAX_NUMBER) ? MAX_NUMBER : ((this.quantity < MIN_NUMBER) ? MIN_NUMBER : this.quantity)

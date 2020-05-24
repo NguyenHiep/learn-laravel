@@ -31,23 +31,21 @@ class CheckoutRequest extends FormRequest
             'receiver_phone_1'      => 'required',
             'payment_id'            => 'required',
         ];
-        if(request()->get('receiver_address_type') == config('define.APARTMENT'))
-        {
+        if (request()->input('receiver_address_type') == config('define.APARTMENT')) {
             $rules['receiver_address_2'] = 'required';
         }
         $rules_buyer = [];
-        if (!empty(request()->get('delivery_type')))
-        {
+        if (!empty(request()->input('delivery_type'))) {
             $rules_buyer = [
-                'delivery_type'        => 'required',
-                'buyer_email'          => 'required|email',
-                'buyer_name'           => 'required',
-                'buyer_address_type'   => 'required',
-                'buyer_address'        => 'required',
-                'buyer_phone_1'        => 'required',
+                'delivery_type'      => 'required',
+                'buyer_email'        => 'required|email',
+                'buyer_name'         => 'required',
+                'buyer_address_type' => 'required',
+                'buyer_address'      => 'required',
+                'buyer_phone_1'      => 'required',
             ];
-            if (request()->get('buyer_address_type') == config('define.APARTMENT')) {
-                $rules_buyer[ 'buyer_address_2' ] = 'required';
+            if (request()->input('buyer_address_type') == config('define.APARTMENT')) {
+                $rules_buyer['buyer_address_2'] = 'required';
             }
         }
 

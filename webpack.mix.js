@@ -61,6 +61,8 @@ mix.styles([
 
 mix.combine([
   'public/theme-phiten/assets/js/vue.js',
+  'public/theme-phiten/assets/js/vee-validate.min.js',
+  'public/theme-phiten/assets/js/rules.umd.min.js',
   'public/theme-phiten/assets/js/axios.min.js',
   'public/theme-phiten/assets/js/lodash.min.js',
   'public/theme-phiten/assets/js/jquery.js',

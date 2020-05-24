@@ -35,7 +35,10 @@
     @stack('scripts')
     <script>
       var vm = new Vue({
-        el: '#wrapper'
+        el: '#wrapper',
+        created () {
+          this.getListItemCart()
+        },
       })
     </script>
 </div>
