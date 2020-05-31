@@ -1,26 +1,36 @@
-@extends('frontend.theme-ecommerce.template')
+@extends('frontend.theme-phiten.template')
 
-@section('title', 'Chào mừng bạn đến với CMS E-commerce laravel Nguyễn Hiệp')
-@section('description', 'Cung cấp sỉ và lẻ quần áo')
-@section('keywords', 'Quần áo online, áo thun online, quần kaki online')
+@section('title', 'Shop chuyên cung cấp sỉ và lẻ quần áo')
+
+@push('meta')
+    <meta name="title" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
+    <meta name="keywords" content="Quần áo giá sỷ, Quần áo online, áo thun online, quần kaki online">
+    <meta name="description" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
+    <meta property="og:title" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
+    <meta property="og:description" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
+@endpush
 
 @section('content')
-  <script> var page = 'cart'; </script>
-  <main>
-    <section class="container stylization maincont">
-      <ul class="b-crumbs">
-        <li>
-          <a href="{{ URL::to('/') }}">Trang chủ</a>
-        </li>
-        <li>
-          <span>Đặt hàng thành công</span>
-        </li>
-      </ul>
-      <h1 class="main-ttl"><span>Đặt hàng thành công</span></h1>
-      <p>Cảm ơn bạn đã đặt hàng trên esdesignweb.com, chúng tôi sẽ liên hệ với bạn sớm nhất, chúc bạn một ngày tốt lành</p>
-      <p>
-        <a href="{{ route('home') }}">Trở về</a>
-      </p>
-    </section>
-  </main>
+    <div class="entry-heading">
+        <div class="container">
+            <h1>Thanh toán</h1>
+        </div>
+    </div>
+    <main id="main">
+        <div class="container">
+            <div class="successful">
+                <h2>Đơn hàng của bạn đã được đặt!</h2>
+                <p><img src="{{ asset('theme-phiten/assets/images/svg/successful.svg') }}" alt=""></p>
+                <p>Cảm ơn vì đã mua sắm cùng chúng tôi.</p>
+                <div class="desc">
+                    @if(Session::has('orderId'))
+                        <p>Mã đơn hàng của bạn là<span> # {{ Session::get('orderId') }}</span></p>
+                    @endif
+                </div>
+            </div>
+            <div class="paging-cart">
+              <a href="{{ route('home') }}" class="prev"><i class="icon-arrow-14"></i> Quay lại trang home</a>
+            </div>
+        </div>
+    </main>
 @endsection

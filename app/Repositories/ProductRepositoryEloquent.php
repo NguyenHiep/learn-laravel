@@ -145,7 +145,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function getProductByIds(array $ids)
     {
         return $this->model::whereIn('id', $ids)
-            ->select(['id', 'name', 'pictures', 'slug', 'sale_price', 'price', 'quantity', 'category_id'])
+            ->select(['id', 'name', 'pictures', 'slug', 'sku', 'sale_price', 'price', 'quantity', 'category_id'])
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
             ->where('status', config('define.STATUS_ENABLE'))->get();

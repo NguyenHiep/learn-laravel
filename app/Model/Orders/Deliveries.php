@@ -3,6 +3,7 @@
 namespace App\Model\Orders;
 
 use App\Model\BaseModel;
+use App\Model\Orders;
 
 class Deliveries extends BaseModel
 {

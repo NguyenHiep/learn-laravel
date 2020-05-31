@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Checkout;
 
 use App\Http\Requests\CheckoutRequest;
 use App\Model\Orders;
-use App\Model\Products;
 use Carbon\Carbon;
 use Session;
 use App\Http\Controllers\FrontendController;
@@ -15,7 +14,8 @@ use App\Helpers\Cart;
 class CheckoutController extends FrontendController
 {
     use Cart;
-    const STATUS_INPROCESS   = 1;
+
+    const ORDER_IN_PROCESS = 1;
     const DELIVERY_TYPE_SAME = 1;
 
     public function index()
@@ -59,25 +59,26 @@ class CheckoutController extends FrontendController
      * Checkout cart
      *
      * @param CheckoutRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function save(CheckoutRequest $request)
     {
         if (!Session::has(self::SES_ITEMS_CART)) {
-            return redirect()->route('home');
+            return $this->responseJson([
+                'status'  => self::CTRL_MESSAGE_ERROR,
+                'message' => __('system.message.errors', ['errors' => 'Please selected item product']),
+            ]);
         }
-        dd($request->all());
         // Validate data input
+        $inputs = $request->validationData();
         // Get and set item cart to list
         $cartItems = Session::get(self::SES_ITEMS_CART);
         $data['products'] = $this->getListItemsCart($cartItems);
         $data['total_price'] = $this->getToTalPriceCart();
-
-        $inputs = $request->all();
         $inputs['ordered_at'] = Carbon::now()->toDateTimeString();
         $inputs['delivered_at'] = Carbon::now()->toDateTimeString();
-        $inputs['status'] = static::STATUS_INPROCESS;
+        $inputs['status'] = static::ORDER_IN_PROCESS;
         $inputs['sub_total'] = $data['total_price'];
         $inputs['total'] = $data['total_price'];
         // Code xử lý product
@@ -99,7 +100,7 @@ class CheckoutController extends FrontendController
                 $inputs['buyer_name'] = $inputs['receiver_name'];
                 $inputs['buyer_address_type'] = $inputs['receiver_address_type'];
                 $inputs['buyer_address'] = $inputs['receiver_address_1'];
-                $inputs['buyer_address_2'] = $inputs['receiver_address_2'];
+                $inputs['buyer_address_2'] = $inputs['receiver_address_2'] ?? null;
                 $inputs['buyer_phone_1'] = $inputs['receiver_phone_1'];
             }
 
@@ -122,24 +123,36 @@ class CheckoutController extends FrontendController
             }
             $order_products = new Orders\Products();
             $order_products::insert($list_product);
+            Session::flash('orderId', $order->id);
             DB::commit();
-            return redirect()->route('checkout.thanks')->with([
-                'message' => __('Đặt hàng thành công'),
+            return $this->responseJson([
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
+                'message' => __('Đặt hàng thành công'),
+                'data'    => [
+                    'redirectUrl' => route('checkout.thanks')
+                ]
             ]);
 
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error(__METHOD__, [$e->getMessage()]);
         }
-        return redirect()->back()->withInput($inputs)->with([
-            'message' => __('system.message.errors', ['errors' => 'Create order is failed']),
+        return $this->responseJson([
             'status'  => self::CTRL_MESSAGE_ERROR,
+            'message' => __('system.message.errors', ['errors' => 'Create order is failed']),
         ]);
     }
 
+    /***
+     * Show page thanks after checkout cart successfully
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function thanks()
     {
+        if (!Session::has(self::SES_ITEMS_CART)) {
+            return redirect()->route('home');
+        }
         if (Session::has(self::SES_ITEMS_CART)) {
             Session::forget(self::SES_ITEMS_CART);
         }

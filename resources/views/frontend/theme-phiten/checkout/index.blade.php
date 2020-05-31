@@ -3,7 +3,7 @@
 @section('title', 'Thanh toán - Shop chuyên cung cấp sỉ và lẻ quần áo')
 
 @push('meta')
-    <meta name="title" content="hanh toán - Shop chuyên cung cấp sỉ và lẻ quần áo">
+    <meta name="title" content="Thanh toán - Shop chuyên cung cấp sỉ và lẻ quần áo">
     <meta name="keywords" content="Quần áo giá sỷ, Quần áo online, áo thun online, quần kaki online">
     <meta name="description" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
     <meta property="og:title" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
