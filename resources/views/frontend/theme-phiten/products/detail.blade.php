@@ -185,7 +185,12 @@
                                 <a href="{{ route('product.show', ['slug' => $relatedProduct->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                 <div class="group">
                                     <span class="gitem like"><i class="icon-heart"></i></span>
-                                    <a href="{{ route('product.show', ['slug' => $relatedProduct->slug]) }}" class="gitem cart"><i class="icon-cart"></i></a>
+                                    <a href="javascript:void(0)"
+                                       class="gitem cart"
+                                       @click="addToCart({quantity: 1, product_id: {{ $relatedProduct->id }} })"
+                                    >
+                                        <i class="icon-cart"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +220,12 @@
                                     <a href="{{ route('product.show', ['slug' => $viewedProduct->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                     <div class="group">
                                         <span class="gitem like"><i class="icon-heart"></i></span>
-                                        <a href="{{ route('product.show', ['slug' => $viewedProduct->slug]) }}" class="gitem cart"><i class="icon-cart"></i></a>
+                                        <a href="javascript:void(0)"
+                                           class="gitem cart"
+                                           @click="addToCart({quantity: 1, product_id: {{ $viewedProduct->id }} })"
+                                        >
+                                            <i class="icon-cart"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -10,8 +10,8 @@
           <div class="col-md-8">
             <form action="" method="POST">
               @csrf
-              <input type="email" placeholder="Nhập email để đăng ký" />
-              <button class="btn">Đăng Ký</button>
+              <input type="email" placeholder="Nhập email để đăng ký" required/>
+              <button type="submit" class="btn">Đăng Ký</button>
             </form>
           </div>
         </div>

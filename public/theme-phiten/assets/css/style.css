@@ -78,3 +78,9 @@
     -o-transition: 200ms ease-in-out;
     transition: 200ms ease-in-out;
 }
+.list-mini-product {
+    padding: 0 20px;
+    max-height: 260px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

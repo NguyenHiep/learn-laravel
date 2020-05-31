@@ -21,17 +21,17 @@
             <div class="container">
                 <div class="wizard">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="address-tab active">
+                        <li role="presentation" :class="step_process === STEP_REGISTER ? 'active' : ''" class="address-tab">
                             <h3>
                                 <a href="#address" data-toggle="tab" aria-controls="step1" role="tab" data-step="1">
-                                    <img src="{{ asset('theme-phiten/assets/images/svg/shipping-address.svg') }}" alt="">Địa chỉ
+                                    <img src="{{ asset('theme-phiten/assets/images/svg/shipping-address.svg') }}" alt="shipping address"> Địa chỉ
                                 </a>
                             </h3>
                         </li>
-                        <li role="presentation" class="disabled confirm-tab">
+                        <li role="presentation" :class="step_process === STEP_CONFIRM ? 'active' : ''" class="confirm-tab">
                             <h3>
                                 <a href="#confirm" data-toggle="tab" aria-controls="step3" role="tab" data-step="3">
-                                    <img src="{{ asset('theme-phiten/assets/images/svg/review-order.svg') }}" alt="review-order.svg">Xác nhận
+                                    <img src="{{ asset('theme-phiten/assets/images/svg/review-order.svg') }}" alt="review order"> Xác nhận
                                 </a>
                             </h3>
                         </li>
