@@ -88,9 +88,10 @@
       new Vue({
         el: '#wrapper',
         data: {
+          paymentOptions: @json($paymentOptions),
           different_address: false,
           billing: {
-            payment_method: 'cod',
+            payment_method: 1,
             state: '',
             city: ''
           },

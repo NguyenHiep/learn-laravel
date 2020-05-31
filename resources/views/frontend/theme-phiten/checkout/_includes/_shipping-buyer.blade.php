@@ -69,13 +69,12 @@
             <div class="box-wrapper1 payment clearfix">
                 <div class="box-header">
                 </div>
-
-                <ul class="list-inline payment-method row grid-space-2">
-                    <li class="col-4">
+                <ul class="list-inline payment-method row grid-space-2" v-if="paymentOptions.length > 0">
+                    <li class="col-4" v-for="(payment, index) in paymentOptions" :key="index">
                         <div class="item">
-                            <label class="form-group radio block" title="Thanh toán bằng tiền mặt">
-                                <input type="radio" v-model="billing.payment_method" id="cod" value="cod"/>
-                                <span for="cod"></span> Thanh toán bằng tiền mặt
+                            <label class="form-group radio block" data-toggle="tooltip" data-placement="top" :title="payment.description">
+                                <input type="radio" :value="payment.id" v-model="billing.payment_method" :id="'payment' + payment.id"/>
+                                <span :for="'payment' + payment.id"></span> @{{ payment.name }}
                             </label>
                         </div>
                     </li>

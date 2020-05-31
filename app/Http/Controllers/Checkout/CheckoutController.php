@@ -24,11 +24,11 @@ class CheckoutController extends FrontendController
             return redirect()->route('home');
         }
         $data = [];
-        $this->payment_options = [
+        $paymentOptions = [
             [
                 'id'          => 1,
-                'name'        => 'Thanh toán online',
-                'description' => 'Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.'
+                'name'        => 'Thanh toán khi nhận hàng',
+                'description' => 'Nhận hàng thanh toán'
             ],
             [
                 'id'          => 2,
@@ -42,11 +42,11 @@ class CheckoutController extends FrontendController
             ],
             [
                 'id'          => 3,
-                'name'        => 'Thanh toán khi nhận hàng',
+                'name'        => 'Thanh toán online',
                 'description' => 'Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.'
             ],
         ];
-        $data['payment_options'] = $this->payment_options;
+        $data['paymentOptions'] = $paymentOptions;
         // Get and set item cart to list
         $cartItems = Session::get(self::SES_ITEMS_CART);
         $data['products'] = $this->getListItemsCart($cartItems);
