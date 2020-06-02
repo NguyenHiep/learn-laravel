@@ -85,9 +85,13 @@
       const STEP_REGISTER = 'register';
       const STEP_CONFIRM = 'confirm';
       const ORDER_URL = '@php echo route('checkout.save') @endphp';
+      const STATE_URL = '@php echo route('checkout.state') @endphp';
       new Vue({
         el: '#wrapper',
         data: {
+          locations: @json($locations),
+          provinces: @json($provinces),
+          shipping_provinces: @json($provinces),
           paymentOptions: @json($paymentOptions),
           different_address: false,
           billing: {
@@ -129,9 +133,42 @@
               }).finally(() => self.loading = false)
             }
           },
-
           redirectStepOrder(stepName) {
             this.step_process = stepName;
+          },
+          changeState (action) {
+            let self = this
+            action = action || null
+            if (!self.billing.state && !action) {
+              return
+            }
+
+            if (!self.shipping.state && action) {
+              return
+            }
+            let dataSend = {}
+            if (action) {
+              dataSend = { id: self.shipping.state }
+            } else {
+              dataSend = { id: self.billing.state }
+            }
+            self.loading = true
+            axios.post(STATE_URL, dataSend).then(response => {
+              let responseData = response.data
+              self.loading = false
+              if (!_.isEmpty(responseData.data) && _.isArray(responseData.data.listState)) {
+                if (_.isEmpty(action)) {
+                  self.billing.city = ''
+                  self.provinces = responseData.data.listState
+                } else {
+                  self.shipping.city = ''
+                  self.shipping_provinces = responseData.data.listState
+                }
+              }
+            }).catch(error => {
+              console.log(error)
+              self.errored = true
+            }).finally(() => self.loading = false)
           }
         }
       })

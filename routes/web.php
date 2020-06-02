@@ -121,6 +121,7 @@ Route::namespace('Checkout')->group(function () {
     Route::get('/thong-tin-giao-hang/', 'CheckoutController@index')->name('checkout.index');
     Route::post('/dat-hang/', 'CheckoutController@save')->name('checkout.save');
     Route::get('/dat-hang-thanh-cong/', 'CheckoutController@thanks')->name('checkout.thanks');
+    Route::post('/state/', 'CheckoutController@getState')->name('checkout.state');
     Route::prefix('/checkout/')->group(function () {
         Route::get('/get-item-cart/', 'CartController@getListItem')->name('checkout.cart.listitem');
         Route::post('/addtocart/', 'CartController@add')->name('checkout.cart.add');

@@ -25,7 +25,7 @@
         <div class="item form-group ">
             <label for="shipping-phone">Phone<span>*</span></label>
             <validation-provider rules="required|numeric|length:10" v-slot="{ errors }">
-                <input type="phone" v-model="shipping.phone" name="Phone" :class="errors[0] ? 'has_error' : ''" class="form-control input"/>
+                <input type="text" v-model="shipping.phone" name="Phone" :class="errors[0] ? 'has_error' : ''" class="form-control input"/>
                 <span class="error" v-if="errors[0]">@{{ errors[0] }}</span>
             </validation-provider>
         </div>
@@ -37,10 +37,9 @@
         <div class="item form-group ">
             <label for="shipping-state">Bang/Tỉnh<span>*</span></label>
             <validation-provider rules="required" v-slot="{ errors }">
-                <select name="Bang/Tỉnh" v-model="shipping.state" :class="errors[0] ? 'has_error' : ''" class="custom-select-black select select-state">
+                <select @change="changeState('shipping')" name="Bang/Tỉnh" v-model="shipping.state" :class="errors[0] ? 'has_error' : ''" class="custom-select-black select select-state">
                     <option value="">Xin hãy lựa chọn</option>
-                    <option value="1">Hồ Chí Minh</option>
-                    <option value="65">Hà Nội</option>
+                    <option v-for="(location, index) in locations" :key="index" :value="location.code">@{{ location.name }}</option>
                 </select>
                 <span class="error" v-if="errors[0]">@{{ errors[0] }}</span>
             </validation-provider>
@@ -51,9 +50,7 @@
             <validation-provider rules="required" v-slot="{ errors }">
                 <select name="Quận/huyện" v-model="shipping.city" :class="errors[0] ? 'has_error' : ''" class="custom-select-black select">
                     <option value="">Quận/huyện</option>
-                    <option value="Quận 1">Quận 1</option>
-                    <option value="Quận 2">Quận 2</option>
-                    <option value="Quận 3">Quận 3</option>
+                    <option v-for="(province, index) in shipping_provinces" :key="index" :value="province.code">@{{ province.name }}</option>
                 </select>
                 <span class="error" v-if="errors[0]">@{{ errors[0] }}</span>
             </validation-provider>

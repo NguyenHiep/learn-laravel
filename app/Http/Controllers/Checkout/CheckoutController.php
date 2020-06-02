@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Checkout;
 
 use App\Http\Requests\CheckoutRequest;
 use App\Model\Orders;
+use App\Repositories\LocationRepository;
+use App\Repositories\ProvinceRepository;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Session;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +54,9 @@ class CheckoutController extends FrontendController
         $cartItems = Session::get(self::SES_ITEMS_CART);
         $data['products'] = $this->getListItemsCart($cartItems);
         $data['total_price'] = $this->getToTalPriceCart();
-
+        $locations = app(LocationRepository::class)->getListLocation();
+        $data['locations'] = $locations;
+        $data['provinces'] = app(ProvinceRepository::class)->getListProvinceByLocationId($locations->first()->code);
         return view('frontend.theme-phiten.checkout.index', $data);
     }
 
@@ -157,5 +162,27 @@ class CheckoutController extends FrontendController
             Session::forget(self::SES_ITEMS_CART);
         }
         return view('frontend.theme-phiten.checkout.thanks');
+    }
+
+    public function getState(Request $request)
+    {
+        $id = $request->input('id', 0);
+        if (empty($id)) {
+            return $this->responseJson([
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+                'message' => __('Action completed.'),
+                'data'    => [
+                    'listState' => []
+                ]
+            ]);
+        }
+        $listState = app(ProvinceRepository::class)->getListProvinceByLocationId($id);
+        return $this->responseJson([
+            'status'  => self::CTRL_MESSAGE_SUCCESS,
+            'message' => __('Action completed.'),
+            'data'    => [
+                'listState' => $listState
+            ]
+        ]);
     }
 }

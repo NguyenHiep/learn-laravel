@@ -44,10 +44,9 @@
 
             <div class="item form-group">
                 <validation-provider rules="required" v-slot="{ errors }">
-                    <select name="Tỉnh" v-model="billing.state" class="custom-select-black select select-state" :class="errors[0] ? 'has_error' : ''" placeholder="Tỉnh*">
+                    <select @change="changeState()" name="Tỉnh" v-model="billing.state" class="custom-select-black select select-state" :class="errors[0] ? 'has_error' : ''" placeholder="Tỉnh*">
                         <option value="">Xin hãy lựa chọn</option>
-                        <option value="1">Hồ Chí Minh</option>
-                        <option value="65">Hà Nội</option>
+                        <option v-for="(location, index) in locations" :key="index" :value="location.code">@{{ location.name }}</option>
                     </select>
                     <span class="error" v-if="errors[0]">@{{ errors[0] }}</span>
                 </validation-provider>
@@ -57,9 +56,7 @@
                 <validation-provider rules="required" v-slot="{ errors }">
                     <select v-model="billing.city" name="Quận/huyện" :class="errors[0] ? 'has_error' : ''" class="custom-select-black select">
                         <option value="">Quận/huyện</option>
-                        <option value="Quận 1">Quận 1</option>
-                        <option value="Quận 2">Quận 2</option>
-                        <option value="Quận 3">Quận 3</option>
+                        <option v-for="(province, index) in provinces" :key="index" :value="province.code">@{{ province.name }}</option>
                     </select>
                     <span class="error" v-if="errors[0]">@{{ errors[0] }}</span>
                 </validation-provider>

@@ -8,6 +8,8 @@ use App\Repositories\CommentRepository;
 use App\Repositories\CommentRepositoryEloquent;
 use App\Repositories\CustomerRepository;
 use App\Repositories\CustomerRepositoryEloquent;
+use App\Repositories\LocationRepository;
+use App\Repositories\LocationRepositoryEloquent;
 use App\Repositories\OrderRepository;
 use App\Repositories\OrderRepositoryEloquent;
 use App\Repositories\PageRepository;
@@ -24,6 +26,8 @@ use App\Repositories\PostTagRepository;
 use App\Repositories\PostTagRepositoryEloquent;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProductRepositoryEloquent;
+use App\Repositories\ProvinceRepository;
+use App\Repositories\ProvinceRepositoryEloquent;
 use App\Repositories\RoleRepository;
 use App\Repositories\RoleRepositoryEloquent;
 use App\Repositories\SettingRepository;
@@ -68,5 +72,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CustomerRepository::class, CustomerRepositoryEloquent::class);
         $this->app->bind(RoleRepository::class, RoleRepositoryEloquent::class);
         $this->app->bind(PermissionRepository::class, PermissionRepositoryEloquent::class);
+        $this->app->bind(LocationRepository::class, LocationRepositoryEloquent::class);
+        $this->app->bind(ProvinceRepository::class, ProvinceRepositoryEloquent::class);
     }
 }
