@@ -70,7 +70,7 @@
                     <li class="col-4" v-for="(payment, index) in paymentOptions" :key="index">
                         <div class="item">
                             <label class="form-group radio block" data-toggle="tooltip" data-placement="top" :title="payment.description">
-                                <input type="radio" :value="payment.id" v-model="billing.payment_method" :id="'payment' + payment.id"/>
+                                <input type="radio" :value="payment.id" v-model.number="billing.payment_method" :id="'payment' + payment.id"/>
                                 <span :for="'payment' + payment.id"></span> @{{ payment.name }}
                             </label>
                         </div>

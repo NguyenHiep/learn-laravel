@@ -21,11 +21,11 @@
                 </div>
                 <div class="item">
                     <div class="title">Quận/huyện:</div>
-                    <div class="text text_billing_district">@{{ billing.city }}</div>
+                    <div class="text text_billing_district">@{{ getBillingStateName(billing.city) }}</div>
                 </div>
                 <div class="item">
                     <div class="title">Bang /Tỉnh:</div>
-                    <div class="text text_billing_state">@{{ billing.state }}</div>
+                    <div class="text text_billing_state">@{{ getLocationName(billing.state) }}</div>
                 </div>
 
             </div>
@@ -51,12 +51,12 @@
 
                 <div class="item">
                     <div class="title">Quận/huyện:</div>
-                    <div class="text shipping_text_city">@{{ shipping.city }}</div>
+                    <div class="text shipping_text_city">@{{ getShippingStateName(shipping.city) }}</div>
                 </div>
 
                 <div class="item">
                     <div class="title">Thành phố:</div>
-                    <div class="text shipping_text_state">@{{ shipping.state }}</div>
+                    <div class="text shipping_text_state">@{{ getLocationName(shipping.state) }}</div>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
     <!--End widget-->
     <div class="widget widget-address">
         <div class="widget-title">Phương thức thanh toán</div>
-        <div class="widget-content text_payment">@{{ billing.payment_method }}</div>
+        <div class="widget-content text_payment">@{{ getPaymentName(billing.payment_method) }}</div>
     </div> <!--End widget-->
 </div>
 

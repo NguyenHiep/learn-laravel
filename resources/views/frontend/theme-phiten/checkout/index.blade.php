@@ -52,11 +52,11 @@
                                         <!-- end sidebar right -->
                                         <div class="col-md-8 col-sm-6">
                                             <div class="tab-content">
-                                                <div id="address" class="tab-pane" :class="step_process === STEP_REGISTER ? 'active' : ''" role="tabpanel">
+                                                <div id="address" v-if="step_process === STEP_REGISTER" class="tab-pane" :class="step_process === STEP_REGISTER ? 'active' : ''" role="tabpanel">
                                                     @includeIf('frontend.theme-phiten.checkout._includes.shipping')
                                                 </div>
 
-                                                <div id="confirm" class="tab-pane" :class="step_process === STEP_CONFIRM ? 'active' : ''" role="tabpanel">
+                                                <div id="confirm" v-if="step_process === STEP_CONFIRM" class="tab-pane" :class="step_process === STEP_CONFIRM ? 'active' : ''" role="tabpanel">
                                                     @includeIf('frontend.theme-phiten.checkout._includes.confirm')
                                                 </div>
                                                 @includeIf('frontend.theme-phiten.checkout._includes.sidebar-mobile')
@@ -169,6 +169,42 @@
               console.log(error)
               self.errored = true
             }).finally(() => self.loading = false)
+          },
+          getLocationName (key) {
+            if (_.isEmpty(key)) {
+              return
+            }
+            let currentLocation = _.find(this.locations, { 'code': key })
+            if (!_.isEmpty(currentLocation) && _.isObject(currentLocation)) {
+              return currentLocation.name
+            }
+          },
+          getBillingStateName (key) {
+            if (_.isEmpty(key)) {
+              return
+            }
+            let currentState = _.find(this.provinces, { 'code': key })
+            if (!_.isEmpty(currentState) && _.isObject(currentState)) {
+              return currentState.name
+            }
+          },
+          getShippingStateName (key) {
+            if (_.isEmpty(key)) {
+              return
+            }
+            let currentState = _.find(this.shipping_provinces, { 'code': key })
+            if (!_.isEmpty(currentState) && _.isObject(currentState)) {
+              return currentState.name
+            }
+          },
+          getPaymentName (key) {
+            if (!_.isInteger(key)) {
+              return
+            }
+            let currentPayment = _.find(this.paymentOptions, { 'id': key })
+            if (!_.isEmpty(currentPayment) && _.isObject(currentPayment)) {
+              return currentPayment.name
+            }
           }
         }
       })
