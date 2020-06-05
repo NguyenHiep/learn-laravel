@@ -3,24 +3,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <span class="close" data-dismiss="modal"><i class="icon-close"></i></span>
-            <form class="inner formlogin">
+            <form class="inner formlogin" method="POST" action="{{ route('login') }}">
+                @csrf
                 <h3>Đăng nhập</h3>
+                @if ($errors->has('email'))
+                    <span class="help-block error">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+                @if ($errors->has('password'))
+                    <span class="help-block error">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
                 <p class="winput">
-                    <input class="input" type="email" placeholder="Email" required/>
+                    <input name="email" class="input{{ $errors->has('email') ? ' has-error' : '' }}" type="email" placeholder="Email" required/>
                     <i class="icon-user"></i>
                 </p>
+
                 <p class="winput">
-                    <input class="input" type="password" id="password" placeholder="Mật khẩu"  required/>
+                    <input name="password" class="input{{ $errors->has('password') ? ' has-error' : '' }}" type="password" id="password" placeholder="Mật khẩu"  required/>
                     <i class="icon-lock"></i>
                 </p>
                 <p class="wremember">
-                    <label class="remember"><input type="checkbox"> Nhớ đến tôi</label>
+                    <label class="remember">
+                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}> Nhớ đến tôi</label>
                     <a href="javascript:void(0)" class="spass">
                         <span class="s">Hiển thị</span> <span class="h">Ẩn</span> Mật khẩu
                     </a>
                 </p>
                 <p class="text-center">
-                    <button class="btn noshadow">Đăng nhập</button>
+                    <button type="submit" class="btn noshadow">Đăng nhập</button>
                 </p>
                 <p class="text-center">
                     <a href="#" class="switchform" data-form="fforgot">Quên mật khẩu?</a>
@@ -186,7 +199,12 @@
               $('#password').attr('type', 'text')
             }
 
-          })
+          });
+        @if($errors->has('email') || $errors->has('password'))
+            $('#myLogin').modal({
+              show: true
+            });
+        @endif
         })
       })(jQuery)
     </script>

@@ -107,6 +107,20 @@ Route::prefix('manage')->name('manage.')->namespace('Manage')->group(function ()
     });
 });
 
+// Route of customer
+
+Route::prefix('customer')
+    ->middleware(['auth'])
+    ->name('customer.')
+    ->namespace('Customer')->group(function () {
+    Route::get('/', 'CustomerController@index')->name('dashboard');
+    Route::get('/orders', 'CustomerController@orders')->name('orders');
+    Route::get('/orders/{id}', 'CustomerController@detail')->name('orders.detail');
+    Route::put('/orders/cancel/{id}', 'CustomerController@cancel')->name('orders.cancel');
+    Route::get('/reviews', 'CustomerController@reviews')->name('reviews');
+    Route::get('/profile', 'CustomerController@profile')->name('profile');
+});
+
 Route::get('/chuyen-muc/{slug}/', 'CategoriesController@show')->name('category.show');
 Route::get('/san-pham/{slug}/', 'ProductsController@show')->name('product.show');
 Route::get('/product/quick-view/', 'ProductsController@quick_view')->name('product.quick_view');

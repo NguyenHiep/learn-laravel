@@ -8,6 +8,7 @@ use App\Validators\CustomerValidator;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
+use Illuminate\Support\Arr;
 use Log;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Storage;
@@ -164,6 +165,8 @@ class CustomersController extends BackendController
             $this->validator->with($inputs)->passesOrFail( CustomerValidator::RULE_UPDATE );
             if (!empty($inputs['password'])) {
                 $inputs['password'] = bcrypt($inputs['password']);
+            } else {
+                $inputs = Arr::except($inputs, ['password']);
             }
             if ($request->hasFile('avatar')) {
                 $pathAvatar = Storage::put(UPLOAD_AVATAR, $request->file('avatar'));
