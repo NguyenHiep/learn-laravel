@@ -119,6 +119,7 @@ Route::prefix('customer')
     Route::put('/orders/cancel/{id}', 'CustomerController@cancel')->name('orders.cancel');
     Route::get('/reviews', 'CustomerController@reviews')->name('reviews');
     Route::get('/profile', 'CustomerController@profile')->name('profile');
+    Route::put('/profile/update', 'CustomerController@update')->name('profile.update');
 });
 
 Route::get('/chuyen-muc/{slug}/', 'CategoriesController@show')->name('category.show');

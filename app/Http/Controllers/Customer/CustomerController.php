@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\FrontendController;
 use App\Repositories\CustomerRepository;
 use App\Repositories\OrderRepository;
+use Illuminate\Http\Request;
 
 class CustomerController extends FrontendController
 {
@@ -41,9 +42,13 @@ class CustomerController extends FrontendController
         return view('frontend.theme-phiten.customers.orders', $assignData);
     }
 
-    public function detail()
+    public function detail(int $id)
     {
-        return view('frontend.theme-phiten.customers.orders-detail');
+        $order = $this->orderRepository->getOrderDetail($id);
+        $assignData = [
+            'order' => $order
+        ];
+        return view('frontend.theme-phiten.customers.orders-detail', $assignData);
     }
 
     public function reviews()
@@ -53,10 +58,20 @@ class CustomerController extends FrontendController
 
     public function profile()
     {
-        return view('frontend.theme-phiten.customers.profile');
+        $customerId = auth()->id() ?? 0;
+        $customer = $this->customerRepository->getCustomerInfo($customerId);
+        $assignData = [
+            'customer' => $customer
+        ];
+        return view('frontend.theme-phiten.customers.profile', $assignData);
     }
 
-    public function cancel()
+    public function update(Request $request)
+    {
+
+    }
+
+    public function cancel(Request $request)
     {
 
     }

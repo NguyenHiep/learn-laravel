@@ -10,16 +10,12 @@
     <meta property="og:description" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
 @endpush
 
+@section('breadcrumb')
+    <li><a href="{{ route('customer.profile') }}">Tài khoản của tôi</a></li>
+    <li class="active">Đơn hàng của tôi</li>
+@endsection
+
 @section('content')
-    <div class="entry-breadcrumb">
-        <div class="container">
-            <ul class="list-inline breadcrumbs">
-                <li><a href="http://phiten.dev.nguyenhiep"><i class="icon icon-home" aria-hidden="true"></i></a></li>
-                <li><a href="account">Tài khoản của tôi</a></li>
-                <li class="active">Đơn hàng của tôi</li>
-            </ul>
-        </div>
-    </div>
     <main id="main" class="page-account">
         <div class="container">
             <div class="content-wrapper clearfix ">
@@ -45,21 +41,6 @@
 
                                         <tbody>
                                         @if($listOrders->total() > 1)
-                                        <tr>
-                                            <td>#46</td>
-                                            <td>Mar 12, 2020</td>
-                                            <td>Đã hoàn thành</td>
-                                            <td>6.900.000&nbsp;₫</td>
-                                            <td>
-                                                <a href="account/orders/46"
-                                                   class="btn-view" data-toggle="tooltip" title="Xem đơn hàng"
-                                                   rel="tooltip">
-                                                    <i class="icon icon-eye" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="account/orders/cancel/46"
-                                                   class="btn-custom">Hủy đơn</a>
-                                            </td>
-                                        </tr>
                                         @foreach($listOrders as $order)
                                             <tr>
                                                 <td>#{{ format_order_id($order->id)}}</td>

@@ -61,4 +61,9 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         return $model->get();
     }
 
+    public function getOrderDetail(int $id)
+    {
+        return $this->model::with(['products','deliveries'])->where('id', $id)->first();
+    }
+
 }

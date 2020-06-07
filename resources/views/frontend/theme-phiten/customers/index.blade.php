@@ -9,9 +9,11 @@
     <meta property="og:title" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
     <meta property="og:description" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
 @endpush
+
 @section('breadcrumb')
     <li class="active">Tài khoản của tôi</li>
 @endsection
+
 @section('content')
     <main id="main" class="page-account">
         <div class="container">

@@ -10,16 +10,12 @@
     <meta property="og:description" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
 @endpush
 
+@section('breadcrumb')
+    <li><a href="{{ route('customer.profile') }}">Tài khoản của tôi</a></li>
+    <li class="active">Nhận xét của tôi</li>
+@endsection
+
 @section('content')
-    <div class="entry-breadcrumb">
-        <div class="container">
-            <ul class="list-inline breadcrumbs">
-                <li><a href="#"><i class="icon icon-home" aria-hidden="true"></i></a></li>
-                <li><a href="/account">Tài khoản của tôi</a></li>
-                <li class="active">Nhận xét của tôi</li>
-            </ul>
-        </div>
-    </div>
     <main id="main" class="page-account">
         <div class="container">
             <div class="content-wrapper clearfix ">

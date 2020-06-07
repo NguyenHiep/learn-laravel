@@ -10,52 +10,41 @@
     <meta property="og:description" content="Shop chuyên cung cấp sỉ và lẻ quần áo">
 @endpush
 
+@section('breadcrumb')
+    <li><a href="{{ route('customer.profile') }}">Tài khoản của tôi</a></li>
+    <li><a href="{{ route('customer.orders') }}">Đơn hàng của tôi</a></li>
+    <li class="active">Xem đơn hàng</li>
+@endsection
+
 @section('content')
-    <div class="entry-breadcrumb">
-        <div class="container">
-            <ul class="list-inline breadcrumbs">
-                <li><a href="http://phiten.dev.nguyenhiep"><i class="icon icon-home" aria-hidden="true"></i></a></li>
-                <li><a href="account">Tài khoản của tôi</a></li>
-                <li><a href="account/orders">Đơn hàng của tôi</a></li>
-                <li class="active">Xem đơn hàng</li>
-            </ul>
-        </div>
-    </div>
     <main id="main">
         <div class="container">
             <div class="content-wrapper clearfix ">
-
                 <div class="container">
                     <div class="orders-view-wrapper clearfix">
                         <div class="row">
-
-
                             <div class="col-md-6 col-sm-6">
                                 <div class="order-details">
                                     <h5><b>Chi tiết đặt hàng</b></h5>
-
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
-                                            <tr>
-                                                <td>Điện thoại:</td>
-                                                <td>0923457673</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Email:</td>
-                                                <td>info@mangoads.vn</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Ngày:</td>
-                                                <td>Mar 12, 2020</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Phương thức thanh toán:</td>
-                                                <td>Thanh toán bằng tiền mặt</td>
-                                            </tr>
+                                                <tr>
+                                                    <td>Điện thoại:</td>
+                                                    <td>{{ $order->deliveries->buyer_phone_1 }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Email:</td>
+                                                    <td>{{ $order->deliveries->buyer_email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngày:</td>
+                                                    <td>{{ format_date($order->ordered_at) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Phương thức thanh toán:</td>
+                                                    <td>{{ __('selector.payment.' . $order->payment_id) }}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -68,11 +57,7 @@
                                 <div class="order-address">
                                     <h5><b>Địa chỉ thanh toán</b></h5>
                                     <p>
-                                        <span>Agency Agency</span>
-                                        <span>123 abc</span>
-                                        <span>123 abc</span>
-                                        <span>Quận 5,  700000</span>
-                                        <span>Vietnam</span>
+                                        <span>{{ $order->deliveries->buyer_address }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -81,19 +66,12 @@
                                 <div class="order-address">
                                     <h5><b>Địa chỉ giao hàng</b></h5>
                                     <p>
-                                        <span>Agency Agency</span>
-                                        <span>123 abc</span>
-                                        <span></span>
-                                        <span>Quận 5,  700000</span>
-                                        <span>Vietnam</span>
+                                        <span>{{ $order->deliveries->receiver_address_1 }}</span>
                                     </p>
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="row end">
-
                             <div class="cart-list col-12">
                                 <div class="table-responsive">
                                     <table class="table">
@@ -102,35 +80,37 @@
                                             <th>Sản phẩm</th>
                                             <th>Đơn giá</th>
                                             <th>Số lượng</th>
-                                            <th>Đơn giá</th>
+                                            <th>Thành tiền</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                <h6>
-                                                    <a href="product">
-                                                        Tất bọc ống chân Phiten X30 (1 cặp)
-                                                    </a>
-                                                </h6>
+                                        @foreach($order->products as $product)
+                                            <tr>
+                                                <td>
+                                                    <h6>
+                                                        <a href="{{ route('product.show', ['slug' => \Illuminate\Support\Str::slug($product->name)]) }}">{{ $product->name }}</a>
+                                                    </h6>
+                                                </td>
 
-                                            </td>
+                                                <td>
+                                                    <label class="visible-xs">Đơn giá:</label>
+                                                    <span class="price">{{ format_price($product->price) }}</span>
+                                                </td>
 
-                                            <td>
-                                                <label class="visible-xs">Đơn giá:</label>
-                                                <span class="price">1.380.000&nbsp;₫</span>
-                                            </td>
+                                                <td>
+                                                    <label class="visible-xs">Số lượng:</label>
+                                                    <span>{{ $product->quantity }}</span>
+                                                </td>
 
-                                            <td>
-                                                <label class="visible-xs">Số lượng:</label>
-                                                <span>5</span>
-                                            </td>
-
-                                            <td>
-                                                <label class="visible-xs">Đơn giá:</label>
-                                                <span class="price">6.900.000&nbsp;₫</span>
-                                            </td>
-                                        </tr>
+                                                <td>
+                                                    <label class="visible-xs">Thành tiền:</label>
+                                                    <span class="price">
+                                                        @php $price = $product->price * $product->quantity @endphp
+                                                        {{ format_price($price) }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -140,19 +120,16 @@
                                 <table class="table">
                                     <tbody>
                                     <tr>
-                                        <td><b>Thành tiền</b></td>
-                                        <td><span class="price">6.900.000&nbsp;₫</span></td>
+                                        <td><b>Tổng tiền</b></td>
+                                        <td><span class="price">{{ format_price($order->sub_total) }}</span></td>
                                     </tr>
-
                                     <tr>
                                         <td>Phí vận chuyển</td>
-                                        <td><span class="price">0&nbsp;₫</span></td>
+                                        <td><span class="price">{{ format_price($order->delivery_fee) }}</span></td>
                                     </tr>
-
-
                                     <tr>
-                                        <td><b>Tổng cộng</b></td>
-                                        <td><span class="price">6.900.000&nbsp;₫</span></td>
+                                        <td><b>Tổng thanh toán</b></td>
+                                        <td><span class="price">{{ format_price($order->total) }}</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -163,6 +140,5 @@
                 </div>
             </div>
         </div>
-
     </main>
 @endsection
