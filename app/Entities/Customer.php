@@ -17,6 +17,8 @@ class Customer extends BaseModel implements Transformable
 
     protected $table = 'customers';
 
+    protected $appends = ['full_name'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,5 +46,10 @@ class Customer extends BaseModel implements Transformable
         'password',
         'remember_token'
     ];
+
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
 
 }

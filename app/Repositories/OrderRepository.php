@@ -16,4 +16,6 @@ interface OrderRepository extends RepositoryInterface
     public function getLatestOrder(int $limit = 10);
 
     public function getTotalPrice();
+
+    public function getOrderCustomer(int $customerId, int $limit = 15);
 }

@@ -48,4 +48,17 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         return $this->model::selectRaw('SUM(`total`) AS `total_sales`, COUNT(`id`) AS `total_order`')->first();
     }
 
+    public function getOrderCustomer(int $customerId, int $limit = 15)
+    {
+        $model = $this->model::join('customers AS c', 'c.id', '=', 'orders.customer_id')
+            ->select(['orders.id', 'orders.ordered_at', 'orders.status', 'orders.total'])
+            ->orderBy('orders.id', 'DESC');
+        if ($limit > 0) {
+            $model->limit($limit);
+        } else {
+            return $model->paginate(20);
+        }
+        return $model->get();
+    }
+
 }

@@ -198,7 +198,6 @@
               $(this).addClass('ac')
               $('#password').attr('type', 'text')
             }
-
           });
         @if($errors->has('email') || $errors->has('password'))
             $('#myLogin').modal({

@@ -5,24 +5,40 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\FrontendController;
 use App\Repositories\CustomerRepository;
+use App\Repositories\OrderRepository;
 
 class CustomerController extends FrontendController
 {
     protected $customerRepository;
+    protected $orderRepository;
 
-    public function __construct(CustomerRepository $customerRepository)
-    {
+    public function __construct(
+        CustomerRepository $customerRepository,
+        OrderRepository $orderRepository
+    ) {
         $this->customerRepository = $customerRepository;
+        $this->orderRepository = $orderRepository;
     }
 
     public function index()
     {
-        return view('frontend.theme-phiten.customers.index');
+        $customerId = auth()->id() ?? 0;
+        $customer = $this->customerRepository->getCustomerInfo($customerId);
+        $listOrders = $this->orderRepository->getOrderCustomer($customerId);
+        $assignData = [
+            'customer' => $customer,
+            'listOrders' => $listOrders
+        ];
+        return view('frontend.theme-phiten.customers.index', $assignData);
     }
 
     public function orders()
     {
-        return view('frontend.theme-phiten.customers.orders');
+        $listOrders = $this->orderRepository->getOrderCustomer(auth()->id(), 0);
+        $assignData = [
+            'listOrders' => $listOrders
+        ];
+        return view('frontend.theme-phiten.customers.orders', $assignData);
     }
 
     public function detail()

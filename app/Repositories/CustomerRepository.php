@@ -12,4 +12,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface CustomerRepository extends RepositoryInterface
 {
     public function getListCustomer();
+
+    public function getCustomerInfo(int $id);
 }
