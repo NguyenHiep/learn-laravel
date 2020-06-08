@@ -14,9 +14,17 @@
                     <button><i class="icon-search-2"></i></button>
                 </form>
             </div>
-            <div class="item">
-                <a href="#" data-toggle="modal" data-target="#myLogin">Đăng Nhập</a>
-            </div>
+                <div class="item">
+                    @guest
+                        <a href="#" data-toggle="modal" data-target="#myLogin">Đăng Nhập</a>
+                    @endguest
+                    @auth
+                        <a href="{{ route('customer.dashboard') }}">
+                            <img src="{{ asset('theme-phiten/assets/images/svg/user.svg') }}" alt="user icon"/>
+                            {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
+                        </a>
+                    @endauth
+                </div>
         </div>
     </div>
 </div>

@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Customer;
 
 
 use App\Http\Controllers\FrontendController;
+use App\Http\Requests\ProfileRequest;
 use App\Repositories\CustomerRepository;
+use App\Repositories\LocationRepository;
 use App\Repositories\OrderRepository;
+use App\Repositories\ProvinceRepository;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Log;
 
 class CustomerController extends FrontendController
 {
@@ -58,17 +64,52 @@ class CustomerController extends FrontendController
 
     public function profile()
     {
-        $customerId = auth()->id() ?? 0;
-        $customer = $this->customerRepository->getCustomerInfo($customerId);
+        $customer = $this->customerRepository->getCustomerInfo(auth()->id());
+        $locations = app(LocationRepository::class)->getListLocation();
+        $locationId = $customer->city_id ?? 0;
+        if (empty($locationId)) {
+            $locationId = $locations->first()->code;
+        }
+        $provinces = app(ProvinceRepository::class)->getListProvinceByLocationId($locationId);
         $assignData = [
-            'customer' => $customer
+            'customer'  => $customer,
+            'locations' => $locations,
+            'provinces' => $provinces
         ];
         return view('frontend.theme-phiten.customers.profile', $assignData);
     }
 
-    public function update(Request $request)
+    /***
+     * update profile customer
+     *
+     * @param ProfileRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(ProfileRequest $request)
     {
-
+        try {
+            DB::beginTransaction();
+            $inputs = $request->validationData();
+            $customer = $this->customerRepository->find(auth()->id());
+            if (empty($inputs['password'])) {
+                $inputs = Arr::except($inputs, ['password']);
+            } else {
+                $inputs['password'] = bcrypt($inputs['password']);
+            }
+            $customer->fill($inputs)->save();
+            DB::commit();
+            return redirect()->route('customer.profile')->with([
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+                'message' => __('Action completed.')
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error(__METHOD__, [$e->getMessage()]);
+        }
+        return redirect()->back()->with([
+            'status'  => self::CTRL_MESSAGE_ERROR,
+            'message' => __('system.message.errors', ['errors' => 'Update profile failed!']),
+        ]);
     }
 
     public function cancel(Request $request)

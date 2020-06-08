@@ -82,7 +82,14 @@
               <div class="widget widget-menu my-account">
                 <h3 class="widget-title">Tài khoản của tôi</h3>
                 <ul class="menu menu-footer 2">
-                  <li><a href="#" data-toggle="modal" data-target="#myLogin" id="flogin">Đăng nhập / Đăng ký</a></li>
+                  <li>
+                    @guest
+                      <a href="#" data-toggle="modal" data-target="#myLogin" id="flogin">Đăng nhập / Đăng ký</a>
+                    @endguest
+                    @auth
+                      <a href="{{ route('customer.dashboard') }}"> Bảng điều khiển</a>
+                    @endauth
+                  </li>
                   <li><a href="{{ route('checkout.cart.index') }}">Giỏ hàng của tôi</a></li>
                 </ul>
               </div>

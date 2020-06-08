@@ -41,23 +41,24 @@
 
                                         <tbody>
                                         @if($listOrders->total() > 1)
-                                        @foreach($listOrders as $order)
+                                            @foreach($listOrders as $order)
+                                                <tr>
+                                                    <td>#{{ format_order_id($order->id)}}</td>
+                                                    <td>{{ format_date($order->ordered_at) }}</td>
+                                                    <td> {{ __('selector.orders.status.' . $order->status) }}</td>
+                                                    <td> {{ format_price($order->total) }}</td>
+                                                    <td>
+                                                        <a href="{{ route('customer.orders.detail', $order->id) }}" class="btn-view" data-toggle="tooltip" title="Xem đơn hàng" rel="tooltip">
+                                                            <i class="icon icon-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn-custom">Hủy đơn</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
                                             <tr>
-                                                <td>#{{ format_order_id($order->id)}}</td>
-                                                <td>{{ format_date($order->ordered_at) }}</td>
-                                                <td> {{ __('selector.orders.status.' . $order->status) }}</td>
-                                                <td> {{ format_price($order->total) }}</td>
-                                                <td>
-                                                    <a href="{{ route('customer.orders.detail', $order->id) }}"
-                                                       class="btn-view" data-toggle="tooltip" title="Xem đơn hàng"
-                                                       rel="tooltip">
-                                                        <i class="icon icon-eye" aria-hidden="true"></i>
-                                                    </a>
-                                                    <a href="{{ route('customer.orders.cancel', $order->id) }}"
-                                                       class="btn-custom">Hủy đơn</a>
-                                                </td>
+                                                <td colspan="5" style="text-align: center">Chưa có đơn hàng nào được đặt</td>
                                             </tr>
-                                        @endforeach
                                         @endif
                                         </tbody>
                                     </table>

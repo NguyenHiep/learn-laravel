@@ -32,6 +32,22 @@
                                 <div class="account-details inner">
                                     <div class="account rowlabel label-150 mb-30">
                                         <h4>Tài khoản</h4>
+
+                                        @if (session('status') === 'success' && session('message'))
+                                            <div class="alert alert-success">
+                                                {{ session('message') }}
+                                            </div>
+                                        @endif
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger" style="padding-left: 30px">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+
                                         <div class="item form-group ">
                                             <label class="title" for="first-name">
                                                 Tên<span>*</span>
@@ -46,7 +62,7 @@
                                                 Họ<span>*</span>
                                             </label>
                                             <span class="text">
-                                                <input type="text" name="last_name" id="last-name" class="form-control input" value="{{ old('first_name', $customer->last_name) }}">
+                                                <input type="text" name="last_name" id="last-name" class="form-control input" value="{{ old('last_name', $customer->last_name) }}">
                                             </span>
                                         </div>
 
@@ -55,7 +71,7 @@
                                                 Phone<span>*</span>
                                             </label>
                                             <span class="text">
-                                                <input type="text" name="phone" id="phone" class="form-control input" value="{{ old('phone', $customer->phone) }}">
+                                                <input type="text" name="phone" maxlength="10" id="phone" class="form-control input" value="{{ old('phone', $customer->phone) }}">
                                             </span>
                                         </div>
 
@@ -73,7 +89,29 @@
                                                 Địa chỉ
                                             </label>
                                             <span class="text">
-                                                <input type="text" name="address" id="address" class="form-control input" value="{{ old('email', $customer->address) }}">
+                                                <input type="text" name="address" id="address" class="form-control input" value="{{ old('address', $customer->address) }}">
+                                            </span>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="title">
+                                                Bang/Tỉnh*
+                                            </label>
+                                            <span class="text">
+                                                <select v-model="city_id" @change="changeState()" name="city_id" id="city_id" class="form-control input">
+                                                    <option value="">Xin hãy lựa chọn</option>
+                                                    <option v-for="(location, index) in locations" :key="index" :value="location.code">@{{ location.name }}</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="title">
+                                                Quận/huyện*
+                                            </label>
+                                            <span class="text">
+                                                <select v-model="district_id" name="district_id" id="district_id" class="form-control input">
+                                                    <option value="">Xin hãy lựa chọn</option>
+                                                    <option v-for="(province, index) in provinces" :key="index" :value="province.code">@{{ province.name }}</option>
+                                                </select>
                                             </span>
                                         </div>
 
@@ -140,3 +178,37 @@
 
     </main>
 @endsection
+@push('scripts')
+    <script>
+      const STATE_URL = '@php echo route('checkout.state') @endphp';
+      new Vue({
+        el: '#wrapper',
+        data: {
+          locations: @json($locations),
+          provinces: @json($provinces),
+          city_id: '{{ $customer->city_id ?? '' }}',
+          district_id: '{{ $customer->district_id ?? '' }}',
+        },
+        created () {
+          this.getListItemCart()
+        },
+        methods: {
+          changeState () {
+            let self = this
+            self.loading = true
+            axios.post(STATE_URL, { id: self.city_id }).then(response => {
+              let responseData = response.data
+              self.loading = false
+              if (!_.isEmpty(responseData.data) && _.isArray(responseData.data.listState)) {
+                self.district_id = ''
+                self.provinces = responseData.data.listState
+              }
+            }).catch(error => {
+              console.log(error)
+              self.errored = true
+            }).finally(() => self.loading = false)
+          },
+        }
+      })
+    </script>
+@endpush

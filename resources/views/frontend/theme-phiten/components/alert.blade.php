@@ -24,8 +24,11 @@
       case 'info':
         toastr['info'](data.message, 'Thông báo')
         break
-      default:
+      case 'error':
         toastr['error'](data.message, 'Thông báo')
+        break
+      default:
+        break
     }
   }
 

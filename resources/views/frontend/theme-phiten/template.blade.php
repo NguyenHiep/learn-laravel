@@ -2,22 +2,22 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <title>@yield('title')</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     @stack('meta')
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="shortcut icon" href="{{ asset('theme-phiten/assets/images/favicon.png') }}" type="image/x-icon"/>
-    <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap&subset=vietnamese" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme-phiten/assets/css/app.css') }}" />
+    <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap&subset=vietnamese" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme-phiten/assets/css/app.css') }}"/>
     @stack('styles')
     <script>
-        window.WifeCart = {
-            csrfToken: "{{ csrf_token() }}",
-            pathImageProduct: "{{ UPLOAD_PRODUCT }}",
-            language: '',
-            currency: ''
-        }
+      window.WifeCart = {
+        csrfToken: "{{ csrf_token() }}",
+        pathImageProduct: "{{ UPLOAD_PRODUCT }}",
+        language: '',
+        currency: ''
+      }
     </script>
 </head>
 
@@ -29,7 +29,9 @@
     @endif
     @yield('content')
     @includeIf('frontend.theme-phiten._includes._footer')
-    @includeIf('frontend.theme-phiten._modules.login-register')
+    @guest
+        @includeIf('frontend.theme-phiten._modules.login-register')
+    @endguest
     <script src="{{ asset('theme-phiten/assets/js/app.js') }}"></script>
     @includeIf('frontend.theme-phiten.components.alert')
     @stack('scripts')

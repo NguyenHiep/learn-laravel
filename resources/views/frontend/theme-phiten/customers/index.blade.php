@@ -37,12 +37,12 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                <th>ID đơn hàng</th>
-                                                <th>Ngày</th>
-                                                <th>Trạng thái</th>
-                                                <th>Tổng cộng</th>
-                                                <th></th>
-                                            </tr>
+                                                    <th>ID đơn hàng</th>
+                                                    <th>Ngày</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Tổng cộng</th>
+                                                    <th></th>
+                                                </tr>
                                             </thead>
                                             <tbody>
                                             @if($listOrders->isNotEmpty())
@@ -62,6 +62,10 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
+                                            @else
+                                                <tr>
+                                                    <td colspan="5" style="text-align: center">Chưa có đơn hàng nào được đặt</td>
+                                                </tr>
                                             @endif
                                             </tbody>
                                         </table>
