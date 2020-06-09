@@ -37,7 +37,7 @@
         <div class="item form-group ">
             <label for="shipping-state">Bang/Tỉnh<span>*</span></label>
             <validation-provider rules="required" v-slot="{ errors }">
-                <select @change="changeState('shipping')" name="Bang/Tỉnh" v-model="shipping.state" :class="errors[0] ? 'has_error' : ''" class="custom-select-black select select-state">
+                <select @change="changeState(shipping.state, 'shipping')" name="Bang/Tỉnh" v-model="shipping.state" :class="errors[0] ? 'has_error' : ''" class="custom-select-black select select-state">
                     <option value="">Xin hãy lựa chọn</option>
                     <option v-for="(location, index) in locations" :key="index" :value="location.code">@{{ location.name }}</option>
                 </select>

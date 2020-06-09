@@ -1,8 +1,10 @@
 <div class="form-address">
-    <h6>
-        Bạn có tài khoản? Vui lòng <a href="#" data-toggle="modal" data-target="#myLogin" id="flogin">đăng nhập.</a>
-        Hoặc bấm <a href="#" data-toggle="modal" data-target="#myLogin" id="fregister">vào đây</a> để tạo tài khoản mới
-    </h6>
+    @guest
+        <h6>
+            Bạn có tài khoản? Vui lòng <a href="#" data-toggle="modal" data-target="#myLogin" id="flogin">đăng nhập.</a>
+            Hoặc bấm <a href="#" data-toggle="modal" data-target="#myLogin" id="fregister">vào đây</a> để tạo tài khoản mới
+        </h6>
+    @endguest
     @includeIf('frontend.theme-phiten.checkout._includes._shipping-buyer')
     <div class="checkbox ship-to-a-different-address clicked">
         <input type="hidden" name="ship_to_a_different_address" value="0">

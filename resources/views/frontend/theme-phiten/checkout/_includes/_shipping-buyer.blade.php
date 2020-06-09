@@ -44,7 +44,7 @@
 
             <div class="item form-group">
                 <validation-provider rules="required" v-slot="{ errors }">
-                    <select @change="changeState()" name="Tỉnh" v-model="billing.state" class="custom-select-black select select-state" :class="errors[0] ? 'has_error' : ''" placeholder="Tỉnh*">
+                    <select @change="changeState(billing.state)" name="Tỉnh" v-model="billing.state" class="custom-select-black select select-state" :class="errors[0] ? 'has_error' : ''" placeholder="Tỉnh*">
                         <option value="">Xin hãy lựa chọn</option>
                         <option v-for="(location, index) in locations" :key="index" :value="location.code">@{{ location.name }}</option>
                     </select>

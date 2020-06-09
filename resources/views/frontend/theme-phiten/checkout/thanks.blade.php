@@ -24,7 +24,7 @@
                 <p>Cảm ơn vì đã mua sắm cùng chúng tôi.</p>
                 <div class="desc">
                     @if(Session::has('orderId'))
-                        <p>Mã đơn hàng của bạn là<span> # {{ Session::get('orderId') }}</span></p>
+                        <p>Mã đơn hàng của bạn là<span> #{{ format_order_id(Session::get('orderId')) }}</span></p>
                     @endif
                 </div>
             </div>

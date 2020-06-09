@@ -97,7 +97,8 @@
           billing: {
             payment_method: 1,
             state: '',
-            city: ''
+            city: '',
+            notes: ''
           },
           shipping: {
             state: '',
@@ -108,6 +109,9 @@
         },
         created () {
           this.getListItemCart()
+          @if(!empty($customer))
+            this.getAddressCustomer()
+          @endif
         },
         methods: {
           checkoutCart () {
@@ -136,22 +140,17 @@
           redirectStepOrder(stepName) {
             this.step_process = stepName;
           },
-          changeState (action) {
+          changeState (stateId, action) {
             let self = this
             action = action || null
             if (!self.billing.state && !action) {
               return
             }
 
-            if (!self.shipping.state && action) {
+            if (!self.shipping.state && action && action !== 'customer') {
               return
             }
-            let dataSend = {}
-            if (action) {
-              dataSend = { id: self.shipping.state }
-            } else {
-              dataSend = { id: self.billing.state }
-            }
+            let dataSend = { id: stateId }
             self.loading = true
             axios.post(STATE_URL, dataSend).then(response => {
               let responseData = response.data
@@ -160,7 +159,10 @@
                 if (_.isEmpty(action)) {
                   self.billing.city = ''
                   self.provinces = responseData.data.listState
-                } else {
+                } else if (action === 'customer') {
+                  console.log(self.billing);
+                  self.provinces = responseData.data.listState
+                } else if (action === 'shipping') {
                   self.shipping.city = ''
                   self.shipping_provinces = responseData.data.listState
                 }
@@ -205,7 +207,21 @@
             if (!_.isEmpty(currentPayment) && _.isObject(currentPayment)) {
               return currentPayment.name
             }
+          },
+          @if(!empty($customer))
+          getAddressCustomer () {
+            let customerInfo = {
+              customer_email: '{{ $customer->email }}',
+              full_name: '{{ $customer->last_name }} {{ $customer->first_name }}',
+              address: '{{ $customer->address }}',
+              customer_phone: '{{ $customer->phone }}',
+              state: '{{ $customer->city_id }}',
+              city: '{{ $customer->district_id }}'
+            }
+            this.billing = Object.assign(this.billing, customerInfo)
+            this.changeState(customerInfo.state, 'customer')
           }
+          @endif
         }
       })
     </script>

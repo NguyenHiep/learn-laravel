@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Checkout;
 
 use App\Http\Requests\CheckoutRequest;
 use App\Model\Orders;
+use App\Repositories\CustomerRepository;
 use App\Repositories\LocationRepository;
 use App\Repositories\ProvinceRepository;
 use Carbon\Carbon;
@@ -57,6 +58,8 @@ class CheckoutController extends FrontendController
         $locations = app(LocationRepository::class)->getListLocation();
         $data['locations'] = $locations;
         $data['provinces'] = app(ProvinceRepository::class)->getListProvinceByLocationId($locations->first()->code);
+        $customerId = auth()->id() ?? 0;
+        $data['customer'] = app(CustomerRepository::class)->getCustomerInfo($customerId);
         return view('frontend.theme-phiten.checkout.index', $data);
     }
 
