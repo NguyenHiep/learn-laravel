@@ -40,10 +40,13 @@ return [
 
     'orders' => [
         'status' => [
-            1 => 'Chờ xử lý',
-            2 => 'Xử lý xong',
-            3 => 'Đang giao hàng',
-            4 => 'Giao hàng thành công',
+            1 => 'Đã hủy',
+            2 => 'Đã hoàn thành',
+            3 => 'Tạm dừng',
+            4 => 'Đang chờ xử lý',
+            5 => 'Trong khi chờ thanh toán',
+            6 => 'Đang xử lý',
+            7 => 'Hoàn tiền',
         ]
     ],
     'payment' => [

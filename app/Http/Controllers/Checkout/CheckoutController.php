@@ -19,7 +19,7 @@ class CheckoutController extends FrontendController
 {
     use Cart;
 
-    const ORDER_IN_PROCESS = 1;
+    const ORDER_IN_PROCESS = 4;
     const DELIVERY_TYPE_SAME = 1;
 
     public function index()
@@ -89,6 +89,7 @@ class CheckoutController extends FrontendController
         $inputs['status'] = static::ORDER_IN_PROCESS;
         $inputs['sub_total'] = $data['total_price'];
         $inputs['total'] = $data['total_price'];
+        $inputs['customer_id'] = auth()->id() ?? 0;
         // Code xử lý product
         try {
             DB::beginTransaction();
@@ -132,6 +133,7 @@ class CheckoutController extends FrontendController
             $order_products = new Orders\Products();
             $order_products::insert($list_product);
             Session::flash('orderId', $order->id);
+            //TODO: Send mail order
             DB::commit();
             return $this->responseJson([
                 'status'  => self::CTRL_MESSAGE_SUCCESS,

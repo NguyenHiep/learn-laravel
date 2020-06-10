@@ -31,7 +31,7 @@
 
           <div class="product-list-result mainproduct lists-1 lists-1-hover">
             <div class="row grid-space-0">
-              @if($products->total() > 1)
+              @if($products->total() > 0)
                 @foreach($products as $product)
                   <div class="col-6 col-sm-6 col-md-3">
                     <div class="item">

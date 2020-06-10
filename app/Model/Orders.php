@@ -34,13 +34,9 @@ class Orders extends BaseModel
         'note',
         'note',
         'status',
-        'payment_id'
+        'payment_id',
+        'customer_id'
     ];
-
-   /* protected $dates = [
-        'ordered_at',
-        'delivered_at',
-    ];*/
 
     public function setOrderedAtAttribute($value)
     {

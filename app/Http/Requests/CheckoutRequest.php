@@ -68,7 +68,7 @@ class CheckoutRequest extends FormRequest
             'receiver_address_type' => 1, //TODO: Need change
             'receiver_address_1'    => $billing['address'],
             'receiver_phone_1'      => $billing['customer_phone'],
-            'payment_id'            => 1, //TODO: Need change
+            'payment_id'            => $billing['payment_method'],
             'note'                  => $billing['notes'],
             'delivery_type'         => 1 //TODO: Need change
         ];

@@ -40,7 +40,7 @@
                                         </thead>
 
                                         <tbody>
-                                        @if($listOrders->total() > 1)
+                                        @if($listOrders->total() > 0)
                                             @foreach($listOrders as $order)
                                                 <tr>
                                                     <td>#{{ format_order_id($order->id)}}</td>

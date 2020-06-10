@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row grid-space-60 end">
                 <div class="col-md-8 col-lg-9">
-                    @if($posts->total() > 1)
+                    @if($posts->total() > 0)
                         <ul class="list-news">
                             @foreach($posts as $post)
                                 <li class="item">
