@@ -115,8 +115,8 @@ Route::prefix('customer')
     ->namespace('Customer')->group(function () {
     Route::get('/', 'CustomerController@index')->name('dashboard');
     Route::get('/orders', 'CustomerController@orders')->name('orders');
-    Route::get('/orders/{id}', 'CustomerController@detail')->name('orders.detail');
-    Route::put('/orders/cancel/{id}', 'CustomerController@cancel')->name('orders.cancel');
+    Route::get('/orders/{id}', 'CustomerController@detail')->name('orders.detail')->where('id', '[0-9]+');;
+    Route::put('/orders/cancel/{id}', 'CustomerController@cancel')->name('orders.cancel')->where('id', '[0-9]+');;
     Route::get('/reviews', 'CustomerController@reviews')->name('reviews');
     Route::get('/profile', 'CustomerController@profile')->name('profile');
     Route::put('/profile/update', 'CustomerController@update')->name('profile.update');

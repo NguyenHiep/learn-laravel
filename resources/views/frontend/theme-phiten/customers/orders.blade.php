@@ -26,6 +26,16 @@
                     </div>
                     <div class="col-md-8 col-lg-9">
                         <div class="content-right formaccount clearfix">
+                            @if (session('status') === 'success' && session('message'))
+                                <div class="alert alert-success">
+                                    {{ session('message') }}
+                                </div>
+                            @endif
+                            @if (session('status') === 'error' && session('message'))
+                                <div class="alert alert-danger">
+                                    {{ session('message') }}
+                                </div>
+                            @endif
                             <div class="index-table">
                                 <div class="wrap-table">
                                     <table class="table-cart productListCart">
@@ -51,7 +61,13 @@
                                                         <a href="{{ route('customer.orders.detail', $order->id) }}" class="btn-view" data-toggle="tooltip" title="Xem đơn hàng" rel="tooltip">
                                                             <i class="icon icon-eye" aria-hidden="true"></i>
                                                         </a>
-                                                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn-custom">Hủy đơn</a>
+                                                        @if($order->status === 4)  {{-- If order status is Pending --}}
+                                                            <a class="btn-custom" href="javascript:void(0)" onclick="event.preventDefault();document.getElementById('cancel-order-{{ $order->id }}').submit();">Hủy đơn</a>
+                                                            <form id="cancel-order-{{ $order->id }}" action="{{ route('customer.orders.cancel', $order->id) }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                                @method('PUT')
+                                                            </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

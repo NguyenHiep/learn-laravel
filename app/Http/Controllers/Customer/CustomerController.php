@@ -16,6 +16,9 @@ use Log;
 
 class CustomerController extends FrontendController
 {
+
+    const ORDER_STATUS_CANCEL = 1;
+
     protected $customerRepository;
     protected $orderRepository;
 
@@ -112,8 +115,37 @@ class CustomerController extends FrontendController
         ]);
     }
 
-    public function cancel(Request $request)
+    /****
+     * Cancel order by customer
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|void
+     */
+    public function cancel($id)
     {
+        $order = $this->orderRepository->findWhere([
+            'id'          => $id,
+            'customer_id' => auth()->id()
+        ], ['id', 'customer_id', 'status'])->first();
+        if (empty($order)) {
+            return abort(404);
+        }
+        try {
+            DB::beginTransaction();
+            $order->update(['status' => self::ORDER_STATUS_CANCEL]);
+            DB::commit();
+            return redirect()->route('customer.orders')->with([
+                'status'  => self::CTRL_MESSAGE_SUCCESS,
+                'message' => __('Action completed.')
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error(__METHOD__, [$e->getMessage()]);
+        }
 
+        return redirect()->back()->with([
+            'status'  => self::CTRL_MESSAGE_ERROR,
+            'message' => __('system.message.errors', ['errors' => 'Cancel order failed!']),
+        ]);
     }
 }
