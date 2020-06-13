@@ -115,7 +115,6 @@
                                     </table>
                                 </div>
                             </div>
-
                             <div class="pull-right">
 
                             </div>

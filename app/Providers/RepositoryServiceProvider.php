@@ -24,6 +24,8 @@ use App\Repositories\PostRepository;
 use App\Repositories\PostRepositoryEloquent;
 use App\Repositories\PostTagRepository;
 use App\Repositories\PostTagRepositoryEloquent;
+use App\Repositories\ProductCommentRepository;
+use App\Repositories\ProductCommentRepositoryEloquent;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProductRepositoryEloquent;
 use App\Repositories\ProvinceRepository;
@@ -74,5 +76,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PermissionRepository::class, PermissionRepositoryEloquent::class);
         $this->app->bind(LocationRepository::class, LocationRepositoryEloquent::class);
         $this->app->bind(ProvinceRepository::class, ProvinceRepositoryEloquent::class);
+        $this->app->bind(ProductCommentRepository::class, ProductCommentRepositoryEloquent::class);
     }
 }

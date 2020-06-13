@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Repositories\CustomerRepository;
 use App\Repositories\LocationRepository;
 use App\Repositories\OrderRepository;
+use App\Repositories\ProductCommentRepository;
 use App\Repositories\ProvinceRepository;
 use DB;
 use Illuminate\Http\Request;
@@ -62,7 +63,11 @@ class CustomerController extends FrontendController
 
     public function reviews()
     {
-        return view('frontend.theme-phiten.customers.reviews');
+        $listComment = app(ProductCommentRepository::class)->getCommentByUser(auth()->id());
+        $assignData = [
+            'listComment' => $listComment
+        ];
+        return view('frontend.theme-phiten.customers.reviews', $assignData);
     }
 
     public function profile()
