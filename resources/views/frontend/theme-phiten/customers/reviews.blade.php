@@ -55,7 +55,7 @@
                                                     <td>
                                                         <span class="product-rating">
                                                             @for($i=1; $i<=5; $i++)
-                                                                <i class="icon icon-star-full {{ ($i > $comment->rate) ? '' : 'rated' }}"></i>
+                                                                <i class="icon {{ ($i > $comment->rate) ? 'icon-star-empty' : 'icon-star-full rated' }}"></i>
                                                             @endfor
                                                         </span>
                                                     </td>

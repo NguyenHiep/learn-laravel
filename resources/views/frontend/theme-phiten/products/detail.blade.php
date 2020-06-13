@@ -58,12 +58,10 @@
                         @if(!empty($settings->params) && !empty($settings->params['enable_product_comment']))
                         <div class="product-review total-rating">
                             <span class="product-rating">
-                                <i class="icon icon-star-empty"></i>
-                                <i class="icon icon-star-empty"></i>
-                                <i class="icon icon-star-empty"></i>
-                                <i class="icon icon-star-empty"></i>
-                                <i class="icon icon-star-empty"></i>
-                            </span> 0 Phản hồi khách hàng
+                                 @for($i = 1; $i <= 5; $i++)
+                                    <i class="icon {{ $i > ceil($listComment->avg('rate')) ? 'icon-star-empty' : 'icon-star-full rated' }}"></i>
+                                 @endfor
+                            </span> {{ $listComment->total() }} Phản hồi khách hàng
                         </div>
                         @endif
                         <p class="price">
@@ -126,37 +124,36 @@
                 <div class="col-lg-12">
                     <div class="review">
                         <div class="tab-inner active">
-                            <div id="reviews" class="tab-reviews reviews tab-pane fade in  ">
-                                <ul class="user-review list-commnets  mb-20">
-                                    <li class="item">
-                                        <div class="name">
-                                            <div class="text">
-                                                <div class="date">
-                                                    <span class="time" data-toggle="tooltip" title="May 10, 2020">
-                                                    12 phút trước</span>
+                            <div id="reviews" class="tab-reviews reviews tab-pane fade in">
+                                @if($listComment->total() > 0)
+                                    <ul class="user-review list-commnets mb-20">
+                                        @foreach($listComment as $comment)
+                                            <li class="item">
+                                                <div class="name">
+                                                    <div class="text">
+                                                        <div class="date">
+                                                            <span class="time" data-toggle="tooltip" title="{{ format_date($comment->created_at,'%d/%m/%Y') }}">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span>
+                                                        </div>
+                                                        <div class="title">{{ $comment->name }}</div>
+                                                        <span class="product-rating">
+                                                            @for($i = 1; $i <= 5; $i++)
+                                                                <i class="icon {{ $i > $comment->rate ? 'icon-star-empty' : 'icon-star-full rated' }}"></i>
+                                                            @endfor
+                                                        </span>
+
+                                                    </div>
                                                 </div>
-                                                <div class="title">Hiep Nguyen</div>
-                                                <span class="product-rating">
-                                                    <i class="icon icon-star-full rated"></i>
-                                                    <i class="icon icon-star-full rated"></i>
-                                                    <i class="icon icon-star-full rated"></i>
-                                                    <i class="icon icon-star-empty"></i>
-                                                    <i class="icon icon-star-empty"></i>
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-                                            varius tortor nibh,
-                                            sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam
-                                            hendrerit molestie. Mauris
-                                            malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac
-                                            porttitor pulvinar,
-                                        </div>
-                                    </li>
-                                </ul>
-
+                                                <div class="desc">{{ $comment->content }}</div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
                                 <div>
+                                    @if($listComment->lastPage() > 1)
+                                        {{ $listComment->appends(request()->query())->links('vendor.pagination.bootstrap-4')  }}
+                                    @endif
+                                </div>
+                                <div class="clearfix">
                                     <button type="submit" class="btn btn1 btn-review-popup">Thêm đánh giá</button>
                                 </div>
                             </div>

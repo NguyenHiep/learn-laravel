@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 6.18.13 on 2020-06-13 00:07:36.
+ * Generated for Laravel 6.18.13 on 2020-06-13 22:32:46.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16867,6 +16867,88 @@ namespace Maatwebsite\Excel\Facades {
  
 }
 
+namespace Mews\Captcha\Facades { 
+
+    /**
+     * 
+     *
+     * @see \Mews\Captcha\Captcha
+     */ 
+    class Captcha {
+        
+        /**
+         * Create captcha image
+         *
+         * @param string $config
+         * @param bool $api
+         * @return array|mixed 
+         * @throws Exception
+         * @static 
+         */ 
+        public static function create($config = 'default', $api = false)
+        {
+                        /** @var \Mews\Captcha\Captcha $instance */
+                        return $instance->create($config, $api);
+        }
+        
+        /**
+         * Captcha check
+         *
+         * @param string $value
+         * @return bool 
+         * @static 
+         */ 
+        public static function check($value)
+        {
+                        /** @var \Mews\Captcha\Captcha $instance */
+                        return $instance->check($value);
+        }
+        
+        /**
+         * Captcha check
+         *
+         * @param string $value
+         * @param string $key
+         * @return bool 
+         * @static 
+         */ 
+        public static function check_api($value, $key)
+        {
+                        /** @var \Mews\Captcha\Captcha $instance */
+                        return $instance->check_api($value, $key);
+        }
+        
+        /**
+         * Generate captcha image source
+         *
+         * @param string $config
+         * @return string 
+         * @static 
+         */ 
+        public static function src($config = 'default')
+        {
+                        /** @var \Mews\Captcha\Captcha $instance */
+                        return $instance->src($config);
+        }
+        
+        /**
+         * Generate captcha image html tag
+         *
+         * @param string $config
+         * @param array $attrs $attrs -> HTML attributes supplied to the image tag where key is the attribute and the value is the attribute value
+         * @return string 
+         * @static 
+         */ 
+        public static function img($config = 'default', $attrs = [])
+        {
+                        /** @var \Mews\Captcha\Captcha $instance */
+                        return $instance->img($config, $attrs);
+        }
+         
+    }
+ 
+}
+
 namespace Yajra\DataTables\Facades { 
 
     /**
@@ -19956,6 +20038,8 @@ namespace  {
     class WSDelivery extends \NMH\WSDelivery\WSDeliveryFacade {}
 
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
+
+    class Captcha extends \Mews\Captcha\Facades\Captcha {}
 
     class DataTables extends \Yajra\DataTables\Facades\DataTables {}
  

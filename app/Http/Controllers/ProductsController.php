@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\CategoryRepository;
+use App\Repositories\ProductCommentRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
@@ -62,11 +63,13 @@ class ProductsController extends FrontendController
         if (empty($category)) {
             abort(404);
         }
+        $listComment = app(ProductCommentRepository::class)->getCommentByProduct($product->id);
         $assignData = [
             'category'         => $category,
             'product'          => $product,
             'products_related' => $this->productRepository->getRelatedProducts($product->id, 14),
             'products_viewed'  => $this->productRepository->getListProductTrending(14),
+            'listComment'      => $listComment
         ];
         return view('frontend.theme-phiten.products.detail', $assignData);
     }
