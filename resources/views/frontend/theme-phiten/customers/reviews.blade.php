@@ -25,98 +25,57 @@
                         @includeIf('frontend.theme-phiten.customers.sidebar')
                     </div>
                     <div class="col-md-8 col-lg-9">
-                        <div class="content-right formaccount">
+                        <div class="content-right formaccount clearfix">
                             <div class="index-table">
                                 <div class="wrap-table">
                                     <table class="table-cart productListCart">
                                         <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Sản phẩm</th>
-                                            <th>Xếp hạng</th>
-                                            <th>Ngày</th>
-                                        </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th>Sản phẩm</th>
+                                                <th>Xếp hạng</th>
+                                                <th>Ngày</th>
+                                            </tr>
                                         </thead>
 
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="image-holder">
-                                                    <img src="storage/media/rpxqFY6WAHGQ1Id0i0Ln6CflFZh5KVn1lqr93kZr.jpeg">
-                                                </div>
-                                            </td>
+                                        @if($listComment->total() >0)
+                                            @foreach($listComment as $comment)
+                                                <tr>
+                                                    <td>
+                                                        <div class="image-holder">
+                                                            <img src="{{ asset(UPLOAD_PRODUCT . $comment->pictures) }}">
+                                                        </div>
+                                                    </td>
 
-                                            <td>
-                                                <a href="product/phiten-rakuwa-shirt-sport-half-sleeve1">Áo
-                                                    thun thể thao Rakuwa Phiten tay ngắn</a>
-                                            </td>
+                                                    <td>
+                                                        <a href="{{ route('product.show', ['slug' => $comment->slug]) }}">{{ $comment->product_name }}</a>
+                                                    </td>
 
-                                            <td>
-                                    <span class="product-rating">
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-</span>
-                                            </td>
+                                                    <td>
+                                                        <span class="product-rating">
+                                                            @for($i=1; $i<=5; $i++)
+                                                                <i class="icon icon-star-full {{ ($i > $comment->rate) ? '' : 'rated' }}"></i>
+                                                            @endfor
+                                                        </span>
+                                                    </td>
 
-                                            <td>Oct 28, 2019</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="image-holder">
-                                                    <img src="storage/media/rpxqFY6WAHGQ1Id0i0Ln6CflFZh5KVn1lqr93kZr.jpeg">
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <a href="product/phiten-rakuwa-shirt-sport-half-sleeve1">Áo
-                                                    thun thể thao Rakuwa Phiten tay ngắn</a>
-                                            </td>
-
-                                            <td>
-                                    <span class="product-rating">
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-</span>
-                                            </td>
-
-                                            <td>Nov 12, 2019</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="image-holder">
-                                                    <img src="storage/media/AlXxQys1glwsefDSiOpeu3Hhqx9yLGmeoFxW0pgk.jpeg">
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <a href="product/phiten-rakuwa-necklace-wire-model-air2">Vòng
-                                                    cổ Phiten Rakuwa Wire Model Air</a>
-                                            </td>
-
-                                            <td>
-                                    <span class="product-rating">
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-    <i class="icon icon-star-full rated"></i>
-</span>
-                                            </td>
-
-                                            <td>Dec 1, 2019</td>
-                                        </tr>
+                                                    <td>{{ format_date($comment->created_at, '%d/%m/%Y') }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="4" style="text-align: center">{{ __('Không có review nào') }}</td>
+                                            </tr>
+                                        @endif
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div class="pull-right">
-
+                                @if($listComment->lastPage() > 1)
+                                    {{ $listComment->appends(request()->query())->links('vendor.pagination.bootstrap-4')  }}
+                                @endif
                             </div>
                         </div>
                     </div>

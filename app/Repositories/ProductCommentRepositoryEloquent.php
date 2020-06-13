@@ -52,11 +52,17 @@ class ProductCommentRepositoryEloquent extends BaseRepository implements Product
     public function getCommentByUser(int $customerId, int $limit = 15)
     {
         return DB::table('product_comments AS pc')
-            ->select(['pc.id', 'pc.rate', 'pc.created_at', 'p.name AS product_name', 'p.slug'])
+            ->select(['pc.id', 'pc.rate', 'pc.created_at', 'p.name AS product_name', 'p.slug', 'p.pictures'])
             ->join('products AS p', 'p.id', '=', 'pc.product_id')
             ->join('customers AS c', 'c.id', '=', 'pc.customer_id')
             ->where('c.id', $customerId)
+            ->whereNotNull('p.category_id')
+            ->where('p.category_id', '!=', '')
+            ->where('p.status', config('define.STATUS_ENABLE'))
             ->whereNull('pc.deleted_at')
+            ->whereNull('c.deleted_at')
+            ->whereNull('p.deleted_at')
+            ->orderByDesc('pc.created_at')
             ->paginate($limit);
     }
 
