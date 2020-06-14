@@ -76,6 +76,7 @@ class ProductCommentRepositoryEloquent extends BaseRepository implements Product
             ->whereNotNull('p.category_id')
             ->where('p.category_id', '!=', '')
             ->where('p.status', config('define.STATUS_ENABLE'))
+            ->where('pc.status', config('define.STATUS_ENABLE'))
             ->whereNull('pc.deleted_at')
             ->whereNull('c.deleted_at')
             ->whereNull('p.deleted_at')
