@@ -14,7 +14,8 @@
   }
 
   function showNotificationMessage (data) {
-    switch (data.status) {
+    let status = data.status || null;
+    switch (status) {
       case 'success':
         toastr['success'](data.message, 'Thông báo')
         break
@@ -34,8 +35,8 @@
 
   @if(!empty(session('message')) && !empty(session('status')))
   showNotificationMessage({
-    status: "@php session('status') @endphp",
-    message: "@php session('message') @endphp"
+    status: '{{ session('status') }}',
+    message: '{{ session('message') }}'
   })
   @endif
 </script>

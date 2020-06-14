@@ -192,6 +192,7 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         NMH\WSDelivery\WSDeliveryServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -246,7 +247,8 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
-        'WSDelivery' => NMH\WSDelivery\WSDeliveryFacade::class
+        'WSDelivery' => NMH\WSDelivery\WSDeliveryFacade::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

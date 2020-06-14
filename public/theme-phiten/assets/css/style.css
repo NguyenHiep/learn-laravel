@@ -15,7 +15,7 @@
     width: 70px;
 }
 
-.checkout input.has_error, select.has_error {
+input.has_error, select.has_error {
     border-color: red
 }
 

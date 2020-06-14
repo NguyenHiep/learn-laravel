@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductCommentRepository;
 use App\Repositories\ProductRepository;
+use DB;
 use Illuminate\Http\Request;
+use Log;
 
 class ProductsController extends FrontendController
 {
@@ -87,6 +89,47 @@ class ProductsController extends FrontendController
         }
         return response()->view('frontend.theme-phiten.products.quickview', ['product' => $product], 200)
             ->header('Content-Type', 'text/html');
+    }
+
+    /****
+     * Save comment of product
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function comment(Request $request)
+    {
+        $this->validate($request, [
+            'name'       => 'required|string|max:255',
+            'rate'       => 'required|numeric|min:1|max:5',
+            'content'    => 'required|string',
+            'captcha'    => 'required|captcha',
+            'product_id' => 'required|numeric|exists:products,id'
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $inputs = $request->all();
+            $inputs['ip_user'] = getRealIpAddr();
+            $inputs['customer_id'] = auth()->id() ?? 0;
+            $product = app(ProductRepository::class)->find($inputs['product_id'], ['id', 'name', 'slug']);
+            $commentRepo = app(ProductCommentRepository::class);
+            $commentRepo->fill($inputs);
+            $commentRepo->save();
+            DB::commit();
+            return redirect()->route('product.show', ['slug' => $product->slug])->with([
+                'message' => 'Action completed',
+                'status'  => self::CTRL_MESSAGE_SUCCESS
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error(__METHOD__, [$e->getMessage()]);
+        }
+        return redirect()->back()->with([
+            'message' => __('system.message.errors', ['errors' => 'Create comment failed!']),
+            'status'  => self::CTRL_MESSAGE_ERROR
+        ]);
     }
 
 }

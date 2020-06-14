@@ -39,4 +39,14 @@ class HomeController extends FrontendController
         return view('frontend.theme-phiten.home', $data);
     }
 
+    /****
+     * Generate captcha
+     *
+     * @return string
+     */
+    public function generateCaptcha()
+    {
+        return captcha_src();
+    }
+
 }

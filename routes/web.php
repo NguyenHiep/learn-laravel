@@ -126,6 +126,8 @@ Route::get('/chuyen-muc/{slug}/', 'CategoriesController@show')->name('category.s
 Route::get('/san-pham/{slug}/', 'ProductsController@show')->name('product.show');
 Route::get('/product/quick-view/', 'ProductsController@quick_view')->name('product.quick_view');
 Route::get('/san-pham/', 'ProductsController@listProduct')->name('product.list');
+Route::get('generate/captcha', 'HomeController@generateCaptcha')->name('generate.captcha');
+Route::post('product/comments', 'ProductsController@comment')->name('comment.stored');
 
 Route::get('/tin-tuc/', 'PostsController@show')->name('posts.show');
 Route::get('/tin-tuc/{slug}', 'PostsController@detail')->name('posts.detail');
