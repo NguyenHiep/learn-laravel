@@ -47,15 +47,14 @@
                             @endif
                         </div>
                         <div class="form-group row" style="margin-top: 15px">
-                            <label for="captcha" class="col-6">
+                            <label for="captcha" class="col-4">
                                 <input maxlength="10" type="text" value="{{ old('captcha') }}" id="captcha" name="captcha" class="w-100 form-control input {{ $errors->has('captcha') ? 'has_error' : '' }}" placeholder="Nhập mã code" required style="width: 100%"/>
                                 @if ($errors->has('captcha'))
                                     <p class="help-block">{{ $errors->first('captcha') }}</p>
                                 @endif
                             </label>
                             <div class="col-6">
-                                <a href="javascript:void(0)" id="generate-captcha"><i class="icon icon-refresh" aria-hidden="true"></i>Refresh</a>
-                                {!! captcha_img() !!}
+                                @includeIf('frontend.theme-phiten.components.captcha')
                             </div>
                         </div>
                     </div>
@@ -74,17 +73,6 @@
 <script>
   (function ($) {
     $(document).ready(function () {
-      $('#generate-captcha').on('click', _.debounce(function (e) {
-        e.preventDefault()
-        let anchor = $(this)
-        let captcha = anchor.next('img')
-        $.ajax({
-          type: 'GET',
-          url: '{{ route('generate.captcha') }}',
-        }).done(function (msg) {
-          captcha.attr('src', msg)
-        })
-      }, 500))
     @if($errors->has('rate') || $errors->has('name') || $errors->has('content') || $errors->has('captcha') || $errors->has('product_id'))
         $('#myReview').modal({
           show: true

@@ -55,7 +55,8 @@
                 </div>
             </form>
 
-            <form class="inner formforgot">
+            <form class="inner formforgot" method="POST" action="">
+                @csrf
                 <h3>Đặt lại mật khẩu</h3>
                 <p>Nhập email tài khoản của bạn để nhận liên kết cho phép bạn đặt lại mật khẩu của mình.</p>
                 <p class="winput">
@@ -65,10 +66,13 @@
                 <p class="text-center">
                     <button class="btn noshadow"> Đặt lại mật khẩu</button>
                 </p>
-                <p class="text-center"><a class="switchform" data-form="flogin" href="javascript:void(0)">Đăng nhập</a></p>
+                <p class="text-center">
+                    <a class="switchform" data-form="flogin" href="javascript:void(0)">Đăng nhập</a>
+                </p>
             </form>
 
-            <form class="inner formregister">
+            <form class="inner formregister" method="POST" action="">
+                @csrf
                 <div class="logsocial2">
                     <span class="title">Hoặc tiếp tục với</span>
                     <div class="row">
@@ -82,11 +86,11 @@
                 </div>
                 <h3>Đăng ký</h3>
                 <p class="winput">
-                    <input type="text" name="first_name" value="" class="input" id="first-name" placeholder="Tên" autofocus="" required="">
+                    <input type="text" name="last_name" value="" class="input" id="last-name" placeholder="Họ" autofocus="" required="">
                     <i class="icon-user"></i>
                 </p>
                 <p class="winput">
-                    <input type="text" name="last_name" value="" class="input" id="last-name" placeholder="Họ" autofocus="" required="">
+                    <input type="text" name="first_name" value="" class="input" id="first-name" placeholder="Tên" autofocus="" required="">
                     <i class="icon-user"></i>
                 </p>
                 <p class="winput">
@@ -94,7 +98,7 @@
                     <i class="icon-mail-1"></i>
                 </p>
                 <p class="winput">
-                    <input type="number" name="phone" value="" class="input" id="phone" placeholder="Điện thoại" required="">
+                    <input type="tel" name="phone" value="" class="input" id="phone" placeholder="Điện thoại" required="">
                     <i class="icon-phone-4"></i>
                 </p>
                 <p class="winput">
@@ -114,51 +118,30 @@
                 <p class="gender">
                     <span class="title">Giới tính : </span>
                     <label class="radio ">
-                        <input name="gender" type="radio" checked="" value="1">
-                        <span></span>
-                        Nam
+                        <input name="gender" type="radio" value="1" checked />
+                        <span></span>Nam
                     </label>
                     <label class="radio ">
-                        <input name="gender" type="radio" value="2">
-                        <span></span>
-                        Nữ
+                        <input name="gender" type="radio" value="2" />
+                        <span></span>Nữ
                     </label>
                 </p>
+                <p class="winput">
+                    <input type="date" name="birthday" class="form-control input"/>
+                    <i class="icon-calendar"></i>
+                </p>
                 <div class="row mb-20">
-                    <div class="col-sm-4 col-xs-4">
-                        <select name="day" class="select">
-                            <option value="000">Day</option>
-                            <?php
-                            for ($i = 1; $i <= 31; $i++) {
-                                echo '<option value="' . $i . '">' . $i . '</option>';
-                            } ?>
-                        </select>
+                    <div class="col-sm-6 col-xs-6">
+                        <input type="text" name="captcha" class="input" id="captcha" placeholder="Mã captcha" required />
                     </div>
-                    <div class="col-sm-4 col-xs-4">
-                        <select name="month" class="select">
-                            <option value="000">Month</option>
-                            <?php
-                            for ($i = 1; $i <= 12; $i++) {
-                                echo '<option value="' . $i . '">' . $i . '</option>';
-                            } ?>
-                        </select>
-                    </div>
-                    <div class="col-sm-4 col-xs-4">
-                        <select name="Year" class="select">
-                            <option value="000">Year</option>
-                            <?php
-                            for ($i = 1970; $i <= 2020; $i++) {
-                                echo '<option value="' . $i . '">' . $i . '</option>';
-                            } ?>
-                        </select>
+                    <div class="col-sm-6 col-xs-6">
+                        @includeIf('frontend.theme-phiten.components.captcha')
                     </div>
                 </div>
-
                 <div>
                     <label class="checkbox ">
                         <input type="checkbox" name="receive" checked>
-                        <span></span>
-                        Theo dõi để nhận thêm ưu đãi!
+                        <span></span>Theo dõi để nhận thêm ưu đãi!
                     </label>
                 </div>
                 <p>
@@ -168,7 +151,6 @@
                         Tôi đồng ý với <a href="/page/privacy-policy">Chính sách bảo mật</a>
                     </label>
                 </p>
-
                 <p class="text-center">
                     <button class="btn noshadow">  Đăng ký</button>
                 </p>

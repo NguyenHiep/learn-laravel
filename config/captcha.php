@@ -5,7 +5,7 @@ return [
     'default' => [
         'length' => 9,
         'width' => 120,
-        'height' => 36,
+        'height' => 40,
         'quality' => 90,
         'math' => true,
     ],
