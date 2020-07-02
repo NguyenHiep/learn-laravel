@@ -78,3 +78,6 @@ ADD `deleted_at` timestamp NULL DEFAULT NULL AFTER `body`;
 --Add column customer_id for table orders
 ALTER TABLE `orders`
 ADD `customer_id` int unsigned NOT NULL DEFAULT 0 AFTER `payment_id`;
+
+-- Update params config
+UPDATE `website_info` SET `params` = '{\"enable_social\": 1, \"enable_copyright\": 1, \"enable_subscribe\": 1, \"limit_number_post\": 12, \"enable_home_slider\": 1, \"enable_login_google\": 1, \"enable_post_related\": 1, \"enable_checkout_cart\": 1, \"enable_login_facebook\": 1, \"enable_product_viewed\": 1, \"enable_show_logo_site\": 1, \"limit_number_category\": 20, \"enable_product_comment\": 1, \"enable_product_related\": 1, \"enable_home_category_one\": 1, \"enable_home_category_two\": 1, \"enable_home_category_four\": 1, \"limit_number_post_comment\": 5, \"enable_home_category_three\": 1, \"enable_home_product_related\": 1, \"enable_home_product_trending\": 1, \"limit_number_product_comment\": 5, \"enable_category_filter_attribute\": 1}' WHERE (`id` = '1');

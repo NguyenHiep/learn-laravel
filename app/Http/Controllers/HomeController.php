@@ -14,6 +14,8 @@ class HomeController extends FrontendController
         'thoitrang_chobe'   => 3,
         'phukien_thoitrang' => 4
     ];
+    const LIMIT_ITEM = 14;
+
     public $sliderRepository;
     public $productRepository;
 
@@ -34,8 +36,8 @@ class HomeController extends FrontendController
             }
         }
         $data['categories'] = $categories;
-        $data['products_trending'] = $this->productRepository->getListProductTrending(14);
-        $data['products_viewed'] = $this->productRepository->getListProductTrending(14);
+        $data['products_trending'] = $this->productRepository->getListProductTrending(self::LIMIT_ITEM);
+        $data['products_viewed'] = $this->productRepository->getListProductTrending(self::LIMIT_ITEM);
         return view('frontend.theme-phiten.home', $data);
     }
 
@@ -44,9 +46,15 @@ class HomeController extends FrontendController
      *
      * @return string
      */
-    public function generateCaptcha()
+    public function refreshCaptcha()
     {
-        return captcha_src();
+        return $this->responseJson([
+            'status'  => true,
+            'message' => __('Action completed'),
+            'data'    => [
+                'captcha' => captcha_img()
+            ]
+        ]);
     }
 
 }

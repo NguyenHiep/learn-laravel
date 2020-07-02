@@ -57,7 +57,11 @@ class CheckoutController extends FrontendController
         $data['total_price'] = $this->getToTalPriceCart();
         $locations = app(LocationRepository::class)->getListLocation();
         $data['locations'] = $locations;
-        $data['provinces'] = app(ProvinceRepository::class)->getListProvinceByLocationId($locations->first()->code);
+        $provinces = [];
+        if ($locations->isNotEmpty()) {
+            $provinces = app(ProvinceRepository::class)->getListProvinceByLocationId($locations->first()->code);
+        }
+        $data['provinces'] = $provinces;
         $customerId = auth()->id() ?? 0;
         $data['customer'] = app(CustomerRepository::class)->getCustomerInfo($customerId);
         return view('frontend.theme-phiten.checkout.index', $data);

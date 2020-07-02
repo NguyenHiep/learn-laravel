@@ -3,21 +3,37 @@
 namespace App\Entities;
 
 use App\Entities\BaseModel as BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Customer.
  *
  * @package namespace App\Entities;
  */
-class Customer extends BaseModel implements Transformable
+class Customer extends Authenticatable implements Transformable
 {
-    use TransformableTrait;
+    use TransformableTrait, SoftDeletes;
 
     protected $table = 'customers';
 
     protected $appends = ['full_name'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.

@@ -289,6 +289,20 @@
           incrementQuantity () {
             this.quantity = (this.quantity > MAX_NUMBER) ? MAX_NUMBER : this.quantity + 1
             this.itemCartBuyNow.quantity = this.quantity
+          },
+          refreshCaptchaComment () {
+            let self = this
+            self.loading = true
+            axios.get('/refresh/captcha').then(response => {
+              let responseData = response.data
+              self.loading = false
+              if (!_.isEmpty(responseData.data) && !_.isEmpty(responseData.data.captcha)) {
+                jQuery('#refresh-captcha-comment').html(responseData.data.captcha)
+              }
+            }).catch(error => {
+              console.log(error)
+              self.errored = true
+            }).finally(() => self.loading = false)
           }
         }
       })

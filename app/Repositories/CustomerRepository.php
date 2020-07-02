@@ -14,4 +14,6 @@ interface CustomerRepository extends RepositoryInterface
     public function getListCustomer();
 
     public function getCustomerInfo(int $id);
+
+    public function createCustomer(array $data);
 }

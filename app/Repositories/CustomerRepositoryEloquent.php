@@ -43,4 +43,9 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
         return $this->model::where('id', $id)->select(['id', 'avatar', 'first_name', 'last_name', 'username', 'email', 'last_login', 'phone', 'gender', 'birthday', 'address', 'city_id', 'district_id'])->first();
     }
 
+    public function createCustomer(array $data)
+    {
+        return $this->create($data);
+    }
+
 }

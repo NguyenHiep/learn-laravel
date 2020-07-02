@@ -54,7 +54,13 @@
                                 @endif
                             </label>
                             <div class="col-6">
-                                @includeIf('frontend.theme-phiten.components.captcha')
+{{--                                @includeIf('frontend.theme-phiten.components.captcha')--}}
+                                <a href="javascript:void(0)" @click="refreshCaptchaComment()">
+                                    <img src="{{ asset('theme-phiten/assets/images/svg/refresh.svg') }}" alt="refresh captcha" style="width: 40px"/>
+                                </a>
+                                <span id="refresh-captcha-comment">
+                                    {!! captcha_img() !!}
+                                </span>
                             </div>
                         </div>
                     </div>

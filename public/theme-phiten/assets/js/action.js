@@ -45,7 +45,19 @@ Vue.mixin({
       loading: false,
       errored: false,
       listItemCart: [],
-      totalPrice: 0
+      totalPrice: 0,
+      screenDisplay: "login",
+      customer: {
+        first_name: '',
+        last_name: '',
+        username: '',
+        password: '',
+        email: '',
+        phone: '',
+        gender: '',
+        birthday: '',
+        captcha: ''
+      }
     }
   },
   computed: {
@@ -133,8 +145,38 @@ Vue.mixin({
         self.errored = true
       }).finally(() => self.loading = false)
     },
-    calculateTotalPrice () {
-      console.log('calculate total price')
+    registerCustomer () {
+      const isValid = this.$refs.registerForm.validate();
+      if (!isValid) {
+        return;
+      }
+      let self = this;
+      let dataSend = self.customer;
+      self.loading = true
+      axios.post('/api/v1/customer', dataSend).then(response => {
+        let responseData = response.data
+        self.loading = false
+        if (!_.isEmpty(responseData.data) && !_.isEmpty(responseData.data.redirectUrl)) {
+          //window.location.href = responseData.data.redirectUrl
+        }
+      }).catch(error => {
+        console.log(error)
+        self.errored = true
+      }).finally(() => self.loading = false)
+    },
+    refreshCaptcha () {
+      let self = this
+      self.loading = true
+      axios.get('/refresh/captcha').then(response => {
+        let responseData = response.data
+        self.loading = false
+        if (!_.isEmpty(responseData.data) && !_.isEmpty(responseData.data.captcha)) {
+          jQuery('#refresh-captcha').html(responseData.data.captcha)
+        }
+      }).catch(error => {
+        console.log(error)
+        self.errored = true
+      }).finally(() => self.loading = false)
     }
   }
 })

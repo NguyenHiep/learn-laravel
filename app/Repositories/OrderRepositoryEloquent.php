@@ -52,6 +52,7 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     {
         $model = $this->model::join('customers AS c', 'c.id', '=', 'orders.customer_id')
             ->select(['orders.id', 'orders.ordered_at', 'orders.status', 'orders.total'])
+            ->where('c.id', $customerId)
             ->orderBy('orders.id', 'DESC');
         if ($limit > 0) {
             $model->limit($limit);

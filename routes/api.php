@@ -17,4 +17,6 @@ use Illuminate\Http\Request;
     return $request->user();
 })->middleware('auth:api');*/
 
-Route::get('/sliders/{alias}', 'Apis\SlidersController@index')->where('alias', '[A-Za-z0-9-]+');
+Route::prefix('v1')->namespace('Apis')->name('api.')->group(function () {
+    Route::post('customer', 'CustomerController@store')->name('customer.store');
+});

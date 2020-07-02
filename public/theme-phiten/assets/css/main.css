@@ -6215,42 +6215,6 @@ span.imgres > iframe, span.imgres > img {
     padding: 0 10px
 }
 
-.formpopup form {
-    height: 0;
-    overflow: hidden;
-    visibility: hidden
-}
-
-.formpopup.switch .formlogin {
-    height: 0;
-    overflow: hidden;
-    visibility: hidden
-}
-
-.formpopup.switch .formregister {
-    height: auto;
-    overflow: inherit;
-    visibility: visible
-}
-
-.formpopup[data-show=flogin] .formlogin {
-    height: auto;
-    overflow: inherit;
-    visibility: visible
-}
-
-.formpopup[data-show=fforgot] .formforgot {
-    height: auto;
-    overflow: inherit;
-    visibility: visible
-}
-
-.formpopup[data-show=fregister] .formregister {
-    height: auto;
-    overflow: inherit;
-    visibility: visible
-}
-
 .lists-1 .item {
     text-align: center;
     height: 100%;
@@ -8421,24 +8385,6 @@ textarea.input {
     left: 50%;
     bottom: 0;
     padding: 0 10px
-}
-
-.formpopup .formregister {
-    height: 0;
-    overflow: hidden;
-    visibility: hidden
-}
-
-.formpopup.switch .formlogin {
-    height: 0;
-    overflow: hidden;
-    visibility: hidden
-}
-
-.formpopup.switch .formregister {
-    height: auto;
-    overflow: inherit;
-    visibility: visible
 }
 
 .wrating {
