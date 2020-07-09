@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Manage;
 
 use App\DataTables\OrdersDataTable;
 use App\Http\Controllers\BackendController;
+use App\Jobs\SendEmail;
 use App\Mail\OrderConfirm;
 use App\Model\Orders;
 use App\Model\Settings;
 use App\Repositories\OrderRepository;
+use App\Repositories\SettingRepository;
 use Carbon\Carbon;
 use DNS1D;
 use Illuminate\Http\Request;
@@ -218,9 +220,17 @@ class OrdersController extends BackendController
 
     public function sentMailConfirm($id)
     {
-        // TODO: Sent mail confirm orders
         $order = Orders::with('products', 'deliveries')->findOrFail($id);
-        Mail::to("nguyenminhhiep9x@gmail.com")->send(new OrderConfirm($order));
+        $settingRepo = app(SettingRepository::class);
+        $settings = $settingRepo->getSettings();
+        $emailInfo = [
+            'subject'   => 'Xác nhận đơn hàng  - #' . format_order_id($order->id),
+            'from'      => $settings->email1,
+            'from_name' => $settings->email1_name,
+            'recipient' => $order->deliveries->buyer_email,
+            'content'   => ['order' => $order]
+        ];
+        dispatch(new SendEmail($emailInfo, 'emails.orders.confirm'));
         return redirect()->route('manage.orders.index')->with([
             'message' => __('system.message.update'),
             'status'  => self::CTRL_MESSAGE_SUCCESS,

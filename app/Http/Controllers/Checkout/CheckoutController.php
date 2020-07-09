@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Checkout;
 
 use App\Http\Requests\CheckoutRequest;
+use App\Jobs\SendEmail;
 use App\Model\Orders;
 use App\Repositories\CustomerRepository;
 use App\Repositories\LocationRepository;
+use App\Repositories\OrderRepository;
 use App\Repositories\ProvinceRepository;
+use App\Repositories\SettingRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
@@ -137,7 +140,17 @@ class CheckoutController extends FrontendController
             $order_products = new Orders\Products();
             $order_products::insert($list_product);
             Session::flash('orderId', $order->id);
-            //TODO: Send mail order
+            $settingRepo = app(SettingRepository::class);
+            $settings = $settingRepo->getSettings();
+            $orderDetail = app(OrderRepository::class)->getOrderDetail($order->id);
+            $emailInfo = [
+                'subject'   => 'Xác nhận đơn hàng  - #' . format_order_id($order->id),
+                'from'      => $settings->email1,
+                'from_name' => $settings->email1_name,
+                'recipient' => $orderDetail->deliveries->buyer_email,
+                'content'   => ['order' => $orderDetail]
+            ];
+            dispatch(new SendEmail($emailInfo, 'emails.orders.confirm'));
             DB::commit();
             return $this->responseJson([
                 'status'  => self::CTRL_MESSAGE_SUCCESS,

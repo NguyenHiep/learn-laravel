@@ -36,8 +36,9 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::send($this->template, array('content' => $this->mailInfo['content']),function ($message) {$message->to($this->mailInfo['recipient'],
-                $this->mailInfo['recipient_name'] ?? $this->mailInfo['recipient'])->subject($this->mailInfo['subject']);
+        Mail::send($this->template, array('content' => $this->mailInfo['content']), function ($message) {
+            $message->to($this->mailInfo['recipient'], $this->mailInfo['recipient_name'] ?? $this->mailInfo['recipient'])
+                    ->subject($this->mailInfo['subject']);
             if (isset($this->mailInfo['from'])) {
                 $message->from($this->mailInfo['from'], $this->mailInfo['from_name'] ?? $this->mailInfo['from']);
             }

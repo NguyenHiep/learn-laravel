@@ -156,8 +156,31 @@ Vue.mixin({
       axios.post('/api/v1/customer', dataSend).then(response => {
         let responseData = response.data
         self.loading = false
-        if (!_.isEmpty(responseData.data) && !_.isEmpty(responseData.data.redirectUrl)) {
-          //window.location.href = responseData.data.redirectUrl
+        let message = {}
+        if (responseData.status) {
+          message.status = 'success'
+        } else {
+          message.status = 'error'
+        }
+        message.message = responseData.message
+        showNotificationMessage(message)
+        if (!_.isEmpty(responseData) && responseData.status) {
+          self.$refs.registerForm.reset();
+          self.customer = {
+            first_name: '',
+            last_name: '',
+            username: '',
+            password: '',
+            email: '',
+            phone: '',
+            gender: '',
+            birthday: '',
+            captcha: ''
+          }
+          //TODO: Close popup
+          jQuery('#myLogin').modal({
+            show: false
+          })
         }
       }).catch(error => {
         console.log(error)

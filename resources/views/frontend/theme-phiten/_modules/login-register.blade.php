@@ -187,7 +187,7 @@
                         </label>
                     </p>
                     <p class="text-center">
-                        <button class="btn noshadow">  Đăng ký</button>
+                        <button class="btn noshadow"> Đăng ký</button>
                     </p>
 
                     <div class="resge">
