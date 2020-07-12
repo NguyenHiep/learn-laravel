@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use App\Entities\BaseModel as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Passport\HasApiTokens;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class Customer extends Authenticatable implements Transformable
 {
-    use TransformableTrait, SoftDeletes;
+    use TransformableTrait, HasApiTokens, SoftDeletes;
 
     protected $table = 'customers';
 

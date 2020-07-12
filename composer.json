@@ -25,7 +25,8 @@
         "prettus/laravel-validation": "^1.2",
         "spatie/laravel-permission": "^3.11",
         "laravel/helpers": "^1.2",
-        "mews/captcha": "^3.1"
+        "mews/captcha": "^3.1",
+        "laravel/passport": "^9.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

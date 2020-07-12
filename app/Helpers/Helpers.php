@@ -197,3 +197,33 @@ if (!function_exists('format_order_id')) {
         return str_pad($orderId, 7, '0', 0);
     }
 }
+
+if (!function_exists('generate_username')) {
+    /****
+     * Generate username unique in table customers
+     *
+     * @param $first_name
+     * @param $last_name
+     * @return string
+     */
+    function generate_username($first_name, $last_name)
+    {
+        $tmpStr = unicode_str_filter($first_name . $last_name);
+        $tmpStr = str_replace('-', '', $tmpStr);
+        $username = '';
+        $noNumber = 1;
+        while (true) {
+            $count = DB::table('customers')->where('username', $tmpStr)->count();
+            if ($count == 0) {
+                $username = $tmpStr;
+                break;
+            }
+            $cLast = substr($tmpStr, -1); // Get last character
+            $tmpStr = substr($tmpStr, 0, -1); //
+            $cLast = (is_numeric($cLast) && $cLast > 0) ? $cLast + 1 : $cLast . $noNumber;
+            $tmpStr .= $cLast;
+            $noNumber++;
+        }
+        return $username;
+    }
+}

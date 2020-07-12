@@ -153,7 +153,7 @@ Vue.mixin({
       let self = this;
       let dataSend = self.customer;
       self.loading = true
-      axios.post('/api/v1/customer', dataSend).then(response => {
+      axios.post('/register', dataSend).then(response => {
         let responseData = response.data
         self.loading = false
         let message = {}
@@ -164,8 +164,12 @@ Vue.mixin({
         }
         message.message = responseData.message
         showNotificationMessage(message)
-        if (!_.isEmpty(responseData) && responseData.status) {
-          self.$refs.registerForm.reset();
+        if (!_.isEmpty(responseData)
+          && responseData.status
+          && responseData.data
+          && responseData.data.redirectUrl) {
+          self.loading = false
+          self.$refs.registerForm.reset()
           self.customer = {
             first_name: '',
             last_name: '',
@@ -177,10 +181,10 @@ Vue.mixin({
             birthday: '',
             captcha: ''
           }
-          //TODO: Close popup
           jQuery('#myLogin').modal({
             show: false
           })
+          window.location.href = responseData.data.redirectUrl
         }
       }).catch(error => {
         console.log(error)

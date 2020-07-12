@@ -99,13 +99,13 @@
                         </p>
                         <div class="error" v-if="errors[0]">@{{ errors[0] }}</div>
                     </validation-provider>
-                    <validation-provider name="Tên đăng nhập" rules="required" v-slot="{ errors }">
+                    {{--<validation-provider name="Tên đăng nhập" rules="required" v-slot="{ errors }">
                         <p class="winput">
                             <input v-model="customer.username" type="text" name="username" :class="errors[0] ? 'has_error' : ''" class="input" id="first-name" placeholder="Tên đăng nhập" autofocus="" required>
                             <i class="icon-user"></i>
                         </p>
                         <div class="error" v-if="errors[0]">@{{ errors[0] }}</div>
-                    </validation-provider>
+                    </validation-provider>--}}
                     <validation-provider name="Email" rules="required|email" v-slot="{ errors }">
                         <p class="winput">
                             <input v-model.trim="customer.email" type="text" name="email" :class="errors[0] ? 'has_error' : ''" class="input" id="email" placeholder="Email" required="">
@@ -141,28 +141,7 @@
                         </p>
                         <div class="error" v-if="errors[0]">@{{ errors[0] }}</div>
                     </validation-provider>
-                    <validation-provider name="Giới tính" rules="required" v-slot="{ errors }">
-                        <p class="gender">
-                            <span class="title">Giới tính : </span>
-                            <label class="radio ">
-                                <input v-model="customer.gender" name="gender" type="radio" :class="errors[0] ? 'has_error' : ''" value="1" checked />
-                                <span></span>Nam
-                            </label>
-                            <label class="radio ">
-                                <input v-model="customer.gender" name="gender" type="radio" :class="errors[0] ? 'has_error' : ''" value="2" />
-                                <span></span>Nữ
-                            </label>
-                        </p>
-                        <div class="error" v-if="errors[0]">@{{ errors[0] }}</div>
-                    </validation-provider>
-                    <validation-provider name="Birthday" rules="required" v-slot="{ errors }">
-                        <p class="winput">
-                            <input v-model="customer.birthday" type="date" name="birthday" :class="errors[0] ? 'has_error' : ''" class="form-control input"/>
-                            <i class="icon-calendar"></i>
-                        </p>
-                        <div class="error" v-if="errors[0]">@{{ errors[0] }}</div>
-                    </validation-provider>
-                    {{--<div class="row mb-20">
+                    <div class="row mb-20">
                         <div class="col-sm-6 col-xs-6">
                             <validation-provider name="Mã captcha" rules="required" v-slot="{ errors }">
                                 <input v-model.trim="customer.captcha" type="text" name="captcha" :class="errors[0] ? 'has_error' : ''" class="input" id="captcha" placeholder="Mã captcha" required />
@@ -172,7 +151,28 @@
                         <div class="col-sm-6 col-xs-6">
                             @includeIf('frontend.theme-phiten.components.captcha')
                         </div>
-                    </div>--}}
+                    </div>
+{{--                    <validation-provider name="Giới tính" rules="required" v-slot="{ errors }">--}}
+{{--                        <p class="gender">--}}
+{{--                            <span class="title">Giới tính : </span>--}}
+{{--                            <label class="radio ">--}}
+{{--                                <input v-model="customer.gender" name="gender" type="radio" :class="errors[0] ? 'has_error' : ''" value="1" checked />--}}
+{{--                                <span></span>Nam--}}
+{{--                            </label>--}}
+{{--                            <label class="radio ">--}}
+{{--                                <input v-model="customer.gender" name="gender" type="radio" :class="errors[0] ? 'has_error' : ''" value="2" />--}}
+{{--                                <span></span>Nữ--}}
+{{--                            </label>--}}
+{{--                        </p>--}}
+{{--                        <div class="error" v-if="errors[0]">@{{ errors[0] }}</div>--}}
+{{--                    </validation-provider>--}}
+{{--                    <validation-provider name="Birthday" rules="required" v-slot="{ errors }">--}}
+{{--                        <p class="winput">--}}
+{{--                            <input v-model="customer.birthday" type="date" name="birthday" :class="errors[0] ? 'has_error' : ''" class="form-control input"/>--}}
+{{--                            <i class="icon-calendar"></i>--}}
+{{--                        </p>--}}
+{{--                        <div class="error" v-if="errors[0]">@{{ errors[0] }}</div>--}}
+{{--                    </validation-provider>--}}
                     <div>
                         <label class="checkbox ">
                             <input v-model="customer.receive" type="checkbox" name="receive" />

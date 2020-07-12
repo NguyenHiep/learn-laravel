@@ -1,0 +1,1 @@
+-- Add column subscribe for table customers
