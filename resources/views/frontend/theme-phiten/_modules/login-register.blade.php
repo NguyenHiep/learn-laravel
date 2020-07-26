@@ -55,12 +55,12 @@
                 </div>
             </form>
 
-            <form v-if="screenDisplay === 'forgotPassword'" class="inner formforgot" method="POST" action="">
+            <form v-if="screenDisplay === 'forgotPassword'" class="inner formforgot" method="POST" action="{{ route('password.email') }}">
                 @csrf
                 <h3>Đặt lại mật khẩu</h3>
                 <p>Nhập email tài khoản của bạn để nhận liên kết cho phép bạn đặt lại mật khẩu của mình.</p>
                 <p class="winput">
-                    <input class="input" type="email" placeholder="Email" required/>
+                    <input class="input" type="email" placeholder="Email" name="email" value="{{ old('email') }}"/>
                     <i class="icon-mail-1"></i>
                 </p>
                 <p class="text-center">

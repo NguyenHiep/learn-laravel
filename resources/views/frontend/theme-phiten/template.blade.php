@@ -30,7 +30,9 @@
     @yield('content')
     @includeIf('frontend.theme-phiten._includes._footer')
     @guest
-        @includeIf('frontend.theme-phiten._modules.login-register')
+        @if(!request()->routeIs('password.reset'))
+            @includeIf('frontend.theme-phiten._modules.login-register')
+        @endif
     @endguest
     <script src="{{ asset('theme-phiten/assets/js/app.js') }}"></script>
     @includeIf('frontend.theme-phiten.components.alert')

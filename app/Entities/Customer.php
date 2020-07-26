@@ -2,8 +2,9 @@
 
 namespace App\Entities;
 
-use App\Entities\BaseModel as BaseModel;
+use App\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -16,7 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class Customer extends Authenticatable implements Transformable
 {
-    use TransformableTrait, HasApiTokens, SoftDeletes;
+    use Notifiable, TransformableTrait, HasApiTokens, SoftDeletes;
 
     protected $table = 'customers';
 
@@ -67,6 +68,16 @@ class Customer extends Authenticatable implements Transformable
     public function getFullNameAttribute()
     {
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    /***
+     * send password reset notification use queue
+     *
+     * @param string $token
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 
 }

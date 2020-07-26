@@ -14,17 +14,21 @@
                     <button><i class="icon-search-2"></i></button>
                 </form>
             </div>
-                <div class="item">
-                    @guest
+            @guest
+                @if(!request()->routeIs('password.reset'))
+                    <div class="item">
                         <a href="#" data-toggle="modal" data-target="#myLogin">Đăng Nhập</a>
-                    @endguest
-                    @auth
-                        <a href="{{ route('customer.dashboard') }}">
-                            <img src="{{ asset('theme-phiten/assets/images/svg/user.svg') }}" alt="user icon"/>
-                            {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
-                        </a>
-                    @endauth
+                    </div>
+                @endif
+            @endguest
+            @auth
+                <div class="item">
+                    <a href="{{ route('customer.dashboard') }}">
+                        <img src="{{ asset('theme-phiten/assets/images/svg/user.svg') }}" alt="user icon"/>
+                        {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
+                    </a>
                 </div>
+            @endauth
         </div>
     </div>
 </div>

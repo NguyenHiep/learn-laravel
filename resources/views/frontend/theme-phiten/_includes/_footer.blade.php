@@ -84,7 +84,9 @@
                 <ul class="menu menu-footer 2">
                   <li>
                     @guest
-                      <a href="#" data-toggle="modal" data-target="#myLogin" id="flogin">Đăng nhập / Đăng ký</a>
+                      @if(!request()->routeIs('password.reset'))
+                        <a href="#" data-toggle="modal" data-target="#myLogin" id="flogin">Đăng nhập / Đăng ký</a>
+                      @endif
                     @endguest
                     @auth
                       <a href="{{ route('customer.dashboard') }}"> Bảng điều khiển</a>
