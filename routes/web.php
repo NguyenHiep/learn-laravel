@@ -29,7 +29,9 @@ Route::prefix('manage')->name('manage.')->namespace('Manage')->group(function ()
     // Backend route
     Route::middleware(['auth:user'])->group(function () {
         # Package editor
-        Route::prefix('/filemanager')->name('unisharp.lfm.')->namespace('\UniSharp\LaravelFilemanager\Controllers')->group(function () {
+        Route::prefix('/filemanager')
+            ->name('unisharp.lfm.')
+            ->namespace('\UniSharp\LaravelFilemanager\Controllers')->group(function () {
             Route::get('/', 'LfmController@show')->name('show');
             Route::any('/upload', 'UploadController@upload')->name('upload');
             Route::get('/errors', 'LfmController@getErrors')->name('getErrors');
