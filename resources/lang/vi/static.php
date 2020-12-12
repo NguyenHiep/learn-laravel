@@ -7,6 +7,7 @@ return [
                 'title'    => 'Cài đặt',
                 'settings' => 'Cài đặt thông tin website',
                 'admins'   => 'Quản trị tài khoản',
+                'theme_options' => 'Cấu hình giao diện website',
             ],
             'categories' => [
                 'title' => 'Chuyên mục',
@@ -67,7 +68,14 @@ return [
                 'title_email'    => 'Thông tin email',
                 'title_host'     => 'Cấu hình host gửi mail SMTP',
                 'title_personal' => 'Thông tin cá nhân và Điều khoản sử dụng',
-            ]
+            ],
+            'theme_options' => [
+                'page_title'     => 'Cấu hình giao diện website',
+                'title_general'  => 'Cấu hình chung',
+                'title_home'     => 'Cấu hình trang chủ',
+                'title_posts'    => 'Cấu hình bài viết',
+                'title_products' => 'Cấu hình sản phẩm',
+            ],
         ],
         'posts'    => [
             'posts'    => [

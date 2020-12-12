@@ -267,14 +267,19 @@
       @endcan
       @can('setting-list')
       <li
-        class="nav-item  {{ active(['manage.settings.index'], 'active open') }}">
+        class="nav-item  {{ active(['manage.settings.index', 'manage.settings.theme_options'], 'active open') }}">
         <a href="{{ route('manage.settings.index') }}" class="nav-link nav-toggle">
           <i class="icon-settings"></i>
           <span class="title">{{__('static.sidebars.manage.settings.title')}}</span>
-          <span class="arrow {{ active(['manage.settings.index'], 'open') }}"></span>
+          <span class="arrow {{ active(['manage.settings.index', 'manage.settings.theme_options'], 'open') }}"></span>
           <span class="selected"></span>
         </a>
         <ul class="sub-menu">
+          <li class="nav-item">
+            <a href="{{ route('manage.settings.theme_options') }}" class="nav-link ">
+              <span class="title">{{__('static.sidebars.manage.settings.theme_options')}}</span>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{ route('manage.settings.index') }}" class="nav-link ">
               <span class="title">{{__('static.sidebars.manage.settings.settings')}}</span>

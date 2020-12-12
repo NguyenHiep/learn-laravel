@@ -104,6 +104,8 @@ Route::prefix('manage')->name('manage.')->namespace('Manage')->group(function ()
         ]);
         Route::prefix('settings')->group(function () {
             Route::get('settings', 'SettingsController@index')->name('settings.index');
+            Route::get('theme-options', 'SettingsController@themeOptions')->name('settings.theme_options');
+            Route::post('theme-options', 'SettingsController@storedThemeOptions')->name('settings.theme_options.stored');
             Route::post('settings', 'SettingsController@update')->name('settings.update');
         });
     });
