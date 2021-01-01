@@ -75,7 +75,7 @@ class CustomerController extends FrontendController
         $customer = $this->customerRepository->getCustomerInfo(auth()->id());
         $locations = app(LocationRepository::class)->getListLocation();
         $locationId = $customer->city_id ?? 0;
-        if (empty($locationId)) {
+        if (empty($locationId) && $locations->isNotEmpty()) {
             $locationId = $locations->first()->code;
         }
         $provinces = app(ProvinceRepository::class)->getListProvinceByLocationId($locationId);

@@ -53,6 +53,11 @@ Route::prefix('manage')->name('manage.')->namespace('Manage')->group(function ()
         Route::resource('categories', 'CategoriesController')->parameters([
             'categories' => 'id'
         ]);
+        Route::prefix('products')->name('products.')->group(function () {
+            Route::resource('comments', 'ProductCommentsController')->parameters([
+                'comments' => 'id'
+            ])->except(['create', 'store', 'show']);
+        });
         Route::post('products/attributes/delete/{id}', 'ProductsController@deleteAttribute')->name('products.attributes.delete')->where('id', '[0-9]+');
         Route::resource('products', 'ProductsController')->parameters([
             'products' => 'id'
@@ -89,7 +94,7 @@ Route::prefix('manage')->name('manage.')->namespace('Manage')->group(function ()
         ]);
         Route::resource('comments', 'CommentsController')->parameters([
             'comments' => 'id'
-        ]);
+        ])->except(['create', 'store', 'show']);;
         Route::resource('customers', 'CustomersController')->parameters([
             'customers' => 'id'
         ]);

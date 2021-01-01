@@ -201,6 +201,14 @@
         </a>
       </li>
       @endcan
+      @can('product-comment-list')
+        <li class="nav-item">
+          <a href="{{ route('manage.products.comments.index') }}" class="nav-link nav-toggle">
+            <i class="icon-bubbles"></i>
+            <span class="title">{{__('static.sidebars.manage.products.comments')}}</span>
+          </a>
+        </li>
+      @endcan
       @canany(['customer-list', 'user-list', 'role-list'])
       <li class="nav-item {{ active([
     'manage.customers.index', 'manage.customers.create', 'manage.customers.edit',

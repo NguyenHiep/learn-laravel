@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Cập nhật sản phẩm')
+@section('title', __('static.manage.products.edit'))
 @section('content')
   <div class="page-content-wrapper products">
     <div class="page-content">
@@ -16,7 +16,7 @@
       </div>
       <h3 class="page-title"> Cập nhật sản phẩm </h3>
       <div class="row">
-        {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\ProductsController@update',$record->id], 'files' => true, 'class' => 'form-horizontal form-row-seperated']) !!}
+        {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\ProductsController@update', $record->id], 'files' => true, 'class' => 'form-horizontal form-row-seperated']) !!}
         <div class="col-md-9">
           <div class="portlet">
             <div class="portlet-title">

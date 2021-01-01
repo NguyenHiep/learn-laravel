@@ -243,7 +243,25 @@ return [
             'price'             => 'Giá bán',
             'quantity'          => 'Tồn kho',
             'add_new_attribute' => 'Thêm thuộc tính mới',
-        )
+        ),
+        'comments' => array(
+            'title'             => 'Chỉnh sửa bình luận',
+            'name'              => 'Người bình luận',
+            'name_placeholder'  => 'Nhập họ và tên',
+            'content'           => 'Nội dung',
+            'url'               => 'Liên kết',
+            'url_placeholder'   => 'VD: https://minhhhiep.info',
+            'list' => array(
+                'id'           => 'ID',
+                'name'         => 'Họ và tên',
+                'product_name' => 'Sản phẩm',
+                'rate'         => 'Số sao',
+                'status'       => 'Trạng thái',
+                'ip_user'      => 'IP',
+                'created_at'   => 'Ngày tạo',
+                'actions'      => 'Hành động'
+            )
+        ),
     ),
     'categories' => array(
         'id'      => 'ID',

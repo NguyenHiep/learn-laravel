@@ -36,7 +36,7 @@ class ProductCommentRepositoryEloquent extends BaseRepository implements Product
 
     public function getListComment()
     {
-        return $this->model::select([
+        return $this->model::with(['product'])->select([
             'id',
             'name',
             'content',

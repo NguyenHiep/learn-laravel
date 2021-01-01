@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use App\Entities\BaseModel as BaseModel;
 use App\Entities\Product as Product;
+use App\Entities\Customer as Customer;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -24,6 +25,7 @@ class ProductComment extends BaseModel implements Transformable
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'content',
         'rate',
@@ -38,6 +40,14 @@ class ProductComment extends BaseModel implements Transformable
      */
     public function product()
     {
-        return $this->hasOne(Product::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    /**
+     * Get the comment for the product.
+     */
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'customer_id');
     }
 }

@@ -1,69 +1,47 @@
 @extends('manage.master')
-@section('title', __('common.comments.title'))
+@section('title', __('common.products.comments.title'))
 @section('content')
   <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-      <!-- BEGIN PAGE HEADER-->
-
-      <!-- BEGIN PAGE BAR -->
       <div class="page-bar">
         <ul class="page-breadcrumb">
           <li>
-            <a href="{{route('manage.comments.index')}}">{{__('static.manage.comments.page_title')}}</a>
+            <a href="{{route('manage.products.comments.index')}}">{{__('static.manage.products.comments.page_title')}}</a>
             <i class="fa fa-circle"></i>
           </li>
           <li>
-            <span>{{__('common.comments.title')}}</span>
+            <span>{{__('common.products.comments.title')}}</span>
           </li>
         </ul>
       </div>
-      <!-- END PAGE BAR -->
-      <!-- BEGIN PAGE TITLE-->
-      <h3 class="page-title"> {{__('static.manage.comments.edit')}}  </h3>
-      <!-- END PAGE TITLE-->
+      <h3 class="page-title"> {{__('static.manage.products.comments.edit')}}  </h3>
       <div class="row">
-        {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\CommentsController@update',$record->id], 'files' => false]) !!}
+        {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\ProductCommentsController@update', $record->id], 'files' => false]) !!}
         <div class="col-md-9">
           <div class="portlet light bordered">
             <div class="portlet-title">
               <div class="caption font-dark">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject bold uppercase">{{ __('static.manage.comments.edit') }}</span>
+                <span class="caption-subject bold uppercase">{{ __('static.manage.products.comments.edit') }}</span>
               </div>
             </div>
             <div class="portlet-body form">
               <div class="form-body">
                 @php $key = 'name'; @endphp
                 <div class="form-group">
-                  <label class="control-label">{{__('common.comments.'.$key.'')}}
+                  <label class="control-label">{{__('common.products.comments.'.$key.'')}}
                     <span class="required"> * </span>
                   </label>
-                  {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.comments.'.$key.'_placeholder') ]) !!}
-                </div>
-                @php $key = 'email'; @endphp
-                <div class="form-group">
-                  <label class="control-label">{{__('common.comments.'.$key.'')}}
-                    <span class="required"> * </span>
-                  </label>
-                  {!! Form::email($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.comments.'.$key.'_placeholder') ]) !!}
+                  {!! Form::text($key, old($key), ['class' => 'form-control', 'required' => 'required','placeholder' => __('common.products.comments.'.$key.'_placeholder') ]) !!}
                 </div>
                 @php $key = 'content'; @endphp
                 <div class="form-group">
-                  <label class="control-label">{{__('common.comments.'.$key.'')}}
+                  <label class="control-label">{{__('common.products.comments.'.$key.'')}}
                   </label>
-                  {!! Form::textarea($key, old($key) ,
-                  [
-                  'class' => 'tinymce_editor form-control',
-                  'rows' => 9
+                  {!! Form::textarea($key, old($key) ,[
+                    'class' => 'tinymce_editor form-control',
+                    'rows' => 9
                   ]) !!}
-                </div>
-
-                @php $key = 'url'; @endphp
-                <div class="form-group">
-                  <label class="control-label">{{__('common.comments.'.$key.'')}}
-                  </label>
-                  {!! Form::url($key, old($key), ['class' => 'form-control','placeholder' => __('common.comments.'.$key.'_placeholder')]) !!}
                 </div>
               </div> <!-- End .form-body -->
             </div>
@@ -79,9 +57,14 @@
               </div>
             </div>
             <div class="portlet-body" style="display: block;">
+              @if(!empty($record->product))
+              <div class="form-group clearfix">
+                <label>Sản phẩm: <a href="{{ route('product.show', $record->product->slug) }}" target="_blank">{{$record->product->name}}</a></label>
+              </div>
+              @endif
               @php $key = 'created_at'; @endphp
               <div class="form-group">
-                <label>Ngày bình luận: <strong>{{ $record->$key }} - 29/09/2017@11:58</strong> </label>
+                <label>Ngày bình luận: <strong>{{ format_date($record->$key, '%d/%m/%Y@%H:%M') }}</strong> </label>
               </div>
               @php $key = 'ip_user'; @endphp
               <div class="form-group clearfix">
@@ -91,23 +74,23 @@
               <div class="form-group clearfix">
                 <label>Số sao: {{$record->$key}}</label>
               </div>
-              @php $key='comment_status'; @endphp
+              @php $key='status'; @endphp
               <div class="form-group clearfix">
                 <label class="control-label">Trạng thái:</label>
                 @if(!empty(__('selector.page_status')))
                   <div class="radio-list">
-                    @foreach(__('selector.page_status') as $k =>$val)
-                      @if($k === 2)
-                        <label class="radio-inline"> {!! Form::radio($key, $k, true) !!}    {{$val }} </label>
+                    @foreach(__('selector.page_status') as $k => $val)
+                      @if($k === $record->$key)
+                        <label class="radio-inline"> {!! Form::radio($key, $k, true) !!} {{$val }} </label>
                       @else
-                        <label class="radio-inline"> {!! Form::radio($key, $k) !!}    {{$val }} </label>
+                        <label class="radio-inline"> {!! Form::radio($key, $k) !!} {{$val }} </label>
                       @endif
                     @endforeach
                   </div>
                 @endif
               </div>
               <div class="form-group clearfix">
-                <a href="{{ route('manage.comments.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
+                <a href="{{ route('manage.products.comments.index') }}" class="btn default">{{__('common.buttons.cancel')}}</a>
                 <button type="submit" class="btn green pull-right">Đăng bình luận</button>
               </div>
             </div>
@@ -116,4 +99,5 @@
         {!! Form::close() !!}
       </div>
     </div>
+  </div>
 @endsection

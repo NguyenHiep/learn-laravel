@@ -1,34 +1,34 @@
-'use strict'
+'use strict';
 $(document).ready(function () {
   let elemBody = $('body'),
     datatables = getSelector('datatables'),
-    objDataTables = elemBody.find(datatables).eq(0)
+    objDataTables = elemBody.find(datatables).eq(0);
   // Call  method using datatable
-  ajaxSetup()
-  loadDatatables(objDataTables)
-})
+  ajaxSetup();
+  loadDatatables(objDataTables);
+});
 
 function ajaxSetup () {
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
-  })
+  });
 }
 
 function getSelector (str) {
-  let selector = '[data-provide~="' + str + '"]'
+  let selector = '[data-provide~="' + str + '"]';
   if (str.indexOf('$ ') === 0) {
-    selector = str.substr(2)
+    selector = str.substr(2);
   }
-  return selector
+  return selector;
 }
 
 function loadDatatables (obj) {
   let self = $('#' + obj.attr('id')),
     limit = $(self).data('pagelength'),
-    url = $(self).data('ajax')
-  if (typeof url != 'undefined') {
+    url = $(self).data('ajax');
+  if (typeof url !== 'undefined') {
     window.Tables = $(self).DataTable({
       stateSave: true,
       pageLength: limit,
@@ -36,13 +36,13 @@ function loadDatatables (obj) {
       serverSide: true,
       ajax: url,
       order: [[0, 'desc']]
-    })
+    });
   } else {
     window.Tables = $(self).DataTable({
       stateSave: true,
       pageLength: 10,
       order: [[0, 'desc']]
-    })
+    });
   }
 }
 
@@ -57,9 +57,9 @@ function deleteItem (that) {
     url = $this.data('ajax-url'),
     type = $this.data('type'),
     table = window.Tables,
-    mess = 'Are you sure to hide this record?'
+    mess = 'Are you sure to hide this record?';
   if (typeof type === 'undefined') {
-    mess = 'Are you sure to delete this record?'
+    mess = 'Are you sure to delete this record?';
   }
   if (confirm(mess)) {
     $.ajax({
@@ -69,14 +69,14 @@ function deleteItem (that) {
       success: function (data) {
         show_message(data);
         if (data.status === 'success') {
-          table.row(tr).remove().draw()
+          table.row(tr).remove().draw();
         } else {
-          table.draw()
+          table.draw();
         }
       },
       error: function (xhr, status, error) {
         show_message(error);
       }
-    })
+    });
   }
 }

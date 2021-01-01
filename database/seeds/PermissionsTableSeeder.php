@@ -89,7 +89,11 @@ class PermissionsTableSeeder extends Seeder
             'setting-create',
             'setting-edit',
             'setting-delete',
-            'dashboard-list'
+            'dashboard-list',
+            'product-comment-list',
+            'product-comment-create',
+            'product-comment-edit',
+            'product-comment-delete',
         ];
 
         // Update role for user

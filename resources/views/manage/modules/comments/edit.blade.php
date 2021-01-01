@@ -73,7 +73,7 @@
             <div class="portlet-body" style="display: block;">
               @php $key = 'created_at'; @endphp
               <div class="form-group">
-                <label>Ngày bình luận: <strong>{{ $record->$key }} - 29/09/2017@11:58</strong> </label>
+                <label>Ngày bình luận: <strong>{{ format_date($record->$key, '%d/%m/%Y@%H:%M') }}</strong> </label>
               </div>
               @php $key = 'ip_user'; @endphp
               <div class="form-group clearfix">

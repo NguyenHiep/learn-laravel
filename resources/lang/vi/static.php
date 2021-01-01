@@ -12,10 +12,11 @@ return [
             'categories' => [
                 'title' => 'Chuyên mục',
             ],
-            'products'   => [
-                'title'  => 'Sản phẩm',
-                'create' => 'Sản phẩm mới',
-                'list'   => 'Tất cả sản phẩm',
+            'products' => [
+                'title'    => 'Sản phẩm',
+                'create'   => 'Sản phẩm mới',
+                'list'     => 'Tất cả sản phẩm',
+                'comments' => 'Bình luận sản phẩm',
             ],
             'orders'     => [
                 'title'  => 'Đơn hàng',
@@ -95,6 +96,15 @@ return [
         ],
         'pages'    => [
             'edit' => 'Cập nhật trang'
+        ],
+        'products' => [
+            'page_title' => 'Quản lý sản phẩm',
+            'created'    => 'Thêm mới sản phẩm',
+            'edit'       => 'Cập nhật sản phẩm',
+            'comments' => [
+                'page_title' => 'Quản lý bình luận sản phẩm',
+                'edit'       => 'Cập nhật bình luận',
+            ]
         ],
         'comments' => [
             'page_title' => 'Quản lý bình luận',

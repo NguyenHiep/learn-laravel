@@ -1,5 +1,5 @@
 @extends('manage.master')
-@section('title', 'Quản lý sản phẩm')
+@section('title', __('static.manage.products.page_title'))
 
 @section('content')
   <div class="page-content-wrapper">

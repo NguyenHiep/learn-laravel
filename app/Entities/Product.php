@@ -46,5 +46,9 @@ class Product extends BaseModel implements Transformable
         'galary_img' => 'array'
     ];
 
+    public function comments()
+    {
+        return $this->hasMany(ProductComment::class, 'product_id', 'id');
+    }
 
 }
