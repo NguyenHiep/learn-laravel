@@ -271,14 +271,15 @@ class OrdersController extends BackendController
      */
     public function exportOrderPdf(Request $request, int $orderId)
     {
-        $record             = Orders::findOrFail($orderId);
-        $store_info         = Settings::first();
+        static $FILE_PDF    = 'invoice_%s_%s.pdf';
+        $record             = $this->repository->find($orderId);
+        $store_info         = app(SettingRepository::class)->getSettings();
         $data['record']     = $record;
         $data['store_info'] = $store_info;
         // Create barcode order deliveries
         DNS1D::getBarcodePNGPath(format_order_id($record->id), 'C128', '1');
         $pdf = PDF::loadView('manage.modules.orders.export_invoice_pdf', $data);
-        $name_pdf = 'invoice_' . format_date($record->delivered_at, '%d%m%Y') . '_' . str_pad($record->id, 7, '0', 0) . '.pdf';
+        $name_pdf = printf($FILE_PDF, format_date($record->delivered_at, '%d%m%Y'), str_pad($record->id, 7, '0', 0));
         return $pdf->stream($name_pdf);
     }
 

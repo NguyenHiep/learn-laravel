@@ -61,7 +61,7 @@
           @endif
         </div>
         <div class="col-xs-offset-1 col-xs-5 text-left">
-          <img src="{{ asset('/storage/barcode/' . strtolower(format_order_id($record->id).'.png')) }}" alt="{{$record->id}}" style="width: 200px; height: 50px"/>
+          <img src="{{ asset('/storage/barcode/' . strtolower(format_order_id($record->id).'c128.png')) }}" alt="{{$record->id}}" style="width: 200px; height: 50px"/>
           <p>
             Mã đơn vận: {{ format_order_id($record->id) }} <br/>
             Mã đơn hàng: <strong>{{ format_order_id($record->id) }}</strong>
