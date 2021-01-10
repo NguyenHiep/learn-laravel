@@ -20,4 +20,5 @@ interface PostRepository extends RepositoryInterface
     public function getRelatedPost(array $postIds);
 
     public function getCommentByPostId(int $postId);
+
 }

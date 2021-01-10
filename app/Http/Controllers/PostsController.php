@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FrontCommentRequest;
 use App\Repositories\CommentRepository;
 use App\Repositories\PostRepository;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -21,6 +22,8 @@ class PostsController extends FrontendController
 
     public function show()
     {
+        $ids_recent = $this->getCookiePostRecent();
+        $data['posts_recent'] = $this->postRepository->getRelatedPost($ids_recent);
         $data['posts'] = $this->postRepository->getListPostNew();
         return view('frontend.theme-phiten.posts.show', $data);
     }
@@ -42,8 +45,11 @@ class PostsController extends FrontendController
                 $ids_related[] = $i;
             }
         }
+        $this->setCookiePostRecent($post_id);
+        $ids_recent = $this->getCookiePostRecent();
         $data['post'] = $post;
         $data['post_related'] = $this->postRepository->getRelatedPost($ids_related);
+        $data['posts_recent'] = $this->postRepository->getRelatedPost($ids_recent);
         return view('frontend.theme-phiten.posts.detail', $data);
     }
 
@@ -70,6 +76,37 @@ class PostsController extends FrontendController
             'message' => __('system.message.comment.failed'),
             'status'  => self::CTRL_MESSAGE_ERROR,
         ]);
+    }
+
+    private function setCookiePostRecent($postId, $limit = 5)
+    {
+        if (empty($postId)) {
+            return false;
+        }
+        $lastViewedPost = Cookie::get('post_ids', []);
+        if (!empty($lastViewedPost) && is_string($lastViewedPost)) {
+            $lastViewedPost = json_decode($lastViewedPost);
+        }
+        if (!in_array($postId, $lastViewedPost)) {
+            $count = count($lastViewedPost);
+            if ($count >= $limit) {
+                array_shift($lastViewedPost);
+            }
+            array_push($lastViewedPost, $postId);
+        }
+        $oneYear = 525600;
+        return Cookie::queue(Cookie::make('post_ids', json_encode($lastViewedPost), $oneYear));
+    }
+
+    private function getCookiePostRecent()
+    {
+        $lastViewedPost = Cookie::get('post_ids');
+        return json_decode($lastViewedPost);
+    }
+
+    private function deleteCookieBookRecent()
+    {
+        return Cookie::queue(Cookie::forget('post_ids'));
     }
 
 }
