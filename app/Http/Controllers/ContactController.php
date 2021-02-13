@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ContactRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\SubscribeRepository;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -75,5 +77,42 @@ class ContactController extends FrontendController
             'message' => __('system.message.errors', ['errors' => __('Create contact failed!')]),
             'status'  => self::CTRL_MESSAGE_ERROR
         ]);
+    }
+
+    public function subscribe(Request $request)
+    {
+        $remoteIp = getRealIpAddr();
+        try {
+            $responseData = recaptcha_verify($request->input('google_token'), $remoteIp);
+            if (!empty($responseData) && $responseData->success && $responseData->action === $request->input('google_action')) {
+                if ($responseData->score < 0.5) {
+                    return $this->responseJson([
+                        'status' => self::CTRL_MESSAGE_ERROR,
+                        'message' => __('system.message.errors', ['errors' => 'Google reCaptcha failed with score ' . $responseData->score])
+                    ], 400);
+                }
+                app(SubscribeRepository::class)->storedSubscribe([
+                    'email'   => $request->input('email_subscribe'),
+                    'ip_user' => $remoteIp
+                ]);
+                return $this->responseJson([
+                    'status'  => self::CTRL_MESSAGE_SUCCESS,
+                    'message' => __('Đăng ký theo dõi thành công!')
+                ]);
+            }
+            return $this->responseJson([
+                'status'  => self::CTRL_MESSAGE_ERROR,
+                'message' => __('system.message.errors', ['errors' => $responseData->{'error-codes'}])
+            ], 400);
+
+        } catch (\Exception $ex) {
+            logger('Subscribe:', [$ex->getMessage()]);
+        } catch (GuzzleException $ex) {
+            logger('Verify recaptcha response: ', [$ex->getMessage()]);
+        }
+        return $this->responseJson([
+            'status' => self::CTRL_MESSAGE_ERROR,
+            'message' => __('system.message.errors', ['errors' => __('Something went wrong')])
+        ], 500);
     }
 }

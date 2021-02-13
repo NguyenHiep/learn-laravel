@@ -18,6 +18,7 @@
         language: '',
         currency: ''
       }
+      WifeCart.recaptcha_site_key = "{{ config('google.recaptcha_site_key') }}";
     </script>
 </head>
 
@@ -36,6 +37,8 @@
     @endguest
     <script src="{{ asset('theme-phiten/assets/js/app.js') }}"></script>
     @includeIf('frontend.theme-phiten.components.alert')
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('google.recaptcha_site_key') }}"></script>
+    <script src='{{ asset('theme-phiten/assets/js/recaptcha.js') }}'></script>
     @stack('scripts')
     <script>
       var vm = new Vue({

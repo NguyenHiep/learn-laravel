@@ -8,10 +8,10 @@
             <h3 class="widget-title">Theo dõi để nhận thêm ưu đãi!</h3>
           </div>
           <div class="col-md-8">
-            <form action="" method="POST">
+            <form action="{{ route('contact.subscribe') }}" method="POST" id="frm-subscribe">
               @csrf
-              <input type="email" placeholder="Nhập email để đăng ký" required/>
-              <button type="submit" class="btn">Đăng Ký</button>
+              <input type="email" name="email_subscribe" placeholder="Nhập email để đăng ký" required/>
+              <button type="submit" class="btn js-button-subscribe">Đăng Ký</button>
             </form>
           </div>
         </div>

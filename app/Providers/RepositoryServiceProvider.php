@@ -38,6 +38,8 @@ use App\Repositories\SettingRepository;
 use App\Repositories\SettingRepositoryEloquent;
 use App\Repositories\SliderRepository;
 use App\Repositories\SliderRepositoryEloquent;
+use App\Repositories\SubscribeRepository;
+use App\Repositories\SubscribeRepositoryEloquent;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
@@ -80,5 +82,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProvinceRepository::class, ProvinceRepositoryEloquent::class);
         $this->app->bind(ProductCommentRepository::class, ProductCommentRepositoryEloquent::class);
         $this->app->bind(ContactRepository::class, ContactRepositoryEloquent::class);
+        $this->app->bind(SubscribeRepository::class, SubscribeRepositoryEloquent::class);
     }
 }

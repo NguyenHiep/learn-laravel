@@ -84,3 +84,6 @@ input.has_error, select.has_error {
     overflow-x: hidden;
     overflow-y: auto;
 }
+.grecaptcha-badge {
+    opacity:0;
+}

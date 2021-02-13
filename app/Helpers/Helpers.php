@@ -1,4 +1,8 @@
 <?php
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+
 define("VERSION", "1.0.1");
 
 /**
@@ -225,5 +229,43 @@ if (!function_exists('generate_username')) {
             $noNumber++;
         }
         return $username;
+    }
+}
+
+if (!function_exists('recaptcha_verify')) {
+    /***
+     * Recaptcha v3 verify token
+     *
+     * @param $token
+     * @param $remote_ip
+     *
+     * @return object  {
+     * "success": true,
+     * "hostname": "recaptcha-demo.appspot.com",
+     * "challenge_ts": "2021-02-13T05:23:20Z",
+     * "apk_package_name": null,
+     * "score": 0.9,
+     * "action": "examples/v3scores",
+     * "error-codes": []
+     * }
+     * @throws GuzzleException
+     */
+    function recaptcha_verify($token, $remote_ip = null)
+    {
+        $client = new Client([
+            'headers' => [
+                'Accept'       => 'application/json',
+                'Content-Type' => 'application/json'
+            ]
+        ]);
+        $dataSend = [
+            'secret'   => config('google.recaptcha_secret'),
+            'response' => $token
+        ];
+        if (!empty($remote_ip)) {
+            $dataSend['remoteip'] = $remote_ip;
+        }
+        $response = $client->request('post', config('google.recaptcha_verify_url'), ['query' => $dataSend]);
+        return json_decode($response->getBody()->getContents());
     }
 }

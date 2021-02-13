@@ -164,6 +164,8 @@ Route::group(['prefix' => '/compares/'], function () {
     Route::get('/remove/', 'ComparesController@remove')->name('compare.remove');
 });
 
+Route::post('subscribe', 'ContactController@subscribe')->name('contact.subscribe');
+
 Route::get('lien-he', 'ContactController@index')->name('contact.index');
 Route::post('lien-he', 'ContactController@store')->name('contact.store');
 Route::get('tim-kiem', 'SearchController@index')->name('search.index');
