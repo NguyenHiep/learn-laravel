@@ -39,23 +39,23 @@
                                         <div class="item">
                                             <div class=" row grid-space-20">
                                                 <div class="col-3">
-                                                    <a href="{{ route('posts.detail', $post->post_slug) }}" class="img tRes" title="{{ $post->post_title }}">
+                                                    <a href="{{ route('posts.detail', $post2->post_slug) }}" class="img tRes" title="{{ $post2->post_title }}">
                                                         @php
-                                                            $mediaName = $post->media->name ?? null;
-                                                            if (!empty($post->posts_medias_id) && !empty($mediaName)) {
+                                                            $mediaName = $post2->media->name ?? null;
+                                                            if (!empty($post2->posts_medias_id) && !empty($mediaName)) {
                                                                 $imgUrl = Storage::url(UPLOAD_MEDIAS . $mediaName);
                                                             } else {
                                                                 $imgUrl = asset('theme-phiten/assets/images/img-1.jpg');
                                                             }
                                                         @endphp
-                                                        <img class="owl-lazy" data-src="{{ $imgUrl }}" alt="{{ $post->post_title }}"/>
+                                                        <img class="owl-lazy" data-src="{{ $imgUrl }}" alt="{{ $post2->post_title }}"/>
                                                     </a>
                                                 </div>
                                                 <div class="col-9">
-                                                    <a href="{{ route('posts.detail', $post->post_slug) }}" class="title" title="{{ $post->post_title }}">{{ $post->post_title }}</a>
+                                                    <a href="{{ route('posts.detail', $post2->post_slug) }}" class="title" title="{{ $post2->post_title }}">{{ $post2->post_title }}</a>
                                                     <div class="date">
                                                         <img src="{{ asset('theme-phiten/assets/images/svg/time.svg') }}" alt="icon time"/>
-                                                        {{ $post->created_at->diffForHumans() }}
+                                                        {{ $post2->created_at->diffForHumans() }}
                                                     </div>
                                                 </div>
                                             </div>

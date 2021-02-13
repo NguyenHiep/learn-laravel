@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FrontCommentRequest;
 use App\Repositories\CommentRepository;
 use App\Repositories\PostRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -22,9 +23,11 @@ class PostsController extends FrontendController
 
     public function show()
     {
-        $ids_recent = $this->getCookiePostRecent();
+        $posts_recent = $this->getCookiePostRecent();
+        $ids_recent = array_keys($posts_recent);
         $data['posts_recent'] = $this->postRepository->getRelatedPost($ids_recent);
         $data['posts'] = $this->postRepository->getListPostNew();
+        $data['posts_recent_original'] = $posts_recent;
         return view('frontend.theme-phiten.posts.show', $data);
     }
 
@@ -46,10 +49,12 @@ class PostsController extends FrontendController
             }
         }
         $this->setCookiePostRecent($post_id);
-        $ids_recent = $this->getCookiePostRecent();
+        $posts_recent = $this->getCookiePostRecent();
+        $ids_recent = array_keys($posts_recent);
         $data['post'] = $post;
         $data['post_related'] = $this->postRepository->getRelatedPost($ids_related);
         $data['posts_recent'] = $this->postRepository->getRelatedPost($ids_recent);
+        $data['posts_recent_original'] = $posts_recent;
         return view('frontend.theme-phiten.posts.detail', $data);
     }
 
@@ -85,14 +90,14 @@ class PostsController extends FrontendController
         }
         $lastViewedPost = Cookie::get('post_ids', []);
         if (!empty($lastViewedPost) && is_string($lastViewedPost)) {
-            $lastViewedPost = json_decode($lastViewedPost);
+            $lastViewedPost = json_decode($lastViewedPost, true);
         }
-        if (!in_array($postId, $lastViewedPost)) {
+        if (!array_key_exists($postId, $lastViewedPost)) {
             $count = count($lastViewedPost);
-            if ($count >= $limit) {
+            if ($count > $limit) {
                 array_shift($lastViewedPost);
             }
-            array_push($lastViewedPost, $postId);
+            $lastViewedPost[$postId] = Carbon::now();
         }
         $oneYear = 525600;
         return Cookie::queue(Cookie::make('post_ids', json_encode($lastViewedPost), $oneYear));
@@ -101,7 +106,7 @@ class PostsController extends FrontendController
     private function getCookiePostRecent()
     {
         $lastViewedPost = Cookie::get('post_ids');
-        return json_decode($lastViewedPost);
+        return json_decode($lastViewedPost, true);
     }
 
     private function deleteCookieBookRecent()

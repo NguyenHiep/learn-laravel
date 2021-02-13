@@ -18,13 +18,13 @@
       <div class="widget-content">
             <ul class="recently-post">
               @if(!empty($posts_recent))
-                  @foreach($posts_recent as $post)
+                  @foreach($posts_recent as $post_recent)
                       <li >
                         <div class="item">
-                            <a href="{{ route('posts.detail', $post->post_slug) }}" class="title">{{ $post->post_title }}</a>
+                            <a href="{{ route('posts.detail', $post_recent->post_slug) }}" class="title">{{ $post_recent->post_title }}</a>
                             <div class="date">
-                                <img src="{{ asset('theme-phiten/assets/images/svg/time.svg') }}" alt="{{ $post->post_title }}" />
-                                2 hours ago
+                                <img src="{{ asset('theme-phiten/assets/images/svg/time.svg') }}" alt="{{ $post_recent->post_title }}" />
+                                {{ \Carbon\Carbon::parse($posts_recent_original[$post_recent->id])->diffForHumans() }}
                             </div>
                         </div>
                       </li>
