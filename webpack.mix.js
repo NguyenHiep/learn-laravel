@@ -49,7 +49,7 @@ mix.combine([
     'public/manages/assets/layouts/layout/scripts/demo.min.js',
     'public/manages/assets/layouts/global/scripts/quick-sidebar.min.js',
     'public/manages/assets/js/layouts.js',
-    'public/manages/assets/js/action.js',
+    'public/manages/assets/js/action.js'
 ], 'public/js/manage/app.js');
 
 /** Front End*/
@@ -69,5 +69,5 @@ mix.combine([
   'public/theme-phiten/assets/js/bootstrap.min.js',
   'public/theme-phiten/assets/js/toastr.min.js',
   'public/theme-phiten/assets/js/script.js',
-  'public/theme-phiten/assets/js/action.js',
+  'public/theme-phiten/assets/js/action.js'
 ], 'public/theme-phiten/assets/js/app.js');
