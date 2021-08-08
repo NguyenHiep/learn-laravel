@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="15px" viewBox="0 0 14 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>user</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Header" transform="translate(-1195.000000, -7.000000)" stroke="#FFFFFF" stroke-width="1.2">
+            <g id="Nav">
+                <g id="Top-Header">
+                    <g id="icon" transform="translate(1196.000000, 7.000000)">
+                        <g id="user" transform="translate(0.000000, 1.000000)">
+                            <path d="M12,13.2 L12,11.7333333 C12,10.1132981 10.6568542,8.8 9,8.8 L3,8.8 C1.34314575,8.8 0,10.1132981 0,11.7333333 L0,13.2" id="Shape"></path>
+                            <ellipse id="Oval" cx="6" cy="2.93333333" rx="3" ry="2.93333333"></ellipse>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

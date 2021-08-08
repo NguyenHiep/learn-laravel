@@ -20,7 +20,7 @@
         <div class="container">
             <div class="successful">
                 <h2>Đơn hàng của bạn đã được đặt!</h2>
-                <p><img src="{{ asset('theme-phiten/assets/images/svg/successful.svg') }}" alt=""></p>
+                <p><img src="{{ asset('assets/images/svg/successful.svg') }}" alt=""></p>
                 <p>Cảm ơn vì đã mua sắm cùng chúng tôi.</p>
                 <div class="desc">
                     @if(Session::has('orderId'))

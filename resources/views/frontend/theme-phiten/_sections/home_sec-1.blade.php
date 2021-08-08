@@ -1,4 +1,4 @@
-<section class="sec-tb sec-1 lazy-hidden" data-lazy-type="bg" data-lazy-src="{{ asset('theme-phiten/assets/images/gradient-4.png') }}">
+<section class="sec-tb sec-1 lazy-hidden" data-lazy-type="bg" data-lazy-src="{{ asset('assets/images/gradient-4.png') }}">
     <div class="container">
         <div class="entry-head">
             <h2 class="st" data-title="Công Nghệ Phiten">
@@ -9,8 +9,8 @@
         <div class="row ">
             <div class="col-md-6">
                 <div class="img  efch-1 ef-img-l">
-                    <img class="lazy-hidden " data-lazy-type="image" src="{{ asset('theme-phiten/assets/images/image.svg') }}"
-                         data-lazy-src="{{ asset('theme-phiten/assets/images/img-1.jpg') }}" alt=""/>
+                    <img class="lazy-hidden " data-lazy-type="image" src="{{ asset('assets/images/image.svg') }}"
+                         data-lazy-src="{{ asset('assets/images/img-1.jpg') }}" alt=""/>
                 </div>
             </div>
             <div class="col-md-6">
@@ -30,11 +30,11 @@
         </div>
 
         <div class="sec-tb">
-            <img class="lazy-hidden " data-lazy-type="image" src="{{ asset('theme-phiten/assets/images/image.svg') }}"
-                 data-lazy-src="{{ asset('theme-phiten/assets/images/img-4.png') }}" alt=""/>
+            <img class="lazy-hidden " data-lazy-type="image" src="{{ asset('assets/images/image.svg') }}"
+                 data-lazy-src="{{ asset('assets/images/img-4.png') }}" alt=""/>
         </div>
     </div>
-    <img class="tl lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset('theme-phiten/assets/images/bg-1.svg') }}" alt=""/>
-    <img class="br lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset('theme-phiten/assets/images/bg-2.svg') }}" alt=""/>
+    <img class="tl lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset('assets/images/bg-1.svg') }}" alt=""/>
+    <img class="br lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset('assets/images/bg-2.svg') }}" alt=""/>
 
-</section>  
+</section>

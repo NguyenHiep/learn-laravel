@@ -7,9 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     @stack('meta')
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="shortcut icon" href="{{ asset('theme-phiten/assets/images/favicon.png') }}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon"/>
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap&subset=vietnamese" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme-phiten/assets/css/app.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/app.css') }}"/>
     @stack('styles')
 </head>
 
@@ -27,10 +27,10 @@
         @endif
     @endguest
     <script>@includeIf('frontend.theme-phiten.appresources')</script>
-    <script src="{{ asset('theme-phiten/assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     @includeIf('frontend.theme-phiten.components.alert')
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('google.recaptcha_site_key') }}"></script>
-    <script src='{{ asset('theme-phiten/assets/js/recaptcha.js') }}'></script>
+    <script src='{{ asset('assets/js/recaptcha.js') }}'></script>
     @stack('scripts')
     <script>
       var vm = new Vue({

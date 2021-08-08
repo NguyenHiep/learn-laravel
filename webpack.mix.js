@@ -53,11 +53,19 @@ mix.combine([
 ], 'public/js/manage/app.js');
 
 /** Front End*/
+mix.copyDirectory('public/theme-phiten/assets/fonts', 'public/assets/fonts');
+
+mix.copyDirectory('public/theme-phiten/assets/images', 'public/assets/images');
+
+mix.copyDirectory('public/theme-phiten/assets/img', 'public/assets/img');
+
+mix.copyDirectory('public/theme-phiten/assets/js', 'public/assets/js');
+
 mix.styles([
   'public/theme-phiten/assets/css/toastr.min.css',
   'public/theme-phiten/assets/css/main.css',
   'public/theme-phiten/assets/css/style.css'
-], 'public/theme-phiten/assets/css/app.css');
+], 'public/assets/css/app.css');
 
 mix.combine([
   'public/theme-phiten/assets/js/vue.js',
@@ -70,4 +78,4 @@ mix.combine([
   'public/theme-phiten/assets/js/toastr.min.js',
   'public/theme-phiten/assets/js/script.js',
   'public/theme-phiten/assets/js/action.js'
-], 'public/theme-phiten/assets/js/app.js');
+], 'public/assets/js/app.js');

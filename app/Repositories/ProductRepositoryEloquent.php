@@ -151,4 +151,45 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
             ->where('status', config('define.STATUS_ENABLE'))->get();
     }
 
+    public function search(array $data, int $limit = 20)
+    {
+        $querySearch = $data['q'] ?? '';
+        if (empty($querySearch)) {
+            return [];
+        }
+        $queryModel = $this->model->query();
+        $queryModel->where('status', config('define.STATUS_ENABLE'))
+            ->where(function ($query) use ($querySearch) {
+                $query->where('sku', $querySearch)
+                    ->orWhereRaw("`name` LIKE CONCAT('%', CONVERT('" . $querySearch . "', BINARY), '%')")
+                    ->orWhere('name', 'like', '%' . $querySearch . '%');
+            });
+        // Filter by price
+       /* $price_from = 0;
+        if (!empty($options['price_from'])) {
+            $price_from = intval($options['price_from']);
+        }
+        $price_to = 0;
+        if (!empty($options['price_to'])) {
+            $price_to = intval($options['price_to']);
+        }
+        if (!empty($price_to)) {
+            $queryModel->whereBetween('price', [$price_from, $price_to]);
+        }
+        // Filter stock
+        $status = $options['status'] ?? '';
+        if (!empty($status) && is_array($status)) {
+            $queryModel->where(function ($query) use($status){
+                if (in_array('in_stock', $status)) {
+                    $query->orWhere('quantity', '>', 0);
+                }
+                if (in_array('out_stock', $status)) {
+                    $query->orWhere('quantity', 0);
+                }
+            });
+
+        }*/
+        return $queryModel->orderBy('name')->paginate($limit);
+    }
+
 }

@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <img class=" tr lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset('theme-phiten/assets/images/subscribe.png') }}"  alt="" />
+    <img class=" tr lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset('assets/images/subscribe.png') }}"  alt="" />
   </div>
   @endif
   <div class="sec-tb">
@@ -130,5 +130,5 @@
 </div>
 <div id="back-top"><i class="icon icon-chevron-up"></i></div>
 <div id="loading" v-show="loading">
-  <img src="{{ asset('theme-phiten//assets/img/loading.gif') }}">
+  <img src="{{ asset('assets/img/loading.gif') }}">
 </div>

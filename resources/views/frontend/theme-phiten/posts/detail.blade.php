@@ -24,7 +24,7 @@
                     <div class="entry-content">
                         <h1>{{ $post->post_title }}</h1>
                         <div class="date">
-                            <img src="{{ asset('theme-phiten/assets/images/svg/time.svg') }}" alt="icon time"/>
+                            <img src="{{ asset('assets/images/svg/time.svg') }}" alt="icon time"/>
                             {{ $post->created_at->diffForHumans() }}
                         </div>
                         {!! $post->post_full !!}
@@ -45,7 +45,7 @@
                                                             if (!empty($post2->posts_medias_id) && !empty($mediaName)) {
                                                                 $imgUrl = Storage::url(UPLOAD_MEDIAS . $mediaName);
                                                             } else {
-                                                                $imgUrl = asset('theme-phiten/assets/images/img-1.jpg');
+                                                                $imgUrl = asset('assets/images/img-1.jpg');
                                                             }
                                                         @endphp
                                                         <img class="owl-lazy" data-src="{{ $imgUrl }}" alt="{{ $post2->post_title }}"/>
@@ -54,7 +54,7 @@
                                                 <div class="col-9">
                                                     <a href="{{ route('posts.detail', $post2->post_slug) }}" class="title" title="{{ $post2->post_title }}">{{ $post2->post_title }}</a>
                                                     <div class="date">
-                                                        <img src="{{ asset('theme-phiten/assets/images/svg/time.svg') }}" alt="icon time"/>
+                                                        <img src="{{ asset('assets/images/svg/time.svg') }}" alt="icon time"/>
                                                         {{ $post2->created_at->diffForHumans() }}
                                                     </div>
                                                 </div>
@@ -75,7 +75,7 @@
     </main>
 @endsection
 @push('scripts')
-    <script src='{{ asset('theme-phiten/assets/js/owl.carousel.min.js') }}'></script>
-    <script src='{{ asset('theme-phiten/assets/js/imagesloaded.pkgd.min.js') }}'></script>
-    <script src='{{ asset('theme-phiten/assets/js/script_owl.js') }}'></script>
+    <script src='{{ asset('assets/js/owl.carousel.min.js') }}'></script>
+    <script src='{{ asset('assets/js/imagesloaded.pkgd.min.js') }}'></script>
+    <script src='{{ asset('assets/js/script_owl.js') }}'></script>
 @endpush

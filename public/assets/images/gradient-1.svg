@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="543px" height="507px" viewBox="0 0 543 507" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Mask Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="95.9838156%" id="linearGradient-1">
+            <stop stop-color="#001017" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#011017" stop-opacity="0.10255054" offset="14.4215137%"></stop>
+            <stop stop-color="#061019" stop-opacity="0.568812274" offset="63.6725427%"></stop>
+            <stop stop-color="#071019" stop-opacity="0.975741621" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="92 -331 635 -331 635 176 92 176"></polygon>
+    </defs>
+    <g id="01.HomePage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.1-Home---Demo-4" transform="translate(-177.000000, -1422.000000)">
+            <g id="#1-Bracelet" transform="translate(85.000000, 1753.000000)">
+                <g id="Slide-03">
+                    <mask id="mask-3" fill="white">
+                        <use xlink:href="#path-2"></use>
+                    </mask>
+                    <use id="Mask-Copy-2" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

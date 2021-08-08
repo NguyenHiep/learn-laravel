@@ -2,37 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Categories;
-use App\Model\Products;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
-use App\Helpers\ToolbarConfig;
 
 class SearchController extends FrontendController
 {
-    
-    public $mcategory;
-    public $mproduct;
-    public $config_toolbar;
-    
-    public function __construct(Categories $categories, Products $products)
+    public $categoryRepository;
+    public $productRepository;
+
+    public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository)
     {
-        $this->mcategory      = $categories;
-        $this->mproduct       = $products;
-        $this->config_toolbar = ToolbarConfig::getInstance();
+        $this->categoryRepository = $categoryRepository;
+        $this->productRepository  = $productRepository;
     }
-    
+
     public function index(Request $request)
     {
-        $rules = [
-            'price_from' => 'nullable|integer',
-            'price_to'   => 'nullable|integer|gte:price_from',
-            'stocks'     => 'nullable|array',
-            'sizes'      => 'nullable|array',
-            'brands'     => 'nullable|array',
-            'colors'     => 'nullable|array',
+        $data['sort'] = $request->input('sort', 'latest');
+        switch ($data['sort']) {
+            case 'priceLowToHigh' :
+                $column = 'price';
+                $direction = 'asc';
+                break;
+            case 'topRated' :
+                $column = 'id';
+                $direction = 'desc';
+                break;
+            case 'priceHighToLow' :
+                $column = 'price';
+                $direction = 'desc';
+                break;
+            default:
+                $column = 'id';
+                $direction = 'desc';
+        }
+        $conditions = [
+            'column'    => $column,
+            'direction' => $direction,
         ];
-        $this->validate($request, $rules);
-        $data['products'] = $this->mproduct->search($this->config_toolbar, $request->all());
-        return view('frontend.theme-ecommerce.search', $data);
+        $data['products'] = $this->productRepository->search($request->all());
+        return view('frontend.theme-phiten.search', $data);
     }
 }

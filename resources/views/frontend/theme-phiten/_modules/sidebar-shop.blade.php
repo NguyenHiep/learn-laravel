@@ -11,7 +11,7 @@
                         <div class=" row grid-space-20">
                             <div class="col-5">
                                 <a href="04_product_detail.php" class="img">
-                                    <img src="{{ asset('theme-phiten/assets/images/product-1.jpg') }}" alt=""/>
+                                    <img src="{{ asset('assets/images/product-1.jpg') }}" alt=""/>
                                 </a>
                             </div>
                             <div class="col-7">

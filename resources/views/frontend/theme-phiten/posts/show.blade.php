@@ -31,7 +31,7 @@
                                                     if (!empty($post->posts_medias_id) && !empty($mediaName)) {
                                                         $imgUrl = Storage::url(UPLOAD_MEDIAS . $mediaName);
                                                     } else {
-                                                        $imgUrl = asset('theme-phiten/assets/images/img-1.jpg');
+                                                        $imgUrl = asset('assets/images/img-1.jpg');
                                                     }
                                                 @endphp
                                                 <img class="lazy-hidden" data-lazy-type="image" data-lazy-src="{{ $imgUrl }}" alt="{{ $post->post_title }}"/>

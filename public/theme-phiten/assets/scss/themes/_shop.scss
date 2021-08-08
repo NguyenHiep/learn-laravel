@@ -26,25 +26,25 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   @include max767 {
     .modal-content { padding:15px;}
    }
-  h3 { font-size: 24px; text-align: center; } 
-  a { 
-    color: $color1; @extend .tss; 
+  h3 { font-size: 24px; text-align: center; }
+  a {
+    color: $color1; @extend .tss;
     &:not(.btn):hover {  color: $color3;  }
   }
 
 
-  a.input { 
+  a.input {
     &.share {
-      position: relative; display: block;  width: 100%; padding-left: 50px; line-height: 43px; color: #999; @extend .tss; 
+      position: relative; display: block;  width: 100%; padding-left: 50px; line-height: 43px; color: #999; @extend .tss;
       cursor: pointer;
-      &:hover { color: $color1; } 
+      &:hover { color: $color1; }
       &>img { height: 18px; left: 15px; text-align: center; @include middleY; }
     }
 
   }
 
-  .winput { 
-    position: relative;  
+  .winput {
+    position: relative;
     .input { width: 100%; padding-left: 45px; }
     &>i { width: 45px; text-align: center; @include middleY; left: 0; color: $color1; }
 
@@ -53,9 +53,9 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   .select { width:100%; font-size: 14px;}
   .wremember {
     overflow: hidden;
-    .remember { 
-      float: left; 
-      input {   float: left;     margin: 5px 5px 0 0;   }      
+    .remember {
+      float: left;
+      input {   float: left;     margin: 5px 5px 0 0;   }
     }
 
     .spass {
@@ -66,7 +66,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
       &.ac {
         .h { display: inline-block; }
         .s { display: none; }
-      }    
+      }
     }
   }
 
@@ -98,7 +98,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   &.switch {
     .formlogin {
       height: 0; overflow: hidden; visibility: hidden;
-    }    
+    }
     .formregister {
       height: auto; overflow: inherit; visibility: visible;
     }
@@ -108,22 +108,22 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   &[data-show="flogin"] {
     .formlogin {
       height: auto; overflow: inherit; visibility: visible;
-    }      
+    }
   }
   &[data-show="fforgot"] {
     .formforgot {
       height: auto; overflow: inherit; visibility: visible;
-    }      
+    }
   }
   &[data-show="fregister"] {
     .formregister {
       height: auto; overflow: inherit; visibility: visible;
-    }      
+    }
   }
 
 
 
-} // .formpopup 
+} // .formpopup
 
 
 
@@ -131,7 +131,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 
 
 .lists-1 {
-  .item { 
+  .item {
     margin-bottom: 30px; text-align: center; height: 100%; background-color: #fff; padding:15px; @extend .tss;
 
     @include min1200{
@@ -144,11 +144,11 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
            img {opacity: 0 !important;}
         }
         .title, .price { color: #fff; }
-      }      
+      }
     }
   }
 
-  .img { 
+  .img {
     text-align: center;     display: block; position: relative;
     img { height: 150px; }
   }
@@ -157,10 +157,10 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   .groupbtn {
     position: absolute; bottom: 20px; left: 0; right: 0;  @extend .tss; opacity: 0;
     .btn {   }
-    .group {  
+    .group {
       display: block; padding-top: 20px;
-      .gitem { 
-        display: inline-block; width: 26px; height: 26px; text-align: center; line-height: 26px; 
+      .gitem {
+        display: inline-block; width: 26px; height: 26px; text-align: center; line-height: 26px;
         background-color: $color3; border-radius:100%; color: #fff; margin:0 5px;  @extend .tss;
         &:hover, &.active {
           background-color: $color4;
@@ -171,8 +171,8 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 
 
 
-  .title { 
-    color: $color2; display: block; margin-bottom: 15px; @extend .tss; 
+  .title {
+    color: $color2; display: block; margin-bottom: 15px; @extend .tss;
     &:hover { color: $color1 }
   }
   .price {    color: $color1;  }
@@ -212,23 +212,23 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 }
 
 
- 
+
 
   .list-mini-product {
 
     margin:0 0 15px;
     list-style: none;
     .item { margin-bottom: 20px; }
-    .img { 
-      display: block; margin-bottom: 10px; 
+    .img {
+      display: block; margin-bottom: 10px;
       img { width: 100%; display: block; height: auto !important;  }
     }
-    .title { 
+    .title {
       display: block; margin-bottom: 5px; color: $color2; @extend .tss;     line-height: 1.4;
-      &:hover { color: $color1 !important; } 
+      &:hover { color: $color1 !important; }
     }
     .number { font-size: 12px; color: #A6A6A6; font-weight: 400;  margin-bottom: 5px;}
-    .price {   color: $color1; font-weight: 700; } 
+    .price {   color: $color1; font-weight: 700; }
 
   }
 
@@ -247,7 +247,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   &.active {
     .toggle-content {
       opacity: 1; visibility: visible;
-    }    
+    }
   }
 }
 
@@ -258,7 +258,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
     padding: 0 20px;
     max-height: 260px;
     overflow-x: hidden;
-    overflow-y: auto;    
+    overflow-y: auto;
   }
   .total {
     font-size: 15px; color: #fff; background-color: $color1; line-height: 25px; padding:20px 25px;
@@ -278,7 +278,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   padding:0 0 10px;
   border-bottom: 1px solid #ebebeb;
   .results { float: left;     line-height: 30px;}
-  .orderby { 
+  .orderby {
     float: right;
     select { border:none; color: #4C5454; }
   }
@@ -333,11 +333,11 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 }
 
 .widget-category {
-  .checkbox { display: block; margin-bottom: 10px; color: #666666; font-size: 12px; font-weight: 500; line-height: 25px; } 
+  .checkbox { display: block; margin-bottom: 10px; color: #666666; font-size: 12px; font-weight: 500; line-height: 25px; }
   ul {
     list-style: none;
 
-    a { 
+    a {
       display: block; position: relative;  color: #666666; font-size: 12px; font-weight: 500; line-height: 25px;
       padding-left: 30px;
       &:before {
@@ -410,11 +410,11 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 .quality,.qualitys {
   overflow: hidden;  padding: 10px; line-height: 30px; position: relative; background-color: $color1; padding:1px;
   display: inline-block;
-  .plus, .minus, input {  
-    float: left; height: 25px; line-height: 25px; text-align: center;     width: 25px; 
+  .plus, .minus, input {
+    float: left; height: 25px; line-height: 25px; text-align: center;     width: 25px;
     background-color: #fff;  @extend .tss; border:none; color: $color1;
   }
-  .plus, .minus{  
+  .plus, .minus{
     &:hover { color: #fff; background-color: $color1; }
   }
   input {font-size: 18px; margin:0 1px; width: 40px; font-weight: 700; }
@@ -458,11 +458,11 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   .desc { margin-bottom: 30px; }
 
   .cart-like {
-    .btn { 
-      margin-right: 30px; 
+    .btn {
+      margin-right: 30px;
       @include min1200 { width: 280px; }
     }
-    .like {    
+    .like {
       vertical-align: middle; font-size: 30px; color: #E4E4E4;
       &.active {
         background-color:  transparent; color: $color1;
@@ -479,7 +479,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
     .item {
       flex: 0 0 35px;
       max-width: 35px;
-      padding: 0 5px;      
+      padding: 0 5px;
     }
     .checkbox {
         margin: 0 0 5px;
@@ -498,8 +498,8 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   h2 { font-weight: 700; color: $color2; text-transform: uppercase; }
   .wstar {
     width: 127px; position: relative; height: 20px; display: inline-block; vertical-align: text-bottom;
-    &>img { 
-      position: absolute; width: 100%; top: 0; left:0; opacity: 0; 
+    &>img {
+      position: absolute; width: 100%; top: 0; left:0; opacity: 0;
       &.active,&.s-0 { opacity: 1; }
     }
     .over {
@@ -531,15 +531,15 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 
 
 #main .box-acordion {
-  .tab-title { 
-    font-size: 18px; color: $color2; padding:15px 0; font-weight: 700; text-transform: uppercase; 
+  .tab-title {
+    font-size: 18px; color: $color2; padding:15px 0; font-weight: 700; text-transform: uppercase;
     border-bottom: 1px solid transparent;
   }
   .tab-content { padding:20px 0; }
 
   .tab {
     &.show {
-      
+
       .tab-title {border-color: #D3D3D3;}
     }
   }
@@ -551,16 +551,16 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   .tab-menu {
     display: table; width: 100%; font-size: 15px; font-weight: 500; color: #F9C8D8;
-    &>div { 
+    &>div {
       display: table-cell; vertical-align: middle; height: 60px; text-align: center;     padding: 5px; cursor: pointer;
       border:1px solid #F9C8D8; @extend .tss;     line-height: normal;
       &:not(:first-child){border-left: none;}
-      &:hover {color: $color1;} 
+      &:hover {color: $color1;}
       &.active {
         color: $color1;
         border-top-color: #fff;
         border-bottom:3px solid $color1;
-      } 
+      }
     }
 
     &.cols-4 {
@@ -579,14 +579,14 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 }
 
 .list-commnets {
-  list-style: none; 
-  .item { 
-    display: block; position: relative; 
+  list-style: none;
+  .item {
+    display: block; position: relative;
 
   }
   .name {
     overflow: hidden; margin-bottom: 15px;
-    
+
     .img{ float: left; width: 50px; margin-right: 10px; border-radius: 100%; }
     .text { overflow: hidden;  }
     .date { font-weight: 300; opacity: 0.6;  }
@@ -626,7 +626,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 
   .widget {
     padding:25px; border: 1px solid #ebebeb; border-radius: 8px; margin-bottom: 30px;
-    &-title { color: #666666; font-weight: 500; margin-bottom: 20px; } 
+    &-title { color: #666666; font-weight: 500; margin-bottom: 20px; }
 
   }
 
@@ -637,7 +637,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 
 
 .sidebar {
-  .widget { 
+  .widget {
     border-radius: 6px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); margin-bottom: 30px;
   }
   .widget-title {
@@ -686,8 +686,8 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
   min-width: 700px;
 
   .subtotal { text-align: right; }
-  th { 
-    text-align: left; 
+  th {
+    text-align: left;
     font-weight: 400; color: #A6A6A6;
     border-bottom: 1px solid #A6A6A6; padding: 0 5px 15px;
     width: 120px;
@@ -699,10 +699,10 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 
 
   }
-  td { 
-    padding:20px 5px 0; 
+  td {
+    padding:20px 5px 0;
     &.product {
-      a { 
+      a {
         font-weight: 500; color: $color2; @extend .tss;
         &:hover { color: $color1; }
       }
@@ -721,11 +721,11 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 .promotion-total {
   border-top:1px solid #dcdcdc;
   margin-top: 15px; padding: 20px 0;
-  form.code { 
-    display: inline-block; position: relative;  
+  form.code {
+    display: inline-block; position: relative;
     input { height: 35px; border-radius: 6px; border:1px solid #dcdcdc; width: 260px; padding: 0 80px 0 15px;  }
-    button { 
-      height: 35px; border-radius: 6px; border:0; background-color: $color1; padding:0 20px; position: absolute; right: 0; top: 0; bottom: 0;  
+    button {
+      height: 35px; border-radius: 6px; border:0; background-color: $color1; padding:0 20px; position: absolute; right: 0; top: 0; bottom: 0;
       font-size: 12px; color: #fff;
     }
   }
@@ -751,7 +751,7 @@ background: linear-gradient(17deg, rgba(236,242,248,1) 0%, rgba(255,255,255,1) 5
 
 .paging-cart {
   text-align: center; padding:30px 0;
-  a { 
+  a {
     display: inline-block; margin:0 15px;
     color: #CCCCCC; @extend .tss; text-transform: uppercase; font-weight: 700;
     &:hover { color: $color1; }
@@ -819,10 +819,10 @@ div.successful {
     overflow: hidden; margin-bottom: 50px;
     .img {
       background-color: #D8D8D8; width: 45px; height: 45px; border-radius:100%; margin-right: 10px; float: left; position: relative;
-      overflow: hidden; 
+      overflow: hidden;
       img { @include middle; max-width: 100%; max-height: 100%;}
     }
-    .text { 
+    .text {
       overflow: hidden; font-size: 12px; color: $color2; font-weight: 400;
       .t2 { display: block; color: $color1; font-size: 16px; }
     }
@@ -830,7 +830,7 @@ div.successful {
 
   @include max991 {
     .rowlabel .item .title {
-      display: block; float: none; margin: 0 0 5px; font-weight: 700;  
+      display: block; float: none; margin: 0 0 5px; font-weight: 700;
     }
     .formaccount { padding:15px; }
   }
@@ -838,7 +838,7 @@ div.successful {
 
 .formaccount {
   max-width: 720px; padding:40px; background-color: #fff; font-size: 13px;
-  border:1px solid #E8E8E8; border-radius: 6px;  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); 
+  border:1px solid #E8E8E8; border-radius: 6px;  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   .inner {
     max-width: 490px;
 
@@ -855,12 +855,12 @@ div.successful {
   .btnsubmit { padding-top: 30px }
 
   .item {
-    &.password { display: none; } 
+    &.password { display: none; }
   }
 
   &.edit-pass {
     .item {
-      &.password { display: block; } 
+      &.password { display: block; }
     }
   }
 
@@ -875,19 +875,19 @@ div.successful {
   &:hover {
     [class^="icon-"], [class*=" icon-"] {
       &:before {     content: "\e953"; }
-    }    
+    }
   }
 }
 
 .menu-account {
   list-style: none; margin:0; padding:0;
-  a { 
+  a {
     display: block; position: relative;  font-weight: 400;
     padding:15px 5px 15px 25px; color: #545454; @extend .tss;
     &:hover { color: $color1; }
     img { @include middleY; left:0; width: 12px; }
   }
-  li { 
+  li {
     display: block; position: relative; border-left:4px solid transparent;
     padding-left:20px;
 
@@ -917,5 +917,5 @@ div.successful {
 @include max767 {
   .sidebar-content .widget-address .title {
       float: none; width: auto; margin:0;
-  }  
+  }
 }

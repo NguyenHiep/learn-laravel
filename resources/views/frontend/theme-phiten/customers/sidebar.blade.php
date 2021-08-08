@@ -1,6 +1,6 @@
 <div class="uname">
     <span class="img">
-      <img width="15" height="20" src="{{ asset('theme-phiten/assets/images/svg/user.svg') }}" alt="user.svg">
+      <img width="15" height="20" src="{{ asset('assets/images/svg/user.svg') }}" alt="user.svg">
     </span>
     <div class="text">
         <span class="t1">Tải khoản</span>

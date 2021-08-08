@@ -17,7 +17,7 @@
     @includeIf('frontend.theme-phiten._sections.home_sec-3')
 @endsection
 @push('scripts')
-    <script src='{{ asset('theme-phiten/assets/js/owl.carousel.min.js') }}'></script>
-    <script src='{{ asset('theme-phiten/assets/js/imagesloaded.pkgd.min.js') }}'></script>
-    <script src='{{ asset('theme-phiten/assets/js/script_owl.js') }}'></script>
+    <script src='{{ asset('assets/js/owl.carousel.min.js') }}'></script>
+    <script src='{{ asset('assets/js/imagesloaded.pkgd.min.js') }}'></script>
+    <script src='{{ asset('assets/js/script_owl.js') }}'></script>
 @endpush

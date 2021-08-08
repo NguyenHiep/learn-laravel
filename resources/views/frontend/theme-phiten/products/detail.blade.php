@@ -243,9 +243,9 @@
     @endif
 @endsection
 @push('scripts')
-    <script src='{{ asset('theme-phiten/assets/js/owl.carousel.min.js') }}'></script>
-    <script src='{{ asset('theme-phiten/assets/js/imagesloaded.pkgd.min.js') }}'></script>
-    <script src='{{ asset('theme-phiten/assets/js/script_owl.js') }}'></script>
+    <script src='{{ asset('assets/js/owl.carousel.min.js') }}'></script>
+    <script src='{{ asset('assets/js/imagesloaded.pkgd.min.js') }}'></script>
+    <script src='{{ asset('assets/js/script_owl.js') }}'></script>
     @if(!empty($settings->params) && !empty($settings->params['enable_product_comment']))
     <script>
       jQuery(document).ready(function () {

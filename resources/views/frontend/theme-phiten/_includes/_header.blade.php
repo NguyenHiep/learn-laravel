@@ -26,7 +26,7 @@
             @auth
                 <div class="item">
                     <a href="{{ route('customer.dashboard') }}">
-                        <img src="{{ asset('theme-phiten/assets/images/svg/user.svg') }}" alt="user icon"/>
+                        <img src="{{ asset('assets/images/svg/user.svg') }}" alt="user icon"/>
                         {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
                     </a>
                 </div>
@@ -49,7 +49,7 @@
         <div class="group-header">
             <div class="item widget-mini-cart toggleClass">
                 <span class="toggle">
-                    <img src="{{ asset('theme-phiten/assets/images/svg/shopping-cart-black.svg') }}" alt="shopping-cart" width="24px"/>
+                    <img src="{{ asset('assets/images/svg/shopping-cart-black.svg') }}" alt="shopping-cart" width="24px"/>
                     <span class="qty cart-count">@{{ listItemCart.length }}</span>
                 </span>
                 <div class="toggle-content">

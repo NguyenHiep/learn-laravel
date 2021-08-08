@@ -19,7 +19,7 @@
         </div>
         <div class="entry-heading2" v-if="listItemCart.length > 0">
             <div class="container">
-                <h3><img src="{{ asset('theme-phiten/assets/images/svg/list-cart.svg') }}" alt="list-cart"/>Giỏ hàng
+                <h3><img src="{{ asset('assets/images/svg/list-cart.svg') }}" alt="list-cart"/>Giỏ hàng
                 </h3>
             </div>
         </div>
@@ -29,7 +29,7 @@
                     <div class="content-wrapper clearfix cart-page">
                         <div class="successful">
                             <h2>Giỏ hàng của bạn đang trống!</h2>
-                            <p><img src="{{ asset('theme-phiten/assets/images/svg/icon_cart_empty_grey.svg') }}" alt="not empty"></p>
+                            <p><img src="{{ asset('assets/images/svg/icon_cart_empty_grey.svg') }}" alt="not empty"></p>
                             <p>Quay lại cửa hàng để chọn sản phẩm của bạn</p>
                         </div>
 
@@ -47,7 +47,7 @@
                                 <tr>
                                     <th class="delete">
                                         <span class="delete-all" @click="removeAllItemCart()">
-                                            <img src="{{ asset('theme-phiten/assets/images/svg/remove.svg') }}" alt="Xóa tất cả" title="Xóa tất cả" style="cursor: pointer"/>
+                                            <img src="{{ asset('assets/images/svg/remove.svg') }}" alt="Xóa tất cả" title="Xóa tất cả" style="cursor: pointer"/>
                                         </span>
                                     </th>
                                     <th class="image">Hình ảnh</th>

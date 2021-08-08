@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="20px" viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>shopping-cart</title>
+    <desc>Created with Sketch.</desc>
+    <g id="01.HomePage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.1-Home---Demo-4" transform="translate(-1259.000000, -18.000000)">
+            <g id="#-HEADER">
+                <g id="Top-Nav">
+                    <g id="#-Icon-RIGHT" transform="translate(798.000000, 10.000000)">
+                        <g id="shopping-cart" transform="translate(462.000000, 9.000000)">
+                            <ellipse id="Oval" stroke="#FFFFFF" stroke-width="1.5488" stroke-linecap="round" stroke-linejoin="round" cx="6.22222222" cy="17.1212121" rx="1" ry="1"></ellipse>
+                            <ellipse id="Oval" stroke="#FFFFFF" stroke-width="1.5488" stroke-linecap="round" stroke-linejoin="round" cx="14.7777778" cy="17.1212121" rx="1" ry="1"></ellipse>
+                            <path d="M0,1 L3.11111111,1 L5.19555556,11.7931515 C5.34235097,12.5590957 5.99774306,13.1058715 6.75111111,13.0909091 L14.3111111,13.0909091 C15.0644792,13.1058715 15.7198712,12.5590957 15.8666667,11.7931515 L17.1111111,5.03030303 L3.88888889,5.03030303" id="Shape" stroke="#FFFFFF" stroke-width="1.5488" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <circle id="Oval-2" stroke="#004EA2" stroke-width="1.9602" fill="#FFFFFF" cx="17.5" cy="4.5" r="4.5"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

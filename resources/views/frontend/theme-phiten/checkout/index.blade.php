@@ -24,14 +24,14 @@
                         <li role="presentation" :class="step_process === STEP_REGISTER ? 'active' : ''" class="address-tab">
                             <h3>
                                 <a href="#address" data-toggle="tab" aria-controls="step1" role="tab" data-step="1">
-                                    <img src="{{ asset('theme-phiten/assets/images/svg/shipping-address.svg') }}" alt="shipping address"> Địa chỉ
+                                    <img src="{{ asset('assets/images/svg/shipping-address.svg') }}" alt="shipping address"> Địa chỉ
                                 </a>
                             </h3>
                         </li>
                         <li role="presentation" :class="step_process === STEP_CONFIRM ? 'active' : ''" class="confirm-tab">
                             <h3>
                                 <a href="#confirm" data-toggle="tab" aria-controls="step3" role="tab" data-step="3">
-                                    <img src="{{ asset('theme-phiten/assets/images/svg/review-order.svg') }}" alt="review order"> Xác nhận
+                                    <img src="{{ asset('assets/images/svg/review-order.svg') }}" alt="review order"> Xác nhận
                                 </a>
                             </h3>
                         </li>

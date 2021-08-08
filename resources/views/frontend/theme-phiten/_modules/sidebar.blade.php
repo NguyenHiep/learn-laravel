@@ -65,20 +65,20 @@
                 <div class="widget-title">Sao</div>
 
                 <div class="item active"><span class="text">(Từ 4 sao)</span> <img
-                            src="{{ asset('theme-phiten/assets/images/star4.svg') }}" alt=""/>
+                            src="{{ asset('assets/images/star4.svg') }}" alt=""/>
                 </div>
                 <div class="item"><span class="text">(Từ 3 sao)</span> <img
-                            src="{{ asset('theme-phiten/assets/images/star3.svg') }}" alt=""/></div>
+                            src="{{ asset('assets/images/star3.svg') }}" alt=""/></div>
                 <div class="item"><span class="text">(Từ 2 sao)</span> <img
-                            src="{{ asset('theme-phiten/assets/images/star4.svg') }}" alt=""/></div>
+                            src="{{ asset('assets/images/star4.svg') }}" alt=""/></div>
                 <div class="item"><span class="text">(Từ 1 sao)</span> <img
-                            src="{{ asset('theme-phiten/assets/images/star1.svg') }}" alt=""/></div>
+                            src="{{ asset('assets/images/star1.svg') }}" alt=""/></div>
             </div> <!--End widget-->
         @endif
     </div>
 </div>
 @push('scripts')
-    <script src="{{ asset('theme-phiten/assets/js/jquery-ui.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
     <script>
       (function ($) {
         $(document).ready(function () {

@@ -23,7 +23,7 @@
                         <div class="item">
                             <a href="{{ route('posts.detail', $post_recent->post_slug) }}" class="title">{{ $post_recent->post_title }}</a>
                             <div class="date">
-                                <img src="{{ asset('theme-phiten/assets/images/svg/time.svg') }}" alt="{{ $post_recent->post_title }}" />
+                                <img src="{{ asset('assets/images/svg/time.svg') }}" alt="{{ $post_recent->post_title }}" />
                                 {{ \Carbon\Carbon::parse($posts_recent_original[$post_recent->id])->diffForHumans() }}
                             </div>
                         </div>
