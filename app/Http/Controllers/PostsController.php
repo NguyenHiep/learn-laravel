@@ -14,6 +14,7 @@ class PostsController extends FrontendController
 {
     public $postRepository;
     public $commentRepository;
+    const COOKIE_ONE_YEAR = 525600;
 
     public function __construct(PostRepository $postRepository, CommentRepository $commentRepository)
     {
@@ -23,11 +24,14 @@ class PostsController extends FrontendController
 
     public function show()
     {
-        $posts_recent = $this->getCookiePostRecent();
-        $ids_recent = array_keys($posts_recent);
-        $data['posts_recent'] = $this->postRepository->getRelatedPost($ids_recent);
+        $recentPosts = $this->getCookiePostRecent();
+        $recentIds = [];
+        if (!empty($recentPosts) && is_array($recentPosts)) {
+            $recentIds = array_keys($recentPosts);
+        }
+        $data['posts_recent'] = $this->postRepository->getRelatedPost($recentIds);
         $data['posts'] = $this->postRepository->getListPostNew();
-        $data['posts_recent_original'] = $posts_recent;
+        $data['posts_recent_original'] = $recentPosts;
         return view('frontend.theme-phiten.posts.show', $data);
     }
 
@@ -37,24 +41,27 @@ class PostsController extends FrontendController
         if (empty($post)) {
             return abort(404);
         }
-        $post_id     = $post->id;
+        $postId     = $post->id;
         $space       = 3; // Khoang cach
-        $limit_max   = max($post_id + $space, 0);
-        $limit_min   = max($post_id - $space, 0);
-        $ids_related = [];
+        $limitMax   = max($postId + $space, 0);
+        $limitMin   = max($postId - $space, 0);
+        $relatedIds = [];
 
-        for ($i = $limit_min; $i <= $limit_max; $i++) {
-            if ($i != $post_id) {
-                $ids_related[] = $i;
+        for ($i = $limitMin; $i <= $limitMax; $i++) {
+            if ($i !== $postId) {
+                $relatedIds[] = $i;
             }
         }
-        $this->setCookiePostRecent($post_id);
-        $posts_recent = $this->getCookiePostRecent();
-        $ids_recent = array_keys($posts_recent);
+        $this->setCookiePostRecent($postId);
+        $recentPosts = $this->getCookiePostRecent();
+        $recentIds = [];
+        if (!empty($recentPosts) && is_array($recentPosts)) {
+            $recentIds = array_keys($recentPosts);
+        }
         $data['post'] = $post;
-        $data['post_related'] = $this->postRepository->getRelatedPost($ids_related);
-        $data['posts_recent'] = $this->postRepository->getRelatedPost($ids_recent);
-        $data['posts_recent_original'] = $posts_recent;
+        $data['post_related'] = $this->postRepository->getRelatedPost($relatedIds);
+        $data['posts_recent'] = $this->postRepository->getRelatedPost($recentIds);
+        $data['posts_recent_original'] = $recentPosts;
         return view('frontend.theme-phiten.posts.detail', $data);
     }
 
@@ -99,8 +106,7 @@ class PostsController extends FrontendController
             }
             $lastViewedPost[$postId] = Carbon::now();
         }
-        $oneYear = 525600;
-        return Cookie::queue(Cookie::make('post_ids', json_encode($lastViewedPost), $oneYear));
+        return Cookie::queue(Cookie::make('post_ids', json_encode($lastViewedPost), self::COOKIE_ONE_YEAR));
     }
 
     private function getCookiePostRecent()

@@ -8,14 +8,16 @@
         </a>
         @endif
         <div class="group-right">
+            @if(!request()->routeIs('checkout.index'))
             <div class="item">
                 <form action="{{ route('search.index') }}" method="GET" class="form-search-focus">
                     <input name="q" type="text" placeholder="Tìm kiếm sản phẩm..."/>
                     <button><i class="icon-search-2"></i></button>
                 </form>
             </div>
+            @endif
             @guest
-                @if(!request()->routeIs('password.reset'))
+                @if(!request()->routeIs('password.reset') && !request()->routeIs('checkout.index'))
                     <div class="item">
                         <a href="#" data-toggle="modal" data-target="#myLogin">Đăng Nhập</a>
                     </div>

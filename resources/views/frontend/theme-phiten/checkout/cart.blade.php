@@ -93,7 +93,7 @@
                                         <span id="total-amount" class="price">@{{ totalPrice | formatPrice }}</span>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                {{--<div class="col-md-7">
                                     <div class="promotion">
                                         Phiếu mua hàng
                                         <form action="" class="code">
@@ -101,7 +101,7 @@
                                             <button>Áp dụng</button>
                                         </form>
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                         <div class="paging-cart">

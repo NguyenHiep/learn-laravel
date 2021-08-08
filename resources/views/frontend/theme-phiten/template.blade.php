@@ -11,15 +11,6 @@
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap&subset=vietnamese" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('theme-phiten/assets/css/app.css') }}"/>
     @stack('styles')
-    <script>
-      window.WifeCart = {
-        csrfToken: "{{ csrf_token() }}",
-        pathImageProduct: "{{ UPLOAD_PRODUCT }}",
-        language: '',
-        currency: ''
-      }
-      WifeCart.recaptcha_site_key = "{{ config('google.recaptcha_site_key') }}";
-    </script>
 </head>
 
 <body>
@@ -35,6 +26,7 @@
             @includeIf('frontend.theme-phiten._modules.login-register')
         @endif
     @endguest
+    <script>@includeIf('frontend.theme-phiten.appresources')</script>
     <script src="{{ asset('theme-phiten/assets/js/app.js') }}"></script>
     @includeIf('frontend.theme-phiten.components.alert')
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('google.recaptcha_site_key') }}"></script>
