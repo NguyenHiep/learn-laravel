@@ -13,7 +13,7 @@
 <script src="{{asset('/manages/assets/global/plugins/excanvas.min.js')}}"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<script src="{{ asset('js/manage/app.js') }}"> </script>
+<script src="/assets/manage/js/app.js"> </script>
 <script src="{{ asset('/manages/assets/global/plugins/tinymce/js/tinymce/jquery.tinymce.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/manages/assets/global/plugins/tinymce/js/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
 @stack('custom-scripts')

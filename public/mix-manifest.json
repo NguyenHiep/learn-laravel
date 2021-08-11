@@ -1,8 +1,8 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/css/manage/app.css": "/css/manage/app.css",
-    "/js/manage/app.js": "/js/manage/app.js",
+    "/assets/manage/css/login.css": "/assets/manage/css/login.css",
+    "/assets/manage/js/login.js": "/assets/manage/js/login.js",
+    "/assets/manage/css/app.css": "/assets/manage/css/app.css",
+    "/assets/manage/js/app.js": "/assets/manage/js/app.js",
     "/assets/css/app.css": "/assets/css/app.css",
     "/assets/js/app.js": "/assets/js/app.js"
 }

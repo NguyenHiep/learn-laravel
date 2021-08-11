@@ -25,7 +25,7 @@ Version: 4.7.1
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="{{ asset('/manages/assets/global/plugins/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('manages/assets/global/plugins/simple-line-icons/simple-line-icons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/manage/app.css') }}" />
+    <link rel="stylesheet" href="/assets/manage/css/app.css" />
   @show
 
   @php
