@@ -120,6 +120,9 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function getProductBySlug($slug)
     {
         return $this->model::where('slug', $slug)
+            ->select(['id', 'name', 'slug', 'description', 'short_description', 'category_id',
+                'sku', 'price', 'sale_price', 'quantity', 'meta_title', 'meta_keywords',
+                'meta_description', 'galary_img', 'pictures'])
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
             ->where('status', config('define.STATUS_ENABLE'))->first();
@@ -128,9 +131,11 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function getRelatedProducts(int $id, int $limit = 4)
     {
         return $this->model::where('status', config('define.STATUS_ENABLE'))
+            ->select(['id', 'name', 'slug', 'price', 'sale_price', 'pictures'])
             ->where('id', '!=', $id)
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
+            ->where('status', config('define.STATUS_ENABLE'))
             ->limit($limit)->get();
     }
 
@@ -158,6 +163,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
             return [];
         }
         $queryModel = $this->model->query();
+        $queryModel->select(['id', 'name', 'slug', 'price', 'sale_price', 'pictures']);
         $queryModel->where('status', config('define.STATUS_ENABLE'))
             ->where(function ($query) use ($querySearch) {
                 $query->where('sku', $querySearch)

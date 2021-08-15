@@ -62,7 +62,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      */
     public function getPostBySlug($slug)
     {
-        return $this->model::with(['media'])
+        return $this->model::with(['media:id,name'])
             ->select(['id', 'post_title', 'post_slug', 'post_intro', 'post_full', 'post_keyword', 'posts_medias_id', 'visit', 'created_at', 'updated_at'])
             ->where('post_slug', $slug)
             ->where('post_status', config('define.STATUS_ENABLE'))
@@ -75,7 +75,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      */
     public function getRelatedPost(array $postIds)
     {
-        return $this->model::with(['media'])
+        return $this->model::with(['media:id,name'])
             ->select(['id', 'post_title', 'post_slug', 'post_intro', 'post_full', 'post_keyword', 'posts_medias_id', 'visit', 'created_at', 'updated_at'])
             ->where('post_status', config('define.STATUS_ENABLE'))
             ->whereIn('id', $postIds)

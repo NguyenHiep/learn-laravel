@@ -40,7 +40,8 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
 
     public function getListCategoryMenu(array $catIds = [])
     {
-        $model = $this->model::where('status', config('define.STATUS_ENABLE'));
+        $model = $this->model::select(['id', 'name', 'slug', 'image', 'description'])
+        ->where('status', config('define.STATUS_ENABLE'));
         if (count($catIds) > 0) {
             $model->whereIn('id', $catIds);
         }
@@ -49,7 +50,8 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
 
     public function getCategoryBySlug($slug)
     {
-        return $this->model::where('slug', $slug)
+        return $this->model::select(['id', 'name', 'slug', 'image', 'description'])
+            ->where('slug', $slug)
             ->where('status', config('define.STATUS_ENABLE'))
             ->first();
     }

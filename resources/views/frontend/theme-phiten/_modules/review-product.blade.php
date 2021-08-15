@@ -1,4 +1,4 @@
-<!-- Modal -->
+@if(!empty($settings->params) && !empty($settings->params['enable_product_comment']))
 <div class="modal fade" id="myReview" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -74,17 +74,21 @@
         </div>
     </div>
 </div>
-
 @push('scripts')
 <script>
   (function ($) {
     $(document).ready(function () {
+      jQuery('.btn-review-popup').on('click', function (e) {
+        e.preventDefault()
+        jQuery('#myReview').modal('show')
+      })
     @if($errors->has('rate') || $errors->has('name') || $errors->has('content') || $errors->has('captcha') || $errors->has('product_id'))
         $('#myReview').modal({
           show: true
         })
     @endif
-    })
-  })(jQuery)
+    });
+  })(jQuery);
 </script>
 @endpush
+@endif
