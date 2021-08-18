@@ -49,9 +49,11 @@
                 </div>
               </div>
             </div>
-            @php $deliveries = $record->deliveries; @endphp
-            @php $order_products = $record->products; @endphp
-            @php $grand_total = $record->total + $record->delivery_fee; @endphp
+            @php
+                $deliveries     = $record->deliveries;
+                $order_products = $record->products;
+                $grand_total    = $record->total + $record->delivery_fee;
+            @endphp
             <div class="portlet-body">
               <div class="tab-pane">
                 <div class="row">
@@ -86,10 +88,12 @@
                           <div class="col-md-5 name"> Phương thức thanh toán: </div>
                           <div class="col-md-7 value">{{ __('selector.payment.'.$record->payment_id) }}</div>
                         </div>
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Ghi chú: </div>
-                          <div class="col-md-7 value"> {{ $record->note }} </div>
-                        </div>
+                        @if(!empty($record->note))
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Ghi chú: </div>
+                            <div class="col-md-7 value"> {{ $record->note }} </div>
+                          </div>
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -122,12 +126,14 @@
                             {{ nl2br($deliveries->receiver_address_1) }}
                           </div>
                         </div>
-                        <div class="row static-info">
-                          <div class="col-md-5 name"> Địa chỉ khác: </div>
-                          <div class="col-md-7 value">
-                            {{ nl2br($deliveries->receiver_address_2) }}
+                        @if (!empty($deliveries->receiver_address_2))
+                          <div class="row static-info">
+                            <div class="col-md-5 name"> Địa chỉ khác: </div>
+                            <div class="col-md-7 value">
+                              {{ nl2br($deliveries->receiver_address_2) }}
+                            </div>
                           </div>
-                        </div>
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -159,7 +165,12 @@
                               @foreach($order_products as $product)
                                 @php
                                   $count++;
-                                  $total_include_tax =  $product->price * $product->quantity;
+                                  $salePrice = $product->price;
+                                  if ($product->sale_price > 0 && $product->sale_price < $salePrice) {
+                                      $salePrice = $product->sale_price;
+                                  }
+
+                                  $total_include_tax =  $salePrice * $product->quantity;
                                   $totalPrice += $total_include_tax;
                                 @endphp
                                 <tr>
@@ -167,7 +178,7 @@
                                   <td>
                                     <a href="{{ route('manage.products.edit', ['id' => $product->product_id]) }}" target="_blank"> {{ $product->name }} </a>
                                   </td>
-                                  <td> {{ format_price($product->price) }} </td>
+                                  <td> {{ format_price($salePrice) }} </td>
                                   <td> {{ $product->quantity }} </td>
                                   <td> {{ format_price($total_include_tax) }} </td>
                                 </tr>

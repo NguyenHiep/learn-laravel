@@ -85,6 +85,13 @@
                                         </thead>
                                         <tbody>
                                         @foreach($order->products as $product)
+                                            @php
+                                                $salePrice = $product->price;
+                                                if ($product->sale_price > 0 && $product->sale_price < $salePrice) {
+                                                    $salePrice = $product->sale_price;
+                                                }
+                                                $totalPrice = $salePrice * $product->quantity;
+                                            @endphp
                                             <tr>
                                                 <td>
                                                     <h6>
@@ -94,7 +101,7 @@
 
                                                 <td>
                                                     <label class="visible-xs">Đơn giá:</label>
-                                                    <span class="price">{{ format_price($product->price) }}</span>
+                                                    <span class="price">{{ format_price($salePrice) }}</span>
                                                 </td>
 
                                                 <td>
@@ -105,8 +112,7 @@
                                                 <td>
                                                     <label class="visible-xs">Thành tiền:</label>
                                                     <span class="price">
-                                                        @php $price = $product->price * $product->quantity @endphp
-                                                        {{ format_price($price) }}
+                                                        {{ format_price($totalPrice) }}
                                                     </span>
                                                 </td>
                                             </tr>

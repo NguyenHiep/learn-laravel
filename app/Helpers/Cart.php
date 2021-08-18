@@ -31,9 +31,14 @@ trait Cart
         // Update value
         foreach ($this->list_product as &$product) {
             $product->item_cart_quantity = $this->item_quantity[$product->id]['quantity'];
-            $product->item_cart_sum = $product->item_cart_quantity * $product->price;
+            $salePrice = $product->price;
+            if ($product->sale_price > 0 && $product->sale_price < $salePrice) {
+                $salePrice = $product->sale_price;
+            }
+            $product->item_cart_sum = (float) $product->item_cart_quantity * $salePrice;
             $product->price = (float)$product->price;
             $product->sale_price = (float)$product->sale_price;
+            $product->actual_price = (float)$salePrice;
             $product->url = route('product.show', ['slug' => $product->slug]);
         }
         return $this->list_product;

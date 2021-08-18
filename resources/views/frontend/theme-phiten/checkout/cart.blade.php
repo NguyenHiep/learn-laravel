@@ -25,7 +25,7 @@
         </div>
         <main id="main">
             <div class="container">
-                <template v-if="listItemCart.length == 0">
+                <template v-if="listItemCart.length === 0">
                     <div class="content-wrapper clearfix cart-page">
                         <div class="successful">
                             <h2>Giỏ hàng của bạn đang trống!</h2>
@@ -67,7 +67,7 @@
                                         <a :href="product.url" class="title">@{{ product.name}}</a>
                                     </td>
                                     <td class="price">
-                                        <span class="product-price">@{{ product.price | formatPrice }}</span>
+                                        <span class="product-price">@{{ product.actual_price | formatPrice }}</span>
                                     </td>
                                     <td class="number">
                                         <div class="qualitys">
@@ -135,21 +135,21 @@
             let itemCurrent = _.find(this.listItemCart, ['id', product.id])
             let quantityItem = itemCurrent.item_cart_quantity
             itemCurrent.item_cart_quantity = (quantityItem > MAX_NUMBER) ? MAX_NUMBER : ((quantityItem < MIN_NUMBER) ? MIN_NUMBER : quantityItem)
-            itemCurrent.item_cart_sum = itemCurrent.item_cart_quantity * itemCurrent.sale_price
+            itemCurrent.item_cart_sum = itemCurrent.item_cart_quantity * itemCurrent.actual_price
             this.totalPrice = _.sumBy(this.listItemCart, 'item_cart_sum')
           },
           decrementQuantity (product) {
             let itemCurrent = _.find(this.listItemCart, ['id', product.id])
             let quantityItem = itemCurrent.item_cart_quantity
             itemCurrent.item_cart_quantity = (quantityItem < 2) ? MIN_NUMBER : quantityItem - 1
-            itemCurrent.item_cart_sum = itemCurrent.item_cart_quantity * itemCurrent.sale_price
+            itemCurrent.item_cart_sum = itemCurrent.item_cart_quantity * itemCurrent.actual_price
             this.totalPrice = _.sumBy(this.listItemCart, 'item_cart_sum')
           },
           incrementQuantity (product) {
             let itemCurrent = _.find(this.listItemCart, ['id', product.id])
             let quantityItem = itemCurrent.item_cart_quantity
             itemCurrent.item_cart_quantity = (quantityItem > MAX_NUMBER) ? MAX_NUMBER : quantityItem + 1
-            itemCurrent.item_cart_sum = itemCurrent.item_cart_quantity * itemCurrent.sale_price
+            itemCurrent.item_cart_sum = itemCurrent.item_cart_quantity * itemCurrent.actual_price
             this.totalPrice = _.sumBy(this.listItemCart, 'item_cart_sum')
           },
         }

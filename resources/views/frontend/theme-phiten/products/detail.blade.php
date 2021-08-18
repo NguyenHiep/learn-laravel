@@ -12,7 +12,7 @@
 
 @section('breadcrumb')
     <li><a href="{{ route('category.show', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
-    <li class="active"><a href="javascript:void(0)">{{ $product->name }}</a></li>
+    <li class="active">{{ $product->name }}</li>
 @endsection
 
 @section('content')
@@ -20,53 +20,16 @@
         <div class="container">
             <div class="row grid-space-80">
                 <div class="col-lg-6">
-                    <div class="wrap-syn-owl ">
-                        <div class="wrap-syn-1">
-                            <div class="syn-slider-1 owl-carousel s-loop">
-                               @if(!empty($product->listImages))
-                                    @foreach($product->listImages as $image)
-                                        <div class="item">
-                                            <div class="tRes_80">
-                                                <img src="{{ asset(UPLOAD_PRODUCT . $image) }}" alt="{{ $product->name }}" />
-                                            </div>
-                                        </div>
-                                    @endforeach
-                               @endif
-                            </div>
-                        </div>
-                        <div class="wrap-syn-2">
-                            <div class="syn-slider-2 owl-carousel" data-res="4,3,3,3" data-margin="30,30,20,20">
-                                @if(!empty($product->listImages))
-                                    @foreach($product->listImages as $image)
-                                        <div class="item">
-                                            <div class="tRes_80">
-                                                <img src="{{ asset(UPLOAD_PRODUCT . $image) }}" alt="{{ $product->name }}" />
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
+                    @includeIf('frontend.theme-phiten.components.product.pdp-images', ['product' => $product])
                 </div>
                 <div class="col-lg-6">
                     <div class="info-detail sec-b">
                         <h3>{{ $product->name }}</h3>
-                        @if(!empty($settings->params) && !empty($settings->params['enable_product_comment']))
-                        <div class="product-review total-rating">
-                            <span class="product-rating">
-                                 @for($i = 1; $i <= 5; $i++)
-                                    <i class="icon {{ $i > ceil($listComment->avg('rate')) ? 'icon-star-empty' : 'icon-star-full rated' }}"></i>
-                                 @endfor
-                            </span> {{ $listComment->total() }} Phản hồi khách hàng
-                        </div>
-                        @endif
-                        <p class="price">
-                            <span class="price_new">{{ format_price($product->sale_price) }}</span>
-                            <span class="price_old">{{ format_price($product->price) }}</span>
-                        </p>
-
+                        @includeIf('frontend.theme-phiten.components.reviews.inline-rating', [
+                            'settings'    => $settings,
+                            'listComment' => $listComment
+                        ])
+                        @includeIf('frontend.theme-phiten.components.product.price', ['product' => $product])
                         <div class="row quan-color-size">
                             <div class="col-md-4">
                                 <div class="title">Số lượng:</div>
@@ -76,25 +39,7 @@
                                     <a href="javascript:void(0)" class="plus" @click="incrementQuantity()"><i class="icon-plus"></i></a>
                                 </div>
                             </div>
-{{--                            <div class="col-md-4">--}}
-{{--                                <div class="title">Màu sắc:</div>--}}
-{{--                                <div class="widget-color row">--}}
-{{--                                    <select name="color" class="select">--}}
-{{--                                        <option value="">Đỏ</option>--}}
-{{--                                        <option value="">Xanh</option>--}}
-{{--                                        <option value="">Vàng</option>--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-
-{{--                            </div>--}}
-{{--                            <div class="col-md-4">--}}
-{{--                                <div class="title">Kích thước:</div>--}}
-{{--                                <select name="size" class="select">--}}
-{{--                                    <option value="">10cm</option>--}}
-{{--                                    <option value="">20cm</option>--}}
-{{--                                    <option value="">30cm</option>--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
+{{--                            @includeIf('frontend.theme-phiten.components.product.pdp-attributes', ['product' => $product])--}}
                         </div>
 
                         <div class="desc">{!! $product->short_description !!}</div>
@@ -117,49 +62,10 @@
                     </div>
                 </div>
             </div>
-            @if(!empty($settings->params) && !empty($settings->params['enable_product_comment']))
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="review">
-                        <div class="tab-inner active">
-                            <div id="reviews" class="tab-reviews reviews tab-pane fade in">
-                                @if($listComment->total() > 0)
-                                    <ul class="user-review list-commnets mb-20">
-                                        @foreach($listComment as $comment)
-                                            <li class="item">
-                                                <div class="name">
-                                                    <div class="text">
-                                                        <div class="date">
-                                                            <span class="time" data-toggle="tooltip" title="{{ format_date($comment->created_at,'%d/%m/%Y') }}">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span>
-                                                        </div>
-                                                        <div class="title">{{ $comment->name }}</div>
-                                                        <span class="product-rating">
-                                                            @for($i = 1; $i <= 5; $i++)
-                                                                <i class="icon {{ $i > $comment->rate ? 'icon-star-empty' : 'icon-star-full rated' }}"></i>
-                                                            @endfor
-                                                        </span>
-
-                                                    </div>
-                                                </div>
-                                                <div class="desc">{{ $comment->content }}</div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                                <div>
-                                    @if($listComment->lastPage() > 1)
-                                        {{ $listComment->appends(request()->query())->links('vendor.pagination.bootstrap-4')  }}
-                                    @endif
-                                </div>
-                                <div class="clearfix">
-                                    <button type="submit" class="btn btn1 btn-review-popup">Thêm đánh giá</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
+            @includeIf('frontend.theme-phiten.components.reviews.list-reviews', [
+               'settings'    => $settings,
+               'listComment' => $listComment
+           ])
         </div>
     </main>
     @includeIf('frontend.theme-phiten.components.product.related', ['settings' => $settings])

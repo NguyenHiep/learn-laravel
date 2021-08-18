@@ -33,9 +33,11 @@
                 </div>
               </div>
             </div>
-            @php $order_products = $record->products; @endphp
-            @php $grand_total = $record->total + $record->delivery_fee; @endphp
-            @php $deliveries = $record->deliveries; @endphp
+            @php
+                $order_products = $record->products;
+                $grand_total    = $record->total + $record->delivery_fee;
+                $deliveries     = $record->deliveries;
+            @endphp
             <div class="portlet-body">
               <div class="tabbable-line">
                 <div class="tab-pane">
@@ -148,13 +150,11 @@
                             <table class="table table-hover table-bordered table-striped">
                               <thead>
                               <tr>
-                                <th>#</th>
+                                <th>STT</th>
                                 <th> Sản phẩm </th>
+                                <th> Đơn giá </th>
                                 <th> Số lượng </th>
-                                <th> Thuế </th>
-                                <th> Giá </th>
-                                <th> Giá có thuế </th>
-                                <th> Tổng tiền</th>
+                                <th> Thành tiền</th>
                                 <th class="text-center">Action</th>
                               </tr>
                               </thead>
@@ -164,8 +164,11 @@
                                 @foreach($order_products as $product)
                                   @php
                                     $count++;
-                                    $price_include_tax =  $product->price * (($record->tax_rate / 100) + 1);
-                                    $total_include_tax =  $price_include_tax * $product->quantity;
+                                    $salePrice = $product->price;
+                                    if ($product->sale_price > 0 && $product->sale_price < $salePrice) {
+                                        $salePrice = $product->sale_price;
+                                    }
+                                    $total_include_tax =  $salePrice * $product->quantity;
                                   @endphp
                                   <tr>
                                     <td>{{ $count }}</td>
@@ -176,10 +179,8 @@
                                       $key = 'order_products.'.$product->product_id.'.quantity';
                                       $key = convert_input_name($key);
                                     @endphp
+                                    <td> {{ format_price($salePrice) }} </td>
                                     <td> {{ Form::number($key, old($key, $product->quantity), ['class' => 'form-control input-sm', 'min' => 0, 'readonly']) }} </td>
-                                    <td> {{ $record->tax_rate}}% </td>
-                                    <td> {{ format_price($product->price) }} </td>
-                                    <td> {{ format_price($price_include_tax)}} </td>
                                     <td> {{ format_price($total_include_tax) }} </td>
                                     <td class="text-center">
                                       <a href="#"><i class="fa fa-trash-o" title="Xóa"></i></a>
@@ -237,7 +238,7 @@
                             <div class="col-md-5 name"> Tên khách hàng: </div>
                             <div class="col-md-7 value">
                               {{ Form::text(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['class' => 'form-control input-sm', 'placeholder' => 'VD: Nguyễn văn A'])}}
-                        
+
                             </div>
                           </div>
                           @php $key = 'order_deliveries.buyer_email' @endphp
@@ -261,7 +262,7 @@
                               {{ Form::textarea(convert_input_name($key), old(convert_input_name($key), $deliveries->{get_name_convert_input($key)}), ['cols' => 30, 'rows' => 3, 'class' => 'form-control input-sm'])}}
                             </div>
                           </div>
-                    
+
                         </div>
                       </div>
                     </div>
