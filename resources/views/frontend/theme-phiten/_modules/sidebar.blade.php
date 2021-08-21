@@ -8,7 +8,6 @@
     <div class="inner">
         <div class="widget widget-price">
             <div class="widget-title">Giá (VND)</div>
-
             <div class="rangeprice">
                 <div id="slider-range"></div>
                 <div class="gprice">
@@ -19,85 +18,72 @@
                         <span class="val2"></span>
                     </span>
                 </div>
-                <input type="hidden" id="amount1" name="amount1">
-                <input type="hidden" id="amount2" name="amount2">
+                <input type="hidden" id="min_price" name="filter[min_price]">
+                <input type="hidden" id="max_price" name="filter[max_price]">
             </div>
         </div> <!--End widget-->
-        @if(!empty($settings->params['enable_category_filter_attribute']))
-            <div class="widget widget-size">
-                <div class="widget-title">Kích thước</div>
-                <div class="row grid-space-10">
-                    <?php
-                    $array_1 = ['14', '15', '16', '17', '18', '19'];
-                    for($i = 0;$i < 6;$i++) { ?>
-                    <div class="col-6">
-                        <label class="checkbox ">
-                            <input type="checkbox">
-                            <span></span>
-                            <?php echo $array_1[$i]; ?> cm
-                        </label>
-                    </div>
-                    <?php
-                    } ?>
-                </div>
-            </div> <!--End widget-->
-            <div class="widget widget-color">
-                <div class="widget-title">Màu sắc</div>
-
-                <div class="row cols-5 grid-space-10">
-                    <?php
-                    $array_2 = ['#000', '#fff', '#D0021B', '#9A0F0E', '#004EA2', '#000080'];
-                    $array_2_name = ['black', 'white', 'abc', 'xyz', 'aaa', 'fff'];
-                    for($i = 0;$i < 6;$i++) { ?>
-                    <div class="col-2">
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            <span class="<?php echo $array_2_name[$i]; ?>"
-                                  style="background-color: <?php echo $array_2[$i]; ?>; border-color: <?php echo $array_2[$i]; ?>"></span>
-                        </label>
-                    </div>
-                    <?php
-                    } ?>
-                </div>
-
-            </div> <!--End widget-->
-            <div class="widget widget-star">
-                <div class="widget-title">Sao</div>
-
-                <div class="item active"><span class="text">(Từ 4 sao)</span> <img
-                            src="{{ asset('assets/images/star4.svg') }}" alt=""/>
-                </div>
-                <div class="item"><span class="text">(Từ 3 sao)</span> <img
-                            src="{{ asset('assets/images/star3.svg') }}" alt=""/></div>
-                <div class="item"><span class="text">(Từ 2 sao)</span> <img
-                            src="{{ asset('assets/images/star4.svg') }}" alt=""/></div>
-                <div class="item"><span class="text">(Từ 1 sao)</span> <img
-                            src="{{ asset('assets/images/star1.svg') }}" alt=""/></div>
-            </div> <!--End widget-->
-        @endif
+{{--        @includeIf('frontend.theme-phiten.components.catalog.filters', ['settings' => $settings])--}}
     </div>
 </div>
 @push('scripts')
     <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
     <script>
+      function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+          return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+          return uri + separator + key + "=" + value;
+        }
+      }
       (function ($) {
         $(document).ready(function () {
+          const defaultMinValue = {{ request()->input('min_price', 0) }};
+          const defaultMaxValue = {{ request()->input('max_price', 1000000) }};
           $('#slider-range').slider({
             range: true,
             min: 0,
             max: 2000000,
-            values: [0, 1000000],
+            values: [defaultMinValue, defaultMaxValue],
             slide: function (event, ui) {
-              $('#amount1').val(ui.values[0])
-              $('#amount2').val(ui.values[1])
-              $('.gprice .val1').html(ui.values[0])
-              $('.gprice .val2').html(ui.values[1])
-
-            }
+              let minPrice = ui.values[0];
+              let maxPrice = ui.values[1];
+              $('#min_price').val(minPrice)
+              $('#max_price').val(maxPrice)
+              $('.gprice .val1').html(minPrice)
+              $('.gprice .val2').html(maxPrice)
+            },
+            change: _.debounce(function( event, ui ) {
+              let self = this;
+              let $loading = $('body').find('#loading').eq(0);
+              $loading.show();
+              let minPrice = ui.values[0];
+              let maxPrice = ui.values[1];
+              // Push params to url
+              let newUrlMinPrice = updateQueryStringParameter(window.location.href, 'min_price', minPrice);
+              let newUrlMaxPrice = updateQueryStringParameter(newUrlMinPrice, 'max_price', maxPrice);
+              let fullAjaxUrl = updateQueryStringParameter(newUrlMaxPrice, 'ajax', true);
+              window.history.pushState({}, '', newUrlMaxPrice);
+              $.ajax({
+                type: 'GET',
+                url: fullAjaxUrl,
+              }).done(function (response) {
+                $('.js-product-list').html(response);
+                window.lazyLoadPost();
+                $('html, body').animate({
+                  scrollTop: Math.floor(Math.random() * 10) //random number between 0 and 10
+                }, 500);
+                $loading.hide();
+              }).fail(function (jqXHR) {
+                $loading.hide();
+              });
+            }, 500)
           })
-          $('#amount1').val($('#slider-range').slider('values', 0))
-          $('#amount2').val($('#slider-range').slider('values', 1))
-
+          $('#min_price').val($('#slider-range').slider('values', 0))
+          $('#max_price').val($('#slider-range').slider('values', 1))
+          //
           $('.gprice .val1').html($('#slider-range').slider('values', 0))
           $('.gprice .val2').html($('#slider-range').slider('values', 1))
 

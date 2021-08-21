@@ -14,7 +14,7 @@
   <main id="main">
     <div class="container">
       <div class="row end">
-        <div class="col-lg-9 product_list_content">
+        <div class="col-lg-9 product_list_content js-product-list">
           <div class="topresults clearfix">
             <div class="results"><span class="cl1 b">{{ $products->total() }}</span> Sản phẩm được tìm thấy</div>
             <div class="search-result-right pull-right orderby">
@@ -52,7 +52,7 @@
                       </div>
                       <div class="divtext">
                         <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="title equal_{{ $loop->iteration }}">{{ $product->name }}</a>
-                        <p class="price"> {{ format_price($product->sale_price) }} </p>
+                        <p class="price"> {{ format_price($product->actual_price) }} </p>
                       </div>
                     </div>
                   </div>

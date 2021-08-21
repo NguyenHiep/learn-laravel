@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ProductRepository as ProductRepository;
@@ -58,8 +59,9 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function getProductByCategoryIds(array $catIds, array $condition = [], int $limit = 0)
     {
         $count = count($catIds);
-        $model = $this->model::select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id'])
+        $model = DB::table('products')->select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id'])
             ->where('status', config('define.STATUS_ENABLE'))->orderBy('id', 'DESC');
+        $model->addSelect(DB::raw('IF (sale_price > 0 AND sale_price < price, sale_price, price) as actual_price'));
         if ($count > 1) {
             $model->where(function ($query) use ($catIds) {
                 collect($catIds)->map(function ($catId) use ($query) {
@@ -76,6 +78,22 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
             $model->orderBy($condition['column'], $condition['direction']);
             $model->orderBy('name', 'ASC');
         }
+        $model->whereNull('deleted_at');
+
+        if (count($condition) > 0
+            && isset($condition['min_price'])
+            && !empty($condition['max_price'])
+            && is_numeric($condition['min_price'])
+            && is_numeric($condition['max_price'])) {
+            $newModel = DB::table( DB::raw("({$model->toSql()}) as sub") )
+                ->mergeBindings($model)
+                ->groupBy('sub.id');
+            $newModel->whereRaw('actual_price >= ' . $condition['min_price'] . ' AND actual_price <=' . $condition['max_price']);
+            if ($limit > 0) {
+                return $newModel->paginate($limit);
+            }
+            return $newModel->get();
+        }
 
         if ($limit > 0) {
             return $model->paginate($limit);
@@ -91,20 +109,23 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      */
     public function getListProductTrending(int $limit = 0)
     {
-        $model = $this->model::where('status', config('define.STATUS_ENABLE'))
+        $model = $this->model::select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id']);
+        $model->addSelect(DB::raw('IF (sale_price > 0 AND sale_price < price, sale_price, price) as actual_price'))
+            ->where('status', config('define.STATUS_ENABLE'))
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
             ->orderBy('id', 'DESC');
         if ($limit > 0) {
             $model->limit($limit);
         }
-        return $model->get(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id']);
+        return $model->get();
     }
 
     public function getProducts(array $conditions = [], int $limit = 20)
     {
         $model = $this->model::query()
             ->select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id'])
+            ->addSelect(DB::raw('IF (sale_price > 0 AND sale_price < price, sale_price, price) as actual_price'))
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
             ->where('status', config('define.STATUS_ENABLE'));
@@ -119,19 +140,24 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
 
     public function getProductBySlug($slug)
     {
-        return $this->model::where('slug', $slug)
-            ->select(['id', 'name', 'slug', 'description', 'short_description', 'category_id',
-                'sku', 'price', 'sale_price', 'quantity', 'meta_title', 'meta_keywords',
-                'meta_description', 'galary_img', 'pictures'])
+        return $this->model::select([
+            'id', 'name', 'slug', 'description', 'short_description', 'category_id',
+            'sku', 'price', 'sale_price', 'quantity', 'meta_title', 'meta_keywords',
+            'meta_description', 'galary_img', 'pictures'
+        ])
+            ->addSelect(DB::raw('IF (sale_price > 0 AND sale_price < price, sale_price, price) as actual_price'))
+            ->where('slug', $slug)
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
-            ->where('status', config('define.STATUS_ENABLE'))->first();
+            ->where('status', config('define.STATUS_ENABLE'))
+            ->first();
     }
 
     public function getRelatedProducts(int $id, int $limit = 4)
     {
         return $this->model::where('status', config('define.STATUS_ENABLE'))
             ->select(['id', 'name', 'slug', 'price', 'sale_price', 'pictures'])
+            ->addSelect(DB::raw('IF (sale_price > 0 AND sale_price < price, sale_price, price) as actual_price'))
             ->where('id', '!=', $id)
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
@@ -142,6 +168,8 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function getProductById(int $id)
     {
         return $this->model::where('id', $id)
+            ->select(['id', 'name', 'pictures', 'slug', 'sku', 'sale_price', 'price', 'quantity', 'category_id'])
+            ->addSelect(DB::raw('IF (sale_price > 0 AND sale_price < price, sale_price, price) as actual_price'))
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
             ->where('status', config('define.STATUS_ENABLE'))->first();
@@ -151,6 +179,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     {
         return $this->model::whereIn('id', $ids)
             ->select(['id', 'name', 'pictures', 'slug', 'sku', 'sale_price', 'price', 'quantity', 'category_id'])
+            ->addSelect(DB::raw('IF (sale_price > 0 AND sale_price < price, sale_price, price) as actual_price'))
             ->whereNotNull('category_id')
             ->where('category_id', '!=', '')
             ->where('status', config('define.STATUS_ENABLE'))->get();
@@ -164,6 +193,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         }
         $queryModel = $this->model->query();
         $queryModel->select(['id', 'name', 'slug', 'price', 'sale_price', 'pictures']);
+        $queryModel->addSelect(DB::raw('IF (sale_price > 0 AND sale_price < price, sale_price, price) as actual_price'));
         $queryModel->where('status', config('define.STATUS_ENABLE'))
             ->where(function ($query) use ($querySearch) {
                 $query->where('sku', $querySearch)

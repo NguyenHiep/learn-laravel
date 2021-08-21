@@ -1,27 +1,41 @@
 {
-  "asi": true,
-  "browser": true,
-  "devel": true,
-  "eqeqeq": true,
-  "eqnull": true,
-  "esnext": true,
-  "expr": true,
   "globals": {
-    "chrome": false,
-    "FileList": false
+    "jasmine": false,
+    "spyOn": false,
+    "it": false,
+    "console": false,
+    "describe": false,
+    "expect": false,
+    "beforeEach": false,
+    "waits": false,
+    "waitsFor": false,
+    "runs": false
   },
-  "globalstrict": true,
+
+  "node" : true,
+  "es5" : true,
+  "browser" : true,
+
+  "boss" : false,
+  "curly": false,
+  "debug": false,
+  "devel": false,
+  "eqeqeq": true,
+  "evil": true,
+  "forin": false,
   "immed": true,
-  "latedef": "nofunc",
-  "laxbreak": true,
-  "loopfunc": true,
+  "laxbreak": false,
   "newcap": true,
   "noarg": true,
-  "node": true,
-  "predef": [
-    "escape",
-    "unescape"
-  ],
+  "noempty": false,
+  "nonew": false,
+  "nomen": false,
+  "onevar": true,
+  "plusplus": false,
+  "regexp": false,
+  "undef": true,
+  "sub": true,
   "strict": true,
-  "undef": true
+  "white": true,
+  "unused": true
 }

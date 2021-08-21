@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 // Register package global
-Vue.use(VeeValidate)
-Vue.component('ValidationProvider', VeeValidate.ValidationProvider)
-Vue.component('ValidationObserver', VeeValidate.ValidationObserver)
+Vue.use(VeeValidate);
+Vue.component('ValidationProvider', VeeValidate.ValidationProvider);
+Vue.component('ValidationObserver', VeeValidate.ValidationObserver);
 const vi = {
   'code': 'vi',
   'messages': {
@@ -32,12 +32,12 @@ const vi = {
     'required_if': '{_field_} là trường bắt buộc',
     'size': '{_field_} phải nhỏ hơn {size} KB'
   }
-}
+};
 
 for (let key in vi.messages) {
-  VeeValidate.extend(key, VeeValidateRules[key])
+  VeeValidate.extend(key, VeeValidateRules[key]);
 }
-VeeValidate.localize('vi', vi)
+VeeValidate.localize('vi', vi);
 
 Vue.mixin({
   data: function () {
@@ -58,92 +58,92 @@ Vue.mixin({
         birthday: '',
         captcha: ''
       }
-    }
+    };
   },
   computed: {
     now: function () {
-      return Date.now()
+      return Date.now();
     }
   },
   methods: {
     getListItemCart () {
-      let self = this
-      axios.get('/checkout/get-item-cart').then(response => {
-        self.listItemCart = response.data.data.products
-        self.totalPrice = response.data.data.total_price
+      let self = this;
+      axios.get(window.app.Urls.MINI_CART).then(response => {
+        self.listItemCart = response.data.data.products;
+        self.totalPrice = response.data.data.total_price;
       }).catch(error => {
-        console.log(error)
-        self.errored = true
-      }).finally(() => self.loading = false)
+        console.log(error);
+        self.errored = true;
+      }).finally(() => self.loading = false);
     },
     addToCart (item) {
-      let self = this
-      self.loading = true
+      let self = this;
+      self.loading = true;
       if (_.isEmpty(item)) {
-        alert('Please selected product item!')
-        return
+        alert(window.app.Resources.SELECT_ITEM);
+        return;
       }
-      axios.post('/checkout/addtocart', item).then(response => {
-        self.loading = false
-        showNotificationMessage(response.data)
+      axios.post(window.app.Urls.ADD_TO_CART, item).then(response => {
+        self.loading = false;
+        showNotificationMessage(response.data);
         if (!_.isEmpty(item.redirectUrl)) {
-          window.location.href = item.redirectUrl
+          window.location.href = item.redirectUrl;
         }
-        self.getListItemCart() //TODO: Remove optimize code
+        self.getListItemCart(); //TODO: Remove optimize code
       }).catch(error => {
-        console.log(error)
-        self.errored = true
-      }).finally(() => self.loading = false)
+        console.log(error);
+        self.errored = true;
+      }).finally(() => self.loading = false);
     },
     updateItemCart () {
       let self = this,
-        dataSend = {
-          data: self.listItemCart
-        }
-      self.loading = true
-      axios.post('/checkout/update', dataSend).then(response => {
-        let responseData = response.data
-        self.loading = false
+          dataSend = {
+            data: self.listItemCart
+          };
+      self.loading = true;
+      axios.post(window.app.Urls.UPDATE_CART, dataSend).then(response => {
+        let responseData = response.data;
+        self.loading = false;
         if (!_.isEmpty(responseData.data) && !_.isEmpty(responseData.data.redirectUrl)) {
-          window.location.href = responseData.data.redirectUrl
+          window.location.href = responseData.data.redirectUrl;
         }
       }).catch(error => {
-        console.log(error)
-        self.errored = true
+        console.log(error);
+        self.errored = true;
       }).finally(() => self.loading = false)
     },
     removeItemCart (item, index) {
-      let self = this
-      self.loading = true
-      item.product_id = item.id
-      axios.post('/checkout/removecart', item).then(response => {
-        self.loading = false
-        self.listItemCart.splice(index, 1)
-        showNotificationMessage(response.data)
+      let self = this;
+      self.loading = true;
+      item.product_id = item.id;
+      axios.post(window.app.Urls.REMOVE_CART, item).then(response => {
+        self.loading = false;
+        self.listItemCart.splice(index, 1);
+        showNotificationMessage(response.data);
       }).catch(error => {
-        console.log(error)
-        self.errored = true
-      }).finally(() => self.loading = false)
+        console.log(error);
+        self.errored = true;
+      }).finally(() => self.loading = false);
     },
     removeAllItemCart () {
-      if (!confirm('Do you have delete all item?')) {
-        return
+      if (!confirm(window.app.Resources.REMOVE_ALL_ITEMS)) {
+        return;
       }
-      let self = this
-      self.loading = true
+      let self = this;
+      self.loading = true;
       let dataSend = {
         delete_all: true
-      }
-      axios.post('/checkout/removeallcart', dataSend).then(response => {
-        self.loading = false
+      };
+      axios.post(window.app.Urls.REMOVE_ALL_CART, dataSend).then(response => {
+        self.loading = false;
         if (response.data.status === 'info') {
-          self.listItemCart = []
-          showNotificationMessage(response.data)
+          self.listItemCart = [];
+          showNotificationMessage(response.data);
         }
       }).catch(error => {
-        console.log(error)
-        self.errored = true
-      }).finally(() => self.loading = false)
+        console.log(error);
+        self.errored = true;
+      }).finally(() => self.loading = false);
     },
     registerCustomer () {
       const isValid = this.$refs.registerForm.validate();
@@ -152,24 +152,24 @@ Vue.mixin({
       }
       let self = this;
       let dataSend = self.customer;
-      self.loading = true
-      axios.post('/register', dataSend).then(response => {
-        let responseData = response.data
-        self.loading = false
-        let message = {}
+      self.loading = true;
+      axios.post(window.app.Urls.REGISTER_USER, dataSend).then(response => {
+        let responseData = response.data;
+        self.loading = false;
+        let message = {};
         if (responseData.status) {
-          message.status = 'success'
+          message.status = 'success';
         } else {
-          message.status = 'error'
+          message.status = 'error';
         }
-        message.message = responseData.message
-        showNotificationMessage(message)
+        message.message = responseData.message;
+        showNotificationMessage(message);
         if (!_.isEmpty(responseData)
           && responseData.status
           && responseData.data
           && responseData.data.redirectUrl) {
-          self.loading = false
-          self.$refs.registerForm.reset()
+          self.loading = false;
+          self.$refs.registerForm.reset();
           self.customer = {
             first_name: '',
             last_name: '',
@@ -180,42 +180,42 @@ Vue.mixin({
             gender: '',
             birthday: '',
             captcha: ''
-          }
+          };
           jQuery('#myLogin').modal({
             show: false
-          })
-          window.location.href = responseData.data.redirectUrl
+          });
+          window.location.href = responseData.data.redirectUrl;
         }
       }).catch(error => {
-        console.log(error)
-        self.errored = true
-      }).finally(() => self.loading = false)
+        console.log(error);
+        self.errored = true;
+      }).finally(() => self.loading = false);
     },
     refreshCaptcha () {
-      let self = this
-      self.loading = true
-      axios.get('/refresh/captcha').then(response => {
-        let responseData = response.data
-        self.loading = false
+      let self = this;
+      self.loading = true;
+      axios.get(window.app.Urls.REFRESH_RECAPTCHA).then(response => {
+        let responseData = response.data;
+        self.loading = false;
         if (!_.isEmpty(responseData.data) && !_.isEmpty(responseData.data.captcha)) {
-          jQuery('#refresh-captcha').html(responseData.data.captcha)
+          jQuery('#refresh-captcha').html(responseData.data.captcha);
         }
       }).catch(error => {
-        console.log(error)
-        self.errored = true
-      }).finally(() => self.loading = false)
+        console.log(error);
+        self.errored = true;
+      }).finally(() => self.loading = false);
     }
   }
-})
+});
 
 Vue.filter('formatPrice', function (value) {
   if (typeof value !== 'number') {
-    return value
+    return value;
   }
-  var formatter = new Intl.NumberFormat('vi', {
+  let formatter = new Intl.NumberFormat('vi', {
     style: 'currency',
     currency: 'VND',
     minimumFractionDigits: 0
-  })
-  return formatter.format(value)
-})
+  });
+  return formatter.format(value);
+});

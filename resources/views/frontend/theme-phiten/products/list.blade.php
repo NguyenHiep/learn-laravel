@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="divtext">
                                                 <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="title equal_{{ $loop->iteration }}">{{ $product->name }}</a>
-                                                <p class="price"> {{ format_price($product->sale_price) }} </p>
+                                                <p class="price"> {{ format_price($product->actual_price) }} </p>
                                             </div>
                                         </div>
                                     </div>

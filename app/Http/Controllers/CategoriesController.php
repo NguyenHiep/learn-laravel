@@ -45,8 +45,14 @@ class CategoriesController extends FrontendController
             'column'    => $column,
             'direction' => $direction,
         ];
+        $conditions['min_price'] = request()->input('min_price', 0);
+        $conditions['max_price'] = request()->input('max_price', 0);
+        $renderTemplate = 'frontend.theme-phiten.catagories.show';
+        if (request()->input('ajax')) {
+            $renderTemplate = 'frontend.theme-phiten.catagories.filter-price-ajax';
+        }
         $data['category'] = $category;
         $data['products'] = $this->productRepository->getProductByCategoryIds([$category->id], $conditions, 20);
-        return view('frontend.theme-phiten.catagories.show', $data);
+        return view($renderTemplate, $data);
     }
 }

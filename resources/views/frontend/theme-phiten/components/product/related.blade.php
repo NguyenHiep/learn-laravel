@@ -27,7 +27,7 @@
                             </div>
                             <div class="divtext">
                                 <a href="{{ route('product.show', ['slug' => $relatedProduct->slug]) }}" class="title equal_{{ $loop->iteration + 1 }}">{{ $relatedProduct->name }}</a>
-                                <p class="price"> {{ format_price($relatedProduct->sale_price) }} </p>
+                                <p class="price"> {{ format_price($relatedProduct->actual_price) }} </p>
                             </div>
                         </div>
                     @endforeach

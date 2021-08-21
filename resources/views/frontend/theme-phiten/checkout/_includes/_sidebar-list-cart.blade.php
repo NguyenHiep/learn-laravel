@@ -17,7 +17,7 @@
                             <label class="">Số lượng:</label>
                             <span>@{{ product.item_cart_quantity }}</span>
                         </div>
-                        <div class="price">@{{ product.sale_price | formatPrice }}</div>
+                        <div class="price">@{{ product.actual_price | formatPrice }}</div>
                     </div>
                 </div>
             </li>
