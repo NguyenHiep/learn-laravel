@@ -93,6 +93,7 @@ mix.copyDirectory('public/theme-phiten/assets/js', 'public/assets/js');
 
 mix.styles([
   'public/theme-phiten/assets/css/toastr.min.css',
+  'public/theme-phiten/assets/css/font-awesome.min.css',
   'public/theme-phiten/assets/css/main.css',
   'public/theme-phiten/assets/css/style.css'
 ], 'public/assets/css/app.css');

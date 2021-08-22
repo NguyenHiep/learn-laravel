@@ -10120,7 +10120,8 @@ fieldset {
 }
 
 .product-rating i {
-    color: #d9d9d9
+    color: #d9d9d9;
+    font-size: 18px;
 }
 
 .product-rating .rated {
@@ -10157,11 +10158,11 @@ fieldset {
 }
 
 .review-form .rating > label:before {
-    font-family: "icomoon";
+    font-family: "FontAwesome";
     font-size: 20px;
     font-weight: normal;
     display: inline-block;
-    content: "\e957";
+    content: "\f006";
     cursor: pointer
 }
 
@@ -10170,7 +10171,7 @@ fieldset {
 }
 
 .review-form .rating > input:checked ~ label:before {
-    content: "\e956"
+    content: "\f005"
 }
 
 .review-form .rating:not(:checked) > label:hover {
@@ -10178,7 +10179,7 @@ fieldset {
 }
 
 .review-form .rating:not(:checked) > label:hover:before {
-    content: "\e956"
+    content: "\f005"
 }
 
 .review-form .rating:not(:checked) > label:hover ~ label {
@@ -10186,7 +10187,7 @@ fieldset {
 }
 
 .review-form .rating:not(:checked) > label:hover ~ label:before {
-    content: "\e956"
+    content: "\f005"
 }
 
 .review-form .rating > input:checked + label:hover, .review-form .rating > input:checked ~ label:hover {

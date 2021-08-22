@@ -20,7 +20,7 @@
                                                 <div class="title">{{ $comment->name }}</div>
                                                 <span class="product-rating">
                                                     @for($i = 1; $i <= 5; $i++)
-                                                        <i class="icon {{ $i > $comment->rate ? 'icon-star-empty' : 'icon-star-full rated' }}"></i>
+                                                        <i class="fa {{ $i > $comment->rate ? 'fa-star-o' : 'fa-star rated' }}"></i>
                                                     @endfor
                                                 </span>
 
