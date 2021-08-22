@@ -121,7 +121,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         return $model->get();
     }
 
-    public function getProducts(array $conditions = [], int $limit = 20)
+    public function getProducts(array $conditions = [], int $limit = 12)
     {
         $model = $this->model::query()
             ->select(['id', 'name', 'pictures', 'slug', 'sale_price', 'quantity', 'category_id'])
@@ -185,7 +185,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
             ->where('status', config('define.STATUS_ENABLE'))->get();
     }
 
-    public function search(array $data, int $limit = 20)
+    public function search(array $data, int $limit = 12)
     {
         $querySearch = $data['q'] ?? '';
         if (empty($querySearch)) {

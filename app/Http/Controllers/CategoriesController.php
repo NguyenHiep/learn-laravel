@@ -7,6 +7,9 @@ use App\Repositories\ProductRepository;
 
 class CategoriesController extends FrontendController
 {
+
+    const LIMIT = 12;
+
     public $categoryRepository;
     public $productRepository;
 
@@ -52,7 +55,7 @@ class CategoriesController extends FrontendController
             $renderTemplate = 'frontend.theme-phiten.catagories.filter-price-ajax';
         }
         $data['category'] = $category;
-        $data['products'] = $this->productRepository->getProductByCategoryIds([$category->id], $conditions, 20);
+        $data['products'] = $this->productRepository->getProductByCategoryIds([$category->id], $conditions, self::LIMIT);
         return view($renderTemplate, $data);
     }
 }

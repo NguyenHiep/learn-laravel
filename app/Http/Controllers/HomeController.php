@@ -14,7 +14,7 @@ class HomeController extends FrontendController
         'thoitrang_chobe'   => 3,
         'phukien_thoitrang' => 4
     ];
-    const LIMIT_ITEM = 14;
+    const LIMIT_ITEM = 12;
 
     public $sliderRepository;
     public $productRepository;

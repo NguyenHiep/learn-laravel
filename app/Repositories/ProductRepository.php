@@ -17,7 +17,7 @@ interface ProductRepository extends RepositoryInterface
 
     public function getListProductTrending(int $limit = 0);
 
-    public function getProducts(array $conditions = [], int $limit = 20);
+    public function getProducts(array $conditions = [], int $limit = 12);
 
     public function getProductBySlug($slug);
 
@@ -27,5 +27,5 @@ interface ProductRepository extends RepositoryInterface
 
     public function getProductByIds(array $ids);
 
-    public function search(array $data, int $limit = 20);
+    public function search(array $data, int $limit = 12);
 }

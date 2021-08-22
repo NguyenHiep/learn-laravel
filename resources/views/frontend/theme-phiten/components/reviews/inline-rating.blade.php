@@ -4,6 +4,6 @@
              @for($i = 1; $i <= 5; $i++)
                 <i class="icon {{ $i > ceil($listComment->avg('rate')) ? 'icon-star-empty' : 'icon-star-full rated' }}"></i>
             @endfor
-        </span> {{ $listComment->total() }} Phản hồi khách hàng
+        </span> {{ $listComment->total() }} bình luận
     </div>
 @endif

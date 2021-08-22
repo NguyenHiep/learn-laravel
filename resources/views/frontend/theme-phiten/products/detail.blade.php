@@ -18,17 +18,21 @@
 @section('content')
     <main id="main" class="page-product-detail" v-cloak>
         <div class="container">
-            <div class="row grid-space-80">
+            <div class="row">
                 <div class="col-lg-6">
                     @includeIf('frontend.theme-phiten.components.product.pdp-images', ['product' => $product])
                 </div>
                 <div class="col-lg-6">
                     <div class="info-detail sec-b">
                         <h3>{{ $product->name }}</h3>
-                        @includeIf('frontend.theme-phiten.components.reviews.inline-rating', [
+                        <div class="group-sku-rating">
+                            <div class="sku-product"><span>Mã sản phẩm: </span>{{ $product->sku }}</div>
+                            @includeIf('frontend.theme-phiten.components.reviews.inline-rating', [
                             'settings'    => $settings,
                             'listComment' => $listComment
-                        ])
+                            ])
+                        </div>
+
                         @includeIf('frontend.theme-phiten.components.product.price', ['product' => $product])
                         <div class="row quan-color-size">
                             <div class="col-md-4">
@@ -45,8 +49,9 @@
                         <div class="desc">{!! $product->short_description !!}</div>
 
                         <div class="cart-like">
+                            <button class="btn sm add-to-cart" title="Thêm vào giỏ " @click="addToCart(itemCart)">Thêm vào giỏ hàng</button>
                             <button class="btn sm btn-buy-now" title="Mua ngay" @click="addToCart(itemCartBuyNow)">Mua ngay</button>
-                            <a class="add-to-cart detail_add_to_cart_2" @click="addToCart(itemCart)"></a>
+{{--                            <a class="add-to-cart detail_add_to_cart_2" @click="addToCart(itemCart)"></a>--}}
                         </div>
                     </div>
                 </div>

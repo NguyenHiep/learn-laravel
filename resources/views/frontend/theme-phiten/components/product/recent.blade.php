@@ -4,7 +4,7 @@
             <div class="widget">
                 <h3 class="widget-title">Sản phẩm đã xem</h3>
                 @if($products_viewed->isNotEmpty())
-                    <div class="owl-carousel s-auto s-nav nav-3" data-res="5,4,3,1" data-margin="10,10,10,10">
+                    <div class="owl-carousel s-auto s-nav nav-3" data-res="4,2,2,1" data-margin="10,10,10,10">
                         @foreach($products_viewed as $viewedProduct)
                             <div class="item">
                                 <div class="img">

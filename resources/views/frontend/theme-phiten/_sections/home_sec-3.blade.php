@@ -8,7 +8,7 @@
                 </h2>
             </div>
             <div class="sec-b">
-                <div class="owl-carousel s-nav nav-1" data-res="5,3,2,2" data-margin="0,0,0,0">
+                <div class="owl-carousel s-nav nav-1" data-res="4,3,2,2" data-margin="0,0,0,0">
                     @foreach($products_trending as $product)
                         <div class="item">
                             <div class="img">
@@ -40,7 +40,7 @@
                 <div class="col-lg-12">
                     <div class="widget">
                         <h3 class="widget-title">Sản phẩm đã xem</h3>
-                        <div class="owl-carousel s-nav nav-3" data-res="5,3,2,2" data-margin="20,20,20,0">
+                        <div class="owl-carousel s-nav nav-3" data-res="4,3,2,2" data-margin="20,20,20,0">
                             @foreach($products_viewed as $product)
                                 <div class="item">
                                     <div class="img">

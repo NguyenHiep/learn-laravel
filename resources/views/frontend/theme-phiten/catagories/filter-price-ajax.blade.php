@@ -15,7 +15,7 @@
     <div class="row grid-space-0">
         @if($products->total() > 0)
             @foreach($products as $product)
-                <div class="col-6 col-sm-6 col-md-3">
+                <div class="col-6 col-sm-6 col-md-4">
                     <div class="item">
                         <div class="img">
                             <img class="lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset(UPLOAD_PRODUCT . $product->pictures) }}"  alt="{{ $product->name }}"  />
