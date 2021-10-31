@@ -335,3 +335,22 @@ table.dataTable thead .sorting_desc {
 .upload-gallery li .deleteImage i {
     font-size: 16px;
 }
+/* Fix toggle menu sidebar */
+.navbar .menu-toggler {
+    background-image: url(../../manage/img/sidebar_toggler_icon_darkblue.png);
+}
+
+/* Change image loading datatable */
+.dataTables_wrapper .dataTables_processing {
+    background: none !important;
+    background-image: url(../../manage/img/ajax-loading.gif) !important;
+    background-repeat: no-repeat !important;
+    height: 50px !important;
+    width: 50px !important;
+    margin: 0 auto !important;
+    font-size: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    top: 20% !important;
+    z-index: 10;
+}

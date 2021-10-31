@@ -15,6 +15,8 @@ const mix = require('laravel-mix')
 //   .sass('resources/assets/sass/app.scss', 'public/css');
 
 /** Compress styling page login manage */
+mix.copyDirectory('public/manages/assets/img', 'public/assets/manage/img');
+
 mix.styles([
   'public/manages/assets/global/plugins/font-awesome/css/font-awesome.min.css',
   'public/manages/assets/global/plugins/simple-line-icons/simple-line-icons.min.css',
@@ -60,7 +62,7 @@ mix.styles([
   'public/manages/assets/global/css/components.min.css',
   'public/manages/assets/global/css/plugins.min.css',
   'public/manages/assets/layouts/layout/css/layout.min.css',
-  'public/manages/assets/layouts/layout/css/themes/darkblue.min.css',
+  'public/manages/assets/layouts/layout/css/themes/darkblue.css',
   'public/manages/assets/layouts/layout/css/custom.min.css'
 ], 'public/assets/manage/css/app.css');
 
