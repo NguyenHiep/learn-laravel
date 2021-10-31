@@ -218,7 +218,7 @@
                 <li>
                     <label>
                         @php
-                            $urlImage = empty($item) ? '/manages/assets/imgs/default-product-img.jpg' : UPLOAD_PRODUCT . $item;
+                            $urlImage = empty($item) ? '/manages/assets/imgs/default-product-img.jpg' : Storage::url($item);
                             $displayDel = empty($item) ? 'none' : 'block';
                             $displayAdd = empty($item) ? 'block' : 'none';
                         @endphp

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use App\Helpers\Uploads;
+use App\Helpers\Upload;
 
 class CategoriesController extends BackendController
 {
@@ -114,7 +114,7 @@ class CategoriesController extends BackendController
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
-        $image = Uploads::upload($request, 'image', UPLOAD_CATEGORY);
+        $image = Upload::singleFile( 'image', config('define.UPLOAD_CATEGORY'));
         if ($image) {
             $inputs['image'] = $image;
         }
@@ -193,7 +193,7 @@ class CategoriesController extends BackendController
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
-        $image = Uploads::upload($request, 'image', UPLOAD_CATEGORY);
+        $image = Upload::singleFile( 'image', config('define.UPLOAD_CATEGORY'));
         if ($image) {
             $inputs['image'] = $image;
         }

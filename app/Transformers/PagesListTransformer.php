@@ -54,7 +54,7 @@ class PagesListTransformer extends BaseTransformer
         $html = '';
         $mediaName = $page->media->name ?? null;
         if (!empty($page->page_medias_id) && !empty($mediaName)) {
-            $html .= '<img src="' . Storage::url(UPLOAD_MEDIAS . $mediaName) . '" draggable="false" alt="' . $mediaName . '" class="img-thumbnail" width="80" height="40"/>';
+            $html .= '<img src="' . Storage::url($mediaName) . '" draggable="false" alt="' . $mediaName . '" class="img-thumbnail" width="80" height="40"/>';
         }
         return $html;
     }

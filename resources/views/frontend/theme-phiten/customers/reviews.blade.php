@@ -44,7 +44,7 @@
                                                 <tr>
                                                     <td>
                                                         <div class="image-holder">
-                                                            <img src="{{ asset(UPLOAD_PRODUCT . $comment->pictures) }}">
+                                                            <img src="{{ Storage::url($comment->pictures) }}">
                                                         </div>
                                                     </td>
 

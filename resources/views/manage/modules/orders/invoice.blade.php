@@ -21,7 +21,7 @@
         <div class="row invoice-logo">
           <div class="col-xs-6 invoice-logo-space">
             @if(!empty($store_info->company_logo))
-              <img class="img-responsive" src="{{ asset(UPLOAD_SETTING . $store_info->company_logo) }}" alt="{{ $store_info->subtitle }}" style="max-width: 200px" />
+              <img class="img-responsive" src="{{ Storage::url($store_info->company_logo) }}" alt="{{ $store_info->subtitle }}" style="max-width: 200px" />
             @endif
           </div>
           <div class="col-xs-6">

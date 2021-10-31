@@ -16,7 +16,7 @@
       <!-- BEGIN PAGE TITLE-->
       <h3 class="page-title">Cập nhật slider </h3>
       <!-- END PAGE TITLE-->
-      
+
       <div class="row">
         <div class="col-md-12">
         {!! Form::model($record, ['method' => 'PATCH', 'action' => ['Manage\SlidersController@update',$record->id], 'files' => true, 'class' => 'form-horizontal']) !!}
@@ -32,7 +32,7 @@
                 <button type="submit" name="submit" class="btn green" id="submit_form">{{__('common.buttons.save')}}</button>
               </div>
             </div>
-            
+
             <div class="portlet-body">
               <div class="form-body">
                 <div class="row">
@@ -46,7 +46,7 @@
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                             @php
-                              $img_url =  (!empty($record->{$key})) ? asset(UPLOAD_SLIDER.$record->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
+                              $img_url =  (!empty($record->{$key})) ? Storage::url($record->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
                               echo '<img src="'.$img_url.'" alt="product" />';
                             @endphp
                           </div>
@@ -56,14 +56,14 @@
                               <span class="fileinput-new"> Chọn hình ảnh </span>
                               <span class="fileinput-exists"> Ảnh khác </span>
                               {{ Form::file($key) }}</span>
-                            
+
                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
                           </div>
                         </div>
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
-                    
+
                     @php $key = 'slider_title'; @endphp
                     <div class="form-group @if ($errors->has($key)) has-error  @endif">
                       <label class="control-label col-md-3">{{__('common.sliders.'.$key.'')}}

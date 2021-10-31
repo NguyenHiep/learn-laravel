@@ -5,7 +5,7 @@
                 @foreach($product->listImages as $image)
                     <div class="item">
                         <div class="tRes_80">
-                            <img src="{{ asset(UPLOAD_PRODUCT . $image) }}" alt="{{ $product->name }}" />
+                            <img src="{{ Storage::url($image) }}" alt="{{ $product->name }}" />
                         </div>
                     </div>
                 @endforeach
@@ -18,7 +18,7 @@
                 @foreach($product->listImages as $image)
                     <div class="item">
                         <div class="tRes_80">
-                            <img src="{{ asset(UPLOAD_PRODUCT . $image) }}" alt="{{ $product->name }}" />
+                            <img src="{{ Storage::url($image) }}" alt="{{ $product->name }}" />
                         </div>
                     </div>
                 @endforeach

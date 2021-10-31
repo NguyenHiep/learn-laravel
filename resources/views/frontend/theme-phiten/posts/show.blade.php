@@ -29,7 +29,7 @@
                                                 @php
                                                     $mediaName = $post->media->name ?? null;
                                                     if (!empty($post->posts_medias_id) && !empty($mediaName)) {
-                                                        $imgUrl = Storage::url(UPLOAD_MEDIAS . $mediaName);
+                                                        $imgUrl = Storage::url($mediaName);
                                                     } else {
                                                         $imgUrl = asset('assets/images/img-1.jpg');
                                                     }

@@ -38,7 +38,7 @@
 <header id="header" class="fixe" role="banner">
     <div class="container">
         @if(!empty($settings) && !empty($settings->company_logo) && !empty($settings->params['enable_show_logo_site']))
-            <a href="{{ route('home') }}" id="logo"> <img src="{{ asset(UPLOAD_SETTING . $settings->company_logo) }}" alt="{{ $settings->subtitle }}"></a>
+            <a href="{{ route('home') }}" id="logo"> <img src="{{ Storage::url($settings->company_logo) }}" alt="{{ $settings->subtitle }}"></a>
         @endif
         <div class="wrap-menu-header "> <!--Detect only show PC-->
             <ul class="menu-top-header">

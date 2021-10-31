@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\DataTables\PostMediasDataTable;
+use App\Helpers\Upload;
 use App\Model\Medias;
 
 use App\Http\Controllers\BackendController;
@@ -103,11 +104,10 @@ class MediasController extends BackendController
         ];
         if (request()->hasFile('file')) {
             $files           = request()->file('file');
-            $file_size       = $files->getClientSize();
+            $file_size       = $files->getSize();
             $file_mimes      = $files->getMimeType();
             $file_extension  = $files->getClientOriginalExtension();
-            $filename        = sha1(uniqid() . time() . time()) . ".{$file_extension}";
-            $path_filename   = $files->storeAs(UPLOAD_MEDIAS, $filename);
+            $fileName        = Upload::singleFile('file', config('define.UPLOAD_MEDIAS'));
             $extension_img   = ['jpeg', 'jpg', 'png', 'gif', 'svg'];
             $extension_files = ['doc', 'docx', 'csv', 'txt'];
             $extension_video = ['mp3', 'mp4'];
@@ -119,10 +119,10 @@ class MediasController extends BackendController
             } elseif (in_array($file_extension, $extension_video, true)) {
                 $file_type = 'video';
             }
-            
-            if ($path_filename) {
+
+            if (!empty($fileName)) {
                 $medias = Medias::create([
-                    'name'    => $filename,
+                    'name'    => $fileName,
                     'types'   => $file_type,
                     'user_id' => auth()->user()->id
                 ]);
@@ -137,7 +137,7 @@ class MediasController extends BackendController
                     'message' => 'Success',
                 ];
             }
-            
+
         }
         return response()->json($result);
     }
@@ -146,9 +146,8 @@ class MediasController extends BackendController
      * Display the specified resource.
      *
      * @param  int $id
-     * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         //
     }
@@ -156,15 +155,16 @@ class MediasController extends BackendController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $record = Medias::findOrFail($id);
         return view('manage.modules.medias.edit', compact('record'));
     }
-    
+
     /***
      *  Update the specified resource in storage.
      *
@@ -202,11 +202,12 @@ class MediasController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
+     *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $medias = Medias::find($id);
         if (empty($medias)) {
@@ -219,7 +220,7 @@ class MediasController extends BackendController
         try {
             \DB::beginTransaction();
             $medias->posts_medias_info()->forceDelete();
-            Storage::delete(UPLOAD_MEDIAS . $medias->name);
+            Storage::delete($medias->name);
             $medias->forceDelete();
             \DB::commit();
             return response()->json([

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Session;
 use App\Http\Controllers\FrontendController;
 use App\Helpers\Cart;
+use Storage;
 
 class CartController extends FrontendController
 {
@@ -92,7 +93,7 @@ class CartController extends FrontendController
                             'id'         => $product->id,
                             'slug'       => $product->slug,
                             'name'       => $product->name,
-                            'pictures'   => asset(UPLOAD_PRODUCT . $product->pictures),
+                            'pictures'   => Storage::url($product->pictures),
                             'sale_price' => $product->sale_price,
                             'quantity'   => $quantity_item
                         ]
@@ -111,7 +112,7 @@ class CartController extends FrontendController
                 'id'         => $product->id,
                 'slug'       => $product->slug,
                 'name'       => $product->name,
-                'pictures'   => asset(UPLOAD_PRODUCT . $product->pictures),
+                'pictures'   => Storage::url($product->pictures),
                 'sale_price' => $product->sale_price,
                 'quantity'   => $quantity,
             ]

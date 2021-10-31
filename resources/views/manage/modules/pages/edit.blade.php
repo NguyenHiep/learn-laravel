@@ -143,7 +143,7 @@
               <a class="btn btn-outline btn-block dark" data-toggle="modal" href="#medias_libraries"> Chọn ảnh tiêu biểu</a>
               <div class="clearfix margin-top-15" id="img_featured">
                 @if(!empty($record->{$key}))
-                  <img src="{{Storage::url(UPLOAD_MEDIAS.$record->media->name)}}" draggable="false" alt="" class="img-responsive">
+                  <img src="{{Storage::url($record->media->name)}}" draggable="false" alt="" class="img-responsive">
                   {{ Form::hidden($key, old($key, $record->{$key}),['id' => $key]) }}
                 @else
                   <input type="hidden" name="{{$key}}" value="0" id="{{$key}}"/>

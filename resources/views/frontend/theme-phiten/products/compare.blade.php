@@ -8,7 +8,7 @@
   @if(count($products) > 0)
   <main>
     <section class="container stylization maincont">
-      
+
       <ul class="b-crumbs">
         <li>
           <a href="{{ URL::to('/') }}">Trang chủ</a>
@@ -31,7 +31,7 @@
                       <div class="wccm-thumb">
                         <i class="fa fa-remove remove-compare-item" data-id="{{ $product->id }}"></i>
                         @if(!empty($product->pictures))
-                            <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
+                            <img src="{{ Storage::url($product->pictures) }}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
                         @else
                           <img src="{{ asset('theme-ecommerce/img/354x236.png') }}" alt="">
                         @endif
@@ -42,7 +42,7 @@
                       <div class="price">{{ format_price($product->price) }}</div>
                     </td>
                   @endforeach
-                 
+
                 </tr>
                 </tbody>
               </table>
@@ -100,7 +100,7 @@
           </div>
         </div>
       </div>
-    
+
     </section>
   </main>
   @endif

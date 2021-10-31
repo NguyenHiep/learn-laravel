@@ -55,7 +55,7 @@ class PostsListTransformer extends BaseTransformer
         $html = '';
         $mediaName = $post->media->name ?? null;
         if (!empty($post->posts_medias_id) && !empty($mediaName)) {
-            $html .= '<img src="' . Storage::url(UPLOAD_MEDIAS . $mediaName) . '" draggable="false" alt="' . $mediaName . '" class="img-thumbnail" />';
+            $html .= '<img src="' . Storage::url($mediaName) . '" draggable="false" alt="' . $mediaName . '" class="img-thumbnail" />';
         }
         return $html;
     }

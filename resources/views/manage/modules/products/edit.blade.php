@@ -90,7 +90,7 @@
                   <div class="fileinput fileinput-new" data-provides="fileinput">
                     <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                       @php
-                        $img_url =  (!empty($record->{$key})) ? asset(UPLOAD_PRODUCT.$record->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
+                        $img_url =  (!empty($record->{$key})) ? Storage::url($record->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
                         echo '<img src="'.$img_url.'" alt="product" />';
                       @endphp
                     </div>

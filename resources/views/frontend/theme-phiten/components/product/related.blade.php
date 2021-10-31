@@ -11,7 +11,7 @@
                     @foreach($products_related as $relatedProduct)
                         <div class="item">
                             <div class="img">
-                                <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $relatedProduct->pictures) }}"  alt="{{ $relatedProduct->name }}" />
+                                <img class="owl-lazy" data-src="{{ Storage::url($relatedProduct->pictures) }}"  alt="{{ $relatedProduct->name }}" />
                                 <div class="groupbtn">
                                     <a href="{{ route('product.show', ['slug' => $relatedProduct->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                     <div class="group">

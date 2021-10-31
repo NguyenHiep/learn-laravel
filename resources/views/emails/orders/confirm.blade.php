@@ -154,7 +154,7 @@
                                         <tr>
                                             <td>
                                                 @if(!empty($settings) && !empty($settings->company_logo) && !empty($settings->params['enable_show_logo_site']))
-                                                    <a href="{{ route('home') }}" id="logo" target="_blank"><img width="40%" src="{{ asset(UPLOAD_SETTING . $settings->company_logo) }}" alt="{{ $settings->subtitle }}"></a>
+                                                    <a href="{{ route('home') }}" id="logo" target="_blank"><img width="40%" src="{{ Storage::url($settings->company_logo) }}" alt="{{ $settings->subtitle }}"></a>
                                                 @endif
                                                 <div class="line-border"></div>
                                             </td>

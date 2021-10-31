@@ -28,7 +28,7 @@
           <div class="portlet light bordered">
             <div class="portlet-body" style="display: block; overflow: hidden">
               <div class="form-group">
-                <img src="{{Storage::url(UPLOAD_MEDIAS.$record->name)}}" alt="{{$record->name}}" class="img-responsive" />
+                <img src="{{Storage::url($record->name)}}" alt="{{$record->name}}" class="img-responsive" />
               </div>
               <!--
               <div class="form-group">
@@ -98,7 +98,7 @@
                 <li><i class="fa fa-calendar-plus-o"></i> Được tải lên ngày: <b>{{date('d/m/Y @ H:i:s', strtotime($record->created_at)) }}</b></li>
                 <li>
                   <lable>Liên Kết Tới Tập Tin:</lable>
-                  <input type="text" readonly value="{{url('/').Storage::url(UPLOAD_MEDIAS.$record->name)}}" class="form-control"/></li>
+                  <input type="text" readonly value="{{Storage::url($record->name)}}" class="form-control"/></li>
                 <li><label for="">Tên tập tin:</label> <strong>{{$record->name}}</strong></li>
                 <li><label for="">Loại tập tin:</label> <strong>{{$record->posts_medias_info->extension}}</strong></li>
                 <li><label for="">Dung lượng tệp:</label> <strong>{{round(($record->posts_medias_info->size / 1024/ 1024),2).' MB' }}</strong></li>

@@ -9,7 +9,7 @@
         <div class="row grid-space-0 {{ $loop->iteration % 2 == 0 ? 'end' : '' }}">
             <div class="col-md-4">
                 <div class="item_intro">
-                    <img class="img lazy-hidden" data-lazy-type="image" src="{{ asset(UPLOAD_CATEGORY . $category->image) }}" data-lazy-src="{{ asset(UPLOAD_CATEGORY . $category->image) }}" alt="{{ $category->name }}" />
+                    <img class="img lazy-hidden" data-lazy-type="image" src="{{ Storage::url($category->image) }}" data-lazy-src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}" />
                     <div class="divtext">
                         <h2 class="title">{{ $category->name }}</h2>
                         <div class="desc">{!! $category->description !!}</div>
@@ -24,7 +24,7 @@
                             @foreach($category->products as $product)
                                 <div class="item">
                                     <div class="img">
-                                        <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $product->pictures) }}"  alt="{{ $product->name }}" />
+                                        <img class="owl-lazy" data-src="{{ Storage::url($product->pictures) }}"  alt="{{ $product->name }}" />
                                         <div class="groupbtn">
                                             <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                             <div class="group">

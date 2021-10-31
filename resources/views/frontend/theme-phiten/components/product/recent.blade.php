@@ -8,7 +8,7 @@
                         @foreach($products_viewed as $viewedProduct)
                             <div class="item">
                                 <div class="img">
-                                    <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $viewedProduct->pictures) }}"  alt="{{ $viewedProduct->name }}" />
+                                    <img class="owl-lazy" data-src="{{ Storage::url($viewedProduct->pictures) }}"  alt="{{ $viewedProduct->name }}" />
                                     <div class="groupbtn">
                                         <a href="{{ route('product.show', ['slug' => $viewedProduct->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                         <div class="group">

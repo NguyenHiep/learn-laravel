@@ -142,7 +142,7 @@
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                             @php
-                              $img_url =  (!empty($settings->{$key})) ? asset(UPLOAD_SETTING.$settings->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
+                              $img_url =  (!empty($settings->{$key})) ? Storage::url($settings->{$key}) : 'http://www.placehold.it/200x150/EFEFEF/AAAAAA';
                               echo '<img src="'.$img_url.'" alt="product" />';
                             @endphp
                           </div>
@@ -154,14 +154,14 @@
                               @endphp
                               <span class="fileinput-exists"> Ảnh khác </span>
                               {{ Form::file($key) }}</span>
-          
+
                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Gỡ bỏ </a>
                           </div>
                         </div>
                         @if ($errors->has($key)) <span class="help-block">{{$errors->first($key)}}</span>  @endif
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
               </div>

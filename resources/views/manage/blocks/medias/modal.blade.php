@@ -33,16 +33,16 @@
                   <ul class="list-unstyled list-attachments">
                     @foreach($medias as $media)
                       @if(isset($id) && $media->id == $id )
-                        <li data-id="{{$media->id}}" data-src="{{Storage::url(UPLOAD_MEDIAS.$media->name)}}"
+                        <li data-id="{{$media->id}}" data-src="{{Storage::url($media->name)}}"
                             class="medias_attachment selected details">
                       @else
-                        <li data-id="{{$media->id}}" data-src="{{Storage::url(UPLOAD_MEDIAS.$media->name)}}"
+                        <li data-id="{{$media->id}}" data-src="{{Storage::url($media->name)}}"
                             class="medias_attachment">
                           @endif
                           <div class="js-action-medias-attachment medias-attachment-preview landscape">
                             <div class="thumbnail">
                               <div class="centered">
-                                <img src="{{Storage::url(UPLOAD_MEDIAS.$media->name)}}" draggable="false" alt="">
+                                <img src="{{Storage::url($media->name)}}" draggable="false" alt="">
                               </div>
                             </div>
                           </div>

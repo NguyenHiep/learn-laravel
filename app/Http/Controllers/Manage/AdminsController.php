@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\DataTables\UsersDataTable;
+use App\Helpers\Upload;
 use App\Http\Controllers\Controller;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
@@ -115,7 +116,7 @@ class AdminsController extends Controller
         try {
             $this->validator->with($inputs)->passesOrFail(UserValidator::RULE_CREATE);
             if ($request->hasFile('avatar')) {
-                $pathAvatar = Storage::put(UPLOAD_USER_ADMIN, $request->file('avatar'));
+                $pathAvatar = Upload::singleFile('avatar', config('define.UPLOAD_USER_ADMIN'));
                 $inputs['avatar'] = $pathAvatar;
             }
 
@@ -185,7 +186,7 @@ class AdminsController extends Controller
                 $inputs = Arr::except($inputs, array('password'));
             }
             if ($request->hasFile('avatar')) {
-                $pathAvatar = Storage::put(UPLOAD_USER_ADMIN, $request->file('avatar'));
+                $pathAvatar = Upload::singleFile('avatar', config('define.UPLOAD_USER_ADMIN'));
                 $inputs['avatar'] = $pathAvatar;
             }
             DB::beginTransaction();

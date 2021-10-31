@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Entities\Slider;
+use Storage;
 
 class SlidersListTransformer extends BaseTransformer
 {
@@ -51,7 +52,7 @@ class SlidersListTransformer extends BaseTransformer
 
         $html = '';
         if (!empty($url)) {
-            $html .= '<img src="' . asset(UPLOAD_SLIDER . $url) . '" draggable="false" alt="' . $url . '" class="img-thumbnail" width="60"/>';
+            $html .= '<img src="' . Storage::url($url) . '" draggable="false" alt="' . $url . '" class="img-thumbnail" width="60"/>';
         }
         return $html;
     }

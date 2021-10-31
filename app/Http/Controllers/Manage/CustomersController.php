@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\DataTables\CustomersDataTable;
+use App\Helpers\Upload;
 use App\Repositories\CustomerRepository;
 use App\Validators\CustomerValidator;
 use DB;
@@ -101,7 +102,7 @@ class CustomersController extends BackendController
             $this->validator->with($inputs)->passesOrFail( CustomerValidator::RULE_CREATE );
             $inputs['password'] = bcrypt($inputs['password']);
             if ($request->hasFile('avatar')) {
-                $pathAvatar = Storage::put(UPLOAD_AVATAR, $request->file('avatar'));
+                $pathAvatar = Upload::singleFile('avatar', config('define.UPLOAD_AVATAR'));
                 $inputs['avatar'] = $pathAvatar;
             }
             if (empty($inputs['birthday'])) {
@@ -169,7 +170,7 @@ class CustomersController extends BackendController
                 $inputs = Arr::except($inputs, ['password']);
             }
             if ($request->hasFile('avatar')) {
-                $pathAvatar = Storage::put(UPLOAD_AVATAR, $request->file('avatar'));
+                $pathAvatar = Upload::singleFile('avatar', config('define.UPLOAD_AVATAR'));
                 $inputs['avatar'] = $pathAvatar;
             }
             if (empty($inputs['birthday'])) {

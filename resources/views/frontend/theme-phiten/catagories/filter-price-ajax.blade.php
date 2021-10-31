@@ -18,7 +18,7 @@
                 <div class="col-6 col-sm-6 col-md-4">
                     <div class="item">
                         <div class="img">
-                            <img class="lazy-hidden" data-lazy-type="image" data-lazy-src="{{ asset(UPLOAD_PRODUCT . $product->pictures) }}"  alt="{{ $product->name }}"  />
+                            <img class="lazy-hidden" data-lazy-type="image" data-lazy-src="{{ Storage::url($product->pictures) }}"  alt="{{ $product->name }}"  />
                             <div class="groupbtn">
                                 <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                 <div class="group">

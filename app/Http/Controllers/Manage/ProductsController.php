@@ -11,7 +11,7 @@ use App\Model\Categories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use App\Helpers\Uploads;
+use App\Helpers\Upload;
 use App\DataTables\ProductsDataTable;
 
 class ProductsController extends BackendController
@@ -149,11 +149,11 @@ class ProductsController extends BackendController
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
 
-        $gallery_upload = Uploads::multiple_upload($request, 'gallery_img', UPLOAD_PRODUCT);
+        $gallery_upload = Upload::multipleFiles('gallery_img', config('define.UPLOAD_PRODUCT'));
         if ($gallery_upload) {
             $inputs['galary_img'] = $gallery_upload;
         }
-        $pictures = Uploads::upload($request, 'pictures', UPLOAD_PRODUCT);
+        $pictures = Upload::singleFile( 'pictures', config('define.UPLOAD_PRODUCT'));
         if ($pictures) {
             $inputs['pictures'] = $pictures;
         }
@@ -190,10 +190,11 @@ class ProductsController extends BackendController
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     *
+     * @return void
      */
-    public function show($id)
+    public function show(int $id)
     {
         //
     }
@@ -201,10 +202,11 @@ class ProductsController extends BackendController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $list_cate_all = Categories::all();
         $record = Products::with('productAttributes')->findOrFail($id);
@@ -226,12 +228,13 @@ class ProductsController extends BackendController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int                       $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $product = Products::findOrFail($id);
         $inputs = $request->all();
@@ -244,11 +247,11 @@ class ProductsController extends BackendController
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
-        $pictures = Uploads::upload($request, 'pictures', UPLOAD_PRODUCT);
+        $pictures = Upload::singleFile('pictures', config('define.UPLOAD_PRODUCT'));
         if ($pictures) {
             $inputs['pictures'] = $pictures;
         }
-        $gallery_upload = Uploads::multiple_upload($request, 'gallery_img', UPLOAD_PRODUCT);
+        $gallery_upload = Upload::multipleFiles('gallery_img', config('define.UPLOAD_PRODUCT'));
         if ($gallery_upload) {
             $inputs['galary_img'] = $gallery_upload;
         }
@@ -289,11 +292,12 @@ class ProductsController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
+     *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $product = Products::findOrFail($id);
         try {

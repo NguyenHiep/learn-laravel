@@ -2,7 +2,7 @@
     $app = app();
     $wifeCart = $app->make('stdClass');
     $wifeCart->csrfToken = csrf_token();
-    $wifeCart->pathImageProduct = UPLOAD_PRODUCT;
+    $wifeCart->pathImageProduct = Storage::url('/');
     $wifeCart->language = '';
     $wifeCart->currency = '';
     $wifeCart->recaptcha_site_key = config('google.recaptcha_site_key');

@@ -10,8 +10,8 @@
         <ul class="prod-slider-car">
           <li>
             @if(!empty($product->pictures))
-              <a data-fancybox-group="product" class="fancy-img" href="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}">
-                <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
+              <a data-fancybox-group="product" class="fancy-img" href="{{ Storage::url($product->pictures)}}">
+                <img src="{{ Storage::url($product->pictures) }}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
               </a>
             @else
               <a data-fancybox-group="product" class="fancy-img" href="{{ asset('theme-ecommerce/img/354x236.png') }}">
@@ -22,8 +22,8 @@
           @if(!empty($product->galary_img))
             @foreach($product->galary_img as $item)
               <li>
-                <a data-fancybox-group="product" class="fancy-img" href="{{asset(UPLOAD_PRODUCT.$item)}}">
-                  <img src="{{asset(UPLOAD_PRODUCT.$item)}}" alt="{{ $product->name }}" title="{{ $product->name }}" class="img-responsive" />
+                <a data-fancybox-group="product" class="fancy-img" href="{{ Storage::url($item) }}">
+                  <img src="{{Storage::url($item)}}" alt="{{ $product->name }}" title="{{ $product->name }}" class="img-responsive" />
                 </a>
               </li>
             @endforeach
@@ -35,7 +35,7 @@
           <li>
             @if(!empty($product->pictures))
               <a data-slide-index="0" href="#">
-                <img src="{{ asset(UPLOAD_PRODUCT.$product->pictures)}}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
+                <img src="{{ Storage::url($product->pictures) }}" alt="{{ $product->name }}" class="img-responsive" title="{{ $product->name }}"/>
               </a>
             @else
               <a data-slide-index="0" href="#">
@@ -47,7 +47,7 @@
             @foreach($product->galary_img as $item)
               <li>
                 <a data-slide-index="{{ $loop->iteration }}" href="#">
-                  <img src="{{asset(UPLOAD_PRODUCT.$item)}}" alt="{{ $product->name }}" title="{{ $product->name }}" class="img-responsive" />
+                  <img src="{{asset( Storage::url($item) )}}" alt="{{ $product->name }}" title="{{ $product->name }}" class="img-responsive" />
                 </a>
               </li>
             @endforeach
@@ -55,7 +55,7 @@
         </ul>
       </div>
     </div>
-    
+
     <div class="prod-cont">
       <ul class="prod-cont-txt">
         <li>
@@ -69,7 +69,7 @@
       <p class="prod-actions">
         <a href="javascript:void(0)" class="prod-compare compare_product"  data-id="{{ $product->id }}"><i class="fa fa-bar-chart"></i> So sánh</a>
       </p>
-      
+
       <div class="prod-info">
         <p class="prod-price">
           <b class="item_current_price">{{ format_price($product->price) }}</b>

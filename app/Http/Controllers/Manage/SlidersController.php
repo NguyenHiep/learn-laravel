@@ -11,7 +11,7 @@ use App\Model\Sliders;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Helpers\Uploads;
+use App\Helpers\Upload;
 
 class SlidersController extends BackendController
 {
@@ -98,7 +98,7 @@ class SlidersController extends BackendController
     public function store(SlidersRequest $request)
     {
         $inputs = $request->all();
-        $slider_img = Uploads::upload($request, 'slider_img', UPLOAD_SLIDER);
+        $slider_img = Upload::singleFile( 'slider_img', config('define.UPLOAD_SLIDER'));
         if($slider_img){
             $inputs['slider_img'] = $slider_img;
         }
@@ -166,7 +166,7 @@ class SlidersController extends BackendController
         }
         $inputs = $request->all();
 
-        $slider_img = Uploads::upload($request, 'slider_img', UPLOAD_SLIDER);
+        $slider_img = Upload::singleFile( 'slider_img', config('define.UPLOAD_SLIDER'));
         if($slider_img){
             $inputs['slider_img'] = $slider_img;
         }

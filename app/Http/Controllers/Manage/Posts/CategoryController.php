@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use App\Helpers\Uploads;
+use App\Helpers\Upload;
 
 class CategoryController extends BackendController
 {
@@ -30,7 +30,7 @@ class CategoryController extends BackendController
         $this->middleware('permission:post-category-delete', ['only' => ['destroy']]);
         $this->repository = $repository;
     }
-    
+
     /**
      * Validate category field
      * @param $data
@@ -48,7 +48,7 @@ class CategoryController extends BackendController
             'status'            => 'required|min:1|max:2',
         ]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -108,7 +108,7 @@ class CategoryController extends BackendController
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
-        $image = Uploads::upload($request, 'image', UPLOAD_CATEGORY);
+        $image = Upload::singleFile( 'image', config('define.UPLOAD_CATEGORY'));
         if ($image) {
             $inputs[ 'image' ] = $image;
         }
@@ -174,11 +174,11 @@ class CategoryController extends BackendController
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($inputs);
         }
-        $image = Uploads::upload($request, 'image', UPLOAD_CATEGORY);
+        $image = Upload::singleFile( 'image', config('define.UPLOAD_CATEGORY'));
         if ($image) {
             $inputs['image'] = $image;
         }
-        
+
         DB::beginTransaction();
         $category->update($inputs);
         DB::commit();

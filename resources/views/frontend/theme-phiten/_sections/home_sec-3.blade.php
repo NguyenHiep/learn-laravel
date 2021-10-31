@@ -12,7 +12,7 @@
                     @foreach($products_trending as $product)
                         <div class="item">
                             <div class="img">
-                                <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $product->pictures) }}"  alt="{{ $product->name }}" />
+                                <img class="owl-lazy" data-src="{{ Storage::url($product->pictures) }}"  alt="{{ $product->name }}" />
                                 <div class="groupbtn">
                                     <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                     <div class="group">
@@ -44,7 +44,7 @@
                             @foreach($products_viewed as $product)
                                 <div class="item">
                                     <div class="img">
-                                        <img class="owl-lazy" data-src="{{ asset(UPLOAD_PRODUCT . $product->pictures) }}"  alt="{{ $product->name }}" />
+                                        <img class="owl-lazy" data-src="{{ Storage::url($product->pictures) }}"  alt="{{ $product->name }}" />
                                         <div class="groupbtn">
                                             <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="btn btn2 sm"> View Detail</a>
                                             <div class="group">

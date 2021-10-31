@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Helpers\Uploads;
+use App\Helpers\Upload;
 use Illuminate\View\View;
 
 class SettingsController extends BackendController
@@ -49,7 +49,7 @@ class SettingsController extends BackendController
             DB::beginTransaction();
             $settings = Settings::checkWebsiteInfo(self::WEBSITE_INFO_ID);
             if (empty($settings)) {
-                $company_logo = Uploads::upload($request, 'company_logo', UPLOAD_SETTING);
+                $company_logo = Upload::singleFile( 'company_logo', config('define.UPLOAD_SETTING'));
                 if ($company_logo) {
                     $inputs['company_logo'] = $company_logo;
                 }
@@ -64,7 +64,7 @@ class SettingsController extends BackendController
             }
 
             // Update data info
-            $company_logo = Uploads::upload($request, 'company_logo', UPLOAD_SETTING);
+            $company_logo = Upload::singleFile( 'company_logo', config('define.UPLOAD_SETTING'));
             if ($company_logo) {
                 $inputs['company_logo'] = $company_logo;
             }
