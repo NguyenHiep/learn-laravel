@@ -11,6 +11,11 @@ use Log;
 
 class ProductsController extends FrontendController
 {
+
+    const LIMIT_GET_PRODUCT = 16;
+    const LIMIT_RELATED_PRODUCT = 8;
+    const LIMIT_TRENDING_PRODUCT = 8;
+
     public $categoryRepository;
     public $productRepository;
 
@@ -46,7 +51,7 @@ class ProductsController extends FrontendController
             'direction' => $direction,
         ];
 
-        $data['products'] = $this->productRepository->getProducts($conditions);
+        $data['products'] = $this->productRepository->getProducts($conditions, self::LIMIT_GET_PRODUCT);
         $data['categories'] = $this->categoryRepository->getListCategoryMenu();
         return view('frontend.theme-phiten.products.list', $data);
     }
@@ -69,8 +74,8 @@ class ProductsController extends FrontendController
         $assignData = [
             'category'         => $category,
             'product'          => $product,
-            'products_related' => $this->productRepository->getRelatedProducts($product->id, 14),
-            'products_viewed'  => $this->productRepository->getListProductTrending(14),
+            'products_related' => $this->productRepository->getRelatedProducts($product->id, self::LIMIT_RELATED_PRODUCT),
+            'products_viewed'  => $this->productRepository->getListProductTrending(self::LIMIT_TRENDING_PRODUCT),
             'listComment'      => $listComment
         ];
         return view('frontend.theme-phiten.products.detail', $assignData);

@@ -3,7 +3,7 @@
         @foreach($sliders as $slider)
             <div class="item item-visible">
                 <div class="img tRes_45">
-                    <img class="owl-lazy" data-src="{{ Storage::url($slider->slider_img) }}" alt="{{ $slider->slider_title }}"/>
+                    <img width="1200" height="464" class="owl-lazy" data-src="{{ Storage::url($slider->slider_img) }}" alt="{{ $slider->slider_title }}"/>
                 </div>
                 <div class="container">
                     <div class="divtext">

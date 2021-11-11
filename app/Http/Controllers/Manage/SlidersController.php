@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Manage;
 use App\DataTables\SlidersDataTable;
 use App\Http\Requests\SlidersRequest;
 use App\Repositories\SliderRepository;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BackendController;
 use App\Model\Sliders;
@@ -12,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Helpers\Upload;
+use Illuminate\View\View;
 
 class SlidersController extends BackendController
 {
@@ -35,7 +39,7 @@ class SlidersController extends BackendController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -81,7 +85,7 @@ class SlidersController extends BackendController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -91,9 +95,10 @@ class SlidersController extends BackendController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @param  Request  $request
+     *
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function store(SlidersRequest $request)
     {
@@ -114,7 +119,7 @@ class SlidersController extends BackendController
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error(__METHOD__, [$e->getMessage()]);
         }
@@ -127,10 +132,11 @@ class SlidersController extends BackendController
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
+     *
      * @return void
      */
-    public function show($id)
+    public function show(int $id)
     {
         //
     }
@@ -139,31 +145,27 @@ class SlidersController extends BackendController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @return Factory|View
      */
     public function edit($id)
     {
-        $record = Sliders::find($id);
-        if (empty($record)) {
-            return abort(404);
-        }
+        $record = Sliders::findOrFail($id);
         return view('manage.modules.sliders.edit')->with(['record' => $record]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @param  SlidersRequest  $request
+     * @param  int             $id
+     *
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function update(SlidersRequest $request, $id)
+    public function update(SlidersRequest $request, int $id)
     {
-        $slider = Sliders::find($id);
-        if (empty($slider)) {
-            return abort(404);
-        }
+        $slider = Sliders::findOrFail($id);
         $inputs = $request->all();
 
         $slider_img = Upload::singleFile( 'slider_img', config('define.UPLOAD_SLIDER'));
@@ -179,7 +181,7 @@ class SlidersController extends BackendController
                 'message' => __('system.message.update'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS,
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error(__METHOD__, [$e->getMessage()]);
         }
@@ -193,11 +195,12 @@ class SlidersController extends BackendController
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        $slider = Sliders::find($id);
+        $slider = Sliders::findOrFail($id);
         if (empty($slider)) {
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => __('common.not_found_id_delete')]),
@@ -206,15 +209,15 @@ class SlidersController extends BackendController
         }
 
         try {
-            \DB::beginTransaction();
+            DB::beginTransaction();
             $slider->delete();
-            \DB::commit();
+            DB::commit();
             return response()->json([
                 'message' => __('system.message.delete'),
                 'status'  => self::CTRL_MESSAGE_SUCCESS
             ]);
-        } catch (\Exception $e) {
-            \DB::rollBack();
+        } catch (Exception $e) {
+            DB::rollBack();
             Log::error(__METHOD__, [$e->getMessage()]);
             return response()->json([
                 'message' => __('system.message.errors', ['errors' => $e->getMessage()]),

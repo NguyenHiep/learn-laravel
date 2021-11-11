@@ -38,7 +38,11 @@
                   <div class="col-6 col-sm-6 col-md-3">
                     <div class="item">
                       <div class="img">
-                        <img class="lazy-hidden" data-lazy-type="image" data-lazy-src="{{ Storage::url($product->pictures) }}"  alt="{{ $product->name }}"  />
+                        @if($loop->iteration > 8)
+                          <img class="lazy-hidden" data-lazy-type="image" data-lazy-src="{{ Storage::url($product->pictures) }}" alt="{{ $product->name }}" />
+                        @else
+                          <img src="{{ Storage::url($product->pictures) }}" alt="{{ $product->name }}" />
+                        @endif
                         <div class="groupbtn">
                           <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="btn btn2 sm"> View Detail</a>
                           <div class="group">
@@ -54,7 +58,7 @@
                       </div>
                       <div class="divtext">
                         <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="title equal_{{ $loop->iteration }}">{{ $product->name }}</a>
-                        <p class="price"> {{ format_price($product->sale_price) }} </p>
+                        <p class="price"> {{ format_price($product->actual_price) }} </p>
                       </div>
                     </div>
                   </div>

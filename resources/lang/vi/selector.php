@@ -13,6 +13,10 @@ return [
         config('define.STATUS_ENABLE')  => 'Kích hoạt',
         config('define.STATUS_DISABLE') => 'Không kích hoạt',
     ],
+    'theme_options_status'      => [
+        config('define.STATUS_THEME_OPTIONS_ENABLE')  => 'Kích hoạt',
+        config('define.STATUS_THEME_OPTIONS_DISABLE') => 'Không kích hoạt',
+    ],
     'gender' => [
         1 => 'Nam',
         2 => 'Nữ'

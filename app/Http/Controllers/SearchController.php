@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class SearchController extends FrontendController
 {
+
+    const LIMIT_GET_PRODUCT = 16;
+
     public $categoryRepository;
     public $productRepository;
 
@@ -41,7 +44,7 @@ class SearchController extends FrontendController
             'column'    => $column,
             'direction' => $direction,
         ];
-        $data['products'] = $this->productRepository->search($request->all());
+        $data['products'] = $this->productRepository->search($request->all(), self::LIMIT_GET_PRODUCT);
         return view('frontend.theme-phiten.search', $data);
     }
 }

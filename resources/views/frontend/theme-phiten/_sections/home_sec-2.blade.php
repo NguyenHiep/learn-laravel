@@ -5,7 +5,7 @@
        || ($loop->iteration == 3 && !empty($settings->params['enable_home_category_three']))
        || ($loop->iteration == 4 && !empty($settings->params['enable_home_category_four']))
     )
-    <section class=" sec-product sec-product-{{ $loop->iteration }}">
+    <section class="sec-product sec-product-{{ $loop->iteration }}">
         <div class="row grid-space-0 {{ $loop->iteration % 2 == 0 ? 'end' : '' }}">
             <div class="col-md-4">
                 <div class="item_intro">

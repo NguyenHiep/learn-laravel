@@ -24,8 +24,7 @@ class SlidersRequest extends FormRequest
      */
     public function rules()
     {
-
-        $slider_id = $this->route('slider');
+        $slider_id = $this->route('id');
         switch ($this->method()) {
             case 'GET':
             case 'DELETE': {

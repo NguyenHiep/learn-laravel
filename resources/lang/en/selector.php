@@ -10,6 +10,10 @@ return [
         1 => 'Enable',
         2 => 'Disable',
     ),
+    'theme_options_status' => [
+        config('define.STATUS_THEME_OPTIONS_ENABLE')  => 'Enable',
+        config('define.STATUS_THEME_OPTIONS_DISABLE') => 'Disable',
+    ],
     'orders' => [
         'status' => [
             1 => 'Canceled',

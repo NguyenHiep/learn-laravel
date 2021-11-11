@@ -42,7 +42,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -58,7 +58,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -74,7 +74,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -90,7 +90,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -106,7 +106,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -122,7 +122,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -138,7 +138,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -161,7 +161,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -177,7 +177,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -193,7 +193,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -209,7 +209,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -225,7 +225,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -241,7 +241,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -257,7 +257,7 @@
                         <span class="required"> * </span>
                       </label>
                       <div class="radio-list">
-                        @foreach(__('selector.status') as $k => $val)
+                        @foreach(__('selector.theme_options_status') as $k => $val)
                           @if($params[$key] == $k)
                             <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                           @else
@@ -281,7 +281,7 @@
                            <span class="required"> * </span>
                          </label>
                          <div class="radio-list">
-                           @foreach(__('selector.status') as $k => $val)
+                           @foreach(__('selector.theme_options_status') as $k => $val)
                              @if($params[$key] == $k)
                                <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                              @else
@@ -297,7 +297,7 @@
                            <span class="required"> * </span>
                          </label>
                          <div class="radio-list">
-                           @foreach(__('selector.status') as $k => $val)
+                           @foreach(__('selector.theme_options_status') as $k => $val)
                              @if($params[$key] == $k)
                                <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                              @else
@@ -313,7 +313,7 @@
                            <span class="required"> * </span>
                          </label>
                          <div class="radio-list">
-                           @foreach(__('selector.status') as $k => $val)
+                           @foreach(__('selector.theme_options_status') as $k => $val)
                              @if($params[$key] == $k)
                                <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                              @else
@@ -329,7 +329,7 @@
                            <span class="required"> * </span>
                          </label>
                          <div class="radio-list">
-                           @foreach(__('selector.status') as $k => $val)
+                           @foreach(__('selector.theme_options_status') as $k => $val)
                              @if($params[$key] == $k)
                                <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                              @else
@@ -368,7 +368,7 @@
                           <span class="required"> * </span>
                         </label>
                         <div class="radio-list">
-                          @foreach(__('selector.status') as $k => $val)
+                          @foreach(__('selector.theme_options_status') as $k => $val)
                             @if($params[$key] == $k)
                               <label> {!! Form::radio($key, $k, true) !!} {{ $val }} </label>
                             @else

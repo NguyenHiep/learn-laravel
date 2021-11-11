@@ -66,7 +66,7 @@ return [
         'theme_options' => array(
             'enable_social'                    => 'Liên kết mạng xã hội',
             'enable_copyright'                 => 'Thông tin bản quyền',
-            'enable_subscribe'                 => 'Đăng ký theo ',
+            'enable_subscribe'                 => 'Đăng ký theo dõi',
             'enable_checkout_cart'             => 'Hiển thị checkout cart',
             'enable_login_facebook'            => 'Hiển thị đăng nhập với Facebook',
             'enable_login_google'              => 'Hiển thị đăng nhập với google',
